@@ -2,22 +2,24 @@
 
 ## Purpose
 
-Infusion Diffusion is a South African botanical infusion brand. The storefront should turn browsing and buying into a calm, considered ritual while remaining direct, trustworthy, and easy to operate.
+Infusion Diffusion is a South African luxury home-fragrance brand selling fragrant room diffusers, room sprays, and candles. The storefront should make scent feel like a considered part of an interior while keeping product choice, care, delivery, and purchase paths direct and trustworthy.
 
 ## Audience
 
-- South African customers discovering botanical drinks and daily rituals.
-- Gift buyers who need clear product meaning and confident guidance.
+- South African customers seeking elevated fragrance for lived-in rooms.
+- Design-conscious buyers who value refined vessels, atmosphere, and gift-worthy presentation.
+- Gift buyers who need clear scent, format, size, care, and delivery guidance.
 - Returning customers who value quick reordering and dependable fulfillment.
 - The brand owner, who needs editorial control without developer assistance.
 
 ## Experience principles
 
-1. Make the product understandable before making it poetic.
-2. Use sensory storytelling with concrete ingredients, preparation, quantity, and delivery information.
+1. Make the product and fragrance format understandable before making it poetic.
+2. Use sensory storytelling with concrete scent notes, room context, size, care, safety, and longevity information.
 3. Keep purchase paths obvious and low-friction.
-4. Earn trust through legibility, transparent policies, stock accuracy, and predictable checkout.
-5. Design for mobile and constrained South African connections first.
+4. Earn luxury through material detail, proportion, typography, photography, and service clarity.
+5. Earn trust through legibility, transparent policies, stock accuracy, and predictable checkout.
+6. Design for mobile and constrained South African connections first.
 
 ## Initial market
 
@@ -29,4 +31,4 @@ Infusion Diffusion is a South African botanical infusion brand. The storefront s
 
 ## Current milestone
 
-Ship an accessible Sanity-managed holding page and a complete agent, test, preview, and production foundation. Cart and checkout are intentionally out of scope until the commerce phase.
+Establish the approved Figma style guide and synchronize it with repository guidance before designing storefront pages. The accessible Sanity-managed holding page and delivery foundation remain in place. Cart and checkout implementation remain out of scope until the commerce phase.

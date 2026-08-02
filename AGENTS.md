@@ -32,3 +32,4 @@ Keep this file short. Put reusable procedures in `.agents/skills` and deeper exp
 8. Agents may verify Vercel previews. Production requires a green protected branch and explicit human merge; never run a direct production deployment unless the user explicitly authorizes it.
 9. Preserve unrelated user changes. Report verification evidence and residual risk at every handoff.
 10. When recurring review feedback reveals a durable rule, update the nearest relevant guidance or skill.
+11. Keep approved Figma, `DESIGN.md`, runtime semantic tokens, and Storybook component contracts synchronized. Follow `.agents/skills/design-to-storybook/SKILL.md`, name any intentional divergence, and never treat the provisional holding-page styles as approved brand truth.

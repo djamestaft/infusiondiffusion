@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-02T00:00:00+02:00",
+  "title": "Design System: Infusion Diffusion",
+  "extensions": {
+    "colorMeta": {
+      "ink-deep": {
+        "role": "neutral",
+        "displayName": "Deep Ink",
+        "canonical": "#11110F"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#191916"
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#282823"
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#3C3B35"
+      },
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "#E8E2D5"
+      },
+      "bone-light": {
+        "role": "neutral",
+        "displayName": "Light Bone",
+        "canonical": "#F5F1E8"
+      },
+      "porcelain": {
+        "role": "neutral",
+        "displayName": "Porcelain",
+        "canonical": "#FCFAF5"
+      },
+      "antique-gold-deep": {
+        "role": "primary",
+        "displayName": "Deep Antique Gold",
+        "canonical": "#A9842D"
+      },
+      "antique-gold": {
+        "role": "primary",
+        "displayName": "Antique Gold",
+        "canonical": "#C5A447"
+      },
+      "antique-gold-light": {
+        "role": "primary",
+        "displayName": "Light Antique Gold",
+        "canonical": "#DDC77F"
+      },
+      "smoked-olive": {
+        "role": "secondary",
+        "displayName": "Smoked Olive",
+        "canonical": "#45483A"
+      },
+      "resin": {
+        "role": "tertiary",
+        "displayName": "Resin",
+        "canonical": "#633F32"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Expressive campaign and first-view headings."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles and major section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Product, fragrance, and editorial titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Product information and long-form reading."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, controls, and compact metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "subtle",
+        "value": "0 4px 12px rgba(17,17,15,0.12)",
+        "purpose": "Quiet separation for lightly raised surfaces."
+      },
+      {
+        "name": "raised",
+        "value": "0 12px 32px -4px rgba(17,17,15,0.18)",
+        "purpose": "Product and navigation surfaces requiring clear lift."
+      },
+      {
+        "name": "floating",
+        "value": "0 20px 48px -8px rgba(17,17,15,0.22)",
+        "purpose": "Overlays and temporary floating surfaces only."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "< 768px" },
+      { "name": "desktop", "value": ">= 768px" }
+    ]
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "The Perfumer's Cabinet",
+    "overview": "Infusion Diffusion uses deep contrast, measured gold, tactile materials, and generous quiet to make home fragrance feel composed and intimate. Product meaning remains clear before language becomes poetic.",
+    "keyCharacteristics": [
+      "Composed hierarchy and decisive proportion.",
+      "Black glass, warm metal, wax, vapor, flame, and shadow.",
+      "Precise product language and restrained ornament.",
+      "Luxury for lived-in rooms rather than decorative display alone."
+    ],
+    "rules": [
+      {
+        "name": "The Measured Gold Rule",
+        "body": "Gold is a material edge and action cue, not a universal outline or decorative wash.",
+        "section": "colors"
+      },
+      {
+        "name": "The Semantic Pair Rule",
+        "body": "Use the approved Figma foreground/background pairs. Body text must meet WCAG AA, and focus must remain visibly distinct.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Voice Rule",
+        "body": "Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Depth Signal Rule",
+        "body": "Use a border or a shadow on a surface, not both.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do let typography, product imagery, proportion, and material contrast carry the identity.",
+      "Do keep scent format, notes, size, care, safety, price, stock, and delivery information concrete.",
+      "Do preserve true product proportions and controlled gold highlights in photography.",
+      "Do show diffusers, sprays, and candles as one coherent family."
+    ],
+    "donts": [
+      "Don't use towels, stacked stones, scattered florals, or other familiar spa shorthand as the default photographic world.",
+      "Don't introduce generic AI-design tells: purple gradients, glowing surfaces, gratuitous pills, nested card grids, or vague decorative copy.",
+      "Don't crop caps, flames, spray triggers, or reed tips when the image's job is product recognition.",
+      "Don't change Figma, DESIGN.md, runtime tokens, or Storybook in isolation."
+    ]
+  }
+}

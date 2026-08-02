@@ -1,37 +1,166 @@
-# Infusion Diffusion design system
+---
+name: Infusion Diffusion
+description: The Perfumer's Cabinet — a composed luxury home-fragrance identity.
+colors:
+  ink-deep: "#11110F"
+  ink: "#191916"
+  ink-soft: "#282823"
+  graphite: "#3C3B35"
+  bone: "#E8E2D5"
+  bone-light: "#F5F1E8"
+  porcelain: "#FCFAF5"
+  antique-gold-deep: "#A9842D"
+  antique-gold: "#C5A447"
+  antique-gold-light: "#DDC77F"
+  smoked-olive: "#45483A"
+  resin: "#633F32"
+  error: "#A64237"
+  success: "#4E6A50"
+typography:
+  display:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "72px"
+    fontWeight: 400
+    lineHeight: 1.111
+    letterSpacing: "-0.02em"
+  headline:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "48px"
+    fontWeight: 400
+    lineHeight: 1.167
+    letterSpacing: "-0.01em"
+  title:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "28px"
+    fontWeight: 400
+    lineHeight: 1.286
+    letterSpacing: "normal"
+  body:
+    fontFamily: "Manrope, Arial, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.625
+    letterSpacing: "normal"
+  label:
+    fontFamily: "Manrope, Arial, sans-serif"
+    fontSize: "12px"
+    fontWeight: 600
+    lineHeight: 1.333
+    letterSpacing: "0.08em"
+rounded:
+  none: "0px"
+  sm: "2px"
+  md: "4px"
+  lg: "8px"
+  full: "999px"
+spacing:
+  2xs: "4px"
+  xs: "8px"
+  sm: "12px"
+  md: "16px"
+  lg: "24px"
+  xl: "32px"
+  2xl: "48px"
+  3xl: "64px"
+  4xl: "96px"
+---
 
-Status: provisional until the approved Figma style guide is connected.
+# Design System: Infusion Diffusion
 
-## Direction
+## Overview
 
-The visual language should feel botanical, warm, tactile, and composed without becoming rustic, clinical, or generically “wellness.” Let typography, photography, proportion, and material detail carry the identity.
+**Creative North Star: "The Perfumer's Cabinet"**
 
-Avoid generic AI design tells: purple gradients, nested card grids, gratuitous pills, glowing surfaces, feature-icon tiles, excessive rounding, and vague decorative copy.
+Infusion Diffusion uses deep contrast, measured gold, tactile materials, and generous quiet to make home fragrance feel composed and intimate. The system is luxurious without becoming ornate, rustic, clinical, or generically wellness-coded. Product meaning remains clear before language becomes poetic.
 
-## Foundations
+The approved visual authority is the [Figma Style Guide](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=25-2). Its foundation sections are Cover `25:3`, Brand `26:2`, Color `27:2`, Typography `28:2`, Layout & Material `29:2`, and Photography `31:2`.
 
-- Semantic CSS variables in `src/app/globals.css` are the token source of truth.
-- Display typography is reserved for expressive headings and short statements.
-- Body typography prioritizes clarity at mobile sizes.
-- Color roles describe purpose (`primary`, `accent`, `muted`) rather than literal color names.
-- Motion must explain state or hierarchy and respect reduced-motion preferences.
-- All interactive targets are at least 44×44 CSS pixels.
+The Figma foundations are approved. Repository CSS tokens and components are not yet migrated and must not be treated as equal visual authority until their Figma-to-code sync is completed and verified.
+
+**Key Characteristics:**
+
+- Composed hierarchy and decisive proportion.
+- Black glass, warm metal, wax, vapor, flame, and shadow.
+- Precise product language and restrained ornament.
+- Luxury for lived-in rooms rather than decorative display alone.
+
+## Colors
+
+Midnight is the signature environment; Ivory provides editorial relief. Gold signals action and precious detail. Smoked Olive and Resin support atmospheric fields rather than arbitrary decoration.
+
+### Primary
+
+- **Antique Gold:** the principal action and precious-detail color.
+- **Deep Ink:** the signature immersive surface and primary action in Ivory mode.
+
+### Secondary
+
+- **Smoked Olive:** a quiet atmospheric field for supporting surfaces.
+- **Resin:** a warm material accent for editorial depth.
+
+### Neutral
+
+- **Porcelain and Bone:** editorial surfaces and text against Midnight.
+- **Graphite and Soft Ink:** layered dark surfaces, subdued text, and borders.
+
+**The Measured Gold Rule.** Gold is a material edge and action cue, not a universal outline or decorative wash.
+
+**The Semantic Pair Rule.** Use the approved Figma foreground/background pairs. Body text must meet WCAG AA, and focus must remain visibly distinct.
+
+## Typography
+
+**Display Font:** Marcellus (with Georgia fallback)
+
+**Body Font:** Manrope (with Arial fallback)
+
+**Character:** Marcellus gives headings the ceremonial character of engraved packaging. Manrope keeps product detail, navigation, pricing, and commerce controls quiet and legible.
+
+### Hierarchy
+
+- **Display** (400, 72/80): campaign statements and first-view headings; maximum two short lines.
+- **Headline** (400, 48/56): page titles and major section headings.
+- **Title** (400, 28/36): product, fragrance, and editorial titles.
+- **Body** (400, 16/26): default reading text with a target measure of 65–75 characters.
+- **Label** (600, 12/16, 0.08em): compact metadata and controls; uppercase is allowed when short.
+
+**The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
+
+## Layout
+
+Use a 4px base spacing scale. Desktop compositions use 12 columns with 80px margins and 24px gutters. Mobile compositions use four columns with 20px margins and 16px gutters. The content maximum is 1280px, and every interactive target is at least 44×44 CSS pixels.
+
+Large editorial intervals create ceremony; compact spacing supports commerce controls. Preserve clear reading order, mobile-first behavior, keyboard access, visible focus, content extremes, and reduced-motion preferences.
+
+## Elevation & Depth
+
+Depth is restrained and ambient: Subtle uses a short soft lift, Raised supports floating product or navigation surfaces, and Floating is reserved for overlays requiring clear separation. Prefer tonal layering for ordinary sections.
+
+**The One Depth Signal Rule.** Use a border or a shadow on a surface, not both.
+
+## Shapes
+
+Corners remain disciplined so glass vessels, wax, and product photography provide the softest forms. Use 2–4px radii for controls and ordinary surfaces, 8px only for larger contained regions, and full rounding only for genuinely circular geometry or compact pill controls.
+
+Borders are hairline by default. Ornament must derive from the approved logo geometry rather than unrelated flourishes.
 
 ## Components
 
-- shadcn/ui source lives under `src/components/ui` and provides accessible primitives.
-- Brand components compose primitives; feature code should consume brand components before styling primitives directly.
-- Every reusable component has stories for default, interactive, disabled/loading/error, long-content, and responsive states where applicable.
-- Figma component names should map to Storybook titles and code component names whenever practical.
+Figma components are not yet approved. Build them in this order: buttons and links, inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
-## Design workflow
+Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 
-1. Read `PRODUCT.md` and the feature brief.
-2. Inspect relevant Figma frames and variables through MCP.
-3. Use Impeccable `shape` or `craft` to establish hierarchy and states.
-4. Receive human approval before implementation when direction materially changes.
-5. Implement through tokens and shadcn-based components.
-6. Review in Storybook at mobile and desktop widths.
-7. Run Impeccable `critique`, `audit`, and `polish` before preview approval.
+## Do's and Don'ts
 
-Do not infer final brand values from the provisional holding page. Replace tokens deliberately when the style guide is approved, without changing stable component APIs unnecessarily.
+### Do:
+
+- **Do** let typography, product imagery, proportion, and material contrast carry the identity.
+- **Do** keep scent format, notes, size, care, safety, price, stock, and delivery information concrete.
+- **Do** preserve true product proportions and controlled gold highlights in photography.
+- **Do** show diffusers, sprays, and candles as one coherent family.
+
+### Don't:
+
+- **Don't** use towels, stacked stones, scattered florals, or other familiar spa shorthand as the default photographic world.
+- **Don't** introduce generic AI-design tells: purple gradients, glowing surfaces, gratuitous pills, nested card grids, or vague decorative copy.
+- **Don't** crop caps, flames, spray triggers, or reed tips when the image's job is product recognition.
+- **Don't** change Figma, `DESIGN.md`, runtime tokens, or Storybook in isolation; follow the synchronization workflow in `.agents/skills/design-to-storybook/SKILL.md`.
