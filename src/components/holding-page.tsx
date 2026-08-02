@@ -1,4 +1,4 @@
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
@@ -25,11 +25,7 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
 
       <section className="mx-auto grid min-h-[calc(100vh-7rem)] max-w-7xl items-center gap-14 py-16 lg:grid-cols-[1.35fr_0.65fr] lg:py-24">
         <div>
-          <p className="text-primary mb-6 flex items-center gap-2 text-sm font-semibold tracking-[0.14em] uppercase">
-            <Sparkles aria-hidden="true" className="size-4" />
-            {settings.eyebrow}
-          </p>
-          <h1 className="font-display max-w-5xl text-[clamp(3.4rem,10vw,8.4rem)] leading-[0.82] font-medium tracking-[-0.045em] text-balance">
+          <h1 className="font-display max-w-4xl text-[clamp(3.4rem,8vw,6rem)] leading-[0.88] font-medium tracking-[-0.035em] text-balance">
             {settings.headline}
           </h1>
           <p className="text-muted-foreground mt-9 max-w-xl text-lg leading-8 sm:text-xl">
