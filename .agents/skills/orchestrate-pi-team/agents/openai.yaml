@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrate Pi Team"
+  short_description: "Coordinate safe Pi specialist teams"
+  default_prompt: "Use $orchestrate-pi-team to coordinate this task across the project specialist team."
