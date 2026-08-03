@@ -7,7 +7,7 @@ test("shows the holding page without serious accessibility violations", async ({
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Let the good things steep." }),
+    page.getByRole("heading", { name: "Scent for living." }),
   ).toBeVisible();
 
   const results = await new AxeBuilder({ page })

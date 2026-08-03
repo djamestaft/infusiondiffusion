@@ -19,10 +19,9 @@ export const LongContent: Story = {
   args: {
     settings: {
       ...fallbackSiteSettings,
-      headline:
-        "A considered collection for long mornings and slower evenings.",
+      headline: "Fragrance for rooms that hold a life of their own.",
       introduction:
-        "Botanical blends made with patience, curiosity, and an eye for the small rituals that make an ordinary day feel a little more intentional.",
+        "A considered collection of room sprays, reed diffusers, and candles, with clear guidance on scent notes, room placement, care, and longevity.",
     },
   },
 };

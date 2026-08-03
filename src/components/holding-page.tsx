@@ -39,7 +39,7 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
               </a>
             </Button>
             <p className="text-muted-foreground text-sm">
-              The new store is steeping.
+              The first collection is taking shape.
             </p>
           </div>
         </div>
@@ -51,10 +51,10 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
             </span>
             <div>
               <p className="text-muted-foreground mb-3 text-xs font-semibold tracking-[0.16em] uppercase">
-                Small rituals, carefully made
+                Room sprays · Diffusers · Candles
               </p>
               <p className="font-display text-3xl leading-tight">
-                An evolving collection of botanical infusions.
+                The finishing layer of a considered interior.
               </p>
             </div>
           </div>

@@ -11,13 +11,13 @@ export type SiteSettings = {
 
 export const fallbackSiteSettings: SiteSettings = {
   brandName: "Infusion Diffusion",
-  eyebrow: "Botanical infusions · Coming soon",
-  headline: "Let the good things steep.",
+  eyebrow: "Home fragrance · Coming soon",
+  headline: "Scent for living.",
   introduction:
-    "We are preparing a considered collection of botanical blends for slower mornings, brighter afternoons, and everything between.",
+    "We are preparing a considered collection of room sprays, reed diffusers, and candles for layered, lived-in rooms.",
   contactEmail: "hello@infusiondiffusion.co.za",
   callToActionLabel: "Say hello",
   seoTitle: "Infusion Diffusion",
   seoDescription:
-    "Thoughtfully blended infusions, created to bring a little ritual to every day.",
+    "Discover room sprays, reed diffusers, and candles designed to bring considered fragrance into lived-in rooms.",
 };
