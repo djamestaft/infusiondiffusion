@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T19:05:09+02:00",
+  "generatedAt": "2026-08-03T20:35:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -85,6 +85,18 @@
       "label": {
         "displayName": "Label",
         "purpose": "Navigation, controls, and compact metadata."
+      },
+      "navigationLogoPrimaryMobile": {
+        "displayName": "Navigation Logo Primary Mobile",
+        "purpose": "Approved editable brand lockup lettering at mobile sizes."
+      },
+      "navigationLogoPrimaryDesktop": {
+        "displayName": "Navigation Logo Primary Desktop",
+        "purpose": "Approved editable brand lockup lettering at desktop sizes."
+      },
+      "navigationLogoSecondaryMobile": {
+        "displayName": "Navigation Logo Secondary Mobile",
+        "purpose": "Approved DIFFUSION lettering in the mobile lockup."
       }
     },
     "shadows": [
@@ -186,6 +198,13 @@
       "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, ZAR price, explicit sold-out status, and a full-card focus ring.",
       "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER · 200ML</p><h3>Bois de Santal</h3><p>Cardamom · rose · sandalwood</p><strong>R 420</strong></div></a>",
       "css": ".ds-product-card { display: grid; grid-template-rows: auto 1fr; width: 100%; max-width: 288px; padding: 2px; border-radius: 4px; background: var(--product-card-surface); color: var(--product-card-text); text-decoration: none; } .ds-product-card img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 4px 4px 0 0; } .ds-product-card:focus-visible { outline: 2px solid var(--product-card-focus); outline-offset: -2px; } .ds-product-card h3, .ds-product-card div > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "custom",
+      "description": "The approved responsive storefront header with editable text lockup, primary destinations, account and cart utilities, and a full-height accessible mobile drawer.",
+      "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION — DIFFUSION —</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
+      "css": ".ds-navigation { min-height: 80px; padding-inline: 20px; background: var(--navigation-surface); color: var(--navigation-text); } .ds-navigation a, .ds-navigation button { min-width: 44px; min-height: 44px; } .ds-navigation :focus-visible { outline: 2px solid var(--navigation-focus); outline-offset: 2px; } @media (min-width: 1024px) { .ds-navigation { min-height: 104px; padding-inline: 32px; } }"
     }
   ],
   "narrative": {

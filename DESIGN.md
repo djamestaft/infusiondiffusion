@@ -47,6 +47,24 @@ typography:
     fontWeight: 600
     lineHeight: 1.333
     letterSpacing: "0.08em"
+  navigationLogoPrimaryMobile:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "18px"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "0.28em"
+  navigationLogoPrimaryDesktop:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "32px"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "0.28em"
+  navigationLogoSecondaryMobile:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "9px"
+    fontWeight: 400
+    lineHeight: 1.333
+    letterSpacing: "0.24em"
 rounded:
   none: "0px"
   sm: "2px"
@@ -75,7 +93,7 @@ Infusion Diffusion uses deep contrast, measured gold, tactile materials, and gen
 
 The approved visual authority is the [Figma Style Guide](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=25-2). Its foundation sections are Cover `25:3`, Brand `26:2`, Color `27:2`, Typography `28:2`, Layout & Material `29:2`, and Photography `31:2`.
 
-The Figma foundations are approved. Repository CSS migration is incremental: AnnouncementBar, Button, and TextLink are synchronized with their approved Figma sources; remaining provisional holding-page styles are not approved brand truth.
+The Figma foundations are approved. Repository CSS migration is incremental: AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, and Navigation are synchronized with their approved Figma sources; remaining provisional holding-page styles are not approved brand truth.
 
 ### Figma organization and handoff
 
@@ -142,6 +160,8 @@ Midnight is the signature environment; Ivory provides editorial relief. Gold sig
 
 **The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
 
+The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 18/18 on mobile and 32/32 on desktop; its secondary line is 9/12 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
+
 ## Layout
 
 Use a 4px base spacing scale. Desktop compositions use 12 columns with 80px margins and 24px gutters. Mobile compositions use four columns with 20px margins and 16px gutters. The content maximum is 1280px, and every interactive target is at least 44×44 CSS pixels.
@@ -180,7 +200,9 @@ Text and email inputs plus textarea use native controls, a 44px minimum editable
 
 ProductCard is one browse-only product-detail link. It uses inset 3:4 media with 4px top corners and square lower image corners; keyboard focus follows the complete card's 4px corners. The hierarchy is format, a two-line Marcellus product name, a two-line factual scent-note summary, and a stable ZAR price row. Sold out is explicit text and does not disable navigation. Ivory and Midnight use the `Product Cards / Semantic` variables. Brochure imagery and copy are provisional Storybook fixtures only; Shopify will replace their values through the same component contract. The labeled Figma guide and Storybook LongContent story visibly prove the two-line title and scent-note clamps.
 
-Build the remaining components in this order: navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
+`Navigation` is approved in the Navigation [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-169), [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-215), and [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-193) frames. It uses the editable Marcellus `LogoTextLockup`, a 104px desktop header with 32px insets, and an 80px mobile header with 20px insets. Ivory navigation uses accessible deep gold `#735716` for small logo lettering and interaction accents; Midnight uses Antique Gold. Destinations use a 2px gold current or hover rule separated from the label; keyboard focus outlines the full target. Account, cart, menu, and close controls retain adjacent 44px targets on mobile without extra inter-control gaps. The mobile menu is a named full-height modal that contains focus, closes on Escape, locks background scrolling, and restores focus.
+
+Build the remaining components as commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
 Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 
