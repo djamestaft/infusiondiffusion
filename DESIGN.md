@@ -164,7 +164,15 @@ Borders are hairline by default. Ornament must derive from the approved logo geo
 
 `AnnouncementBar` is the first approved Figma component and proves the component-to-code handoff. Its approved [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=93-6) and [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=93-12) frames map to `AnnouncementBar` in code and `Components/AnnouncementBar` in Storybook.
 
-Build the remaining components in this order: buttons and links, inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
+`Button` and `TextLink` are approved in the Buttons & Links [desktop frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=108-146) and [mobile frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=108-212). Their canonical Figma component sets are Button `99:177` and TextLink `99:206`, mapping to `Components/Button` and `Components/TextLink` in Storybook.
+
+Buttons use three roles: Primary for the decisive action, Secondary for a bordered alternative, and Quiet for a low-emphasis action without a persistent border. All roles support default, large, and square icon sizes in Ivory and Midnight modes. Controls keep a 44px minimum target, restrained 4px corners, uppercase Manrope labels, mode-aware focus outlines, and stable dimensions while loading. Loading buttons announce busy state and suppress repeat activation. Disabled styling reduces emphasis without erasing the label. Use real buttons for actions and `asChild` with a real anchor for destinations; icon-only controls require an accessible name. Icons are monochrome SVG line icons, never emoji or Unicode stand-ins.
+
+Text links use real anchor semantics and remain underlined. Inline links live in prose; Standalone links have a 44px minimum target and may include a trailing monochrome vector icon; Inverse links retain contrast on Midnight surfaces. Links have no disabled state: if a destination is unavailable, render explanatory text or omit the link instead of faking a disabled anchor.
+
+The action and link variables in `globals.css` are semantic, mode-aware mappings. Gold is reserved for action emphasis, link emphasis, and focus—not a default border on quiet or tertiary controls. The legacy Button names `default`, `outline`, `ghost`, and `lg` remain temporary aliases for migration safety and must not be used in new work.
+
+Build the remaining components in this order: inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
 Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 

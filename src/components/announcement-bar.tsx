@@ -1,3 +1,5 @@
+import { TextLink } from "@/components/ui/text-link";
+
 export type AnnouncementBarProps = {
   message?: string | null;
   link?: {
@@ -34,12 +36,13 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
           {content}
         </p>
         {showLink ? (
-          <a
-            className="text-announcement-accent outline-announcement-accent inline-flex min-h-11 items-center px-2 text-xs leading-4 font-semibold tracking-[0.08em] uppercase underline underline-offset-4 outline-0 focus-visible:outline-2 focus-visible:outline-offset-2"
+          <TextLink
+            variant="inverse"
+            className="text-announcement-accent focus-visible:outline-announcement-accent inline-flex min-h-11 items-center px-2 text-xs leading-4 font-semibold tracking-[0.08em] uppercase"
             href={linkHref}
           >
             {linkLabel}
-          </a>
+          </TextLink>
         ) : null}
       </div>
     </aside>
