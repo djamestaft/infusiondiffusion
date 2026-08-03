@@ -77,6 +77,23 @@ The approved visual authority is the [Figma Style Guide](https://www.figma.com/d
 
 The Figma foundations are approved. Repository CSS tokens and components are not yet migrated and must not be treated as equal visual authority until their Figma-to-code sync is completed and verified.
 
+### Figma organization and handoff
+
+- `Style Guide` (`25:2`) is the canonical foundation page. Preserve its numbered
+  foundation frames and do not place feature exploration inside them.
+- Create feature work on a separate page named `Feature / <feature-name>`. Use
+  top-level frames named `<feature-name> / Desktop / <state>` and
+  `<feature-name> / Mobile / <state>`.
+- Name reusable Figma components to match code and Storybook wherever practical:
+  `AnnouncementBar` in Figma, `AnnouncementBar` in code, and
+  `Components/AnnouncementBar` in Storybook.
+- Mark frames `Exploration`, `Review`, or `Approved`. Only an exact frame link
+  marked `Approved` may drive implementation. Record that link in the feature
+  brief or pull request.
+- Keep design-system components and variables in the canonical file. Feature
+  pages should use instances and semantic variables rather than detached copies
+  or raw replacement colors.
+
 **Key Characteristics:**
 
 - Composed hierarchy and decisive proportion.
