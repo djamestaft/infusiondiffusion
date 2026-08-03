@@ -240,7 +240,7 @@
     {
       "name": "Navigation",
       "kind": "custom",
-      "description": "The approved responsive storefront header with editable text lockup, primary destinations, account and cart utilities, and a full-height accessible mobile drawer.",
+      "description": "The approved responsive storefront header with the editable text lockup as its production brand mark, primary destinations, account and cart utilities, and a full-height accessible mobile drawer. The ornamental artwork is deferred reference material, not a release dependency.",
       "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION — DIFFUSION —</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
       "css": ".ds-navigation { min-height: 80px; padding-inline: 20px; background: var(--navigation-surface); color: var(--navigation-text); } .ds-navigation a, .ds-navigation button { min-width: 44px; min-height: 44px; } .ds-navigation :focus-visible { outline: 2px solid var(--navigation-focus); outline-offset: 2px; } @media (min-width: 1024px) { .ds-navigation { min-height: 104px; padding-inline: 32px; } }"
     },

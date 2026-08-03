@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, Navigation, PriceDisplay, CommerceStatus, Dialog, Drawer, AlertDialog, FeedbackAlert, Badge, Eyebrow, Heading, Lead, and ContentHeader have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; the planned Phase 4 core component inventory is complete, while the approved vector logo master and responsive page templates remain pending.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, Navigation, PriceDisplay, CommerceStatus, Dialog, Drawer, AlertDialog, FeedbackAlert, Badge, Eyebrow, Heading, Lead, and ContentHeader have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; the planned Phase 4 core component inventory is complete, the editable `LogoTextLockup` is the approved production storefront mark, and responsive page templates remain pending. The ornamental vector logo master is deferred and does not block the current release.
 
 ### Application foundation — complete
 
@@ -62,7 +62,8 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] PriceDisplay and CommerceStatus approved in Figma, implemented in Storybook/runtime and ProductCard compositions, and synchronized through semantic variables
 - [x] Dialog, Drawer, AlertDialog, and FeedbackAlert approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [x] Badge, Eyebrow, Heading, Lead, and ContentHeader approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
-- [ ] Obtain the approved vector logo master and confirm production asset/licence records
+- [x] Confirm the editable LogoTextLockup as the production storefront mark
+- [ ] Obtain the ornamental vector logo master and licence record only if future approved use requires it — deferred, not a release blocker
 - [x] Core component inventory designed in Figma and represented in Storybook
 - [ ] Responsive page templates approved before storefront implementation
 
@@ -254,10 +255,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Obtain the approved vector logo master and confirm production asset and licence records.
-2. Define and approve responsive page templates before storefront implementation.
-3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
-4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
+1. Define and approve responsive page templates before storefront implementation.
+2. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
+3. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
+4. Revisit the ornamental vector logo master and licence record only if a future approved use brings it back into scope.
 
 ## Roadmap maintenance
 

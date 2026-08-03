@@ -9,7 +9,7 @@ Create the reusable global storefront navigation that helps customers reach prod
 ## Decisions
 
 - Primary destinations are Shop, Fragrance Guide, About, and Contact. The component receives destinations as props; this phase does not create those routes or their content.
-- Navigation uses the approved editable `LogoTextLockup`: Marcellus `INFUSION` with `DIFFUSION` beneath it between short rules. The original ornamental artwork remains preserved as a brand asset but is not the navigation default.
+- Navigation uses the approved editable `LogoTextLockup`: Marcellus `INFUSION` with `DIFFUSION` beneath it between short rules. It is the current production storefront mark. The original ornamental artwork remains preserved as reference material and is not a release dependency.
 - Desktop uses a horizontal navigation beneath the optional AnnouncementBar. Mobile uses a menu button and a full-height modal drawer with the same link order.
 - The mobile drawer has a visible close control, focus containment, Escape dismissal, scroll locking, and focus return to its opener. Reduced motion removes non-essential movement without removing state feedback.
 - Account and cart are persistent commerce utilities on desktop and mobile. Each uses a 44px target and an accessible name; cart quantity is optional and must only render from real commerce state. Search remains deferred.
@@ -43,13 +43,13 @@ Create the reusable global storefront navigation that helps customers reach prod
 
 - Building Shop, Fragrance Guide, About, Contact, search, account, cart, checkout, or menu-content routes; this slice only exposes account and cart navigation entry points.
 - Live cart counts, predictive search, authentication, mega-menu merchandising, localization switching, and page-level sticky/scroll behavior.
-- Reconstructing the original ornamental logo. The approved editable text lockup is the navigation default; the original artwork remains preserved until the owner supplies its vector master and licence record.
+- Reconstructing the original ornamental logo. The approved editable text lockup is the production storefront mark; revisit the preserved artwork only if the owner supplies its vector master and licence record and explicitly approves a future use.
 
 ## Provisional source record
 
 - Canonical Figma Brand frame: `26:2`.
 - Original Infusion Diffusion ornamental lockup: `26:7`, 580×378, preserved as owner-provided transparent artwork.
-- Approved editable navigation lockup: component set `162:120`. This does not replace the outstanding vector master and licence record for the ornamental asset.
+- Approved editable navigation lockup and current production storefront mark: component set `162:120`. A vector master and licence record are only required if the deferred ornamental asset returns to scope.
 
 ## Approval record
 
@@ -62,6 +62,7 @@ Create the reusable global storefront navigation that helps customers reach prod
 - Product owner confirmed that account and cart icons are required commerce utilities on 3 August 2026. Both now appear in desktop and mobile compositions with accessible target labels; the cart is shown without a speculative quantity.
 - Account and cart controls use matching 44px targets and 1.5px strokes. Their glyphs are optically balanced rather than mechanically identical: the profile uses a narrower shoulder arc so it reads as a person at navigation size.
 - Product owner approved the navigation designs and selected the editable text lockup as the preferred navigation logo on 3 August 2026.
+- Product owner confirmed the editable text lockup as the current production storefront logo and deferred the ornamental vector asset on 3 August 2026.
 
 ## Figma review record
 
