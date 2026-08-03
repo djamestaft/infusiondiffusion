@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 const { sanityLiveMock } = vi.hoisted(() => ({
   sanityLiveMock: vi.fn(() => null),
@@ -16,7 +16,10 @@ vi.mock("@/sanity/lib/live", () => ({ SanityLive: sanityLiveMock }));
 import WebsiteLayout from "@/app/(website)/layout";
 
 describe("website layout", () => {
+  afterEach(() => vi.unstubAllEnvs());
+
   it("waits for the Sanity invalidation function before refreshing published content", async () => {
+    vi.stubEnv("VERCEL_ENV", "production");
     const layout = await WebsiteLayout({ children: <main>Storefront</main> });
 
     // Invoke the returned server-component child to inspect its contract without
@@ -27,6 +30,18 @@ describe("website layout", () => {
     expect(sanityLiveMock).toHaveBeenCalledWith({
       includeDrafts: false,
       waitFor: "function",
+    });
+  });
+
+  it("does not wait for the production function outside production", async () => {
+    vi.stubEnv("VERCEL_ENV", "preview");
+    const layout = await WebsiteLayout({ children: <main>Storefront</main> });
+    const liveElement = layout.props.children[1];
+    liveElement.type(liveElement.props);
+
+    expect(sanityLiveMock).toHaveBeenLastCalledWith({
+      includeDrafts: false,
+      waitFor: undefined,
     });
   });
 });

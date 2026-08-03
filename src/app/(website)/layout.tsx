@@ -15,7 +15,12 @@ export default async function WebsiteLayout({
     <>
       {children}
       {isSanityConfigured ? (
-        <SanityLive includeDrafts={isEnabled} waitFor="function" />
+        <SanityLive
+          includeDrafts={isEnabled}
+          waitFor={
+            process.env.VERCEL_ENV === "production" ? "function" : undefined
+          }
+        />
       ) : null}
       {isEnabled ? <VisualEditing /> : null}
     </>

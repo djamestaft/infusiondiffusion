@@ -30,9 +30,10 @@ Capture the failing URL, deployment ID, commit SHA, timestamp, browser evidence,
 ## Sanity content invalidation
 
 Published changes in the `j222nd1i.production` dataset are coordinated by the
-`invalidate-tags` Sanity Sync Tag function. The storefront's `SanityLive`
-subscription waits for that function before refreshing, which prevents a live
-event from racing Vercel's tagged cache.
+`invalidate-tags` Sanity Sync Tag function. The function sends the event's sync
+tags to the protected production `/api/revalidate-tags` route before calling
+`done()`. Production `SanityLive` subscriptions wait for that completion, which
+prevents a live event from racing Vercel's tagged cache.
 
 - Preview infrastructure changes with `pnpm exec sanity blueprints plan`.
 - Deploy the function with `pnpm exec sanity blueprints deploy` after the
@@ -40,9 +41,13 @@ event from racing Vercel's tagged cache.
 - Inspect deployed configuration with `pnpm exec sanity functions list --verbose`
   and runtime failures with `pnpm exec sanity functions logs invalidate-tags`.
 - Keep exactly one Sync Tag invalidate function attached to a dataset.
-- If publishing stops updating the storefront, inspect function logs first. A
-  failed `done()` call is deliberately thrown so Sanity records the invocation
-  as failed instead of acknowledging stale cache state.
+- Configure the same `SANITY_REVALIDATE_TAGS_SECRET` as a server-only Production
+  variable in Vercel and on the function. Configure the function's
+  `SANITY_REVALIDATE_TAGS_ENDPOINT` as the production route URL.
+- If publishing stops updating the storefront, compare the Content Lake
+  `_updatedAt`, function logs, endpoint response, and Vercel cache headers. The
+  function deliberately throws when the route or `done()` fails so Sanity does
+  not acknowledge stale cache state.
 
 ## External provisioning still required
 
