@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-02T00:00:00+02:00",
+  "generatedAt": "2026-08-03T12:00:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -109,7 +109,15 @@
       { "name": "desktop", "value": ">= 768px" }
     ]
   },
-  "components": [],
+  "components": [
+    {
+      "name": "AnnouncementBar",
+      "kind": "custom",
+      "description": "A concise, non-dismissible editorial notice above site navigation, with an optional destination link.",
+      "html": "<aside class=\"ds-announcement\" aria-label=\"Announcement\"><p>THE FIRST COLLECTION IS TAKING SHAPE.</p></aside>",
+      "css": ".ds-announcement { min-height: 44px; display: flex; align-items: center; justify-content: center; padding: 8px 20px; background: var(--announcement); color: var(--announcement-foreground); border-bottom: 1px solid var(--announcement-border); text-align: center; } .ds-announcement p { margin: 0; font: 600 12px/16px Manrope, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }"
+    }
+  ],
   "narrative": {
     "northStar": "The Perfumer's Cabinet",
     "overview": "Infusion Diffusion uses deep contrast, measured gold, tactile materials, and generous quiet to make home fragrance feel composed and intimate. Product meaning remains clear before language becomes poetic.",

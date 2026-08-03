@@ -18,7 +18,7 @@
     "test:e2e": "playwright test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "sanity:schema": "sanity schema extract --path=./src/sanity/extract.json",
+    "sanity:schema": "sanity schema extract --path=./src/sanity/extract.json --force",
     "sanity:typegen": "sanity typegen generate",
     "check": "prettier --check . && eslint . --max-warnings=0 && tsc --noEmit && vitest run --config vitest.config.ts && vitest run --config vitest.storybook.config.ts && storybook build && next build"
   },

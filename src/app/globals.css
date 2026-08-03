@@ -5,6 +5,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-announcement: var(--announcement);
+  --color-announcement-foreground: var(--announcement-foreground);
+  --color-announcement-accent: var(--announcement-accent);
+  --color-announcement-border: var(--announcement-border);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -62,6 +66,10 @@
   --border: oklch(0.82 0.045 78);
   --input: oklch(0.82 0.045 78);
   --ring: oklch(0.52 0.1 148);
+  --announcement: #11110f;
+  --announcement-foreground: #fcfaf5;
+  --announcement-accent: #ddc77f;
+  --announcement-border: #a9842d;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
