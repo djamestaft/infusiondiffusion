@@ -162,7 +162,9 @@ Borders are hairline by default. Ornament must derive from the approved logo geo
 
 ## Components
 
-Figma components are not yet approved. Build them in this order: buttons and links, inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
+`AnnouncementBar` is the first approved Figma component and proves the component-to-code handoff. Its approved [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=93-6) and [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=93-12) frames map to `AnnouncementBar` in code and `Components/AnnouncementBar` in Storybook.
+
+Build the remaining components in this order: buttons and links, inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
 Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 

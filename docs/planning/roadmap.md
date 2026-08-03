@@ -149,7 +149,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Connect and authenticate Figma MCP
 - [x] Scope agent work to the canonical Infusion Diffusion file and exact node links
 - [x] Document page/frame naming and component-to-code mapping conventions
-- [ ] Test one approved component handoff through Storybook
+- [x] Test one approved component handoff through Storybook
 
 ### Shopify
 

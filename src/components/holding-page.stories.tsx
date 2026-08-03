@@ -15,6 +15,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+export const WithAnnouncement: Story = {
+  args: {
+    settings: {
+      ...fallbackSiteSettings,
+      announcement: {
+        enabled: true,
+        message: "The first collection is taking shape.",
+      },
+    },
+  },
+};
+
 export const LongContent: Story = {
   args: {
     settings: {

@@ -10,6 +10,19 @@ test("shows the holding page without serious accessibility violations", async ({
     page.getByRole("heading", { name: "Scent for living." }),
   ).toBeVisible();
 
+  const announcement = page.getByLabel("Announcement");
+  await expect(announcement).toHaveText(
+    "The first collection is taking shape.",
+  );
+  await expect(announcement.getByRole("link")).toHaveCount(0);
+
+  const announcementBox = await announcement.boundingBox();
+  expect(announcementBox).not.toBeNull();
+  expect(announcementBox!.height).toBeGreaterThanOrEqual(44);
+  expect(announcementBox!.width).toBeLessThanOrEqual(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     .analyze();

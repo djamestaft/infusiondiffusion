@@ -1,10 +1,16 @@
 import { ArrowUpRight } from "lucide-react";
 
+import { AnnouncementBar } from "@/components/announcement-bar";
 import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { SiteSettings } from "@/sanity/types";
 
 export function HoldingPage({ settings }: { settings: SiteSettings }) {
+  const showAnnouncement = Boolean(
+    settings.announcement.enabled && settings.announcement.message?.trim(),
+  );
+
   return (
     <main className="relative isolate min-h-screen overflow-hidden px-5 py-6 sm:px-8 lg:px-12">
       <div
@@ -16,7 +22,24 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
         className="bg-primary/15 absolute -bottom-56 -left-44 -z-10 size-[38rem] rounded-full blur-3xl"
       />
 
-      <nav className="border-foreground/15 mx-auto flex max-w-7xl items-center justify-between border-b pb-5">
+      {showAnnouncement ? (
+        <div className="mx-auto max-w-7xl">
+          <AnnouncementBar
+            message={settings.announcement.message}
+            link={{
+              label: settings.announcement.linkLabel,
+              href: settings.announcement.linkUrl,
+            }}
+          />
+        </div>
+      ) : null}
+
+      <nav
+        className={cn(
+          "border-foreground/15 mx-auto flex max-w-7xl items-center justify-between border-b pb-5",
+          showAnnouncement && "mt-4",
+        )}
+      >
         <BrandMark />
         <span className="text-muted-foreground hidden text-xs font-semibold tracking-[0.16em] uppercase sm:block">
           Johannesburg · South Africa

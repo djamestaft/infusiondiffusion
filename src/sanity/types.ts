@@ -1,6 +1,12 @@
 export type SiteSettings = {
   brandName: string;
   eyebrow: string;
+  announcement: {
+    enabled: boolean;
+    message?: string;
+    linkLabel?: string;
+    linkUrl?: string;
+  };
   headline: string;
   introduction: string;
   contactEmail: string;
@@ -12,6 +18,10 @@ export type SiteSettings = {
 export const fallbackSiteSettings: SiteSettings = {
   brandName: "Infusion Diffusion",
   eyebrow: "Home fragrance · Coming soon",
+  announcement: {
+    enabled: true,
+    message: "The first collection is taking shape.",
+  },
   headline: "Scent for living.",
   introduction:
     "We are preparing a considered collection of room sprays, reed diffusers, and candles for layered, lived-in rooms.",
