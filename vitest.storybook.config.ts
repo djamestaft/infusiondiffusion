@@ -9,6 +9,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [storybookTest({ configDir: path.join(dirname, ".storybook") })],
+  optimizeDeps: { include: ["next/link"] },
   test: {
     name: "storybook",
     browser: {

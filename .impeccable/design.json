@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T20:35:00+02:00",
+  "generatedAt": "2026-08-03T22:45:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -63,6 +63,16 @@
         "role": "tertiary",
         "displayName": "Resin",
         "canonical": "#633F32"
+      },
+      "error": {
+        "role": "tertiary",
+        "displayName": "Error",
+        "canonical": "#A64237"
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Success",
+        "canonical": "#4E6A50"
       }
     },
     "typographyMeta": {
@@ -114,6 +124,13 @@
         "name": "floating",
         "value": "0 20px 48px -8px rgba(17,17,15,0.22)",
         "purpose": "Overlays and temporary floating surfaces only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "150ms ease",
+        "purpose": "Default color and underline response for interactive component states; removed when reduced motion is requested."
       }
     ],
     "breakpoints": [
@@ -195,9 +212,23 @@
     {
       "name": "ProductCard",
       "kind": "custom",
-      "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, ZAR price, explicit sold-out status, and a full-card focus ring.",
+      "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, composed PriceDisplay, material commerce status, and a full-card focus ring.",
       "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER · 200ML</p><h3>Bois de Santal</h3><p>Cardamom · rose · sandalwood</p><strong>R 420</strong></div></a>",
       "css": ".ds-product-card { display: grid; grid-template-rows: auto 1fr; width: 100%; max-width: 288px; padding: 2px; border-radius: 4px; background: var(--product-card-surface); color: var(--product-card-text); text-decoration: none; } .ds-product-card img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 4px 4px 0 0; } .ds-product-card:focus-visible { outline: 2px solid var(--product-card-focus); outline-offset: -2px; } .ds-product-card h3, .ds-product-card div > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }"
+    },
+    {
+      "name": "PriceDisplay",
+      "kind": "custom",
+      "description": "Localized regular, sale, or starting-price presentation in compact and standard scales, with explicit sale and original-price semantics.",
+      "html": "<span class=\"ds-price-display\"><span>R 1 249,95</span><s>R 1 499,95</s></span>",
+      "css": ".ds-price-display { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; color: var(--price-display-current); font: 600 24px/32px Manrope, Arial, sans-serif; } .ds-price-display s { color: var(--price-display-compare); font: 400 16px/24px Manrope, Arial, sans-serif; }"
+    },
+    {
+      "name": "CommerceStatus",
+      "kind": "custom",
+      "description": "Explicit Shopify-derived availability language in inline or restrained overlay treatment; colour is always a supporting cue.",
+      "html": "<span class=\"ds-commerce-status\"><span aria-hidden=\"true\"></span>Only 3 left</span>",
+      "css": ".ds-commerce-status { display: inline-flex; align-items: center; gap: 8px; padding-block: 4px; color: var(--commerce-status-inline); font: 600 14px/20px Manrope, Arial, sans-serif; } .ds-commerce-status > span { width: 6px; height: 6px; border-radius: 999px; background: var(--commerce-status-low-stock-surface); }"
     },
     {
       "name": "Navigation",

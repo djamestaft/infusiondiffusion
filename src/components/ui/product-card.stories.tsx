@@ -36,7 +36,16 @@ export const Hover: Story = {
       "bg-product-card-hover [&_h3]:text-product-card-accent [&_h3]:underline",
   },
 };
+export const Sale: Story = {
+  args: {
+    compareAtPrice: { amount: "520", currencyCode: "ZAR" },
+  },
+};
+export const LowStock: Story = {
+  args: { availability: "low-stock", lowStockCount: 3 },
+};
 export const SoldOut: Story = { args: { availability: "sold-out" } };
+export const PreOrder: Story = { args: { availability: "pre-order" } };
 export const MissingImage: Story = { args: { image: undefined } };
 export const LongContent: Story = {
   args: {
@@ -46,6 +55,18 @@ export const LongContent: Story = {
   },
 };
 export const Midnight: Story = {
+  render: (args) => (
+    <div className="dark w-80 bg-[#11110f] p-4">
+      <ProductCard {...args} />
+    </div>
+  ),
+};
+export const MidnightSaleLowStock: Story = {
+  args: {
+    compareAtPrice: { amount: "520", currencyCode: "ZAR" },
+    availability: "low-stock",
+    lowStockCount: 3,
+  },
   render: (args) => (
     <div className="dark w-80 bg-[#11110f] p-4">
       <ProductCard {...args} />
@@ -96,14 +117,27 @@ export const DesktopCollection: Story = {
     <div className="p-8">
       <FixtureLabel />
       <div className="grid max-w-[1224px] grid-cols-4 gap-6">
-        {productCardFixtures.map((item, index) => (
-          <ProductCard
-            key={item.href}
-            {...item}
-            imagePriority={index === 0}
-            availability={index === 1 ? "sold-out" : "available"}
-          />
-        ))}
+        {productCardFixtures.map((item, index) => {
+          const availability =
+            index === 1
+              ? ("sold-out" as const)
+              : index === 3
+                ? ("low-stock" as const)
+                : ("in-stock" as const);
+
+          return (
+            <ProductCard
+              key={item.href}
+              {...item}
+              imagePriority={index === 0}
+              availability={availability}
+              compareAtPrice={
+                index === 2 ? { amount: "520", currencyCode: "ZAR" } : undefined
+              }
+              lowStockCount={index === 3 ? 3 : undefined}
+            />
+          );
+        })}
       </div>
     </div>
   ),

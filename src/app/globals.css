@@ -52,6 +52,27 @@
   --color-product-card-status: var(--product-card-status);
   --color-product-card-status-foreground: var(--product-card-status-foreground);
   --color-product-card-media-fallback: var(--product-card-media-fallback);
+  --color-price-display-current: var(--price-display-current);
+  --color-price-display-compare: var(--price-display-compare);
+  --color-price-display-accent: var(--price-display-accent);
+  --color-commerce-status-inline: var(--commerce-status-inline);
+  --color-commerce-status-sold-out: var(--commerce-status-sold-out);
+  --color-commerce-status-available-surface: var(
+    --commerce-status-available-surface
+  );
+  --color-commerce-status-available-text: var(--commerce-status-available-text);
+  --color-commerce-status-low-stock-surface: var(
+    --commerce-status-low-stock-surface
+  );
+  --color-commerce-status-low-stock-text: var(--commerce-status-low-stock-text);
+  --color-commerce-status-sold-out-surface: var(
+    --commerce-status-sold-out-surface
+  );
+  --color-commerce-status-sold-out-text: var(--commerce-status-sold-out-text);
+  --color-commerce-status-pre-order-surface: var(
+    --commerce-status-pre-order-surface
+  );
+  --color-commerce-status-pre-order-text: var(--commerce-status-pre-order-text);
   --color-navigation-surface: var(--navigation-surface);
   --color-navigation-text: var(--navigation-text);
   --color-navigation-muted: var(--navigation-muted);
@@ -156,12 +177,25 @@
   --product-card-hover: #f5f1e8;
   --product-card-text: #11110f;
   --product-card-meta: #3c3b35;
-  --product-card-price: #11110f;
+  --product-card-price: var(--price-display-current);
   --product-card-focus: #c5a447;
   --product-card-accent: #a9842d;
-  --product-card-status: #11110f;
-  --product-card-status-foreground: #fcfaf5;
+  --product-card-status: var(--commerce-status-sold-out-surface);
+  --product-card-status-foreground: var(--commerce-status-sold-out-text);
   --product-card-media-fallback: #e8e2d5;
+  --price-display-current: #11110f;
+  --price-display-compare: #3c3b35;
+  --price-display-accent: #a9842d;
+  --commerce-status-inline: #11110f;
+  --commerce-status-sold-out: #a64237;
+  --commerce-status-available-surface: #4e6a50;
+  --commerce-status-available-text: #fcfaf5;
+  --commerce-status-low-stock-surface: #a9842d;
+  --commerce-status-low-stock-text: #11110f;
+  --commerce-status-sold-out-surface: #11110f;
+  --commerce-status-sold-out-text: #fcfaf5;
+  --commerce-status-pre-order-surface: #633f32;
+  --commerce-status-pre-order-text: #fcfaf5;
   --navigation-surface: #fcfaf5;
   --navigation-text: #11110f;
   --navigation-muted: #3c3b35;
@@ -252,12 +286,25 @@
   --product-card-hover: #191916;
   --product-card-text: #fcfaf5;
   --product-card-meta: #e8e2d5;
-  --product-card-price: #ddc77f;
+  --product-card-price: var(--price-display-current);
   --product-card-focus: #ddc77f;
   --product-card-accent: #ddc77f;
-  --product-card-status: #fcfaf5;
-  --product-card-status-foreground: #11110f;
+  --product-card-status: var(--commerce-status-sold-out-surface);
+  --product-card-status-foreground: var(--commerce-status-sold-out-text);
   --product-card-media-fallback: #282823;
+  --price-display-current: #fcfaf5;
+  --price-display-compare: #e8e2d5;
+  --price-display-accent: #ddc77f;
+  --commerce-status-inline: #fcfaf5;
+  --commerce-status-sold-out: #fcfaf5;
+  --commerce-status-available-surface: #4e6a50;
+  --commerce-status-available-text: #fcfaf5;
+  --commerce-status-low-stock-surface: #ddc77f;
+  --commerce-status-low-stock-text: #11110f;
+  --commerce-status-sold-out-surface: #fcfaf5;
+  --commerce-status-sold-out-text: #11110f;
+  --commerce-status-pre-order-surface: #633f32;
+  --commerce-status-pre-order-text: #fcfaf5;
   --navigation-surface: #11110f;
   --navigation-text: #fcfaf5;
   --navigation-muted: #e8e2d5;
