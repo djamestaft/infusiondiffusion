@@ -68,6 +68,47 @@ export const Midnight: Story = {
     ),
   ],
 };
+export const MidnightRoles: Story = {
+  render: () => (
+    <div className="dark bg-background flex flex-wrap items-center gap-4 p-12">
+      <Button>Shop fragrance</Button>
+      <Button variant="secondary">Shop fragrance</Button>
+      <Button variant="quiet">Shop fragrance</Button>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const buttons = within(canvasElement).getAllByRole("button");
+    await expect(buttons).toHaveLength(3);
+    for (const button of buttons) {
+      await expect(button).toBeVisible();
+      await expect(
+        button.getBoundingClientRect().height,
+      ).toBeGreaterThanOrEqual(44);
+    }
+  },
+};
+export const MobileReflow: Story = {
+  args: {
+    children:
+      "Explore every fragrance in the complete seasonal collection for your home",
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-[calc(100vw-40px)] max-w-80">
+        <Story />
+      </div>
+    ),
+  ],
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const button = within(canvasElement).getByRole("button");
+    await expect(button).toBeVisible();
+    await expect(button).toHaveTextContent("complete seasonal collection");
+    const bounds = button.getBoundingClientRect();
+    await expect(bounds.height).toBeGreaterThan(44);
+    await expect(bounds.width).toBeLessThanOrEqual(320);
+  },
+};
 export const KeyboardFocus: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -1,12 +1,18 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { ArrowUpRight } from "lucide-react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
 
 import { TextLink } from "@/components/ui/text-link";
 
 afterEach(cleanup);
 
 describe("TextLink", () => {
+  it("requires a destination in its public props", () => {
+    expectTypeOf<React.ComponentProps<typeof TextLink>>().toMatchTypeOf<{
+      href: string;
+    }>();
+  });
+
   it("renders a real link with its destination", () => {
     render(<TextLink href="/delivery">View delivery details</TextLink>);
     expect(

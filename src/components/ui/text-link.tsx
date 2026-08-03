@@ -22,8 +22,9 @@ const textLinkVariants = cva(
 
 export interface TextLinkProps
   extends
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">,
     VariantProps<typeof textLinkVariants> {
+  href: NonNullable<React.AnchorHTMLAttributes<HTMLAnchorElement>["href"]>;
   icon?: React.ReactNode;
 }
 

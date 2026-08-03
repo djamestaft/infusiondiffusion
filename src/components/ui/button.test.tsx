@@ -51,4 +51,19 @@ describe("Button", () => {
     await userEvent.click(link);
     expect(onClick).not.toHaveBeenCalled();
   });
+
+  it("enforces an unfocusable unavailable link over caller tab indexes", () => {
+    render(
+      <Button asChild loading tabIndex={0}>
+        <a href="/collections" tabIndex={0}>
+          Explore
+        </a>
+      </Button>,
+    );
+
+    expect(screen.getByRole("link", { name: "Explore" })).toHaveAttribute(
+      "tabindex",
+      "-1",
+    );
+  });
 });

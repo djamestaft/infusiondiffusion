@@ -24,7 +24,10 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
 
   const linkLabel = link?.label?.trim();
   const linkHref = link?.href?.trim();
-  const showLink = Boolean(linkLabel && linkHref && isSafeHref(linkHref));
+  const safeLink =
+    linkLabel && linkHref && isSafeHref(linkHref)
+      ? { label: linkLabel, href: linkHref }
+      : null;
 
   return (
     <aside
@@ -35,13 +38,13 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
         <p className="text-xs leading-4 font-semibold tracking-[0.08em] uppercase">
           {content}
         </p>
-        {showLink ? (
+        {safeLink ? (
           <TextLink
             variant="inverse"
             className="text-announcement-accent focus-visible:outline-announcement-accent inline-flex min-h-11 items-center px-2 text-xs leading-4 font-semibold tracking-[0.08em] uppercase"
-            href={linkHref}
+            href={safeLink.href}
           >
-            {linkLabel}
+            {safeLink.label}
           </TextLink>
         ) : null}
       </div>

@@ -80,6 +80,7 @@ function Button({
   disabled = false,
   children,
   onClick,
+  tabIndex,
   type,
   ...props
 }: ButtonProps) {
@@ -95,9 +96,10 @@ function Button({
     onClick?.(event);
   };
 
-  const childElement = React.isValidElement<{ children?: React.ReactNode }>(
-    children,
-  )
+  const childElement = React.isValidElement<{
+    children?: React.ReactNode;
+    tabIndex?: number;
+  }>(children)
     ? children
     : null;
   const contentChildren =
@@ -122,20 +124,24 @@ function Button({
 
   const slottedChild =
     asChild && childElement
-      ? React.cloneElement(childElement, undefined, content)
+      ? React.cloneElement(
+          childElement,
+          unavailable ? { tabIndex: -1 } : undefined,
+          content,
+        )
       : children;
 
   return (
     <Comp
+      {...props}
       data-slot="button"
       className={cn(buttonVariants({ variant, size }), className)}
       aria-busy={loading || undefined}
       aria-disabled={asChild && unavailable ? true : undefined}
       disabled={asChild ? undefined : unavailable}
-      tabIndex={asChild && unavailable ? -1 : props.tabIndex}
+      tabIndex={asChild && unavailable ? -1 : tabIndex}
       type={asChild ? undefined : (type ?? "button")}
       onClick={handleClick}
-      {...props}
     >
       {asChild ? slottedChild : content}
     </Comp>
