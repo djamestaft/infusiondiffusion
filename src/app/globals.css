@@ -98,6 +98,15 @@
   --color-feedback-success-surface: var(--feedback-success-surface);
   --color-feedback-warning-surface: var(--feedback-warning-surface);
   --color-feedback-error-surface: var(--feedback-error-surface);
+  --color-badge-neutral-surface: var(--badge-neutral-surface);
+  --color-badge-neutral-foreground: var(--badge-neutral-foreground);
+  --color-badge-neutral-border: var(--badge-neutral-border);
+  --color-badge-accent-surface: var(--badge-accent-surface);
+  --color-badge-accent-foreground: var(--badge-accent-foreground);
+  --color-content-primary: var(--content-primary);
+  --color-content-secondary: var(--content-secondary);
+  --color-content-accent: var(--content-accent);
+  --color-content-surface: var(--content-surface);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -180,7 +189,7 @@
   --action-destructive-active: #783029;
   --link-inline: #11110f;
   --link-standalone: #11110f;
-  --link-hover: #a9842d;
+  --link-hover: #735716;
   --link-active: #45483a;
   --link-inverse: #ddc77f;
   --link-inverse-hover: #c5a447;
@@ -240,6 +249,15 @@
   --feedback-success-surface: #eef2ec;
   --feedback-warning-surface: #f6f0df;
   --feedback-error-surface: #f7ece8;
+  --badge-neutral-surface: #f5f1e8;
+  --badge-neutral-foreground: #11110f;
+  --badge-neutral-border: rgb(60 59 53 / 72%);
+  --badge-accent-surface: #11110f;
+  --badge-accent-foreground: #fcfaf5;
+  --content-primary: #11110f;
+  --content-secondary: #3c3b35;
+  --content-accent: #735716;
+  --content-surface: #fcfaf5;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -368,6 +386,15 @@
   --feedback-success-surface: #1d231d;
   --feedback-warning-surface: #252116;
   --feedback-error-surface: #261a17;
+  --badge-neutral-surface: #282823;
+  --badge-neutral-foreground: #e8e2d5;
+  --badge-neutral-border: rgb(232 226 213 / 72%);
+  --badge-accent-surface: #c5a447;
+  --badge-accent-foreground: #11110f;
+  --content-primary: #fcfaf5;
+  --content-secondary: #e8e2d5;
+  --content-accent: #ddc77f;
+  --content-surface: #11110f;
 }
 
 @layer base {
