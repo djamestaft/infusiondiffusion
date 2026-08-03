@@ -1,7 +1,7 @@
+import { createRef } from "react";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { Badge } from "@/components/ui/badge";
 import {
   ContentHeader,
   Eyebrow,
@@ -23,28 +23,51 @@ describe("content primitives", () => {
   );
 
   it("uses paragraph semantics for eyebrow and lead", () => {
+    const eyebrowRef = createRef<HTMLParagraphElement>();
+    const leadRef = createRef<HTMLParagraphElement>();
     render(
       <>
-        <Eyebrow>Home fragrance</Eyebrow>
-        <Lead>Concrete room and format guidance.</Lead>
+        <Eyebrow ref={eyebrowRef}>Home fragrance</Eyebrow>
+        <Lead ref={leadRef}>Concrete room and format guidance.</Lead>
       </>,
     );
     expect(screen.getByText("Home fragrance").tagName).toBe("P");
     expect(screen.getByText("Concrete room and format guidance.").tagName).toBe(
       "P",
     );
+    expect(eyebrowRef.current).toBe(screen.getByText("Home fragrance"));
+    expect(leadRef.current).toBe(
+      screen.getByText("Concrete room and format guidance."),
+    );
   });
 });
 
 describe("ContentHeader", () => {
+  it("rejects nested headings and arbitrary action nodes at the type boundary", () => {
+    if (false) {
+      <ContentHeader
+        // @ts-expect-error ContentHeader owns the only heading in its contract.
+        title={<Heading level={3}>Nested heading</Heading>}
+        headingLevel={2}
+      />;
+      <ContentHeader
+        title="Gift edit"
+        headingLevel={2}
+        // @ts-expect-error Actions must compose the approved Button or TextLink configuration.
+        action={<a href="/gift-edit">Unbounded action</a>}
+      />;
+    }
+    expect(true).toBe(true);
+  });
+
   it("owns one heading and preserves context, heading, lead, action order", () => {
     const { container } = render(
       <ContentHeader
-        badge={<Badge>New</Badge>}
+        context={{ type: "badge", label: "New" }}
         title="The evening ritual"
         headingLevel={2}
         lead="Fragrance that unfolds gradually."
-        action={<a href="#shop">Shop diffusers</a>}
+        action={{ type: "button", label: "Shop diffusers", href: "#shop" }}
       />,
     );
 

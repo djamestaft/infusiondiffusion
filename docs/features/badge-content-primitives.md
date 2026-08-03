@@ -1,6 +1,6 @@
 # Badge and Content Primitives
 
-Status: Implemented and verified locally
+Status: Implemented; pull-request verification in progress
 
 ## Summary
 

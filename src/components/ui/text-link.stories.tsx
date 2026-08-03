@@ -29,6 +29,10 @@ export const Standalone: Story = {
     children: "Explore the collection",
     icon: <ArrowUpRight className="size-4" strokeWidth={1.75} />,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.hover(canvas.getByRole("link"));
+  },
 };
 export const Inverse: Story = {
   args: { variant: "inverse", children: "Explore the collection" },

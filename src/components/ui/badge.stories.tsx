@@ -39,7 +39,7 @@ export const LongContent: Story = {
 
 export const Midnight: Story = {
   render: () => (
-    <div className="dark flex flex-wrap gap-4 bg-[#11110f] p-8">
+    <div className="dark bg-content-surface flex flex-wrap gap-4 p-8">
       <Badge>New</Badge>
       <Badge variant="accent">Gift edit</Badge>
     </div>

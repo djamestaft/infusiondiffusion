@@ -24,9 +24,12 @@ Customers can distinguish actions from destinations, understand their relative e
 4. Loading preserves the button's width and label footprint, shows a monochrome vector spinner, sets `aria-busy`, and prevents repeat activation. Disabled buttons are non-interactive and retain a legible label.
 5. Every Button has a minimum 44px target, visible mode-aware keyboard focus, reduced-motion behavior, and reflows rather than clips long labels. Icon-only usage requires an accessible name.
 6. TextLink exposes Inline, Standalone, and Inverse roles. Inline links remain underlined in prose; Standalone links have a 44px target and may carry a decorative trailing monochrome vector icon.
-7. TextLink always renders a real anchor with a destination and has a visible mode-aware focus treatment. It deliberately has no disabled API or fake disabled-link state.
-8. AnnouncementBar preserves its approved appearance while consuming the shared TextLink focus and interaction contract. The holding-page contact destination uses the approved Button API.
-9. Storybook documents component roles, sizes, modes, loading, disabled, focus, long content, responsive behavior, and anchor semantics. Vitest covers semantics and unavailable/loading behavior.
+7. Ivory TextLink hover uses accessible deep gold `#735716`. Storybook must
+   deterministically exercise hover so axe evaluates the interaction color on
+   the actual preview canvas rather than only the default state.
+8. TextLink always renders a real anchor with a destination and has a visible mode-aware focus treatment. It deliberately has no disabled API or fake disabled-link state.
+9. AnnouncementBar preserves its approved appearance while consuming the shared TextLink focus and interaction contract. The holding-page contact destination uses the approved Button API.
+10. Storybook documents component roles, sizes, modes, loading, disabled, focus, long content, responsive behavior, and anchor semantics. Vitest covers semantics and unavailable/loading behavior.
 
 ## Out of scope
 

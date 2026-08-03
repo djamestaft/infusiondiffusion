@@ -1,6 +1,9 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
+import { Badge, type BadgeProps } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { TextLink } from "@/components/ui/text-link";
 import { cn } from "@/lib/utils";
 
 const headingVariants = cva(
@@ -72,20 +75,34 @@ export function Lead({ className, ...props }: React.ComponentProps<"p">) {
   );
 }
 
-export type ContentHeaderProps = Omit<React.ComponentProps<"div">, "title"> & {
-  badge?: React.ReactNode;
-  eyebrow?: React.ReactNode;
-  title: React.ReactNode;
+type ContentHeaderContext =
+  | { type: "badge"; label: string; variant?: BadgeProps["variant"] }
+  | { type: "eyebrow"; label: string };
+
+type ContentHeaderAction =
+  | {
+      type: "button";
+      label: string;
+      href: string;
+      variant?: "primary" | "secondary" | "quiet";
+    }
+  | { type: "link"; label: string; href: string };
+
+export type ContentHeaderProps = Omit<
+  React.ComponentProps<"div">,
+  "children" | "dangerouslySetInnerHTML" | "title"
+> & {
+  context?: ContentHeaderContext;
+  title: string;
   headingLevel: HeadingLevel;
   headingTreatment?: HeadingProps["treatment"];
-  lead?: React.ReactNode;
-  action?: React.ReactNode;
+  lead?: string;
+  action?: ContentHeaderAction;
   align?: "start" | "center";
 };
 
 export function ContentHeader({
-  badge,
-  eyebrow,
+  context,
   title,
   headingLevel,
   headingTreatment = "headline",
@@ -95,8 +112,6 @@ export function ContentHeader({
   className,
   ...props
 }: ContentHeaderProps) {
-  const context = badge ?? eyebrow;
-
   return (
     <div
       data-slot="content-header"
@@ -108,14 +123,30 @@ export function ContentHeader({
       )}
       {...props}
     >
-      {context ? <div data-slot="content-header-context">{context}</div> : null}
+      {context ? (
+        <div data-slot="content-header-context">
+          {context.type === "badge" ? (
+            <Badge variant={context.variant}>{context.label}</Badge>
+          ) : (
+            <Eyebrow>{context.label}</Eyebrow>
+          )}
+        </div>
+      ) : null}
       <Heading level={headingLevel} treatment={headingTreatment}>
         {title}
       </Heading>
       {lead ? <Lead className="whitespace-pre-line">{lead}</Lead> : null}
       {action ? (
         <div data-slot="content-header-action" className="mt-2 w-fit">
-          {action}
+          {action.type === "button" ? (
+            <Button asChild variant={action.variant}>
+              <a href={action.href}>{action.label}</a>
+            </Button>
+          ) : (
+            <TextLink href={action.href} variant="standalone">
+              {action.label}
+            </TextLink>
+          )}
         </div>
       ) : null}
     </div>

@@ -17,8 +17,13 @@ const badgeVariants = cva(
   },
 );
 
-export interface BadgeProps
-  extends React.ComponentProps<"span">, VariantProps<typeof badgeVariants> {}
+export interface BadgeProps extends VariantProps<typeof badgeVariants> {
+  children: string | number;
+  className?: string;
+  id?: string;
+  ref?: React.Ref<HTMLSpanElement>;
+  "aria-label"?: string;
+}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (

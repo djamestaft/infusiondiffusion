@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T21:40:28+02:00",
+  "generatedAt": "2026-08-03T23:50:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -177,14 +177,14 @@
     {
       "name": "TextLink / Inline",
       "kind": "custom",
-      "description": "An always-underlined destination within prose.",
+      "description": "An always-underlined destination within prose, with an accessible deep-gold hover state on Ivory.",
       "html": "<a class=\"ds-link-inline\" href=\"#delivery\">View delivery details</a>",
       "css": ".ds-link-inline { border-radius: 2px; color: var(--link-inline); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-inline:hover { color: var(--link-hover); } .ds-link-inline:active { color: var(--link-active); } .ds-link-inline:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
     },
     {
       "name": "TextLink / Standalone",
       "kind": "custom",
-      "description": "A directional destination outside prose with a minimum 44px target and optional monochrome trailing icon.",
+      "description": "A directional destination outside prose with a minimum 44px target, optional monochrome trailing icon, and accessible deep-gold hover on Ivory.",
       "html": "<a class=\"ds-link-standalone\" href=\"#collection\">Explore the collection <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
       "css": ".ds-link-standalone { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; border-radius: 2px; color: var(--link-standalone); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-standalone svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; } .ds-link-standalone:hover { color: var(--link-hover); } .ds-link-standalone:active { color: var(--link-active); } .ds-link-standalone:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
     },
