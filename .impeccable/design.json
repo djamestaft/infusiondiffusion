@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T23:50:00+02:00",
+  "generatedAt": "2026-08-03T21:40:28+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -257,6 +257,20 @@
       "description": "Consequential confirmation with no ambiguous close icon and initial focus on the least-destructive action.",
       "html": "<div class=\"ds-alert-dialog\" role=\"alertdialog\" aria-modal=\"true\" aria-labelledby=\"confirm-title\"><h2 id=\"confirm-title\">Remove this item?</h2><button>CANCEL</button><button>REMOVE</button></div>",
       "css": ".ds-alert-dialog { max-width: 560px; padding: 32px; border-radius: 8px; background: var(--overlay-surface); color: var(--overlay-text); box-shadow: 0 16px 40px rgba(0,0,0,.24); }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "description": "Concise static editorial metadata in Neutral or Accent roles; never an interactive control or Shopify-owned commerce status.",
+      "html": "<span class=\"ds-badge\">GIFT EDIT</span>",
+      "css": ".ds-badge { display: inline-flex; max-width: 100%; align-items: center; padding: 6px 12px; border: 1px solid var(--badge-neutral-border); border-radius: 2px; background: var(--badge-neutral-surface); color: var(--badge-neutral-foreground); font: 600 12px/16px Manrope, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; } .ds-badge[data-variant=accent] { border-color: transparent; background: var(--badge-accent-surface); color: var(--badge-accent-foreground); }"
+    },
+    {
+      "name": "ContentHeader",
+      "kind": "custom",
+      "description": "A semantic editorial hierarchy composing one explicit heading with optional Badge or Eyebrow context, Lead, and an existing action primitive.",
+      "html": "<header class=\"ds-content-header\"><p class=\"ds-eyebrow\">THE FRAGRANCE LIBRARY</p><h2>Choose atmosphere with intention.</h2><p>Compare fragrance character, room context, format and care before choosing.</p></header>",
+      "css": ".ds-content-header { display: flex; max-width: 1024px; flex-direction: column; align-items: flex-start; gap: 16px; color: var(--content-primary); } .ds-content-header h2 { margin: 0; max-width: 20ch; color: var(--content-primary); font: 400 48px/56px Marcellus, Georgia, serif; letter-spacing: -0.01em; } .ds-content-header > p:not(.ds-eyebrow) { max-width: 70ch; margin: 0; color: var(--content-secondary); font: 400 18px/30px Manrope, Arial, sans-serif; } .ds-eyebrow { margin: 0; color: var(--content-accent); font: 600 12px/16px Manrope, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }"
     },
     {
       "name": "FeedbackAlert",
