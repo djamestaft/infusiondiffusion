@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T18:00:00+02:00",
+  "generatedAt": "2026-08-03T18:45:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -179,6 +179,13 @@
       "description": "Visible label, optional or required status, native control, and one automatically associated supporting or error message.",
       "html": "<div class=\"ds-field\"><label for=\"email\">Email address *</label><input id=\"email\" class=\"ds-input\" type=\"email\" required><p>We only use this address for requested updates.</p></div>",
       "css": ".ds-field { display: grid; gap: 8px; } .ds-field label { color: var(--field-text); font: 600 14px/20px Manrope, Arial, sans-serif; } .ds-field p { margin: 0; color: var(--field-placeholder); font: 400 14px/20px Manrope, Arial, sans-serif; } .ds-field [data-error] { color: var(--field-error-text); }"
+    },
+    {
+      "name": "ProductCard",
+      "kind": "custom",
+      "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, ZAR price, explicit sold-out status, and a full-card focus ring.",
+      "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER · 200ML</p><h3>Bois de Santal</h3><p>Cardamom · rose · sandalwood</p><strong>R 420</strong></div></a>",
+      "css": ".ds-product-card { display: grid; grid-template-rows: auto 1fr; width: 100%; max-width: 288px; padding: 2px; border-radius: 2px; background: var(--product-card-surface); color: var(--product-card-text); text-decoration: none; } .ds-product-card img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 2px 2px 0 0; } .ds-product-card:focus-visible { outline: 2px solid var(--product-card-focus); outline-offset: -2px; } .ds-product-card h3, .ds-product-card div > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }"
     }
   ],
   "narrative": {
