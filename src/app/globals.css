@@ -24,6 +24,10 @@
   --color-action-disabled-border: var(--action-disabled-border);
   --color-action-disabled-foreground: var(--action-disabled-foreground);
   --color-action-focus: var(--action-focus);
+  --color-action-destructive: var(--action-destructive);
+  --color-action-destructive-foreground: var(--action-destructive-foreground);
+  --color-action-destructive-hover: var(--action-destructive-hover);
+  --color-action-destructive-active: var(--action-destructive-active);
   --color-link-inline: var(--link-inline);
   --color-link-standalone: var(--link-standalone);
   --color-link-hover: var(--link-hover);
@@ -79,6 +83,21 @@
   --color-navigation-accent: var(--navigation-accent);
   --color-navigation-border: var(--navigation-border);
   --color-navigation-focus: var(--navigation-focus);
+  --color-overlay-scrim: var(--overlay-scrim);
+  --color-overlay-surface: var(--overlay-surface);
+  --color-overlay-text: var(--overlay-text);
+  --color-overlay-muted: var(--overlay-muted);
+  --color-overlay-accent: var(--overlay-accent);
+  --color-overlay-border: var(--overlay-border);
+  --color-overlay-focus: var(--overlay-focus);
+  --color-feedback-info: var(--feedback-info);
+  --color-feedback-success: var(--feedback-success);
+  --color-feedback-warning: var(--feedback-warning);
+  --color-feedback-error: var(--feedback-error);
+  --color-feedback-info-surface: var(--feedback-info-surface);
+  --color-feedback-success-surface: var(--feedback-success-surface);
+  --color-feedback-warning-surface: var(--feedback-warning-surface);
+  --color-feedback-error-surface: var(--feedback-error-surface);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -155,6 +174,10 @@
   --action-disabled-border: transparent;
   --action-disabled-foreground: #3c3b35;
   --action-focus: #ddc77f;
+  --action-destructive: #a64237;
+  --action-destructive-foreground: #fcfaf5;
+  --action-destructive-hover: #8f352c;
+  --action-destructive-active: #783029;
   --link-inline: #11110f;
   --link-standalone: #11110f;
   --link-hover: #a9842d;
@@ -202,6 +225,21 @@
   --navigation-accent: #735716;
   --navigation-border: #e8e2d5;
   --navigation-focus: #c5a447;
+  --overlay-scrim: rgb(17 17 15 / 72%);
+  --overlay-surface: #fcfaf5;
+  --overlay-text: #11110f;
+  --overlay-muted: #3c3b35;
+  --overlay-accent: #a9842d;
+  --overlay-border: #e8e2d5;
+  --overlay-focus: #c5a447;
+  --feedback-info: #3c3b35;
+  --feedback-success: #4e6a50;
+  --feedback-warning: #735716;
+  --feedback-error: #a64237;
+  --feedback-info-surface: #f5f1e8;
+  --feedback-success-surface: #eef2ec;
+  --feedback-warning-surface: #f6f0df;
+  --feedback-error-surface: #f7ece8;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -264,6 +302,10 @@
   --action-disabled-border: transparent;
   --action-disabled-foreground: #e8e2d5;
   --action-focus: #ddc77f;
+  --action-destructive: #a64237;
+  --action-destructive-foreground: #fcfaf5;
+  --action-destructive-hover: #bd5146;
+  --action-destructive-active: #8f352c;
   --link-inline: #ddc77f;
   --link-standalone: #ddc77f;
   --link-hover: #c5a447;
@@ -311,6 +353,21 @@
   --navigation-accent: #c5a447;
   --navigation-border: #3c3b35;
   --navigation-focus: #ddc77f;
+  --overlay-scrim: rgb(17 17 15 / 78%);
+  --overlay-surface: #191916;
+  --overlay-text: #fcfaf5;
+  --overlay-muted: #e8e2d5;
+  --overlay-accent: #ddc77f;
+  --overlay-border: #3c3b35;
+  --overlay-focus: #ddc77f;
+  --feedback-info: #e8e2d5;
+  --feedback-success: #8eae91;
+  --feedback-warning: #ddc77f;
+  --feedback-error: #e0796f;
+  --feedback-info-surface: #191916;
+  --feedback-success-surface: #1d231d;
+  --feedback-warning-surface: #252116;
+  --feedback-error-surface: #261a17;
 }
 
 @layer base {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T22:45:00+02:00",
+  "generatedAt": "2026-08-03T23:50:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -168,6 +168,13 @@
       "css": ".ds-btn-quiet { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border: 0; border-radius: 4px; background: transparent; color: var(--action-quiet-foreground); font: 600 14px/20px Manrope, Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 150ms ease; } .ds-btn-quiet:hover { background: var(--action-quiet-hover); } .ds-btn-quiet:active { background: var(--action-quiet-active); } .ds-btn-quiet:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
     },
     {
+      "name": "Button / Destructive",
+      "kind": "button",
+      "description": "A restricted confirmation action for explicit consequential operations such as removing an item.",
+      "html": "<button class=\"ds-btn-destructive\">REMOVE ITEM</button>",
+      "css": ".ds-btn-destructive { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border: 0; border-radius: 4px; background: var(--action-destructive); color: var(--action-destructive-foreground); font: 600 14px/20px Manrope, Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 150ms ease; } .ds-btn-destructive:hover { background: var(--action-destructive-hover); } .ds-btn-destructive:active { background: var(--action-destructive-active); } .ds-btn-destructive:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
       "name": "TextLink / Inline",
       "kind": "custom",
       "description": "An always-underlined destination within prose.",
@@ -236,6 +243,27 @@
       "description": "The approved responsive storefront header with editable text lockup, primary destinations, account and cart utilities, and a full-height accessible mobile drawer.",
       "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION — DIFFUSION —</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
       "css": ".ds-navigation { min-height: 80px; padding-inline: 20px; background: var(--navigation-surface); color: var(--navigation-text); } .ds-navigation a, .ds-navigation button { min-width: 44px; min-height: 44px; } .ds-navigation :focus-visible { outline: 2px solid var(--navigation-focus); outline-offset: 2px; } @media (min-width: 1024px) { .ds-navigation { min-height: 104px; padding-inline: 32px; } }"
+    },
+    {
+      "name": "Dialog and Drawer",
+      "kind": "custom",
+      "description": "Accessible focus-contained overlay surfaces with mode-aware scrims, explicit exit controls, and responsive action layout.",
+      "html": "<div class=\"ds-overlay\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"dialog-title\"><button aria-label=\"Close dialog\"></button><h2 id=\"dialog-title\">Choose a delivery option</h2><p>Select the method that suits your order.</p></div>",
+      "css": ".ds-overlay { max-width: 560px; padding: 32px; border-radius: 8px; background: var(--overlay-surface); color: var(--overlay-text); box-shadow: 0 16px 40px rgba(0,0,0,.24); } .ds-overlay:focus-visible { outline: 2px solid var(--overlay-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "AlertDialog",
+      "kind": "custom",
+      "description": "Consequential confirmation with no ambiguous close icon and initial focus on the least-destructive action.",
+      "html": "<div class=\"ds-alert-dialog\" role=\"alertdialog\" aria-modal=\"true\" aria-labelledby=\"confirm-title\"><h2 id=\"confirm-title\">Remove this item?</h2><button>CANCEL</button><button>REMOVE</button></div>",
+      "css": ".ds-alert-dialog { max-width: 560px; padding: 32px; border-radius: 8px; background: var(--overlay-surface); color: var(--overlay-text); box-shadow: 0 16px 40px rgba(0,0,0,.24); }"
+    },
+    {
+      "name": "FeedbackAlert",
+      "kind": "custom",
+      "description": "Static inline information, success, warning, or error feedback with written meaning and a monochrome vector icon.",
+      "html": "<div class=\"ds-feedback-alert\"><svg aria-hidden=\"true\"></svg><div><strong>Saved successfully</strong><p>Your delivery preference has been updated.</p></div></div>",
+      "css": ".ds-feedback-alert { display: grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 20px 20px 20px 24px; border: 1px solid var(--overlay-border); border-left-width: 1px; border-radius: 4px; background: var(--feedback-info-surface); color: var(--overlay-text); } .ds-feedback-alert[data-tone=success] { background: var(--feedback-success-surface); } .ds-feedback-alert[data-tone=warning] { background: var(--feedback-warning-surface); } .ds-feedback-alert[data-tone=error] { background: var(--feedback-error-surface); }"
     }
   ],
   "narrative": {
