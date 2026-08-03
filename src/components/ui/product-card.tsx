@@ -4,12 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import {
+  CommerceStatus,
+  type CommerceStatusValue,
+} from "@/components/ui/commerce-status";
+import {
+  formatCommerceMoney,
+  type CommerceMoney,
+  PriceDisplay,
+  type PriceDisplayType,
+} from "@/components/ui/price-display";
 import { cn } from "@/lib/utils";
 
-export interface ProductCardMoney {
-  amount: string;
-  currencyCode: "ZAR";
-}
+export type ProductCardMoney = CommerceMoney;
 
 export interface ProductCardImage {
   src: string;
@@ -22,32 +29,16 @@ export interface ProductCardProps {
   format: string;
   notes: string;
   price: ProductCardMoney;
+  compareAtPrice?: ProductCardMoney;
+  priceType?: PriceDisplayType;
   image?: ProductCardImage;
-  availability?: "available" | "sold-out";
+  availability?: CommerceStatusValue;
+  lowStockCount?: number;
   className?: string;
   imagePriority?: boolean;
 }
 
-const zarFormatter = new Intl.NumberFormat("en-ZA", {
-  style: "currency",
-  currency: "ZAR",
-  currencyDisplay: "narrowSymbol",
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 2,
-});
-
-export function formatProductCardPrice({
-  amount,
-  currencyCode,
-}: ProductCardMoney) {
-  const value = Number(amount);
-
-  if (currencyCode !== "ZAR" || !Number.isFinite(value)) {
-    return amount;
-  }
-
-  return zarFormatter.format(value).replace(/\u00a0/g, " ");
-}
+export const formatProductCardPrice = formatCommerceMoney;
 
 export function ProductCard({
   href,
@@ -55,12 +46,15 @@ export function ProductCard({
   format,
   notes,
   price,
+  compareAtPrice,
+  priceType = compareAtPrice ? "sale" : "regular",
   image,
-  availability = "available",
+  availability = "in-stock",
+  lowStockCount,
   className,
   imagePriority = false,
 }: ProductCardProps) {
-  const soldOut = availability === "sold-out";
+  const showStatus = availability !== "in-stock";
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = image && !imageFailed;
 
@@ -89,10 +83,13 @@ export function ProductCard({
             Image coming soon
           </span>
         )}
-        {soldOut ? (
-          <span className="bg-product-card-status text-product-card-status-foreground absolute top-2 right-2 px-2 py-1 font-sans text-xs leading-4 font-semibold tracking-[0.08em] uppercase">
-            Sold out
-          </span>
+        {showStatus ? (
+          <CommerceStatus
+            status={availability}
+            treatment="overlay"
+            lowStockCount={lowStockCount}
+            className="absolute top-2 right-2"
+          />
         ) : null}
       </div>
 
@@ -106,9 +103,13 @@ export function ProductCard({
         <p className="text-product-card-meta line-clamp-2 font-sans text-sm leading-5">
           {notes}
         </p>
-        <p className="text-product-card-price mt-auto font-sans text-sm leading-5 font-semibold">
-          {formatProductCardPrice(price)}
-        </p>
+        <PriceDisplay
+          price={price}
+          compareAtPrice={compareAtPrice}
+          type={priceType}
+          size="compact"
+          className="mt-auto"
+        />
       </div>
     </Link>
   );

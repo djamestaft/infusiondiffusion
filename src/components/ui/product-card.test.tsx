@@ -56,6 +56,30 @@ describe("ProductCard", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", product.href);
   });
 
+  it("keeps the ordinary in-stock state quiet", () => {
+    render(<ProductCard {...product} availability="in-stock" />);
+    expect(screen.queryByText("In stock")).not.toBeInTheDocument();
+  });
+
+  it("composes low-stock status with a truthful quantity", () => {
+    render(
+      <ProductCard {...product} availability="low-stock" lowStockCount={3} />,
+    );
+    expect(screen.getByText("Only 3 left")).toBeVisible();
+  });
+
+  it("composes a sale price with its compare-at value", () => {
+    render(
+      <ProductCard
+        {...product}
+        compareAtPrice={{ amount: "520", currencyCode: "ZAR" }}
+      />,
+    );
+    expect(screen.getByText("Sale price:")).toBeInTheDocument();
+    expect(screen.getByText("Original price:")).toBeInTheDocument();
+    expect(screen.getByText("R 520").closest("s")).toBeInTheDocument();
+  });
+
   it("receives keyboard focus as a whole card", async () => {
     const user = userEvent.setup();
     render(<ProductCard {...product} />);
