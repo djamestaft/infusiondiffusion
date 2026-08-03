@@ -1,6 +1,6 @@
 # Navigation system
 
-Status: Visual design and reusable runtime implementation complete; awaiting pull-request review.
+Status: Complete and merged in PR #21 on 3 August 2026.
 
 ## Summary
 
@@ -26,7 +26,7 @@ Create the reusable global storefront navigation that helps customers reach prod
 4. Every destination is a real anchor with a useful accessible name. The current destination uses `aria-current="page"`; hover, active, and focus-visible states are legible in Ivory and Midnight modes.
 5. Empty or malformed destination input fails safely: no blank anchors render, the logo home destination remains available, and the mobile menu control is omitted when no valid destinations exist.
 6. Long labels, four destinations, 200% text zoom, and 320px through desktop widths do not cause clipping or horizontal page overflow. Desktop may move to the mobile pattern before labels collide.
-7. The actual logo preserves its aspect ratio and useful accessible name. Its raster implementation is responsive and optimized; replacement with the future vector master does not require a component API change.
+7. The editable text lockup remains legible without clipping at mobile and desktop sizes and exposes a useful accessible name. The preserved ornamental artwork can later receive a vector master without changing the navigation contract.
 8. Storybook documents desktop Ivory/Midnight, active link, hover/focus, mobile closed/open, keyboard journey, long labels, and empty navigation. Vitest covers semantics, safe destinations, active state, open/close behavior, focus restoration, and Escape dismissal.
 9. Figma defines canonical Navigation and MobileNavigation components, semantic variables, and Approved desktop/mobile review frames before runtime implementation begins.
 10. This phase adds no Shopify client, speculative cart count, search UI, authentication flow, Sanity schema, analytics event, new public route, or page-level sticky behavior. Account and cart destinations remain injected navigation contracts until their journeys are built.
@@ -37,19 +37,19 @@ Create the reusable global storefront navigation that helps customers reach prod
 - `DESIGN.md` and `.impeccable/design.json`: durable rules after visual approval.
 - Runtime: reusable global navigation and accessible mobile drawer primitives.
 - Storybook and Vitest: responsive, interaction, accessibility, failure, and content-extreme states.
-- Roadmap: record Navigation as the active Phase 4 slice.
+- Roadmap: record Navigation as a completed Phase 4 slice and advance the immediate next action.
 
 ## Out of scope
 
 - Building Shop, Fragrance Guide, About, Contact, search, account, cart, checkout, or menu-content routes; this slice only exposes account and cart navigation entry points.
 - Live cart counts, predictive search, authentication, mega-menu merchandising, localization switching, and page-level sticky/scroll behavior.
-- Reconstructing or redrawing the logo. The approved raster-backed Figma source is used until the owner supplies the vector master and licence record.
+- Reconstructing the original ornamental logo. The approved editable text lockup is the navigation default; the original artwork remains preserved until the owner supplies its vector master and licence record.
 
 ## Provisional source record
 
 - Canonical Figma Brand frame: `26:2`.
-- Infusion Diffusion primary logo lockup: `26:7`, 580×378, now bound to the owner-provided transparent image fill.
-- The logo source is approved visual artwork but not the outstanding vector master tracked in the roadmap.
+- Original Infusion Diffusion ornamental lockup: `26:7`, 580×378, preserved as owner-provided transparent artwork.
+- Approved editable navigation lockup: component set `162:120`. This does not replace the outstanding vector master and licence record for the ornamental asset.
 
 ## Approval record
 
@@ -76,7 +76,8 @@ Create the reusable global storefront navigation that helps customers reach prod
 ## Verification record
 
 - Unit suite: 43 tests passed, including navigation semantics, malformed destinations, Escape dismissal, scroll locking, focus containment, and focus restoration.
-- Storybook browser suite: 65 tests passed in Chromium with accessibility checks across Ivory, Midnight, mobile, long-label, and empty-destination states.
+- Storybook browser suite: 66 tests passed in Chromium with accessibility checks across Ivory, Midnight, mobile closed/open, long-label, and empty-destination states.
 - Full local gate: formatting, lint, TypeScript, unit tests, Storybook browser tests, Storybook production build, and Next.js production build passed.
 - Impeccable detection reported no findings for the navigation component, text lockup, or navigation tokens after approved logo sizes were added to the design system.
 - The Storybook accessibility gate identified the original Ivory gold at 3.34:1 for small logo text. Runtime tokens and approved Figma sources now use accessible deep gold `#735716`; the rerun passed.
+- GitHub CI, Vercel Preview, and required checks passed; PR #21 was merged to protected `main` on 3 August 2026.

@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, and Navigation have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; Navigation is ready for pull-request review before the next Phase 4 commerce composition begins.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, and Navigation have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; the next Phase 4 slice is the price-display and commerce-status primitive set.
 
 ### Application foundation — complete
 
@@ -58,6 +58,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Button and TextLink approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [x] Input, Textarea, and Field approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [x] ProductCard approved in Figma, implemented in Storybook/runtime with provisional brochure fixtures, and synchronized through semantic variables
+- [x] Navigation and LogoTextLockup approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [ ] Obtain the approved vector logo master and confirm production asset/licence records
 - [ ] Core component inventory designed in Figma and represented in Storybook
 - [ ] Responsive page templates approved before storefront implementation
@@ -158,6 +159,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Test one approved component handoff through Storybook
 - [x] Synchronize Button/TextLink Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
 - [x] Synchronize Input/Textarea/Field Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
+- [x] Synchronize ProductCard and Navigation Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
 
 ### Shopify
 
@@ -213,9 +215,9 @@ Exit criteria met: the announcement bar was delivered from repository context an
 ### Phase 4 — establish the production design system
 
 1. [x] Finalize brand strategy and approve foundation tokens.
-2. [ ] Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives. Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
-3. [ ] Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content across the full component inventory. Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
-4. [ ] Map approved Figma components to repository primitives. AnnouncementBar, Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
+2. [ ] Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives. Navigation, Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
+3. [ ] Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content across the full component inventory. Navigation, Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
+4. [ ] Map approved Figma components to repository primitives. AnnouncementBar, Navigation, Button, TextLink, Input, Textarea, Field, and ProductCard are complete.
 
 Exit criteria: storefront pages can be composed from approved, tested primitives rather than page-specific UI.
 
@@ -249,7 +251,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Continue Phase 4 with navigation, followed by commerce-specific compositions.
+1. Continue Phase 4 with price display and commerce-status primitives, followed by the remaining commerce-specific compositions.
 2. Obtain the approved vector logo master and confirm production asset and licence records.
 3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
 4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
