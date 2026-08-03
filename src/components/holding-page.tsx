@@ -55,7 +55,7 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
             {settings.introduction}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Button asChild size="lg">
+            <Button asChild size="large">
               <a href={`mailto:${settings.contactEmail}`}>
                 {settings.callToActionLabel}
                 <ArrowUpRight aria-hidden="true" className="size-4" />

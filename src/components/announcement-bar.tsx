@@ -1,3 +1,5 @@
+import { TextLink } from "@/components/ui/text-link";
+
 export type AnnouncementBarProps = {
   message?: string | null;
   link?: {
@@ -22,7 +24,10 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
 
   const linkLabel = link?.label?.trim();
   const linkHref = link?.href?.trim();
-  const showLink = Boolean(linkLabel && linkHref && isSafeHref(linkHref));
+  const safeLink =
+    linkLabel && linkHref && isSafeHref(linkHref)
+      ? { label: linkLabel, href: linkHref }
+      : null;
 
   return (
     <aside
@@ -33,13 +38,14 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
         <p className="text-xs leading-4 font-semibold tracking-[0.08em] uppercase">
           {content}
         </p>
-        {showLink ? (
-          <a
-            className="text-announcement-accent outline-announcement-accent inline-flex min-h-11 items-center px-2 text-xs leading-4 font-semibold tracking-[0.08em] uppercase underline underline-offset-4 outline-0 focus-visible:outline-2 focus-visible:outline-offset-2"
-            href={linkHref}
+        {safeLink ? (
+          <TextLink
+            variant="inverse"
+            className="text-announcement-accent focus-visible:outline-announcement-accent inline-flex min-h-11 items-center px-2 text-xs leading-4 font-semibold tracking-[0.08em] uppercase"
+            href={safeLink.href}
           >
-            {linkLabel}
-          </a>
+            {safeLink.label}
+          </TextLink>
         ) : null}
       </div>
     </aside>

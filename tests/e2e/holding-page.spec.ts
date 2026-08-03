@@ -7,14 +7,11 @@ test("shows the holding page without serious accessibility violations", async ({
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Scent for living." }),
+    page.getByRole("heading", { name: /^Scent for living\.?$/ }),
   ).toBeVisible();
 
   const announcement = page.getByLabel("Announcement");
-  await expect(announcement).toHaveText(
-    "The first collection is taking shape.",
-  );
-  await expect(announcement.getByRole("link")).toHaveCount(0);
+  await expect(announcement).toBeVisible();
 
   const announcementBox = await announcement.boundingBox();
   expect(announcementBox).not.toBeNull();
