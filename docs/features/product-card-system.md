@@ -1,6 +1,6 @@
 # Product card system
 
-Status: Approved, implemented, and locally verified on 3 August 2026; pull request pending.
+Status: Complete. Approved, implemented, verified, and merged in PR #19 on 3 August 2026.
 
 ## Summary
 
