@@ -135,7 +135,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 ### Vercel
 
 - [x] Import the GitHub repository
-- [ ] Confirm the Node version matches `.nvmrc`
+- [x] Confirm the Node version matches `.nvmrc`
 - [x] Configure Preview and Production environment variables separately
 - [x] Configure `NEXT_PUBLIC_SITE_URL` for `https://infusion-diffusion.vercel.app`
 - [x] Deploy the fallback holding page to the Vercel production URL
@@ -239,11 +239,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Align the Vercel project Node version with `.nvmrc`; Vercel currently reports Node 24 while the repository declares Node 22.12.
-2. Use the announcement bar as the first small feature to exercise the full brief-to-Figma-to-Storybook-to-Preview agent workflow.
-3. Migrate only the approved tokens and primitives needed by that feature, keeping Figma, `DESIGN.md`, runtime CSS, and Storybook synchronized.
-4. Record the completed loop's failure modes and approval points before moving into the broader component inventory.
-5. Audit the existing Shopify store before creating or deleting commerce data.
+1. Use the announcement bar as the first small feature to exercise the full brief-to-Figma-to-Storybook-to-Preview agent workflow.
+2. Migrate only the approved tokens and primitives needed by that feature, keeping Figma, `DESIGN.md`, runtime CSS, and Storybook synchronized.
+3. Record the completed loop's failure modes and approval points before moving into the broader component inventory.
+4. Audit the existing Shopify store before creating or deleting commerce data.
 
 ## Roadmap maintenance
 
