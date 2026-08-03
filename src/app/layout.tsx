@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Infusion Diffusion",
   },
   description:
-    "Thoughtfully blended infusions, created to bring a little ritual to every day.",
+    "Discover room sprays, reed diffusers, and candles designed to bring considered fragrance into lived-in rooms.",
 };
 
 export default function RootLayout({
