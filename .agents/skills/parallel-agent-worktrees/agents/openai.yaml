@@ -1,0 +1,4 @@
+interface:
+  display_name: "Parallel Agent Worktrees"
+  short_description: "Isolate concurrent agents with Treehouse"
+  default_prompt: "Use $parallel-agent-worktrees to allocate isolated Treehouse workspaces for concurrent repository tasks."

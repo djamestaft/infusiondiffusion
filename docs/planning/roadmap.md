@@ -58,7 +58,7 @@ The repository is a working local foundation. It builds without connected servic
 - [ ] Core component inventory designed in Figma and represented in Storybook
 - [ ] Responsive page templates approved before storefront implementation
 
-### Quality and delivery — complete locally, remote CI pending
+### Quality and delivery — CI operational, preview deployment pending
 
 - [x] ESLint, Prettier, and strict type checking configured
 - [x] Vitest unit and integration testing configured
@@ -68,8 +68,8 @@ The repository is a working local foundation. It builds without connected servic
 - [x] Storybook and Next.js production builds included in the quality gate
 - [x] GitHub Actions workflow created
 - [x] Current local formatting, lint, type, test, accessibility, and build checks pass
-- [ ] GitHub repository created and initial code pushed
-- [ ] Protected `main` branch and required CI checks enabled
+- [x] GitHub repository created and initial code pushed
+- [x] Protected `main` branch and required CI checks enabled
 - [ ] Vercel Preview deployment verified from a pull request
 - [ ] Production deployment and smoke test completed
 
@@ -84,6 +84,7 @@ The repository is a working local foundation. It builds without connected servic
 - [x] Browser release/debugging agent defined
 - [x] Reusable skills created for feature briefs, design-to-Storybook, Sanity changes, Shopify changes, quality gates, and release debugging
 - [x] Agent evaluation scenarios started in `docs/agent-evals.md`
+- [x] Treehouse configured for repository-local, isolated concurrent agent worktrees
 - [ ] Run Impeccable initialization to enrich its project-context schema
 - [ ] Install Superpowers from the Codex plugin marketplace
 - [ ] Add Figma MCP usage rules and a design handoff workflow after connection
@@ -114,9 +115,9 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### GitHub
 
-- [ ] Create the repository under the intended owner or organisation
-- [ ] Add the remote and push the initial commit
-- [ ] Protect `main`; require pull requests and successful CI checks
+- [x] Create the repository under the intended owner or organisation
+- [x] Add the remote and push the initial commit
+- [x] Protect `main`; require pull requests and successful CI checks
 - [ ] Configure collaborators and least-privilege access
 - [ ] Enable Dependabot or an equivalent dependency-update process
 
@@ -161,6 +162,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [ ] Install Superpowers through the Codex plugin marketplace
 - [ ] Run `$impeccable init` when ready to replace the provisional context with its richer schema
 - [ ] Verify repository agents can read the project context and invoke their assigned skills
+- [x] Configure Treehouse to isolate concurrent writing agents in repository-local worktrees
 - [ ] Document any account-specific MCP setup without committing tokens
 
 ## Delivery sequence

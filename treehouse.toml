@@ -1,0 +1,6 @@
+max_trees = 16
+root = "./worktrees"
+
+# Worktree root directory (relative to repo root or absolute path).
+# Worktrees are placed under {root}/.treehouse/. Default: $HOME
+# This keeps the reusable pool inside this repository at worktrees/.treehouse/.

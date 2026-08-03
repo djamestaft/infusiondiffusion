@@ -33,3 +33,4 @@ Keep this file short. Put reusable procedures in `.agents/skills` and deeper exp
 9. Preserve unrelated user changes. Report verification evidence and residual risk at every handoff.
 10. When recurring review feedback reveals a durable rule, update the nearest relevant guidance or skill.
 11. Keep approved Figma, `DESIGN.md`, runtime semantic tokens, and Storybook component contracts synchronized. Follow `.agents/skills/design-to-storybook/SKILL.md`, name any intentional divergence, and never treat the provisional holding-page styles as approved brand truth.
+12. Concurrent implementation agents must use separate Treehouse-managed worktrees and task branches. Follow `.agents/skills/parallel-agent-worktrees/SKILL.md`; never let two writing agents share a checkout or branch, and integrate through reviewed pull requests rather than editing `main`.

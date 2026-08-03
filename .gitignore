@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# Treehouse-managed agent worktrees
+/worktrees/
+
 # next.js
 /.next/
 /out/

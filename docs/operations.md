@@ -16,6 +16,13 @@ Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; n
 4. A human approves and merges the pull request.
 5. Verify production homepage, metadata, health, content publishing, and runtime logs.
 
+## Parallel agent delivery
+
+- Keep the primary checkout clean for coordination and review. Allocate every concurrent writing agent a leased Treehouse worktree and its own `agent/<task-slug>` branch using `.agents/skills/parallel-agent-worktrees/SKILL.md`.
+- Integrate each task through a pull request so CI and Vercel Preview evaluate the exact branch before a human merges it.
+- Sequence work that shares migrations, generated files, lockfiles, or the same component boundary unless ownership can be divided safely.
+- Treat worktrees as file isolation, not secret or service isolation. Give concurrent servers unique ports and keep credentials in ignored, least-privilege environment files.
+
 ## Incident response
 
 Capture the failing URL, deployment ID, commit SHA, timestamp, browser evidence, console/network output, and Vercel logs. Reproduce before changing code. If production is materially broken, recommend restoring the last known-good Vercel deployment; only a human may authorize the rollback. After resolution, add the missed regression check to CI or the relevant skill.
