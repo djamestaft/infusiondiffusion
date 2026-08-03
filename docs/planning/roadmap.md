@@ -249,7 +249,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Continue Phase 4 with product card, followed by navigation.
+1. Continue Phase 4 with navigation, followed by commerce-specific compositions.
 2. Obtain the approved vector logo master and confirm production asset and licence records.
 3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
 4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
