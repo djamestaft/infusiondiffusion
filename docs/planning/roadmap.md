@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository is a working local and remote foundation. Protected `main` runs green CI, and the fallback holding page is live on Vercel at `https://infusion-diffusion.vercel.app`. The pull-request Preview loop still needs an end-to-end verification.
+The repository is a working local and remote foundation. Protected `main` runs green CI, the fallback holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and pull request #1 proved the Preview delivery loop end to end.
 
 ### Application foundation — complete
 
@@ -71,7 +71,7 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [x] GitHub repository created and initial code pushed
 - [x] Protected `main` branch and required CI checks enabled
 - [x] Initial Vercel production holding page deployed
-- [ ] Vercel Preview deployment verified from a pull request
+- [x] Vercel Preview deployment verified from a pull request
 - [ ] Production deployment and smoke test completed
 
 ### Agentic system — initial scaffold complete
@@ -138,7 +138,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [ ] Configure Preview and Production environment variables separately
 - [x] Configure `NEXT_PUBLIC_SITE_URL` for `https://infusion-diffusion.vercel.app`
 - [x] Deploy the fallback holding page to the Vercel production URL
-- [ ] Deploy a preview and verify `/`, `/studio`, and `/api/health`
+- [x] Deploy a preview and verify `/`, `/studio`, and `/api/health`
 - [ ] Add the final custom production domain and validate DNS
 - [ ] Enable deployment protection and runtime/log access for the appropriate team
 
@@ -175,8 +175,8 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 1. [x] Create the GitHub repository and push the initial foundation.
 2. [x] Protect `main` with the existing CI workflow.
 3. [x] Connect Vercel and deploy the fallback holding page.
-4. [ ] Open a non-`main` pull request and obtain a green Vercel Preview deployment.
-5. [ ] Verify `/`, `/studio`, and `/api/health` on Preview and confirm Preview/Production environment separation.
+4. [x] Open a non-`main` pull request and obtain a green Vercel Preview deployment.
+5. [x] Verify `/`, `/studio`, and `/api/health` on Preview and confirm Preview/Production environment separation.
 
 Exit criteria: a pull request produces a green CI run and a reviewable Vercel Preview; production still requires explicit human approval.
 
@@ -238,13 +238,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Commit the Treehouse and roadmap changes on a non-`main` branch and open a pull request.
-2. Confirm the pull request receives both a green `quality` check and a Vercel Preview URL.
-3. Run the release-debug workflow against `/`, `/studio`, and `/api/health` on that Preview.
-4. Confirm Node 22 and Preview/Production environment separation in Vercel, then merge with human approval.
-5. Create the Sanity project and configure local, Preview, and Production credentials plus CORS.
-6. Select the first small feature that will exercise the full brief-to-design-to-Storybook-to-Preview agent workflow.
-7. Audit the existing Shopify store before creating or deleting commerce data.
+1. Confirm the Vercel project uses Node 22 and document the Preview/Production variable sets as services are connected.
+2. Create the Sanity project and configure local, Preview, and Production credentials plus CORS.
+3. Select the first small feature that will exercise the full brief-to-design-to-Storybook-to-Preview agent workflow.
+4. Audit the existing Shopify store before creating or deleting commerce data.
 
 ## Roadmap maintenance
 
