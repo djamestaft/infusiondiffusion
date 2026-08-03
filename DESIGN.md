@@ -160,7 +160,7 @@ Midnight is the signature environment; Ivory provides editorial relief. Gold sig
 
 **The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
 
-The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 18/18 on mobile and 32/32 on desktop; its secondary line is 9/12 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
+The approved navigation `LogoTextLockup` is the current production storefront mark and is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 18/18 on mobile and 32/32 on desktop; its secondary line is 9/12 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules. The preserved ornamental artwork is deferred reference material, not a release dependency; do not reconstruct or substitute it unless the product owner supplies an approved master and explicitly changes this decision.
 
 ## Layout
 
