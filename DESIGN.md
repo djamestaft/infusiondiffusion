@@ -172,7 +172,11 @@ Text links use real anchor semantics and remain underlined. Inline links live in
 
 The action and link variables in `globals.css` map one-to-one to the Figma `Buttons & Links / Semantic` collection. Both use Ivory and Midnight modes, scoped color roles, and web code syntax. Gold is reserved for action emphasis, link emphasis, and focus—not a default border on quiet or tertiary controls. TextLink exposes Default, Hover, Active, and Focus states and deliberately omits Disabled. The legacy Button names `default`, `outline`, `ghost`, and `lg` remain temporary aliases for migration safety and must not be used in new work.
 
-Build the remaining components in this order: inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
+`Input`, `Textarea`, and `Field` are approved in the Inputs [desktop frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=118-18) and [mobile frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=118-19). Their canonical Figma component sets are Input `119:224`, Textarea `119:297`, and Field `119:340`, mapping to the identically named Storybook titles and code primitives.
+
+Text and email inputs plus textarea use native controls, a 44px minimum editable target, restrained 4px corners, and the `Inputs / Semantic` Ivory/Midnight variables. Focus uses a two-pixel gold outline with offset; invalid fields keep that focus treatment while using a mode-aware error border and explicit `Error:` message. Read-only controls remain focusable, disabled controls do not, and textarea remains vertically resizable. Field owns the persistent visible label and automatically associates its active description or error with the control. Required status is native and visible; optional status is written in the label. Supporting text is replaced when an error is present.
+
+Build the remaining components in this order: product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
 Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 

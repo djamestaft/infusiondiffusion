@@ -31,6 +31,17 @@
   --color-link-inverse: var(--link-inverse);
   --color-link-inverse-hover: var(--link-inverse-hover);
   --color-link-inverse-active: var(--link-inverse-active);
+  --color-field-surface: var(--field-surface);
+  --color-field-text: var(--field-text);
+  --color-field-placeholder: var(--field-placeholder);
+  --color-field-border: var(--field-border);
+  --color-field-border-hover: var(--field-border-hover);
+  --color-field-focus: var(--field-focus);
+  --color-field-disabled-surface: var(--field-disabled-surface);
+  --color-field-disabled-text: var(--field-disabled-text);
+  --color-field-readonly-surface: var(--field-readonly-surface);
+  --color-field-error-border: var(--field-error-border);
+  --color-field-error-text: var(--field-error-text);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -114,6 +125,17 @@
   --link-inverse: #ddc77f;
   --link-inverse-hover: #c5a447;
   --link-inverse-active: #c5a447;
+  --field-surface: #fcfaf5;
+  --field-text: #11110f;
+  --field-placeholder: #3c3b35;
+  --field-border: #3c3b35;
+  --field-border-hover: #11110f;
+  --field-focus: #ddc77f;
+  --field-disabled-surface: #e8e2d5;
+  --field-disabled-text: #3c3b35;
+  --field-readonly-surface: #f5f1e8;
+  --field-error-border: #a64237;
+  --field-error-text: #a64237;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -183,6 +205,17 @@
   --link-inverse: #ddc77f;
   --link-inverse-hover: #c5a447;
   --link-inverse-active: #c5a447;
+  --field-surface: #191916;
+  --field-text: #fcfaf5;
+  --field-placeholder: #e8e2d5;
+  --field-border: #e8e2d5;
+  --field-border-hover: #f5f1e8;
+  --field-focus: #ddc77f;
+  --field-disabled-surface: #3c3b35;
+  --field-disabled-text: #e8e2d5;
+  --field-readonly-surface: #282823;
+  --field-error-border: #a64237;
+  --field-error-text: #ddc77f;
 }
 
 @layer base {
