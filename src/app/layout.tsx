@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Manrope, Marcellus } from "next/font/google";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -7,8 +7,9 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
-const cormorant = Cormorant_Garamond({
+const marcellus = Marcellus({
   variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${marcellus.variable}`}>
       <body>{children}</body>
     </html>
   );

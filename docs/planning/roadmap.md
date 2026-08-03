@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, and ProductCard have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; remaining Phase 4 components continue through reviewed feature work.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, and Navigation have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; Navigation is ready for pull-request review before the next Phase 4 commerce composition begins.
 
 ### Application foundation — complete
 
