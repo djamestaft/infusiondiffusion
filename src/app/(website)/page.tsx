@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 
 import { HoldingPage } from "@/components/holding-page";
-import { getSiteSettings } from "@/sanity/lib/settings";
+import { getDynamicFetchOptions } from "@/sanity/lib/live";
+import {
+  getSiteSettings,
+  getSiteSettingsMetadata,
+} from "@/sanity/lib/settings";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings();
+  const { perspective } = await getDynamicFetchOptions();
+  const settings = await getSiteSettingsMetadata(perspective);
   return {
     title: settings.seoTitle,
     description: settings.seoDescription,
@@ -18,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const settings = await getSiteSettings();
+  const options = await getDynamicFetchOptions();
+  const settings = await getSiteSettings(options);
   return <HoldingPage settings={settings} />;
 }
