@@ -210,9 +210,9 @@ Exit criteria met: the announcement bar was delivered from repository context an
 ### Phase 4 — establish the production design system
 
 1. [x] Finalize brand strategy and approve foundation tokens.
-2. [ ] Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives. Button and TextLink are complete.
-3. [ ] Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content across the full component inventory. Button and TextLink are complete.
-4. [ ] Map approved Figma components to repository primitives. AnnouncementBar, Button, and TextLink are complete.
+2. [ ] Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives. Button, TextLink, Input, Textarea, and Field are complete.
+3. [ ] Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content across the full component inventory. Button, TextLink, Input, Textarea, and Field are complete.
+4. [ ] Map approved Figma components to repository primitives. AnnouncementBar, Button, TextLink, Input, Textarea, and Field are complete.
 
 Exit criteria: storefront pages can be composed from approved, tested primitives rather than page-specific UI.
 
@@ -246,7 +246,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Continue Phase 4 with inputs and focus states, followed by product card and navigation.
+1. Continue Phase 4 with product card, followed by navigation.
 2. Obtain the approved vector logo master and confirm production asset and licence records.
 3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
 4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.

@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "coverage/**",
     "storybook-static/**",
+    "worktrees/**",
     ".agents/skills/impeccable/**",
     "next-env.d.ts",
   ]),

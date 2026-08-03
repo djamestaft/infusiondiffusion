@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T16:39:26+02:00",
+  "generatedAt": "2026-08-03T18:00:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -158,6 +158,27 @@
       "description": "The Midnight-surface link treatment, retaining a warm gold underline and visible focus.",
       "html": "<a class=\"ds-link-inverse\" href=\"#collection\">Explore the collection</a>",
       "css": ".ds-link-inverse { border-radius: 2px; color: var(--link-inverse); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-inverse:hover { color: var(--link-inverse-hover); } .ds-link-inverse:active { color: var(--link-inverse-active); } .ds-link-inverse:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "description": "A native single-line text or email control with approved Ivory and Midnight interaction states.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"name@example.com\">",
+      "css": ".ds-input { min-height: 44px; width: 100%; padding: 8px 16px; border: 1px solid var(--field-border); border-radius: 4px; background: var(--field-surface); color: var(--field-text); font: 400 16px/24px Manrope, Arial, sans-serif; } .ds-input:hover { border-color: var(--field-border-hover); } .ds-input:focus-visible { outline: 2px solid var(--field-focus); outline-offset: 2px; } .ds-input[aria-invalid=true] { border-color: var(--field-error-border); }"
+    },
+    {
+      "name": "Textarea",
+      "kind": "input",
+      "description": "A native vertically resizable multiline control sharing the Input state and token contract.",
+      "html": "<textarea class=\"ds-textarea\" placeholder=\"Tell us how we can help.\"></textarea>",
+      "css": ".ds-textarea { min-height: 112px; width: 100%; resize: vertical; padding: 12px 16px; border: 1px solid var(--field-border); border-radius: 4px; background: var(--field-surface); color: var(--field-text); font: 400 16px/24px Manrope, Arial, sans-serif; } .ds-textarea:hover { border-color: var(--field-border-hover); } .ds-textarea:focus-visible { outline: 2px solid var(--field-focus); outline-offset: 2px; } .ds-textarea[aria-invalid=true] { border-color: var(--field-error-border); }"
+    },
+    {
+      "name": "Field",
+      "kind": "custom",
+      "description": "Visible label, optional or required status, native control, and one automatically associated supporting or error message.",
+      "html": "<div class=\"ds-field\"><label for=\"email\">Email address *</label><input id=\"email\" class=\"ds-input\" type=\"email\" required><p>We only use this address for requested updates.</p></div>",
+      "css": ".ds-field { display: grid; gap: 8px; } .ds-field label { color: var(--field-text); font: 600 14px/20px Manrope, Arial, sans-serif; } .ds-field p { margin: 0; color: var(--field-placeholder); font: 400 14px/20px Manrope, Arial, sans-serif; } .ds-field [data-error] { color: var(--field-error-text); }"
     }
   ],
   "narrative": {
