@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository is a working local and remote foundation. Protected `main` runs green CI, the fallback holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and pull request #1 proved the Preview delivery loop end to end.
+The repository is a working local and remote foundation. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved Figma Style Guide is now the canonical visual foundation; runtime tokens and reusable components still need to be migrated through reviewed feature work.
 
 ### Application foundation — complete
 
@@ -33,32 +33,33 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [x] Environment variables documented in `.env.example`
 - [x] Production Next.js build verified locally
 
-### Content foundation — scaffolded, credentials pending
+### Content foundation — connected and verified
 
 - [x] Sanity Studio embedded at `/studio`
 - [x] Initial `siteSettings` schema created
 - [x] Sanity client, GROQ query, live content, draft mode, and Visual Editing foundations added
 - [x] Fallback content supports local and preview builds without Sanity
 - [x] Sanity schema extraction and type-generation commands added
-- [ ] Sanity project and datasets created
-- [ ] Local, Preview, and Production credentials configured
-- [ ] CORS and Studio host configuration completed
-- [ ] Initial site settings document populated
-- [ ] Content publishing and preview flow verified end to end
+- [x] Sanity project and production dataset created
+- [x] Local, Preview, and Production credentials configured
+- [x] CORS and embedded Studio host configuration completed
+- [x] Initial site settings document populated
+- [x] Draft, published, Preview, Production, and cache-invalidation flows verified end to end
 
-### Design system — scaffolded
+### Design system — approved foundation, runtime migration pending
 
-- [x] Provisional brand direction documented in `DESIGN.md`
+- [x] Approved Figma brand foundation documented in `DESIGN.md`
 - [x] Semantic color, typography, spacing, focus, and motion foundations added
 - [x] Storybook configured for component development
 - [x] Accessibility and interaction testing enabled in Storybook
 - [x] Impeccable installed as a repository-scoped design skill with hooks
-- [ ] Figma MCP connected and limited to the required Infusion Diffusion files
-- [ ] Brand assets, typography licences, photography rules, and final palette approved
+- [x] Figma MCP connected and agent workflow scoped to the canonical Infusion Diffusion file
+- [x] Canonical Style Guide, palette, typography system, layout, and photography rules approved
+- [ ] Obtain the approved vector logo master and confirm production asset/licence records
 - [ ] Core component inventory designed in Figma and represented in Storybook
 - [ ] Responsive page templates approved before storefront implementation
 
-### Quality and delivery — CI operational, preview deployment pending
+### Quality and delivery — CI, Preview, and Production operational
 
 - [x] ESLint, Prettier, and strict type checking configured
 - [x] Vitest unit and integration testing configured
@@ -72,7 +73,7 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [x] Protected `main` branch and required CI checks enabled
 - [x] Initial Vercel production holding page deployed
 - [x] Vercel Preview deployment verified from a pull request
-- [ ] Production deployment and smoke test completed
+- [x] Production deployment and smoke test completed
 
 ### Agentic system — initial scaffold complete
 
@@ -88,7 +89,7 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [x] Treehouse configured for repository-local, isolated concurrent agent worktrees
 - [ ] Run Impeccable initialization to enrich its project-context schema
 - [ ] Install Superpowers from the Codex plugin marketplace
-- [ ] Add Figma MCP usage rules and a design handoff workflow after connection
+- [x] Add Figma MCP usage rules and a design handoff workflow after connection
 - [ ] Exercise the full prompt-to-preview workflow on a small real feature
 - [ ] Record failure modes, improve skills, and add regression evaluations
 - [ ] Define human approval points for design, merge, production, and rollback
@@ -124,18 +125,18 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### Sanity
 
-- [ ] Create the project
-- [ ] Create `production` and, if useful, a separate preview/development dataset
-- [ ] Set the project ID and dataset variables locally and in Vercel
-- [ ] Create a least-privilege token for authenticated preview access only if needed
-- [ ] Add localhost, Vercel Preview, and production origins to CORS
-- [ ] Deploy or configure the Studio host if an external Studio URL is desired
+- [x] Create the project
+- [x] Create the `production` dataset; defer a separate development dataset until a feature requires isolation
+- [x] Set the project ID and dataset variables locally and in Vercel
+- [x] Create a least-privilege Viewer token for authenticated preview access
+- [x] Add localhost, Vercel Preview, and production origins to CORS
+- [x] Verify the embedded Studio at `/studio`; no external Studio host is currently required
 
 ### Vercel
 
 - [x] Import the GitHub repository
 - [ ] Confirm the Node version matches `.nvmrc`
-- [ ] Configure Preview and Production environment variables separately
+- [x] Configure Preview and Production environment variables separately
 - [x] Configure `NEXT_PUBLIC_SITE_URL` for `https://infusion-diffusion.vercel.app`
 - [x] Deploy the fallback holding page to the Vercel production URL
 - [x] Deploy a preview and verify `/`, `/studio`, and `/api/health`
@@ -144,10 +145,10 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### Figma
 
-- [ ] Confirm the canonical design file and team ownership
-- [ ] Connect Figma MCP
-- [ ] Grant access only to the required files
-- [ ] Document page/frame naming and component-to-code mapping conventions
+- [x] Confirm the canonical design file and approved Style Guide frame
+- [x] Connect and authenticate Figma MCP
+- [x] Scope agent work to the canonical Infusion Diffusion file and exact node links
+- [x] Document page/frame naming and component-to-code mapping conventions
 - [ ] Test one approved component handoff through Storybook
 
 ### Shopify
@@ -164,7 +165,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 - [ ] Install Superpowers through the Codex plugin marketplace
 - [ ] Run `$impeccable init` when ready to replace the provisional context with its richer schema
-- [ ] Verify repository agents can read the project context and invoke their assigned skills
+- [x] Verify repository agents can read the project context and invoke their assigned skills
 - [x] Configure Treehouse to isolate concurrent writing agents in repository-local worktrees
 - [ ] Document any account-specific MCP setup without committing tokens
 
@@ -182,10 +183,10 @@ Exit criteria: a pull request produces a green CI run and a reviewable Vercel Pr
 
 ### Phase 2 — connect editorial content
 
-1. Provision Sanity and configure credentials/CORS.
-2. Populate site settings and prove published plus draft content flows.
-3. Expand schemas only for an agreed first page slice.
-4. Verify Visual Editing, cache behavior, and generated types.
+1. [x] Provision Sanity and configure credentials/CORS.
+2. [x] Populate site settings and prove published plus draft content flows.
+3. [x] Expand schemas only for the agreed holding-page slice.
+4. [x] Verify Visual Editing, cache behavior, and generated types.
 
 Exit criteria: an editor can publish a controlled content change and see it correctly on Preview and Production without a code change.
 
@@ -238,10 +239,11 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Confirm the Vercel project uses Node 22 and document the Preview/Production variable sets as services are connected.
-2. Create the Sanity project and configure local, Preview, and Production credentials plus CORS.
-3. Select the first small feature that will exercise the full brief-to-design-to-Storybook-to-Preview agent workflow.
-4. Audit the existing Shopify store before creating or deleting commerce data.
+1. Align the Vercel project Node version with `.nvmrc`; Vercel currently reports Node 24 while the repository declares Node 22.12.
+2. Use the announcement bar as the first small feature to exercise the full brief-to-Figma-to-Storybook-to-Preview agent workflow.
+3. Migrate only the approved tokens and primitives needed by that feature, keeping Figma, `DESIGN.md`, runtime CSS, and Storybook synchronized.
+4. Record the completed loop's failure modes and approval points before moving into the broader component inventory.
+5. Audit the existing Shopify store before creating or deleting commerce data.
 
 ## Roadmap maintenance
 
