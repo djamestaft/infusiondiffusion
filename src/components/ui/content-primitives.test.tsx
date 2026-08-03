@@ -107,8 +107,10 @@ describe("ContentHeader", () => {
   });
 
   it("exposes centered alignment and consumer classes", () => {
+    const ref = createRef<HTMLDivElement>();
     render(
       <ContentHeader
+        ref={ref}
         className="fixture-class"
         align="center"
         title="Gift edit"
@@ -121,5 +123,6 @@ describe("ContentHeader", () => {
       "center",
     );
     expect(screen.getByTestId("header")).toHaveClass("fixture-class");
+    expect(ref.current).toBe(screen.getByTestId("header"));
   });
 });
