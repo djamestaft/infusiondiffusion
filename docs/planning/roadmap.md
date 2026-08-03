@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository is a working local and remote foundation. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved Figma Style Guide is now the canonical visual foundation; runtime tokens and reusable components still need to be migrated through reviewed feature work.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The announcement bar completed the full brief-to-Figma-to-Storybook-to-implementation-to-review-to-production loop and is the first approved reusable component operating with live editorial content. The approved Figma Style Guide remains the canonical visual foundation; the broader component system still needs to be migrated through reviewed feature work.
 
 ### Application foundation — complete
 
@@ -75,7 +75,7 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [x] Vercel Preview deployment verified from a pull request
 - [x] Production deployment and smoke test completed
 
-### Agentic system — initial scaffold complete
+### Agentic system — baseline validated
 
 - [x] Persistent repository rules captured in `AGENTS.md`
 - [x] Product, design, architecture, and operations context files created
@@ -90,9 +90,9 @@ The repository is a working local and remote foundation. Protected `main` runs g
 - [ ] Run Impeccable initialization to enrich its project-context schema
 - [ ] Install Superpowers from the Codex plugin marketplace
 - [x] Add Figma MCP usage rules and a design handoff workflow after connection
-- [ ] Exercise the full prompt-to-preview workflow on a small real feature
-- [ ] Record failure modes, improve skills, and add regression evaluations
-- [ ] Define human approval points for design, merge, production, and rollback
+- [x] Exercise the full prompt-to-production workflow with the announcement bar
+- [x] Record first-loop failure modes, improve guidance, and add regression evaluations
+- [x] Define human approval points for design, merge, production, editorial publishing, and rollback
 - [ ] Extract the proven generic system into a separate project template
 
 ### Commerce — architecture chosen, implementation pending
@@ -192,13 +192,13 @@ Exit criteria: an editor can publish a controlled content change and see it corr
 
 ### Phase 3 — validate the agentic workflow
 
-1. Choose a small real feature, such as the announcement bar or newsletter form.
-2. Turn the prompt into decision-complete acceptance criteria.
-3. Move through product design, Figma/Storybook, implementation, tests, independent review, and preview verification.
-4. Capture unclear instructions, missed edge cases, excessive context, and false-success claims.
-5. Update the relevant context file, skill, or evaluation instead of relying on conversational memory.
+1. [x] Choose the announcement bar as the first small real feature.
+2. [x] Turn the prompt into decision-complete acceptance criteria.
+3. [x] Move through product design, approved Figma frames, Storybook approval, implementation, tests, independent review, Preview, merge, Production, and Sanity publishing.
+4. [x] Capture environment, content-rollout, URL-safety, hidden-layout, integrated-test, and protected-Preview failure modes.
+5. [x] Update repository context, skills, tests, and regression evaluations instead of relying on conversational memory.
 
-Exit criteria: a fresh agent can complete the workflow from repository context, while stopping at the documented human approval points.
+Exit criteria met: the announcement bar was delivered from repository context and stopped for human design approval, merge, and editorial publishing. The reusable approval gates and first-loop regressions are documented in `docs/operations.md` and `docs/agent-evals.md`.
 
 ### Phase 4 — establish the production design system
 
@@ -239,10 +239,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Use the announcement bar as the first small feature to exercise the full brief-to-Figma-to-Storybook-to-Preview agent workflow.
-2. Migrate only the approved tokens and primitives needed by that feature, keeping Figma, `DESIGN.md`, runtime CSS, and Storybook synchronized.
-3. Record the completed loop's failure modes and approval points before moving into the broader component inventory.
-4. Audit the existing Shopify store before creating or deleting commerce data.
+1. Begin Phase 4 by inventorying and prioritizing the production components needed for the first catalogue and product-detail journeys.
+2. Obtain the approved vector logo master and confirm production asset and licence records.
+3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
+4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
 
 ## Roadmap maintenance
 

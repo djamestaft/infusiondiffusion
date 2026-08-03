@@ -23,6 +23,23 @@ Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; n
 4. A human approves and merges the pull request.
 5. Verify production homepage, metadata, health, content publishing, and runtime logs.
 
+## Human approval points
+
+Agents prepare evidence and recommendations at each gate, but do not substitute
+their own approval for the named human decision.
+
+| Gate              | Required evidence                                                                                  | Human decision                                                                                                           |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Design            | Decision-complete brief, approved Figma frames, responsive states, and Storybook review            | Approve the visual and interaction contract before implementation is treated as final                                    |
+| Merge             | Green required checks, independent review, and a reviewable Vercel Preview                         | Approve and merge the pull request; agents never merge their own delivery work                                           |
+| Production        | Protected `main`, successful Vercel deployment, health check, and smoke-test plan                  | Authorize production promotion when it is not the automatic result of an approved merge                                  |
+| Editorial publish | Valid Studio document and a preview of the intended content state                                  | Publish, disable, or schedule content in Sanity                                                                          |
+| Rollback          | Confirmed impact, failing deployment or content state, and a named last-known-good recovery target | Authorize a Vercel rollback or destructive content recovery; reversible Sanity feature switches may be used by an editor |
+
+Design rejection returns to the brief or Figma contract. Failed code or Preview
+evidence returns to implementation. A failed production smoke test triggers
+incident response; it never relaxes a gate.
+
 ## Parallel agent delivery
 
 - Keep the primary checkout clean for coordination and review. Allocate every concurrent writing agent a leased Treehouse worktree and its own `agent/<task-slug>` branch using `.agents/skills/parallel-agent-worktrees/SKILL.md`.
@@ -56,11 +73,9 @@ prevents a live event from racing Vercel's tagged cache.
   function deliberately throws when the route or `done()` fails so Sanity does
   not acknowledge stale cache state.
 
-## External provisioning still required
+## Remaining external provisioning
 
-1. Create a GitHub repository, push this code, and protect `main` with required checks.
-2. Create a Sanity project and production dataset; populate `.env.local`, configure CORS for local/Vercel URLs, and create least-privilege preview credentials.
-3. Import the repository into Vercel, set Preview and Production variables separately, then verify a preview before enabling production.
-4. Install Superpowers from the Codex plugin marketplace.
-5. Connect Figma MCP and authorize only the required design files.
-6. In the commerce phase, create a clean Shopify store and complete the South African payment-gateway and fee audit before checkout work.
+1. Install Superpowers from the Codex plugin marketplace if it remains useful to the delivery workflow.
+2. Obtain the Figma plan and seat required for Code Connect if direct component mapping becomes necessary.
+3. Add the final production domain and validate DNS.
+4. In the commerce phase, audit the existing Shopify store and complete the South African payment-gateway and fee review before checkout work.
