@@ -14,7 +14,9 @@ export default async function WebsiteLayout({
   return (
     <>
       {children}
-      {isSanityConfigured ? <SanityLive includeDrafts={isEnabled} /> : null}
+      {isSanityConfigured ? (
+        <SanityLive includeDrafts={isEnabled} waitFor="function" />
+      ) : null}
       {isEnabled ? <VisualEditing /> : null}
     </>
   );
