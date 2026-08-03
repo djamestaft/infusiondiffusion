@@ -49,9 +49,9 @@ typography:
     letterSpacing: "0.08em"
   navigationLogoPrimaryMobile:
     fontFamily: "Marcellus, Georgia, serif"
-    fontSize: "26px"
+    fontSize: "20px"
     fontWeight: 400
-    lineHeight: 1.077
+    lineHeight: 1
     letterSpacing: "0.28em"
   navigationLogoPrimaryDesktop:
     fontFamily: "Marcellus, Georgia, serif"
@@ -61,9 +61,9 @@ typography:
     letterSpacing: "0.28em"
   navigationLogoSecondaryMobile:
     fontFamily: "Marcellus, Georgia, serif"
-    fontSize: "11px"
+    fontSize: "10px"
     fontWeight: 400
-    lineHeight: 1.455
+    lineHeight: 1.3
     letterSpacing: "0.24em"
 rounded:
   none: "0px"
@@ -160,7 +160,7 @@ Midnight is the signature environment; Ivory provides editorial relief. Gold sig
 
 **The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
 
-The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 26/28 on mobile and 32/32 on desktop; its secondary line is 11/16 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
+The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 20/20 on mobile and 32/32 on desktop; its secondary line is 10/13 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
 
 ## Layout
 
@@ -200,7 +200,7 @@ Text and email inputs plus textarea use native controls, a 44px minimum editable
 
 ProductCard is one browse-only product-detail link. It uses inset 3:4 media with 4px top corners and square lower image corners; keyboard focus follows the complete card's 4px corners. The hierarchy is format, a two-line Marcellus product name, a two-line factual scent-note summary, and a stable ZAR price row. Sold out is explicit text and does not disable navigation. Ivory and Midnight use the `Product Cards / Semantic` variables. Brochure imagery and copy are provisional Storybook fixtures only; Shopify will replace their values through the same component contract. The labeled Figma guide and Storybook LongContent story visibly prove the two-line title and scent-note clamps.
 
-`Navigation` is approved in the Navigation [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-169), [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-215), and [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-193) frames. It uses the editable Marcellus `LogoTextLockup`, a 104px desktop header with 32px insets, and an 80px mobile header with 20px insets. Ivory navigation uses accessible deep gold `#735716` for small logo lettering and interaction accents; Midnight uses Antique Gold. Destinations use a 2px gold current or hover rule separated from the label; keyboard focus outlines the full target. Account, cart, menu, and close controls retain 44px targets. The mobile menu is a named full-height modal that contains focus, closes on Escape, locks background scrolling, and restores focus.
+`Navigation` is approved in the Navigation [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-169), [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-215), and [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-193) frames. It uses the editable Marcellus `LogoTextLockup`, a 104px desktop header with 32px insets, and an 80px mobile header with 20px insets. Ivory navigation uses accessible deep gold `#735716` for small logo lettering and interaction accents; Midnight uses Antique Gold. Destinations use a 2px gold current or hover rule separated from the label; keyboard focus outlines the full target. Account, cart, menu, and close controls retain adjacent 44px targets on mobile without extra inter-control gaps. The mobile menu is a named full-height modal that contains focus, closes on Escape, locks background scrolling, and restores focus.
 
 Build the remaining components as commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 

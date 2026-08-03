@@ -289,13 +289,13 @@
     text-wrap: balance;
   }
   .navigation-logo-primary {
-    font-size: 1.625rem;
-    line-height: 1.75rem;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
     letter-spacing: 0.28em;
   }
   .navigation-logo-secondary {
-    font-size: 0.6875rem;
-    line-height: 1rem;
+    font-size: 0.625rem;
+    line-height: 0.8125rem;
     letter-spacing: 0.24em;
   }
   @media (min-width: 64rem) {

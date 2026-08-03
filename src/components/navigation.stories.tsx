@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { userEvent, within } from "storybook/test";
 
 import { Navigation } from "@/components/navigation";
 
@@ -20,6 +21,15 @@ export const Midnight: Story = {
 
 export const MobileClosed: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
+};
+
+export const MobileOpen: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    await userEvent.click(
+      within(canvasElement).getByRole("button", { name: "Open menu" }),
+    );
+  },
 };
 
 export const LongLabels: Story = {

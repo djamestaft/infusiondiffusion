@@ -83,16 +83,16 @@ function DestinationLink({
         mobile && "min-h-13 w-full px-5",
       )}
     >
-      <span>{destination.label}</span>
-      <span
-        aria-hidden="true"
-        className={cn(
-          "bg-navigation-accent absolute bottom-0 h-0.5 transition-[width] duration-150 motion-reduce:transition-none",
-          current
-            ? "w-[calc(100%-1.5rem)]"
-            : "w-0 group-hover:w-[calc(100%-1.5rem)]",
-        )}
-      />
+      <span className="relative">
+        {destination.label}
+        <span
+          aria-hidden="true"
+          className={cn(
+            "bg-navigation-accent absolute -bottom-2 left-0 h-0.5 transition-[width] duration-150 motion-reduce:transition-none",
+            current ? "w-full" : "w-0 group-hover:w-full",
+          )}
+        />
+      </span>
     </a>
   );
 }
@@ -206,7 +206,7 @@ export function Navigation({
           </div>
         </div>
 
-        <div className="flex items-center gap-1 lg:hidden">
+        <div className="flex items-center lg:hidden">
           {utilities}
           {links.length ? (
             <button
@@ -241,7 +241,7 @@ export function Navigation({
             >
               <LogoTextLockup className="w-35" />
             </Link>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center">
               {utilities}
               <button
                 type="button"
