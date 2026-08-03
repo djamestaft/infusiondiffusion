@@ -8,6 +8,13 @@
 
 Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; never move them into public variables.
 
+## Runtime version
+
+- Local development and CI use the exact Node release in `.nvmrc`.
+- `package.json` constrains supported development and build runtimes to the same Node major.
+- Vercel uses the corresponding Node major for Preview and Production deployments.
+- Update `.nvmrc`, the `package.json` engine constraint, and the Vercel project setting together. Verify the full local gate and a Vercel Preview before merging.
+
 ## Release gate
 
 1. CI passes formatting, lint, types, Vitest, Storybook tests/build, Next build, and Playwright.
