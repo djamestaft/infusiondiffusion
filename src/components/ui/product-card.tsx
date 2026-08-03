@@ -69,11 +69,11 @@ export function ProductCard({
       href={href}
       aria-label={`View ${name}`}
       className={cn(
-        "group bg-product-card-surface text-product-card-text hover:bg-product-card-hover focus-visible:ring-product-card-focus relative grid w-full max-w-72 grid-rows-[auto_1fr] rounded-sm p-0.5 no-underline transition-colors outline-none focus-visible:ring-2 focus-visible:ring-inset motion-reduce:transition-none",
+        "group bg-product-card-surface text-product-card-text hover:bg-product-card-hover focus-visible:ring-product-card-focus relative grid w-full max-w-72 grid-rows-[auto_1fr] rounded-lg p-0.5 no-underline transition-colors outline-none focus-visible:ring-2 focus-visible:ring-inset motion-reduce:transition-none",
         className,
       )}
     >
-      <div className="bg-product-card-media-fallback relative aspect-3/4 w-full overflow-hidden rounded-t-sm rounded-b-none">
+      <div className="bg-product-card-media-fallback relative aspect-3/4 w-full overflow-hidden rounded-t-lg rounded-b-none">
         {showImage ? (
           <Image
             src={image.src}

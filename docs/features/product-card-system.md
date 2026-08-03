@@ -61,6 +61,7 @@ The first design fixtures come from the owner's brochure file. They are provisio
 - Figma mobile Approved frame: [Product Cards / Mobile / Approved](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=134-188).
 - Canonical ProductCard component set: `133:255` with 24 Size, Theme, State, and Availability variants plus editable content and image visibility properties.
 - Product owner approved the corrected desktop and mobile Figma frames on 3 August 2026. Both frames are named Approved.
+- Product owner requested a more legible image radius and a visible long-title clamp example on 3 August 2026. ProductCard now uses 4px top media/card corners with square lower media corners, and the labeled Figma guide demonstrates the two-line clamp at desktop and mobile sizes.
 
 ## Synchronization status
 
