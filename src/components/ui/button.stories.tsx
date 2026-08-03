@@ -17,6 +17,9 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {};
 export const Secondary: Story = { args: { variant: "secondary" } };
 export const Quiet: Story = { args: { variant: "quiet" } };
+export const Destructive: Story = {
+  args: { variant: "destructive", children: "Remove item" },
+};
 export const Large: Story = {
   args: { size: "large", children: "Explore the collection" },
 };
@@ -74,11 +77,12 @@ export const MidnightRoles: Story = {
       <Button>Shop fragrance</Button>
       <Button variant="secondary">Shop fragrance</Button>
       <Button variant="quiet">Shop fragrance</Button>
+      <Button variant="destructive">Remove item</Button>
     </div>
   ),
   play: async ({ canvasElement }) => {
     const buttons = within(canvasElement).getAllByRole("button");
-    await expect(buttons).toHaveLength(3);
+    await expect(buttons).toHaveLength(4);
     for (const button of buttons) {
       await expect(button).toBeVisible();
       await expect(
