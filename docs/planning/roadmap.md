@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 2 August 2026
+Last updated: 3 August 2026
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository is a working local foundation. It builds without connected services by rendering safe fallback content, so account provisioning does not block development.
+The repository is a working local and remote foundation. Protected `main` runs green CI, and the fallback holding page is live on Vercel at `https://infusion-diffusion.vercel.app`. The pull-request Preview loop still needs an end-to-end verification.
 
 ### Application foundation — complete
 
@@ -70,6 +70,7 @@ The repository is a working local foundation. It builds without connected servic
 - [x] Current local formatting, lint, type, test, accessibility, and build checks pass
 - [x] GitHub repository created and initial code pushed
 - [x] Protected `main` branch and required CI checks enabled
+- [x] Initial Vercel production holding page deployed
 - [ ] Vercel Preview deployment verified from a pull request
 - [ ] Production deployment and smoke test completed
 
@@ -132,11 +133,13 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### Vercel
 
-- [ ] Import the GitHub repository
+- [x] Import the GitHub repository
 - [ ] Confirm the Node version matches `.nvmrc`
 - [ ] Configure Preview and Production environment variables separately
+- [x] Configure `NEXT_PUBLIC_SITE_URL` for `https://infusion-diffusion.vercel.app`
+- [x] Deploy the fallback holding page to the Vercel production URL
 - [ ] Deploy a preview and verify `/`, `/studio`, and `/api/health`
-- [ ] Add the production domain and validate DNS
+- [ ] Add the final custom production domain and validate DNS
 - [ ] Enable deployment protection and runtime/log access for the appropriate team
 
 ### Figma
@@ -169,10 +172,11 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### Phase 1 — establish the remote delivery loop
 
-1. Create GitHub repository and push the initial foundation.
-2. Connect Vercel and obtain a green Preview deployment.
-3. Protect `main` with the existing CI workflow.
-4. Confirm preview and production environment separation.
+1. [x] Create the GitHub repository and push the initial foundation.
+2. [x] Protect `main` with the existing CI workflow.
+3. [x] Connect Vercel and deploy the fallback holding page.
+4. [ ] Open a non-`main` pull request and obtain a green Vercel Preview deployment.
+5. [ ] Verify `/`, `/studio`, and `/api/health` on Preview and confirm Preview/Production environment separation.
 
 Exit criteria: a pull request produces a green CI run and a reviewable Vercel Preview; production still requires explicit human approval.
 
@@ -234,12 +238,13 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Review and commit the current foundation as the baseline.
-2. Create the GitHub repository and connect Vercel.
-3. Create the Sanity project and configure local plus Vercel environments.
-4. Connect Figma MCP and identify the canonical brand file.
-5. Audit the existing Shopify store before creating or deleting commerce data.
-6. Select the first small feature that will test the full agentic workflow.
+1. Commit the Treehouse and roadmap changes on a non-`main` branch and open a pull request.
+2. Confirm the pull request receives both a green `quality` check and a Vercel Preview URL.
+3. Run the release-debug workflow against `/`, `/studio`, and `/api/health` on that Preview.
+4. Confirm Node 22 and Preview/Production environment separation in Vercel, then merge with human approval.
+5. Create the Sanity project and configure local, Preview, and Production credentials plus CORS.
+6. Select the first small feature that will exercise the full brief-to-design-to-Storybook-to-Preview agent workflow.
+7. Audit the existing Shopify store before creating or deleting commerce data.
 
 ## Roadmap maintenance
 
