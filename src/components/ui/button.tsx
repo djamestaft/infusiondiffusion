@@ -14,16 +14,16 @@ const buttonVariants = cva(
         primary:
           "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         secondary:
-          "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:text-action-disabled-foreground",
+          "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         quiet:
-          "bg-transparent text-action-quiet-foreground hover:bg-action-quiet-hover active:bg-action-quiet-active disabled:text-action-disabled-foreground aria-disabled:text-action-disabled-foreground",
+          "bg-transparent text-action-quiet-foreground hover:bg-action-quiet-hover active:bg-action-quiet-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         // Temporary compatibility aliases; remove after downstream consumers migrate.
         default:
           "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         outline:
-          "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:text-action-disabled-foreground",
+          "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         ghost:
-          "bg-transparent text-action-quiet-foreground hover:bg-action-quiet-hover active:bg-action-quiet-active disabled:text-action-disabled-foreground aria-disabled:text-action-disabled-foreground",
+          "bg-transparent text-action-quiet-foreground hover:bg-action-quiet-hover active:bg-action-quiet-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
       },
       size: {
         default: "py-3",

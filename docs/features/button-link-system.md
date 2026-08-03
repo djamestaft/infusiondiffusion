@@ -1,6 +1,6 @@
 # Buttons & Links
 
-Status: Approved for implementation
+Status: Delivered and synchronized
 
 ## Approved visual source
 
@@ -9,6 +9,8 @@ Status: Approved for implementation
 - Button component set `99:177`
 - TextLink component set `99:206`
 - Human approval recorded 2026-08-03.
+- Merged in pull request #16 as `f99b6de` on 2026-08-03.
+- Post-merge Figma/runtime synchronization audited on 2026-08-03.
 
 ## User outcome
 
@@ -38,10 +40,12 @@ The previous Button variant names `default`, `outline`, and `ghost`, plus size `
 
 ## Sync matrix
 
-| Layer               | Source                                                                           | Status |
-| ------------------- | -------------------------------------------------------------------------------- | ------ |
-| Figma               | Approved desktop `108:146`, mobile `108:212`, Button `99:177`, TextLink `99:206` | Synced |
-| Repository guidance | `DESIGN.md` Buttons & Links contract                                             | Synced |
-| Runtime tokens      | Semantic action/link variables in `src/app/globals.css`                          | Synced |
-| Components          | `Button`, `TextLink`, AnnouncementBar and holding-page migrations                | Synced |
-| Storybook           | `Components/Button`, `Components/TextLink`, existing integration stories         | Synced |
+| Layer               | Source                                                                                               | Status |
+| ------------------- | ---------------------------------------------------------------------------------------------------- | ------ |
+| Figma               | Approved desktop `108:146`, mobile `108:212`, Button `99:177`, TextLink `99:206`, semantic variables | Synced |
+| Repository guidance | `DESIGN.md` Buttons & Links contract                                                                 | Synced |
+| Runtime tokens      | Semantic action/link variables in `src/app/globals.css`                                              | Synced |
+| Components          | `Button`, `TextLink`, AnnouncementBar and holding-page migrations                                    | Synced |
+| Storybook           | `Components/Button`, `Components/TextLink`, existing integration stories                             | Synced |
+
+The Figma semantic collection uses scoped Ivory/Midnight variables with web code syntax matching `globals.css`. Button and TextLink masters consume those variables. TextLink documents Default, Hover, Active, and Focus only; unavailable destinations are omitted or rendered as explanatory text rather than disabled links.

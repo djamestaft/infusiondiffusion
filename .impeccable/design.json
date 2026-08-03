@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T12:00:00+02:00",
+  "generatedAt": "2026-08-03T16:39:26+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -116,6 +116,48 @@
       "description": "A concise, non-dismissible editorial notice above site navigation, with an optional destination link.",
       "html": "<aside class=\"ds-announcement\" aria-label=\"Announcement\"><p>THE FIRST COLLECTION IS TAKING SHAPE.</p></aside>",
       "css": ".ds-announcement { min-height: 44px; display: flex; align-items: center; justify-content: center; padding: 8px 20px; background: var(--announcement); color: var(--announcement-foreground); border-bottom: 1px solid var(--announcement-border); text-align: center; } .ds-announcement p { margin: 0; font: 600 12px/16px Manrope, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Button / Primary",
+      "kind": "button",
+      "description": "The decisive action in a local decision group, using Deep Ink on Ivory and measured Antique Gold on Midnight.",
+      "html": "<button class=\"ds-btn-primary\">SHOP FRAGRANCE</button>",
+      "css": ".ds-btn-primary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border: 0; border-radius: 4px; background: var(--action-primary); color: var(--action-primary-foreground); font: 600 14px/20px Manrope, Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 150ms ease; } .ds-btn-primary:hover { background: var(--action-primary-hover); } .ds-btn-primary:active { background: var(--action-primary-active); } .ds-btn-primary:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Button / Secondary",
+      "kind": "button",
+      "description": "A bordered alternative that supports the primary action without competing with it.",
+      "html": "<button class=\"ds-btn-secondary\">SHOP FRAGRANCE</button>",
+      "css": ".ds-btn-secondary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border: 1px solid var(--action-secondary-border); border-radius: 4px; background: transparent; color: var(--action-secondary-foreground); font: 600 14px/20px Manrope, Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 150ms ease; } .ds-btn-secondary:hover { background: var(--action-secondary-hover); } .ds-btn-secondary:active { background: var(--action-secondary-active); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Button / Quiet",
+      "kind": "button",
+      "description": "A borderless, low-emphasis utility action that recedes behind Primary and Secondary controls.",
+      "html": "<button class=\"ds-btn-quiet\">SHOP FRAGRANCE</button>",
+      "css": ".ds-btn-quiet { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border: 0; border-radius: 4px; background: transparent; color: var(--action-quiet-foreground); font: 600 14px/20px Manrope, Arial, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; transition: background-color 150ms ease; } .ds-btn-quiet:hover { background: var(--action-quiet-hover); } .ds-btn-quiet:active { background: var(--action-quiet-active); } .ds-btn-quiet:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "TextLink / Inline",
+      "kind": "custom",
+      "description": "An always-underlined destination within prose.",
+      "html": "<a class=\"ds-link-inline\" href=\"#delivery\">View delivery details</a>",
+      "css": ".ds-link-inline { border-radius: 2px; color: var(--link-inline); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-inline:hover { color: var(--link-hover); } .ds-link-inline:active { color: var(--link-active); } .ds-link-inline:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "TextLink / Standalone",
+      "kind": "custom",
+      "description": "A directional destination outside prose with a minimum 44px target and optional monochrome trailing icon.",
+      "html": "<a class=\"ds-link-standalone\" href=\"#collection\">Explore the collection <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
+      "css": ".ds-link-standalone { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; border-radius: 2px; color: var(--link-standalone); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-standalone svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; } .ds-link-standalone:hover { color: var(--link-hover); } .ds-link-standalone:active { color: var(--link-active); } .ds-link-standalone:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "TextLink / Inverse",
+      "kind": "custom",
+      "description": "The Midnight-surface link treatment, retaining a warm gold underline and visible focus.",
+      "html": "<a class=\"ds-link-inverse\" href=\"#collection\">Explore the collection</a>",
+      "css": ".ds-link-inverse { border-radius: 2px; color: var(--link-inverse); font: 500 16px/26px Manrope, Arial, sans-serif; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 150ms ease; } .ds-link-inverse:hover { color: var(--link-inverse-hover); } .ds-link-inverse:active { color: var(--link-inverse-active); } .ds-link-inverse:focus-visible { outline: 2px solid var(--action-focus); outline-offset: 2px; }"
     }
   ],
   "narrative": {

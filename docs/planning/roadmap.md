@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The announcement bar completed the full brief-to-Figma-to-Storybook-to-implementation-to-review-to-production loop and is the first approved reusable component operating with live editorial content. The approved Figma Style Guide remains the canonical visual foundation; the broader component system still needs to be migrated through reviewed feature work.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, and TextLink have completed approved Figma-to-Storybook-to-runtime delivery. The button/link slice also validated visible Codex coordination, independent review, and post-merge design-token reconciliation. The approved Figma Style Guide remains the canonical visual foundation; remaining Phase 4 components still move through reviewed feature work.
 
 ### Application foundation — complete
 
@@ -46,7 +46,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Initial site settings document populated
 - [x] Draft, published, Preview, Production, and cache-invalidation flows verified end to end
 
-### Design system — approved foundation, runtime migration pending
+### Design system — approved foundation, runtime migration in progress
 
 - [x] Approved Figma brand foundation documented in `DESIGN.md`
 - [x] Semantic color, typography, spacing, focus, and motion foundations added
@@ -55,6 +55,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Impeccable installed as a repository-scoped design skill with hooks
 - [x] Figma MCP connected and agent workflow scoped to the canonical Infusion Diffusion file
 - [x] Canonical Style Guide, palette, typography system, layout, and photography rules approved
+- [x] Button and TextLink approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [ ] Obtain the approved vector logo master and confirm production asset/licence records
 - [ ] Core component inventory designed in Figma and represented in Storybook
 - [ ] Responsive page templates approved before storefront implementation
@@ -95,7 +96,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Define human approval points for design, merge, production, editorial publishing, and rollback
 - [x] Trial Pi orchestration with Codex-backed specialist roles and scoped MCP
 - [x] Retire Pi after operator testing exposed insufficient worker visibility and autonomous multi-PR behavior
-- [ ] Deliver the button/link system through visible Codex coordination and record time, interventions, conflicts, and review findings
+- [x] Deliver the button/link system through visible Codex coordination and record interventions, review findings, and synchronization corrections
 - [ ] Extract the proven generic system into a separate project template
 
 ### Commerce — architecture chosen, implementation pending
@@ -153,6 +154,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Scope agent work to the canonical Infusion Diffusion file and exact node links
 - [x] Document page/frame naming and component-to-code mapping conventions
 - [x] Test one approved component handoff through Storybook
+- [x] Synchronize Button/TextLink Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
 
 ### Shopify
 
@@ -171,7 +173,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Verify repository agents can read the project context and invoke their assigned skills
 - [x] Configure Treehouse to isolate concurrent writing agents in repository-local worktrees
 - [x] Evaluate and reject Pi as the repository orchestrator
-- [ ] Validate the visible Codex coordination rules on the button/link feature
+- [x] Validate the visible Codex coordination rules on the button/link feature
 - [ ] Document any account-specific MCP setup without committing tokens
 
 ## Delivery sequence
@@ -207,10 +209,10 @@ Exit criteria met: the announcement bar was delivered from repository context an
 
 ### Phase 4 — establish the production design system
 
-1. Finalize brand strategy and approve tokens.
-2. Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives.
-3. Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content.
-4. Map approved Figma components to repository primitives.
+1. [x] Finalize brand strategy and approve foundation tokens.
+2. [ ] Build Storybook coverage for navigation, buttons, inputs, cards, price display, badges, dialogs/drawers, feedback states, and content primitives. Button and TextLink are complete.
+3. [ ] Validate keyboard behavior, contrast, responsive extremes, reduced motion, and long content across the full component inventory. Button and TextLink are complete.
+4. [ ] Map approved Figma components to repository primitives. AnnouncementBar, Button, and TextLink are complete.
 
 Exit criteria: storefront pages can be composed from approved, tested primitives rather than page-specific UI.
 
@@ -244,7 +246,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Begin Phase 4 by inventorying and prioritizing the production components needed for the first catalogue and product-detail journeys.
+1. Continue Phase 4 with inputs and focus states, followed by product card and navigation.
 2. Obtain the approved vector logo master and confirm production asset and licence records.
 3. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
 4. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
