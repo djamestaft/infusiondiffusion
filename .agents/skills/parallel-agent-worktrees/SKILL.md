@@ -20,7 +20,7 @@ description: Allocate and coordinate isolated Treehouse worktrees and Git branch
 
 1. Preserve unrelated changes and remain within the assigned files. Report an ownership overlap before editing the same surface as another agent.
 2. Commit coherent changes on the task branch, push it, and open a pull request with `gh pr create`. If `gh` is unexpectedly unavailable, diagnose the shared shell/tool installation first and use an already-authorized GitHub connector or API fallback when available; do not hand routine PR creation back to the user solely because one CLI command is missing. Do not merge into or edit `main` from an agent worktree.
-3. Rebase or merge the latest `origin/main` into the task branch before final verification when another task landed first. Resolve conflicts deliberately and rerun the proportional quality gate.
+3. Rebase or merge the latest `<remote>/main` into the task branch before final verification when another task landed first. Resolve conflicts deliberately and rerun the proportional quality gate.
 4. Require green CI, review, and any relevant Vercel Preview verification before human merge.
 
 ## Return safely
