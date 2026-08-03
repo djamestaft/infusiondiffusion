@@ -58,6 +58,15 @@ next-env.d.ts
 /.impeccable/live/cache/
 /worktrees/.treehouse
 
+# Pi local runtime, packages, sessions, credentials, and caches
+/.pi/npm/
+/.pi/git/
+/.pi/agent/auth.json
+/.pi/agent/sessions/
+/.pi/mcp-cache.json
+/.pi/oauth/
+/.pi/*.local.json
+
 # Sanity Functions
 /.sanity/
 functions/**/.env*
