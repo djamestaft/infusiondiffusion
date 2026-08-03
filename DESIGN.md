@@ -75,7 +75,7 @@ Infusion Diffusion uses deep contrast, measured gold, tactile materials, and gen
 
 The approved visual authority is the [Figma Style Guide](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=25-2). Its foundation sections are Cover `25:3`, Brand `26:2`, Color `27:2`, Typography `28:2`, Layout & Material `29:2`, and Photography `31:2`.
 
-The Figma foundations are approved. Repository CSS tokens and components are not yet migrated and must not be treated as equal visual authority until their Figma-to-code sync is completed and verified.
+The Figma foundations are approved. Repository CSS migration is incremental: AnnouncementBar, Button, and TextLink are synchronized with their approved Figma sources; remaining provisional holding-page styles are not approved brand truth.
 
 ### Figma organization and handoff
 
@@ -170,7 +170,7 @@ Buttons use three roles: Primary for the decisive action, Secondary for a border
 
 Text links use real anchor semantics and remain underlined. Inline links live in prose; Standalone links have a 44px minimum target and may include a trailing monochrome vector icon; Inverse links retain contrast on Midnight surfaces. Links have no disabled state: if a destination is unavailable, render explanatory text or omit the link instead of faking a disabled anchor.
 
-The action and link variables in `globals.css` are semantic, mode-aware mappings. Gold is reserved for action emphasis, link emphasis, and focus—not a default border on quiet or tertiary controls. The legacy Button names `default`, `outline`, `ghost`, and `lg` remain temporary aliases for migration safety and must not be used in new work.
+The action and link variables in `globals.css` map one-to-one to the Figma `Buttons & Links / Semantic` collection. Both use Ivory and Midnight modes, scoped color roles, and web code syntax. Gold is reserved for action emphasis, link emphasis, and focus—not a default border on quiet or tertiary controls. TextLink exposes Default, Hover, Active, and Focus states and deliberately omits Disabled. The legacy Button names `default`, `outline`, `ghost`, and `lg` remain temporary aliases for migration safety and must not be used in new work.
 
 Build the remaining components in this order: inputs and focus states, product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
