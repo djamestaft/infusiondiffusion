@@ -31,8 +31,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const Hover: Story = {
-  play: async ({ canvasElement }) => {
-    await userEvent.hover(within(canvasElement).getByRole("link"));
+  args: {
+    className:
+      "bg-product-card-hover [&_h3]:text-product-card-accent [&_h3]:underline",
   },
 };
 export const SoldOut: Story = { args: { availability: "sold-out" } };
