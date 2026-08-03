@@ -93,10 +93,9 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Exercise the full prompt-to-production workflow with the announcement bar
 - [x] Record first-loop failure modes, improve guidance, and add regression evaluations
 - [x] Define human approval points for design, merge, production, editorial publishing, and rollback
-- [x] Configure a pinned Pi team with Codex-backed specialist roles, scoped MCP, and HerdR lifecycle reporting
-- [x] Validate Pi worker communication and role-scoped Context7 access with live workers
-- [ ] Validate Pi multi-writer Treehouse isolation before the next feature
-- [ ] Deliver the button/link system through Pi and record time, cost, interventions, conflicts, and review findings
+- [x] Trial Pi orchestration with Codex-backed specialist roles and scoped MCP
+- [x] Retire Pi after operator testing exposed insufficient worker visibility and autonomous multi-PR behavior
+- [ ] Deliver the button/link system through visible Codex coordination and record time, interventions, conflicts, and review findings
 - [ ] Extract the proven generic system into a separate project template
 
 ### Commerce — architecture chosen, implementation pending
@@ -171,9 +170,8 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [ ] Run `$impeccable init` when ready to replace the provisional context with its richer schema
 - [x] Verify repository agents can read the project context and invoke their assigned skills
 - [x] Configure Treehouse to isolate concurrent writing agents in repository-local worktrees
-- [x] Install Pi and configure the project specialist team with Codex-backed models
-- [ ] Complete Pi OpenAI Codex and Figma OAuth on each operator machine
-- [ ] Pass the Pi orchestration adoption gate on the button/link feature
+- [x] Evaluate and reject Pi as the repository orchestrator
+- [ ] Validate the visible Codex coordination rules on the button/link feature
 - [ ] Document any account-specific MCP setup without committing tokens
 
 ## Delivery sequence

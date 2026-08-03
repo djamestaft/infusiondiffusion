@@ -47,55 +47,30 @@ incident response; it never relaxes a gate.
 - Sequence work that shares migrations, generated files, lockfiles, or the same component boundary unless ownership can be divided safely.
 - Treat worktrees as file isolation, not secret or service isolation. Give concurrent servers unique ports and keep credentials in ignored, least-privilege environment files.
 
-## Pi team orchestration
+## Codex agent coordination
 
-Pi is the project coordinator for multi-agent feature work. HerdR remains the
-visible terminal runtime, Treehouse owns checkout isolation, and protected GitHub
-pull requests remain the integration boundary.
+Codex is the project coordinator for feature work. HerdR may host visible
+terminal sessions, Treehouse owns checkout isolation when parallel writers are
+approved, and protected GitHub pull requests remain the integration boundary.
 
-### Install and authenticate
-
-1. Run `nvm use` so the shell uses the exact Node version in `.nvmrc`.
-2. Run `.agents/skills/orchestrate-pi-team/scripts/install-pi-runtime.sh`.
-   The installer pins Pi `0.83.0`, applies the audited `brace-expansion` `5.0.9`
-   transitive security update, verifies the production dependency audit, and
-   installs the HerdR lifecycle integration.
-3. Start Pi from the repository with
-   `pi --provider openai-codex --model gpt-5.6-sol`.
-4. Run `/login openai-codex` and complete browser OAuth. Credentials remain in
-   `~/.pi/agent/auth.json`; never copy them into `.pi` in the repository.
-5. Run `/mcp-auth figma` from an MCP-enabled interactive session when Figma
-   authorization is required. Do not put OAuth tokens in `.pi/mcp.json`.
-
-The repository pins `pi-agents-team` in `.pi/settings.json`. Pi installs its
-project-local package cache under ignored `.pi/npm/`. Figma and Context7 are
-declared without credentials in `.pi/mcp.json`; only the designer and docs
-researcher load the pinned MCP adapter.
-
-The initial adoption smoke test launched `explorer` and `quality_reviewer` in
-parallel and retrieved both terminal results. A separate `docs_researcher`
-successfully resolved the official Next.js library through scoped Context7 MCP.
-The first parallel writing feature must still prove distinct Treehouse leases,
-branches, `cwd` values, and write scopes before multi-writer use is accepted.
-
-### Operate the team
-
-- Follow `.agents/skills/orchestrate-pi-team/SKILL.md` for routing,
-  coordinator-mediated messages, relay handling, model tiers, and handoff.
-- Open `/team` to inspect workers and cost. Use `/team-steer` for changed
-  requirements and `/team-stop` for canceled work.
-- Allocate every writer a Treehouse lease and task branch before delegation.
-  Pass the leased checkout as `cwd` and permit writes only to `.` within it.
-- Never reuse a writing worker across worktrees. Never give an ordinary worker
+- Before delegation, tell the user which specialist roles will run, what each
+  owns, whether they can write, and which approval gate comes next.
+- Keep status, questions, worker results, and changes of direction visible in the
+  coordinator conversation. Do not hide material decisions behind background
+  execution.
+- Default to one delivery branch and one pull request. Use concurrent writing
+  agents only for independently mergeable ownership after the user approves the
+  proposed branches and pull-request topology.
+- Research, design, review, and debugging agents remain read-only unless their
+  bounded task explicitly requires a change. Never give ordinary agents
   production, Shopify Admin, Sanity write, webhook, or deployment credentials.
-- Pi path scopes are not an OS sandbox. Protected branches, narrow tool sets,
-  isolated worktrees, secret minimization, review, and human approval remain
-  mandatory.
+- Stop at the documented design, merge, production, editorial publish, and
+  rollback gates.
 
-If the team runtime is unhealthy, run `/team-enable off` and continue with the
-existing Codex agents. Reverting the project `.pi` configuration disables the
-repository integration; uninstalling the global Pi runtime or clearing OAuth is
-a separate user-level action.
+The Pi orchestration trial was retired because its background worker model made
+worker dialogue and autonomous multi-PR delivery insufficiently visible to the
+operator. Pi may remain installed as user-level tooling, but it is not configured
+or required by this repository.
 
 ## Incident response
 
