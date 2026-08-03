@@ -49,7 +49,7 @@ typography:
     letterSpacing: "0.08em"
   navigationLogoPrimaryMobile:
     fontFamily: "Marcellus, Georgia, serif"
-    fontSize: "20px"
+    fontSize: "18px"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "0.28em"
@@ -61,9 +61,9 @@ typography:
     letterSpacing: "0.28em"
   navigationLogoSecondaryMobile:
     fontFamily: "Marcellus, Georgia, serif"
-    fontSize: "10px"
+    fontSize: "9px"
     fontWeight: 400
-    lineHeight: 1.3
+    lineHeight: 1.333
     letterSpacing: "0.24em"
 rounded:
   none: "0px"
@@ -160,7 +160,7 @@ Midnight is the signature environment; Ivory provides editorial relief. Gold sig
 
 **The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
 
-The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 20/20 on mobile and 32/32 on desktop; its secondary line is 10/13 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
+The approved navigation `LogoTextLockup` is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 18/18 on mobile and 32/32 on desktop; its secondary line is 9/12 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules.
 
 ## Layout
 

@@ -183,7 +183,7 @@ export function Navigation({
           aria-label="Infusion Diffusion home"
           className="focus-visible:outline-navigation-focus inline-flex focus-visible:outline-2 focus-visible:outline-offset-2"
         >
-          <LogoTextLockup className="w-35 lg:w-55" />
+          <LogoTextLockup className="w-31 lg:w-55" />
         </Link>
 
         <div className="hidden items-center gap-5 lg:flex">
@@ -239,7 +239,7 @@ export function Navigation({
               aria-label="Infusion Diffusion home"
               className="focus-visible:outline-navigation-focus focus-visible:outline-2 focus-visible:outline-offset-2"
             >
-              <LogoTextLockup className="w-35" />
+              <LogoTextLockup className="w-31" />
             </Link>
             <div className="flex items-center">
               {utilities}
