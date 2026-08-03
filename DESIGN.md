@@ -176,7 +176,11 @@ The action and link variables in `globals.css` map one-to-one to the Figma `Butt
 
 Text and email inputs plus textarea use native controls, a 44px minimum editable target, restrained 4px corners, and the `Inputs / Semantic` Ivory/Midnight variables. Focus uses a two-pixel gold outline with offset; invalid fields keep that focus treatment while using a mode-aware error border and explicit `Error:` message. Read-only controls remain focusable, disabled controls do not, and textarea remains vertically resizable. Field owns the persistent visible label and automatically associates its active description or error with the control. Required status is native and visible; optional status is written in the label. Supporting text is replaced when an error is present.
 
-Build the remaining components in this order: product card, navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
+`ProductCard` is approved in the Product Cards [desktop frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=134-2) and [mobile frame](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=134-188). Its canonical Figma component set is ProductCard `133:255`, mapping to `Components/ProductCard` in Storybook and the `ProductCard` code primitive.
+
+ProductCard is one browse-only product-detail link. It uses inset 3:4 media with 4px top corners and square lower image corners; keyboard focus follows the complete card's 4px corners. The hierarchy is format, a two-line Marcellus product name, a two-line factual scent-note summary, and a stable ZAR price row. Sold out is explicit text and does not disable navigation. Ivory and Midnight use the `Product Cards / Semantic` variables. Brochure imagery and copy are provisional Storybook fixtures only; Shopify will replace their values through the same component contract. The labeled Figma guide and Storybook LongContent story visibly prove the two-line title and scent-note clamps.
+
+Build the remaining components in this order: navigation, then commerce-specific compositions. Component names must map to Storybook titles and code component names wherever practical.
 
 Every reusable component must document default, hover/focus, disabled, loading, error/empty, long-content, and responsive states where applicable. Extend the existing shadcn-based primitives instead of creating duplicate low-level controls.
 
