@@ -27,6 +27,23 @@ Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; n
 
 Capture the failing URL, deployment ID, commit SHA, timestamp, browser evidence, console/network output, and Vercel logs. Reproduce before changing code. If production is materially broken, recommend restoring the last known-good Vercel deployment; only a human may authorize the rollback. After resolution, add the missed regression check to CI or the relevant skill.
 
+## Sanity content invalidation
+
+Published changes in the `j222nd1i.production` dataset are coordinated by the
+`invalidate-tags` Sanity Sync Tag function. The storefront's `SanityLive`
+subscription waits for that function before refreshing, which prevents a live
+event from racing Vercel's tagged cache.
+
+- Preview infrastructure changes with `pnpm exec sanity blueprints plan`.
+- Deploy the function with `pnpm exec sanity blueprints deploy` after the
+  storefront pull request is approved.
+- Inspect deployed configuration with `pnpm exec sanity functions list --verbose`
+  and runtime failures with `pnpm exec sanity functions logs invalidate-tags`.
+- Keep exactly one Sync Tag invalidate function attached to a dataset.
+- If publishing stops updating the storefront, inspect function logs first. A
+  failed `done()` call is deliberately thrown so Sanity records the invocation
+  as failed instead of acknowledging stale cache state.
+
 ## External provisioning still required
 
 1. Create a GitHub repository, push this code, and protect `main` with required checks.
