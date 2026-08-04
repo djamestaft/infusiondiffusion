@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive Home, Collection, Product detail, and Editorial templates now compose the completed primitive inventory in Storybook across desktop/mobile and Ivory/Midnight Navigation treatments. The editable `LogoTextLockup` remains the approved production storefront mark, while the ornamental vector logo master is deferred and does not block the current release.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision, and the first server-only normalized catalogue boundary is implemented against stable Storefront API `2026-07`. Payment, tax, shipping, fulfilment, app, billing, and domain readiness remain Admin-only launch blockers.
 
 ### Application foundation — complete
 
@@ -112,10 +112,11 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Headless boundary documented: Shopify handles commerce while Next.js owns all customer-facing UI
 - [x] Sanity/Shopify ownership rules documented to avoid duplicated price or inventory state
 - [x] Hosted Shopify checkout selected for the initial release
-- [ ] Audit the existing Shopify store, catalogue, theme-independent data, apps, domains, and billing
-- [ ] Decide whether to clean the existing store or create a fresh store without discarding useful product/order data
+- [x] Audit the Storefront-visible existing catalogue; Admin-only apps, domains, billing, payment, tax, shipping, and fulfilment evidence remains required before checkout
+- [x] Retain and clean the existing store; no evidence justifies a duplicate store or catalogue migration
 - [ ] Confirm South African payment gateway, currency, tax, shipping, fulfilment, and Shopify fee requirements
-- [ ] Create least-privilege Storefront API credentials
+- [x] Create a Headless storefront with a local server-only private Storefront API credential; Vercel environment configuration remains pending
+- [x] Implement the normalized server-only product and collection catalogue boundary
 - [ ] Design normalized product, variant, collection, cart, and money types
 - [ ] Implement server-side Shopify client and GraphQL operations
 - [ ] Build collection, product detail, cart, and checkout journeys
@@ -167,11 +168,11 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 
 ### Shopify
 
-- [ ] Secure owner access to the existing store
+- [x] Secure owner access to the existing store
 - [ ] Export or otherwise safeguard current products, customers, orders, domains, and configuration before restructuring
-- [ ] Complete the keep-versus-new-store audit
+- [x] Complete the keep-versus-new-store catalogue audit and choose to retain the existing store
 - [ ] Configure markets, currency, taxes, shipping, payments, policies, and notifications
-- [ ] Create the Storefront API integration and minimum required scopes
+- [x] Create the Headless Storefront API integration with minimum catalogue scopes; exact inventory quantity remains deliberately disabled
 - [ ] Keep Admin API credentials server-only and add them only when a defined integration needs them
 - [ ] Configure webhook secrets separately for Preview and Production where applicable
 
@@ -255,10 +256,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
-2. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
-3. Design normalized product, variant, collection, cart, and money types against the audited store.
-4. Revisit the ornamental vector logo master and licence record only if a future approved use brings it back into scope.
+1. Complete the Admin-only South African payment, tax, shipping, fulfilment, app, billing, and domain readiness evidence before checkout implementation.
+2. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
+3. Connect the approved Collection and Product detail routes to the normalized catalogue boundary; keep cart and checkout out of scope until operational readiness is confirmed.
+4. Design the normalized cart contract and secure cookie lifecycle after catalogue routes are proven.
 
 ## Roadmap maintenance
 
