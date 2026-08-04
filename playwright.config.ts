@@ -17,7 +17,9 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_BASE_URL
     ? undefined
     : {
-        command: "corepack pnpm dev",
+        command: process.env.CI
+          ? "SHOPIFY_E2E_FIXTURES=1 corepack pnpm dev"
+          : "corepack pnpm dev",
         url: "http://127.0.0.1:3000/api/health",
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,

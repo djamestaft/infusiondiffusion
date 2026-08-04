@@ -26,6 +26,8 @@ Customers can browse the Shopify-backed catalogue at `/shop` and open a product 
 6. Shopify CDN images are explicitly allowlisted. Catalogue reads use cache tags suitable for later webhook invalidation.
 7. Unit tests cover the Shopify-to-UI adapter; Playwright covers desktop/mobile browse navigation, headings, live price/status text, 404, console errors, and WCAG AA checks.
 
+CI browser journeys use deterministic normalized catalogue fixtures only in a `CI=true`, `NODE_ENV=development` server. Live Shopify contract verification remains a separate read-only local/Preview check, so production credentials are not copied into GitHub Actions and required tests do not depend on external store availability.
+
 ## Out of scope
 
 Home replacement, filters/sorting, Admin cleanup, cart, checkout, customer accounts, inventory quantity, Sanity product relationships, and production domain work.
