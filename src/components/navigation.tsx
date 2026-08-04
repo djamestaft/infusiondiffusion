@@ -17,6 +17,7 @@ export type NavigationProps = {
   currentHref?: string;
   accountHref?: string;
   cartHref?: string;
+  cartCount?: number;
   theme?: "ivory" | "midnight";
   className?: string;
 };
@@ -102,6 +103,7 @@ export function Navigation({
   currentHref,
   accountHref = "/account",
   cartHref = "/cart",
+  cartCount = 0,
   theme = "ivory",
   className,
 }: NavigationProps) {
@@ -157,11 +159,28 @@ export function Navigation({
           className="size-[1.125rem] stroke-[1.5]"
         />
       </UtilityLink>
-      <UtilityLink href={cartHref} label="Cart">
-        <ShoppingCart
-          aria-hidden="true"
-          className="size-[1.375rem] stroke-[1.5]"
-        />
+      <UtilityLink
+        href={cartHref}
+        label={
+          cartCount
+            ? `Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
+            : "Cart"
+        }
+      >
+        <span className="relative">
+          <ShoppingCart
+            aria-hidden="true"
+            className="size-[1.375rem] stroke-[1.5]"
+          />
+          {cartCount ? (
+            <span
+              aria-hidden="true"
+              className="bg-navigation-accent text-navigation-surface absolute -top-2.5 -right-2.5 inline-flex min-w-5 items-center justify-center rounded-full px-1 font-sans text-xs leading-5 font-semibold"
+            >
+              {cartCount > 99 ? "99+" : cartCount}
+            </span>
+          ) : null}
+        </span>
       </UtilityLink>
     </>
   );

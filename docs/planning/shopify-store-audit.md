@@ -1,6 +1,6 @@
 # Shopify store audit
 
-Status: Storefront catalogue audit complete on 4 August 2026; keep-and-clean decision recorded. Admin-only launch readiness remains blocked on owner confirmation.
+Status: Storefront catalogue audit complete on 4 August 2026; keep-and-clean decision recorded. Initial Admin readiness evidence was reviewed on 4 August 2026. Live checkout remains blocked.
 
 ## Evidence and decision
 
@@ -31,3 +31,15 @@ Before any Shopify mutation, export products and retain a dated copy with record
 The Storefront API cannot establish the Shopify plan and billing owner, paid apps, payment-provider readiness, South African VAT treatment, shipping profiles and rates, fulfilment locations, custom-domain/DNS ownership, theme dependencies, discounts/gift cards, or whether customer/order exports are safely retained. These require owner/Admin evidence before payment, checkout, domain cutover, app removal, or destructive cleanup.
 
 No Admin credential is required for the catalogue boundary. Never place customer/order exports, credentials, billing evidence, or personal data in git.
+
+## Initial Admin readiness evidence
+
+Owner-supplied, redacted Shopify Admin screenshots establish the following without storing the screenshots or sensitive account data in git:
+
+- South Africa is the only active market. The Storefront API separately confirms ZAR as the shop and presentment currency.
+- No primary payment provider is active. PayPal is offered but inactive. Shopify reports a 2% third-party transaction fee before the provider's own processing fees.
+- Manual tax is active for South Africa at 15%. The owner reports that the business is not yet registered; this configuration is therefore unapproved for live orders until the legal entity and VAT position are confirmed with a qualified South African adviser and reflected correctly in Shopify.
+- The general shipping profile contains all products, one South African fulfilment location, a domestic zone, R150 express delivery, and an R100 standard rate. The displayed standard-rate condition requires clarification before launch.
+- A submitted shipping screenshot showed unsaved changes. It is evidence only and does not establish that those changes were intentionally saved.
+
+This evidence permits cart and checkout engineering behind a server-side launch gate. It does not permit live payment activation, VAT collection, or public checkout enablement. Remaining evidence: plan and billing ownership, provider selection and test mode, confirmed tax treatment, saved shipping-rate conditions, fulfilment workflow, installed/paid apps, policies, domain ownership, and a pre-cleanup export.
