@@ -18,15 +18,24 @@ import {
   readCartId,
   writeCartId,
 } from "@/lib/shopify/cart-session";
+import {
+  isValidCartLineId,
+  isValidCartQuantity,
+  isValidMerchandiseId,
+} from "@/lib/shopify/cart-identifiers";
 
-const gid = /^gid:\/\/shopify\/(ProductVariant|CartLine)\/[A-Za-z0-9_-]+$/;
-function safeGid(value: string) {
-  if (!gid.test(value) || value.length > 256)
+function safeMerchandiseId(value: string) {
+  if (!isValidMerchandiseId(value))
+    throw new Error("That cart request is invalid.");
+  return value;
+}
+function safeLineId(value: string) {
+  if (!isValidCartLineId(value))
     throw new Error("That cart request is invalid.");
   return value;
 }
 function safeQuantity(value: number) {
-  if (!Number.isInteger(value) || value < 1 || value > 99)
+  if (!isValidCartQuantity(value))
     throw new Error("Choose a quantity from 1 to 99.");
   return value;
 }
@@ -38,7 +47,7 @@ function refresh() {
 export async function addToCartAction(
   merchandiseId: string,
 ): Promise<CartContract> {
-  safeGid(merchandiseId);
+  safeMerchandiseId(merchandiseId);
   const cartId = await readCartId();
   let cart: ShopifyCart;
   if (cartId) {
@@ -59,7 +68,7 @@ export async function updateLineAction(lineId: string, quantity: number) {
     if (!cartId) return readCart();
     const cart = await updateCartLine(
       cartId,
-      safeGid(lineId),
+      safeLineId(lineId),
       safeQuantity(quantity),
     );
     refresh();
@@ -72,7 +81,7 @@ export async function removeLineAction(lineId: string) {
   try {
     const cartId = await readCartId();
     if (!cartId) return readCart();
-    const cart = await removeCartLine(cartId, safeGid(lineId));
+    const cart = await removeCartLine(cartId, safeLineId(lineId));
     refresh();
     return toPublicCart(cart);
   } catch {
