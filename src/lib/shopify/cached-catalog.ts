@@ -19,6 +19,28 @@ export async function getCachedProducts() {
   return getProducts();
 }
 
+export async function getCachedHomepageProducts() {
+  "use cache";
+  cacheLife({ stale: 60, revalidate: 300, expire: 900 });
+  cacheTag("shopify:products");
+  if (useE2EFixtures) return shopifyE2EProducts;
+  try {
+    return await getProducts();
+  } catch (error) {
+    if (
+      error instanceof ShopifyStorefrontError &&
+      error.code === "CONFIGURATION"
+    ) {
+      console.warn(
+        "Shopify Storefront API is not configured; rendering the homepage catalogue fallback.",
+      );
+      return [];
+    }
+    console.error("Unable to load Shopify homepage products", error);
+    return [];
+  }
+}
+
 export async function getCachedProduct(handle: string) {
   "use cache";
   cacheLife({ stale: 60, revalidate: 300, expire: 900 });

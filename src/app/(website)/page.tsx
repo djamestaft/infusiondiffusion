@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { HomeTemplate } from "@/components/templates/storefront-templates";
-import { getCachedProducts } from "@/lib/shopify/cached-catalog";
+import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
 import { readCart } from "@/lib/shopify/cart-session";
 import { toProductCard } from "@/lib/shopify/presentation";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
@@ -30,10 +30,7 @@ async function HomeContent() {
   const options = await getDynamicFetchOptions();
   const [settings, catalogue, cart] = await Promise.all([
     getSiteSettings(options),
-    getCachedProducts().catch((error) => {
-      console.error("Unable to load Shopify homepage products", error);
-      return [];
-    }),
+    getCachedHomepageProducts(),
     readCart(),
   ]);
   const products = catalogue.map(toProductCard);
