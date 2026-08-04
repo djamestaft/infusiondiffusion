@@ -15,6 +15,63 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: src/sanity/extract.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type EditorialPage = {
+  _id: string;
+  _type: "editorialPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  introduction?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  sections?: Array<{
+    heading?: string;
+    body?: string;
+    _type: "editorialSection";
+    _key: string;
+  }>;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -84,22 +141,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
 export type SanityFileAsset = {
   _id: string;
   _type: "sanity.fileAsset";
@@ -159,25 +200,21 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
+  | EditorialPage
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
   | SiteSettings
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
@@ -208,4 +245,23 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     guidanceActionLabel: string | null;
     guidanceSupportingText: string | null;
   } | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: EDITORIAL_PAGE_QUERY
+// Query: *[_type == "editorialPage" && slug.current == $slug][0]{    eyebrow,    title,    introduction,    "image": heroImage{      "src": asset->url,      alt    },    sections[]{      heading,      body    },    seoTitle,    seoDescription  }
+export type EDITORIAL_PAGE_QUERY_RESULT = {
+  eyebrow: string | null;
+  title: string | null;
+  introduction: string | null;
+  image: {
+    src: string | null;
+    alt: string | null;
+  } | null;
+  sections: Array<{
+    heading: string | null;
+    body: string | null;
+  }> | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
 } | null;

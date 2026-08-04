@@ -1,6 +1,6 @@
 # Responsive page templates
 
-Status: Figma approved by the product owner on 4 August 2026; reusable Storybook implementation complete on 4 August 2026; Home runtime integration with Sanity editorial copy and Shopify catalogue truth implemented on 4 August 2026; remaining route integration continues in the commerce phase.
+Status: Figma approved by the product owner on 4 August 2026; reusable Storybook implementation complete on 4 August 2026; Home and Fragrance Guide runtime integrations implemented on 4 August 2026; remaining route integration continues in the launch-readiness phase.
 
 ## Summary
 
@@ -84,4 +84,6 @@ South African customers should be able to understand the brand, distinguish frag
 - The ordinary page canvas uses the existing semantic `content-surface` token (Porcelain `#FCFAF5`); the selected fragrance-guidance band uses the existing warmer quiet surface role (`#F5F1E8`). Navigation owns its Ivory or Midnight mode independently of the page canvas.
 - The public Home route now composes the approved Home template with Sanity-owned editorial fields, complete editorial fallbacks, live normalized Shopify ProductCard data, a provisional live product hero image, and the current Shopify cart count.
 - Home empty-catalogue and long-editorial-content states are represented in Storybook. Missing Shopify catalogue data cannot erase the editorial journey or produce a broken image region.
-- Product photography remains provisional. Remaining Editorial route integration, final content, analytics, and production asset replacement remain pending.
+- The public Fragrance Guide route composes the approved Editorial template with a reusable Sanity `editorialPage` document, complete guide fallbacks, dynamic metadata, current navigation/cart state, and an optional provisional live Shopify image when no editorial image is published.
+- Editorial missing-image and long-content states are represented in Storybook. Missing or partial Sanity content cannot erase the practical guide or its heading structure.
+- Product photography remains provisional. About/Contact route integration, final content, analytics, homepage expansion, and production asset replacement remain pending.

@@ -29,3 +29,21 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     }
   }
 `);
+
+export const EDITORIAL_PAGE_QUERY = defineQuery(`
+  *[_type == "editorialPage" && slug.current == $slug][0]{
+    eyebrow,
+    title,
+    introduction,
+    "image": heroImage{
+      "src": asset->url,
+      alt
+    },
+    sections[]{
+      heading,
+      body
+    },
+    seoTitle,
+    seoDescription
+  }
+`);

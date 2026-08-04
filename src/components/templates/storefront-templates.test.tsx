@@ -155,4 +155,26 @@ describe("storefront templates", () => {
     );
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
+
+  it("renders editor-owned context and the live cart state", () => {
+    render(
+      <EditorialTemplate
+        eyebrow="A guide from Sanity"
+        title="Choosing home fragrance"
+        introduction="A practical introduction."
+        image={undefined}
+        sections={[]}
+        currentHref="/fragrance-guide"
+        cartCount={2}
+      />,
+    );
+
+    expect(screen.getByText("A guide from Sanity")).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Fragrance Guide", current: "page" }),
+    ).toBeVisible();
+    expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
+      2,
+    );
+  });
 });
