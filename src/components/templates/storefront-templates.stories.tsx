@@ -130,6 +130,16 @@ export const ProductDetailMobile: Story = {
     />
   ),
 };
+export const ProductDetailBrowseOnly: Story = {
+  render: () => (
+    <ProductDetailTemplate
+      product={featured}
+      description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
+      details={productDetails}
+      showPurchaseAction={false}
+    />
+  ),
+};
 
 export const Editorial: Story = {
   render: () => (

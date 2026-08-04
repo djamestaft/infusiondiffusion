@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision, and the first server-only normalized catalogue boundary is implemented against stable Storefront API `2026-07`. Payment, tax, shipping, fulfilment, app, billing, and domain readiness remain Admin-only launch blockers.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary now feeds live browse-only Collection and Product detail routes. Payment, tax, shipping, fulfilment, app, billing, domain, cart, and checkout readiness remain blockers to purchasing.
 
 ### Application foundation — complete
 
@@ -117,6 +117,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [ ] Confirm South African payment gateway, currency, tax, shipping, fulfilment, and Shopify fee requirements
 - [x] Create a Headless storefront with a local server-only private Storefront API credential; Vercel environment configuration remains pending
 - [x] Implement the normalized server-only product and collection catalogue boundary
+- [x] Connect browse-only Collection and Product detail routes to live Shopify catalogue truth
 - [ ] Design normalized product, variant, collection, cart, and money types
 - [ ] Implement server-side Shopify client and GraphQL operations
 - [ ] Build collection, product detail, cart, and checkout journeys
