@@ -106,7 +106,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Deliver the button/link system through visible Codex coordination and record interventions, review findings, and synchronization corrections
 - [ ] Extract the proven generic system into a separate project template
 
-### Commerce — architecture chosen, implementation pending
+### Commerce — catalogue and gated cart implemented; launch operations pending
 
 - [x] Shopify selected as the commerce system of record
 - [x] Headless boundary documented: Shopify handles commerce while Next.js owns all customer-facing UI
@@ -118,9 +118,9 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Create a Headless storefront with a local server-only private Storefront API credential; Vercel environment configuration remains pending
 - [x] Implement the normalized server-only product and collection catalogue boundary
 - [x] Connect browse-only Collection and Product detail routes to live Shopify catalogue truth
-- [ ] Design normalized product, variant, collection, cart, and money types
-- [ ] Implement server-side Shopify client and GraphQL operations
-- [ ] Build collection, product detail, cart, and checkout journeys
+- [x] Design normalized product, variant, collection, cart, and money types
+- [x] Implement server-side Shopify catalogue and cart GraphQL operations
+- [x] Build collection, product detail, persistent cart, and checkout-gated journeys
 - [ ] Add webhook handling and cache invalidation where required
 - [ ] Verify real inventory, discount, checkout, order, and fulfilment flows
 
@@ -257,10 +257,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Complete the Admin-only South African payment, tax, shipping, fulfilment, app, billing, and domain readiness evidence before checkout implementation.
-2. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
-3. Connect the approved Collection and Product detail routes to the normalized catalogue boundary; keep cart and checkout out of scope until operational readiness is confirmed.
-4. Design the normalized cart contract and secure cookie lifecycle after catalogue routes are proven.
+1. Complete the Admin-only South African payment, tax, shipping, fulfilment, app, billing, and domain readiness evidence before enabling hosted checkout.
+2. Verify the gated cart against the live Shopify cart contract in Preview while `SHOPIFY_CHECKOUT_ENABLED=false`.
+3. Configure and test the primary payment provider, save shipping settings, resolve tax registration, and prove a Shopify test order before enabling checkout.
+4. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 
 ## Roadmap maintenance
 

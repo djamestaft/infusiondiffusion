@@ -26,16 +26,14 @@ for (const path of ["/shop", "/products/bois-de-santal-200ml"]) {
   });
 }
 
-test("collection cards navigate to a live product without a false purchase action", async ({
-  page,
-}) => {
+test("collection cards navigate to a purchasable product", async ({ page }) => {
   await page.goto("/shop");
   await page.getByRole("link", { name: "View Bois De Santal" }).click();
   await expect(page).toHaveURL(/\/products\/bois-de-santal-200ml$/);
   await expect(
     page.getByRole("heading", { level: 1, name: "Bois De Santal" }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Add to bag" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
 });
 
 test("unknown product handles return 404", async ({ page }) => {

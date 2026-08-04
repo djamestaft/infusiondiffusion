@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 
 type TemplateNavigationProps = {
   navigationTheme?: NavigationProps["theme"];
+  cartCount?: number;
 };
 
 const sectionClass =
@@ -31,6 +32,7 @@ const sectionClass =
 
 function TemplateShell({
   navigationTheme = "ivory",
+  cartCount,
   currentHref,
   children,
 }: TemplateNavigationProps & {
@@ -39,7 +41,11 @@ function TemplateShell({
 }) {
   return (
     <div className="bg-content-surface text-content-primary min-h-dvh">
-      <Navigation theme={navigationTheme} currentHref={currentHref} />
+      <Navigation
+        theme={navigationTheme}
+        currentHref={currentHref}
+        cartCount={cartCount}
+      />
       <main>{children}</main>
     </div>
   );
@@ -156,9 +162,14 @@ export function CollectionTemplate({
   title = "The collection",
   description = "Layered home fragrance, described through the notes you will actually live with.",
   navigationTheme,
+  cartCount,
 }: CollectionTemplateProps) {
   return (
-    <TemplateShell navigationTheme={navigationTheme} currentHref="/shop">
+    <TemplateShell
+      navigationTheme={navigationTheme}
+      currentHref="/shop"
+      cartCount={cartCount}
+    >
       <section className={sectionClass}>
         <ContentHeader
           context={{ type: "eyebrow", label: "Shop" }}
@@ -207,6 +218,7 @@ export interface ProductDetailTemplateProps extends TemplateNavigationProps {
   onVariantChange?: (id: string) => void;
   onAddToCart?: () => void;
   showPurchaseAction?: boolean;
+  purchaseAction?: React.ReactNode;
 }
 
 export function ProductDetailTemplate({
@@ -218,6 +230,8 @@ export function ProductDetailTemplate({
   onVariantChange,
   onAddToCart,
   showPurchaseAction = true,
+  purchaseAction,
+  cartCount,
   navigationTheme,
 }: ProductDetailTemplateProps) {
   const soldOut = product.availability === "sold-out";
@@ -229,7 +243,7 @@ export function ProductDetailTemplate({
   );
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
-    <TemplateShell navigationTheme={navigationTheme}>
+    <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <article
         className={cn(sectionClass, "grid gap-10 lg:grid-cols-2 lg:gap-20")}
       >
@@ -298,21 +312,22 @@ export function ProductDetailTemplate({
               Select an available format to continue.
             </p>
           ) : null}
-          {showPurchaseAction ? (
-            <Button
-              type="button"
-              size="large"
-              disabled={purchaseDisabled}
-              onClick={onAddToCart}
-              className="w-full sm:w-fit"
-            >
-              {soldOut
-                ? "Sold out"
-                : selectionUnavailable
-                  ? "Choose a format"
-                  : "Add to bag"}
-            </Button>
-          ) : null}
+          {purchaseAction ??
+            (showPurchaseAction ? (
+              <Button
+                type="button"
+                size="large"
+                disabled={purchaseDisabled}
+                onClick={onAddToCart}
+                className="w-full sm:w-fit"
+              >
+                {soldOut
+                  ? "Sold out"
+                  : selectionUnavailable
+                    ? "Choose a format"
+                    : "Add to bag"}
+              </Button>
+            ) : null)}
           <dl className="border-navigation-border mt-4 divide-y border-y font-sans">
             {details.map((detail) => (
               <div
