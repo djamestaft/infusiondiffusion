@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary now feeds live browse-only Collection and Product detail routes. Payment, tax, shipping, fulfilment, app, billing, domain, cart, and checkout readiness remain blockers to purchasing.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary now feeds live Collection and Product detail routes plus a persistent cart. A Shopify test-gateway order has proved checkout handoff, South African shipping and tax calculation, approved, declined, and gateway-failure payment states, order and notification creation, inventory decrement and restock, fulfilment, full refund, and archival. A real payment provider, business and tax registration, discount verification, production credentials, policies, domain, and final launch checks remain blockers to live purchasing.
 
 ### Application foundation — complete
 
@@ -114,7 +114,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Hosted Shopify checkout selected for the initial release
 - [x] Audit the Storefront-visible existing catalogue; Admin-only apps, domains, billing, payment, tax, shipping, and fulfilment evidence remains required before checkout
 - [x] Retain and clean the existing store; no evidence justifies a duplicate store or catalogue migration
-- [ ] Confirm South African payment gateway, currency, tax, shipping, fulfilment, and Shopify fee requirements
+- [ ] Confirm the real South African payment provider and Shopify fee requirements; ZAR, domestic shipping, test tax calculation, fulfilment, and refund behavior are verified
 - [x] Create a Headless storefront with a local server-only private Storefront API credential; Vercel environment configuration remains pending
 - [x] Implement the normalized server-only product and collection catalogue boundary
 - [x] Connect browse-only Collection and Product detail routes to live Shopify catalogue truth
@@ -122,7 +122,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Implement server-side Shopify catalogue and cart GraphQL operations
 - [x] Build collection, product detail, persistent cart, and checkout-gated journeys
 - [ ] Add webhook handling and cache invalidation where required
-- [ ] Verify real inventory, discount, checkout, order, and fulfilment flows
+- [ ] Verify discounts and repeat the checkout lifecycle with the real payment provider; inventory, test checkout, order, notification, fulfilment, restock, and refund flows are verified
 
 ## Credentials and external services checklist
 
@@ -172,7 +172,7 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Secure owner access to the existing store
 - [ ] Export or otherwise safeguard current products, customers, orders, domains, and configuration before restructuring
 - [x] Complete the keep-versus-new-store catalogue audit and choose to retain the existing store
-- [ ] Configure markets, currency, taxes, shipping, payments, policies, and notifications
+- [ ] Finish payments, tax registration, policies, and notification branding; the South Africa market, ZAR checkout, domestic shipping, test tax calculation, and transactional notifications are verified
 - [x] Create the Headless Storefront API integration with minimum catalogue scopes; exact inventory quantity remains deliberately disabled
 - [ ] Keep Admin API credentials server-only and add them only when a defined integration needs them
 - [ ] Configure webhook secrets separately for Preview and Production where applicable
@@ -257,9 +257,9 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Complete the Admin-only South African payment, tax, shipping, fulfilment, app, billing, and domain readiness evidence before enabling hosted checkout.
-2. Verify the gated cart against the live Shopify cart contract in Preview while `SHOPIFY_CHECKOUT_ENABLED=false`.
-3. Configure and test the primary payment provider, save shipping settings, resolve tax registration, and prove a Shopify test order before enabling checkout.
+1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
+2. Add the Shopify Storefront credential to the correct Vercel environments and verify the gated live cart in Preview while `SHOPIFY_CHECKOUT_ENABLED=false`.
+3. Verify discounts, policies, notification branding, apps, billing, and the final domain; then repeat the proven order lifecycle with the real payment provider.
 4. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 
 ## Roadmap maintenance
