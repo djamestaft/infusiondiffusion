@@ -169,7 +169,7 @@ export function Navigation({
   return (
     <header
       className={cn(
-        "bg-navigation-surface text-navigation-text relative z-40 w-full",
+        "border-navigation-border bg-navigation-surface text-navigation-text relative z-40 w-full border-b",
         theme === "midnight" && "dark",
         className,
       )}
