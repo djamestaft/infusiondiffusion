@@ -55,6 +55,27 @@ export const HomeMobile: Story = {
     <HomeTemplate products={productCardFixtures} heroImage={featured.image} />
   ),
 };
+export const HomeEmptyCatalogue: Story = {
+  render: () => <HomeTemplate products={[]} heroImage={undefined} />,
+};
+export const HomeLongContent: Story = {
+  render: () => (
+    <HomeTemplate
+      products={productCardFixtures}
+      heroImage={featured.image}
+      content={{
+        heroTitle:
+          "Fragrance composed with clarity for every room you return to",
+        heroIntroduction:
+          "Discover considered diffusers, room sprays and candles with plainly described notes, useful format guidance and details designed for everyday South African homes.",
+        collectionTitle:
+          "A considered cabinet of atmosphere for rooms of every rhythm",
+        guidanceTitle:
+          "Choose first by the way a room is lived in, then by the feeling you want it to hold",
+      }}
+    />
+  ),
+};
 
 export const Collection: Story = {
   render: () => <CollectionTemplate products={productCardFixtures} />,

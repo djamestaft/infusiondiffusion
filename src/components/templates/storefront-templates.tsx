@@ -69,15 +69,46 @@ function ProductGrid({ products }: { products: ProductCardProps[] }) {
 export interface HomeTemplateProps extends TemplateNavigationProps {
   products: ProductCardProps[];
   heroImage: ProductCardProps["image"];
+  content?: Partial<HomeTemplateContent>;
 }
+
+export type HomeTemplateContent = {
+  heroTitle: string;
+  heroIntroduction: string;
+  heroActionLabel: string;
+  collectionTitle: string;
+  guidanceEyebrow: string;
+  guidanceTitle: string;
+  guidanceIntroduction: string;
+  guidanceActionLabel: string;
+  guidanceSupportingText: string;
+};
+
+export const fallbackHomeTemplateContent: HomeTemplateContent = {
+  heroTitle: "Fragrance, composed for the rooms you live in",
+  heroIntroduction:
+    "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
+  heroActionLabel: "Shop the collection",
+  collectionTitle: "A cabinet of atmosphere",
+  guidanceEyebrow: "Fragrance guidance",
+  guidanceTitle: "Choose by the room, then by the feeling",
+  guidanceIntroduction:
+    "Begin with how the space is used. Bright citrus and herbs lift active rooms; woods, amber and soft florals settle quieter ones.",
+  guidanceActionLabel: "Read the fragrance guide",
+  guidanceSupportingText:
+    "Every fragrance lists its notes plainly, so you can compare character and intensity before choosing a format.",
+};
 
 export function HomeTemplate({
   products,
   heroImage,
   navigationTheme,
+  cartCount,
+  content: suppliedContent,
 }: HomeTemplateProps) {
+  const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
   return (
-    <TemplateShell navigationTheme={navigationTheme}>
+    <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <section
         className={cn(
           sectionClass,
@@ -86,13 +117,13 @@ export function HomeTemplate({
         )}
       >
         <ContentHeader
-          title="Fragrance, composed for the rooms you live in"
+          title={content.heroTitle}
           headingLevel={1}
           headingTreatment="display"
-          lead="Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual."
+          lead={content.heroIntroduction}
           action={{
             type: "button",
-            label: "Shop the collection",
+            label: content.heroActionLabel,
             href: "/shop",
           }}
         />
@@ -118,9 +149,16 @@ export function HomeTemplate({
           treatment="title"
           className="mb-8"
         >
-          A cabinet of atmosphere
+          {content.collectionTitle}
         </Heading>
-        <ProductGrid products={products.slice(0, 3)} />
+        {products.length ? (
+          <ProductGrid products={products.slice(0, 3)} />
+        ) : (
+          <p className="text-content-secondary max-w-prose font-sans">
+            The collection is being prepared. Please return soon to explore the
+            first fragrances.
+          </p>
+        )}
       </section>
 
       <section className="bg-action-quiet-hover">
@@ -131,19 +169,18 @@ export function HomeTemplate({
           )}
         >
           <ContentHeader
-            context={{ type: "eyebrow", label: "Fragrance guidance" }}
-            title="Choose by the room, then by the feeling"
+            context={{ type: "eyebrow", label: content.guidanceEyebrow }}
+            title={content.guidanceTitle}
             headingLevel={2}
-            lead="Begin with how the space is used. Bright citrus and herbs lift active rooms; woods, amber and soft florals settle quieter ones."
+            lead={content.guidanceIntroduction}
             action={{
               type: "link",
-              label: "Read the fragrance guide",
+              label: content.guidanceActionLabel,
               href: "/fragrance-guide",
             }}
           />
           <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
-            Every fragrance lists its notes plainly, so you can compare
-            character and intensity before choosing a format.
+            {content.guidanceSupportingText}
           </p>
         </div>
       </section>

@@ -33,6 +33,17 @@ export type SiteSettings = {
   callToActionLabel?: string;
   seoTitle?: string;
   seoDescription?: string;
+  homepage?: {
+    heroTitle?: string;
+    heroIntroduction?: string;
+    heroActionLabel?: string;
+    collectionTitle?: string;
+    guidanceEyebrow?: string;
+    guidanceTitle?: string;
+    guidanceIntroduction?: string;
+    guidanceActionLabel?: string;
+    guidanceSupportingText?: string;
+  };
 };
 
 export type SanityImagePaletteSwatch = {
@@ -170,7 +181,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription  }
+// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText    }  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   brandName: string | null;
   eyebrow: string | null;
@@ -186,4 +197,15 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   callToActionLabel: string | null;
   seoTitle: string | null;
   seoDescription: string | null;
+  homepage: {
+    heroTitle: string | null;
+    heroIntroduction: string | null;
+    heroActionLabel: string | null;
+    collectionTitle: string | null;
+    guidanceEyebrow: string | null;
+    guidanceTitle: string | null;
+    guidanceIntroduction: string | null;
+    guidanceActionLabel: string | null;
+    guidanceSupportingText: string | null;
+  } | null;
 } | null;

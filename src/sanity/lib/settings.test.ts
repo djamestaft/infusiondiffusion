@@ -60,4 +60,19 @@ describe("site settings", () => {
       getSiteSettings({ perspective: "published", stega: false }),
     ).resolves.toEqual(fallbackSiteSettings);
   });
+
+  it("fills missing nested homepage fields without discarding editorial overrides", async () => {
+    sanityFetchMock.mockResolvedValue({
+      data: { homepage: { heroTitle: "A composed override" } },
+    });
+
+    await expect(
+      getSiteSettings({ perspective: "published", stega: false }),
+    ).resolves.toMatchObject({
+      homepage: {
+        ...fallbackSiteSettings.homepage,
+        heroTitle: "A composed override",
+      },
+    });
+  });
 });

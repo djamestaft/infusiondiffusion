@@ -15,6 +15,17 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     contactEmail,
     callToActionLabel,
     seoTitle,
-    seoDescription
+    seoDescription,
+    homepage{
+      heroTitle,
+      heroIntroduction,
+      heroActionLabel,
+      collectionTitle,
+      guidanceEyebrow,
+      guidanceTitle,
+      guidanceIntroduction,
+      guidanceActionLabel,
+      guidanceSupportingText
+    }
   }
 `);

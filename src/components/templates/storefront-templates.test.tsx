@@ -40,6 +40,41 @@ describe("storefront templates", () => {
     ).toHaveAttribute("href", "/shop");
   });
 
+  it("keeps the home journey meaningful without catalogue data", () => {
+    render(<HomeTemplate products={[]} heroImage={undefined} />);
+    expect(
+      screen.getByText("The collection is being prepared.", { exact: false }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Shop the collection" }),
+    ).toHaveAttribute("href", "/shop");
+  });
+
+  it("renders Sanity-owned homepage copy through the template contract", () => {
+    render(
+      <HomeTemplate
+        products={[]}
+        heroImage={undefined}
+        content={{
+          heroTitle: "A home title from Sanity",
+          collectionTitle: "A collection title from Sanity",
+        }}
+      />,
+    );
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: "A home title from Sanity",
+      }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "A collection title from Sanity",
+      }),
+    ).toBeVisible();
+  });
+
   it("disables the purchase primitive when a product is sold out", () => {
     render(
       <ProductDetailTemplate

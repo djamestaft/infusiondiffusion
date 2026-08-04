@@ -8,7 +8,14 @@ import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { fallbackSiteSettings, type SiteSettings } from "@/sanity/types";
 
 function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
-  return { ...fallbackSiteSettings, ...(settings ?? {}) };
+  return {
+    ...fallbackSiteSettings,
+    ...(settings ?? {}),
+    homepage: {
+      ...fallbackSiteSettings.homepage,
+      ...(settings?.homepage ?? {}),
+    },
+  };
 }
 
 export async function getSiteSettings(
