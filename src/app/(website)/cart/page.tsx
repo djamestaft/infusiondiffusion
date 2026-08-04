@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { CartPage } from "@/components/cart/cart-page";
-import { Navigation } from "@/components/navigation";
+import { CartShell } from "@/components/cart/cart-shell";
 import {
   checkoutAction,
   removeLineAction,
@@ -16,16 +15,13 @@ export const metadata: Metadata = {
 async function CartContent() {
   const cart = await readCart();
   return (
-    <div className="bg-content-surface text-content-primary min-h-dvh">
-      <Navigation cartCount={cart.totalQuantity} cartHref="/cart" />
-      <CartPage
-        initialCart={cart}
-        checkoutEnabled={checkoutIsEnabled()}
-        updateLine={updateLineAction}
-        removeLine={removeLineAction}
-        checkoutAction={checkoutAction}
-      />
-    </div>
+    <CartShell
+      initialCart={cart}
+      checkoutEnabled={checkoutIsEnabled()}
+      updateLine={updateLineAction}
+      removeLine={removeLineAction}
+      checkoutAction={checkoutAction}
+    />
   );
 }
 

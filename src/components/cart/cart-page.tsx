@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import type { CartContract } from "@/lib/shopify/cart-contract";
 import { CartLine } from "@/components/cart/cart-line";
 import { CartSummary } from "@/components/cart/cart-summary";
+import { withOptimisticQuantity } from "@/components/cart/optimistic-cart";
 import { Button } from "@/components/ui/button";
 
 export function CartPage({
@@ -12,27 +13,43 @@ export function CartPage({
   updateLine,
   removeLine,
   checkoutAction,
+  onCartChange,
 }: {
   initialCart: CartContract;
   checkoutEnabled: boolean;
   updateLine: (lineId: string, quantity: number) => Promise<CartContract>;
   removeLine: (lineId: string) => Promise<CartContract>;
   checkoutAction: () => Promise<void>;
+  onCartChange?: (cart: CartContract) => void;
 }) {
   const [cart, setCart] = useState(initialCart);
   const [operationError, setOperationError] = useState<string>();
   const [pending, startTransition] = useTransition();
-  const run = (work: () => Promise<CartContract>) =>
+  const run = (
+    lineId: string,
+    quantity: number,
+    work: () => Promise<CartContract>,
+  ) => {
+    const confirmedCart = cart;
+    const optimisticCart = withOptimisticQuantity(cart, lineId, quantity);
+    setOperationError(undefined);
+    setCart(optimisticCart);
+    onCartChange?.(optimisticCart);
+
     startTransition(async () => {
       try {
-        setOperationError(undefined);
-        setCart(await work());
+        const nextCart = await work();
+        setCart(nextCart);
+        onCartChange?.(nextCart);
       } catch {
+        setCart(confirmedCart);
+        onCartChange?.(confirmedCart);
         setOperationError(
           "We could not update your bag. Your last confirmed selection is still here.",
         );
       }
     });
+  };
   if (!cart.lines.length)
     return (
       <main className="mx-auto min-h-[70dvh] w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
@@ -79,10 +96,10 @@ export function CartPage({
               pending={pending}
               onQuantityChange={(quantity) =>
                 quantity < 1
-                  ? run(() => removeLine(line.id))
-                  : run(() => updateLine(line.id, quantity))
+                  ? run(line.id, 0, () => removeLine(line.id))
+                  : run(line.id, quantity, () => updateLine(line.id, quantity))
               }
-              onRemove={() => run(() => removeLine(line.id))}
+              onRemove={() => run(line.id, 0, () => removeLine(line.id))}
             />
           ))}
         </div>
