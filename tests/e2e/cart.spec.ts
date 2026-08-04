@@ -35,6 +35,12 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
   ).toEqual([]);
   await page.getByRole("button", { name: /Increase Bois De Santal/ }).click();
   await expect(page.getByLabel("Quantity 3")).toBeVisible();
+  await expect(
+    page.getByText("3 items held for this visit.", { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.locator('a[aria-label="Cart, 3 items"]').first(),
+  ).toBeAttached();
   await page.reload();
   await expect(page.getByLabel("Quantity 3")).toBeVisible();
   await page.setViewportSize({ width: 320, height: 568 });

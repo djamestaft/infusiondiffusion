@@ -69,6 +69,7 @@ export function CartLine({
             <Button
               size="icon"
               variant="secondary"
+              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground disabled:bg-transparent"
               aria-label={`Decrease ${line.title} quantity`}
               disabled={pending}
               onClick={() => onQuantityChange?.(line.quantity - 1)}
@@ -84,6 +85,7 @@ export function CartLine({
             <Button
               size="icon"
               variant="secondary"
+              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground disabled:bg-transparent"
               aria-label={`Increase ${line.title} quantity`}
               disabled={pending || !line.available}
               onClick={() => onQuantityChange?.(line.quantity + 1)}
@@ -92,7 +94,7 @@ export function CartLine({
             </Button>
             <Button
               variant="quiet"
-              className="col-span-3 w-fit px-0 underline"
+              className="disabled:text-action-quiet-foreground col-span-3 w-fit px-0 underline disabled:bg-transparent"
               disabled={pending}
               onClick={onRemove}
             >
