@@ -74,6 +74,7 @@ export function ProductCard({
             alt={image.alt}
             fill
             priority={imagePriority}
+            loading={imagePriority ? "eager" : "lazy"}
             sizes="(max-width: 767px) calc((100vw - 56px) / 2), 284px"
             className="object-cover"
             onError={() => setImageFailed(true)}

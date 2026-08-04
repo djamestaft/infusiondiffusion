@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T23:50:00+02:00",
+  "generatedAt": "2026-08-04T14:00:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -278,6 +278,13 @@
       "description": "Static inline information, success, warning, or error feedback with written meaning and a monochrome vector icon.",
       "html": "<div class=\"ds-feedback-alert\"><svg aria-hidden=\"true\"></svg><div><strong>Saved successfully</strong><p>Your delivery preference has been updated.</p></div></div>",
       "css": ".ds-feedback-alert { display: grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 20px 20px 20px 24px; border: 1px solid var(--overlay-border); border-left-width: 1px; border-radius: 4px; background: var(--feedback-info-surface); color: var(--overlay-text); } .ds-feedback-alert[data-tone=success] { background: var(--feedback-success-surface); } .ds-feedback-alert[data-tone=warning] { background: var(--feedback-warning-surface); } .ds-feedback-alert[data-tone=error] { background: var(--feedback-error-surface); }"
+    },
+    {
+      "name": "StorefrontTemplates",
+      "kind": "custom",
+      "description": "Approved responsive Home, Collection, Product detail, and Editorial compositions with independently selectable Ivory or Midnight Navigation, a Porcelain semantic canvas, and provisional product fixtures.",
+      "html": "<main class=\"ds-storefront-template\"><section>Approved content composed from design-system primitives</section></main>",
+      "css": ".ds-storefront-template { min-height: 100dvh; background: var(--content-surface); color: var(--content-primary); } .ds-storefront-template > section { width: min(100% - 40px, 1280px); margin-inline: auto; padding-block: 64px; } @media (min-width: 1024px) { .ds-storefront-template > section { width: min(100% - 96px, 1280px); padding-block: 96px; } }"
     }
   ],
   "narrative": {

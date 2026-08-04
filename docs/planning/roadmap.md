@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 3 August 2026
+Last updated: 4 August 2026
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. AnnouncementBar, Button, TextLink, Input, Textarea, Field, ProductCard, Navigation, PriceDisplay, CommerceStatus, Dialog, Drawer, AlertDialog, FeedbackAlert, Badge, Eyebrow, Heading, Lead, and ContentHeader have completed approved Figma-to-Storybook-to-runtime delivery. The approved Figma Style Guide remains the canonical visual foundation; the planned Phase 4 core component inventory is complete, the editable `LogoTextLockup` is the approved production storefront mark, and responsive page templates remain pending. The ornamental vector logo master is deferred and does not block the current release.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive Home, Collection, Product detail, and Editorial templates now compose the completed primitive inventory in Storybook across desktop/mobile and Ivory/Midnight Navigation treatments. The editable `LogoTextLockup` remains the approved production storefront mark, while the ornamental vector logo master is deferred and does not block the current release.
 
 ### Application foundation — complete
 
@@ -65,7 +65,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Confirm the editable LogoTextLockup as the production storefront mark
 - [ ] Obtain the ornamental vector logo master and licence record only if future approved use requires it — deferred, not a release blocker
 - [x] Core component inventory designed in Figma and represented in Storybook
-- [ ] Responsive page templates approved before storefront implementation
+- [x] Responsive Home, Collection, Product detail, and Editorial templates approved in Figma and implemented as reusable Storybook compositions
 
 ### Quality and delivery — CI, Preview, and Production operational
 
@@ -255,9 +255,9 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 ## Immediate next actions
 
-1. Define and approve responsive page templates before storefront implementation.
-2. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
-3. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
+1. Audit the existing Shopify store before creating, deleting, or restructuring commerce data.
+2. Confirm South African payments, currency, tax, shipping, fulfilment, and Shopify fee requirements before checkout implementation.
+3. Design normalized product, variant, collection, cart, and money types against the audited store.
 4. Revisit the ornamental vector logo master and licence record only if a future approved use brings it back into scope.
 
 ## Roadmap maintenance
