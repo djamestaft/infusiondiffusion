@@ -15,7 +15,7 @@ The website and Studio use separate App Router branches so Sanity live content n
 
 ## Commerce phase boundary
 
-The Storefront API will be wrapped under a server-side `src/lib/shopify` boundary. UI code receives normalized application types rather than raw GraphQL response objects. Storefront credentials use the minimum required scopes. Admin API access is reserved for authenticated server integrations and webhooks.
+The Storefront API is wrapped under a server-only `src/lib/shopify` boundary pinned to an explicit stable API version. UI code receives normalized application types rather than raw GraphQL response objects. The Headless private Storefront token remains server-only, never uses a `NEXT_PUBLIC_*` name, and uses minimum required scopes. Admin API access is reserved for separately justified authenticated server integrations and webhooks.
 
 Sanity documents may store Shopify product GIDs for editorial relationships. They must never copy mutable price, inventory, discount, or order state.
 
