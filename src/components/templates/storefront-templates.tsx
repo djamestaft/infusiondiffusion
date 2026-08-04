@@ -206,6 +206,7 @@ export interface ProductDetailTemplateProps extends TemplateNavigationProps {
   selectedVariantId?: string;
   onVariantChange?: (id: string) => void;
   onAddToCart?: () => void;
+  showPurchaseAction?: boolean;
 }
 
 export function ProductDetailTemplate({
@@ -216,6 +217,7 @@ export function ProductDetailTemplate({
   selectedVariantId,
   onVariantChange,
   onAddToCart,
+  showPurchaseAction = true,
   navigationTheme,
 }: ProductDetailTemplateProps) {
   const soldOut = product.availability === "sold-out";
@@ -296,19 +298,21 @@ export function ProductDetailTemplate({
               Select an available format to continue.
             </p>
           ) : null}
-          <Button
-            type="button"
-            size="large"
-            disabled={purchaseDisabled}
-            onClick={onAddToCart}
-            className="w-full sm:w-fit"
-          >
-            {soldOut
-              ? "Sold out"
-              : selectionUnavailable
-                ? "Choose a format"
-                : "Add to bag"}
-          </Button>
+          {showPurchaseAction ? (
+            <Button
+              type="button"
+              size="large"
+              disabled={purchaseDisabled}
+              onClick={onAddToCart}
+              className="w-full sm:w-fit"
+            >
+              {soldOut
+                ? "Sold out"
+                : selectionUnavailable
+                  ? "Choose a format"
+                  : "Add to bag"}
+            </Button>
+          ) : null}
           <dl className="border-navigation-border mt-4 divide-y border-y font-sans">
             {details.map((detail) => (
               <div
