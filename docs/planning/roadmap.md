@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook, and the public Home route now combines the approved composition with Sanity editorial ownership and live Shopify catalogue truth. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary also feeds live Collection and Product detail routes plus a persistent cart. A Shopify test-gateway order has proved checkout handoff, South African shipping and tax calculation, approved, declined, and gateway-failure payment states, order and notification creation, inventory decrement and restock, fulfilment, full refund, and archival. A real payment provider, business and tax registration, production content and assets, policies, domain, and final launch checks remain blockers to live purchasing; discount verification is deferred by product-owner decision.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook; the public Home route combines the approved composition with Sanity editorial ownership and live Shopify catalogue truth, and the Fragrance Guide now proves a reusable Sanity-managed editorial-page model. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary also feeds live Collection and Product detail routes plus a persistent cart. A Shopify test-gateway order has proved checkout handoff, South African shipping and tax calculation, approved, declined, and gateway-failure payment states, order and notification creation, inventory decrement and restock, fulfilment, full refund, and archival. A real payment provider, business and tax registration, production content and assets, policies, domain, and final launch checks remain blockers to live purchasing; discount verification is deferred by product-owner decision.
 
 ### Application foundation — complete
 
@@ -45,6 +45,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] CORS and embedded Studio host configuration completed
 - [x] Initial site settings document populated
 - [x] Draft, published, Preview, Production, and cache-invalidation flows verified end to end
+- [x] Add a reusable Sanity editorial-page schema and connect the Fragrance Guide route with safe fallbacks
 
 ### Design system — approved foundation, runtime migration in progress
 
@@ -259,9 +260,10 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 ## Immediate next actions
 
 1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
-2. Review the integrated Home route on protected Vercel Preview, then publish or refine the additive homepage fields in Sanity.
-3. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
-4. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
+2. Review the integrated Fragrance Guide on protected Vercel Preview, then create and publish its `fragrance-guide` editorial document in Sanity.
+3. Shape and implement the approved expansion of meaningful, Sanity-managed homepage content.
+4. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
+5. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 
 ## Roadmap maintenance
 

@@ -383,6 +383,7 @@ export function ProductDetailTemplate({
 }
 
 export interface EditorialTemplateProps extends TemplateNavigationProps {
+  eyebrow?: string;
   title: string;
   introduction: string;
   image: ProductCardProps["image"];
@@ -391,19 +392,25 @@ export interface EditorialTemplateProps extends TemplateNavigationProps {
 }
 
 export function EditorialTemplate({
+  eyebrow = "Fragrance journal",
   title,
   introduction,
   image,
   sections,
   currentHref,
   navigationTheme,
+  cartCount,
 }: EditorialTemplateProps) {
   return (
-    <TemplateShell navigationTheme={navigationTheme} currentHref={currentHref}>
+    <TemplateShell
+      navigationTheme={navigationTheme}
+      currentHref={currentHref}
+      cartCount={cartCount}
+    >
       <article>
         <header className={sectionClass}>
           <ContentHeader
-            context={{ type: "eyebrow", label: "Fragrance journal" }}
+            context={{ type: "eyebrow", label: eyebrow }}
             title={title}
             headingLevel={1}
             headingTreatment="display"

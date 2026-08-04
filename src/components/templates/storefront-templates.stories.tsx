@@ -165,6 +165,7 @@ export const ProductDetailBrowseOnly: Story = {
 export const Editorial: Story = {
   render: () => (
     <EditorialTemplate
+      eyebrow="Fragrance guide"
       title="A practical guide to choosing home fragrance"
       introduction="Choose a scent by paying attention to the room, the time of day and the atmosphere you want to return to."
       image={featured.image}
@@ -182,12 +183,37 @@ export const Editorial: Story = {
           body: "A diffuser gives a steady background. A candle creates a shorter ritual, and a room spray offers an immediate reset.",
         },
       ]}
+      currentHref="/fragrance-guide"
+      cartCount={2}
     />
   ),
 };
 export const EditorialMobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: Editorial.render,
+};
+export const EditorialLongContentMobile: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: () => (
+    <EditorialTemplate
+      eyebrow="Fragrance guide"
+      title="A considered guide to choosing fragrance for active rooms, quiet rooms and every ritual between them"
+      introduction="A deliberately extended introduction proves that editor-managed copy can wrap naturally on a narrow screen without losing its reading order or pushing content outside the viewport."
+      image={undefined}
+      sections={[
+        {
+          heading: "Begin with the way the room is used throughout the day",
+          body: "Long-form editorial content remains readable at a useful measure.\n\nA second paragraph also preserves the editor's intended separation without requiring a custom page layout.",
+        },
+        {
+          heading: "Then choose the atmosphere you want to return to",
+          body: "The composition accepts multiple ordered sections and remains meaningful when no optional hero image has been published.",
+        },
+      ]}
+      currentHref="/fragrance-guide"
+      cartCount={12}
+    />
+  ),
 };
 export const EditorialMidnightNavigation: Story = {
   render: () => (
