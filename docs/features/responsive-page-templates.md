@@ -1,6 +1,6 @@
 # Responsive page templates
 
-Status: Figma approved by the product owner on 4 August 2026; reusable Storybook implementation complete on 4 August 2026; production route and live-data integration remain in the commerce phase.
+Status: Figma approved by the product owner on 4 August 2026; reusable Storybook implementation complete on 4 August 2026; Home runtime integration with Sanity editorial copy and Shopify catalogue truth implemented on 4 August 2026; remaining route integration continues in the commerce phase.
 
 ## Summary
 
@@ -82,4 +82,6 @@ South African customers should be able to understand the brand, distinguish frag
 - `Templates/Storefront` in Storybook represents Home, Collection, Product detail, and Editorial at desktop and mobile widths, with both Navigation modes and meaningful empty, sale, low-stock, sold-out, and unavailable-selection states.
 - The templates compose the existing `Navigation`, `Button`, `TextLink`, `ProductCard`, `PriceDisplay`, `CommerceStatus`, `Eyebrow`, `Heading`, `Lead`, and `ContentHeader` primitives. No duplicate low-level control was introduced.
 - The ordinary page canvas uses the existing semantic `content-surface` token (Porcelain `#FCFAF5`); the selected fragrance-guidance band uses the existing warmer quiet surface role (`#F5F1E8`). Navigation owns its Ivory or Midnight mode independently of the page canvas.
-- Product fixtures and imagery remain provisional. Production routes, Shopify fetching, Sanity schemas, cart behavior, and checkout remain intentionally out of scope.
+- The public Home route now composes the approved Home template with Sanity-owned editorial fields, complete editorial fallbacks, live normalized Shopify ProductCard data, a provisional live product hero image, and the current Shopify cart count.
+- Home empty-catalogue and long-editorial-content states are represented in Storybook. Missing Shopify catalogue data cannot erase the editorial journey or produce a broken image region.
+- Product photography remains provisional. Remaining Editorial route integration, final content, analytics, and production asset replacement remain pending.

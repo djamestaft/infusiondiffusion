@@ -19,7 +19,7 @@ The intended ownership model is:
 
 ## Current state
 
-The repository has a proven agentic delivery baseline. Protected `main` runs green CI, the Sanity-managed holding page is live on Vercel at `https://infusion-diffusion.vercel.app`, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary now feeds live Collection and Product detail routes plus a persistent cart. A Shopify test-gateway order has proved checkout handoff, South African shipping and tax calculation, approved, declined, and gateway-failure payment states, order and notification creation, inventory decrement and restock, fulfilment, full refund, and archival. A real payment provider, business and tax registration, discount verification, production credentials, policies, domain, and final launch checks remain blockers to live purchasing.
+The repository has a proven agentic delivery baseline. Protected `main` runs green CI, and the pull-request, Preview, Production, Studio, draft, publish, and cache-invalidation paths have been proved end to end. The approved responsive templates compose the completed primitive inventory in Storybook, and the public Home route now combines the approved composition with Sanity editorial ownership and live Shopify catalogue truth. The existing Shopify store has completed a read-only Storefront catalogue audit with a keep-and-clean decision; the normalized catalogue boundary also feeds live Collection and Product detail routes plus a persistent cart. A Shopify test-gateway order has proved checkout handoff, South African shipping and tax calculation, approved, declined, and gateway-failure payment states, order and notification creation, inventory decrement and restock, fulfilment, full refund, and archival. A real payment provider, business and tax registration, production content and assets, policies, domain, and final launch checks remain blockers to live purchasing; discount verification is deferred by product-owner decision.
 
 ### Application foundation — complete
 
@@ -118,6 +118,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Create a Headless storefront and configure the server-only Storefront API credential for local, Vercel Preview, and Vercel Production environments
 - [x] Implement the normalized server-only product and collection catalogue boundary
 - [x] Connect browse-only Collection and Product detail routes to live Shopify catalogue truth
+- [x] Replace the holding homepage with the approved Home template, Sanity editorial fields, and live Shopify catalogue truth
 - [x] Design normalized product, variant, collection, cart, and money types
 - [x] Implement server-side Shopify catalogue and cart GraphQL operations
 - [x] Build collection, product detail, persistent cart, and checkout-gated journeys
@@ -258,8 +259,8 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 ## Immediate next actions
 
 1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
-2. Authenticate to a protected Vercel Preview and smoke-test the live cart; Preview and Production Shopify variables are scoped, and the Production cart is verified with `SHOPIFY_CHECKOUT_ENABLED=false`.
-3. Verify discounts, policies, notification branding, apps, billing, and the final domain; then repeat the proven order lifecycle with the real payment provider.
+2. Review the integrated Home route on protected Vercel Preview, then publish or refine the additive homepage fields in Sanity.
+3. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
 4. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 
 ## Roadmap maintenance

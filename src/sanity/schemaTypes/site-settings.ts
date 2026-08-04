@@ -87,6 +87,73 @@ export const siteSettings = defineType({
       rows: 3,
       validation: (rule) => rule.max(160),
     }),
+    defineField({
+      name: "homepage",
+      title: "Homepage",
+      type: "object",
+      description:
+        "Editorial copy for the public homepage. Shopify continues to own products, prices, and availability.",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: "heroTitle",
+          title: "Hero title",
+          type: "string",
+          validation: (rule) => rule.max(90),
+        }),
+        defineField({
+          name: "heroIntroduction",
+          title: "Hero introduction",
+          type: "text",
+          rows: 3,
+          validation: (rule) => rule.max(240),
+        }),
+        defineField({
+          name: "heroActionLabel",
+          title: "Hero action label",
+          type: "string",
+          validation: (rule) => rule.max(30),
+        }),
+        defineField({
+          name: "collectionTitle",
+          title: "Featured collection title",
+          type: "string",
+          validation: (rule) => rule.max(70),
+        }),
+        defineField({
+          name: "guidanceEyebrow",
+          title: "Guidance eyebrow",
+          type: "string",
+          validation: (rule) => rule.max(30),
+        }),
+        defineField({
+          name: "guidanceTitle",
+          title: "Guidance title",
+          type: "string",
+          validation: (rule) => rule.max(90),
+        }),
+        defineField({
+          name: "guidanceIntroduction",
+          title: "Guidance introduction",
+          type: "text",
+          rows: 3,
+          validation: (rule) => rule.max(240),
+        }),
+        defineField({
+          name: "guidanceActionLabel",
+          title: "Guidance action label",
+          type: "string",
+          validation: (rule) => rule.max(40),
+        }),
+        defineField({
+          name: "guidanceSupportingText",
+          title: "Guidance supporting text",
+          type: "text",
+          rows: 3,
+          validation: (rule) => rule.max(220),
+        }),
+      ],
+    }),
   ],
   preview: { select: { title: "brandName", subtitle: "headline" } },
 });
