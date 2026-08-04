@@ -115,7 +115,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Audit the Storefront-visible existing catalogue; Admin-only apps, domains, billing, payment, tax, shipping, and fulfilment evidence remains required before checkout
 - [x] Retain and clean the existing store; no evidence justifies a duplicate store or catalogue migration
 - [ ] Confirm the real South African payment provider and Shopify fee requirements; ZAR, domestic shipping, test tax calculation, fulfilment, and refund behavior are verified
-- [x] Create a Headless storefront with a local server-only private Storefront API credential; Vercel environment configuration remains pending
+- [x] Create a Headless storefront and configure the server-only Storefront API credential for local, Vercel Preview, and Vercel Production environments
 - [x] Implement the normalized server-only product and collection catalogue boundary
 - [x] Connect browse-only Collection and Product detail routes to live Shopify catalogue truth
 - [x] Design normalized product, variant, collection, cart, and money types
@@ -258,7 +258,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 ## Immediate next actions
 
 1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
-2. Add the Shopify Storefront credential to the correct Vercel environments and verify the gated live cart in Preview while `SHOPIFY_CHECKOUT_ENABLED=false`.
+2. Authenticate to a protected Vercel Preview and smoke-test the live cart; Preview and Production Shopify variables are scoped, and the Production cart is verified with `SHOPIFY_CHECKOUT_ENABLED=false`.
 3. Verify discounts, policies, notification branding, apps, billing, and the final domain; then repeat the proven order lifecycle with the real payment provider.
 4. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 
