@@ -81,6 +81,7 @@
   --color-navigation-text: var(--navigation-text);
   --color-navigation-muted: var(--navigation-muted);
   --color-navigation-accent: var(--navigation-accent);
+  --color-navigation-divider: var(--navigation-divider);
   --color-navigation-border: var(--navigation-border);
   --color-navigation-focus: var(--navigation-focus);
   --color-overlay-scrim: var(--overlay-scrim);
@@ -228,10 +229,11 @@
   --commerce-status-sold-out-text: #fcfaf5;
   --commerce-status-pre-order-surface: #633f32;
   --commerce-status-pre-order-text: #fcfaf5;
-  --navigation-surface: #fcfaf5;
+  --navigation-surface: #f5f1e8;
   --navigation-text: #11110f;
   --navigation-muted: #3c3b35;
   --navigation-accent: #735716;
+  --navigation-divider: #c5a447;
   --navigation-border: #e8e2d5;
   --navigation-focus: #c5a447;
   --overlay-scrim: rgb(17 17 15 / 72%);
@@ -369,6 +371,7 @@
   --navigation-text: #fcfaf5;
   --navigation-muted: #e8e2d5;
   --navigation-accent: #c5a447;
+  --navigation-divider: #c5a447;
   --navigation-border: #3c3b35;
   --navigation-focus: #ddc77f;
   --overlay-scrim: rgb(17 17 15 / 78%);

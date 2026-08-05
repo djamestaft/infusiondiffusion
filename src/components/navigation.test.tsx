@@ -8,11 +8,15 @@ afterEach(cleanup);
 
 describe("Navigation", () => {
   it("renders the approved destinations and commerce utilities", () => {
-    render(<Navigation currentHref="/shop" />);
+    const { container } = render(<Navigation currentHref="/shop" />);
 
     expect(
       screen.getByRole("navigation", { name: "Primary" }),
     ).toBeInTheDocument();
+    expect(container.querySelector("header")).toHaveClass(
+      "bg-navigation-surface",
+      "border-navigation-divider",
+    );
     expect(screen.getAllByRole("link", { name: "Shop" })[0]).toHaveAttribute(
       "aria-current",
       "page",
