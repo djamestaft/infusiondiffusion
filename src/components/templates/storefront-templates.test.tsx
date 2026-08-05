@@ -25,8 +25,13 @@ describe("storefront templates", () => {
     );
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(3);
     expect(
-      screen.getByRole("link", { name: "Shop the collection" }),
-    ).toHaveAttribute("href", "/shop");
+      screen.getAllByRole("link", { name: "Shop the collection" }),
+    ).toHaveLength(2);
+    expect(
+      screen.getByRole("heading", { name: "Born from fragrance" }),
+    ).toBeVisible();
+    expect(screen.getByText(/Jacqui Kirchmann/)).toBeVisible();
+    expect(screen.getByText(/8–12 months/)).toBeVisible();
   });
 
   it("gives an empty collection a useful route back", () => {
@@ -46,8 +51,8 @@ describe("storefront templates", () => {
       screen.getByText("The collection is being prepared.", { exact: false }),
     ).toBeVisible();
     expect(
-      screen.getByRole("link", { name: "Shop the collection" }),
-    ).toHaveAttribute("href", "/shop");
+      screen.getAllByRole("link", { name: "Shop the collection" }),
+    ).toHaveLength(2);
   });
 
   it("renders Sanity-owned homepage copy through the template contract", () => {
@@ -73,6 +78,27 @@ describe("storefront templates", () => {
         name: "A collection title from Sanity",
       }),
     ).toBeVisible();
+  });
+
+  it("lets editors hide optional homepage storytelling sections", () => {
+    render(
+      <HomeTemplate
+        products={[]}
+        heroImage={undefined}
+        content={{
+          showServiceReassurance: false,
+          showFounderStory: false,
+          showLongevity: false,
+          showCollectionInvitation: false,
+        }}
+      />,
+    );
+
+    expect(screen.queryByText("Born from fragrance")).not.toBeInTheDocument();
+    expect(screen.queryByText(/8–12 months/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Six fragrances. A roomful of possibility."),
+    ).not.toBeInTheDocument();
   });
 
   it("disables the purchase primitive when a product is sold out", () => {

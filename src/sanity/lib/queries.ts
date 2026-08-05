@@ -25,7 +25,25 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       guidanceTitle,
       guidanceIntroduction,
       guidanceActionLabel,
-      guidanceSupportingText
+      guidanceSupportingText,
+      "showServiceReassurance": coalesce(showServiceReassurance, true),
+      serviceTitle,
+      serviceIntroduction,
+      "showFounderStory": coalesce(showFounderStory, true),
+      founderTitle,
+      founderStory,
+      "founderImage": founderImage{
+        "src": asset->url,
+        alt
+      },
+      "showLongevity": coalesce(showLongevity, true),
+      longevityTitle,
+      longevityIntroduction,
+      longevityConditions,
+      "showCollectionInvitation": coalesce(showCollectionInvitation, true),
+      collectionInvitationTitle,
+      collectionInvitationIntroduction,
+      collectionInvitationActionLabel
     }
   }
 `);

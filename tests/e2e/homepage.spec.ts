@@ -15,13 +15,21 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
       name: "Fragrance, composed for the rooms you live in",
     }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: "Shop the collection" }),
-  ).toHaveAttribute("href", "/shop");
+  const collectionLinks = page.getByRole("link", {
+    name: "Shop the collection",
+  });
+  await expect(collectionLinks).toHaveCount(2);
+  await expect(collectionLinks.first()).toHaveAttribute("href", "/shop");
+  await expect(collectionLinks.last()).toHaveAttribute("href", "/shop");
   await expect(page.getByText(/R\s?(395|430)/).first()).toBeVisible();
   await expect(
     page.getByRole("link", { name: /^View / }).first(),
   ).toHaveAttribute("href", /\/products\//);
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Born from fragrance" }),
+  ).toBeVisible();
+  await expect(page.getByText(/8–12 months/)).toBeVisible();
+  await expect(page.getByText(/Jacqui Kirchmann/)).toBeVisible();
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(

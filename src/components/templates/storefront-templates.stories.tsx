@@ -72,6 +72,27 @@ export const HomeLongContent: Story = {
           "A considered cabinet of atmosphere for rooms of every rhythm",
         guidanceTitle:
           "Choose first by the way a room is lived in, then by the feeling you want it to hold",
+        founderTitle:
+          "Born from an enduring fascination with the way fragrance changes a room",
+        founderStory:
+          "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling. More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances.\n\nCreated with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts, each fragrance is composed with passion, elegance and soul for rooms that are actively lived in.",
+        longevityConditions:
+          "Room temperature, airflow, vessel placement and how often the reeds are turned will shape the pace of diffusion. Warmer, airier rooms may diffuse more quickly, while quieter conditions support a slower release over time.",
+      }}
+    />
+  ),
+};
+
+export const HomeEditorialSectionsHidden: Story = {
+  render: () => (
+    <HomeTemplate
+      products={productCardFixtures}
+      heroImage={featured.image}
+      content={{
+        showServiceReassurance: false,
+        showFounderStory: false,
+        showLongevity: false,
+        showCollectionInvitation: false,
       }}
     />
   ),

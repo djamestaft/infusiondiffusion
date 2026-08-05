@@ -30,7 +30,7 @@ Customers can open the Fragrance Guide from the homepage or primary navigation a
 - Publishing or replacing final editorial photography
 - About and Contact runtime routes
 - Rich portable-text blocks, embedded products, filtering, analytics, or motion
-- Homepage content expansion, which is the next separately shaped UI milestone
+- Homepage content expansion, which is delivered through the separate `siteSettings.homepage` contract
 
 ## Rollback
 

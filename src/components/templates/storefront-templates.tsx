@@ -69,6 +69,7 @@ function ProductGrid({ products }: { products: ProductCardProps[] }) {
 export interface HomeTemplateProps extends TemplateNavigationProps {
   products: ProductCardProps[];
   heroImage: ProductCardProps["image"];
+  founderImage?: ProductCardProps["image"];
   content?: Partial<HomeTemplateContent>;
 }
 
@@ -82,6 +83,20 @@ export type HomeTemplateContent = {
   guidanceIntroduction: string;
   guidanceActionLabel: string;
   guidanceSupportingText: string;
+  showServiceReassurance: boolean;
+  serviceTitle: string;
+  serviceIntroduction: string;
+  showFounderStory: boolean;
+  founderTitle: string;
+  founderStory: string;
+  showLongevity: boolean;
+  longevityTitle: string;
+  longevityIntroduction: string;
+  longevityConditions: string;
+  showCollectionInvitation: boolean;
+  collectionInvitationTitle: string;
+  collectionInvitationIntroduction: string;
+  collectionInvitationActionLabel: string;
 };
 
 export const fallbackHomeTemplateContent: HomeTemplateContent = {
@@ -97,16 +112,37 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
   guidanceActionLabel: "Read the fragrance guide",
   guidanceSupportingText:
     "Every fragrance lists its notes plainly, so you can compare character and intensity before choosing a format.",
+  showServiceReassurance: true,
+  serviceTitle: "Made meaningful by the details",
+  serviceIntroduction:
+    "Clear care guidance, transparent delivery expectations and dependable stock information accompany every product.",
+  showFounderStory: true,
+  founderTitle: "Born from fragrance",
+  founderStory:
+    "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling. More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances.\n\nCreated with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts, each fragrance is composed with passion, elegance and soul.",
+  showLongevity: true,
+  longevityTitle: "Made to linger",
+  longevityIntroduction:
+    "Our 200ml reed diffusers are designed to fragrance a room for approximately 8–12 months under normal use.",
+  longevityConditions:
+    "Room temperature, airflow and how often the reeds are turned will shape the pace of diffusion. A slower ritual lets the fragrance become part of the room rather than simply passing through it.",
+  showCollectionInvitation: true,
+  collectionInvitationTitle: "Six fragrances. A roomful of possibility.",
+  collectionInvitationIntroduction:
+    "Each fragrance was chosen for the atmosphere it creates—warmth, brightness, stillness, memory. Find the one that feels at home in yours.",
+  collectionInvitationActionLabel: "Shop the collection",
 };
 
 export function HomeTemplate({
   products,
   heroImage,
+  founderImage,
   navigationTheme,
   cartCount,
   content: suppliedContent,
 }: HomeTemplateProps) {
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
+  const storyImage = founderImage ?? heroImage;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <section
@@ -184,6 +220,90 @@ export function HomeTemplate({
           </p>
         </div>
       </section>
+
+      {content.showServiceReassurance ? (
+        <section className={sectionClass} aria-labelledby="home-service-title">
+          <Heading id="home-service-title" level={2} treatment="title">
+            {content.serviceTitle}
+          </Heading>
+          <p className="text-content-secondary mt-4 max-w-2xl font-sans text-base leading-7">
+            {content.serviceIntroduction}
+          </p>
+        </section>
+      ) : null}
+
+      {content.showFounderStory ? (
+        <section className="dark bg-content-surface text-content-primary">
+          <div
+            className={cn(
+              sectionClass,
+              "grid gap-12",
+              storyImage && "lg:grid-cols-2 lg:items-center",
+            )}
+          >
+            <div>
+              <Heading level={2} treatment="headline">
+                {content.founderTitle}
+              </Heading>
+              <div className="text-content-secondary mt-8 max-w-xl space-y-6 font-sans text-base leading-7 lg:text-lg">
+                {content.founderStory.split(/\n\s*\n/).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+            {storyImage ? (
+              <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
+                <Image
+                  src={storyImage.src}
+                  alt={storyImage.alt}
+                  fill
+                  sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
+                  className="object-cover"
+                />
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {content.showLongevity ? (
+        <section className="bg-action-quiet-hover">
+          <div
+            className={cn(sectionClass, "grid gap-8 lg:grid-cols-2 lg:gap-24")}
+          >
+            <div>
+              <Heading level={2} treatment="headline">
+                {content.longevityTitle}
+              </Heading>
+              <Lead className="mt-6">{content.longevityIntroduction}</Lead>
+            </div>
+            <p className="text-content-secondary max-w-xl font-sans text-base leading-7 lg:pt-4 lg:text-lg">
+              {content.longevityConditions}
+            </p>
+          </div>
+        </section>
+      ) : null}
+
+      {content.showCollectionInvitation ? (
+        <section
+          className={sectionClass}
+          aria-labelledby="home-collection-invitation-title"
+        >
+          <Heading
+            id="home-collection-invitation-title"
+            level={2}
+            treatment="headline"
+          >
+            {content.collectionInvitationTitle}
+          </Heading>
+          <p className="text-content-secondary mt-6 max-w-2xl font-sans text-base leading-7 lg:text-lg">
+            {content.collectionInvitationIntroduction}
+          </p>
+          <Button asChild variant="primary" className="mt-8">
+            <a href="/shop">{content.collectionInvitationActionLabel}</a>
+          </Button>
+        </section>
+      ) : null}
     </TemplateShell>
   );
 }

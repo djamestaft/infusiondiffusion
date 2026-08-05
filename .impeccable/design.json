@@ -282,7 +282,7 @@
     {
       "name": "StorefrontTemplates",
       "kind": "custom",
-      "description": "Approved responsive Home, Collection, Product detail, and Editorial compositions with independently selectable Ivory or Midnight Navigation, a Porcelain semantic canvas, and provisional product fixtures.",
+      "description": "Approved responsive Home, Collection, Product detail, and Editorial compositions with independently selectable Ivory or Midnight Navigation, a Porcelain semantic canvas, and provisional product fixtures. Home adds service reassurance, a Midnight founder story, qualified longevity guidance, and a closing collection invitation while Shopify retains commerce truth.",
       "html": "<main class=\"ds-storefront-template\"><section>Approved content composed from design-system primitives</section></main>",
       "css": ".ds-storefront-template { min-height: 100dvh; background: var(--content-surface); color: var(--content-primary); } .ds-storefront-template > section { width: min(100% - 40px, 1280px); margin-inline: auto; padding-block: 64px; } @media (min-width: 1024px) { .ds-storefront-template > section { width: min(100% - 96px, 1280px); padding-block: 96px; } }"
     }
