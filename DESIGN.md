@@ -9,7 +9,11 @@ colors:
   bone: "#E8E2D5"
   bone-light: "#F5F1E8"
   porcelain: "#FCFAF5"
+  sage-base: "#EEF0E7"
+  sage-elevated: "#E3E7DA"
+  sage-quiet: "#DDE2D4"
   antique-gold-deep: "#A9842D"
+  antique-gold-accessible: "#735716"
   antique-gold: "#C5A447"
   antique-gold-light: "#DDC77F"
   smoked-olive: "#45483A"
@@ -121,7 +125,7 @@ The Figma foundations and responsive Home, Collection, Product detail, and Edito
 
 ## Colors
 
-Midnight is the signature environment; Ivory provides editorial relief. Gold signals action and precious detail. Smoked Olive and Resin support atmospheric fields rather than arbitrary decoration.
+Midnight is the signature environment; Mineral Sage provides the approved light editorial environment. Gold signals action and precious detail. Smoked Olive and Resin support atmospheric fields rather than arbitrary decoration.
 
 ### Primary
 
@@ -135,7 +139,8 @@ Midnight is the signature environment; Ivory provides editorial relief. Gold sig
 
 ### Neutral
 
-- **Porcelain and Bone:** editorial surfaces and text against Midnight.
+- **Mineral Sage:** the light-mode canvas and sticky navigation use `#EEF0E7`; elevated surfaces use `#E3E7DA`, and quiet feature fields use `#DDE2D4`.
+- **Porcelain and Bone:** inverse text against Midnight and retained warm neutral references.
 - **Graphite and Soft Ink:** layered dark surfaces, subdued text, and borders.
 
 **The Measured Gold Rule.** Gold is a material edge and action cue, not a universal outline or decorative wash.
@@ -200,7 +205,9 @@ Text and email inputs plus textarea use native controls, a 44px minimum editable
 
 ProductCard is one browse-only product-detail link. It uses inset 3:4 media with 4px top corners and square lower image corners; keyboard focus follows the complete card's 4px corners. The hierarchy is format, a two-line Marcellus product name, a two-line factual scent-note summary, and a stable ZAR price row. Sold out is explicit text and does not disable navigation. Ivory and Midnight use the `Product Cards / Semantic` variables. Brochure imagery and copy are provisional Storybook fixtures only; Shopify will replace their values through the same component contract. The labeled Figma guide and Storybook LongContent story visibly prove the two-line title and scent-note clamps.
 
-`Navigation` is approved in the Navigation [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-169), [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-215), and [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-193) frames. It uses the editable Marcellus `LogoTextLockup`, a 104px desktop header with 32px insets, and an 80px mobile header with 20px insets. Ivory navigation uses Bone Light `#F5F1E8` above the Porcelain `#FCFAF5` page canvas, with accessible deep gold `#735716` for small logo lettering and interaction accents plus an Antique Gold `#C5A447` bottom edge. Midnight uses Antique Gold accents over Deep Ink. Destinations use a 2px gold current or hover rule separated from the label; keyboard focus outlines the full target. Account, cart, menu, and close controls retain adjacent 44px targets on mobile without extra inter-control gaps. The mobile menu is a named full-height modal that contains focus, closes on Escape, locks background scrolling, and restores focus.
+On Mineral Sage, ProductCard hover text uses accessible deep gold `#735716`; the brighter Antique Gold values remain material and focus accents rather than small text on the light surface.
+
+`Navigation` is approved in the Navigation [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-169), [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-215), and [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=157-193) frames. It uses the editable Marcellus `LogoTextLockup`, a sticky 104px desktop header with 32px insets, and a sticky 80px mobile header with 20px insets. Light navigation uses Sage Base `#EEF0E7`, continuous with the page canvas, with quiet Sage `#DDE2D4` for neutral edges, accessible deep gold `#735716` for small logo lettering and interaction accents, and an Antique Gold `#C5A447` bottom edge. Midnight uses Antique Gold accents over Deep Ink. Destinations use a 2px gold current or hover rule separated from the label; keyboard focus outlines the full target. Account, cart, menu, and close controls retain adjacent 44px targets on mobile without extra inter-control gaps. The mobile menu is a named full-height modal that contains focus, closes on Escape, locks background scrolling, and restores focus.
 
 `PriceDisplay` and `CommerceStatus` are approved in the Price & Commerce Status [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=181-2) and [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=181-119) frames. Their canonical component sets are PriceDisplay `178:34` and CommerceStatus `179:42`, mapping to `Components/PriceDisplay` and `Components/CommerceStatus` in Storybook.
 
@@ -208,7 +215,7 @@ PriceDisplay presents normalized Shopify money as Regular, Sale, or From in Comp
 
 CommerceStatus presents In stock, Low stock, Sold out, or Pre-order as Inline text with a supporting marker or as a restrained Overlay rectangle. Written status is always present, colour never carries meaning alone, and the status is static information rather than an unsolicited live region. ProductCard keeps ordinary in-stock availability quiet and uses Overlay only when low stock, sold out, or pre-order materially changes purchase expectations. Shopify will own all price, compare-at, inventory, and availability truth; Storybook values remain provisional fixtures.
 
-The responsive storefront templates are approved on the Figma `Feature / Responsive Page Templates` page: the expanded [Home desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-616) and [Home mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-638), [Collection Ivory desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-137), [Product detail Ivory desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-294), and [Editorial Ivory desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-373), with matching mobile and Midnight-navigation Approved frames recorded in `docs/features/responsive-page-templates.md`. The expanded Home adds service reassurance, an immersive Midnight founder story, qualified longevity guidance, and a closing collection invitation without duplicating Shopify commerce truth. Ordinary canvases use Porcelain through the semantic content surface rather than hardcoded white; selected feature bands may use the warmer quiet surface. Navigation remains independently selectable as Ivory or Midnight and always retains its semantic bottom divider.
+The responsive storefront templates are approved on the Figma `Feature / Responsive Page Templates` page: the expanded [Home desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-616) and [Home mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-638), [Collection light desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-137), [Product detail light desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-294), and [Editorial light desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-373), with matching mobile and Midnight-navigation Approved frames recorded in `docs/features/responsive-page-templates.md`. The expanded Home adds service reassurance, an immersive Midnight founder story, qualified longevity guidance, and a closing collection invitation without duplicating Shopify commerce truth. Ordinary light canvases use Sage Base through the semantic content surface rather than hardcoded white; selected feature bands use Sage Quiet. Navigation remains independently selectable as light or Midnight and always retains its semantic bottom divider.
 
 `Dialog`, `Drawer`, `AlertDialog`, and `FeedbackAlert` are approved in the Dialogs & Feedback [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=188-3), [drawer](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=188-20), [state](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=188-33), [mobile dialog](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=188-66), and [mobile drawer](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=188-83) frames. Their canonical Figma sources are Dialog `190:33`, Drawer `190:55`, AlertDialog `190:64`, and FeedbackAlert `190:113`, mapping to identically named Storybook titles and code primitives.
 
