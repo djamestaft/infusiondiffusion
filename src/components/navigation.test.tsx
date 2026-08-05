@@ -16,6 +16,8 @@ describe("Navigation", () => {
     expect(container.querySelector("header")).toHaveClass(
       "bg-navigation-surface",
       "border-navigation-divider",
+      "sticky",
+      "top-0",
     );
     expect(screen.getAllByRole("link", { name: "Shop" })[0]).toHaveAttribute(
       "aria-current",

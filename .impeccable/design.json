@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-04T14:00:00+02:00",
+  "generatedAt": "2026-08-05T12:00:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
     "colorMeta": {
@@ -39,10 +39,30 @@
         "displayName": "Porcelain",
         "canonical": "#FCFAF5"
       },
+      "sage-base": {
+        "role": "neutral",
+        "displayName": "Sage Base",
+        "canonical": "#EEF0E7"
+      },
+      "sage-elevated": {
+        "role": "neutral",
+        "displayName": "Sage Elevated",
+        "canonical": "#E3E7DA"
+      },
+      "sage-quiet": {
+        "role": "neutral",
+        "displayName": "Sage Quiet",
+        "canonical": "#DDE2D4"
+      },
       "antique-gold-deep": {
         "role": "primary",
         "displayName": "Deep Antique Gold",
         "canonical": "#A9842D"
+      },
+      "antique-gold-accessible": {
+        "role": "primary",
+        "displayName": "Accessible Deep Gold",
+        "canonical": "#735716"
       },
       "antique-gold": {
         "role": "primary",
