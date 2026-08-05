@@ -100,6 +100,28 @@ export type SiteSettings = {
     guidanceIntroduction?: string;
     guidanceActionLabel?: string;
     guidanceSupportingText?: string;
+    showServiceReassurance?: boolean;
+    serviceTitle?: string;
+    serviceIntroduction?: string;
+    showFounderStory?: boolean;
+    founderTitle?: string;
+    founderStory?: string;
+    founderImage?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    showLongevity?: boolean;
+    longevityTitle?: string;
+    longevityIntroduction?: string;
+    longevityConditions?: string;
+    showCollectionInvitation?: boolean;
+    collectionInvitationTitle?: string;
+    collectionInvitationIntroduction?: string;
+    collectionInvitationActionLabel?: string;
   };
 };
 
@@ -218,7 +240,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText    }  }
+// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText,      "showServiceReassurance": coalesce(showServiceReassurance, true),      serviceTitle,      serviceIntroduction,      "showFounderStory": coalesce(showFounderStory, true),      founderTitle,      founderStory,      "founderImage": founderImage{        "src": asset->url,        alt      },      "showLongevity": coalesce(showLongevity, true),      longevityTitle,      longevityIntroduction,      longevityConditions,      "showCollectionInvitation": coalesce(showCollectionInvitation, true),      collectionInvitationTitle,      collectionInvitationIntroduction,      collectionInvitationActionLabel    }  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   brandName: string | null;
   eyebrow: string | null;
@@ -244,6 +266,24 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     guidanceIntroduction: string | null;
     guidanceActionLabel: string | null;
     guidanceSupportingText: string | null;
+    showServiceReassurance: boolean | true;
+    serviceTitle: string | null;
+    serviceIntroduction: string | null;
+    showFounderStory: boolean | true;
+    founderTitle: string | null;
+    founderStory: string | null;
+    founderImage: {
+      src: string | null;
+      alt: string | null;
+    } | null;
+    showLongevity: boolean | true;
+    longevityTitle: string | null;
+    longevityIntroduction: string | null;
+    longevityConditions: string | null;
+    showCollectionInvitation: boolean | true;
+    collectionInvitationTitle: string | null;
+    collectionInvitationIntroduction: string | null;
+    collectionInvitationActionLabel: string | null;
   } | null;
 } | null;
 

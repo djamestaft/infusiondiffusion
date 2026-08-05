@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 4 August 2026
+Last updated: 5 August 2026
 
 ## Purpose
 
@@ -46,6 +46,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Initial site settings document populated
 - [x] Draft, published, Preview, Production, and cache-invalidation flows verified end to end
 - [x] Add a reusable Sanity editorial-page schema and connect the Fragrance Guide route with safe fallbacks
+- [x] Expand the homepage with independently managed founder, service, longevity, and collection-invitation content
 
 ### Design system — approved foundation, runtime migration in progress
 
@@ -261,7 +262,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
 2. Review the integrated Fragrance Guide on protected Vercel Preview, then create and publish its `fragrance-guide` editorial document in Sanity.
-3. Shape and implement the approved expansion of meaningful, Sanity-managed homepage content.
+3. Shape and implement a Sanity-managed About page that develops the approved founder story without duplicating commerce data.
 4. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
 5. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 

@@ -75,4 +75,29 @@ describe("site settings", () => {
       },
     });
   });
+
+  it("uses safe homepage fallbacks for blank copy and incomplete images", async () => {
+    sanityFetchMock.mockResolvedValue({
+      data: {
+        homepage: {
+          founderTitle: "  ",
+          longevityTitle: null,
+          founderImage: { src: "https://cdn.sanity.io/image.jpg", alt: "" },
+        },
+      },
+    });
+
+    const settings = await getSiteSettings({
+      perspective: "published",
+      stega: false,
+    });
+
+    expect(settings).toMatchObject({
+      homepage: {
+        founderTitle: fallbackSiteSettings.homepage.founderTitle,
+        longevityTitle: fallbackSiteSettings.homepage.longevityTitle,
+      },
+    });
+    expect(settings.homepage.founderImage).toBeUndefined();
+  });
 });

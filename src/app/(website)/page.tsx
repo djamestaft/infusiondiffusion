@@ -40,6 +40,7 @@ async function HomeContent() {
     <HomeTemplate
       products={products}
       heroImage={heroImage}
+      founderImage={settings.homepage.founderImage}
       cartCount={cart.totalQuantity}
       content={settings.homepage}
     />

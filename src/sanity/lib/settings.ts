@@ -8,12 +8,24 @@ import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 import { fallbackSiteSettings, type SiteSettings } from "@/sanity/types";
 
 function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
+  const homepage = Object.fromEntries(
+    Object.entries(settings?.homepage ?? {}).filter(([key, value]) => {
+      if (value === null || value === undefined) return false;
+      if (typeof value === "string") return value.trim().length > 0;
+      if (key === "founderImage") {
+        const image = value as { src?: string; alt?: string };
+        return Boolean(image.src?.trim() && image.alt?.trim());
+      }
+      return true;
+    }),
+  ) as Partial<SiteSettings["homepage"]>;
+
   return {
     ...fallbackSiteSettings,
     ...(settings ?? {}),
     homepage: {
       ...fallbackSiteSettings.homepage,
-      ...(settings?.homepage ?? {}),
+      ...homepage,
     },
   };
 }
