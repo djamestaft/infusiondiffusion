@@ -43,6 +43,29 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
   expect(consoleErrors).toEqual([]);
 });
 
+test("reveals each following section at the viewport edge", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const reveals = page.locator("[data-scroll-reveal]");
+  const belowFoldIndex = await reveals.evaluateAll((elements) =>
+    elements.findIndex(
+      (element) => element.getBoundingClientRect().top >= window.innerHeight,
+    ),
+  );
+  expect(belowFoldIndex).toBeGreaterThanOrEqual(0);
+  const nextSection = reveals.nth(belowFoldIndex);
+  await expect(nextSection).toHaveAttribute("data-reveal-state", "waiting");
+
+  await nextSection.scrollIntoViewIfNeeded();
+  await expect(nextSection).toHaveAttribute("data-reveal-state", "visible");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(nextSection).toHaveCSS("opacity", "1");
+  await expect(nextSection).toHaveCSS("transform", "none");
+});
+
 test("reports a healthy deployment", async ({ request }) => {
   const response = await request.get("/api/health");
   expect(response.ok()).toBeTruthy();

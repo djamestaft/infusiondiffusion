@@ -20,6 +20,8 @@ import {
   ProductCard,
   type ProductCardProps,
 } from "@/components/ui/product-card";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ScrollRevealController } from "@/components/ui/scroll-reveal-controller";
 import { cn } from "@/lib/utils";
 
 type TemplateNavigationProps = {
@@ -145,6 +147,7 @@ export function HomeTemplate({
   const storyImage = founderImage ?? heroImage;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
+      <ScrollRevealController />
       <section
         className={cn(
           sectionClass,
@@ -178,131 +181,152 @@ export function HomeTemplate({
         ) : null}
       </section>
 
-      <section className={sectionClass} aria-labelledby="home-collection-title">
-        <Heading
-          id="home-collection-title"
-          level={2}
-          treatment="title"
-          className="mb-8"
+      <ScrollReveal direction="left">
+        <section
+          className={sectionClass}
+          aria-labelledby="home-collection-title"
         >
-          {content.collectionTitle}
-        </Heading>
-        {products.length ? (
-          <ProductGrid products={products.slice(0, 3)} />
-        ) : (
-          <p className="text-content-secondary max-w-prose font-sans">
-            The collection is being prepared. Please return soon to explore the
-            first fragrances.
-          </p>
-        )}
-      </section>
-
-      <section className="bg-action-quiet-hover">
-        <div
-          className={cn(
-            sectionClass,
-            "grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end",
-          )}
-        >
-          <ContentHeader
-            context={{ type: "eyebrow", label: content.guidanceEyebrow }}
-            title={content.guidanceTitle}
-            headingLevel={2}
-            lead={content.guidanceIntroduction}
-            action={{
-              type: "link",
-              label: content.guidanceActionLabel,
-              href: "/fragrance-guide",
-            }}
-          />
-          <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
-            {content.guidanceSupportingText}
-          </p>
-        </div>
-      </section>
-
-      {content.showServiceReassurance ? (
-        <section className={sectionClass} aria-labelledby="home-service-title">
-          <Heading id="home-service-title" level={2} treatment="title">
-            {content.serviceTitle}
+          <Heading
+            id="home-collection-title"
+            level={2}
+            treatment="title"
+            className="mb-8"
+          >
+            {content.collectionTitle}
           </Heading>
-          <p className="text-content-secondary mt-4 max-w-2xl font-sans text-base leading-7">
-            {content.serviceIntroduction}
-          </p>
+          {products.length ? (
+            <ProductGrid products={products.slice(0, 3)} />
+          ) : (
+            <p className="text-content-secondary max-w-prose font-sans">
+              The collection is being prepared. Please return soon to explore
+              the first fragrances.
+            </p>
+          )}
         </section>
-      ) : null}
+      </ScrollReveal>
 
-      {content.showFounderStory ? (
-        <section className="dark bg-content-surface text-content-primary">
+      <ScrollReveal direction="right">
+        <section className="bg-action-quiet-hover">
           <div
             className={cn(
               sectionClass,
-              "grid gap-12",
-              storyImage && "lg:grid-cols-2 lg:items-center",
+              "grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end",
             )}
           >
-            <div>
-              <Heading level={2} treatment="headline">
-                {content.founderTitle}
-              </Heading>
-              <div className="text-content-secondary mt-8 max-w-xl space-y-6 font-sans text-base leading-7 lg:text-lg">
-                {content.founderStory.split(/\n\s*\n/).map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </div>
-            {storyImage ? (
-              <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
-                <Image
-                  src={storyImage.src}
-                  alt={storyImage.alt}
-                  fill
-                  sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-                  className="object-cover"
-                />
-              </div>
-            ) : null}
-          </div>
-        </section>
-      ) : null}
-
-      {content.showLongevity ? (
-        <section className="bg-action-quiet-hover">
-          <div
-            className={cn(sectionClass, "grid gap-8 lg:grid-cols-2 lg:gap-24")}
-          >
-            <div>
-              <Heading level={2} treatment="headline">
-                {content.longevityTitle}
-              </Heading>
-              <Lead className="mt-6">{content.longevityIntroduction}</Lead>
-            </div>
-            <p className="text-content-secondary max-w-xl font-sans text-base leading-7 lg:pt-4 lg:text-lg">
-              {content.longevityConditions}
+            <ContentHeader
+              context={{ type: "eyebrow", label: content.guidanceEyebrow }}
+              title={content.guidanceTitle}
+              headingLevel={2}
+              lead={content.guidanceIntroduction}
+              action={{
+                type: "link",
+                label: content.guidanceActionLabel,
+                href: "/fragrance-guide",
+              }}
+            />
+            <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
+              {content.guidanceSupportingText}
             </p>
           </div>
         </section>
+      </ScrollReveal>
+
+      {content.showServiceReassurance ? (
+        <ScrollReveal direction="left">
+          <section
+            className={sectionClass}
+            aria-labelledby="home-service-title"
+          >
+            <Heading id="home-service-title" level={2} treatment="title">
+              {content.serviceTitle}
+            </Heading>
+            <p className="text-content-secondary mt-4 max-w-2xl font-sans text-base leading-7">
+              {content.serviceIntroduction}
+            </p>
+          </section>
+        </ScrollReveal>
+      ) : null}
+
+      {content.showFounderStory ? (
+        <ScrollReveal variant="unveil">
+          <section className="dark bg-content-surface text-content-primary">
+            <div
+              className={cn(
+                sectionClass,
+                "grid gap-12",
+                storyImage && "lg:grid-cols-2 lg:items-center",
+              )}
+            >
+              <div>
+                <Heading level={2} treatment="headline">
+                  {content.founderTitle}
+                </Heading>
+                <div className="text-content-secondary mt-8 max-w-xl space-y-6 font-sans text-base leading-7 lg:text-lg">
+                  {content.founderStory.split(/\n\s*\n/).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+              {storyImage ? (
+                <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
+                  <Image
+                    src={storyImage.src}
+                    alt={storyImage.alt}
+                    fill
+                    sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : null}
+            </div>
+          </section>
+        </ScrollReveal>
+      ) : null}
+
+      {content.showLongevity ? (
+        <ScrollReveal direction="right">
+          <section className="bg-action-quiet-hover">
+            <div
+              className={cn(
+                sectionClass,
+                "grid gap-8 lg:grid-cols-2 lg:gap-24",
+              )}
+            >
+              <div>
+                <Heading level={2} treatment="headline">
+                  {content.longevityTitle}
+                </Heading>
+                <Lead className="mt-6">{content.longevityIntroduction}</Lead>
+              </div>
+              <p className="text-content-secondary max-w-xl font-sans text-base leading-7 lg:pt-4 lg:text-lg">
+                {content.longevityConditions}
+              </p>
+            </div>
+          </section>
+        </ScrollReveal>
       ) : null}
 
       {content.showCollectionInvitation ? (
-        <section
-          className={sectionClass}
-          aria-labelledby="home-collection-invitation-title"
-        >
-          <Heading
-            id="home-collection-invitation-title"
-            level={2}
-            treatment="headline"
+        <ScrollReveal direction="left">
+          <section
+            className={sectionClass}
+            aria-labelledby="home-collection-invitation-title"
           >
-            {content.collectionInvitationTitle}
-          </Heading>
-          <p className="text-content-secondary mt-6 max-w-2xl font-sans text-base leading-7 lg:text-lg">
-            {content.collectionInvitationIntroduction}
-          </p>
-          <Button asChild variant="primary" className="mt-8">
-            <a href="/shop">{content.collectionInvitationActionLabel}</a>
-          </Button>
-        </section>
+            <Heading
+              id="home-collection-invitation-title"
+              level={2}
+              treatment="headline"
+            >
+              {content.collectionInvitationTitle}
+            </Heading>
+            <p className="text-content-secondary mt-6 max-w-2xl font-sans text-base leading-7 lg:text-lg">
+              {content.collectionInvitationIntroduction}
+            </p>
+            <Button asChild variant="primary" className="mt-8">
+              <a href="/shop">{content.collectionInvitationActionLabel}</a>
+            </Button>
+          </section>
+        </ScrollReveal>
       ) : null}
     </TemplateShell>
   );
