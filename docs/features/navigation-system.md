@@ -14,7 +14,7 @@ Create the reusable global storefront navigation that helps customers reach prod
 - The mobile drawer has a visible close control, focus containment, Escape dismissal, scroll locking, and focus return to its opener. Reduced motion removes non-essential movement without removing state feedback.
 - Account and cart are persistent commerce utilities on desktop and mobile. Each uses a 44px target and an accessible name; cart quantity is optional and must only render from real commerce state. Search remains deferred.
 - Desktop navigation is 104px tall with 32px horizontal insets. Mobile navigation is 80px tall with 20px horizontal insets; utility controls group beside the menu control rather than reducing its target.
-- Navigation exposes Ivory and Midnight modes. It does not own page-level sticky behavior, announcement content, analytics, authentication, or cart state.
+- Navigation exposes Ivory and Midnight modes. Ivory uses the warmer Bone Light surface above the Porcelain page canvas and an Antique Gold bottom edge; Midnight retains its Deep Ink surface and gold interaction cues. It does not own page-level sticky behavior, announcement content, analytics, authentication, or cart state.
 - Active destination is optional and communicated by text treatment plus `aria-current="page"`, never color alone.
 - Hover and current destinations use an explicit two-pixel underline with six pixels of separation from the label; keyboard focus remains a distinct full target outline.
 
@@ -60,6 +60,7 @@ Create the reusable global storefront navigation that helps customers reach prod
 - Product owner requested an editable, higher-contrast text-lockup exploration on 3 August 2026. The exploration uses approved Marcellus typography, stacks `DIFFUSION` beneath `INFUSION`, retains short rules on either side, and removes the ornamental border and corners.
 - Product owner requested a slimmer navigation bar with a deliberate right inset on 3 August 2026. Desktop is now 104px tall with 32px horizontal insets; mobile is 80px tall with 20px insets while retaining 44px controls.
 - Product owner confirmed that account and cart icons are required commerce utilities on 3 August 2026. Both now appear in desktop and mobile compositions with accessible target labels; the cart is shown without a speculative quantity.
+- Product owner reconfirmed the intended beige-versus-eggshell separation on 5 August 2026 after Preview exposed that both runtime roles had collapsed to Porcelain. Runtime Ivory Navigation now uses Bone Light `#F5F1E8`, the page remains Porcelain `#FCFAF5`, and the approved Antique Gold bottom edge is explicit.
 - Account and cart controls use matching 44px targets and 1.5px strokes. Their glyphs are optically balanced rather than mechanically identical: the profile uses a narrower shoulder arc so it reads as a person at navigation size.
 - Product owner approved the navigation designs and selected the editable text lockup as the preferred navigation logo on 3 August 2026.
 - Product owner confirmed the editable text lockup as the current production storefront logo and deferred the ornamental vector asset on 3 August 2026.
