@@ -2,6 +2,7 @@ import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ScrollRevealController } from "@/components/ui/scroll-reveal-controller";
 
 let intersectionCallback: IntersectionObserverCallback;
 const disconnect = vi.fn();
@@ -40,9 +41,12 @@ afterEach(() => {
 describe("ScrollReveal", () => {
   it("reveals once as soon as the section intersects the viewport", () => {
     render(
-      <ScrollReveal>
-        <section>Next section</section>
-      </ScrollReveal>,
+      <>
+        <ScrollRevealController />
+        <ScrollReveal>
+          <section>Next section</section>
+        </ScrollReveal>
+      </>,
     );
 
     const reveal = screen.getByText("Next section").parentElement;
@@ -65,11 +69,15 @@ describe("ScrollReveal", () => {
       matches: true,
     } as MediaQueryList);
 
-    render(<ScrollReveal>Quiet content</ScrollReveal>);
+    render(
+      <>
+        <ScrollRevealController />
+        <ScrollReveal>Quiet content</ScrollReveal>
+      </>,
+    );
 
-    expect(screen.getByText("Quiet content")).toHaveAttribute(
+    expect(screen.getByText("Quiet content")).not.toHaveAttribute(
       "data-reveal-state",
-      "visible",
     );
     expect(observe).not.toHaveBeenCalled();
   });

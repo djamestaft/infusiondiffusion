@@ -48,8 +48,14 @@ test("reveals each following section at the viewport edge", async ({
 }) => {
   await page.goto("/");
 
-  const reveals = page.locator(".scroll-reveal");
-  const nextSection = reveals.first();
+  const reveals = page.locator("[data-scroll-reveal]");
+  const belowFoldIndex = await reveals.evaluateAll((elements) =>
+    elements.findIndex(
+      (element) => element.getBoundingClientRect().top >= window.innerHeight,
+    ),
+  );
+  expect(belowFoldIndex).toBeGreaterThanOrEqual(0);
+  const nextSection = reveals.nth(belowFoldIndex);
   await expect(nextSection).toHaveAttribute("data-reveal-state", "waiting");
 
   await nextSection.scrollIntoViewIfNeeded();

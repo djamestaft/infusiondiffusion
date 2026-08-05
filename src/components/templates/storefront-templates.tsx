@@ -21,6 +21,7 @@ import {
   type ProductCardProps,
 } from "@/components/ui/product-card";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ScrollRevealController } from "@/components/ui/scroll-reveal-controller";
 import { cn } from "@/lib/utils";
 
 type TemplateNavigationProps = {
@@ -146,6 +147,7 @@ export function HomeTemplate({
   const storyImage = founderImage ?? heroImage;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
+      <ScrollRevealController />
       <section
         className={cn(
           sectionClass,
