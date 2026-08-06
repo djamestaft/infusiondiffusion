@@ -32,6 +32,12 @@ These layers describe different parts of one system. A change is unfinished whil
 6. Verify variable values, mode behavior, typography, radii, spacing, focus treatment, component states, and mobile/desktop screenshots.
 7. End every handoff with a sync matrix for Figma, `DESIGN.md`, CSS tokens, components, and Storybook. Mark each `synced`, `pending`, or `intentional divergence` with a reason.
 
+## Cross-agent Figma handoff
+
+When the design agent and implementation agent are different tool lanes, the design agent must capture the approved Figma evidence before implementation begins. Write an implementation-ready handoff containing exact file/frame URLs and node IDs, dimensions, layout/grid, semantic variables, typography, spacing, assets, states, responsive behavior, accessibility decisions, and intentional divergences. Include screenshots or structured MCP exports when available.
+
+The implementation agent consumes that gated capture and does not require duplicate Figma access. Missing or unauthenticated Figma access blocks the design-capture phase, not a later implementation phase after a complete handoff has passed. Never replace the capture with prose inferred from a screenshot or with an implementation agent's visual guess.
+
 When a phase intentionally stops before implementation, record the pending layers plainly. Pending is acceptable; silent drift is not.
 
 Never use screenshot pixels as inaccessible HTML, bake UI copy into raster assets, or change a stable component API solely to match one frame.

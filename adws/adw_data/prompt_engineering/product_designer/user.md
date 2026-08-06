@@ -14,7 +14,7 @@
 
 ## Task
 
-Review the plan from the product-design boundary, write your evidence to `<context_handoff_dir>/product_designer.md`, and report whether implementation is ready to begin.
+Review the plan from the product-design boundary. For approved Figma work, query the exact nodes through the configured Figma MCP server and write implementation evidence to `<context_handoff_dir>/figma_handoff.md`. Write your review to `<context_handoff_dir>/product_designer.md`, then report whether implementation is ready to begin.
 
 ## Report
 
@@ -27,7 +27,8 @@ Respond with ONLY valid JSON matching `SpecialistOutput`:
   "summary": "<one-sentence verdict>",
   "findings": ["<design finding with evidence>"],
   "blocking": [],
-  "artifacts": ["<context_handoff_dir>/product_designer.md"],
+  "figma_evidence": ["<context_handoff_dir>/figma_handoff.md"],
+  "artifacts": ["<context_handoff_dir>/product_designer.md", "<context_handoff_dir>/figma_handoff.md"],
   "notes_for_next_agent": "<implementation guidance and human gates>"
 }
 ```

@@ -103,6 +103,7 @@ class SpecialistOutput(EnvelopeBase):
     ready: bool = False
     findings: list[str] = Field(default_factory=list)
     blocking: list[str] = Field(default_factory=list)
+    figma_evidence: list[str] = Field(default_factory=list)
 
 
 class BuildOutput(EnvelopeBase):

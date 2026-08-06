@@ -96,9 +96,11 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
         with run.phase(PhaseParams(
                 name=f"advise_{specialist}", kind="agent", owner=specialist,
                 description="Inspect the plan through the selected specialist boundary before implementation")) as ph:
+            advice_gates = [gates.artifacts_exist, gates.files_non_empty]
+            if specialist == "product_designer":
+                advice_gates.append(gates.figma_handoff_complete)
             advice = ph.call(AgentCall(output_type=SpecialistOutput, prompt=prompt,
-                                       previous=plan,
-                                       gates=[gates.artifacts_exist]))
+                                       previous=plan, gates=advice_gates))
             if not advice.ready:
                 return run.finish(accepted=False,
                                   reason=f"{specialist} reported blocking findings: "

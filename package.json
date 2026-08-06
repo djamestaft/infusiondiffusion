@@ -58,6 +58,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
     "jsdom": "30.0.1",
+    "pi-mcp-adapter": "2.20.1",
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "storybook": "10.5.5",

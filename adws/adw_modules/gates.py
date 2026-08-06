@@ -44,6 +44,26 @@ def files_non_empty(envelope: EnvelopeBase, run) -> GateReport:
     return report
 
 
+def figma_handoff_complete(envelope: EnvelopeBase, run) -> GateReport:
+    """Require declared Figma captures to be real, non-empty session artifacts."""
+    report = GateReport()
+    evidence = list(getattr(envelope, "figma_evidence", []))
+    report.check("figma evidence declared", bool(evidence),
+                 f"{len(evidence)} artifact(s) declared" if evidence
+                 else "no Figma implementation evidence was declared")
+    handoff_root = (Path(run.cfg.defaults.data_dir) / "sessions" / run.adw_id /
+                    "context_handoff").resolve()
+    for artifact in evidence:
+        path = Path(artifact)
+        resolved = path.resolve()
+        inside_handoff = resolved == handoff_root or handoff_root in resolved.parents
+        exists = path.is_file() and path.stat().st_size > 0 if path.exists() else False
+        report.check(artifact, inside_handoff and exists,
+                     f"session handoff, {_size(path)}" if inside_handoff and exists
+                     else "Figma evidence must be a non-empty file inside context_handoff")
+    return report
+
+
 def json_parses(envelope: EnvelopeBase, run) -> GateReport:
     report = GateReport()
     for a in envelope.artifacts:

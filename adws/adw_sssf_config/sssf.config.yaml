@@ -154,8 +154,10 @@ agents:
     prompt_engineering:
       system: adws/adw_data/prompt_engineering/product_designer/system.md
       user: adws/adw_data/prompt_engineering/product_designer/user.md
+    harness_engineering:
+      - node_modules/pi-mcp-adapter/index.ts
     writes: []
-    tools: [read, grep, find, ls, bash, write]
+    tools: [read, grep, find, ls, bash, write, mcp]
 
   - name: storefront_engineer
     model: openai-codex/gpt-5.6-terra
