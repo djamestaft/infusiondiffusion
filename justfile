@@ -71,8 +71,8 @@ review *ARGS:
     uv run adws/adw_review.py --config {{config}} "$@"
 
 # required after opening or updating a PR; the release handoff is red until GitHub is green
-pr-gate PR REPO="djamestaft/infusiondiffusion" *ARGS:
-    uv run adws/adw_pr_gate.py {{PR}} --repo {{REPO}} --config {{config}} "$@"
+pr-gate PR *ARGS:
+    uv run adws/adw_pr_gate.py {{PR}} --repo djamestaft/infusiondiffusion --config {{config}} "$@"
 
 # ── watch it ────────────────────────────────────────────────────────────────
 # Reads never block a running workflow, the db is WAL. Poll as hard as you like.
