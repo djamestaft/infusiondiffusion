@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     "storybook-static/**",
     "worktrees/**",
     ".agents/skills/impeccable/**",
+    "adws/**",
+    ".agents/skills/sssf/**",
     "next-env.d.ts",
   ]),
 ]);

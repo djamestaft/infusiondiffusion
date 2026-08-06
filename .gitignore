@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -36,6 +37,7 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+!.env.sample
 
 # vercel
 .vercel
@@ -73,3 +75,10 @@ next-env.d.ts
 functions/**/.env*
 functions/**/.build/
 functions/**/node_modules/
+
+# sssf runtime
+adws/adw_data/sessions/
+adws/adw_data/sssf.db*
+.env
+__pycache__/
+*.pyc
