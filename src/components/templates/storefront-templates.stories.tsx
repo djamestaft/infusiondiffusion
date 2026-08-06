@@ -341,9 +341,13 @@ export const AboutWithPortraits: Story = {
     const artwork = canvas.getByTestId("about-media-artwork-origin");
     await expect(slot).toHaveClass("aspect-4/3");
     await expect(artwork).toHaveClass("aspect-3/4", "mx-auto", "h-full");
-    await expect(
-      canvas.getByRole("img", { name: "Test-only portrait fixture" }),
-    ).toHaveClass("object-contain");
+    const portraits = canvas.getAllByRole("img", {
+      name: "Test-only portrait fixture",
+    });
+    await expect(portraits).toHaveLength(4);
+    for (const portrait of portraits) {
+      await expect(portrait).toHaveClass("object-contain");
+    }
   },
 };
 export const AboutOnePortrait: Story = {
