@@ -16,19 +16,20 @@ import sys
 from adw_modules import agents, gates, session, utils
 from adw_modules.data_types import AgentCall, BuildOutput, PhaseParams
 
-REQUIRED_AGENTS = ["builder"]
+BUILD_OWNERS = ("builder", "storefront_engineer", "content_commerce_engineer")
 
 
-def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None) -> int:
+def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None,
+         owner: str = "builder") -> int:
     cfg = agents.load_config(config)
-    agents.validate(cfg, REQUIRED_AGENTS)
+    agents.validate(cfg, [owner])
     run = session.ensure(cfg, adw_id)
 
     with run.phase(PhaseParams(name="request", kind="engineer", owner=run.engineer,
                                description="Capture the incoming ask")) as ph:
         ph.log(input=prompt)
 
-    with run.phase(PhaseParams(name="build", kind="agent", owner="builder", retries=1,
+    with run.phase(PhaseParams(name="build", kind="agent", owner=owner, retries=1,
                                description="Implement the request")) as ph:
         ph.call(AgentCall(output_type=BuildOutput, prompt=prompt,
                           gates=[gates.diff_matches_claims]))
@@ -41,5 +42,7 @@ if __name__ == "__main__":
     parser.add_argument("prompt", help="inline text or a path to a prompt file")
     parser.add_argument("--config", default="adws/adw_sssf_config/sssf.config.yaml")
     parser.add_argument("--adw-id", default=None, help="join or pin an existing session")
+    parser.add_argument("--owner", choices=BUILD_OWNERS, default="builder",
+                        help="implementation specialist to own this build")
     args = parser.parse_args()
-    sys.exit(main(utils.resolve_prompt(args.prompt), args.config, args.adw_id))
+    sys.exit(main(utils.resolve_prompt(args.prompt), args.config, args.adw_id, args.owner))
