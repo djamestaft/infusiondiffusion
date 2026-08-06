@@ -107,6 +107,51 @@ test("keeps the hero, CTA, and navigation divider intact at 320px", async ({
   ).toBeLessThanOrEqual(320);
 });
 
+test("renders the full-width elevated cabinet band with exact spacing", async ({
+  page,
+}, testInfo) => {
+  await page.goto("/");
+  const expectedGap = testInfo.project.name === "mobile" ? 52 : 72;
+  const band = page.getByTestId("home-cabinet-band");
+  const inner = page.getByTestId("home-cabinet-inner");
+  const hero = page.getByTestId("home-hero-section");
+  const heading = page.getByRole("heading", {
+    name: "A cabinet of atmosphere",
+  });
+  const firstCard = page.getByRole("link", { name: /^View / }).first();
+  await band.scrollIntoViewIfNeeded();
+  await expect(band).toBeVisible();
+  const [bandBox, innerBox, heroBox, headingBox] = await Promise.all([
+    band.boundingBox(),
+    inner.boundingBox(),
+    hero.boundingBox(),
+    heading.boundingBox(),
+  ]);
+  expect(bandBox).not.toBeNull();
+  expect(innerBox).not.toBeNull();
+  expect(heroBox).not.toBeNull();
+  expect(headingBox).not.toBeNull();
+  expect(bandBox!.width).toBe(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+  expect(innerBox!.width).toBeLessThanOrEqual(1280);
+  expect(headingBox!.y - (heroBox!.y + heroBox!.height)).toBe(expectedGap);
+  const controls = page.getByTestId("hero-carousel-controls");
+  if (await controls.count()) {
+    const controlsBox = await controls.boundingBox();
+    expect(controlsBox).not.toBeNull();
+    expect(headingBox!.y - (controlsBox!.y + controlsBox!.height)).toBe(
+      expectedGap,
+    );
+  }
+  await expect(band).toHaveCSS("background-color", "rgb(227, 231, 218)");
+  await expect(band).toHaveCSS("border-top-width", "0px");
+  await expect(band).toHaveCSS("box-shadow", "none");
+  await expect(firstCard).toHaveCSS("background-color", "rgb(238, 240, 231)");
+  await expect(firstCard).toHaveCSS("border-top-width", "0px");
+  await expect(firstCard).toHaveCSS("box-shadow", "none");
+});
+
 test("supports keyboard pagination and manual pause/play", async ({ page }) => {
   test.skip(
     test.info().project.name === "mobile",
@@ -236,7 +281,7 @@ test("renders responsive corner brackets outside the image", async ({
   ]) {
     await expect(locator).toHaveCSS(radius, "8px");
     for (const border of borders)
-      await expect(locator).toHaveCSS(border, "2px");
+      await expect(locator).toHaveCSS(border, "1px");
     await expect(locator).toHaveCSS("box-shadow", "none");
     await expect(locator).toHaveCSS("background-image", "none");
   }

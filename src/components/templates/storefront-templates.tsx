@@ -35,18 +35,34 @@ type TemplateNavigationProps = {
 
 const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
+const homeHeroSectionClass =
+  "mx-auto grid w-full max-w-7xl gap-10 px-5 pt-16 pb-0 sm:px-8 lg:px-12 lg:pt-24 lg:pb-0";
+const homeCollectionInnerClass =
+  "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
 
 function TemplateShell({
   navigationTheme = "ivory",
   cartCount,
   currentHref,
+  surface = "base",
   children,
 }: TemplateNavigationProps & {
   currentHref?: string;
+  surface?: "base" | "elevated";
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-content-surface text-content-primary min-h-dvh">
+    <div
+      className={cn(
+        "text-content-primary min-h-dvh",
+        surface === "elevated"
+          ? "bg-content-surface-elevated"
+          : "bg-content-surface",
+      )}
+      data-testid={
+        surface === "elevated" ? "collection-browsing-surface" : undefined
+      }
+    >
       <Navigation
         theme={navigationTheme}
         currentHref={currentHref}
@@ -161,9 +177,9 @@ export function HomeTemplate({
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <ScrollRevealController />
       <section
+        data-testid="home-hero-section"
         className={cn(
-          sectionClass,
-          "grid gap-10",
+          homeHeroSectionClass,
           carouselSlides.length && "lg:grid-cols-2 lg:items-center",
         )}
       >
@@ -188,25 +204,31 @@ export function HomeTemplate({
 
       <ScrollReveal direction="left">
         <section
-          className={sectionClass}
+          className="bg-content-surface-elevated"
           aria-labelledby="home-collection-title"
+          data-testid="home-cabinet-band"
         >
-          <Heading
-            id="home-collection-title"
-            level={2}
-            treatment="title"
-            className="mb-8"
+          <div
+            className={homeCollectionInnerClass}
+            data-testid="home-cabinet-inner"
           >
-            {content.collectionTitle}
-          </Heading>
-          {products.length ? (
-            <ProductGrid products={products.slice(0, 3)} />
-          ) : (
-            <p className="text-content-secondary max-w-prose font-sans">
-              The collection is being prepared. Please return soon to explore
-              the first fragrances.
-            </p>
-          )}
+            <Heading
+              id="home-collection-title"
+              level={2}
+              treatment="title"
+              className="mb-8"
+            >
+              {content.collectionTitle}
+            </Heading>
+            {products.length ? (
+              <ProductGrid products={products.slice(0, 3)} />
+            ) : (
+              <p className="text-content-secondary max-w-prose font-sans">
+                The collection is being prepared. Please return soon to explore
+                the first fragrances.
+              </p>
+            )}
+          </div>
         </section>
       </ScrollReveal>
 
@@ -355,6 +377,7 @@ export function CollectionTemplate({
       navigationTheme={navigationTheme}
       currentHref="/shop"
       cartCount={cartCount}
+      surface="elevated"
     >
       <section className={sectionClass}>
         <ContentHeader
@@ -364,7 +387,7 @@ export function CollectionTemplate({
           headingTreatment="display"
           lead={description}
         />
-        <div className="border-navigation-border mt-12 flex items-center justify-between border-y py-4 font-sans text-sm">
+        <div className="mt-12 flex items-center justify-between py-4 font-sans text-sm">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>

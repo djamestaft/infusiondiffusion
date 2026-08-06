@@ -180,22 +180,22 @@ export function HeroCarousel({
       <div className="relative p-3 lg:p-5" data-testid="hero-carousel-stage">
         <div className="relative" data-testid="hero-carousel-bracket-envelope">
           <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -left-2 size-10 rounded-tl-[8px] border-t-2 border-l-2 lg:-top-3 lg:-left-3 lg:size-14"
+            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -left-2 size-10 rounded-tl-[8px] border-t border-l lg:-top-3 lg:-left-3 lg:size-14"
             data-testid="hero-carousel-bracket-top-left"
             aria-hidden="true"
           />
           <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -right-2 size-10 rounded-tr-[8px] border-t-2 border-r-2 lg:-top-3 lg:-right-3 lg:size-14"
+            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -right-2 size-10 rounded-tr-[8px] border-t border-r lg:-top-3 lg:-right-3 lg:size-14"
             data-testid="hero-carousel-bracket-top-right"
             aria-hidden="true"
           />
           <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -bottom-2 -left-2 size-10 rounded-bl-[8px] border-b-2 border-l-2 lg:-bottom-3 lg:-left-3 lg:size-14"
+            className="border-hero-carousel-bracket pointer-events-none absolute -bottom-2 -left-2 size-10 rounded-bl-[8px] border-b border-l lg:-bottom-3 lg:-left-3 lg:size-14"
             data-testid="hero-carousel-bracket-bottom-left"
             aria-hidden="true"
           />
           <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -right-2 -bottom-2 size-10 rounded-br-[8px] border-r-2 border-b-2 lg:-right-3 lg:-bottom-3 lg:size-14"
+            className="border-hero-carousel-bracket pointer-events-none absolute -right-2 -bottom-2 size-10 rounded-br-[8px] border-r border-b lg:-right-3 lg:-bottom-3 lg:size-14"
             data-testid="hero-carousel-bracket-bottom-right"
             aria-hidden="true"
           />

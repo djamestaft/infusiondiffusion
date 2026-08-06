@@ -217,6 +217,7 @@
   --color-content-secondary: var(--content-secondary);
   --color-content-accent: var(--content-accent);
   --color-content-surface: var(--content-surface);
+  --color-content-surface-elevated: var(--content-surface-elevated);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -374,6 +375,7 @@
   --content-secondary: #3c3b35;
   --content-accent: #735716;
   --content-surface: #eef0e7;
+  --content-surface-elevated: #e3e7da;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -517,6 +519,7 @@
   --content-secondary: #e8e2d5;
   --content-accent: #ddc77f;
   --content-surface: #11110f;
+  --content-surface-elevated: #191916;
 }
 
 @layer base {
