@@ -351,6 +351,17 @@ export const AboutWithPortraits: Story = {
     const artwork = canvas.getByTestId("about-media-artwork-origin");
     await expect(slot).toHaveClass("aspect-4/3");
     await expect(artwork).toHaveClass("aspect-3/4", "mx-auto", "h-full");
+    const slotBounds = slot.getBoundingClientRect();
+    const artworkBounds = artwork.getBoundingClientRect();
+    await expect(slotBounds.width / slotBounds.height).toBeCloseTo(4 / 3, 2);
+    await expect(artworkBounds.width / artworkBounds.height).toBeCloseTo(
+      3 / 4,
+      2,
+    );
+    await expect(artworkBounds.left - slotBounds.left).toBeCloseTo(
+      slotBounds.right - artworkBounds.right,
+      1,
+    );
     const portraits = canvas.getAllByRole("img", {
       name: "Test-only portrait fixture",
     });

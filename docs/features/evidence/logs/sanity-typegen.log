@@ -1,0 +1,265 @@
+
+> infusion-diffusion@0.1.0 sanity:typegen /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+> sanity typegen generate
+
+- Loading config…
+✔ Config loaded from sanity.cli.ts
+- Loading schema…
+✔ Schema loaded from ./src/sanity/extract.json
+- Generating schema types…
+- Generating query types…
+- Generating query types… (0.8%)
+  └─ Processed 1 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (1.6%)
+  └─ Processed 2 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (2.4%)
+  └─ Processed 3 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (3.2%)
+  └─ Processed 4 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (4.0%)
+  └─ Processed 5 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (4.8%)
+  └─ Processed 6 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (5.6%)
+  └─ Processed 7 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (6.3%)
+  └─ Processed 8 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (7.1%)
+  └─ Processed 9 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (7.9%)
+  └─ Processed 10 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (8.7%)
+  └─ Processed 11 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (9.5%)
+  └─ Processed 12 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (10.3%)
+  └─ Processed 13 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (11.1%)
+  └─ Processed 14 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (11.9%)
+  └─ Processed 15 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (12.7%)
+  └─ Processed 16 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (13.5%)
+  └─ Processed 17 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (14.3%)
+  └─ Processed 18 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (15.1%)
+  └─ Processed 19 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (15.9%)
+  └─ Processed 20 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (16.7%)
+  └─ Processed 21 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (17.5%)
+  └─ Processed 22 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (18.3%)
+  └─ Processed 23 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (19.0%)
+  └─ Processed 24 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (19.8%)
+  └─ Processed 25 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (20.6%)
+  └─ Processed 26 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (21.4%)
+  └─ Processed 27 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (22.2%)
+  └─ Processed 28 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (23.0%)
+  └─ Processed 29 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (23.8%)
+  └─ Processed 30 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (24.6%)
+  └─ Processed 31 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (25.4%)
+  └─ Processed 32 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (26.2%)
+  └─ Processed 33 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (27.0%)
+  └─ Processed 34 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (27.8%)
+  └─ Processed 35 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (28.6%)
+  └─ Processed 36 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (29.4%)
+  └─ Processed 37 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (30.2%)
+  └─ Processed 38 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (31.0%)
+  └─ Processed 39 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (31.7%)
+  └─ Processed 40 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (32.5%)
+  └─ Processed 41 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (33.3%)
+  └─ Processed 42 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (34.1%)
+  └─ Processed 43 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (34.9%)
+  └─ Processed 44 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (35.7%)
+  └─ Processed 45 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (36.5%)
+  └─ Processed 46 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (37.3%)
+  └─ Processed 47 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (38.1%)
+  └─ Processed 48 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (38.9%)
+  └─ Processed 49 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (39.7%)
+  └─ Processed 50 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (40.5%)
+  └─ Processed 51 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (41.3%)
+  └─ Processed 52 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (42.1%)
+  └─ Processed 53 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (42.9%)
+  └─ Processed 54 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (43.7%)
+  └─ Processed 55 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (44.4%)
+  └─ Processed 56 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (45.2%)
+  └─ Processed 57 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (46.0%)
+  └─ Processed 58 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (46.8%)
+  └─ Processed 59 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (47.6%)
+  └─ Processed 60 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (48.4%)
+  └─ Processed 61 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (49.2%)
+  └─ Processed 62 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (50.0%)
+  └─ Processed 63 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (50.8%)
+  └─ Processed 64 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (51.6%)
+  └─ Processed 65 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (52.4%)
+  └─ Processed 66 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (53.2%)
+  └─ Processed 67 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (54.0%)
+  └─ Processed 68 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (54.8%)
+  └─ Processed 69 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (55.6%)
+  └─ Processed 70 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (56.3%)
+  └─ Processed 71 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (57.1%)
+  └─ Processed 72 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (57.9%)
+  └─ Processed 73 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (58.7%)
+  └─ Processed 74 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (59.5%)
+  └─ Processed 75 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (60.3%)
+  └─ Processed 76 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (61.1%)
+  └─ Processed 77 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (61.9%)
+  └─ Processed 78 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (62.7%)
+  └─ Processed 79 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (63.5%)
+  └─ Processed 80 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (64.3%)
+  └─ Processed 81 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (65.1%)
+  └─ Processed 82 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (65.9%)
+  └─ Processed 83 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (66.7%)
+  └─ Processed 84 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (67.5%)
+  └─ Processed 85 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (68.3%)
+  └─ Processed 86 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (69.0%)
+  └─ Processed 87 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (69.8%)
+  └─ Processed 88 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (70.6%)
+  └─ Processed 89 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (71.4%)
+  └─ Processed 90 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (72.2%)
+  └─ Processed 91 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (73.0%)
+  └─ Processed 92 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (73.8%)
+  └─ Processed 93 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (74.6%)
+  └─ Processed 94 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (75.4%)
+  └─ Processed 95 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (76.2%)
+  └─ Processed 96 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (77.0%)
+  └─ Processed 97 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (77.8%)
+  └─ Processed 98 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (78.6%)
+  └─ Processed 99 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (79.4%)
+  └─ Processed 100 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (80.2%)
+  └─ Processed 101 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (81.0%)
+  └─ Processed 102 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (81.7%)
+  └─ Processed 103 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (82.5%)
+  └─ Processed 104 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (83.3%)
+  └─ Processed 105 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (84.1%)
+  └─ Processed 106 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (84.9%)
+  └─ Processed 107 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (85.7%)
+  └─ Processed 108 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (86.5%)
+  └─ Processed 109 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (87.3%)
+  └─ Processed 110 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (88.1%)
+  └─ Processed 111 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (88.9%)
+  └─ Processed 112 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (89.7%)
+  └─ Processed 113 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (90.5%)
+  └─ Processed 114 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (91.3%)
+  └─ Processed 115 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (92.1%)
+  └─ Processed 116 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (92.9%)
+  └─ Processed 117 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (93.7%)
+  └─ Processed 118 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (94.4%)
+  └─ Processed 119 of 126 files. Found 0 queries from 0 files.
+- Generating query types… (95.2%)
+  └─ Processed 120 of 126 files. Found 2 queries from 1 file.
+- Generating query types… (96.0%)
+  └─ Processed 121 of 126 files. Found 2 queries from 1 file.
+- Generating query types… (96.8%)
+  └─ Processed 122 of 126 files. Found 2 queries from 1 file.
+- Generating query types… (97.6%)
+  └─ Processed 123 of 126 files. Found 2 queries from 1 file.
+- Generating query types… (98.4%)
+  └─ Processed 124 of 126 files. Found 2 queries from 1 file.
+- Generating query types… (99.2%)
+  └─ Processed 125 of 126 files. Found 2 queries from 1 file.
+✔ Successfully generated types to /Users/devontaft/Documents/Projects/Client/infusion-diffusion/src/sanity/generated.ts in 848ms
+  └─ 2 queries and 14 schema types
+  └─ found queries in 1 file after evaluating 126 files
+  └─ formatted the generated code with prettier
+exit: 0
