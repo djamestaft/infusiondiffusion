@@ -13,8 +13,8 @@
 
 .scroll-reveal[data-reveal-state="visible"] {
   transition:
-    opacity 1100ms cubic-bezier(0.16, 1, 0.3, 1),
-    clip-path 1450ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 2200ms cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 2900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal[data-reveal-variant="rise"][data-reveal-state="waiting"]
@@ -32,7 +32,7 @@
 .scroll-reveal[data-reveal-variant="rise"][data-reveal-state="visible"]
   > section
   > * {
-  transition: transform 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 2800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal[data-reveal-variant="unveil"][data-reveal-state="waiting"] {
@@ -55,22 +55,22 @@
 
 .scroll-reveal[data-reveal-variant="unveil"][data-reveal-state="visible"] {
   transition:
-    opacity 1250ms cubic-bezier(0.16, 1, 0.3, 1),
-    clip-path 1750ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 2500ms cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 3500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal[data-reveal-variant="unveil"][data-reveal-state="visible"]
   > section
   > div
   > * {
-  transition: transform 1650ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 3300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal[data-reveal-variant="unveil"][data-reveal-state="visible"]
   > section
   > div
   > :nth-child(2) {
-  transition-delay: 120ms;
+  transition-delay: 240ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

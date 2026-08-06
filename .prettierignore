@@ -6,3 +6,5 @@ test-results
 pnpm-lock.yaml
 src/sanity/extract.json
 .agents/skills/impeccable
+adws/**
+.agents/skills/sssf/**
