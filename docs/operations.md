@@ -17,11 +17,12 @@ Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; n
 
 ## Release gate
 
-1. CI passes formatting, lint, types, Vitest, Storybook tests/build, Next build, and Playwright.
-2. Reviewer confirms acceptance criteria, accessibility, security boundaries, and screenshots.
-3. Browser release debugger verifies the Vercel Preview and `/api/health`.
-4. A human approves and merges the pull request.
-5. Verify production homepage, metadata, health, content publishing, and runtime logs.
+1. After every pull-request push, run `just pr-gate <PR number>`. Do not call the handoff ready, request merge, or move to Preview review until the factory records GitHub's required `quality` check as passed. Pending, missing, skipped, cancelled, timed-out, or failed checks are red gates.
+2. CI passes formatting, lint, types, Vitest, Storybook tests/build, Next build, and Playwright.
+3. Reviewer confirms acceptance criteria, accessibility, security boundaries, and screenshots.
+4. Browser release debugger verifies the Vercel Preview and `/api/health`.
+5. A human approves and merges the pull request.
+6. Verify production homepage, metadata, health, content publishing, and runtime logs.
 
 ## Human approval points
 
