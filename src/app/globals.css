@@ -213,6 +213,7 @@
   --color-badge-neutral-border: var(--badge-neutral-border);
   --color-badge-accent-surface: var(--badge-accent-surface);
   --color-badge-accent-foreground: var(--badge-accent-foreground);
+  --color-bone-50: var(--bone-50);
   --color-content-primary: var(--content-primary);
   --color-content-secondary: var(--content-secondary);
   --color-content-accent: var(--content-accent);
@@ -371,6 +372,7 @@
   --badge-neutral-border: rgb(60 59 53 / 72%);
   --badge-accent-surface: #11110f;
   --badge-accent-foreground: #fcfaf5;
+  --bone-50: #f5f1e8;
   --content-primary: #11110f;
   --content-secondary: #3c3b35;
   --content-accent: #735716;

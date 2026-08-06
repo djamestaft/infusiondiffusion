@@ -1,0 +1,80 @@
+
+Running 8 tests using 4 workers
+
+(node:56227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56226) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly (1.9s)
+  ✓  1 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at desktop (2.0s)
+  ✓  2 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at small (2.1s)
+  ✓  4 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at mobile (2.1s)
+(node:56250) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56251) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:56253) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at desktop (1.8s)
+  ✘  8 [mobile] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly (1.6s)
+  ✓  6 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at mobile (1.8s)
+  ✓  7 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at small (1.7s)
+
+
+  1) [chromium] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 4
+
+    - Array []
+    + Array [
+    +   "Access to resource at 'https://j222nd1i.api.sanity.io/v2026-07-01/data/live/events/production?tag=next-loader.live.cache-components' from origin 'http://localhost:3122' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    +   "Failed to load resource: net::ERR_FAILED",
+    + ]
+
+      36 |     .analyze();
+      37 |   expect(results.violations).toEqual([]);
+    > 38 |   expect(consoleErrors).toEqual([]);
+         |                         ^
+      39 | });
+      40 |
+        at /Users/devontaft/Documents/Projects/Client/infusion-diffusion/tests/e2e/fragrance-guide.spec.ts:38:25
+
+    Error Context: test-results/fragrance-guide-renders-th-d8271--fragrance-guide-accessibly-chromium/error-context.md
+
+  2) [mobile] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 4
+
+    - Array []
+    + Array [
+    +   "Access to resource at 'https://j222nd1i.api.sanity.io/v2026-07-01/data/live/events/production?tag=next-loader.live.cache-components' from origin 'http://localhost:3122' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    +   "Failed to load resource: net::ERR_FAILED",
+    + ]
+
+      36 |     .analyze();
+      37 |   expect(results.violations).toEqual([]);
+    > 38 |   expect(consoleErrors).toEqual([]);
+         |                         ^
+      39 | });
+      40 |
+        at /Users/devontaft/Documents/Projects/Client/infusion-diffusion/tests/e2e/fragrance-guide.spec.ts:38:25
+
+    Error Context: test-results/fragrance-guide-renders-th-d8271--fragrance-guide-accessibly-mobile/error-context.md
+
+  2 failed
+    [chromium] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly 
+    [mobile] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly 
+  6 passed (5.2s)
+exit: 1

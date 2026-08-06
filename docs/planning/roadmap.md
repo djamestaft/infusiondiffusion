@@ -263,7 +263,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 
 1. Register the business, resolve the South African tax position, and select and configure the real payment provider before enabling hosted checkout.
 2. Review the integrated Fragrance Guide on protected Vercel Preview, then create and publish its `fragrance-guide` editorial document in Sanity.
-3. Shape and implement a Sanity-managed About page that develops the approved founder story without duplicating commerce data.
+3. Review the Sanity-managed About page on protected Vercel Preview, then create and publish its rights-cleared editorial document.
 4. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
 5. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
 

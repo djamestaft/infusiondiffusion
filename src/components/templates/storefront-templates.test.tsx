@@ -6,6 +6,7 @@ import {
   EditorialTemplate,
   HomeTemplate,
   ProductDetailTemplate,
+  AboutTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -211,6 +212,109 @@ describe("storefront templates", () => {
       "Choosing home fragrance",
     );
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
+
+  it("renders the approved About hierarchy, surfaces, CTA and current navigation", () => {
+    render(
+      <AboutTemplate
+        title="The story behind the atmosphere."
+        introduction="A considered collection."
+        cartCount={2}
+        chapters={[
+          {
+            role: "origin",
+            heading: "Born from fragrance",
+            body: "A factual origin.",
+          },
+          {
+            role: "development",
+            heading: "From more than 130 oils to six fragrances",
+            body: "A factual development.",
+          },
+          {
+            role: "collaborator",
+            heading: "Guidance and encouragement",
+            body: "A factual credit.",
+          },
+          {
+            role: "principles",
+            heading: "Composed for lived-in rooms",
+            body: "A factual principle.",
+          },
+        ]}
+      />,
+    );
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "The story behind",
+    );
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(5);
+    expect(
+      screen.getByRole("link", { name: "About", current: "page" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: /Explore the Fragrance Guide/i }),
+    ).toHaveAttribute("href", "/fragrance-guide");
+    expect(screen.getByTestId("about-chapter-origin")).toHaveClass(
+      "bg-bone-50",
+    );
+    expect(screen.getByTestId("about-chapter-development")).toHaveClass(
+      "bg-content-surface",
+    );
+    expect(screen.getByTestId("about-chapter-collaborator")).toHaveClass(
+      "bg-bone-50",
+    );
+    expect(screen.getByTestId("about-chapter-principles")).toHaveClass(
+      "bg-content-surface",
+    );
+    expect(screen.getByRole("link", { name: "Shop" })).not.toHaveAttribute(
+      "aria-current",
+    );
+    expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
+      2,
+    );
+  });
+
+  it("keeps portrait FIT media inside independent 4:3 slots", () => {
+    render(
+      <AboutTemplate
+        title="About"
+        introduction="Lead"
+        chapters={[
+          {
+            role: "origin",
+            heading: "Origin",
+            body: "Body",
+            image: { src: "data:image/svg+xml,test", alt: "Test portrait" },
+          },
+          { role: "development", heading: "Development", body: "Body" },
+          { role: "collaborator", heading: "Collaborator", body: "Body" },
+          { role: "principles", heading: "Principles", body: "Body" },
+        ]}
+      />,
+    );
+    expect(screen.getByTestId("about-media-slot-origin")).toHaveClass(
+      "aspect-4/3",
+    );
+    expect(screen.getByTestId("about-media-artwork-origin")).toHaveClass(
+      "aspect-3/4",
+      "mx-auto",
+      "h-full",
+    );
+    expect(screen.getByRole("img", { name: "Test portrait" })).toHaveClass(
+      "object-contain",
+    );
+    expect(
+      screen.queryByTestId("about-media-slot-development"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId("about-chapter-development").firstElementChild,
+    ).toHaveClass("text-center");
+    const origin = screen.getByTestId("about-chapter-origin");
+    const heading = origin.querySelector("h2")!;
+    const image = screen.getByRole("img", { name: "Test portrait" });
+    expect(heading.compareDocumentPosition(image)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   });
 
   it("renders editor-owned context and the live cart state", () => {

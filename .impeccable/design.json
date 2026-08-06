@@ -127,6 +127,18 @@
       "navigationLogoSecondaryMobile": {
         "displayName": "Navigation Logo Secondary Mobile",
         "purpose": "Approved DIFFUSION lettering in the mobile lockup."
+      },
+      "aboutDisplay": {
+        "displayName": "About Display",
+        "purpose": "Approved About H1: 56px desktop / 40px mobile."
+      },
+      "aboutChapter": {
+        "displayName": "About Chapter",
+        "purpose": "Approved About chapter H2: 34px desktop / 26px mobile."
+      },
+      "aboutLead": {
+        "displayName": "About Lead",
+        "purpose": "Approved About lead and CTA body: 20px desktop / 17px mobile."
       }
     },
     "shadows": [
@@ -154,8 +166,14 @@
       }
     ],
     "breakpoints": [
-      { "name": "mobile", "value": "< 768px" },
-      { "name": "desktop", "value": ">= 768px" }
+      {
+        "name": "mobile",
+        "value": "< 768px"
+      },
+      {
+        "name": "desktop",
+        "value": ">= 768px"
+      }
     ]
   },
   "components": [
@@ -240,7 +258,7 @@
       "name": "ProductCard",
       "kind": "custom",
       "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, composed PriceDisplay, material commerce status, and a full-card focus ring.",
-      "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER · 200ML</p><h3>Bois de Santal</h3><p>Cardamom · rose · sandalwood</p><strong>R 420</strong></div></a>",
+      "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER \u00b7 200ML</p><h3>Bois de Santal</h3><p>Cardamom \u00b7 rose \u00b7 sandalwood</p><strong>R 420</strong></div></a>",
       "css": ".ds-product-card { display: grid; grid-template-rows: auto 1fr; width: 100%; max-width: 288px; padding: 2px; border-radius: 4px; background: var(--product-card-surface); color: var(--product-card-text); text-decoration: none; } .ds-product-card img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 4px 4px 0 0; } .ds-product-card:focus-visible { outline: 2px solid var(--product-card-focus); outline-offset: -2px; } .ds-product-card h3, .ds-product-card div > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }"
     },
     {
@@ -261,7 +279,7 @@
       "name": "Navigation",
       "kind": "custom",
       "description": "The approved responsive storefront header with the editable text lockup as its production brand mark, primary destinations, account and cart utilities, and a full-height accessible mobile drawer. Ivory uses a Bone Light surface and Antique Gold bottom edge above the Porcelain page canvas; Midnight uses Deep Ink. The ornamental artwork is deferred reference material, not a release dependency.",
-      "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION — DIFFUSION —</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
+      "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION \u2014 DIFFUSION \u2014</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
       "css": ".ds-navigation { min-height: 80px; padding-inline: 20px; background: var(--navigation-surface); color: var(--navigation-text); border-bottom: 1px solid var(--navigation-divider); } .ds-navigation a, .ds-navigation button { min-width: 44px; min-height: 44px; } .ds-navigation :focus-visible { outline: 2px solid var(--navigation-focus); outline-offset: 2px; } @media (min-width: 1024px) { .ds-navigation { min-height: 104px; padding-inline: 32px; } }"
     },
     {
@@ -305,6 +323,11 @@
       "description": "Approved responsive Home, Collection, Product detail, and Editorial compositions with independently selectable Ivory or Midnight Navigation and provisional product fixtures. Home keeps its hero on the base content surface; the full-width Cabinet band and Collection browsing canvas use the dedicated elevated content surface while ProductCards retain their base surface.",
       "html": "<main class=\"ds-storefront-template\"><section>Hero on base surface</section><section class=\"ds-cabinet-band\"><div>A cabinet of atmosphere</div></section></main>",
       "css": ".ds-storefront-template { min-height: 100dvh; background: var(--content-surface); color: var(--content-primary); } .ds-storefront-template > section:not(.ds-cabinet-band), .ds-cabinet-band > div { width: min(100% - 40px, 1280px); margin-inline: auto; } .ds-cabinet-band { width: 100%; background: var(--content-surface-elevated); } .ds-cabinet-band > div { padding-block: 52px 64px; } @media (min-width: 1024px) { .ds-storefront-template > section:not(.ds-cabinet-band), .ds-cabinet-band > div { width: min(100% - 96px, 1280px); } .ds-cabinet-band > div { padding-block: 72px 96px; } }"
+    },
+    {
+      "name": "AboutTemplate",
+      "kind": "custom",
+      "description": "Approved fully light four-chapter About composition. Canonical Bone uses bg-bone-50; optional portrait artwork is centered 3:4 FIT/contain inside a 4:3 slot."
     }
   ],
   "narrative": {
@@ -336,6 +359,11 @@
         "name": "The One Depth Signal Rule",
         "body": "Use a border or a shadow on a surface, not both.",
         "section": "elevation"
+      },
+      {
+        "name": "About portrait FIT rule",
+        "body": "About media preserves whole 3:4 portraits centered in 4:3 slots; no cover crop or placeholder. Authority: Figma 316:198.",
+        "section": "about"
       }
     ],
     "dos": [

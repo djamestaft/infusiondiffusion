@@ -43,7 +43,9 @@ pinned before the first commit phase and printed in the request phase.
 """
 
 import argparse
+import json
 import sys
+from pathlib import Path
 
 from adw_modules import agents, changes, gates, git_helper, quality, session, utils
 from adw_modules.data_types import (AgentCall, BuildOutput, ChangeCapture,
@@ -62,7 +64,8 @@ DOCUMENT_NOTES = ("Read diff_path in full before writing. Document only what the
                   "describes.")
 
 
-def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None) -> int:
+def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None,
+         resume_after_plan: bool = False) -> int:
     cfg = agents.load_config(config)
     agents.validate(cfg, REQUIRED_AGENTS)
     run = session.ensure(cfg, adw_id)
@@ -83,22 +86,35 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
                                description="Capture the incoming ask")) as ph:
         ph.log(input=prompt, baseline=git_helper.short_sha(baseline))
 
-    with run.phase(PhaseParams(name="plan", kind="agent", owner="planner",
-                               description="Turn the request into an implementable plan")) as ph:
-        plan = ph.call(AgentCall(output_type=PlanOutput, prompt=prompt,
-                                 gates=[gates.artifacts_exist, gates.files_non_empty]))
+    if resume_after_plan:
+        if not adw_id:
+            raise ValueError("--resume-after-plan requires --adw-id")
+        envelope_path = Path(cfg.defaults.data_dir) / "sessions" / adw_id / "planner" / "envelope.json"
+        if not envelope_path.is_file():
+            raise FileNotFoundError(f"cannot resume: planner envelope not found at {envelope_path}")
+        plan = PlanOutput.model_validate(json.loads(envelope_path.read_text()))
+        with run.phase(PhaseParams(name="resume_plan", kind="code", owner="factory",
+                                   description="Reuse the committed validated plan and continue at specialist review")) as ph:
+            ph.log(envelope=str(envelope_path), summary=plan.summary)
+    else:
+        with run.phase(PhaseParams(name="plan", kind="agent", owner="planner",
+                                   description="Turn the request into an implementable plan")) as ph:
+            plan = ph.call(AgentCall(output_type=PlanOutput, prompt=prompt,
+                                     gates=[gates.artifacts_exist, gates.files_non_empty]))
 
-    with run.phase(PhaseParams(name="commit_plan", kind="code", owner="git",
-                               description="Put the spec on record before any code exists to blur it")) as ph:
-        commit(ph, plan)
+        with run.phase(PhaseParams(name="commit_plan", kind="code", owner="git",
+                                   description="Put the spec on record before any code exists to blur it")) as ph:
+            commit(ph, plan)
 
     for specialist in plan.advisory_specialists:
         with run.phase(PhaseParams(
                 name=f"advise_{specialist}", kind="agent", owner=specialist,
                 description="Inspect the plan through the selected specialist boundary before implementation")) as ph:
+            advice_gates = [gates.artifacts_exist, gates.files_non_empty]
+            if specialist == "product_designer":
+                advice_gates.append(gates.figma_handoff_complete)
             advice = ph.call(AgentCall(output_type=SpecialistOutput, prompt=prompt,
-                                       previous=plan,
-                                       gates=[gates.artifacts_exist]))
+                                       previous=plan, gates=advice_gates))
             if not advice.ready:
                 return run.finish(accepted=False,
                                   reason=f"{specialist} reported blocking findings: "
@@ -198,5 +214,8 @@ if __name__ == "__main__":
     parser.add_argument("prompt", help="inline text or a path to a prompt file")
     parser.add_argument("--config", default="adws/adw_sssf_config/sssf.config.yaml")
     parser.add_argument("--adw-id", default=None, help="join or pin an existing session")
+    parser.add_argument("--resume-after-plan", action="store_true",
+                        help="reuse this session's validated planner envelope and continue with specialists")
     args = parser.parse_args()
-    sys.exit(main(utils.resolve_prompt(args.prompt), args.config, args.adw_id))
+    sys.exit(main(utils.resolve_prompt(args.prompt), args.config, args.adw_id,
+                  args.resume_after_plan))

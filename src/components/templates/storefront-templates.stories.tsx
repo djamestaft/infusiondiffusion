@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, within } from "storybook/test";
 
 import {
+  AboutTemplate,
   CollectionTemplate,
   EditorialTemplate,
   HomeTemplate,
@@ -22,6 +23,44 @@ const productDetails = [
     value: "Calculated at checkout for South African addresses",
   },
 ];
+const portraitFixture = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="480" height="640"><rect width="480" height="640" fill="#DDE2D4"/><path d="M120 120h240v400H120z" fill="#EEF0E7"/></svg>')}`;
+const aboutChapters = [
+  {
+    role: "origin" as const,
+    heading: "Born from fragrance",
+    body: "A factual origin.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "development" as const,
+    heading: "From more than 130 oils to six fragrances",
+    body: "A factual development.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "collaborator" as const,
+    heading: "Guidance and encouragement",
+    body: "A factual credit.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "principles" as const,
+    heading: "Composed for lived-in rooms",
+    body: "A factual principle.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+];
+
+const maximumAboutTitle =
+  "The story behind the atmosphere, the rooms we return to, and the rituals that make them feel like home";
+const maximumAboutLead =
+  "A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in and the changing rituals that give each interior its character, from early mornings in active kitchens to the slower evenings when a familiar room becomes a place to settle, reflect and welcome the people we love.";
+const maximumAboutBody = Array.from(
+  { length: 5 },
+  (_, index) =>
+    `This complete editorial paragraph ${index + 1} keeps the long-content fixture grounded in a believable reading experience, describing how fragrance can become part of a lived-in room without changing the fixed narrative order, hiding information, or relying on a fixed-height container.`,
+).join("\n\n");
+
 const variants = [
   { id: "200ml", label: "200ml diffuser", available: true },
   { id: "refill", label: "200ml refill", available: false },
@@ -250,6 +289,190 @@ export const ProductDetailBrowseOnly: Story = {
       description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
       details={productDetails}
       showPurchaseAction={false}
+    />
+  ),
+};
+
+export const About: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={[
+        {
+          role: "origin",
+          heading: "Born from fragrance",
+          body: "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",
+        },
+        {
+          role: "development",
+          heading: "From more than 130 oils to six fragrances",
+          body: "More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances.",
+        },
+        {
+          role: "collaborator",
+          heading: "Guidance and encouragement",
+          body: "The collection was created with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts.",
+        },
+        {
+          role: "principles",
+          heading: "Composed for lived-in rooms",
+          body: "Infusion Diffusion treats scent as a considered part of an interior.",
+        },
+      ]}
+      cartCount={2}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("link", { name: "About", current: "page" }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("link", { name: /Explore the Fragrance Guide/i }),
+    ).toHaveAttribute("href", "/fragrance-guide");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-origin"))
+        .backgroundColor,
+    ).toBe("rgb(245, 241, 232)");
+  },
+};
+export const AboutWithPortraits: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={aboutChapters}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const slot = canvas.getByTestId("about-media-slot-origin");
+    const artwork = canvas.getByTestId("about-media-artwork-origin");
+    await expect(slot).toHaveClass("aspect-4/3");
+    await expect(artwork).toHaveClass("aspect-3/4", "mx-auto", "h-full");
+    const slotBounds = slot.getBoundingClientRect();
+    const artworkBounds = artwork.getBoundingClientRect();
+    await expect(slotBounds.width / slotBounds.height).toBeCloseTo(4 / 3, 2);
+    await expect(artworkBounds.width / artworkBounds.height).toBeCloseTo(
+      3 / 4,
+      2,
+    );
+    await expect(artworkBounds.left - slotBounds.left).toBeCloseTo(
+      slotBounds.right - artworkBounds.right,
+      1,
+    );
+    const portraits = canvas.getAllByRole("img", {
+      name: "Test-only portrait fixture",
+    });
+    await expect(portraits).toHaveLength(4);
+    for (const portrait of portraits) {
+      await expect(portrait).toHaveClass("object-contain");
+    }
+    await expect(getComputedStyle(slot).backgroundColor).toBe(
+      "rgba(0, 0, 0, 0)",
+    );
+    await expect(getComputedStyle(slot).boxShadow).toBe("none");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-origin"))
+        .backgroundColor,
+    ).toBe("rgb(245, 241, 232)");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-development"))
+        .backgroundColor,
+    ).toBe("rgb(238, 240, 231)");
+    await expect(canvasElement.querySelector(".dark")).toBeNull();
+    await expect(canvas.queryByText(/ROLE [A-D]/)).toBeNull();
+  },
+};
+export const AboutPortraitsMobile: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: AboutWithPortraits.render,
+  play: AboutWithPortraits.play,
+};
+export const AboutOnePortrait: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection."
+      chapters={aboutChapters.map((chapter, index) =>
+        index ? { ...chapter, image: undefined } : chapter,
+      )}
+    />
+  ),
+};
+export const AboutAlternatingPortraits: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection."
+      chapters={aboutChapters.map((chapter, index) =>
+        index % 2 ? { ...chapter, image: undefined } : chapter,
+      )}
+    />
+  ),
+};
+export const AboutPartialUnavailable: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A partial Sanity response retains valid chapters and safe text-first fallbacks."
+      chapters={aboutChapters.map((chapter, index) =>
+        index === 1
+          ? { ...chapter, image: undefined, body: "A partial chapter body." }
+          : { ...chapter, image: undefined },
+      )}
+    />
+  ),
+};
+export const AboutUnavailable: Story = { render: About.render };
+
+export const AboutMobile: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: About.render,
+};
+export const AboutMaximumContent: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: () => (
+    <AboutTemplate
+      title={maximumAboutTitle}
+      introduction={maximumAboutLead}
+      chapters={aboutChapters.map((chapter) => ({
+        ...chapter,
+        image: undefined,
+        heading: `${chapter.heading} for rooms with a considered and exceptionally long editorial context`,
+        body: maximumAboutBody,
+      }))}
+    />
+  ),
+};
+export const AboutLongContent: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={[
+        {
+          role: "origin",
+          heading: "Born from fragrance",
+          body: "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.\n\nThis paragraph verifies natural expansion.",
+        },
+        {
+          role: "development",
+          heading: "From more than 130 oils to six fragrances",
+          body: "More than 130 fragrance oils were explored before refinement.",
+        },
+        {
+          role: "collaborator",
+          heading: "Guidance and encouragement",
+          body: "The collection was created with guidance and encouragement.",
+        },
+        {
+          role: "principles",
+          heading: "Composed for lived-in rooms",
+          body: "Scent is a considered part of an interior.",
+        },
+      ]}
     />
   ),
 };

@@ -24,3 +24,11 @@ describe("storefront surface tokens", () => {
     );
   });
 });
+
+describe("About canonical surfaces", () => {
+  it("maps approved Bone directly and keeps Sage semantic", () => {
+    expect(styles).toMatch(/--color-bone-50:\s*var\(--bone-50\)/);
+    expect(styles).toMatch(/--bone-50:\s*#f5f1e8;/);
+    expect(styles).toMatch(/--content-surface:\s*#eef0e7;/);
+  });
+});

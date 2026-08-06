@@ -41,8 +41,27 @@ export type EditorialPage = {
     _type: "image";
   };
   sections?: Array<{
+    role?: "origin" | "development" | "collaborator" | "principles";
     heading?: string;
     body?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      sourceOwner?: string;
+      storefrontRightsConfirmed?: boolean;
+      territory?: string;
+      rightsDuration?: "Perpetual" | "Expiry recorded";
+      expiryDate?: string;
+      releaseStatus?:
+        | "Not applicable"
+        | "Model release recorded"
+        | "Property release recorded";
+      licenceReference?: string;
+      _type: "image";
+    };
     _type: "editorialSection";
     _key: string;
   }>;
@@ -254,7 +273,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      "heroSlides": heroSlides[visible != false]{        "id": _key,        "src": image.asset->url,        "hotspot": image.hotspot,        alt,        caption      },      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText,      "showServiceReassurance": coalesce(showServiceReassurance, true),      serviceTitle,      serviceIntroduction,      "showFounderStory": coalesce(showFounderStory, true),      founderTitle,      founderStory,      "founderImage": founderImage{        "src": asset->url,        alt      },      "showLongevity": coalesce(showLongevity, true),      longevityTitle,      longevityIntroduction,      longevityConditions,      "showCollectionInvitation": coalesce(showCollectionInvitation, true),      collectionInvitationTitle,      collectionInvitationIntroduction,      collectionInvitationActionLabel    }  }
+// Query: *[_type == "siteSettings"][0]{ brandName, eyebrow, "announcement": { "enabled": coalesce(announcementEnabled, false), "message": announcementMessage, "linkLabel": announcementLinkLabel, "linkUrl": announcementLinkUrl }, headline, introduction, contactEmail, callToActionLabel, seoTitle, seoDescription, homepage{ heroTitle, heroIntroduction, heroActionLabel, "heroSlides": heroSlides[visible != false]{ "id": _key, "src": image.asset->url, "hotspot": image.hotspot, alt, caption }, collectionTitle, guidanceEyebrow, guidanceTitle, guidanceIntroduction, guidanceActionLabel, guidanceSupportingText, "showServiceReassurance": coalesce(showServiceReassurance, true), serviceTitle, serviceIntroduction, "showFounderStory": coalesce(showFounderStory, true), founderTitle, founderStory, "founderImage": founderImage{ "src": asset->url, alt }, "showLongevity": coalesce(showLongevity, true), longevityTitle, longevityIntroduction, longevityConditions, "showCollectionInvitation": coalesce(showCollectionInvitation, true), collectionInvitationTitle, collectionInvitationIntroduction, collectionInvitationActionLabel } }
 export type SITE_SETTINGS_QUERY_RESULT = {
   brandName: string | null;
   eyebrow: string | null;
@@ -310,7 +329,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: EDITORIAL_PAGE_QUERY
-// Query: *[_type == "editorialPage" && slug.current == $slug][0]{    eyebrow,    title,    introduction,    "image": heroImage{      "src": asset->url,      alt    },    sections[]{      heading,      body    },    seoTitle,    seoDescription  }
+// Query: *[_type == "editorialPage" && slug.current == $slug][0]{    eyebrow, title, introduction, "image": heroImage{ "src": asset->url, alt },    sections[]{ _key, role, heading, body, "image": image{ "src": asset->url, alt, storefrontRightsConfirmed, hotspot, crop } },    seoTitle, seoDescription  }
 export type EDITORIAL_PAGE_QUERY_RESULT = {
   eyebrow: string | null;
   title: string | null;
@@ -320,8 +339,17 @@ export type EDITORIAL_PAGE_QUERY_RESULT = {
     alt: string | null;
   } | null;
   sections: Array<{
+    _key: string;
+    role: "collaborator" | "development" | "origin" | "principles" | null;
     heading: string | null;
     body: string | null;
+    image: {
+      src: string | null;
+      alt: string | null;
+      storefrontRightsConfirmed: boolean | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
   }> | null;
   seoTitle: string | null;
   seoDescription: string | null;

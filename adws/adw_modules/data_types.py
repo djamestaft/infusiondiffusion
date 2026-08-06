@@ -103,6 +103,7 @@ class SpecialistOutput(EnvelopeBase):
     ready: bool = False
     findings: list[str] = Field(default_factory=list)
     blocking: list[str] = Field(default_factory=list)
+    figma_evidence: list[str] = Field(default_factory=list)
 
 
 class BuildOutput(EnvelopeBase):
@@ -185,6 +186,24 @@ class QualityResult(BaseModel):
     checks: list[QualityCheckResult] = Field(default_factory=list)
     failures: list[str] = Field(default_factory=list)
     artifacts: list[str] = Field(default_factory=list)
+
+
+class PullRequestCheck(BaseModel):
+    """One GitHub pull-request check as reported by gh."""
+
+    name: str
+    state: str
+    bucket: str
+    link: str = ""
+    workflow: str = ""
+
+
+class PullRequestGateResult(BaseModel):
+    """Deterministic verdict for the required post-push GitHub checks."""
+
+    passed: bool
+    checks: list[PullRequestCheck] = Field(default_factory=list)
+    failures: list[str] = Field(default_factory=list)
 
 
 # ── Change capture (git diff, deterministic) ─────────────────────────────────

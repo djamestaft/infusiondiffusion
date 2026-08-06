@@ -1,0 +1,7 @@
+
+> infusion-diffusion@0.1.0 sanity:schema /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+> sanity schema extract --path=./src/sanity/extract.json --force
+
+- Extracting schema
+✔ Extracted schema to /Users/devontaft/Documents/Projects/Client/infusion-diffusion/src/sanity/extract.json
+exit: 0
