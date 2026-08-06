@@ -158,43 +158,62 @@ export function HeroCarousel({
       aria-label="Homepage campaign imagery"
       data-autoplay={canAutoplay ? "running" : "paused"}
     >
-      <div
-        className="border-content-accent/25 border p-2"
-        data-testid="hero-carousel-stage"
-      >
-        <div
-          className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-lg"
-          data-testid="hero-carousel-media"
-        >
-          {slides.map((slide, index) => (
-            <Image
-              key={slide.id}
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              priority={index === 0}
-              loading={index === 0 ? "eager" : "lazy"}
-              sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-              className={cn(
-                "object-cover transition-opacity duration-500 motion-reduce:transition-none",
-                index === active
-                  ? "opacity-100"
-                  : "pointer-events-none opacity-0",
-              )}
-              style={{
-                objectPosition: slide.hotspot
-                  ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
-                  : undefined,
-              }}
-              onError={() => markFailed(index)}
-            />
-          ))}
-          {loading ? (
-            <div
-              className="bg-product-card-media-fallback absolute inset-0 animate-pulse motion-reduce:animate-none"
-              aria-hidden="true"
-            />
-          ) : null}
+      <div className="relative p-3 lg:p-5" data-testid="hero-carousel-stage">
+        <div className="relative" data-testid="hero-carousel-bracket-envelope">
+          <span
+            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -left-2 size-10 rounded-tl-[8px] border-t-2 border-l-2 lg:-top-3 lg:-left-3 lg:size-14"
+            data-testid="hero-carousel-bracket-top-left"
+            aria-hidden="true"
+          />
+          <span
+            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -right-2 size-10 rounded-tr-[8px] border-t-2 border-r-2 lg:-top-3 lg:-right-3 lg:size-14"
+            data-testid="hero-carousel-bracket-top-right"
+            aria-hidden="true"
+          />
+          <span
+            className="border-hero-carousel-bracket pointer-events-none absolute -bottom-2 -left-2 size-10 rounded-bl-[8px] border-b-2 border-l-2 lg:-bottom-3 lg:-left-3 lg:size-14"
+            data-testid="hero-carousel-bracket-bottom-left"
+            aria-hidden="true"
+          />
+          <span
+            className="border-hero-carousel-bracket pointer-events-none absolute -right-2 -bottom-2 size-10 rounded-br-[8px] border-r-2 border-b-2 lg:-right-3 lg:-bottom-3 lg:size-14"
+            data-testid="hero-carousel-bracket-bottom-right"
+            aria-hidden="true"
+          />
+          <div
+            className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-[8px]"
+            data-testid="hero-carousel-media"
+          >
+            {slides.map((slide, index) => (
+              <Image
+                key={slide.id}
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+                sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
+                className={cn(
+                  "object-cover transition-opacity duration-500 motion-reduce:transition-none",
+                  index === active
+                    ? "opacity-100"
+                    : "pointer-events-none opacity-0",
+                )}
+                style={{
+                  objectPosition: slide.hotspot
+                    ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
+                    : undefined,
+                }}
+                onError={() => markFailed(index)}
+              />
+            ))}
+            {loading ? (
+              <div
+                className="bg-product-card-media-fallback absolute inset-0 animate-pulse motion-reduce:animate-none"
+                aria-hidden="true"
+              />
+            ) : null}
+          </div>
         </div>
       </div>
       <figcaption className="sr-only">
@@ -202,7 +221,7 @@ export function HeroCarousel({
       </figcaption>
       {slides.length > 1 ? (
         <div
-          className="mt-3 flex items-center justify-center gap-1"
+          className="mt-5 flex items-center justify-center gap-1 lg:mt-6"
           data-testid="hero-carousel-controls"
         >
           <div className="flex" aria-label="Choose a hero slide">

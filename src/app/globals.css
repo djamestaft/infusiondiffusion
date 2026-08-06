@@ -190,6 +190,7 @@
   --color-navigation-muted: var(--navigation-muted);
   --color-navigation-accent: var(--navigation-accent);
   --color-navigation-divider: var(--navigation-divider);
+  --color-hero-carousel-bracket: var(--hero-carousel-bracket);
   --color-navigation-border: var(--navigation-border);
   --color-navigation-focus: var(--navigation-focus);
   --color-overlay-scrim: var(--overlay-scrim);
@@ -342,6 +343,11 @@
   --navigation-muted: #3c3b35;
   --navigation-accent: #735716;
   --navigation-divider: #c5a447;
+  --hero-carousel-bracket: color-mix(
+    in srgb,
+    var(--navigation-divider) 55%,
+    transparent
+  );
   --navigation-border: #dde2d4;
   --navigation-focus: #c5a447;
   --overlay-scrim: rgb(17 17 15 / 72%);
@@ -480,6 +486,11 @@
   --navigation-muted: #e8e2d5;
   --navigation-accent: #c5a447;
   --navigation-divider: #c5a447;
+  --hero-carousel-bracket: color-mix(
+    in srgb,
+    var(--navigation-divider) 55%,
+    transparent
+  );
   --navigation-border: #3c3b35;
   --navigation-focus: #ddc77f;
   --overlay-scrim: rgb(17 17 15 / 78%);

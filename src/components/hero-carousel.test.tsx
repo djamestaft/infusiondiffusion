@@ -118,16 +118,32 @@ describe("HeroCarousel", () => {
     });
   });
 
-  it("frames the image without overlays and centers one control group", () => {
+  it("frames the image with four external brackets and centers one control group", () => {
     render(<HeroCarousel slides={slides} />);
 
     const stage = screen.getByTestId("hero-carousel-stage");
     const media = screen.getByTestId("hero-carousel-media");
     const controls = screen.getByTestId("hero-carousel-controls");
-    expect(stage).toHaveClass("border", "p-2");
-    expect(media).toHaveClass("aspect-4/5", "overflow-hidden");
-    expect(media.querySelectorAll("span")).toHaveLength(0);
-    expect(controls).toHaveClass("justify-center");
+    expect(stage).toHaveClass("p-3", "lg:p-5");
+    expect(stage).not.toHaveClass("border");
+    expect(media).toHaveClass("aspect-4/5", "overflow-hidden", "rounded-[8px]");
+    const brackets = [
+      screen.getByTestId("hero-carousel-bracket-top-left"),
+      screen.getByTestId("hero-carousel-bracket-top-right"),
+      screen.getByTestId("hero-carousel-bracket-bottom-left"),
+      screen.getByTestId("hero-carousel-bracket-bottom-right"),
+    ];
+    expect(brackets).toHaveLength(4);
+    for (const bracket of brackets) {
+      expect(bracket).toHaveClass(
+        "absolute",
+        "size-10",
+        "lg:size-14",
+        "border-hero-carousel-bracket",
+      );
+      expect(bracket).not.toHaveClass("shadow", "bg-linear-to-r");
+    }
+    expect(controls).toHaveClass("justify-center", "mt-5", "lg:mt-6");
     expect(controls).toContainElement(
       screen.getByLabelText("Choose a hero slide"),
     );

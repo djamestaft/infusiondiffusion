@@ -26,7 +26,7 @@ Out of scope: commerce fields, per-slide headings or CTAs, video, infinite autop
 5. Pagination uses 44×44 targets. The active dot displays one eight-second progress ring; autoplay advances once, then stops.
 6. A separate pause/play control is present. Hover, focus within, page hiding, and manual interaction pause/stop autoplay. Reduced motion and Save-Data disable it.
 7. Assistive technology receives announcements only for manual slide selection. Controls use native buttons, visible focus, and explicit names.
-8. Antique Gold cabinet-register strokes remain inside the media at 10% opacity. Navigation's independent full-width canonical-gold bottom divider remains unchanged at desktop and mobile widths.
+8. Four independent continuous L-shaped corner brackets sit fully outside the media, using semantic Navigation-divider Antique Gold `#C5A447` at 55% opacity and a 2px stroke without shadow, glow, or gradient. Mobile uses 8px offsets, 40px arms, and 12px reserved clearance; desktop from `lg` uses 12px offsets, 56px arms, and 20px reserved clearance. Every bracket curve and the image use the same numeric 8px radius at both breakpoints. Brackets are absolute and non-layout, while the wrapper reserves clearance so they never overlay photo pixels. Pagination and pause/play form one centered group 20px below the mobile bracket envelope and 24px below it on desktop. Navigation's independent full-width canonical-gold bottom divider remains unchanged.
 9. Storybook includes desktop/mobile, one/two/three slides, progress, paused, reduced-motion, Save-Data, loading, long-content, empty, and image-failure states.
 10. Vitest covers behavior and normalization. Playwright covers the integrated H1/CTA, navigation divider, keyboard controls, 320px overflow, reduced motion, console errors, and axe.
 
@@ -39,6 +39,8 @@ Fewer than two valid visible slides restores the pre-carousel static Shopify her
 ## Human gates
 
 The product owner/editor must supply and publish final campaign photography. Protected `main` merge remains an explicit human action.
+
+The product owner approved the corner-bracket direction in code on 6 August 2026. The six HeroCarousel Figma states listed above still show the superseded internal-register treatment and must be synchronized before final visual sign-off; until then, code, `DESIGN.md`, runtime semantic tokens, and Storybook are synchronized while Figma is explicitly pending.
 
 The product owner subsequently approved the exact 220×64 outlined export of `LogoTextLockup` from Figma staging node `302:100`, traced to main component `162:96` and instance child `I296:101;169:2`. Runtime uses the transparent SVG geometry as a semantic-color mask inside the existing accessible home link, preserving Ivory and Midnight Navigation accents. This replaces only browser-rendered lettering geometry; Navigation's full-width semantic gold divider remains independent and unchanged.
 

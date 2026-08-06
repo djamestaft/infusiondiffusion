@@ -27,6 +27,34 @@ const slides: HeroCarouselSlide[] = [
   },
 ];
 
+async function verifyBracketLayout(canvasElement: HTMLElement) {
+  const canvas = within(canvasElement);
+  const stage = canvas.getByTestId("hero-carousel-stage");
+  const media = canvas.getByTestId("hero-carousel-media");
+  const controls = canvas.getByTestId("hero-carousel-controls");
+  const topLeft = canvas.getByTestId("hero-carousel-bracket-top-left");
+  const stageBounds = stage.getBoundingClientRect();
+  const mediaBounds = media.getBoundingClientRect();
+  const controlsBounds = controls.getBoundingClientRect();
+  const bracketBounds = topLeft.getBoundingClientRect();
+
+  await expect(mediaBounds.left).toBeGreaterThan(stageBounds.left);
+  await expect(mediaBounds.right).toBeLessThan(stageBounds.right);
+  await expect(bracketBounds.top).toBeLessThan(mediaBounds.top);
+  await expect(bracketBounds.left).toBeLessThan(mediaBounds.left);
+  await expect(controlsBounds.top).toBeGreaterThan(stageBounds.bottom);
+  await expect(
+    Math.abs(
+      controlsBounds.left +
+        controlsBounds.width / 2 -
+        (stageBounds.left + stageBounds.width / 2),
+    ),
+  ).toBeLessThan(1);
+  await expect(
+    canvas.getByRole("button", { name: "Pause carousel" }),
+  ).toBeVisible();
+}
+
 const meta = {
   title: "Components/HeroCarousel",
   component: HeroCarousel,
@@ -46,31 +74,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Desktop: Story = {
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const stage = canvas.getByTestId("hero-carousel-stage");
-    const media = canvas.getByTestId("hero-carousel-media");
-    const controls = canvas.getByTestId("hero-carousel-controls");
-    const stageBounds = stage.getBoundingClientRect();
-    const mediaBounds = media.getBoundingClientRect();
-    const controlsBounds = controls.getBoundingClientRect();
-
-    await expect(mediaBounds.left).toBeGreaterThan(stageBounds.left);
-    await expect(mediaBounds.right).toBeLessThan(stageBounds.right);
-    await expect(controlsBounds.top).toBeGreaterThan(stageBounds.bottom);
-    await expect(
-      Math.abs(
-        controlsBounds.left +
-          controlsBounds.width / 2 -
-          (stageBounds.left + stageBounds.width / 2),
-      ),
-    ).toBeLessThan(1);
-    await expect(
-      canvas.getByRole("button", { name: "Pause carousel" }),
-    ).toBeVisible();
+    await verifyBracketLayout(canvasElement);
   },
 };
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    await verifyBracketLayout(canvasElement);
+  },
 };
 export const OneSlide: Story = { args: { slides: slides.slice(0, 1) } };
 export const TwoSlides: Story = { args: { slides: slides.slice(0, 2) } };

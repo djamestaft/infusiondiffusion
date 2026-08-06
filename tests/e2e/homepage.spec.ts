@@ -119,30 +119,6 @@ test("supports keyboard pagination and manual pause/play", async ({ page }) => {
     page.getByRole("button", { name: "Pause carousel" }),
   ).toBeVisible();
 
-  const stage = page.getByTestId("hero-carousel-stage");
-  const media = page.getByTestId("hero-carousel-media");
-  const controls = page.getByTestId("hero-carousel-controls");
-  const [stageBox, mediaBox, controlsBox] = await Promise.all([
-    stage.boundingBox(),
-    media.boundingBox(),
-    controls.boundingBox(),
-  ]);
-  expect(stageBox).not.toBeNull();
-  expect(mediaBox).not.toBeNull();
-  expect(controlsBox).not.toBeNull();
-  expect(mediaBox!.x).toBeGreaterThan(stageBox!.x);
-  expect(mediaBox!.x + mediaBox!.width).toBeLessThan(
-    stageBox!.x + stageBox!.width,
-  );
-  expect(controlsBox!.y).toBeGreaterThan(stageBox!.y + stageBox!.height);
-  expect(
-    Math.abs(
-      controlsBox!.x +
-        controlsBox!.width / 2 -
-        (stageBox!.x + stageBox!.width / 2),
-    ),
-  ).toBeLessThan(1);
-
   const third = page.getByRole("button", { name: "Show slide 3 of 3" });
   await third.focus();
   await page.keyboard.press("Enter");
@@ -158,6 +134,124 @@ test("supports keyboard pagination and manual pause/play", async ({ page }) => {
   await expect(carousel).toHaveAttribute("data-autoplay", "running");
   await page.getByRole("button", { name: "Pause carousel" }).click();
   await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+});
+
+test("renders responsive corner brackets outside the image", async ({
+  page,
+}, testInfo) => {
+  await page.goto("/e2e-carousel");
+  const mobile = testInfo.project.name === "mobile";
+  const expected = mobile
+    ? { clearance: 12, offset: 8, arm: 40, gap: 20 }
+    : { clearance: 20, offset: 12, arm: 56, gap: 24 };
+  const stage = page.getByTestId("hero-carousel-stage");
+  const media = page.getByTestId("hero-carousel-media");
+  const controls = page.getByTestId("hero-carousel-controls");
+  const topLeft = page.getByTestId("hero-carousel-bracket-top-left");
+  const topRight = page.getByTestId("hero-carousel-bracket-top-right");
+  const bottomLeft = page.getByTestId("hero-carousel-bracket-bottom-left");
+  const bottomRight = page.getByTestId("hero-carousel-bracket-bottom-right");
+  const [
+    stageBox,
+    mediaBox,
+    controlsBox,
+    topLeftBox,
+    topRightBox,
+    bottomLeftBox,
+    bottomRightBox,
+  ] = await Promise.all([
+    stage.boundingBox(),
+    media.boundingBox(),
+    controls.boundingBox(),
+    topLeft.boundingBox(),
+    topRight.boundingBox(),
+    bottomLeft.boundingBox(),
+    bottomRight.boundingBox(),
+  ]);
+  expect(stageBox).not.toBeNull();
+  expect(mediaBox).not.toBeNull();
+  expect(controlsBox).not.toBeNull();
+  expect(topLeftBox).not.toBeNull();
+  expect(topRightBox).not.toBeNull();
+  expect(bottomLeftBox).not.toBeNull();
+  expect(bottomRightBox).not.toBeNull();
+  expect(mediaBox!.x - stageBox!.x).toBe(expected.clearance);
+  expect(mediaBox!.x - topLeftBox!.x).toBe(expected.offset);
+  expect(mediaBox!.y - topLeftBox!.y).toBe(expected.offset);
+  expect(
+    topRightBox!.x + topRightBox!.width - (mediaBox!.x + mediaBox!.width),
+  ).toBe(expected.offset);
+  expect(mediaBox!.y - topRightBox!.y).toBe(expected.offset);
+  expect(mediaBox!.x - bottomLeftBox!.x).toBe(expected.offset);
+  expect(
+    bottomLeftBox!.y + bottomLeftBox!.height - (mediaBox!.y + mediaBox!.height),
+  ).toBe(expected.offset);
+  expect(
+    bottomRightBox!.x + bottomRightBox!.width - (mediaBox!.x + mediaBox!.width),
+  ).toBe(expected.offset);
+  expect(
+    bottomRightBox!.y +
+      bottomRightBox!.height -
+      (mediaBox!.y + mediaBox!.height),
+  ).toBe(expected.offset);
+  for (const bracketBox of [
+    topLeftBox,
+    topRightBox,
+    bottomLeftBox,
+    bottomRightBox,
+  ]) {
+    expect(bracketBox!.width).toBe(expected.arm);
+    expect(bracketBox!.height).toBe(expected.arm);
+  }
+  expect(controlsBox!.y - (stageBox!.y + stageBox!.height)).toBe(expected.gap);
+  expect(
+    Math.abs(
+      controlsBox!.x +
+        controlsBox!.width / 2 -
+        (stageBox!.x + stageBox!.width / 2),
+    ),
+  ).toBeLessThan(1);
+  await expect(media).toHaveCSS("border-radius", "8px");
+  for (const { locator, radius, borders } of [
+    {
+      locator: topLeft,
+      radius: "border-top-left-radius",
+      borders: ["border-top-width", "border-left-width"],
+    },
+    {
+      locator: topRight,
+      radius: "border-top-right-radius",
+      borders: ["border-top-width", "border-right-width"],
+    },
+    {
+      locator: bottomLeft,
+      radius: "border-bottom-left-radius",
+      borders: ["border-bottom-width", "border-left-width"],
+    },
+    {
+      locator: bottomRight,
+      radius: "border-bottom-right-radius",
+      borders: ["border-bottom-width", "border-right-width"],
+    },
+  ]) {
+    await expect(locator).toHaveCSS(radius, "8px");
+    for (const border of borders)
+      await expect(locator).toHaveCSS(border, "2px");
+    await expect(locator).toHaveCSS("box-shadow", "none");
+    await expect(locator).toHaveCSS("background-image", "none");
+  }
+  const bracketPixel = await topLeft.evaluate((element) => {
+    const color = getComputedStyle(element).borderTopColor;
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    const context = canvas.getContext("2d");
+    if (!context) return null;
+    context.fillStyle = color;
+    context.fillRect(0, 0, 1, 1);
+    return [...context.getImageData(0, 0, 1, 1).data];
+  });
+  expect(bracketPixel).toEqual([197, 164, 71, 140]);
 });
 
 test("suppresses autoplay for reduced motion", async ({ page }) => {
