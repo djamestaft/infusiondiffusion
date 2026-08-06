@@ -19,6 +19,20 @@ export const CurrentAbout: Story = {
   args: { currentHref: "/about" },
 };
 
+export const CurrentContact: Story = {
+  args: { currentHref: "/contact" },
+};
+
+export const CurrentContactMobileOpen: Story = {
+  args: { currentHref: "/contact" },
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    await userEvent.click(
+      within(canvasElement).getByRole("button", { name: "Open menu" }),
+    );
+  },
+};
+
 export const CurrentAboutMobileOpen: Story = {
   args: { currentHref: "/about" },
   globals: { viewport: { value: "mobile1", isRotated: false } },

@@ -7,6 +7,7 @@ vi.mock("@/sanity/lib/live", () => ({
 }));
 
 import {
+  fallbackContactPage,
   fallbackFragranceGuide,
   withEditorialFallback,
   fallbackAboutPage,
@@ -14,6 +15,25 @@ import {
 } from "@/sanity/lib/editorial-pages";
 
 describe("editorial page fallbacks", () => {
+  it("uses complete Contact content when Sanity has no document", () => {
+    expect(withEditorialFallback(null, fallbackContactPage)).toEqual(
+      fallbackContactPage,
+    );
+  });
+
+  it("restores blank Contact fields and sections from the approved fallback", () => {
+    expect(
+      withEditorialFallback(
+        {
+          title: " ",
+          introduction: null,
+          sections: [{ heading: "", body: "" }],
+        },
+        fallbackContactPage,
+      ),
+    ).toEqual(fallbackContactPage);
+  });
+
   it("uses complete guide content when Sanity has no document", () => {
     expect(withEditorialFallback(null, fallbackFragranceGuide)).toEqual(
       fallbackFragranceGuide,

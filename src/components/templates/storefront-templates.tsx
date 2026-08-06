@@ -16,6 +16,7 @@ import {
   Heading,
   Lead,
 } from "@/components/ui/content-primitives";
+import { FeedbackAlert } from "@/components/ui/feedback-alert";
 import {
   PriceDisplay,
   type CommerceMoney,
@@ -355,6 +356,146 @@ export function HomeTemplate({
           </section>
         </ScrollReveal>
       ) : null}
+    </TemplateShell>
+  );
+}
+
+export type ContactTemplateProps = TemplateNavigationProps & {
+  eyebrow?: string;
+  title: string;
+  introduction: string;
+  sections: Array<{ heading: string; body: string }>;
+  email: string;
+};
+
+export function ContactTemplate({
+  eyebrow,
+  title,
+  introduction,
+  sections,
+  email,
+  cartCount,
+}: ContactTemplateProps) {
+  const mailto = `mailto:${email}`;
+  return (
+    <TemplateShell currentHref="/contact" cartCount={cartCount}>
+      <article data-testid="contact-page">
+        <header className="bg-content-surface">
+          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
+            {eyebrow ? <Eyebrow className="mb-4">{eyebrow}</Eyebrow> : null}
+            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
+              {title}
+            </h1>
+            <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+              {introduction}
+            </p>
+          </div>
+        </header>
+        <section className="bg-bone-50" aria-labelledby="contact-email-heading">
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-6 lg:px-12 lg:py-24 xl:px-0">
+            <h2
+              id="contact-email-heading"
+              className="font-display text-content-primary text-[26px] leading-[1.2] lg:col-span-12 lg:text-[34px]"
+            >
+              Email us
+            </h2>
+            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-6">
+              <a
+                className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline decoration-1 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+                href={mailto}
+              >
+                {email}
+              </a>
+            </address>
+            <Button
+              asChild
+              variant="primary"
+              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-7 lg:ml-16 lg:justify-self-start"
+            >
+              <a href={mailto}>Email Infusion Diffusion</a>
+            </Button>
+            <FeedbackAlert
+              title="Online form unavailable"
+              tone="info"
+              announcement="none"
+              className="self-start lg:col-span-6"
+            >
+              Online submission is not available at launch. Your email opens in
+              your own mail application; this website does not collect or store
+              your message.
+            </FeedbackAlert>
+          </div>
+        </section>
+        {sections.length ? (
+          <div className="bg-content-surface">
+            <div className="mx-auto w-full max-w-[840px] space-y-16 px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
+              {sections.map((section) => (
+                <section
+                  key={`${section.heading}-${section.body}`}
+                  className="max-w-[70ch]"
+                >
+                  <h2 className="font-display text-content-primary text-[26px] leading-[1.2] [overflow-wrap:anywhere] lg:text-[34px]">
+                    {section.heading}
+                  </h2>
+                  <p className="text-content-secondary mt-6 font-sans text-base leading-[1.625] [overflow-wrap:anywhere] whitespace-pre-line">
+                    {section.body}
+                  </p>
+                </section>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </article>
+    </TemplateShell>
+  );
+}
+
+export function ContactLoadingTemplate() {
+  return (
+    <TemplateShell currentHref="/contact">
+      <section aria-busy="true" aria-label="Loading contact page">
+        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="bg-content-surface-elevated h-16 w-full max-w-[760px] animate-pulse motion-reduce:animate-none" />
+          <div className="bg-content-surface-elevated mt-8 h-24 max-w-[70ch] animate-pulse motion-reduce:animate-none" />
+        </div>
+        <div className="bg-bone-50 h-80 sm:h-96" />
+      </section>
+    </TemplateShell>
+  );
+}
+
+export function ContactErrorTemplate({ reset }: { reset: () => void }) {
+  const email = "hello@infusiondiffusion.co.za";
+  return (
+    <TemplateShell currentHref="/contact">
+      <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-display text-content-primary text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
+            We couldn’t load this page.
+          </h1>
+          <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] lg:text-xl">
+            Nothing was submitted. Try again, or email us directly.
+          </p>
+          <FeedbackAlert
+            title="Unexpected error"
+            tone="error"
+            announcement="alert"
+            className="mt-8"
+          >
+            Please retry. If the problem continues, use the direct email option
+            below.
+          </FeedbackAlert>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Button onClick={reset}>Try again</Button>
+            <a
+              className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+              href={`mailto:${email}`}
+            >
+              {email}
+            </a>
+          </div>
+        </div>
+      </section>
     </TemplateShell>
   );
 }

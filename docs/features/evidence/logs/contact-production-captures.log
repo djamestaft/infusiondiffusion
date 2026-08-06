@@ -1,0 +1,12 @@
+
+Running 3 tests using 1 worker
+
+(node:67292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at desktop (946ms)
+  ✓  2 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at mobile (789ms)
+  ✓  3 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at small (776ms)
+
+  3 passed (3.0s)
+
+EXIT_STATUS=0

@@ -28,6 +28,22 @@ type EditorialPageInput = {
   seoDescription?: string | null;
 };
 
+export const fallbackContactPage: EditorialPage = {
+  eyebrow: "",
+  title: "Let’s talk fragrance.",
+  introduction:
+    "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
+  sections: [
+    {
+      heading: "Before you write",
+      body: "Include the product or fragrance name when it helps explain your question. Do not send payment details or other sensitive information by email.",
+    },
+  ],
+  seoTitle: "Contact | Infusion Diffusion",
+  seoDescription:
+    "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
+};
+
 export const fallbackFragranceGuide: EditorialPage = {
   eyebrow: "Fragrance guide",
   title: "A practical guide to choosing home fragrance",
@@ -103,6 +119,30 @@ async function fetchEditorialPage(
     return fallback;
   }
 }
+export function getContactPage(options: DynamicFetchOptions) {
+  return fetchEditorialPage("contact", options, fallbackContactPage);
+}
+
+export async function getContactPageMetadata(
+  perspective: DynamicFetchOptions["perspective"],
+) {
+  if (!isSanityConfigured) return fallbackContactPage;
+  try {
+    const { data } = await sanityFetchMetadata({
+      query: EDITORIAL_PAGE_QUERY,
+      params: { slug: "contact" },
+      perspective,
+    });
+    return withEditorialFallback(
+      data as EditorialPageInput | null,
+      fallbackContactPage,
+    );
+  } catch {
+    console.error("Unable to load Sanity contact metadata");
+    return fallbackContactPage;
+  }
+}
+
 export function getFragranceGuide(options: DynamicFetchOptions) {
   return fetchEditorialPage("fragrance-guide", options, fallbackFragranceGuide);
 }

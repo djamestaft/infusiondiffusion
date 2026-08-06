@@ -8,6 +8,20 @@ const preview: Preview = {
     layout: "fullscreen",
     controls: { expanded: true },
     a11y: { test: "error" },
+    viewport: {
+      options: {
+        contact390: {
+          name: "Contact 390",
+          styles: { width: "390px", height: "844px" },
+          type: "mobile",
+        },
+        contact320: {
+          name: "Contact 320",
+          styles: { width: "320px", height: "844px" },
+          type: "mobile",
+        },
+      },
+    },
   },
 };
 

@@ -1,6 +1,6 @@
 # Sanity editorial pages
 
-Status: Fragrance Guide runtime integration implemented; Preview review and editorial publishing pending.
+Status: Fragrance Guide and Contact runtime integrations implemented; Preview review and editorial publishing remain human gates.
 
 ## User outcome
 
@@ -28,13 +28,18 @@ Customers can open the Fragrance Guide from the homepage or primary navigation a
 ## Out of scope
 
 - Publishing or replacing final editorial photography
-- About and Contact runtime routes
+- About runtime route
+- Contact-specific structured fields such as phone, hours, address, routing, or form submissions
 - Rich portable-text blocks, embedded products, filtering, analytics, or motion
 - Homepage content expansion, which is delivered through the separate `siteSettings.homepage` contract
 
 ## Rollback
 
 The route can be removed without changing Sanity data. If the Sanity document is unpublished or the service is unavailable, the application continues to render the versioned fallback content.
+
+## Contact page
+
+`editorialPage` slug `contact` reuses the generic title, introduction, ordered sections, and SEO fields. `siteSettings.contactEmail` supplies the contact destination only after route-level trimming and validation; a blank or invalid value falls back to the approved public mailbox. Contact remains direct-email-only and does not add schema fields for a form, phone, hours, address, or message retention.
 
 ## About portrait chapters
 

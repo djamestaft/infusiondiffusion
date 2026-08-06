@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { expect, fn, within } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import {
   AboutTemplate,
+  ContactErrorTemplate,
+  ContactLoadingTemplate,
+  ContactTemplate,
   CollectionTemplate,
   EditorialTemplate,
   HomeTemplate,
@@ -202,6 +205,144 @@ export const HomeEditorialSectionsHidden: Story = {
       }}
     />
   ),
+};
+
+const contactProps = {
+  title: "Let’s talk fragrance.",
+  introduction:
+    "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
+  sections: [
+    {
+      heading: "Before you write",
+      body: "Include the product or fragrance name when it helps explain your question. Do not send payment details or other sensitive information by email.",
+    },
+  ],
+  email: "hello@infusiondiffusion.co.za",
+};
+
+export const Contact: Story = {
+  render: () => <ContactTemplate {...contactProps} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("link", { name: "Contact", current: "page" }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    await expect(canvas.queryByRole("form")).toBeNull();
+    await expect(canvas.getByText("Online form unavailable")).toBeVisible();
+  },
+};
+export const ContactDefault390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: Contact.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    await userEvent.click(canvas.getByRole("button", { name: "Open menu" }));
+    await expect(
+      canvas.getByRole("link", { name: "Contact", current: "page" }),
+    ).toBeVisible();
+    await userEvent.keyboard("{Escape}");
+    await expect(
+      canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toBeVisible();
+  },
+};
+export const ContactSmall320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: Contact.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toBeVisible();
+    await expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(
+      document.documentElement.clientWidth,
+    );
+  },
+};
+export const ContactCartThree: Story = {
+  render: () => <ContactTemplate {...contactProps} cartCount={3} />,
+  play: async ({ canvasElement }) => {
+    await expect(
+      within(canvasElement).getByRole("link", { name: "Cart, 3 items" }),
+    ).toBeVisible();
+  },
+};
+export const ContactPartialFallback: Story = {
+  render: () => (
+    <ContactTemplate
+      {...contactProps}
+      title="A title from Sanity"
+      sections={[]}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "A title from Sanity",
+    );
+    await expect(
+      canvas.queryByRole("heading", { level: 2, name: "Before you write" }),
+    ).toBeNull();
+  },
+};
+export const ContactMaximumContent: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: () => (
+    <ContactTemplate
+      {...contactProps}
+      title={"unbroken-contact-title-".repeat(5)}
+      introduction={"unbroken-introduction-".repeat(16)}
+      email="a-very-long-contact-address-for-an-infinitely-considered-fragrance-studio@infusiondiffusion.co.za"
+      sections={Array.from({ length: 10 }, (_, index) => ({
+        heading: `section-${index + 1}-${"unbroken-heading-".repeat(5)}`,
+        body: "unbroken-editorial-content-".repeat(48),
+      }))}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    await expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(
+      document.documentElement.clientWidth,
+    );
+    await expect(
+      within(canvasElement).getByRole("heading", { level: 1 }),
+    ).toBeVisible();
+  },
+};
+export const ContactLoading: Story = {
+  render: () => <ContactLoadingTemplate />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText("Loading contact page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(
+      canvas.getByRole("link", { name: "Contact", current: "page" }),
+    ).toBeVisible();
+  },
+};
+const contactRetry = fn();
+
+export const ContactUnexpectedError: Story = {
+  render: () => <ContactErrorTemplate reset={contactRetry} />,
+  play: async ({ canvasElement }) => {
+    contactRetry.mockClear();
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("alert")).toHaveTextContent(
+      "Unexpected error",
+    );
+    await userEvent.click(canvas.getByRole("button", { name: "Try again" }));
+    await expect(contactRetry).toHaveBeenCalledOnce();
+    await expect(
+      canvas.getByRole("link", { name: "hello@infusiondiffusion.co.za" }),
+    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+  },
 };
 
 export const Collection: Story = {
