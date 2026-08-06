@@ -1,0 +1,11 @@
+
+ RUN  v4.1.10 /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+
+
+ Test Files  4 passed (4)
+      Tests  35 passed (35)
+   Start at  20:53:05
+   Duration  1.93s (transform 365ms, setup 660ms, import 1.20s, tests 487ms, environment 3.05s)
+
+
+EXIT_STATUS=0

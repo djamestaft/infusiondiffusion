@@ -1,0 +1,203 @@
+
+> infusion-diffusion@0.1.0 check /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+> prettier --check . && eslint . --max-warnings=0 && tsc --noEmit && vitest run --config vitest.config.ts && vitest run --config vitest.storybook.config.ts && storybook build && next build
+
+Checking formatting...
+All matched files use Prettier code style!
+
+ RUN  v4.1.10 /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+
+
+ Test Files  34 passed (34)
+      Tests  175 passed (175)
+   Start at  20:51:27
+   Duration  8.10s (transform 1.89s, setup 6.37s, import 7.55s, tests 6.06s, environment 29.36s)
+
+
+ RUN  v4.1.10 /Users/devontaft/Documents/Projects/Client/infusion-diffusion
+
+
+ Test Files  20 passed (20)
+      Tests  194 passed (194)
+   Start at  20:51:36
+   Duration  8.83s (transform 0ms, setup 16.24s, import 7.45s, tests 15.82s, environment 0ms)
+
+
+┌  Building storybook v10.5.5
+│
+◇  Cleaning outputDir: storybook-static
+│
+◇  Loading presets
+│
+◇  Building manager..
+│
+●  Building open services..
+│
+●  Building preview..
+│  Vite vite v8.2.0 building client environment for production...
+[2Ktransforming...│
+●  Copying static files: public at storybook-static
+✓ 2117 modules transformed.
+rendering chunks...
+computing gzip size...
+│  Vite storybook-static/iframe.html
+│  18.98 kB │ gzip:   5.30 kB
+│  storybook-static/assets/iframe-xScpIMfY.css
+│  61.63 kB │ gzip:  11.90 kB
+│  storybook-static/assets/iframe-Cv7fnw_M.js
+│  0.04 kB │ gzip:   0.06 kB
+│  storybook-static/assets/x-DBitALsI.js
+│  0.27 kB │ gzip:   0.22 kB
+│  storybook-static/assets/arrow-up-right-BdJ5iTa8.js
+│  0.28 kB │ gzip:   0.23 kB
+│  storybook-static/assets/dist-Ch0bEcoH.js
+│  0.75 kB │ gzip:   0.45 kB
+│  storybook-static/assets/textarea-DVgFSh2a.js
+│  1.07 kB │ gzip:   0.51 kB
+│  storybook-static/assets/input-DqW8ZtuJ.js
+│  1.14 kB │ gzip:   0.56 kB
+│  storybook-static/assets/rolldown-runtime-CsOFd3vK.js
+│  1.25 kB │ gzip:   0.69 kB
+│  storybook-static/assets/badge-D69b22B9.js
+│  1.30 kB │ gzip:   0.64 kB
+│  storybook-static/assets/preload-helper-8jINIF9P.js
+│  1.31 kB │ gzip:   0.74 kB
+│  storybook-static/assets/link-BE6rJo5a.js
+│  1.41 kB │ gzip:   0.81 kB
+│  storybook-static/assets/text-link-DjqQxThB.js
+│  1.50 kB │ gzip:   0.71 kB
+│  storybook-static/assets/announcement-bar.stories-C7HNsv_a.js
+│  1.56 kB │ gzip:   0.65 kB
+│  storybook-static/assets/createLucideIcon-Bk8el8aj.js
+│  1.85 kB │ gzip:   0.94 kB
+│  storybook-static/assets/announcement-bar-ulbZVjdk.js
+│  1.91 kB │ gzip:   0.81 kB
+│  storybook-static/assets/price-display-BpMkmhNA.js
+│  2.20 kB │ gzip:   0.95 kB
+│  storybook-static/assets/badge.stories-CuEKh1Lo.js
+│  2.21 kB │ gzip:   0.91 kB
+│  storybook-static/assets/drawer-DcDZOmb8.js
+│  2.21 kB │ gzip:   0.93 kB
+│  storybook-static/assets/commerce-status-eaUNkCsf.js
+│  2.27 kB │ gzip:   0.89 kB
+│  storybook-static/assets/feedback-alert-D4z2KRPD.js
+│  2.75 kB │ gzip:   1.22 kB
+│  storybook-static/assets/price-display.stories-h1PA4Crm.js
+│  2.96 kB │ gzip:   0.96 kB
+│  storybook-static/assets/drawer.stories-gNjRqFeS.js
+│  3.05 kB │ gzip:   1.24 kB
+│  storybook-static/assets/text-link.stories-P_6mkoLP.js
+│  3.07 kB │ gzip:   1.09 kB
+│  storybook-static/assets/textarea.stories-AsRkRdSa.js
+│  3.45 kB │ gzip:   1.23 kB
+│  storybook-static/assets/input.stories-bX63zuqo.js
+│  3.60 kB │ gzip:   1.26 kB
+│  storybook-static/assets/commerce-status.stories-C81fnYQ6.js
+│  3.63 kB │ gzip:   0.87 kB
+│  storybook-static/assets/feedback-alert.stories-ZUOdKVoI.js
+│  3.97 kB │ gzip:   1.20 kB
+│  storybook-static/assets/navigation.stories-5npgOq8W.js
+│  4.24 kB │ gzip:   1.05 kB
+│  storybook-static/assets/product-card.fixtures-C8q2HySM.js
+│  5.17 kB │ gzip:   1.78 kB
+│  storybook-static/assets/content-primitives-DBPYACAp.js
+│  5.23 kB │ gzip:   1.50 kB
+│  storybook-static/assets/dialog.stories-DXOqLL9j.js
+│  5.96 kB │ gzip:   2.19 kB
+│  storybook-static/assets/field.stories-bF4TgAPT.js
+│  6.27 kB │ gzip:   2.08 kB
+│  storybook-static/assets/alert-dialog.stories-DqXl-Tbx.js
+│  6.57 kB │ gzip:   2.34 kB
+│  storybook-static/assets/content-primitives.stories-Dioh4j6A.js
+│  6.64 kB │ gzip:   1.86 kB
+│  storybook-static/assets/hero-carousel.stories-DWoOcFLB.js
+│  6.65 kB │ gzip:   1.91 kB
+│  storybook-static/assets/product-card.stories-BxwpN-pi.js
+│  7.21 kB │ gzip:   2.11 kB
+│  storybook-static/assets/button-BMReUkSz.js
+│  7.79 kB │ gzip:   2.58 kB
+│  storybook-static/assets/holding-page.stories-CdfssfsF.js
+│  8.08 kB │ gzip:   3.17 kB
+│  storybook-static/assets/hero-carousel-DGL49dtI.js
+│  8.25 kB │ gzip:   2.94 kB
+│  storybook-static/assets/navigation-5Cf_-aga.js
+│  8.27 kB │ gzip:   2.74 kB
+│  storybook-static/assets/button.stories-Dr9lbMdu.js
+│  8.76 kB │ gzip:   2.19 kB
+│  storybook-static/assets/image-C3C_eHfQ.js
+│  16.30 kB │ gzip:   6.14 kB
+│  storybook-static/assets/cart.stories-CXU9ud9s.js
+│  20.97 kB │ gzip:   5.21 kB
+│  storybook-static/assets/utils-DTEGmkNc.js
+│  27.68 kB │ gzip:   8.95 kB
+│  storybook-static/vite-inject-mocker-entry.js
+│  27.84 kB │ gzip:   9.66 kB
+│  storybook-static/assets/matchers-JIUQ3HVY-D2RxGVML.js
+│  28.79 kB │ gzip:   9.68 kB
+│  storybook-static/assets/dist-D4OKpLlA.js
+│  37.50 kB │ gzip:  12.96 kB
+│  storybook-static/assets/storefront-templates.stories-BM1Cq4GP.js
+│  74.60 kB │ gzip:  14.45 kB
+│  storybook-static/assets/react-18-DIDK1J0Y.js
+│  204.14 kB │ gzip:  64.12 kB
+│  storybook-static/assets/axe-ZBeKgLEh.js
+│  579.13 kB │ gzip: 158.39 kB
+│  storybook-static/assets/iframe-Or5XjRv8.js
+│  1,333.11 kB │ gzip: 372.57 kB
+
+│
+▲  Vite [plugin builtin:vite-reporter]
+│  (!) Some chunks are larger than 500 kB after minification. Consider:
+│  - Using dynamic import() to code-split the application
+│  - Use build.rolldownOptions.output.codeSplitting to improve chunking:
+│  ]8;;https://rolldown.rs/reference/OutputOptions.codeSplittinghttps://rolldown.rs/reference/OutputOptions.codeSplitting]8;;
+│  - Adjust chunk size limit for this warning via
+│  build.chunkSizeWarningLimit.
+│  Vite ✓ built in 1.89s
+│
+◇  Output directory:
+│  /Users/devontaft/Documents/Projects/Client/infusion-diffusion/storybook-static
+│
+└  Storybook build completed successfully
+
+▲ Next.js 16.2.12 (Turbopack)
+- Environments: .env.local
+- Cache Components enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 13.0s
+  Running TypeScript ...
+  Finished TypeScript in 5.6s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/16) ...
+  Generating static pages using 7 workers (4/16) 
+  Generating static pages using 7 workers (8/16) 
+  Generating static pages using 7 workers (12/16) 
+✓ Generating static pages using 7 workers (16/16) in 986ms
+  Finalizing page optimization ...
+
+Route (app)                  Revalidate  Expire
+┌ ◐ /                                5m     15m
+├ ○ /_not-found
+├ ◐ /about                           1y      1y
+├ ƒ /api/draft-mode/disable
+├ ƒ /api/draft-mode/enable
+├ ƒ /api/health
+├ ƒ /api/revalidate-tags
+├ ◐ /cart
+├ ◐ /contact                         1y      1y
+├ ○ /e2e-carousel
+├ ◐ /fragrance-guide                 5m     15m
+├ ◐ /products/[handle]
+│ └ /products/[handle]
+├ ◐ /shop
+└ ◐ /studio/[[...index]]
+  └ /studio/[[...index]]
+
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+ƒ  (Dynamic)            server-rendered on demand
+
+
+EXIT_STATUS=0

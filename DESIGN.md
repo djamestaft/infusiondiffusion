@@ -291,6 +291,12 @@ Every reusable component must document default, hover/focus, disabled, loading, 
 - **Don't** crop caps, flames, spray triggers, or reed tips when the image's job is product recognition.
 - **Don't** change Figma, `DESIGN.md`, runtime tokens, or Storybook in isolation; follow the synchronization workflow in `.agents/skills/design-to-storybook/SKILL.md`.
 
+## Contact page — approved direct-email editorial route
+
+`/contact` is governed by approved desktop [`329:58`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=329-58), mobile [`329:100`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=329-100), loading `329:135`/`329:165`, error `329:188`/`329:225`, fallback `329:255`/`329:297`, long-content `329:332`/`329:374`, and cart `329:409`/`329:451` frames. It composes Ivory Navigation, a Sage introduction, a Bone 50 direct-email region, and Sage optional editorial sections. Use the existing Marcellus 56/40 H1, 34/26 section headings, Manrope 20/17 lead, Primary Button as a real mail anchor, and static info FeedbackAlert; no new token, asset, form, card, depth, or ornamental treatment is approved.
+
+Contact is direct-email-only: show the public mailbox and a real `mailto:` action, but never a form, editable input, submit state, provider, persistence, success claim, phone, address, hours, or response-time claim. The static `Online form unavailable` notice is not live; only unexpected error uses the existing alert and native retry. At 390/320 and 200% zoom, natural height and safe wrapping take precedence over fixed Figma text-frame artifacts. Runtime correctly marks Contact—rather than the captured Shop instance—as current, and semantic FeedbackAlert colors override stale pale exported text.
+
 ## About page — approved light editorial chapters
 
 `/about` is governed by approved desktop [`316:99`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-99), mobile [`316:151`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-151), and corrected handoff [`316:198`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-198). It is fully light: Sage introduction and chapters two/four, canonical Bone 50 chapters one/three and CTA. Bone maps directly to `--bone-50`/`bg-bone-50`; Sage remains `bg-content-surface`.

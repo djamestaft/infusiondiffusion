@@ -1,0 +1,28 @@
+[WebServer] (node:66866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:66880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:66886) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:66888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 4 workers
+
+(node:66890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66891) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66889) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/e2e/contact.spec.ts:86:1 › keeps the mobile drawer keyboard-operable and restores the unobscured page (3.4s)
+  ✓  2 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at desktop (3.8s)
+  ✓  3 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at small (3.8s)
+  ✓  4 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at mobile (3.8s)
+  ✓  5 [chromium] › tests/e2e/contact.spec.ts:121:1 › keeps Contact readable at 200% zoom and with reduced motion (684ms)
+
+  5 passed (7.1s)
+
+EXIT_STATUS=0

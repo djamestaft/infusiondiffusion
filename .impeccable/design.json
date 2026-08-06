@@ -328,6 +328,11 @@
       "name": "AboutTemplate",
       "kind": "custom",
       "description": "Approved fully light four-chapter About composition. Canonical Bone uses bg-bone-50; optional portrait artwork is centered 3:4 FIT/contain inside a 4:3 slot."
+    },
+    {
+      "name": "ContactTemplate",
+      "kind": "custom",
+      "description": "Approved direct-email Contact composition: Sage introduction, Bone 50 email region, static unavailable information, and optional Sanity editorial sections. It uses existing Navigation, Button, and FeedbackAlert semantics; no form or message collection is present."
     }
   ],
   "narrative": {
@@ -364,6 +369,11 @@
         "name": "About portrait FIT rule",
         "body": "About media preserves whole 3:4 portraits centered in 4:3 slots; no cover crop or placeholder. Authority: Figma 316:198.",
         "section": "about"
+      },
+      {
+        "name": "Contact direct-email rule",
+        "body": "Contact shows a visible validated mailto destination and static unavailable information only. It has no form, submit action, or message persistence; safe wrapping and natural height supersede clipped Figma export artifacts. Authority: Figma 329:58 and 329:100.",
+        "section": "contact"
       }
     ],
     "dos": [

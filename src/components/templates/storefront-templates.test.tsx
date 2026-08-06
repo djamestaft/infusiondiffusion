@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
   CollectionTemplate,
@@ -7,6 +8,9 @@ import {
   HomeTemplate,
   ProductDetailTemplate,
   AboutTemplate,
+  ContactErrorTemplate,
+  ContactLoadingTemplate,
+  ContactTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -51,6 +55,56 @@ describe("storefront templates", () => {
     ).toBeVisible();
     expect(screen.getByText(/Jacqui Kirchmann/)).toBeVisible();
     expect(screen.getByText(/8–12 months/)).toBeVisible();
+  });
+
+  it("renders Contact as a direct-email-only route with the current navigation and cart", () => {
+    render(
+      <ContactTemplate
+        title="Let’s talk fragrance."
+        introduction="A direct email introduction."
+        email="hello@infusiondiffusion.co.za"
+        cartCount={3}
+        sections={[
+          { heading: "Before you write", body: "Use the product name." },
+        ]}
+      />,
+    );
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "Let’s talk fragrance.",
+    );
+    expect(
+      screen.getByRole("link", { name: "Contact", current: "page" }),
+    ).toBeVisible();
+    expect(
+      screen.getAllByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toHaveLength(1);
+    expect(
+      screen.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    expect(screen.queryByRole("form")).not.toBeInTheDocument();
+    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.getByText("Online form unavailable")).toBeVisible();
+    expect(screen.getAllByRole("link", { name: "Cart, 3 items" })).toHaveLength(
+      2,
+    );
+  });
+
+  it("keeps Contact loading and error recovery honest", async () => {
+    const reset = vi.fn();
+    const { unmount } = render(<ContactLoadingTemplate />);
+    expect(screen.getByRole("navigation", { name: "Primary" })).toBeVisible();
+    expect(screen.getByLabelText("Loading contact page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    unmount();
+    render(<ContactErrorTemplate reset={reset} />);
+    expect(screen.getByRole("alert")).toHaveTextContent("Unexpected error");
+    await userEvent.click(screen.getByRole("button", { name: "Try again" }));
+    expect(reset).toHaveBeenCalledOnce();
+    expect(
+      screen.getByRole("link", { name: "hello@infusiondiffusion.co.za" }),
+    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
   });
 
   it("gives an empty collection a useful route back", () => {
