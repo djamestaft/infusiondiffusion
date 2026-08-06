@@ -76,6 +76,7 @@ South African customers should be able to understand the brand, distinguish frag
 - The product owner requested matching Midnight-navigation versions for all four responsive templates on 4 August 2026.
 - The product owner approved a slightly eggshell page canvas on 4 August 2026; all sixteen template frames now bind to semantic `color/background/base` rather than a text-colour role.
 - The product owner approved the complete responsive visual direction and authorized implementation on 4 August 2026.
+- The product owner approved the final Cabinet and Shop tonal synchronization on 6 August 2026. The Home [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-616) and [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=255-638) frames record the full-width elevated Cabinet band and exact 72px/52px carousel-to-heading spacing; the Collection [desktop](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-137) and [mobile](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=203-229) frames record the elevated Shop canvas with base-surface, effect-free ProductCards. These frames are Approved and synchronized with `DESIGN.md`, runtime tokens, and Storybook.
 
 ## Runtime implementation record
 

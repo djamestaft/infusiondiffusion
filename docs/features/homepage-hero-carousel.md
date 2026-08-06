@@ -40,7 +40,7 @@ Fewer than two valid visible slides restores the pre-carousel static Shopify her
 
 The product owner/editor must supply and publish final campaign photography. Protected `main` merge remains an explicit human action.
 
-The product owner approved the corner-bracket direction and continuous three-second cadence in code on 6 August 2026. The six HeroCarousel Figma states listed above still show the superseded internal-register treatment and lack the continuous-motion annotations; they must be synchronized before final visual sign-off. Until then, code, `DESIGN.md`, runtime semantic tokens, and Storybook are synchronized while Figma is explicitly pending.
+The product owner approved the final synchronization on 6 August 2026. All six HeroCarousel Figma states listed above are Approved and match code, `DESIGN.md`, runtime semantic tokens, and Storybook: four independent external 1px corner brackets, the three-second continuous autoplay/progress contract, and the responsive Cabinet spacing and elevated tonal role.
 
 The product owner subsequently approved the exact 220×64 outlined export of `LogoTextLockup` from Figma staging node `302:100`, traced to main component `162:96` and instance child `I296:101;169:2`. Runtime uses the transparent SVG geometry as a semantic-color mask inside the existing accessible home link, preserving Ivory and Midnight Navigation accents. This replaces only browser-rendered lettering geometry; Navigation's full-width semantic gold divider remains independent and unchanged.
 
