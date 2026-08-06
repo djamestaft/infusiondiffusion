@@ -15,6 +15,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Ivory: Story = {};
 
+export const CurrentAbout: Story = {
+  args: { currentHref: "/about" },
+};
+
+export const CurrentAboutMobileOpen: Story = {
+  args: { currentHref: "/about" },
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    await userEvent.click(
+      within(canvasElement).getByRole("button", { name: "Open menu" }),
+    );
+  },
+};
+
 export const Midnight: Story = {
   args: { theme: "midnight" },
 };

@@ -45,6 +45,48 @@ typography:
     fontWeight: 400
     lineHeight: 1.625
     letterSpacing: "normal"
+  aboutDisplay:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "56px"
+    fontWeight: 400
+    lineHeight: 1.15
+    letterSpacing: "normal"
+  aboutMobileDisplay:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "40px"
+    fontWeight: 400
+    lineHeight: 1.15
+    letterSpacing: "normal"
+  aboutChapter:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "34px"
+    fontWeight: 400
+    lineHeight: 1.2
+    letterSpacing: "normal"
+  aboutMobileChapter:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "26px"
+    fontWeight: 400
+    lineHeight: 1.2
+    letterSpacing: "normal"
+  aboutLead:
+    fontFamily: "Manrope, Arial, sans-serif"
+    fontSize: "20px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  aboutMobileLead:
+    fontFamily: "Manrope, Arial, sans-serif"
+    fontSize: "17px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  aboutCta:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "30px"
+    fontWeight: 400
+    lineHeight: 1.2
+    letterSpacing: "normal"
   label:
     fontFamily: "Manrope, Arial, sans-serif"
     fontSize: "12px"
@@ -248,3 +290,9 @@ Every reusable component must document default, hover/focus, disabled, loading, 
 - **Don't** introduce generic AI-design tells: purple gradients, glowing surfaces, gratuitous pills, nested card grids, or vague decorative copy.
 - **Don't** crop caps, flames, spray triggers, or reed tips when the image's job is product recognition.
 - **Don't** change Figma, `DESIGN.md`, runtime tokens, or Storybook in isolation; follow the synchronization workflow in `.agents/skills/design-to-storybook/SKILL.md`.
+
+## About page — approved light editorial chapters
+
+`/about` is governed by approved desktop [`316:99`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-99), mobile [`316:151`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-151), and corrected handoff [`316:198`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=316-198). It is fully light: Sage introduction and chapters two/four, canonical Bone 50 chapters one/three and CTA. Bone maps directly to `--bone-50`/`bg-bone-50`; Sage remains `bg-content-surface`.
+
+Four ordered chapters use desktop CSS alternation while DOM/mobile order remains heading, body, media. Optional media is a 4:3 layout slot containing centered, full-height 3:4 portrait artwork with FIT/contain—never cover or crop. At 1440, slots are 560×420 with 315×420 artwork; at 390, 350×262 with 196.5×262 artwork; at 320, 280×210 with 157.5×210 artwork. Missing media removes the slot and centers the text. Navigation is Ivory with About current; this is the approved runtime current-state divergence from the captured visual source.

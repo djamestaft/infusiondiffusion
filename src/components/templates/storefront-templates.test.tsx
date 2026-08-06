@@ -6,6 +6,7 @@ import {
   EditorialTemplate,
   HomeTemplate,
   ProductDetailTemplate,
+  AboutTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -211,6 +212,54 @@ describe("storefront templates", () => {
       "Choosing home fragrance",
     );
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  });
+
+  it("renders the approved About hierarchy, surfaces, CTA and current navigation", () => {
+    render(
+      <AboutTemplate
+        title="The story behind the atmosphere."
+        introduction="A considered collection."
+        cartCount={2}
+        chapters={[
+          {
+            role: "origin",
+            heading: "Born from fragrance",
+            body: "A factual origin.",
+          },
+          {
+            role: "development",
+            heading: "From more than 130 oils to six fragrances",
+            body: "A factual development.",
+          },
+          {
+            role: "collaborator",
+            heading: "Guidance and encouragement",
+            body: "A factual credit.",
+          },
+          {
+            role: "principles",
+            heading: "Composed for lived-in rooms",
+            body: "A factual principle.",
+          },
+        ]}
+      />,
+    );
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "The story behind",
+    );
+    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(5);
+    expect(
+      screen.getByRole("link", { name: "About", current: "page" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: /Explore the Fragrance Guide/i }),
+    ).toHaveAttribute("href", "/fragrance-guide");
+    expect(screen.getByTestId("about-chapter-origin")).toHaveClass(
+      "bg-bone-50",
+    );
+    expect(screen.getByTestId("about-chapter-development")).toHaveClass(
+      "bg-content-surface",
+    );
   });
 
   it("renders editor-owned context and the live cart state", () => {

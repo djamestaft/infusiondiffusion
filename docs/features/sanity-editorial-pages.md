@@ -35,3 +35,7 @@ Customers can open the Fragrance Guide from the homepage or primary navigation a
 ## Rollback
 
 The route can be removed without changing Sanity data. If the Sanity document is unpublished or the service is unavailable, the application continues to render the versioned fallback content.
+
+## About portrait chapters
+
+`editorialPage` slug `about` additionally uses the fixed `origin`, `development`, `collaborator`, and `principles` roles. Its optional per-section artwork is a rights-controlled 3:4 portrait rendered FIT inside a 4:3 About layout slot. This additive contract does not alter Fragrance Guide hero/section behavior.

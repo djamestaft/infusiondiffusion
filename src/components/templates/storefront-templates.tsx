@@ -619,4 +619,122 @@ export function EditorialTemplate({
   );
 }
 
+export interface AboutTemplateProps extends TemplateNavigationProps {
+  title: string;
+  introduction: string;
+  chapters: Array<{
+    role: "origin" | "development" | "collaborator" | "principles";
+    heading: string;
+    body: string;
+    image?: { src: string; alt: string };
+  }>;
+}
+
+export function AboutTemplate({
+  title,
+  introduction,
+  chapters,
+  cartCount,
+}: AboutTemplateProps) {
+  return (
+    <TemplateShell currentHref="/about" cartCount={cartCount}>
+      <article data-testid="about-page">
+        <header className="bg-content-surface">
+          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-0 lg:py-20">
+            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] lg:text-[56px]">
+              {title}
+            </h1>
+            <p className="text-content-secondary mt-10 max-w-[720px] font-sans text-[17px] leading-[1.5] lg:text-xl">
+              {introduction}
+            </p>
+          </div>
+        </header>
+        {chapters.map((chapter, index) => {
+          const isBone = index % 2 === 0;
+          const imageFirst = index % 2 === 1;
+          return (
+            <section
+              key={chapter.role}
+              data-testid={`about-chapter-${chapter.role}`}
+              className={cn(
+                isBone ? "bg-bone-50" : "bg-content-surface",
+                "py-11 lg:py-[110px]",
+              )}
+            >
+              <div
+                className={cn(
+                  "mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-0",
+                  chapter.image
+                    ? "grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-20"
+                    : "text-center",
+                )}
+              >
+                <div
+                  className={cn(
+                    !chapter.image && "mx-auto max-w-[760px]",
+                    imageFirst && "lg:order-2",
+                  )}
+                >
+                  <h2 className="font-display text-content-primary text-[26px] leading-[1.2] lg:text-[34px]">
+                    {chapter.heading}
+                  </h2>
+                  <div className="text-content-primary mt-8 space-y-6 text-[16px] leading-[1.65] lg:text-[18px]">
+                    {chapter.body.split(/\n\s*\n/).map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+                {chapter.image ? (
+                  <div
+                    data-testid={`about-media-slot-${chapter.role}`}
+                    className={cn(
+                      "relative aspect-4/3 w-full",
+                      imageFirst && "lg:order-1",
+                    )}
+                  >
+                    <div
+                      data-testid={`about-media-artwork-${chapter.role}`}
+                      className="relative mx-auto aspect-3/4 h-full"
+                    >
+                      <Image
+                        src={chapter.image.src}
+                        alt={chapter.image.alt}
+                        fill
+                        sizes="(max-width: 1023px) calc(100vw - 40px), 560px"
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </section>
+          );
+        })}
+        <section
+          className="bg-bone-50 py-12 lg:py-[72px]"
+          aria-labelledby="about-cta-heading"
+        >
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-0">
+            <div>
+              <h2
+                id="about-cta-heading"
+                className="font-display text-content-primary text-[30px] leading-[1.2] lg:text-[40px]"
+              >
+                Find the fragrance for your room.
+              </h2>
+              <p className="text-content-secondary mt-5 max-w-[680px] font-sans text-[17px] leading-[1.5] lg:text-xl">
+                Explore the Fragrance Guide for scent notes, room context and a
+                clear path through the collection.
+              </p>
+            </div>
+            <Button asChild variant="primary" size="large">
+              <a href="/fragrance-guide">Explore the Fragrance Guide</a>
+            </Button>
+          </div>
+        </section>
+      </article>
+    </TemplateShell>
+  );
+}
+
 export type { CommerceStatusValue, CommerceMoney };

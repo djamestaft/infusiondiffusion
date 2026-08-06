@@ -15,7 +15,6 @@ export type EditorialPage = {
   seoTitle: string;
   seoDescription: string;
 };
-
 type EditorialPageInput = {
   eyebrow?: string | null;
   title?: string | null;
@@ -57,12 +56,12 @@ export const fallbackFragranceGuide: EditorialPage = {
     "Choose home fragrance by room, atmosphere, scent notes, and format with this practical Infusion Diffusion guide.",
 };
 
+const text = (value: string | null | undefined, fallback: string) =>
+  value?.trim() || fallback;
 export function withEditorialFallback(
   page: EditorialPageInput | null,
   fallback: EditorialPage,
 ): EditorialPage {
-  const text = (value: string | null | undefined, fallbackValue: string) =>
-    value?.trim() || fallbackValue;
   const sections = page?.sections
     ?.filter((section): section is { heading: string; body: string } =>
       Boolean(section?.heading?.trim() && section.body?.trim()),
@@ -75,7 +74,6 @@ export function withEditorialFallback(
     page?.image?.src && page.image.alt?.trim()
       ? { src: page.image.src, alt: page.image.alt.trim() }
       : fallback.image;
-
   return {
     eyebrow: text(page?.eyebrow, fallback.eyebrow),
     title: text(page?.title, fallback.title),
@@ -86,14 +84,12 @@ export function withEditorialFallback(
     seoDescription: text(page?.seoDescription, fallback.seoDescription),
   };
 }
-
 async function fetchEditorialPage(
   slug: string,
   options: DynamicFetchOptions,
   fallback: EditorialPage,
 ) {
   "use cache";
-
   if (!isSanityConfigured) return fallback;
   try {
     const { data } = await sanityFetch({
@@ -107,11 +103,9 @@ async function fetchEditorialPage(
     return fallback;
   }
 }
-
 export function getFragranceGuide(options: DynamicFetchOptions) {
   return fetchEditorialPage("fragrance-guide", options, fallbackFragranceGuide);
 }
-
 export async function getFragranceGuideMetadata(
   perspective: DynamicFetchOptions["perspective"],
 ) {
@@ -129,5 +123,142 @@ export async function getFragranceGuideMetadata(
   } catch (error) {
     console.error("Unable to load Sanity fragrance guide metadata", error);
     return fallbackFragranceGuide;
+  }
+}
+
+export type AboutChapterRole =
+  "origin" | "development" | "collaborator" | "principles";
+export type AboutPortrait = {
+  src: string;
+  alt: string;
+  hotspot?: { x?: number; y?: number };
+};
+export type AboutPage = {
+  title: string;
+  introduction: string;
+  chapters: Array<{
+    role: AboutChapterRole;
+    heading: string;
+    body: string;
+    image?: AboutPortrait;
+  }>;
+  seoTitle: string;
+  seoDescription: string;
+};
+const aboutRoles: AboutChapterRole[] = [
+  "origin",
+  "development",
+  "collaborator",
+  "principles",
+];
+export const fallbackAboutPage: AboutPage = {
+  title: "The story behind the atmosphere.",
+  introduction:
+    "A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in.",
+  chapters: [
+    {
+      role: "origin",
+      heading: "Born from fragrance",
+      body: "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",
+    },
+    {
+      role: "development",
+      heading: "From more than 130 oils to six fragrances",
+      body: "More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances. The result is a focused cabinet of atmosphere: clear enough to choose with confidence, expressive enough to change the feeling of a room.",
+    },
+    {
+      role: "collaborator",
+      heading: "Guidance and encouragement",
+      body: "The collection was created with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts.",
+    },
+    {
+      role: "principles",
+      heading: "Composed for lived-in rooms",
+      body: "Infusion Diffusion treats scent as a considered part of an interior. Each fragrance is presented with clarity, restraint and a belief that luxury is earned through material detail, proportion and trust.",
+    },
+  ],
+  seoTitle: "About Infusion Diffusion | Infusion Diffusion",
+  seoDescription:
+    "Discover the Infusion Diffusion story, from more than 130 fragrance oils to six fragrances composed for lived-in rooms.",
+};
+type AboutInput = {
+  title?: string | null;
+  introduction?: string | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  sections?: Array<{
+    role?: string | null;
+    heading?: string | null;
+    body?: string | null;
+    image?: {
+      src?: string | null;
+      alt?: string | null;
+      storefrontRightsConfirmed?: boolean | null;
+      hotspot?: { x?: number; y?: number } | null;
+    } | null;
+  } | null> | null;
+};
+export function withAboutFallback(page: AboutInput | null): AboutPage {
+  const sections = page?.sections ?? [];
+  return {
+    title: text(page?.title, fallbackAboutPage.title),
+    introduction: text(page?.introduction, fallbackAboutPage.introduction),
+    chapters: aboutRoles.map((role) => {
+      const fallback = fallbackAboutPage.chapters.find(
+        (chapter) => chapter.role === role,
+      )!;
+      const authored = sections.find((section) => section?.role === role);
+      const image =
+        authored?.image?.src &&
+        authored.image.alt?.trim() &&
+        authored.image.storefrontRightsConfirmed
+          ? {
+              src: authored.image.src,
+              alt: authored.image.alt.trim(),
+              hotspot: authored.image.hotspot ?? undefined,
+            }
+          : undefined;
+      return {
+        ...fallback,
+        heading: text(authored?.heading, fallback.heading),
+        body: text(authored?.body, fallback.body),
+        image,
+      };
+    }),
+    seoTitle: text(page?.seoTitle, fallbackAboutPage.seoTitle),
+    seoDescription: text(
+      page?.seoDescription,
+      fallbackAboutPage.seoDescription,
+    ),
+  };
+}
+export async function getAboutPage(options: DynamicFetchOptions) {
+  if (!isSanityConfigured) return fallbackAboutPage;
+  try {
+    const { data } = await sanityFetch({
+      query: EDITORIAL_PAGE_QUERY,
+      params: { slug: "about" },
+      ...options,
+    });
+    return withAboutFallback(data as AboutInput | null);
+  } catch (error) {
+    console.error("Unable to load Sanity About page", error);
+    return fallbackAboutPage;
+  }
+}
+export async function getAboutPageMetadata(
+  perspective: DynamicFetchOptions["perspective"],
+) {
+  if (!isSanityConfigured) return fallbackAboutPage;
+  try {
+    const { data } = await sanityFetchMetadata({
+      query: EDITORIAL_PAGE_QUERY,
+      params: { slug: "about" },
+      perspective,
+    });
+    return withAboutFallback(data as AboutInput | null);
+  } catch (error) {
+    console.error("Unable to load Sanity About metadata", error);
+    return fallbackAboutPage;
   }
 }

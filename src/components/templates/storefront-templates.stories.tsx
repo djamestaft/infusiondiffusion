@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, within } from "storybook/test";
 
 import {
+  AboutTemplate,
   CollectionTemplate,
   EditorialTemplate,
   HomeTemplate,
@@ -250,6 +251,85 @@ export const ProductDetailBrowseOnly: Story = {
       description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
       details={productDetails}
       showPurchaseAction={false}
+    />
+  ),
+};
+
+export const About: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={[
+        {
+          role: "origin",
+          heading: "Born from fragrance",
+          body: "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",
+        },
+        {
+          role: "development",
+          heading: "From more than 130 oils to six fragrances",
+          body: "More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances.",
+        },
+        {
+          role: "collaborator",
+          heading: "Guidance and encouragement",
+          body: "The collection was created with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts.",
+        },
+        {
+          role: "principles",
+          heading: "Composed for lived-in rooms",
+          body: "Infusion Diffusion treats scent as a considered part of an interior.",
+        },
+      ]}
+      cartCount={2}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("link", { name: "About", current: "page" }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("link", { name: /Explore the Fragrance Guide/i }),
+    ).toHaveAttribute("href", "/fragrance-guide");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-origin"))
+        .backgroundColor,
+    ).toBe("rgb(245, 241, 232)");
+  },
+};
+export const AboutMobile: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: About.render,
+};
+export const AboutLongContent: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={[
+        {
+          role: "origin",
+          heading: "Born from fragrance",
+          body: "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.\n\nThis paragraph verifies natural expansion.",
+        },
+        {
+          role: "development",
+          heading: "From more than 130 oils to six fragrances",
+          body: "More than 130 fragrance oils were explored before refinement.",
+        },
+        {
+          role: "collaborator",
+          heading: "Guidance and encouragement",
+          body: "The collection was created with guidance and encouragement.",
+        },
+        {
+          role: "principles",
+          heading: "Composed for lived-in rooms",
+          body: "Scent is a considered part of an interior.",
+        },
+      ]}
     />
   ),
 };
