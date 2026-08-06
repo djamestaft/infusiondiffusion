@@ -20,7 +20,8 @@ import sys
 from adw_modules import agents, gates, git_helper, quality, session, utils
 from adw_modules.data_types import AgentCall, BuildOutput, PhaseParams, PlanOutput
 
-REQUIRED_AGENTS = ["planner", "builder"]
+REQUIRED_AGENTS = ["planner", "builder", "storefront_engineer",
+                   "content_commerce_engineer"]
 MAX_FIX_LOOPS = 3
 
 
@@ -43,7 +44,9 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
         plan = ph.call(AgentCall(output_type=PlanOutput, prompt=prompt,
                                  gates=[gates.artifacts_exist, gates.files_non_empty]))
 
-    with run.phase(PhaseParams(name="build", kind="agent", owner="builder",
+    implementation_owner = plan.implementation_owner
+
+    with run.phase(PhaseParams(name="build", kind="agent", owner=implementation_owner,
                                description="Implement the plan exactly")) as ph:
         previous = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt, previous=plan,
                                      gates=[gates.artifacts_exist]))
@@ -59,7 +62,7 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
         if test.passed:
             break
 
-        with run.phase(PhaseParams(name=f"fix_{i}", kind="agent", owner="builder", retries=1,
+        with run.phase(PhaseParams(name=f"fix_{i}", kind="agent", owner=implementation_owner, retries=1,
                                    description="Repair what the suite reported, from its "
                                                "verbatim output")) as ph:
             previous = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt,

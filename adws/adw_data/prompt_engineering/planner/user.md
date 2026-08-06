@@ -18,6 +18,11 @@
 
 Plan the work described in `prompt`. The plan must include: acceptance criteria; applicable project skills and why they trigger; system ownership boundaries; exact file ownership; accessibility and content-extreme coverage; deterministic verification commands; preview/rollback evidence where relevant; human approvals required before implementation, merge, publish, production, or rollback; and residual risks.
 
+Select the smallest specialist routing that covers the work:
+- `implementation_owner`: `storefront_engineer` for Next.js/UI/Storybook implementation, `content_commerce_engineer` for Sanity/Shopify/server commerce implementation, otherwise `builder`. Choose exactly one writing owner; never create concurrent writers implicitly.
+- `advisory_specialists`: include `product_designer` when UI direction, interaction, responsive states, or reusable components need design shaping; include `browser_release_debugger` for preview/deployment/runtime diagnosis or verification. Otherwise use an empty list.
+- `review_owner`: use `quality_reviewer` for substantive implementation; use `reviewer` for small generic changes.
+
 1. Write the full plan to `<context_handoff_dir>/plan.md` — this is the copy the builder reads.
 2. Copy that file into the repo under `specs/`:
    - **List `specs/` before you pick the name.** A session that plans more than once reuses its `<adw_id>`, so the obvious name may already be taken.
@@ -38,6 +43,9 @@ Respond with ONLY valid JSON matching `PlanOutput` — no prose before or after:
   "summary": "<one sentence describing the plan>",
   "artifacts": ["<context_handoff_dir>/plan.md", "specs/<adw_id>_<slug>.md"],
   "commit_message": "<imperative one-line git subject for committing THIS PLAN DOCUMENT, not the work it describes — e.g. 'Add spec for the /health endpoint'>",
+  "implementation_owner": "builder",
+  "advisory_specialists": [],
+  "review_owner": "reviewer",
   "notes_for_next_agent": "<what the builder must know>"
 }
 ```
