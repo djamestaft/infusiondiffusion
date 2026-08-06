@@ -62,6 +62,10 @@ sdlc *ARGS:
 simple-sdlc *ARGS:
     uv run adws/adw_simple_sdlc.py --config {{config}} "$@"
 
+# resume a specialist-routed chain whose validated plan is already committed
+resume-simple-sdlc *ARGS:
+    uv run adws/adw_simple_sdlc.py --config {{config}} --resume-after-plan "$@"
+
 # ── watch it ────────────────────────────────────────────────────────────────
 # Reads never block a running workflow, the db is WAL. Poll as hard as you like.
 
