@@ -66,6 +66,10 @@ simple-sdlc *ARGS:
 resume-simple-sdlc *ARGS:
     uv run adws/adw_simple_sdlc.py --config {{config}} --resume-after-plan "$@"
 
+# independently review an already committed build without rebuilding it
+review *ARGS:
+    uv run adws/adw_review.py --config {{config}} "$@"
+
 # ── watch it ────────────────────────────────────────────────────────────────
 # Reads never block a running workflow, the db is WAL. Poll as hard as you like.
 
