@@ -11,6 +11,7 @@ describe("storefront surface tokens", () => {
     expect(styles).toMatch(/--navigation-divider:\s*#c5a447;/);
     expect(styles).toMatch(/--navigation-border:\s*#dde2d4;/);
     expect(styles).toMatch(/--content-surface:\s*#eef0e7;/);
+    expect(styles).toMatch(/--content-surface-elevated:\s*#e3e7da;/);
   });
 
   it("preserves the Midnight storefront palette", () => {
@@ -18,5 +19,8 @@ describe("storefront surface tokens", () => {
       /\.dark\s*\{[\s\S]*--navigation-surface:\s*#11110f;/,
     );
     expect(styles).toMatch(/\.dark\s*\{[\s\S]*--content-surface:\s*#11110f;/);
+    expect(styles).toMatch(
+      /\.dark\s*\{[\s\S]*--content-surface-elevated:\s*#191916;/,
+    );
   });
 });

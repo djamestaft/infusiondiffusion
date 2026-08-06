@@ -48,6 +48,22 @@ export const AsLink: Story = {
   },
 };
 export const Loading: Story = { args: { loading: true } };
+export const LoadingLink: Story = {
+  args: {
+    asChild: true,
+    loading: true,
+    children: <a href="#collection">Explore the collection</a>,
+  },
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole("link", {
+      name: "Explore the collection",
+    });
+    await expect(link).toHaveAttribute("aria-busy", "true");
+    await expect(link).toHaveAttribute("aria-disabled", "true");
+    await expect(link).toHaveAttribute("tabindex", "-1");
+    await expect(link.querySelector("svg")).toBeVisible();
+  },
+};
 export const Disabled: Story = { args: { disabled: true } };
 export const LongLabel: Story = {
   args: {

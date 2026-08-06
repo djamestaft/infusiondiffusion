@@ -20,6 +20,12 @@ function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
     }),
   ) as Partial<SiteSettings["homepage"]>;
 
+  homepage.heroSlides = (settings?.homepage?.heroSlides ?? [])
+    .filter((slide) =>
+      Boolean(slide?.id && slide?.src?.trim() && slide?.alt?.trim()),
+    )
+    .slice(0, 3);
+
   return {
     ...fallbackSiteSettings,
     ...(settings ?? {}),

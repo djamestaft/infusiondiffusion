@@ -115,6 +115,57 @@ export const siteSettings = defineType({
           validation: (rule) => rule.max(30),
         }),
         defineField({
+          name: "heroSlides",
+          title: "Hero carousel slides",
+          type: "array",
+          description:
+            "Add two or three ordered editorial campaign images to enable the carousel. With fewer valid slides, the storefront keeps its existing static hero image.",
+          validation: (rule) => rule.max(3),
+          of: [
+            {
+              type: "object",
+              name: "heroSlide",
+              title: "Hero slide",
+              fields: [
+                defineField({
+                  name: "image",
+                  title: "Image",
+                  type: "image",
+                  options: { hotspot: true },
+                  validation: (rule) => rule.required(),
+                }),
+                defineField({
+                  name: "alt",
+                  title: "Alternative text",
+                  type: "string",
+                  description:
+                    "Describe the meaningful visual content without repeating the homepage heading.",
+                  validation: (rule) => rule.required().max(180),
+                }),
+                defineField({
+                  name: "caption",
+                  title: "Caption",
+                  type: "string",
+                  description:
+                    "Optional editorial context. Do not add product price, stock, discount, or other commerce state.",
+                  validation: (rule) => rule.max(160),
+                }),
+                defineField({
+                  name: "visible",
+                  title: "Visible",
+                  type: "boolean",
+                  initialValue: true,
+                  description:
+                    "Disable a slide without deleting it. At least two valid visible slides are needed for the carousel.",
+                }),
+              ],
+              preview: {
+                select: { title: "alt", subtitle: "caption", media: "image" },
+              },
+            },
+          ],
+        }),
+        defineField({
           name: "collectionTitle",
           title: "Featured collection title",
           type: "string",

@@ -36,6 +36,27 @@ test("collection cards navigate to a purchasable product", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
 });
 
+test("collection uses the elevated browsing surface without card effects", async ({
+  page,
+}) => {
+  await page.goto("/shop");
+  const surface = page.getByTestId("collection-browsing-surface");
+  const firstCard = page.getByRole("link", { name: /^View / }).first();
+  await expect(surface).toHaveCSS("background-color", "rgb(227, 231, 218)");
+  await expect(surface).toHaveCSS("border-top-width", "0px");
+  await expect(surface).toHaveCSS("box-shadow", "none");
+  await expect(firstCard).toHaveCSS("background-color", "rgb(238, 240, 231)");
+  await expect(firstCard).toHaveCSS("border-top-width", "0px");
+  await expect(firstCard).toHaveCSS("box-shadow", "none");
+  const navigationHeader = page
+    .getByRole("navigation", { name: "Primary" })
+    .locator("..");
+  await expect(navigationHeader).toHaveCSS(
+    "border-bottom-color",
+    "rgb(197, 164, 71)",
+  );
+});
+
 test("unknown product handles return 404", async ({ page }) => {
   await page.goto("/products/not-a-real-fragrance");
   await expect(

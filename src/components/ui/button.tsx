@@ -98,14 +98,6 @@ function Button({
     onClick?.(event);
   };
 
-  const childElement = React.isValidElement<{
-    children?: React.ReactNode;
-    tabIndex?: number;
-  }>(children)
-    ? children
-    : null;
-  const contentChildren =
-    asChild && childElement ? childElement.props.children : children;
   const content = (
     <>
       <span
@@ -114,7 +106,7 @@ function Button({
           loading && "opacity-0",
         )}
       >
-        {contentChildren}
+        {children}
       </span>
       {loading ? (
         <span className="absolute inset-0 flex items-center justify-center">
@@ -123,15 +115,33 @@ function Button({
       ) : null}
     </>
   );
-
+  const childElement = React.isValidElement<{ children?: React.ReactNode }>(
+    children,
+  )
+    ? children
+    : null;
+  const loadingLinkContent = childElement ? (
+    <>
+      <span className="inline-flex items-center justify-center gap-2 opacity-0">
+        {childElement.props.children}
+      </span>
+      <span className="absolute inset-0 flex items-center justify-center">
+        <Spinner />
+      </span>
+    </>
+  ) : null;
   const slottedChild =
-    asChild && childElement
+    asChild && childElement && loading
       ? React.cloneElement(
           childElement,
-          unavailable ? { tabIndex: -1 } : undefined,
-          content,
+          { tabIndex: -1 } as React.HTMLAttributes<HTMLElement>,
+          loadingLinkContent,
         )
-      : children;
+      : asChild && childElement && unavailable
+        ? React.cloneElement(childElement, {
+            tabIndex: -1,
+          } as React.HTMLAttributes<HTMLElement>)
+        : children;
 
   return (
     <Comp

@@ -61,9 +61,10 @@ describe("Button", () => {
       </Button>,
     );
 
-    expect(screen.getByRole("link", { name: "Explore" })).toHaveAttribute(
-      "tabindex",
-      "-1",
-    );
+    const link = screen.getByRole("link", { name: "Explore" });
+    expect(link).toHaveAttribute("tabindex", "-1");
+    expect(link).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByText("Explore")).toHaveClass("opacity-0");
+    expect(link.querySelector("svg")).toHaveClass("animate-spin");
   });
 });

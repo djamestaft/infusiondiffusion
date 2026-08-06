@@ -94,6 +94,20 @@ export type SiteSettings = {
     heroTitle?: string;
     heroIntroduction?: string;
     heroActionLabel?: string;
+    heroSlides?: Array<{
+      image?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      alt?: string;
+      caption?: string;
+      visible?: boolean;
+      _type: "heroSlide";
+      _key: string;
+    }>;
     collectionTitle?: string;
     guidanceEyebrow?: string;
     guidanceTitle?: string;
@@ -240,7 +254,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText,      "showServiceReassurance": coalesce(showServiceReassurance, true),      serviceTitle,      serviceIntroduction,      "showFounderStory": coalesce(showFounderStory, true),      founderTitle,      founderStory,      "founderImage": founderImage{        "src": asset->url,        alt      },      "showLongevity": coalesce(showLongevity, true),      longevityTitle,      longevityIntroduction,      longevityConditions,      "showCollectionInvitation": coalesce(showCollectionInvitation, true),      collectionInvitationTitle,      collectionInvitationIntroduction,      collectionInvitationActionLabel    }  }
+// Query: *[_type == "siteSettings"][0]{    brandName,    eyebrow,    "announcement": {      "enabled": coalesce(announcementEnabled, false),      "message": announcementMessage,      "linkLabel": announcementLinkLabel,      "linkUrl": announcementLinkUrl    },    headline,    introduction,    contactEmail,    callToActionLabel,    seoTitle,    seoDescription,    homepage{      heroTitle,      heroIntroduction,      heroActionLabel,      "heroSlides": heroSlides[visible != false]{        "id": _key,        "src": image.asset->url,        "hotspot": image.hotspot,        alt,        caption      },      collectionTitle,      guidanceEyebrow,      guidanceTitle,      guidanceIntroduction,      guidanceActionLabel,      guidanceSupportingText,      "showServiceReassurance": coalesce(showServiceReassurance, true),      serviceTitle,      serviceIntroduction,      "showFounderStory": coalesce(showFounderStory, true),      founderTitle,      founderStory,      "founderImage": founderImage{        "src": asset->url,        alt      },      "showLongevity": coalesce(showLongevity, true),      longevityTitle,      longevityIntroduction,      longevityConditions,      "showCollectionInvitation": coalesce(showCollectionInvitation, true),      collectionInvitationTitle,      collectionInvitationIntroduction,      collectionInvitationActionLabel    }  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   brandName: string | null;
   eyebrow: string | null;
@@ -260,6 +274,13 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     heroTitle: string | null;
     heroIntroduction: string | null;
     heroActionLabel: string | null;
+    heroSlides: Array<{
+      id: string;
+      src: string | null;
+      hotspot: SanityImageHotspot | null;
+      alt: string | null;
+      caption: string | null;
+    }> | null;
     collectionTitle: string | null;
     guidanceEyebrow: string | null;
     guidanceTitle: string | null;

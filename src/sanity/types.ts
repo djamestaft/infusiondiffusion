@@ -17,6 +17,13 @@ export type SiteSettings = {
     heroTitle: string;
     heroIntroduction: string;
     heroActionLabel: string;
+    heroSlides: Array<{
+      id: string;
+      src: string;
+      alt: string;
+      caption?: string;
+      hotspot?: { x: number; y: number };
+    }>;
     collectionTitle: string;
     guidanceEyebrow: string;
     guidanceTitle: string;
@@ -61,6 +68,7 @@ export const fallbackSiteSettings: SiteSettings = {
     heroIntroduction:
       "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
     heroActionLabel: "Shop the collection",
+    heroSlides: [],
     collectionTitle: "A cabinet of atmosphere",
     guidanceEyebrow: "Fragrance guidance",
     guidanceTitle: "Choose by the room, then by the feeling",

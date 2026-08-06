@@ -20,6 +20,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
       heroTitle,
       heroIntroduction,
       heroActionLabel,
+      "heroSlides": heroSlides[visible != false]{
+        "id": _key,
+        "src": image.asset->url,
+        "hotspot": image.hotspot,
+        alt,
+        caption
+      },
       collectionTitle,
       guidanceEyebrow,
       guidanceTitle,

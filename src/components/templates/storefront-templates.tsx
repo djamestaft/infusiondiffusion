@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import {
+  HeroCarousel,
+  type HeroCarouselSlide,
+} from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,18 +35,34 @@ type TemplateNavigationProps = {
 
 const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
+const homeHeroSectionClass =
+  "mx-auto grid w-full max-w-7xl gap-10 px-5 pt-16 pb-0 sm:px-8 lg:px-12 lg:pt-24 lg:pb-0";
+const homeCollectionInnerClass =
+  "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
 
 function TemplateShell({
   navigationTheme = "ivory",
   cartCount,
   currentHref,
+  surface = "base",
   children,
 }: TemplateNavigationProps & {
   currentHref?: string;
+  surface?: "base" | "elevated";
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-content-surface text-content-primary min-h-dvh">
+    <div
+      className={cn(
+        "text-content-primary min-h-dvh",
+        surface === "elevated"
+          ? "bg-content-surface-elevated"
+          : "bg-content-surface",
+      )}
+      data-testid={
+        surface === "elevated" ? "collection-browsing-surface" : undefined
+      }
+    >
       <Navigation
         theme={navigationTheme}
         currentHref={currentHref}
@@ -71,6 +91,7 @@ function ProductGrid({ products }: { products: ProductCardProps[] }) {
 export interface HomeTemplateProps extends TemplateNavigationProps {
   products: ProductCardProps[];
   heroImage: ProductCardProps["image"];
+  heroSlides?: HeroCarouselSlide[];
   founderImage?: ProductCardProps["image"];
   content?: Partial<HomeTemplateContent>;
 }
@@ -138,6 +159,7 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
 export function HomeTemplate({
   products,
   heroImage,
+  heroSlides = [],
   founderImage,
   navigationTheme,
   cartCount,
@@ -145,14 +167,20 @@ export function HomeTemplate({
 }: HomeTemplateProps) {
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
   const storyImage = founderImage ?? heroImage;
+  const carouselSlides =
+    heroSlides.length >= 2
+      ? heroSlides.slice(0, 3)
+      : heroImage
+        ? [{ id: "catalogue-fallback", ...heroImage }]
+        : heroSlides.slice(0, 1);
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <ScrollRevealController />
       <section
+        data-testid="home-hero-section"
         className={cn(
-          sectionClass,
-          "grid gap-10",
-          heroImage && "lg:grid-cols-2 lg:items-center",
+          homeHeroSectionClass,
+          carouselSlides.length && "lg:grid-cols-2 lg:items-center",
         )}
       >
         <ContentHeader
@@ -166,42 +194,41 @@ export function HomeTemplate({
             href: "/shop",
           }}
         />
-        {heroImage ? (
-          <div className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-lg lg:mx-auto lg:w-4/5">
-            <Image
-              src={heroImage.src}
-              alt={heroImage.alt}
-              fill
-              priority
-              loading="eager"
-              sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-              className="object-cover"
-            />
-          </div>
+        {carouselSlides.length ? (
+          <HeroCarousel
+            slides={carouselSlides}
+            className="lg:mx-auto lg:w-4/5"
+          />
         ) : null}
       </section>
 
       <ScrollReveal direction="left">
         <section
-          className={sectionClass}
+          className="bg-content-surface-elevated"
           aria-labelledby="home-collection-title"
+          data-testid="home-cabinet-band"
         >
-          <Heading
-            id="home-collection-title"
-            level={2}
-            treatment="title"
-            className="mb-8"
+          <div
+            className={homeCollectionInnerClass}
+            data-testid="home-cabinet-inner"
           >
-            {content.collectionTitle}
-          </Heading>
-          {products.length ? (
-            <ProductGrid products={products.slice(0, 3)} />
-          ) : (
-            <p className="text-content-secondary max-w-prose font-sans">
-              The collection is being prepared. Please return soon to explore
-              the first fragrances.
-            </p>
-          )}
+            <Heading
+              id="home-collection-title"
+              level={2}
+              treatment="title"
+              className="mb-8"
+            >
+              {content.collectionTitle}
+            </Heading>
+            {products.length ? (
+              <ProductGrid products={products.slice(0, 3)} />
+            ) : (
+              <p className="text-content-secondary max-w-prose font-sans">
+                The collection is being prepared. Please return soon to explore
+                the first fragrances.
+              </p>
+            )}
+          </div>
         </section>
       </ScrollReveal>
 
@@ -350,6 +377,7 @@ export function CollectionTemplate({
       navigationTheme={navigationTheme}
       currentHref="/shop"
       cartCount={cartCount}
+      surface="elevated"
     >
       <section className={sectionClass}>
         <ContentHeader
@@ -359,7 +387,7 @@ export function CollectionTemplate({
           headingTreatment="display"
           lead={description}
         />
-        <div className="border-navigation-border mt-12 flex items-center justify-between border-y py-4 font-sans text-sm">
+        <div className="mt-12 flex items-center justify-between py-4 font-sans text-sm">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>

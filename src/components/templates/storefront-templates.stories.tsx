@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { fn } from "storybook/test";
+import { expect, fn, within } from "storybook/test";
 
 import {
   CollectionTemplate,
@@ -35,10 +35,69 @@ const meta = {
 export default meta;
 type Story = StoryObj;
 
+async function verifyHomeCabinetBand(
+  canvasElement: HTMLElement,
+  expectedGap: number,
+) {
+  const canvas = within(canvasElement);
+  const band = canvas.getByTestId("home-cabinet-band");
+  const inner = canvas.getByTestId("home-cabinet-inner");
+  const controls = canvas.getByTestId("hero-carousel-controls");
+  const heading = canvas.getByRole("heading", {
+    name: "A cabinet of atmosphere",
+  });
+  const firstCard = canvas.getAllByRole("link", { name: /^View / })[0];
+  const bandBounds = band.getBoundingClientRect();
+  const innerBounds = inner.getBoundingClientRect();
+  const controlsBounds = controls.getBoundingClientRect();
+  const headingBounds = heading.getBoundingClientRect();
+
+  await expect(getComputedStyle(band).backgroundColor).toBe(
+    "rgb(227, 231, 218)",
+  );
+  await expect(getComputedStyle(firstCard).backgroundColor).toBe(
+    "rgb(238, 240, 231)",
+  );
+  await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
+  await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
+  await expect(headingBounds.top - controlsBounds.bottom).toBe(expectedGap);
+  await expect(innerBounds.width).toBeLessThanOrEqual(1280);
+  await expect(bandBounds.width).toBe(document.documentElement.clientWidth);
+}
+
+async function verifyCollectionSurface(
+  canvasElement: HTMLElement,
+  expectCards = true,
+) {
+  const canvas = within(canvasElement);
+  const surface = canvas.getByTestId("collection-browsing-surface");
+  await expect(getComputedStyle(surface).backgroundColor).toBe(
+    "rgb(227, 231, 218)",
+  );
+  await expect(getComputedStyle(surface).borderTopWidth).toBe("0px");
+  await expect(getComputedStyle(surface).boxShadow).toBe("none");
+  if (expectCards) {
+    const firstCard = canvas.getAllByRole("link", { name: /^View / })[0];
+    await expect(getComputedStyle(firstCard).backgroundColor).toBe(
+      "rgb(238, 240, 231)",
+    );
+    await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
+    await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
+  }
+}
+
 export const HomeIvory: Story = {
   render: () => (
-    <HomeTemplate products={productCardFixtures} heroImage={featured.image} />
+    <HomeTemplate
+      products={productCardFixtures}
+      heroSlides={[
+        { id: "first", ...featured.image },
+        { id: "second", ...productCardFixtures[4].image },
+      ]}
+      heroImage={featured.image}
+    />
   ),
+  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 72),
 };
 export const HomeMidnightNavigation: Story = {
   render: () => (
@@ -52,8 +111,16 @@ export const HomeMidnightNavigation: Story = {
 export const HomeMobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: () => (
-    <HomeTemplate products={productCardFixtures} heroImage={featured.image} />
+    <HomeTemplate
+      products={productCardFixtures}
+      heroSlides={[
+        { id: "first", ...featured.image },
+        { id: "second", ...productCardFixtures[4].image },
+      ]}
+      heroImage={featured.image}
+    />
   ),
+  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 52),
 };
 export const HomeEmptyCatalogue: Story = {
   render: () => <HomeTemplate products={[]} heroImage={undefined} />,
@@ -100,9 +167,12 @@ export const HomeEditorialSectionsHidden: Story = {
 
 export const Collection: Story = {
   render: () => <CollectionTemplate products={productCardFixtures} />,
+  play: async ({ canvasElement }) => verifyCollectionSurface(canvasElement),
 };
 export const CollectionEmpty: Story = {
   render: () => <CollectionTemplate products={[]} />,
+  play: async ({ canvasElement }) =>
+    verifyCollectionSurface(canvasElement, false),
 };
 export const CollectionMidnightNavigation: Story = {
   render: () => (
@@ -115,6 +185,7 @@ export const CollectionMidnightNavigation: Story = {
 export const CollectionMobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: () => <CollectionTemplate products={productCardFixtures} />,
+  play: async ({ canvasElement }) => verifyCollectionSurface(canvasElement),
 };
 
 export const ProductDetail: Story = {

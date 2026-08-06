@@ -20,10 +20,28 @@ describe("storefront templates", () => {
       />,
     );
     expect(screen.getByRole("navigation", { name: "Primary" })).toBeVisible();
+    expect(
+      screen.getByRole("navigation", { name: "Primary" }).closest("header"),
+    ).toHaveClass("border-navigation-divider", "border-b");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(3);
+    expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
+      "bg-content-surface-elevated",
+    );
+    expect(screen.getByTestId("home-cabinet-band")).not.toHaveClass(
+      "border",
+      "shadow",
+    );
+    expect(screen.getByTestId("home-cabinet-inner")).toHaveClass(
+      "max-w-7xl",
+      "pt-[52px]",
+      "lg:pt-[72px]",
+    );
+    expect(
+      screen.getByRole("heading", { name: "A cabinet of atmosphere" }),
+    ).toHaveClass("mb-8");
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" }),
     ).toHaveLength(2);
@@ -36,6 +54,9 @@ describe("storefront templates", () => {
 
   it("gives an empty collection a useful route back", () => {
     render(<CollectionTemplate products={[]} />);
+    expect(screen.getByTestId("collection-browsing-surface")).toHaveClass(
+      "bg-content-surface-elevated",
+    );
     expect(screen.getByText("0 products")).toBeVisible();
     expect(
       screen.getByRole("heading", { name: "No fragrances found" }),
@@ -43,6 +64,16 @@ describe("storefront templates", () => {
     expect(
       screen.getByRole("link", { name: "View all products" }),
     ).toHaveAttribute("href", "/shop");
+  });
+
+  it("keeps collection cards on the base surface without borders or shadows", () => {
+    render(<CollectionTemplate products={productCardFixtures} />);
+    const card = screen.getAllByRole("link", { name: /^View / })[0];
+    expect(card).toHaveClass("bg-product-card-surface");
+    expect(card).not.toHaveClass("border", "shadow");
+    expect(screen.getByText("6 products").parentElement).not.toHaveClass(
+      "border-y",
+    );
   });
 
   it("keeps the home journey meaningful without catalogue data", () => {

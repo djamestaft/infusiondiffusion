@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@keyframes hero-carousel-progress {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hero-carousel-progress {
+  animation: hero-carousel-progress 3s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel-progress {
+    animation: none;
+  }
+}
+
 .scroll-reveal {
   overflow: clip;
   opacity: 1;
@@ -171,6 +190,7 @@
   --color-navigation-muted: var(--navigation-muted);
   --color-navigation-accent: var(--navigation-accent);
   --color-navigation-divider: var(--navigation-divider);
+  --color-hero-carousel-bracket: var(--hero-carousel-bracket);
   --color-navigation-border: var(--navigation-border);
   --color-navigation-focus: var(--navigation-focus);
   --color-overlay-scrim: var(--overlay-scrim);
@@ -197,6 +217,7 @@
   --color-content-secondary: var(--content-secondary);
   --color-content-accent: var(--content-accent);
   --color-content-surface: var(--content-surface);
+  --color-content-surface-elevated: var(--content-surface-elevated);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -323,6 +344,11 @@
   --navigation-muted: #3c3b35;
   --navigation-accent: #735716;
   --navigation-divider: #c5a447;
+  --hero-carousel-bracket: color-mix(
+    in srgb,
+    var(--navigation-divider) 55%,
+    transparent
+  );
   --navigation-border: #dde2d4;
   --navigation-focus: #c5a447;
   --overlay-scrim: rgb(17 17 15 / 72%);
@@ -349,6 +375,7 @@
   --content-secondary: #3c3b35;
   --content-accent: #735716;
   --content-surface: #eef0e7;
+  --content-surface-elevated: #e3e7da;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -461,6 +488,11 @@
   --navigation-muted: #e8e2d5;
   --navigation-accent: #c5a447;
   --navigation-divider: #c5a447;
+  --hero-carousel-bracket: color-mix(
+    in srgb,
+    var(--navigation-divider) 55%,
+    transparent
+  );
   --navigation-border: #3c3b35;
   --navigation-focus: #ddc77f;
   --overlay-scrim: rgb(17 17 15 / 78%);
@@ -487,6 +519,7 @@
   --content-secondary: #e8e2d5;
   --content-accent: #ddc77f;
   --content-surface: #11110f;
+  --content-surface-elevated: #191916;
 }
 
 @layer base {
@@ -510,24 +543,5 @@
   }
   .text-balance {
     text-wrap: balance;
-  }
-  .navigation-logo-primary {
-    font-size: 1.125rem;
-    line-height: 1.125rem;
-    letter-spacing: 0.28em;
-  }
-  .navigation-logo-secondary {
-    font-size: 0.5625rem;
-    line-height: 0.75rem;
-    letter-spacing: 0.24em;
-  }
-  @media (min-width: 64rem) {
-    .navigation-logo-primary {
-      font-size: 2rem;
-      line-height: 2rem;
-    }
-    .navigation-logo-secondary {
-      font-size: 0.75rem;
-    }
   }
 }
