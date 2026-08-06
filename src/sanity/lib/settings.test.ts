@@ -100,4 +100,35 @@ describe("site settings", () => {
     });
     expect(settings.homepage.founderImage).toBeUndefined();
   });
+
+  it("keeps only the first three complete visible hero slide projections", async () => {
+    sanityFetchMock.mockResolvedValue({
+      data: {
+        homepage: {
+          heroSlides: [
+            { id: "one", src: "https://cdn.sanity.io/one.jpg", alt: "One" },
+            { id: "broken", src: "", alt: "Missing image" },
+            { id: "two", src: "https://cdn.sanity.io/two.jpg", alt: "Two" },
+            {
+              id: "three",
+              src: "https://cdn.sanity.io/three.jpg",
+              alt: "Three",
+            },
+            { id: "four", src: "https://cdn.sanity.io/four.jpg", alt: "Four" },
+          ],
+        },
+      },
+    });
+
+    const settings = await getSiteSettings({
+      perspective: "published",
+      stega: false,
+    });
+
+    expect(settings.homepage.heroSlides.map(({ id }) => id)).toEqual([
+      "one",
+      "two",
+      "three",
+    ]);
+  });
 });

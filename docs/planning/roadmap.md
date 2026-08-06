@@ -47,6 +47,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Draft, published, Preview, Production, and cache-invalidation flows verified end to end
 - [x] Add a reusable Sanity editorial-page schema and connect the Fragrance Guide route with safe fallbacks
 - [x] Expand the homepage with independently managed founder, service, longevity, and collection-invitation content
+- [x] Add the approved Sanity-managed homepage media-carousel contract, runtime fallback, Storybook states, and automated coverage; final campaign photography and Sanity publication remain human content gates
 
 ### Design system — approved foundation, runtime migration in progress
 

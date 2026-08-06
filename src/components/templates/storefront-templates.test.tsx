@@ -20,6 +20,9 @@ describe("storefront templates", () => {
       />,
     );
     expect(screen.getByRole("navigation", { name: "Primary" })).toBeVisible();
+    expect(
+      screen.getByRole("navigation", { name: "Primary" }).closest("header"),
+    ).toHaveClass("border-navigation-divider", "border-b");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );

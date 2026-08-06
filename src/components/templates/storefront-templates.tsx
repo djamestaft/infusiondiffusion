@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import {
+  HeroCarousel,
+  type HeroCarouselSlide,
+} from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -71,6 +75,7 @@ function ProductGrid({ products }: { products: ProductCardProps[] }) {
 export interface HomeTemplateProps extends TemplateNavigationProps {
   products: ProductCardProps[];
   heroImage: ProductCardProps["image"];
+  heroSlides?: HeroCarouselSlide[];
   founderImage?: ProductCardProps["image"];
   content?: Partial<HomeTemplateContent>;
 }
@@ -138,6 +143,7 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
 export function HomeTemplate({
   products,
   heroImage,
+  heroSlides = [],
   founderImage,
   navigationTheme,
   cartCount,
@@ -145,6 +151,12 @@ export function HomeTemplate({
 }: HomeTemplateProps) {
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
   const storyImage = founderImage ?? heroImage;
+  const carouselSlides =
+    heroSlides.length >= 2
+      ? heroSlides.slice(0, 3)
+      : heroImage
+        ? [{ id: "catalogue-fallback", ...heroImage }]
+        : heroSlides.slice(0, 1);
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
       <ScrollRevealController />
@@ -152,7 +164,7 @@ export function HomeTemplate({
         className={cn(
           sectionClass,
           "grid gap-10",
-          heroImage && "lg:grid-cols-2 lg:items-center",
+          carouselSlides.length && "lg:grid-cols-2 lg:items-center",
         )}
       >
         <ContentHeader
@@ -166,18 +178,11 @@ export function HomeTemplate({
             href: "/shop",
           }}
         />
-        {heroImage ? (
-          <div className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-lg lg:mx-auto lg:w-4/5">
-            <Image
-              src={heroImage.src}
-              alt={heroImage.alt}
-              fill
-              priority
-              loading="eager"
-              sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-              className="object-cover"
-            />
-          </div>
+        {carouselSlides.length ? (
+          <HeroCarousel
+            slides={carouselSlides}
+            className="lg:mx-auto lg:w-4/5"
+          />
         ) : null}
       </section>
 

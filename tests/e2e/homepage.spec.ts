@@ -9,6 +9,19 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
 
   await page.goto("/");
 
+  const navigationHeader = page
+    .getByRole("navigation", { name: "Primary" })
+    .locator("..");
+  await expect(navigationHeader).toHaveCSS("border-bottom-style", "solid");
+  await expect(navigationHeader).toHaveCSS(
+    "border-bottom-color",
+    "rgb(197, 164, 71)",
+  );
+  await expect(navigationHeader).toHaveCSS(
+    "width",
+    `${await page.evaluate(() => document.documentElement.clientWidth)}px`,
+  );
+
   await expect(
     page.getByRole("heading", {
       level: 1,
@@ -48,15 +61,14 @@ test("reveals each following section at the viewport edge", async ({
 }) => {
   await page.goto("/");
 
-  const reveals = page.locator("[data-scroll-reveal]");
-  const belowFoldIndex = await reveals.evaluateAll((elements) =>
-    elements.findIndex(
-      (element) => element.getBoundingClientRect().top >= window.innerHeight,
-    ),
+  const waitingReveals = page.locator(
+    '[data-scroll-reveal][data-reveal-state="waiting"]',
   );
-  expect(belowFoldIndex).toBeGreaterThanOrEqual(0);
-  const nextSection = reveals.nth(belowFoldIndex);
-  await expect(nextSection).toHaveAttribute("data-reveal-state", "waiting");
+  await expect.poll(() => waitingReveals.count()).toBeGreaterThan(0);
+  await waitingReveals
+    .first()
+    .evaluate((element) => element.setAttribute("data-e2e-target", ""));
+  const nextSection = page.locator("[data-e2e-target]");
 
   await nextSection.scrollIntoViewIfNeeded();
   await expect(nextSection).toHaveAttribute("data-reveal-state", "visible");
@@ -70,4 +82,27 @@ test("reports a healthy deployment", async ({ request }) => {
   const response = await request.get("/api/health");
   expect(response.ok()).toBeTruthy();
   await expect(response.json()).resolves.toMatchObject({ status: "ok" });
+});
+
+test("keeps the hero, CTA, and navigation divider intact at 320px", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+  await expect(
+    page.getByRole("link", { name: "Shop the collection" }).first(),
+  ).toHaveAttribute("href", "/shop");
+  const navigationHeader = page
+    .getByRole("navigation", { name: "Primary" })
+    .locator("..");
+  await expect(navigationHeader).toHaveCSS(
+    "border-bottom-color",
+    "rgb(197, 164, 71)",
+  );
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(320);
 });
