@@ -79,3 +79,15 @@ export const ImageFailure: Story = {
     ],
   },
 };
+export const PartialImageFailure: Story = {
+  args: {
+    slides: [
+      {
+        id: "broken",
+        src: "/images/missing-hero.jpg",
+        alt: "Unavailable fixture",
+      },
+      ...slides.slice(1),
+    ],
+  },
+};

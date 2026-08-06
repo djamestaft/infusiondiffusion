@@ -20,13 +20,11 @@ describe("Navigation", () => {
       "top-0",
     );
     const logo = container.querySelector(
-      'img[src="/infusion-diffusion-logo.svg"]',
+      '[data-logo-asset="/infusion-diffusion-logo.svg"]',
     );
     expect(logo).toHaveAttribute("aria-hidden", "true");
-    expect(logo).toHaveAttribute("width", "220");
-    expect(logo).toHaveAttribute("height", "64");
-    expect(logo).toHaveAttribute("alt", "");
     expect(logo).toHaveClass("w-31", "lg:w-55", "aspect-[220/64]");
+    expect(logo).toHaveClass("bg-navigation-accent");
     expect(screen.getAllByRole("link", { name: "Shop" })[0]).toHaveAttribute(
       "aria-current",
       "page",

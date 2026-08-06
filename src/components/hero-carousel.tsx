@@ -39,7 +39,9 @@ export function HeroCarousel({
   const [userPaused, setUserPaused] = React.useState(initialPaused);
   const [interactionPaused, setInteractionPaused] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
-  const [imageFailed, setImageFailed] = React.useState(false);
+  const [failedSlideIds, setFailedSlideIds] = React.useState<Set<string>>(
+    () => new Set(),
+  );
   const [manualAnnouncement, setManualAnnouncement] = React.useState("");
   const [reducedMotion, setReducedMotion] = React.useState(
     forceReducedMotion ?? false,
@@ -82,6 +84,7 @@ export function HeroCarousel({
     !reducedMotion &&
     !saveData &&
     !autoplayComplete;
+  const autoplayUnavailable = reducedMotion || saveData;
 
   React.useEffect(() => {
     if (!canAutoplay) return;
@@ -92,7 +95,7 @@ export function HeroCarousel({
     return () => window.clearTimeout(timeout);
   }, [canAutoplay, active, slides.length]);
 
-  if (!slides.length || imageFailed) {
+  if (!slides.length || failedSlideIds.size === slides.length) {
     return (
       <div
         className={cn(
@@ -115,10 +118,19 @@ export function HeroCarousel({
   const current = slides[active];
   const paused = userPaused || interactionPaused || hidden;
   const select = (index: number) => {
+    if (failedSlideIds.has(slides[index].id)) return;
     setAutoplayComplete(true);
     setActive(index);
-    setImageFailed(false);
     setManualAnnouncement(`Slide ${index + 1} of ${slides.length}`);
+  };
+
+  const markFailed = (index: number) => {
+    const failedId = slides[index].id;
+    const nextFailed = new Set(failedSlideIds).add(failedId);
+    setFailedSlideIds(nextFailed);
+    if (index !== active) return;
+    const nextIndex = slides.findIndex((slide) => !nextFailed.has(slide.id));
+    if (nextIndex >= 0) setActive(nextIndex);
   };
 
   return (
@@ -157,7 +169,7 @@ export function HeroCarousel({
                 ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
                 : undefined,
             }}
-            onError={() => index === active && setImageFailed(true)}
+            onError={() => markFailed(index)}
           />
         ))}
         <div className="absolute inset-0 opacity-10" aria-hidden="true">
@@ -186,6 +198,7 @@ export function HeroCarousel({
                 className="focus-visible:outline-action-focus relative flex size-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2"
                 aria-label={`Show slide ${index + 1} of ${slides.length}`}
                 aria-current={index === active ? "true" : undefined}
+                disabled={failedSlideIds.has(slide.id)}
                 onClick={() => select(index)}
               >
                 <svg
@@ -221,16 +234,23 @@ export function HeroCarousel({
           <Button
             variant="quiet"
             size="icon"
-            aria-label={userPaused ? "Play carousel" : "Pause carousel"}
+            aria-label={
+              autoplayUnavailable
+                ? "Autoplay unavailable"
+                : canAutoplay
+                  ? "Pause carousel"
+                  : "Play carousel"
+            }
+            disabled={autoplayUnavailable}
             onClick={() => {
               setAutoplayComplete(false);
-              setUserPaused((value) => !value);
+              setUserPaused(canAutoplay);
             }}
           >
-            {userPaused ? (
-              <Play aria-hidden="true" className="size-4" />
-            ) : (
+            {canAutoplay ? (
               <Pause aria-hidden="true" className="size-4" />
+            ) : (
+              <Play aria-hidden="true" className="size-4" />
             )}
           </Button>
         </div>
@@ -238,7 +258,15 @@ export function HeroCarousel({
       <span className="sr-only" aria-live="polite" aria-atomic="true">
         {manualAnnouncement}
       </span>
-      <span className="sr-only">{paused ? "Carousel paused" : ""}</span>
+      <span className="sr-only" data-testid="carousel-status">
+        {autoplayUnavailable
+          ? "Carousel autoplay unavailable"
+          : canAutoplay
+            ? "Carousel playing"
+            : paused || autoplayComplete
+              ? "Carousel paused"
+              : "Carousel paused"}
+      </span>
     </figure>
   );
 }

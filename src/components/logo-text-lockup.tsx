@@ -1,17 +1,14 @@
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 
 export function LogoTextLockup({ className }: { className?: string }) {
   return (
-    <Image
-      src="/infusion-diffusion-logo.svg"
-      alt=""
+    <span
       aria-hidden="true"
-      width="220"
-      height="64"
-      priority
-      className={cn("block aspect-[220/64] h-auto", className)}
+      data-logo-asset="/infusion-diffusion-logo.svg"
+      className={cn(
+        "bg-navigation-accent block aspect-[220/64] [mask-image:url('/infusion-diffusion-logo.svg')] [mask-size:contain] [mask-position:center] [mask-repeat:no-repeat]",
+        className,
+      )}
     />
   );
 }

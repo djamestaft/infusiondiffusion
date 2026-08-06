@@ -40,4 +40,6 @@ Fewer than two valid visible slides restores the pre-carousel static Shopify her
 
 The product owner/editor must supply and publish final campaign photography. Protected `main` merge remains an explicit human action.
 
-The product owner subsequently approved the exact 220×64 outlined export of `LogoTextLockup` from Figma staging node `302:100`, traced to main component `162:96` and instance child `I296:101;169:2`. Runtime uses the transparent SVG as decorative artwork inside the existing accessible home link. This replaces only browser-rendered lettering geometry; Navigation's full-width semantic gold divider remains independent and unchanged.
+The product owner subsequently approved the exact 220×64 outlined export of `LogoTextLockup` from Figma staging node `302:100`, traced to main component `162:96` and instance child `I296:101;169:2`. Runtime uses the transparent SVG geometry as a semantic-color mask inside the existing accessible home link, preserving Ivory and Midnight Navigation accents. This replaces only browser-rendered lettering geometry; Navigation's full-width semantic gold divider remains independent and unchanged.
+
+Automated browser coverage uses `/e2e-carousel`, a deterministic route that returns not found unless `SHOPIFY_E2E_FIXTURES=1`. It renders the production component and labelled local images without requiring Sanity publication.

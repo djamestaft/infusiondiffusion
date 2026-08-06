@@ -106,3 +106,70 @@ test("keeps the hero, CTA, and navigation divider intact at 320px", async ({
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(320);
 });
+
+test("supports keyboard pagination and manual pause/play", async ({ page }) => {
+  test.skip(
+    test.info().project.name === "mobile",
+    "Keyboard flow is desktop-specific",
+  );
+  await page.goto("/e2e-carousel");
+  const carousel = page.getByLabel("Homepage campaign imagery");
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+
+  const third = page.getByRole("button", { name: "Show slide 3 of 3" });
+  await third.focus();
+  await page.keyboard.press("Enter");
+  await expect(third).toHaveAttribute("aria-current", "true");
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+  await expect(
+    page.getByText("Slide 3 of 3", { exact: true }).last(),
+  ).toHaveAttribute("aria-live", "polite");
+
+  const play = page.getByRole("button", { name: "Play carousel" });
+  await play.click();
+  await play.evaluate((element) => element.blur());
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await page.getByRole("button", { name: "Pause carousel" }).click();
+  await expect(carousel).toHaveAttribute("data-autoplay", "paused");
+});
+
+test("suppresses autoplay for reduced motion", async ({ page }) => {
+  test.skip(
+    test.info().project.name === "mobile",
+    "Covered in the Chromium media-emulation contract",
+  );
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/e2e-carousel");
+  await expect(page.getByLabel("Homepage campaign imagery")).toHaveAttribute(
+    "data-autoplay",
+    "paused",
+  );
+  await expect(
+    page.getByRole("button", { name: "Autoplay unavailable" }),
+  ).toBeDisabled();
+});
+
+test("autoplays exactly once", async ({ page }) => {
+  test.skip(
+    test.info().project.name === "mobile",
+    "Timing contract runs deterministically in Chromium",
+  );
+  test.setTimeout(40_000);
+  await page.goto("/e2e-carousel");
+  await expect(page.getByLabel("Homepage campaign imagery")).toHaveAttribute(
+    "data-autoplay",
+    "running",
+  );
+  await page.waitForTimeout(8_250);
+  await expect(
+    page.getByRole("button", { name: "Show slide 2 of 3" }),
+  ).toHaveAttribute("aria-current", "true");
+  await expect(page.getByLabel("Homepage campaign imagery")).toHaveAttribute(
+    "data-autoplay",
+    "paused",
+  );
+  await page.waitForTimeout(8_500);
+  await expect(
+    page.getByRole("button", { name: "Show slide 2 of 3" }),
+  ).toHaveAttribute("aria-current", "true");
+});
