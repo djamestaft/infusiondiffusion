@@ -348,7 +348,26 @@ export const AboutWithPortraits: Story = {
     for (const portrait of portraits) {
       await expect(portrait).toHaveClass("object-contain");
     }
+    await expect(getComputedStyle(slot).backgroundColor).toBe(
+      "rgba(0, 0, 0, 0)",
+    );
+    await expect(getComputedStyle(slot).boxShadow).toBe("none");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-origin"))
+        .backgroundColor,
+    ).toBe("rgb(245, 241, 232)");
+    await expect(
+      getComputedStyle(canvas.getByTestId("about-chapter-development"))
+        .backgroundColor,
+    ).toBe("rgb(238, 240, 231)");
+    await expect(canvasElement.querySelector(".dark")).toBeNull();
+    await expect(canvas.queryByText(/ROLE [A-D]/)).toBeNull();
   },
+};
+export const AboutPortraitsMobile: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: AboutWithPortraits.render,
+  play: AboutWithPortraits.play,
 };
 export const AboutOnePortrait: Story = {
   render: () => (
@@ -372,11 +391,39 @@ export const AboutAlternatingPortraits: Story = {
     />
   ),
 };
+export const AboutPartialUnavailable: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A partial Sanity response retains valid chapters and safe text-first fallbacks."
+      chapters={aboutChapters.map((chapter, index) =>
+        index === 1
+          ? { ...chapter, image: undefined, body: "A partial chapter body." }
+          : { ...chapter, image: undefined },
+      )}
+    />
+  ),
+};
 export const AboutUnavailable: Story = { render: About.render };
 
 export const AboutMobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: About.render,
+};
+export const AboutMaximumContent: Story = {
+  globals: { viewport: { value: "mobile1", isRotated: false } },
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for rooms we live in and the rituals that give them character."
+      chapters={aboutChapters.map((chapter) => ({
+        ...chapter,
+        image: undefined,
+        heading: `${chapter.heading} for rooms with a considered and exceptionally long editorial context`,
+        body: `${chapter.body}\n\nLong editorial copy remains naturally readable without a fixed-height section or clipping. It preserves paragraphs, source order and accessible reading measure on constrained screens.`,
+      }))}
+    />
+  ),
 };
 export const AboutLongContent: Story = {
   render: () => (

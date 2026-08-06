@@ -297,6 +297,12 @@ describe("storefront templates", () => {
     expect(
       screen.getByTestId("about-chapter-development").firstElementChild,
     ).toHaveClass("text-center");
+    const origin = screen.getByTestId("about-chapter-origin");
+    const heading = origin.querySelector("h2")!;
+    const image = screen.getByRole("img", { name: "Test portrait" });
+    expect(heading.compareDocumentPosition(image)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    );
   });
 
   it("renders editor-owned context and the live cart state", () => {

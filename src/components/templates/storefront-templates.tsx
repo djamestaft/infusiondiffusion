@@ -640,11 +640,11 @@ export function AboutTemplate({
     <TemplateShell currentHref="/about" cartCount={cartCount}>
       <article data-testid="about-page">
         <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-0 lg:py-20">
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] lg:text-[56px]">
+          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 xl:px-0 xl:py-20">
+            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] xl:text-[56px]">
               {title}
             </h1>
-            <p className="text-content-secondary mt-10 max-w-[720px] font-sans text-[17px] leading-[1.5] lg:text-xl">
+            <p className="text-content-secondary mt-10 max-w-[720px] font-sans text-[17px] leading-[1.5] xl:text-xl">
               {introduction}
             </p>
           </div>
@@ -658,27 +658,27 @@ export function AboutTemplate({
               data-testid={`about-chapter-${chapter.role}`}
               className={cn(
                 isBone ? "bg-bone-50" : "bg-content-surface",
-                "py-11 lg:py-[110px]",
+                "py-11 xl:py-[110px]",
               )}
             >
               <div
                 className={cn(
-                  "mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-0",
+                  "mx-auto w-full max-w-7xl px-5 sm:px-8 xl:px-0",
                   chapter.image
-                    ? "grid gap-10 lg:grid-cols-[560px_560px] lg:items-center lg:justify-between"
+                    ? "grid gap-10 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between"
                     : "text-center",
                 )}
               >
                 <div
                   className={cn(
                     !chapter.image && "mx-auto max-w-[760px]",
-                    imageFirst && "lg:order-2",
+                    imageFirst && "xl:order-2",
                   )}
                 >
-                  <h2 className="font-display text-content-primary text-[26px] leading-[1.2] lg:text-[34px]">
+                  <h2 className="font-display text-content-primary text-[26px] leading-[1.2] xl:text-[34px]">
                     {chapter.heading}
                   </h2>
-                  <div className="text-content-primary mt-8 space-y-6 text-[16px] leading-[1.65] lg:text-[18px]">
+                  <div className="text-content-primary mt-8 space-y-6 text-[16px] leading-[1.65] xl:text-[18px]">
                     {chapter.body.split(/\n\s*\n/).map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
@@ -689,7 +689,7 @@ export function AboutTemplate({
                     data-testid={`about-media-slot-${chapter.role}`}
                     className={cn(
                       "relative aspect-4/3 w-full",
-                      imageFirst && "lg:order-1",
+                      imageFirst && "xl:order-1",
                     )}
                   >
                     <div
@@ -711,18 +711,18 @@ export function AboutTemplate({
           );
         })}
         <section
-          className="bg-bone-50 py-12 lg:py-[72px]"
+          className="bg-bone-50 py-12 xl:py-[72px]"
           aria-labelledby="about-cta-heading"
         >
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-0">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 xl:flex-row xl:items-center xl:justify-between xl:px-0">
             <div>
               <h2
                 id="about-cta-heading"
-                className="font-display text-content-primary text-[30px] leading-[1.2] lg:text-[40px]"
+                className="font-display text-content-primary text-[30px] leading-[1.2] xl:text-[40px]"
               >
                 Find the fragrance for your room.
               </h2>
-              <p className="text-content-secondary mt-5 max-w-[680px] font-sans text-[17px] leading-[1.5] lg:text-xl">
+              <p className="text-content-secondary mt-5 max-w-[680px] font-sans text-[17px] leading-[1.5] xl:text-xl">
                 Explore the Fragrance Guide for scent notes, room context and a
                 clear path through the collection.
               </p>

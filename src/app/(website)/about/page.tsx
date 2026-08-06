@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { perspective } = await getDynamicFetchOptions();
   const page = await getAboutPageMetadata(perspective);
   return {
-    title: page.seoTitle,
+    title: { absolute: page.seoTitle },
     description: page.seoDescription,
     openGraph: {
       title: page.seoTitle,

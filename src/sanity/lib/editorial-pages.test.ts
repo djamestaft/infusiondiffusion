@@ -137,3 +137,44 @@ describe("About page fallbacks", () => {
     expect(page.chapters[0]).toEqual(fallbackAboutPage.chapters[0]);
   });
 });
+
+it("ignores duplicate and out-of-order roles while retaining canonical order", () => {
+  const page = withAboutFallback({
+    sections: [
+      {
+        role: "principles",
+        heading: "Principles draft",
+        body: "Principles body",
+      },
+      { role: "origin", heading: "Origin draft", body: "Origin body" },
+      { role: "origin", heading: "Duplicate", body: "Ignored" },
+    ],
+  });
+  expect(page.chapters.map((chapter) => chapter.role)).toEqual([
+    "origin",
+    "development",
+    "collaborator",
+    "principles",
+  ]);
+  expect(page.chapters[0].heading).toBe("Origin draft");
+  expect(page.chapters[2]).toEqual(fallbackAboutPage.chapters[2]);
+});
+
+it("normalizes an invalid portrait focal point to the centered FIT position", () => {
+  const page = withAboutFallback({
+    sections: [
+      {
+        role: "origin",
+        heading: "Origin",
+        body: "Body",
+        image: {
+          src: "https://cdn.sanity.io/portrait.jpg",
+          alt: "A factual portrait",
+          storefrontRightsConfirmed: true,
+          hotspot: { x: 2, y: Number.NaN },
+        },
+      },
+    ],
+  });
+  expect(page.chapters[0].image?.hotspot).toEqual({ x: 0.5, y: 0.5 });
+});

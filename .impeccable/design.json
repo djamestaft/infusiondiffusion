@@ -127,6 +127,18 @@
       "navigationLogoSecondaryMobile": {
         "displayName": "Navigation Logo Secondary Mobile",
         "purpose": "Approved DIFFUSION lettering in the mobile lockup."
+      },
+      "aboutDisplay": {
+        "displayName": "About Display",
+        "purpose": "Approved About H1: 56px desktop / 40px mobile."
+      },
+      "aboutChapter": {
+        "displayName": "About Chapter",
+        "purpose": "Approved About chapter H2: 34px desktop / 26px mobile."
+      },
+      "aboutLead": {
+        "displayName": "About Lead",
+        "purpose": "Approved About lead and CTA body: 20px desktop / 17px mobile."
       }
     },
     "shadows": [

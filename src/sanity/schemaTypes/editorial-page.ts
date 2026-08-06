@@ -128,7 +128,7 @@ export const editorialPage = defineType({
               title: "About chapter role",
               type: "string",
               description:
-                "Required only for About. Stable identity; do not use the visible heading.",
+                "Required only for About, in this order: Origin (truthful origin portrait/working moment), Development (blotters, measured vessels or notes), Collaborator (shared process; do not imply Jacqui is pictured), Principles (fragrance in a lived-in interior). Stable identity; do not use the visible heading.",
               options: {
                 list: aboutRoles.map((value) => ({
                   title: value[0].toUpperCase() + value.slice(1),
