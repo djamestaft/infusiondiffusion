@@ -115,6 +115,33 @@ test("supports keyboard pagination and manual pause/play", async ({ page }) => {
   await page.goto("/e2e-carousel");
   const carousel = page.getByLabel("Homepage campaign imagery");
   await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect(
+    page.getByRole("button", { name: "Pause carousel" }),
+  ).toBeVisible();
+
+  const stage = page.getByTestId("hero-carousel-stage");
+  const media = page.getByTestId("hero-carousel-media");
+  const controls = page.getByTestId("hero-carousel-controls");
+  const [stageBox, mediaBox, controlsBox] = await Promise.all([
+    stage.boundingBox(),
+    media.boundingBox(),
+    controls.boundingBox(),
+  ]);
+  expect(stageBox).not.toBeNull();
+  expect(mediaBox).not.toBeNull();
+  expect(controlsBox).not.toBeNull();
+  expect(mediaBox!.x).toBeGreaterThan(stageBox!.x);
+  expect(mediaBox!.x + mediaBox!.width).toBeLessThan(
+    stageBox!.x + stageBox!.width,
+  );
+  expect(controlsBox!.y).toBeGreaterThan(stageBox!.y + stageBox!.height);
+  expect(
+    Math.abs(
+      controlsBox!.x +
+        controlsBox!.width / 2 -
+        (stageBox!.x + stageBox!.width / 2),
+    ),
+  ).toBeLessThan(1);
 
   const third = page.getByRole("button", { name: "Show slide 3 of 3" });
   await third.focus();
@@ -127,7 +154,7 @@ test("supports keyboard pagination and manual pause/play", async ({ page }) => {
 
   const play = page.getByRole("button", { name: "Play carousel" });
   await play.click();
-  await play.evaluate((element) => element.blur());
+  await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
   await expect(carousel).toHaveAttribute("data-autoplay", "running");
   await page.getByRole("button", { name: "Pause carousel" }).click();
   await expect(carousel).toHaveAttribute("data-autoplay", "paused");

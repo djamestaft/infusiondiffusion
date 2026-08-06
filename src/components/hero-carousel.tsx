@@ -34,7 +34,10 @@ export function HeroCarousel({
   forceSaveData,
   loading = false,
 }: HeroCarouselProps) {
-  const slides = suppliedSlides.slice(0, 3);
+  const slides = React.useMemo(
+    () => suppliedSlides.slice(0, 3),
+    [suppliedSlides],
+  );
   const [active, setActive] = React.useState(0);
   const [userPaused, setUserPaused] = React.useState(initialPaused);
   const [interactionPaused, setInteractionPaused] = React.useState(false);
@@ -85,15 +88,22 @@ export function HeroCarousel({
     !saveData &&
     !autoplayComplete;
   const autoplayUnavailable = reducedMotion || saveData;
+  const autoplayRequested = !userPaused && !autoplayComplete;
 
   React.useEffect(() => {
     if (!canAutoplay) return;
     const timeout = window.setTimeout(() => {
       setAutoplayComplete(true);
-      setActive((current) => (current + 1) % slides.length);
+      setActive((current) => {
+        for (let offset = 1; offset < slides.length; offset += 1) {
+          const candidate = (current + offset) % slides.length;
+          if (!failedSlideIds.has(slides[candidate].id)) return candidate;
+        }
+        return current;
+      });
     }, AUTOPLAY_MS);
     return () => window.clearTimeout(timeout);
-  }, [canAutoplay, active, slides.length]);
+  }, [canAutoplay, active, failedSlideIds, slides]);
 
   if (!slides.length || failedSlideIds.size === slides.length) {
     return (
@@ -126,9 +136,9 @@ export function HeroCarousel({
 
   const markFailed = (index: number) => {
     const failedId = slides[index].id;
-    const nextFailed = new Set(failedSlideIds).add(failedId);
-    setFailedSlideIds(nextFailed);
+    setFailedSlideIds((current) => new Set(current).add(failedId));
     if (index !== active) return;
+    const nextFailed = new Set(failedSlideIds).add(failedId);
     const nextIndex = slides.findIndex((slide) => !nextFailed.has(slide.id));
     if (nextIndex >= 0) setActive(nextIndex);
   };
@@ -148,48 +158,53 @@ export function HeroCarousel({
       aria-label="Homepage campaign imagery"
       data-autoplay={canAutoplay ? "running" : "paused"}
     >
-      <div className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-lg">
-        {slides.map((slide, index) => (
-          <Image
-            key={slide.id}
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            priority={index === 0}
-            loading={index === 0 ? "eager" : "lazy"}
-            sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-            className={cn(
-              "object-cover transition-opacity duration-500 motion-reduce:transition-none",
-              index === active
-                ? "opacity-100"
-                : "pointer-events-none opacity-0",
-            )}
-            style={{
-              objectPosition: slide.hotspot
-                ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
-                : undefined,
-            }}
-            onError={() => markFailed(index)}
-          />
-        ))}
-        <div className="absolute inset-0 opacity-10" aria-hidden="true">
-          <span className="bg-content-accent absolute top-[20%] right-0 left-0 h-px" />
-          <span className="bg-content-accent absolute top-[40%] right-0 left-0 h-px" />
-          <span className="bg-content-accent absolute top-[60%] right-0 left-0 h-px" />
-          <span className="bg-content-accent absolute top-[80%] right-0 left-0 h-px" />
+      <div
+        className="border-content-accent/25 border p-2"
+        data-testid="hero-carousel-stage"
+      >
+        <div
+          className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-lg"
+          data-testid="hero-carousel-media"
+        >
+          {slides.map((slide, index) => (
+            <Image
+              key={slide.id}
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
+              sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
+              className={cn(
+                "object-cover transition-opacity duration-500 motion-reduce:transition-none",
+                index === active
+                  ? "opacity-100"
+                  : "pointer-events-none opacity-0",
+              )}
+              style={{
+                objectPosition: slide.hotspot
+                  ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
+                  : undefined,
+              }}
+              onError={() => markFailed(index)}
+            />
+          ))}
+          {loading ? (
+            <div
+              className="bg-product-card-media-fallback absolute inset-0 animate-pulse motion-reduce:animate-none"
+              aria-hidden="true"
+            />
+          ) : null}
         </div>
-        {loading ? (
-          <div
-            className="bg-product-card-media-fallback absolute inset-0 animate-pulse motion-reduce:animate-none"
-            aria-hidden="true"
-          />
-        ) : null}
       </div>
       <figcaption className="sr-only">
         {current.caption || `Slide ${active + 1} of ${slides.length}`}
       </figcaption>
       {slides.length > 1 ? (
-        <div className="mt-3 flex items-center justify-between gap-3">
+        <div
+          className="mt-3 flex items-center justify-center gap-1"
+          data-testid="hero-carousel-controls"
+        >
           <div className="flex" aria-label="Choose a hero slide">
             {slides.map((slide, index) => (
               <button
@@ -237,17 +252,17 @@ export function HeroCarousel({
             aria-label={
               autoplayUnavailable
                 ? "Autoplay unavailable"
-                : canAutoplay
+                : autoplayRequested
                   ? "Pause carousel"
                   : "Play carousel"
             }
             disabled={autoplayUnavailable}
             onClick={() => {
               setAutoplayComplete(false);
-              setUserPaused(canAutoplay);
+              setUserPaused(autoplayRequested);
             }}
           >
-            {canAutoplay ? (
+            {autoplayRequested ? (
               <Pause aria-hidden="true" className="size-4" />
             ) : (
               <Play aria-hidden="true" className="size-4" />
@@ -265,7 +280,7 @@ export function HeroCarousel({
             ? "Carousel playing"
             : paused || autoplayComplete
               ? "Carousel paused"
-              : "Carousel paused"}
+              : "Carousel waiting"}
       </span>
     </figure>
   );

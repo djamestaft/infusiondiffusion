@@ -115,12 +115,33 @@ function Button({
       ) : null}
     </>
   );
+  const childElement = React.isValidElement<{ children?: React.ReactNode }>(
+    children,
+  )
+    ? children
+    : null;
+  const loadingLinkContent = childElement ? (
+    <>
+      <span className="inline-flex items-center justify-center gap-2 opacity-0">
+        {childElement.props.children}
+      </span>
+      <span className="absolute inset-0 flex items-center justify-center">
+        <Spinner />
+      </span>
+    </>
+  ) : null;
   const slottedChild =
-    asChild && unavailable && React.isValidElement(children)
-      ? React.cloneElement(children, {
-          tabIndex: -1,
-        } as React.HTMLAttributes<HTMLElement>)
-      : children;
+    asChild && childElement && loading
+      ? React.cloneElement(
+          childElement,
+          { tabIndex: -1 } as React.HTMLAttributes<HTMLElement>,
+          loadingLinkContent,
+        )
+      : asChild && childElement && unavailable
+        ? React.cloneElement(childElement, {
+            tabIndex: -1,
+          } as React.HTMLAttributes<HTMLElement>)
+        : children;
 
   return (
     <Comp

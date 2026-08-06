@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { expect, within } from "storybook/test";
 
 import {
   HeroCarousel,
@@ -43,7 +44,31 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = {};
+export const Desktop: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const stage = canvas.getByTestId("hero-carousel-stage");
+    const media = canvas.getByTestId("hero-carousel-media");
+    const controls = canvas.getByTestId("hero-carousel-controls");
+    const stageBounds = stage.getBoundingClientRect();
+    const mediaBounds = media.getBoundingClientRect();
+    const controlsBounds = controls.getBoundingClientRect();
+
+    await expect(mediaBounds.left).toBeGreaterThan(stageBounds.left);
+    await expect(mediaBounds.right).toBeLessThan(stageBounds.right);
+    await expect(controlsBounds.top).toBeGreaterThan(stageBounds.bottom);
+    await expect(
+      Math.abs(
+        controlsBounds.left +
+          controlsBounds.width / 2 -
+          (stageBounds.left + stageBounds.width / 2),
+      ),
+    ).toBeLessThan(1);
+    await expect(
+      canvas.getByRole("button", { name: "Pause carousel" }),
+    ).toBeVisible();
+  },
+};
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
 };

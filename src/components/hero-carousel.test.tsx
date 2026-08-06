@@ -15,6 +15,7 @@ import {
 const slides: HeroCarouselSlide[] = [
   { id: "one", src: "/one.jpg", alt: "First campaign" },
   { id: "two", src: "/two.jpg", alt: "Second campaign" },
+  { id: "three", src: "/three.jpg", alt: "Third campaign" },
 ];
 
 afterEach(() => {
@@ -39,11 +40,11 @@ describe("HeroCarousel", () => {
 
   it("moves manually, announces only that change, and exposes 44px controls", () => {
     render(<HeroCarousel slides={slides} forceReducedMotion />);
-    const next = screen.getByRole("button", { name: "Show slide 2 of 2" });
+    const next = screen.getByRole("button", { name: "Show slide 2 of 3" });
     fireEvent.click(next);
     expect(next).toHaveAttribute("aria-current", "true");
     expect(
-      screen.getByText("Slide 2 of 2", { selector: "[aria-live]" }),
+      screen.getByText("Slide 2 of 3", { selector: "[aria-live]" }),
     ).toHaveClass("sr-only");
     expect(next).toHaveClass("size-11");
     expect(
@@ -56,11 +57,11 @@ describe("HeroCarousel", () => {
     render(<HeroCarousel slides={slides} />);
     act(() => vi.advanceTimersByTime(8_000));
     expect(
-      screen.getByRole("button", { name: "Show slide 2 of 2" }),
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
     act(() => vi.advanceTimersByTime(16_000));
     expect(
-      screen.getByRole("button", { name: "Show slide 2 of 2" }),
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
   });
 
@@ -92,15 +93,18 @@ describe("HeroCarousel", () => {
 
     fireEvent.mouseEnter(carousel);
     expect(carousel).toHaveAttribute("data-autoplay", "paused");
-    expect(screen.getByRole("button", { name: "Play carousel" })).toBeVisible();
+    expect(
+      screen.getByRole("button", { name: "Pause carousel" }),
+    ).toBeVisible();
     fireEvent.mouseLeave(carousel);
 
-    const second = screen.getByRole("button", { name: "Show slide 2 of 2" });
+    const second = screen.getByRole("button", { name: "Show slide 2 of 3" });
     fireEvent.focus(second);
     expect(carousel).toHaveAttribute("data-autoplay", "paused");
     fireEvent.blur(second, { relatedTarget: null });
     fireEvent.click(second);
     expect(carousel).toHaveAttribute("data-autoplay", "paused");
+    expect(screen.getByRole("button", { name: "Play carousel" })).toBeVisible();
 
     Object.defineProperty(document, "hidden", {
       configurable: true,
@@ -112,6 +116,24 @@ describe("HeroCarousel", () => {
       configurable: true,
       value: false,
     });
+  });
+
+  it("frames the image without overlays and centers one control group", () => {
+    render(<HeroCarousel slides={slides} />);
+
+    const stage = screen.getByTestId("hero-carousel-stage");
+    const media = screen.getByTestId("hero-carousel-media");
+    const controls = screen.getByTestId("hero-carousel-controls");
+    expect(stage).toHaveClass("border", "p-2");
+    expect(media).toHaveClass("aspect-4/5", "overflow-hidden");
+    expect(media.querySelectorAll("span")).toHaveLength(0);
+    expect(controls).toHaveClass("justify-center");
+    expect(controls).toContainElement(
+      screen.getByLabelText("Choose a hero slide"),
+    );
+    expect(controls).toContainElement(
+      screen.getByRole("button", { name: "Pause carousel" }),
+    );
   });
 
   it("keeps a stable fallback for empty and failed media", () => {
@@ -131,11 +153,43 @@ describe("HeroCarousel", () => {
       screen.queryByTestId("hero-carousel-fallback"),
     ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Show slide 1 of 2" }),
+      screen.getByRole("button", { name: "Show slide 1 of 3" }),
     ).toBeDisabled();
     expect(
-      screen.getByRole("button", { name: "Show slide 2 of 2" }),
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
     expect(screen.getByAltText("Second campaign")).toBeVisible();
+  });
+
+  it("never autoplays onto a failed lazy slide", () => {
+    vi.useFakeTimers();
+    render(<HeroCarousel slides={slides} />);
+    fireEvent.error(screen.getByAltText("Second campaign"));
+    act(() => vi.advanceTimersByTime(8_000));
+
+    expect(
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
+    ).toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Show slide 3 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
+  });
+
+  it("accumulates multiple lazy failures without selecting either", () => {
+    vi.useFakeTimers();
+    render(<HeroCarousel slides={slides} />);
+    fireEvent.error(screen.getByAltText("Second campaign"));
+    fireEvent.error(screen.getByAltText("Third campaign"));
+    act(() => vi.advanceTimersByTime(8_000));
+
+    expect(
+      screen.getByRole("button", { name: "Show slide 1 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
+    expect(
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
+    ).toBeDisabled();
+    expect(
+      screen.getByRole("button", { name: "Show slide 3 of 3" }),
+    ).toBeDisabled();
   });
 });
