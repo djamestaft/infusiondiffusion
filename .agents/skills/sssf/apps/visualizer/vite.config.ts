@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 const API_PORT = process.env.PORT ?? "4600";
+const UI_PORT = Number(process.env.SSSF_UI_PORT ?? 4601);
 
 export default defineConfig({
   plugins: [vue()],
@@ -13,7 +14,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 4601,
+    port: UI_PORT,
     proxy: {
       "/api": {
         target: `http://localhost:${API_PORT}`,

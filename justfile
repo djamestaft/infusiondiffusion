@@ -12,6 +12,8 @@ set positional-arguments
 # swaps the whole roster for one run.
 config := env_var_or_default("SSSF_CONFIG", "adws/adw_sssf_config/sssf.config.yaml")
 db     := "adws/adw_data/sssf.db"
+obs_api_port := env_var_or_default("SSSF_OBS_API_PORT", "4600")
+obs_ui_port  := env_var_or_default("SSSF_OBS_UI_PORT", "4601")
 
 # list every recipe
 default:
@@ -56,7 +58,7 @@ plan-build *ARGS:
 sdlc *ARGS:
     uv run adws/adw_plan_build_test.py --config {{config}} "$@"
 
-# the full chain, plus review and docs: just simple-sdlc "add a /health endpoint"
+# the full specialist-routed chain, plus review and docs: just simple-sdlc "add a /health endpoint"
 simple-sdlc *ARGS:
     uv run adws/adw_simple_sdlc.py --config {{config}} "$@"
 
@@ -86,4 +88,4 @@ procs ADW_ID:
 
 # boot the trace UI, http://localhost:4601 (api on :4600)
 obs:
-    cd .agents/skills/sssf/apps/visualizer && bun install && (SSSF_DB={{justfile_directory()}}/{{db}} bun run server/index.ts &) && bunx vite
+    cd .agents/skills/sssf/apps/visualizer && bun install && (SSSF_DB={{justfile_directory()}}/{{db}} PORT={{obs_api_port}} bun run server/index.ts &) && SSSF_UI_PORT={{obs_ui_port}} PORT={{obs_api_port}} bunx vite

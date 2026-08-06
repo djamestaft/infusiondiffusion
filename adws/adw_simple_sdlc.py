@@ -8,8 +8,9 @@ Usage:
     uv run adws/adw_simple_sdlc.py "<prompt or path/to/prompt.md>" [--config adws/adw_sssf_config/sssf.config.yaml] [--adw-id a1b2c3d4]
 
 Phases: engineer(request) -> planner -> git(commit_plan)
-        -> builder -> code(test) [-> builder(fix) -> code(test) ... bounded]
-        -> reviewer [-> builder(revise) -> reviewer ... bounded]
+        -> selected read-only specialists -> selected implementation owner
+        -> code(test) [-> implementation owner(fix) -> code(test) ... bounded]
+        -> selected reviewer [-> implementation owner(revise) -> reviewer ... bounded]
         -> code(retest, only if a revision changed code)
         -> git(commit_build) -> code(changes) -> documenter -> git(commit_docs)
 
@@ -47,9 +48,12 @@ import sys
 from adw_modules import agents, changes, gates, git_helper, quality, session, utils
 from adw_modules.data_types import (AgentCall, BuildOutput, ChangeCapture,
                                     DocumentOutput, PhaseParams, PlanOutput,
-                                    ReviewOutput)
+                                    ReviewOutput, SpecialistOutput)
 
-REQUIRED_AGENTS = ["planner", "builder", "reviewer", "documenter"]
+REQUIRED_AGENTS = ["planner", "builder", "reviewer", "documenter",
+                   "product_designer", "storefront_engineer",
+                   "content_commerce_engineer", "browser_release_debugger",
+                   "quality_reviewer"]
 MAX_FIX_LOOPS = 3
 MAX_REVISION_LOOPS = 2
 
@@ -88,7 +92,22 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
                                description="Put the spec on record before any code exists to blur it")) as ph:
         commit(ph, plan)
 
-    with run.phase(PhaseParams(name="build", kind="agent", owner="builder",
+    for specialist in plan.advisory_specialists:
+        with run.phase(PhaseParams(
+                name=f"advise_{specialist}", kind="agent", owner=specialist,
+                description="Inspect the plan through the selected specialist boundary before implementation")) as ph:
+            advice = ph.call(AgentCall(output_type=SpecialistOutput, prompt=prompt,
+                                       previous=plan,
+                                       gates=[gates.artifacts_exist]))
+            if not advice.ready:
+                return run.finish(accepted=False,
+                                  reason=f"{specialist} reported blocking findings: "
+                                         + "; ".join(advice.blocking))
+
+    implementation_owner = plan.implementation_owner
+    review_owner = plan.review_owner
+
+    with run.phase(PhaseParams(name="build", kind="agent", owner=implementation_owner,
                                description="Implement the plan exactly")) as ph:
         build = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt, previous=plan,
                                   gates=[gates.diff_matches_claims]))
@@ -104,7 +123,7 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
         if test.passed:
             break
 
-        with run.phase(PhaseParams(name=f"fix_{i}", kind="agent", owner="builder", retries=1,
+        with run.phase(PhaseParams(name=f"fix_{i}", kind="agent", owner=implementation_owner, retries=1,
                                    description="Repair what the suite reported, from its "
                                                "verbatim output")) as ph:
             build = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt,
@@ -114,7 +133,7 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
     review = None
     revised = False
     for i in range(1, MAX_REVISION_LOOPS + 1):
-        with run.phase(PhaseParams(name=f"review_{i}", kind="agent", owner="reviewer",
+        with run.phase(PhaseParams(name=f"review_{i}", kind="agent", owner=review_owner,
                                    description="Confirm the build matches the plan")) as ph:
             review = ph.call(AgentCall(output_type=ReviewOutput, prompt=prompt, previous=build,
                                        gates=[gates.artifacts_exist, gates.verdict_consistent]))
@@ -122,7 +141,7 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
         if review.approved or i == MAX_REVISION_LOOPS:
             break
 
-        with run.phase(PhaseParams(name=f"revise_{i}", kind="agent", owner="builder", retries=1,
+        with run.phase(PhaseParams(name=f"revise_{i}", kind="agent", owner=implementation_owner, retries=1,
                                    description="Close the reviewer's blocking findings")) as ph:
             build = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt, previous=review,
                                       gates=[gates.diff_matches_claims]))

@@ -12,6 +12,7 @@ import signal
 import sys
 from pathlib import Path
 
+from . import herdr_workspace
 from .data_types import SSSFConfig
 from .runner import Run
 from .tracer import Tracer
@@ -47,4 +48,9 @@ def ensure(cfg: SSSFConfig, adw_id: str | None = None) -> Run:
                          " ".join([Path(sys.argv[0]).name, *sys.argv[1:]]))
     _finalize_when_killed(run)
     run.console.session_started(adw_id, run.engineer)
+    try:
+        run.console.note(herdr_workspace.ensure(run))
+    except (OSError, RuntimeError, KeyError, ValueError) as error:
+        # Auxiliary UI must never prevent the engineering workflow from running.
+        run.console.note(f"Herdr service panes could not start: {error}")
     return run

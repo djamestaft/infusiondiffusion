@@ -145,3 +145,56 @@ agents:
       - bash
       - write
       - edit
+
+  - name: product_designer
+    model: openai-codex/gpt-5.6-sol
+    thinking: high
+    color: "#f59e0b"
+    purpose: Shape and critique UI direction before implementation while preserving human design approval.
+    prompt_engineering:
+      system: adws/adw_data/prompt_engineering/product_designer/system.md
+      user: adws/adw_data/prompt_engineering/product_designer/user.md
+    writes: []
+    tools: [read, grep, find, ls, bash, write]
+
+  - name: storefront_engineer
+    model: openai-codex/gpt-5.6-terra
+    thinking: medium
+    color: "#06b6d4"
+    purpose: Implement approved Next.js, design-system, accessibility, and Storybook work.
+    prompt_engineering:
+      system: adws/adw_data/prompt_engineering/storefront_engineer/system.md
+      user: adws/adw_data/prompt_engineering/storefront_engineer/user.md
+    tools: [read, grep, find, ls, bash, edit, write]
+
+  - name: content_commerce_engineer
+    model: openai-codex/gpt-5.6-sol
+    thinking: high
+    color: "#10b981"
+    purpose: Implement Sanity and server-side Shopify work without crossing content or commerce ownership boundaries.
+    prompt_engineering:
+      system: adws/adw_data/prompt_engineering/content_commerce_engineer/system.md
+      user: adws/adw_data/prompt_engineering/content_commerce_engineer/user.md
+    tools: [read, grep, find, ls, bash, edit, write]
+
+  - name: browser_release_debugger
+    model: openai-codex/gpt-5.6-terra
+    thinking: medium
+    color: "#8b5cf6"
+    purpose: Diagnose local, preview, and production-facing failures and report reproducible release evidence without deploying.
+    prompt_engineering:
+      system: adws/adw_data/prompt_engineering/browser_release_debugger/system.md
+      user: adws/adw_data/prompt_engineering/browser_release_debugger/user.md
+    writes: []
+    tools: [read, grep, find, ls, bash, write]
+
+  - name: quality_reviewer
+    model: openai-codex/gpt-5.6-sol
+    thinking: high
+    color: "#ef4444"
+    purpose: Independently review substantive changes for acceptance criteria, project rules, security, accessibility, and evidence.
+    prompt_engineering:
+      system: adws/adw_data/prompt_engineering/quality_reviewer/system.md
+      user: adws/adw_data/prompt_engineering/quality_reviewer/user.md
+    writes: []
+    tools: [read, grep, find, ls, bash, write]

@@ -88,6 +88,21 @@ class PlanOutput(EnvelopeBase):
     # work product, so a chain that commits per step never reuses one agent's
     # words for another agent's diff.
     commit_message: str = ""
+    implementation_owner: Literal[
+        "builder", "storefront_engineer", "content_commerce_engineer"
+    ] = "builder"
+    advisory_specialists: list[Literal[
+        "product_designer", "browser_release_debugger"
+    ]] = Field(default_factory=list)
+    review_owner: Literal["reviewer", "quality_reviewer"] = "reviewer"
+
+
+class SpecialistOutput(EnvelopeBase):
+    """A read-only specialist's decision before implementation begins."""
+
+    ready: bool = False
+    findings: list[str] = Field(default_factory=list)
+    blocking: list[str] = Field(default_factory=list)
 
 
 class BuildOutput(EnvelopeBase):

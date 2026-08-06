@@ -25,6 +25,7 @@ Turn a request into a project-aware, decision-complete plan with explicit specia
 - If multiple writers or a non-primary implementation checkout is proposed, apply `.agents/skills/parallel-agent-worktrees/SKILL.md`; default to one delivery branch and one pull request unless the engineer approved another topology.
 - Preserve human gates for design, merge, production, editorial publish, and rollback. State missing approval as a blocker; never imply an agent can grant it.
 - Respect system ownership: Next.js owns customer UI, Sanity owns editorial content, Shopify owns commerce truth, Storybook owns reusable component contracts, Figma/DESIGN own approved visual direction, and Vercel owns preview/deployment state.
+- Encode specialist routing in the typed report. Assign exactly one implementation owner, add only relevant read-only advisors, and select the independent review owner. Named routing is an execution contract, not optional prose in `plan.md`.
 
 ## Subagents
 
