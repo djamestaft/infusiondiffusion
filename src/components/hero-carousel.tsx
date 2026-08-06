@@ -24,7 +24,7 @@ export type HeroCarouselProps = {
   loading?: boolean;
 };
 
-const AUTOPLAY_MS = 8_000;
+const AUTOPLAY_MS = 3_000;
 
 export function HeroCarousel({
   slides: suppliedSlides,
@@ -42,6 +42,7 @@ export function HeroCarousel({
   const [userPaused, setUserPaused] = React.useState(initialPaused);
   const [interactionPaused, setInteractionPaused] = React.useState(false);
   const [hidden, setHidden] = React.useState(false);
+  const [offscreen, setOffscreen] = React.useState(false);
   const [failedSlideIds, setFailedSlideIds] = React.useState<Set<string>>(
     () => new Set(),
   );
@@ -50,7 +51,9 @@ export function HeroCarousel({
     forceReducedMotion ?? false,
   );
   const [saveData, setSaveData] = React.useState(forceSaveData ?? false);
-  const [autoplayComplete, setAutoplayComplete] = React.useState(false);
+  const [progressCycle, setProgressCycle] = React.useState(0);
+  const carouselRef = React.useRef<HTMLElement>(null);
+  const wasAutoplaying = React.useRef(false);
 
   React.useEffect(() => {
     if (forceReducedMotion !== undefined) return;
@@ -79,21 +82,38 @@ export function HeroCarousel({
     return () => document.removeEventListener("visibilitychange", update);
   }, []);
 
+  React.useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOffscreen(!entry.isIntersecting),
+      { threshold: 0.01 },
+    );
+    observer.observe(carousel);
+    return () => observer.disconnect();
+  }, []);
+
   const canAutoplay =
     slides.length > 1 &&
     !userPaused &&
     !interactionPaused &&
     !hidden &&
+    !offscreen &&
     !reducedMotion &&
-    !saveData &&
-    !autoplayComplete;
+    !saveData;
   const autoplayUnavailable = reducedMotion || saveData;
-  const autoplayRequested = !userPaused && !autoplayComplete;
+  const autoplayRequested = !userPaused;
+
+  React.useEffect(() => {
+    if (canAutoplay && !wasAutoplaying.current) {
+      setProgressCycle((current) => current + 1);
+    }
+    wasAutoplaying.current = canAutoplay;
+  }, [canAutoplay]);
 
   React.useEffect(() => {
     if (!canAutoplay) return;
     const timeout = window.setTimeout(() => {
-      setAutoplayComplete(true);
       setActive((current) => {
         for (let offset = 1; offset < slides.length; offset += 1) {
           const candidate = (current + offset) % slides.length;
@@ -126,10 +146,10 @@ export function HeroCarousel({
   }
 
   const current = slides[active];
-  const paused = userPaused || interactionPaused || hidden;
+  const paused = userPaused || interactionPaused || hidden || offscreen;
   const select = (index: number) => {
     if (failedSlideIds.has(slides[index].id)) return;
-    setAutoplayComplete(true);
+    setUserPaused(true);
     setActive(index);
     setManualAnnouncement(`Slide ${index + 1} of ${slides.length}`);
   };
@@ -145,9 +165,8 @@ export function HeroCarousel({
 
   return (
     <figure
+      ref={carouselRef}
       className={cn("relative", className)}
-      onMouseEnter={() => setInteractionPaused(true)}
-      onMouseLeave={() => setInteractionPaused(false)}
       onFocusCapture={() => setInteractionPaused(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -249,6 +268,7 @@ export function HeroCarousel({
                   />
                   {index === active ? (
                     <circle
+                      key={`${slide.id}-${progressCycle}`}
                       cx="12"
                       cy="12"
                       r="9"
@@ -276,9 +296,12 @@ export function HeroCarousel({
                   : "Play carousel"
             }
             disabled={autoplayUnavailable}
-            onClick={() => {
-              setAutoplayComplete(false);
+            onClick={(event) => {
               setUserPaused(autoplayRequested);
+              if (!autoplayRequested) {
+                setInteractionPaused(false);
+                event.currentTarget.blur();
+              }
             }}
           >
             {autoplayRequested ? (
@@ -297,7 +320,7 @@ export function HeroCarousel({
           ? "Carousel autoplay unavailable"
           : canAutoplay
             ? "Carousel playing"
-            : paused || autoplayComplete
+            : paused
               ? "Carousel paused"
               : "Carousel waiting"}
       </span>

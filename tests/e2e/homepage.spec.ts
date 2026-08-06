@@ -254,6 +254,38 @@ test("renders responsive corner brackets outside the image", async ({
   expect(bracketPixel).toEqual([197, 164, 71, 140]);
 });
 
+test("restarts a full cycle after explicit pause and play", async ({
+  page,
+}) => {
+  test.skip(
+    test.info().project.name === "mobile",
+    "Timing contract runs deterministically in Chromium",
+  );
+  await page.goto("/e2e-carousel");
+  const first = page.getByRole("button", { name: "Show slide 1 of 3" });
+  await page.waitForTimeout(1_200);
+  await page.getByRole("button", { name: "Pause carousel" }).click();
+  await expect(page.locator(".hero-carousel-progress")).toHaveCount(0);
+  await page.waitForTimeout(2_000);
+  await expect(first).toHaveAttribute("aria-current", "true");
+
+  await page.getByRole("button", { name: "Play carousel" }).click();
+  await expect(page.locator(".hero-carousel-progress")).toHaveCSS(
+    "animation-duration",
+    "3s",
+  );
+  await page.waitForTimeout(2_750);
+  await expect(first).toHaveAttribute("aria-current", "true");
+  await page.waitForTimeout(500);
+  await expect(
+    page.getByRole("button", { name: "Show slide 2 of 3" }),
+  ).toHaveAttribute("aria-current", "true");
+  await expect(page.getByLabel("Homepage campaign imagery")).toHaveAttribute(
+    "data-autoplay",
+    "running",
+  );
+});
+
 test("suppresses autoplay for reduced motion", async ({ page }) => {
   test.skip(
     test.info().project.name === "mobile",
@@ -270,7 +302,9 @@ test("suppresses autoplay for reduced motion", async ({ page }) => {
   ).toBeDisabled();
 });
 
-test("autoplays exactly once", async ({ page }) => {
+test("autoplays continuously every three seconds and ignores hover", async ({
+  page,
+}) => {
   test.skip(
     test.info().project.name === "mobile",
     "Timing contract runs deterministically in Chromium",
@@ -281,16 +315,24 @@ test("autoplays exactly once", async ({ page }) => {
     "data-autoplay",
     "running",
   );
-  await page.waitForTimeout(8_250);
-  await expect(
-    page.getByRole("button", { name: "Show slide 2 of 3" }),
-  ).toHaveAttribute("aria-current", "true");
-  await expect(page.getByLabel("Homepage campaign imagery")).toHaveAttribute(
-    "data-autoplay",
-    "paused",
+  const carousel = page.getByLabel("Homepage campaign imagery");
+  await carousel.hover();
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
+  await expect(page.locator(".hero-carousel-progress")).toHaveCSS(
+    "animation-duration",
+    "3s",
   );
-  await page.waitForTimeout(8_500);
+  await page.waitForTimeout(3_250);
   await expect(
     page.getByRole("button", { name: "Show slide 2 of 3" }),
   ).toHaveAttribute("aria-current", "true");
+  await page.waitForTimeout(3_250);
+  await expect(
+    page.getByRole("button", { name: "Show slide 3 of 3" }),
+  ).toHaveAttribute("aria-current", "true");
+  await page.waitForTimeout(3_250);
+  await expect(
+    page.getByRole("button", { name: "Show slide 1 of 3" }),
+  ).toHaveAttribute("aria-current", "true");
+  await expect(carousel).toHaveAttribute("data-autoplay", "running");
 });

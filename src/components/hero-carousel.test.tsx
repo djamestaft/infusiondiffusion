@@ -21,6 +21,7 @@ const slides: HeroCarouselSlide[] = [
 afterEach(() => {
   cleanup();
   vi.useRealTimers();
+  vi.unstubAllGlobals();
 });
 
 describe("HeroCarousel", () => {
@@ -52,14 +53,46 @@ describe("HeroCarousel", () => {
     ).toBeDisabled();
   });
 
-  it("autoplays once after eight seconds", () => {
+  it("autoplays every three seconds and wraps continuously", () => {
     vi.useFakeTimers();
     render(<HeroCarousel slides={slides} />);
-    act(() => vi.advanceTimersByTime(8_000));
+    act(() => vi.advanceTimersByTime(3_000));
     expect(
       screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
-    act(() => vi.advanceTimersByTime(16_000));
+    act(() => vi.advanceTimersByTime(3_000));
+    expect(
+      screen.getByRole("button", { name: "Show slide 3 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
+    act(() => vi.advanceTimersByTime(3_000));
+    expect(
+      screen.getByRole("button", { name: "Show slide 1 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
+    act(() => vi.advanceTimersByTime(3_000));
+    expect(
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
+  });
+
+  it("restarts a full progress cycle after pause and play", () => {
+    vi.useFakeTimers();
+    render(<HeroCarousel slides={slides} />);
+    const first = screen.getByRole("button", { name: "Show slide 1 of 3" });
+    const originalProgress = first.querySelector(".hero-carousel-progress");
+
+    act(() => vi.advanceTimersByTime(1_500));
+    fireEvent.click(screen.getByRole("button", { name: "Pause carousel" }));
+    expect(first.querySelector(".hero-carousel-progress")).toBeNull();
+    act(() => vi.advanceTimersByTime(3_000));
+    expect(first).toHaveAttribute("aria-current", "true");
+
+    fireEvent.click(screen.getByRole("button", { name: "Play carousel" }));
+    const restartedProgress = first.querySelector(".hero-carousel-progress");
+    expect(restartedProgress).toBeInTheDocument();
+    expect(restartedProgress).not.toBe(originalProgress);
+    act(() => vi.advanceTimersByTime(2_999));
+    expect(first).toHaveAttribute("aria-current", "true");
+    act(() => vi.advanceTimersByTime(1));
     expect(
       screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
@@ -83,7 +116,8 @@ describe("HeroCarousel", () => {
     );
   });
 
-  it("pauses on hover, focus, visibility, and manual pagination", () => {
+  it("keeps playing on hover and pauses for focus, visibility, and manual pagination", () => {
+    vi.useFakeTimers();
     render(<HeroCarousel slides={slides} />);
     const carousel = screen.getByLabelText("Homepage campaign imagery");
     expect(carousel).toHaveAttribute("data-autoplay", "running");
@@ -92,17 +126,21 @@ describe("HeroCarousel", () => {
     ).toBeVisible();
 
     fireEvent.mouseEnter(carousel);
-    expect(carousel).toHaveAttribute("data-autoplay", "paused");
+    expect(carousel).toHaveAttribute("data-autoplay", "running");
+    act(() => vi.advanceTimersByTime(3_000));
+    expect(
+      screen.getByRole("button", { name: "Show slide 2 of 3" }),
+    ).toHaveAttribute("aria-current", "true");
     expect(
       screen.getByRole("button", { name: "Pause carousel" }),
     ).toBeVisible();
     fireEvent.mouseLeave(carousel);
 
-    const second = screen.getByRole("button", { name: "Show slide 2 of 3" });
-    fireEvent.focus(second);
+    const third = screen.getByRole("button", { name: "Show slide 3 of 3" });
+    fireEvent.focus(third);
     expect(carousel).toHaveAttribute("data-autoplay", "paused");
-    fireEvent.blur(second, { relatedTarget: null });
-    fireEvent.click(second);
+    fireEvent.blur(third, { relatedTarget: null });
+    fireEvent.click(third);
     expect(carousel).toHaveAttribute("data-autoplay", "paused");
     expect(screen.getByRole("button", { name: "Play carousel" })).toBeVisible();
 
@@ -116,6 +154,37 @@ describe("HeroCarousel", () => {
       configurable: true,
       value: false,
     });
+  });
+
+  it("pauses while the carousel is offscreen and resumes when visible", () => {
+    let reportIntersection: IntersectionObserverCallback = () => undefined;
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        constructor(callback: IntersectionObserverCallback) {
+          reportIntersection = callback;
+        }
+        observe() {}
+        disconnect() {}
+      },
+    );
+    render(<HeroCarousel slides={slides} />);
+    const carousel = screen.getByLabelText("Homepage campaign imagery");
+
+    act(() =>
+      reportIntersection(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      ),
+    );
+    expect(carousel).toHaveAttribute("data-autoplay", "paused");
+    act(() =>
+      reportIntersection(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      ),
+    );
+    expect(carousel).toHaveAttribute("data-autoplay", "running");
   });
 
   it("frames the image with four external brackets and centers one control group", () => {
@@ -181,7 +250,7 @@ describe("HeroCarousel", () => {
     vi.useFakeTimers();
     render(<HeroCarousel slides={slides} />);
     fireEvent.error(screen.getByAltText("Second campaign"));
-    act(() => vi.advanceTimersByTime(8_000));
+    act(() => vi.advanceTimersByTime(3_000));
 
     expect(
       screen.getByRole("button", { name: "Show slide 2 of 3" }),
@@ -196,7 +265,7 @@ describe("HeroCarousel", () => {
     render(<HeroCarousel slides={slides} />);
     fireEvent.error(screen.getByAltText("Second campaign"));
     fireEvent.error(screen.getByAltText("Third campaign"));
-    act(() => vi.advanceTimersByTime(8_000));
+    act(() => vi.advanceTimersByTime(3_000));
 
     expect(
       screen.getByRole("button", { name: "Show slide 1 of 3" }),

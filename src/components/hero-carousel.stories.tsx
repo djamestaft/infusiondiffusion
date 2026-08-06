@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { expect, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   HeroCarousel,
@@ -86,8 +86,25 @@ export const Mobile: Story = {
 export const OneSlide: Story = { args: { slides: slides.slice(0, 1) } };
 export const TwoSlides: Story = { args: { slides: slides.slice(0, 2) } };
 export const ThreeSlides: Story = {};
-export const Progress: Story = {};
-export const Paused: Story = { args: { initialPaused: true } };
+export const Progress: Story = {
+  play: async ({ canvasElement }) => {
+    const progress = canvasElement.querySelector(".hero-carousel-progress");
+    await expect(progress).toBeVisible();
+    await expect(progress).toHaveStyle({ animationDuration: "3s" });
+  },
+};
+export const Paused: Story = {
+  args: { initialPaused: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "Play carousel" }),
+    );
+    const progress = canvasElement.querySelector(".hero-carousel-progress");
+    await expect(progress).toBeVisible();
+    await expect(progress).toHaveStyle({ animationDuration: "3s" });
+  },
+};
 export const ReducedMotion: Story = { args: { forceReducedMotion: true } };
 export const SaveData: Story = { args: { forceSaveData: true } };
 export const Loading: Story = { args: { loading: true } };
