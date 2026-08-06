@@ -54,7 +54,11 @@ export type EditorialPage = {
       storefrontRightsConfirmed?: boolean;
       territory?: string;
       rightsDuration?: "Perpetual" | "Expiry recorded";
-      releaseStatus?: string;
+      expiryDate?: string;
+      releaseStatus?:
+        | "Not applicable"
+        | "Model release recorded"
+        | "Property release recorded";
       licenceReference?: string;
       _type: "image";
     };

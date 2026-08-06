@@ -23,6 +23,34 @@ const productDetails = [
     value: "Calculated at checkout for South African addresses",
   },
 ];
+const portraitFixture = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="480" height="640"><rect width="480" height="640" fill="#DDE2D4"/><path d="M120 120h240v400H120z" fill="#EEF0E7"/></svg>')}`;
+const aboutChapters = [
+  {
+    role: "origin" as const,
+    heading: "Born from fragrance",
+    body: "A factual origin.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "development" as const,
+    heading: "From more than 130 oils to six fragrances",
+    body: "A factual development.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "collaborator" as const,
+    heading: "Guidance and encouragement",
+    body: "A factual credit.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+  {
+    role: "principles" as const,
+    heading: "Composed for lived-in rooms",
+    body: "A factual principle.",
+    image: { src: portraitFixture, alt: "Test-only portrait fixture" },
+  },
+];
+
 const variants = [
   { id: "200ml", label: "200ml diffuser", available: true },
   { id: "refill", label: "200ml refill", available: false },
@@ -299,6 +327,49 @@ export const About: Story = {
     ).toBe("rgb(245, 241, 232)");
   },
 };
+export const AboutWithPortraits: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in."
+      chapters={aboutChapters}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const slot = canvas.getByTestId("about-media-slot-origin");
+    const artwork = canvas.getByTestId("about-media-artwork-origin");
+    await expect(slot).toHaveClass("aspect-4/3");
+    await expect(artwork).toHaveClass("aspect-3/4", "mx-auto", "h-full");
+    await expect(
+      canvas.getByRole("img", { name: "Test-only portrait fixture" }),
+    ).toHaveClass("object-contain");
+  },
+};
+export const AboutOnePortrait: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection."
+      chapters={aboutChapters.map((chapter, index) =>
+        index ? { ...chapter, image: undefined } : chapter,
+      )}
+    />
+  ),
+};
+export const AboutAlternatingPortraits: Story = {
+  render: () => (
+    <AboutTemplate
+      title="The story behind the atmosphere."
+      introduction="A considered collection."
+      chapters={aboutChapters.map((chapter, index) =>
+        index % 2 ? { ...chapter, image: undefined } : chapter,
+      )}
+    />
+  ),
+};
+export const AboutUnavailable: Story = { render: About.render };
+
 export const AboutMobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: About.render,

@@ -198,6 +198,21 @@ type AboutInput = {
     } | null;
   } | null> | null;
 };
+function normalizeHotspot(
+  hotspot: { x?: number; y?: number } | null | undefined,
+) {
+  return typeof hotspot?.x === "number" &&
+    Number.isFinite(hotspot.x) &&
+    hotspot.x >= 0 &&
+    hotspot.x <= 1 &&
+    typeof hotspot?.y === "number" &&
+    Number.isFinite(hotspot.y) &&
+    hotspot.y >= 0 &&
+    hotspot.y <= 1
+    ? { x: hotspot.x, y: hotspot.y }
+    : { x: 0.5, y: 0.5 };
+}
+
 export function withAboutFallback(page: AboutInput | null): AboutPage {
   const sections = page?.sections ?? [];
   return {
@@ -215,7 +230,7 @@ export function withAboutFallback(page: AboutInput | null): AboutPage {
           ? {
               src: authored.image.src,
               alt: authored.image.alt.trim(),
-              hotspot: authored.image.hotspot ?? undefined,
+              hotspot: normalizeHotspot(authored.image.hotspot),
             }
           : undefined;
       return {
@@ -241,8 +256,8 @@ export async function getAboutPage(options: DynamicFetchOptions) {
       ...options,
     });
     return withAboutFallback(data as AboutInput | null);
-  } catch (error) {
-    console.error("Unable to load Sanity About page", error);
+  } catch {
+    console.error("Unable to load Sanity About page");
     return fallbackAboutPage;
   }
 }
@@ -257,8 +272,8 @@ export async function getAboutPageMetadata(
       perspective,
     });
     return withAboutFallback(data as AboutInput | null);
-  } catch (error) {
-    console.error("Unable to load Sanity About metadata", error);
+  } catch {
+    console.error("Unable to load Sanity About metadata");
     return fallbackAboutPage;
   }
 }

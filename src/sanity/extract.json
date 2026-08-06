@@ -274,10 +274,31 @@
                       },
                       "optional": true
                     },
-                    "releaseStatus": {
+                    "expiryDate": {
                       "type": "objectAttribute",
                       "value": {
                         "type": "string"
+                      },
+                      "optional": true
+                    },
+                    "releaseStatus": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "union",
+                        "of": [
+                          {
+                            "type": "string",
+                            "value": "Not applicable"
+                          },
+                          {
+                            "type": "string",
+                            "value": "Model release recorded"
+                          },
+                          {
+                            "type": "string",
+                            "value": "Property release recorded"
+                          }
+                        ]
                       },
                       "optional": true
                     },

@@ -262,6 +262,43 @@ describe("storefront templates", () => {
     );
   });
 
+  it("keeps portrait FIT media inside independent 4:3 slots", () => {
+    render(
+      <AboutTemplate
+        title="About"
+        introduction="Lead"
+        chapters={[
+          {
+            role: "origin",
+            heading: "Origin",
+            body: "Body",
+            image: { src: "data:image/svg+xml,test", alt: "Test portrait" },
+          },
+          { role: "development", heading: "Development", body: "Body" },
+          { role: "collaborator", heading: "Collaborator", body: "Body" },
+          { role: "principles", heading: "Principles", body: "Body" },
+        ]}
+      />,
+    );
+    expect(screen.getByTestId("about-media-slot-origin")).toHaveClass(
+      "aspect-4/3",
+    );
+    expect(screen.getByTestId("about-media-artwork-origin")).toHaveClass(
+      "aspect-3/4",
+      "mx-auto",
+      "h-full",
+    );
+    expect(screen.getByRole("img", { name: "Test portrait" })).toHaveClass(
+      "object-contain",
+    );
+    expect(
+      screen.queryByTestId("about-media-slot-development"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByTestId("about-chapter-development").firstElementChild,
+    ).toHaveClass("text-center");
+  });
+
   it("renders editor-owned context and the live cart state", () => {
     render(
       <EditorialTemplate

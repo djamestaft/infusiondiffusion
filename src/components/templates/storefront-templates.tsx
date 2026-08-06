@@ -665,7 +665,7 @@ export function AboutTemplate({
                 className={cn(
                   "mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-0",
                   chapter.image
-                    ? "grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-20"
+                    ? "grid gap-10 lg:grid-cols-[560px_560px] lg:items-center lg:justify-between"
                     : "text-center",
                 )}
               >

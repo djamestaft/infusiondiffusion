@@ -30,9 +30,22 @@ const portraitFields = [
     options: { list: ["Perpetual", "Expiry recorded"] },
   }),
   defineField({
+    name: "expiryDate",
+    title: "Rights expiry date",
+    type: "date",
+    description: "Required when rights duration is Expiry recorded.",
+  }),
+  defineField({
     name: "releaseStatus",
     title: "Release status",
     type: "string",
+    options: {
+      list: [
+        "Not applicable",
+        "Model release recorded",
+        "Property release recorded",
+      ],
+    },
   }),
   defineField({
     name: "licenceReference",
@@ -100,10 +113,8 @@ export const editorialPage = defineType({
               .filter(Boolean) ?? [];
           return (
             (roles.length === 4 &&
-              aboutRoles.every(
-                (role) => roles.filter((value) => value === role).length === 1,
-              )) ||
-            "About requires one each of origin, development, collaborator and principles."
+              aboutRoles.every((role, index) => roles[index] === role)) ||
+            "About requires origin, development, collaborator and principles in that exact order."
           );
         }),
       of: [
@@ -156,6 +167,7 @@ export const editorialPage = defineType({
                         storefrontRightsConfirmed?: boolean;
                         territory?: string;
                         rightsDuration?: string;
+                        expiryDate?: string;
                         releaseStatus?: string;
                         licenceReference?: string;
                       }
@@ -167,6 +179,8 @@ export const editorialPage = defineType({
                       image.storefrontRightsConfirmed &&
                       image.territory?.trim() &&
                       image.rightsDuration?.trim() &&
+                      (image.rightsDuration !== "Expiry recorded" ||
+                        image.expiryDate?.trim()) &&
                       image.releaseStatus?.trim() &&
                       image.licenceReference?.trim()) ||
                     "Artwork needs factual alt text and complete rights records before it can be published."
