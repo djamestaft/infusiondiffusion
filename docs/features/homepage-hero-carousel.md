@@ -40,4 +40,4 @@ Fewer than two valid visible slides restores the pre-carousel static Shopify her
 
 The product owner/editor must supply and publish final campaign photography. Protected `main` merge remains an explicit human action.
 
-An additional request to replace the component represented by Figma node `296:101` with a canonical SVG is blocked by the supplied design evidence: `296:101` is the complete 1440px Navigation instance, whose logo child is the approved editable `LogoTextLockup`, not a vector export. `DESIGN.md` explicitly forbids reconstructing the deferred ornamental mark. Navigation therefore remains unchanged unless the product owner identifies an exact vector node or supplies an approved master.
+The product owner subsequently approved the exact 220×64 outlined export of `LogoTextLockup` from Figma staging node `302:100`, traced to main component `162:96` and instance child `I296:101;169:2`. Runtime uses the transparent SVG as decorative artwork inside the existing accessible home link. This replaces only browser-rendered lettering geometry; Navigation's full-width semantic gold divider remains independent and unchanged.

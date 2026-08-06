@@ -165,7 +165,7 @@ Midnight is the signature environment; Mineral Sage provides the approved light 
 
 **The Two-Voice Rule.** Marcellus expresses; Manrope explains and operates. Do not introduce a third decorative type voice.
 
-The approved navigation `LogoTextLockup` is the current production storefront mark and is brand lettering rather than editorial hierarchy. Its Marcellus primary line is 18/18 on mobile and 32/32 on desktop; its secondary line is 9/12 on mobile and 12/16 on desktop. `INFUSION` uses 0.28em tracking, while `DIFFUSION` uses 0.24em tracking between two hairline rules. The preserved ornamental artwork is deferred reference material, not a release dependency; do not reconstruct or substitute it unless the product owner supplies an approved master and explicitly changes this decision.
+The approved navigation `LogoTextLockup` is the current production storefront mark and is brand lettering rather than editorial hierarchy. Its canonical [220×64 outlined SVG export](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=302-100) comes from main component `162:96` and source instance `I296:101;169:2`. Runtime uses that transparent, path-outlined asset at its intrinsic 220:64 ratio so browser font metrics cannot alter its geometry; it is decorative inside the existing accessible home link. The preserved ornamental artwork remains deferred reference material and must not be reconstructed without a separately approved master.
 
 ## Layout
 
