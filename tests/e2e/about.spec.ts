@@ -31,6 +31,23 @@ for (const viewport of [
     ).toBeVisible();
     await expect(page.getByRole("heading", { level: 2 })).toHaveCount(5);
     await expect(
+      page.getByText(
+        "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",
+      ),
+    ).toBeVisible();
+    await expect(
+      page.getByText(
+        /More than 130 fragrance oils sourced from around the world/,
+      ),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/guidance and encouragement of Jacqui Kirchmann/),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/luxury is earned through material detail/),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Cart" })).toBeVisible();
+    await expect(
       page.getByRole("link", { name: /Explore the Fragrance Guide/i }),
     ).toHaveAttribute("href", "/fragrance-guide");
     const about = page.locator('a[aria-current="page"]:visible', {
@@ -44,6 +61,12 @@ for (const viewport of [
     ).toHaveCSS("background-color", "rgb(245, 241, 232)");
     await expect(
       page.locator('[data-testid="about-chapter-development"]'),
+    ).toHaveCSS("background-color", "rgb(238, 240, 231)");
+    await expect(
+      page.locator('[data-testid="about-chapter-collaborator"]'),
+    ).toHaveCSS("background-color", "rgb(245, 241, 232)");
+    await expect(
+      page.locator('[data-testid="about-chapter-principles"]'),
     ).toHaveCSS("background-color", "rgb(238, 240, 231)");
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),

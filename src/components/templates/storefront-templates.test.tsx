@@ -260,6 +260,18 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("about-chapter-development")).toHaveClass(
       "bg-content-surface",
     );
+    expect(screen.getByTestId("about-chapter-collaborator")).toHaveClass(
+      "bg-bone-50",
+    );
+    expect(screen.getByTestId("about-chapter-principles")).toHaveClass(
+      "bg-content-surface",
+    );
+    expect(screen.getByRole("link", { name: "Shop" })).not.toHaveAttribute(
+      "aria-current",
+    );
+    expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
+      2,
+    );
   });
 
   it("keeps portrait FIT media inside independent 4:3 slots", () => {

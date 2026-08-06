@@ -659,13 +659,14 @@ export function AboutTemplate({
               className={cn(
                 isBone ? "bg-bone-50" : "bg-content-surface",
                 "py-11 xl:py-[110px]",
+                chapter.image && "min-h-[740px] xl:min-h-0",
               )}
             >
               <div
                 className={cn(
                   "mx-auto w-full max-w-7xl px-5 sm:px-8 xl:px-0",
                   chapter.image
-                    ? "grid gap-10 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between"
+                    ? "grid gap-24 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-10"
                     : "text-center",
                 )}
               >
@@ -711,7 +712,7 @@ export function AboutTemplate({
           );
         })}
         <section
-          className="bg-bone-50 py-12 xl:py-[72px]"
+          className="bg-bone-50 py-7 xl:py-[91px]"
           aria-labelledby="about-cta-heading"
         >
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 xl:flex-row xl:items-center xl:justify-between xl:px-0">

@@ -51,6 +51,16 @@ const aboutChapters = [
   },
 ];
 
+const maximumAboutTitle =
+  "The story behind the atmosphere, the rooms we return to, and the rituals that make them feel like home";
+const maximumAboutLead =
+  "A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in and the changing rituals that give each interior its character, from early mornings in active kitchens to the slower evenings when a familiar room becomes a place to settle, reflect and welcome the people we love.";
+const maximumAboutBody = Array.from(
+  { length: 5 },
+  (_, index) =>
+    `This complete editorial paragraph ${index + 1} keeps the long-content fixture grounded in a believable reading experience, describing how fragrance can become part of a lived-in room without changing the fixed narrative order, hiding information, or relying on a fixed-height container.`,
+).join("\n\n");
+
 const variants = [
   { id: "200ml", label: "200ml diffuser", available: true },
   { id: "refill", label: "200ml refill", available: false },
@@ -414,13 +424,13 @@ export const AboutMaximumContent: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   render: () => (
     <AboutTemplate
-      title="The story behind the atmosphere."
-      introduction="A considered collection shaped by a lasting fascination with fragrance, refined for rooms we live in and the rituals that give them character."
+      title={maximumAboutTitle}
+      introduction={maximumAboutLead}
       chapters={aboutChapters.map((chapter) => ({
         ...chapter,
         image: undefined,
         heading: `${chapter.heading} for rooms with a considered and exceptionally long editorial context`,
-        body: `${chapter.body}\n\nLong editorial copy remains naturally readable without a fixed-height section or clipping. It preserves paragraphs, source order and accessible reading measure on constrained screens.`,
+        body: maximumAboutBody,
       }))}
     />
   ),
