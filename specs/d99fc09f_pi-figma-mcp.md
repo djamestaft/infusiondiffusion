@@ -45,7 +45,7 @@ corepack pnpm typecheck
 corepack pnpm test
 ```
 
-In a checkout whose project trust was already reviewed by a human, `pi list --approve` and the no-session RPC command-surface check may confirm the pinned adapter and `mcp`/`mcp-auth` commands without connecting to Figma. Do not use those checks to enumerate a server or authenticate.
+Only after a human has recorded review and approval of Pi project trust for this exact checkout may `pi list --approve` and the no-session RPC command-surface check confirm the pinned adapter and `mcp`/`mcp-auth` commands without connecting to Figma. If that evidence is absent, do not run or repeat either `--approve` command, and do not treat a prior invocation as verification evidence. Do not use those checks to enumerate a server or authenticate.
 
 Do **not** run `/mcp-auth figma`, `/mcp tools`, a Figma tool, a direct endpoint request, a DCR retry or workaround, or another Catalog submission. Do not add OAuth credentials, headers, client identifiers, secrets, or provider-response material.
 
