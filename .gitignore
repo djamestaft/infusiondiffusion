@@ -61,7 +61,7 @@ next-env.d.ts
 /.impeccable/live/cache/
 /worktrees/.treehouse
 
-# Pi is not a project dependency; ignore user-local artifacts if it is run here.
+# Ignore Pi package caches, runtime sessions, and local credentials.
 /.pi/npm/
 /.pi/git/
 /.pi/agent/auth.json

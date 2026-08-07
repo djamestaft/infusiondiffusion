@@ -56,7 +56,7 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Storybook configured for component development
 - [x] Accessibility and interaction testing enabled in Storybook
 - [x] Impeccable installed as a repository-scoped design skill with hooks
-- [x] Figma MCP connected and agent workflow scoped to the canonical Infusion Diffusion file
+- [x] Figma MCP connected through already-supported clients and agent workflow scoped to the canonical Infusion Diffusion file; this does not establish live Pi access
 - [x] Canonical Style Guide, palette, typography system, layout, and photography rules approved
 - [x] Button and TextLink approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
 - [x] Input, Textarea, and Field approved in Figma, implemented in Storybook/runtime, and synchronized through semantic variables
@@ -105,7 +105,11 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Record first-loop failure modes, improve guidance, and add regression evaluations
 - [x] Define human approval points for design, merge, production, editorial publishing, and rollback
 - [x] Trial Pi orchestration with Codex-backed specialist roles and scoped MCP
-- [x] Retire Pi after operator testing exposed insufficient worker visibility and autonomous multi-PR behavior
+- [x] Retire Pi orchestration after operator testing exposed insufficient worker visibility and autonomous multi-PR behavior
+- [x] Activate the hard-required project-local Pi Figma MCP client (`pi-mcp-adapter`); this does not restore Pi orchestration
+- [x] Submit Figma MCP Catalog registration for the required Pi client
+- [ ] Obtain Figma Catalog approval for Pi — externally blocked; no response timeline is assumed
+- [ ] After independently confirmed Catalog approval and human authorization, complete browser OAuth, tool enumeration, and one bounded read-only lookup
 - [x] Deliver the button/link system through visible Codex coordination and record interventions, review findings, and synchronization corrections
 - [ ] Extract the proven generic system into a separate project template
 
@@ -163,13 +167,14 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 ### Figma
 
 - [x] Confirm the canonical design file and approved Style Guide frame
-- [x] Connect and authenticate Figma MCP
+- [x] Connect and authenticate Figma MCP through already-supported clients; required Pi client approval remains pending
 - [x] Scope agent work to the canonical Infusion Diffusion file and exact node links
 - [x] Document page/frame naming and component-to-code mapping conventions
 - [x] Test one approved component handoff through Storybook
 - [x] Synchronize Button/TextLink Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
 - [x] Synchronize Input/Textarea/Field Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
 - [x] Synchronize ProductCard and Navigation Figma masters, semantic variables, repository guidance, runtime tokens, and Storybook contracts
+- [x] Preserve Figma MCP evidence for already-supported clients; it does not establish live access for the required Pi client
 
 ### Shopify
 
@@ -189,6 +194,10 @@ Secrets must be placed in `.env.local` for local development and in the correct 
 - [x] Configure Treehouse to isolate concurrent writing agents in repository-local worktrees
 - [x] Evaluate and reject Pi as the repository orchestrator
 - [x] Validate the visible Codex coordination rules on the button/link feature
+- [x] Activate the hard-required project-local Pi Figma MCP client with the exact pinned adapter
+- [x] Submit the Figma MCP Catalog registration for Pi
+- [ ] Await Figma Catalog approval for Pi; observed Dynamic Client Registration HTTP 403 occurred before browser OAuth
+- [ ] After approval and separate human authorization, perform browser OAuth, tool enumeration, and one bounded read-only lookup
 - [ ] Document any account-specific MCP setup without committing tokens
 
 ## Delivery sequence
@@ -267,6 +276,7 @@ Exit criteria: a new brand can be scaffolded without inheriting Infusion Diffusi
 4. Review the Contact Storybook states and protected Vercel Preview, then let an editor create and publish its `contact` editorial document; direct-email fallback remains available without publication.
 5. Verify policies, notification branding, apps, billing, and the final domain; discounts are explicitly deferred, and the proven order lifecycle must be repeated with the real payment provider.
 6. Export and validate a preservation copy before a separately approved Shopify catalogue cleanup.
+7. Await independently confirmed Figma Catalog approval for the required Pi client; do not retry Dynamic Client Registration or begin OAuth, tool enumeration, or a lookup before the separate post-approval gate.
 
 ## Roadmap maintenance
 
