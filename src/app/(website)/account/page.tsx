@@ -18,7 +18,7 @@ export async function getAccountPageData() {
   return { entry, cartCount: cart.totalQuantity };
 }
 
-async function AccountContent() {
+export async function AccountContent() {
   const { entry, cartCount } = await getAccountPageData();
   return (
     <AccountEntry

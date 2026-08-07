@@ -1,15 +1,23 @@
 # Account entry deterministic command record
 
-| Command                                                                                            | Exit |
-| -------------------------------------------------------------------------------------------------- | ---- |
-| `corepack pnpm lint`                                                                               | 0    |
-| `corepack pnpm typecheck`                                                                          | 0    |
-| `corepack pnpm test`                                                                               | 0    |
-| `corepack pnpm test:stories`                                                                       | 0    |
-| `corepack pnpm build-storybook`                                                                    | 0    |
-| `corepack pnpm build`                                                                              | 0    |
-| `corepack pnpm exec playwright test tests/e2e/account.spec.ts --project=chromium --project=mobile` | 0    |
+The commands below were run from the repository root against the completed local
+working tree. The evidence-producing browser run uses only the inert
+`accounts.example.test` fixture and captures no customer data or credentials.
 
-| `python3 -m unittest adws.tests.test_figma_handoff_gate` | 1 |
+| Command                                                                                                                                                                                 | Exit | Reconciled result                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------------------------- |
+| `corepack pnpm exec vitest run --config vitest.config.ts src/lib/shopify/account-entry.test.ts src/components/account/account-entry.test.tsx 'src/app/(website)/account/page.test.tsx'` | 0    | 3 files, 19 tests passed                                                                                 |
+| `node .agents/skills/impeccable/scripts/detect.mjs --json src/components/account 'src/app/(website)/account'`                                                                           | 0    | `[]` findings                                                                                            |
+| `corepack pnpm lint`                                                                                                                                                                    | 0    | Passed through `corepack pnpm check`                                                                     |
+| `corepack pnpm typecheck`                                                                                                                                                               | 0    | Passed through `corepack pnpm check`                                                                     |
+| `corepack pnpm test`                                                                                                                                                                    | 0    | 37 files, 194 tests passed                                                                               |
+| `corepack pnpm test:stories`                                                                                                                                                            | 0    | 21 files, 204 tests passed                                                                               |
+| `corepack pnpm build-storybook`                                                                                                                                                         | 0    | Storybook build completed                                                                                |
+| `corepack pnpm build`                                                                                                                                                                   | 0    | Next production build completed                                                                          |
+| `corepack pnpm exec playwright install chromium`                                                                                                                                        | 0    | Chromium installed                                                                                       |
+| `SAVE_ACCOUNT_EVIDENCE=1 corepack pnpm exec playwright test tests/e2e/account.spec.ts --project=chromium --project=mobile`                                                              | 0    | 42 tests passed; refreshed 1440/390/320 screenshots                                                      |
+| `corepack pnpm check`                                                                                                                                                                   | 0    | Prettier, lint, typecheck, 194 Vitest tests, 204 Storybook tests, Storybook build, and Next build passed |
+| `python3 -m unittest adws.tests.test_figma_handoff_gate`                                                                                                                                | 0    | 3 tests passed                                                                                           |
+| `git diff --check`                                                                                                                                                                      | 0    | No whitespace errors                                                                                     |
 
-`corepack pnpm check` exited 1 because pre-existing immutable plan records `specs/9507c91e_account-entry-implementation.md` and `specs/9507c91e_account-entry.md` fail repository Prettier; no Account implementation file failed that command.
+The previously stale 183/203 totals are superseded by the current 194/204 totals.

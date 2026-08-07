@@ -1,9 +1,16 @@
 # Account entry local verification
 
-Captured from deterministic `SHOPIFY_E2E_FIXTURES=1` and `SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true` local Playwright runs on the implementation branch. The screenshots contain only the inert `accounts.example.test` destination and no customer data.
+Captured from deterministic `SHOPIFY_E2E_FIXTURES=1` and
+`SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true` local Playwright runs. The screenshots
+contain only the inert `accounts.example.test` destination and no customer data.
 
 - `account-1440.png`, `account-390.png`, `account-320.png`: hosted-handoff desktop and narrow layouts.
-- Passed: targeted Vitest; full Vitest (183 tests); Storybook browser tests (203 tests); lint; typecheck; Storybook build; Next build; Playwright Account Chromium and mobile (six checks, including axe, health, no form, metadata and overflow).
-- Local build reports the expected missing local Shopify catalogue configuration fallback; account fixture coverage is independent of it.
+- The Account suite passed 42 Chromium/mobile checks. It proves 1440/390/320 responsive hosted, disabled, configuration-missing, not-provisioned, provider-error, and long-content states; natural-height containment and no horizontal overflow; Tab-driven Home → Account → Cart → Menu → hosted-action order with visible focus; effective 200% CSS-viewport reflow; and loading reduced-motion pulse removal.
+- Targeted Vitest passed 19 tests. Full Vitest passed 194 tests and Storybook browser tests passed 204 tests. Lint, typecheck, Storybook build, Next build, `pnpm check`, and the Figma handoff gate all exited 0; see `account-command-record.md` for the command-level record.
+- The local build reports the expected missing Shopify catalogue configuration fallback; account fixture coverage is independent of it.
 
-Preview remains pending: a human must verify the exact PR deployment with its server-only flag and sanctioned Storefront configuration, record only whether the returned field is valid HTTPS or null, and not authenticate. First rollback recommendation remains setting the server-only flag to `false` and redeploying.
+Preview verification remains a human gate and is intentionally out of scope for
+this local correction. A future sanctioned Preview review must record only
+whether the provider field is valid HTTPS or null, without authenticating or
+recording a destination, token, customer, or order data. The first rollback
+recommendation remains setting the server-only flag to `false` and redeploying.
