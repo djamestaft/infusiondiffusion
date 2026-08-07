@@ -71,8 +71,40 @@ approved, and protected GitHub pull requests remain the integration boundary.
 
 The Pi orchestration trial was retired because its background worker model made
 worker dialogue and autonomous multi-PR delivery insufficiently visible to the
-operator. Pi may remain installed as user-level tooling, but it is not configured
-or required by this repository.
+operator. Pi is not required for storefront work, but this repository configures
+an optional project-local `pi-mcp-adapter` only for the hosted Figma MCP server.
+
+### Optional Pi Figma MCP smoke check
+
+From the repository root, install the locked dependencies and start an ephemeral
+approved Pi session:
+
+```bash
+corepack pnpm install --frozen-lockfile
+pi --approve --no-session --tools mcp,mcpScript
+```
+
+On a new machine, review and approve Pi project trust before the extension runs.
+In Pi, use `/mcp tools` to confirm a non-empty `figma` namespace. If prompted,
+`/mcp-auth figma` opens a Figma browser OAuth approval that only a human may
+complete. The resulting credential stays in the OS credential store; never add,
+paste, redirect, or log OAuth URLs, codes, tokens, identities, or MCP responses.
+
+After approval, enumerate the `figma` tools and call only `figma_whoami` once
+with `{}`. If it is unavailable, use one clearly read-only, bounded metadata
+lookup for file `GYiQd7QSAwCSaGtt0alKG2`, node `25:2`, after inspecting its
+schema. Do not request exports, comments, broad file data, or any modifying tool.
+Record only the adapter version, server name, tool count, selected tool name, and
+success or failure. An OAuth denial, unavailable browser, or insufficient Figma
+scope is a human approval gate, not a configuration workaround.
+
+For a non-interactive extension check, run `pi list --approve` and confirm it
+lists `pi-mcp-adapter`; then run `python3 -m unittest adws.tests.test_pi_mcp_config`.
+If Pi does not load the adapter, verify the project trust decision and that
+`.pi/settings.json` still pins the adapter version from `package.json`; do not
+enable host configuration discovery or put credentials in repository files.
+Rollback is a reviewed revert of `.pi/settings.json`, this guidance, and its test;
+do not revert the hosted endpoint in `.pi/mcp.json`.
 
 ## Incident response
 
