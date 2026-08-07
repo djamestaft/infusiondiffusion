@@ -1,5 +1,20 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const nextServer = {
+  command:
+    "SHOPIFY_E2E_FIXTURES=1 SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true corepack pnpm dev",
+  url: "http://127.0.0.1:3000/api/health",
+  reuseExistingServer: !process.env.CI,
+  timeout: 120_000,
+};
+
+const storybookServer = {
+  command: "corepack pnpm storybook --ci --no-open -p 6006",
+  url: "http://127.0.0.1:6006/iframe.html",
+  reuseExistingServer: !process.env.CI,
+  timeout: 120_000,
+};
+
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
@@ -16,12 +31,5 @@ export default defineConfig({
   ],
   webServer: process.env.PLAYWRIGHT_BASE_URL
     ? undefined
-    : {
-        command: process.env.CI
-          ? "SHOPIFY_E2E_FIXTURES=1 corepack pnpm dev"
-          : "corepack pnpm dev",
-        url: "http://127.0.0.1:3000/api/health",
-        reuseExistingServer: !process.env.CI,
-        timeout: 120_000,
-      },
+    : [nextServer, storybookServer],
 });
