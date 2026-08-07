@@ -8,6 +8,9 @@ const viewports = [
   { name: "small", width: 320, height: 844 },
 ];
 
+const storybookUrl = (story: string) =>
+  `http://127.0.0.1:6006/iframe.html?id=commerce-accountentry--${story}&viewMode=story`;
+
 async function expectNoHorizontalOverflow(page: Page) {
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
@@ -65,20 +68,20 @@ for (const viewport of viewports) {
       });
   });
 
-  for (const state of [
+  for (const story of [
     "disabled",
-    "configuration-missing",
+    "missing-configuration",
     "not-provisioned",
-    "error",
+    "provider-error",
     "long-content",
   ]) {
-    test(`keeps ${state} account content responsive at ${viewport.name}`, async ({
+    test(`keeps ${story} account story content responsive at ${viewport.name}`, async ({
       page,
     }) => {
       await page.setViewportSize(viewport);
-      await page.goto(`/e2e-account/${state}`);
+      await page.goto(storybookUrl(story));
       await expectAccountLayout(page);
-      if (state === "long-content") {
+      if (story === "long-content") {
         const longCopy = page.getByText(/accountaccessinformation/);
         await expect(longCopy).toBeVisible();
         const bounds = await longCopy.boundingBox();
@@ -100,11 +103,21 @@ for (const viewport of viewports) {
   }
 }
 
+test("does not expose an account-state fixture route", async ({ page }) => {
+  const response = await page.goto("/e2e-account/disabled");
+  expect(response?.status()).toBe(404);
+});
+
 test("follows the mobile account Tab order and exposes visible focus", async ({
   page,
-}) => {
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== "chromium",
+    "The Chromium project uses the same 320px CSS viewport deterministically.",
+  );
   await page.setViewportSize({ width: 320, height: 844 });
-  await page.goto("/account");
+  await page.goto(storybookUrl("hosted-desktop"));
+  await expectAccountLayout(page);
   await page.locator("body").focus();
   await expect(page.locator("body")).toBeFocused();
 
@@ -129,24 +142,24 @@ test("follows the mobile account Tab order and exposes visible focus", async ({
   }
 });
 
-test("reflows at an effective 200% zoom viewport without page scaling", async ({
+test("reflows long account content at an effective 200% zoom viewport", async ({
   page,
 }) => {
   // A 1280px desktop viewport at 200% browser zoom exposes a 640px CSS layout
-  // viewport. Setting that viewport verifies the real reflow layout rather than
-  // CDP page scaling, which only magnifies pixels and leaves layout unchanged.
+  // viewport. This verifies reflow rather than CDP page scaling, which only
+  // magnifies pixels and leaves layout unchanged.
   await page.setViewportSize({ width: 640, height: 844 });
-  await page.goto("/e2e-account/long-content");
+  await page.goto(storybookUrl("long-content"));
   await expect(page.evaluate(() => window.innerWidth)).resolves.toBe(640);
   await expectAccountLayout(page);
   await expect(page.getByText(/accountaccessinformation/)).toBeVisible();
 });
 
-test("removes the loading pulse when reduced motion is requested", async ({
+test("removes the Storybook loading pulse when reduced motion is requested", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/e2e-account/loading");
+  await page.goto(storybookUrl("loading"));
   await expectAccountLayout(page);
   await expect(page.getByRole("main").locator(".animate-pulse")).toHaveCSS(
     "animation-name",
