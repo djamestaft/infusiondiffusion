@@ -216,7 +216,7 @@ def run(request: PiRequest, on_event: Optional[Callable[[dict], None]] = None,
     """
     provider, model_id = resolve_model(request.model)
     cmd = [
-        PI_PATH, "-p", "--mode", "json",
+        PI_PATH, "-ne", "-p", "--mode", "json",
         "--provider", provider, "--model", model_id,
         "--thinking", request.thinking,
         "--session-id", request.session_id,
