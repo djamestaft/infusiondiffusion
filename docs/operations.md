@@ -69,42 +69,22 @@ approved, and protected GitHub pull requests remain the integration boundary.
 - Stop at the documented design, merge, production, editorial publish, and
   rollback gates.
 
-The Pi orchestration trial was retired because its background worker model made
-worker dialogue and autonomous multi-PR delivery insufficiently visible to the
-operator. Pi is not required for storefront work, but this repository configures
-an optional project-local `pi-mcp-adapter` only for the hosted Figma MCP server.
+Pi orchestration remains retired because its background-worker model did not provide enough operator visibility. That decision is separate from this repository’s **hard-required Pi client** for the project-local Figma MCP route; Pi is not part of the storefront runtime.
 
-### Optional Pi Figma MCP smoke check
+### Required Pi Figma MCP status and runbook
 
-From the repository root, install the locked dependencies and start an ephemeral
-approved Pi session:
+- **Activation complete:** `.pi/settings.json` activates exactly `pi-mcp-adapter@2.20.1` with bundled skills disabled. The adapter is aligned with the exact `package.json` development dependency. `.pi/mcp.json` contains the single lazy `figma` server at `https://mcp.figma.com/mcp` with host discovery off.
+- **Catalog registration submitted; approval pending:** Figma MCP Catalog registration has been submitted. Approval is provider-owned and pending; no response timeline or approval outcome is implied.
+- **Observed provider boundary:** a Dynamic Client Registration attempt received HTTP 403 **before** browser OAuth. This is a coarse, upstream DCR-policy observation, not an OAuth denial, successful registration, or proof of live Pi/Figma support.
+- **Post-approval gates:** only after Figma approval is independently confirmed and a human authorizes a new task may browser OAuth, tool enumeration, and one bounded read-only lookup be attempted.
 
-```bash
-corepack pnpm install --frozen-lockfile
-pi --approve --no-session --tools mcp,mcpScript
-```
+Until that approval, run only offline activation checks such as `python3 -m unittest adws.tests.test_pi_mcp_config`, `pi list --approve`, and the RPC command-surface check documented in the Pi specification. Do not run `/mcp-auth figma`, `/mcp tools`, a Figma tool, a direct endpoint probe, a DCR retry or workaround, or another Catalog submission. Do not add OAuth credentials, client identifiers, headers, tokens, or claims of current live support.
 
-On a new machine, review and approve Pi project trust before the extension runs.
-In Pi, use `/mcp tools` to confirm a non-empty `figma` namespace. If prompted,
-`/mcp-auth figma` opens a Figma browser OAuth approval that only a human may
-complete. The resulting credential stays in the OS credential store; never add,
-paste, redirect, or log OAuth URLs, codes, tokens, identities, or MCP responses.
+A human must review project trust before the extension executes on a new machine. Any future OAuth credential belongs only in the OS credential store. Never retain or report OAuth URLs, codes, tokens, identities, registration payloads or responses, or MCP result payloads. Sanitized evidence is limited to the adapter version, endpoint policy, submitted/pending state, the coarse pre-OAuth HTTP 403 location, and post-approval success or failure.
 
-After approval, enumerate the `figma` tools and call only `figma_whoami` once
-with `{}`. If it is unavailable, use one clearly read-only, bounded metadata
-lookup for file `GYiQd7QSAwCSaGtt0alKG2`, node `25:2`, after inspecting its
-schema. Do not request exports, comments, broad file data, or any modifying tool.
-Record only the adapter version, server name, tool count, selected tool name, and
-success or failure. An OAuth denial, unavailable browser, or insufficient Figma
-scope is a human approval gate, not a configuration workaround.
+After approval, a separately authorized human-gated task may inspect the tool schema, enumerate tools, and make exactly one bounded read-only lookup. If `figma_whoami` is unavailable, use only a clearly read-only metadata lookup for the approved file/node after schema inspection; do not request exports, comments, broad file data, or modifying tools. OAuth denial, unavailable browser, insufficient scope, or another provider policy response remains a human approval gate, not a configuration workaround.
 
-For a non-interactive extension check, run `pi list --approve` and confirm it
-lists `pi-mcp-adapter`; then run `python3 -m unittest adws.tests.test_pi_mcp_config`.
-If Pi does not load the adapter, verify the project trust decision and that
-`.pi/settings.json` still pins the adapter version from `package.json`; do not
-enable host configuration discovery or put credentials in repository files.
-Rollback is a reviewed revert of `.pi/settings.json`, this guidance, and its test;
-do not revert the hosted endpoint in `.pi/mcp.json`.
+Rollback is a reviewed documentation/configuration revert that preserves the hosted endpoint in `.pi/mcp.json`; never restore immediate-auth guidance, expose credentials, or treat another client’s Figma MCP history as evidence that Pi is approved.
 
 ## Incident response
 
