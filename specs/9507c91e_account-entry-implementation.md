@@ -34,15 +34,15 @@ Context7-first Next.js evidence is supplied in the request: Next.js 16 supports 
 
 ## System ownership boundaries
 
-| System                 | Owns                                                                                                                | Explicitly does not own                                                                                     |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Next.js                | `/account` route shell, runtime gating, normalized-state rendering, metadata, loading/error recovery, accessibility | Authentication, customer identity, customer sessions, orders, account creation, or fabricated provider URLs |
-| Shopify Storefront API | Nullable hosted account destination and account provisioning truth                                                  | First-party page composition                                                                                |
-| Shopify hosted account | Authentication and any customer/order presentation after handoff                                                    | A first-party authenticated session                                                                         |
-| Storybook              | Reusable Account composition and deterministic visual/state contracts                                               | Live provider calls or credentials                                                                          |
-| Figma / `DESIGN.md`    | Approved visual and content direction at `337:321`; documented Account composition                                  | Runtime commerce behavior                                                                                   |
-| Vercel                 | Preview/deployment state and server-only environment configuration                                                  | Enabling Shopify customer accounts                                                                          |
-| Sanity                 | No role                                                                                                             | Customer/account/order data or operational Account copy in this slice                                       |
+| System | Owns | Explicitly does not own |
+| --- | --- | --- |
+| Next.js | `/account` route shell, runtime gating, normalized-state rendering, metadata, loading/error recovery, accessibility | Authentication, customer identity, customer sessions, orders, account creation, or fabricated provider URLs |
+| Shopify Storefront API | Nullable hosted account destination and account provisioning truth | First-party page composition |
+| Shopify hosted account | Authentication and any customer/order presentation after handoff | A first-party authenticated session |
+| Storybook | Reusable Account composition and deterministic visual/state contracts | Live provider calls or credentials |
+| Figma / `DESIGN.md` | Approved visual and content direction at `337:321`; documented Account composition | Runtime commerce behavior |
+| Vercel | Preview/deployment state and server-only environment configuration | Enabling Shopify customer accounts |
+| Sanity | No role | Customer/account/order data or operational Account copy in this slice |
 
 No local login form, email/password field, credential persistence, customer cookie/token, Customer Account API/OIDC flow, legacy customer access token, Admin API request, order history, quick reorder, or payment work may be introduced.
 

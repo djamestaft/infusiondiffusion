@@ -1,39 +1,10 @@
-import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from types import ModuleType, SimpleNamespace
+from types import SimpleNamespace
 from unittest import TestCase
 
-try:
-    import pydantic  # noqa: F401
-except ModuleNotFoundError:
-    # This focused standard-library test must remain runnable from the documented
-    # root command even when the optional ADW runtime environment is not active.
-    fallback = ModuleType("pydantic")
-
-    class BaseModel:
-        def __init__(self, **values):
-            annotations = {}
-            for base in reversed(type(self).mro()):
-                annotations.update(getattr(base, "__annotations__", {}))
-            for name in annotations:
-                value = values.get(name, getattr(type(self), name, None))
-                setattr(self, name, value)
-
-    def Field(*, default_factory):
-        return default_factory()
-
-    def field_validator(*_args, **_kwargs):
-        return lambda function: function
-
-    fallback.BaseModel = BaseModel
-    fallback.Field = Field
-    fallback.ValidationInfo = object
-    fallback.field_validator = field_validator
-    sys.modules["pydantic"] = fallback
-
-from adws.adw_modules.data_types import SpecialistOutput
-from adws.adw_modules.gates import figma_handoff_complete
+from adw_modules.data_types import SpecialistOutput
+from adw_modules.gates import figma_handoff_complete
 
 
 class FigmaHandoffGateTest(TestCase):

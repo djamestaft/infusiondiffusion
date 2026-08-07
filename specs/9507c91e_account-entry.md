@@ -63,14 +63,14 @@ Reuse these approved instances; add no primitive, raw colour, font, radius, orna
 
 ## System ownership boundaries
 
-| System       | Owns in this feature                                                                                                                                          | Must not own                                                                                           |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Next.js      | `/account` route, metadata, server-side orchestration, launch gate, safe normalized-state presentation, accessibility, and first-party recovery links         | Customer identity, sessions at Shopify, passwords, customer/order records, or a fabricated account URL |
-| Shopify      | Whether customer accounts/vanity domain exist, returned `customerAccountUrl`, hosted authentication, account creation/sign-in semantics, customer/order truth | First-party page layout or local UI state                                                              |
-| Storybook    | Reusable `AccountEntry` composition contract and all deterministic visual states                                                                              | Live provider truth or authentication                                                                  |
-| Figma/DESIGN | Approved visual direction, responsive/state contract, and existing component/variable reuse                                                                   | Runtime provider behavior                                                                              |
-| Vercel       | Preview/deployment state and server-only environment values                                                                                                   | Shopify configuration or customer truth                                                                |
-| Sanity       | No role in this slice                                                                                                                                         | Account copy that implies mutable commerce/customer truth, customer records, or order data             |
+| System | Owns in this feature | Must not own |
+| --- | --- | --- |
+| Next.js | `/account` route, metadata, server-side orchestration, launch gate, safe normalized-state presentation, accessibility, and first-party recovery links | Customer identity, sessions at Shopify, passwords, customer/order records, or a fabricated account URL |
+| Shopify | Whether customer accounts/vanity domain exist, returned `customerAccountUrl`, hosted authentication, account creation/sign-in semantics, customer/order truth | First-party page layout or local UI state |
+| Storybook | Reusable `AccountEntry` composition contract and all deterministic visual states | Live provider truth or authentication |
+| Figma/DESIGN | Approved visual direction, responsive/state contract, and existing component/variable reuse | Runtime provider behavior |
+| Vercel | Preview/deployment state and server-only environment values | Shopify configuration or customer truth |
+| Sanity | No role in this slice | Account copy that implies mutable commerce/customer truth, customer records, or order data |
 
 The short operational copy is versioned with the route because it explains a fixed service boundary. Publishing or changing Sanity content is out of scope.
 

@@ -12,11 +12,13 @@ contain only the inert `accounts.example.test` destination and no customer data.
 ## Pull request
 
 - PR: https://github.com/djamestaft/infusiondiffusion/pull/47
-- Initial reviewed implementation commit: `bf9eae48fbee8560df95404645c150b2feb228af`
+- Authenticated Preview release review completed for exact commit `f7b5129a6390a91261859c2304bebae04ba0370d`.
 - The PR body records the implementation plan, approved Figma authority, Shopify-only security boundary, local green evidence, remaining Preview gate, and the human-authorized rollback flag.
 
-Preview verification remains a human gate and is intentionally out of scope for
-this local correction. A future sanctioned Preview review must record only
-whether the provider field is valid HTTPS or null, without authenticating or
-recording a destination, token, customer, or order data. The first rollback
-recommendation remains setting the server-only flag to `false` and redeploying.
+## Authenticated Preview result
+
+- `quality`, Vercel, Vercel Preview Comments, and `just pr-gate 47` passed for the reviewed commit.
+- The authenticated release review observed `/api/health` at `f7b5129`, the safe unavailable `/account` state at desktop and 347×605, no local account controls or customer/order content, no hosted handoff action, no exposed destination, no observed clipping/overflow, and no displayed console error.
+- The review did not authenticate to Shopify, follow a hosted handoff, inspect a live destination, or alter the server-only flag.
+
+Only two Preview checks remain pending: the sanctioned sanitized flag-state observation (valid HTTPS versus null, without retaining a URL) and Preview keyboard/axe checks. The first rollback recommendation remains setting the server-only flag to `false` and redeploying.
