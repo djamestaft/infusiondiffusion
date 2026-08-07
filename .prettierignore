@@ -8,3 +8,5 @@ src/sanity/extract.json
 .agents/skills/impeccable
 adws/**
 .agents/skills/sssf/**
+specs/9507c91e_account-entry.md
+specs/9507c91e_account-entry-implementation.md
