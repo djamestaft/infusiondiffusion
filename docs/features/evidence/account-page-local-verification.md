@@ -9,6 +9,12 @@ contain only the inert `accounts.example.test` destination and no customer data.
 - Targeted Vitest passed 19 tests. Full Vitest passed 194 tests and Storybook browser tests passed 204 tests. Lint, typecheck, Storybook build, Next build, `pnpm check`, and the Figma handoff gate all exited 0; see `account-command-record.md` for the command-level record.
 - The local build reports the expected missing Shopify catalogue configuration fallback; account fixture coverage is independent of it.
 
+## Pull request
+
+- PR: https://github.com/djamestaft/infusiondiffusion/pull/47
+- Initial reviewed implementation commit: `bf9eae48fbee8560df95404645c150b2feb228af`
+- The PR body records the implementation plan, approved Figma authority, Shopify-only security boundary, local green evidence, remaining Preview gate, and the human-authorized rollback flag.
+
 Preview verification remains a human gate and is intentionally out of scope for
 this local correction. A future sanctioned Preview review must record only
 whether the provider field is valid HTTPS or null, without authenticating or
