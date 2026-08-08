@@ -118,3 +118,7 @@ prevents a live event from racing Vercel's tagged cache.
 2. Obtain the Figma plan and seat required for Code Connect if direct component mapping becomes necessary.
 3. Add the final production domain and validate DNS.
 4. In the commerce phase, audit the existing Shopify store and complete the South African payment-gateway and fee review before checkout work.
+
+## Account-entry hosted handoff
+
+`SHOPIFY_ACCOUNT_HANDOFF_ENABLED=false` is an off-by-default, server-only gate for `/account`. Only the exact value `true` permits a Storefront API 2026-07 `shop.customerAccountUrl` lookup; it does not enable Shopify customer accounts. The Shopify owner must provision customer accounts and the required vanity domain. Preview verification must confirm `/api/health`, the disabled and (when provisioned) sanitized HTTPS handoff state without authentication. The first rollback action is a human-authorized environment change to `false`, redeploying to return the truthful unavailable state; no agent enables this flag in Production.
