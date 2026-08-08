@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
+import type { GALLERY_PAGE_QUERY_RESULT } from "@/sanity/generated";
+
 vi.mock("@/env", () => ({ isSanityConfigured: false }));
 vi.mock("@/sanity/lib/live", () => ({
   sanityFetch: vi.fn(),
@@ -108,12 +110,16 @@ describe("editorial page fallbacks", () => {
   });
 });
 
+const galleryInput = (sections: unknown) =>
+  ({ sections }) as GALLERY_PAGE_QUERY_RESULT;
+
 describe("gallery page normalization", () => {
   it("keeps only rights-confirmed complete items in authored order and trims captions", () => {
-    const page = withGalleryFallback({
-      sections: [
+    const page = withGalleryFallback(
+      galleryInput([
         {
           _key: "one",
+          galleryGroup: "campaign",
           heading: "  First  ",
           body: " Caption ",
           image: {
@@ -124,6 +130,7 @@ describe("gallery page normalization", () => {
         },
         {
           _key: "bad",
+          galleryGroup: "campaign",
           heading: "Bad",
           body: "Caption",
           image: {
@@ -134,6 +141,7 @@ describe("gallery page normalization", () => {
         },
         {
           _key: "two",
+          galleryGroup: "campaign",
           heading: "Second",
           body: "Caption two",
           image: {
@@ -142,21 +150,22 @@ describe("gallery page normalization", () => {
             storefrontRightsConfirmed: true,
           },
         },
-      ],
-    });
-    expect(page.items.map((item) => item.id)).toEqual(["one", "two"]);
-    expect(page.items[0]).toMatchObject({
+      ]),
+    );
+    expect(page.campaignItems.map((item) => item.id)).toEqual(["one", "two"]);
+    expect(page.campaignItems[0]).toMatchObject({
       title: "First",
       caption: "Caption",
       image: { alt: "One" },
     });
   });
 
-  it("preserves valid Sanity hotspot and crop data for thumbnail safety", () => {
-    const page = withGalleryFallback({
-      sections: [
+  it("preserves valid crop, hotspot, and projected dimensions", () => {
+    const page = withGalleryFallback(
+      galleryInput([
         {
           _key: "crop",
+          galleryGroup: "market",
           heading: "Crop",
           body: "Caption",
           image: {
@@ -165,21 +174,24 @@ describe("gallery page normalization", () => {
             storefrontRightsConfirmed: true,
             hotspot: { x: 0.3, y: 0.6 },
             crop: { left: 0.1, top: 0.2, right: 0.1, bottom: 0.1 },
+            dimensions: { width: 1280, height: 720, aspectRatio: 16 / 9 },
           },
         },
-      ],
-    });
-    expect(page.items[0].image).toMatchObject({
+      ]),
+    );
+    expect(page.marketItems[0].image).toMatchObject({
       hotspot: { x: 0.3, y: 0.6 },
       crop: { left: 0.1, top: 0.2, right: 0.1, bottom: 0.1 },
+      dimensions: { width: 1280, height: 720, aspectRatio: 16 / 9 },
     });
   });
 
-  it("uses the honest caption fallback only for malformed legacy omissions", () => {
-    const page = withGalleryFallback({
-      sections: [
+  it("uses the caption fallback for a malformed legacy campaign item", () => {
+    const page = withGalleryFallback(
+      galleryInput([
         {
           _key: "legacy",
+          galleryGroup: null,
           heading: "Legacy",
           body: " ",
           image: {
@@ -188,25 +200,132 @@ describe("gallery page normalization", () => {
             storefrontRightsConfirmed: true,
           },
         },
-      ],
-    });
-    expect(page.items[0].caption).toBe(malformedGalleryCaption);
+      ]),
+    );
+    expect(page.campaignItems[0].caption).toBe(malformedGalleryCaption);
   });
 
-  it("bounds valid gallery items at ten", () => {
-    const page = withGalleryFallback({
-      sections: Array.from({ length: 12 }, (_, index) => ({
-        _key: `${index}`,
-        heading: `Item ${index}`,
-        body: "Caption",
-        image: {
-          src: `https://cdn.sanity.io/${index}.jpg`,
-          alt: "Factual image",
-          storefrontRightsConfirmed: true,
+  it("splits explicit groups while preserving order within each group", () => {
+    const page = withGalleryFallback(
+      galleryInput([
+        {
+          _key: "campaign-one",
+          galleryGroup: "campaign",
+          heading: "Campaign one",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/campaign-one.jpg",
+            alt: "Campaign image one",
+            storefrontRightsConfirmed: true,
+          },
         },
-      })),
-    });
-    expect(page.items).toHaveLength(10);
+        {
+          _key: "market-one",
+          galleryGroup: "market",
+          heading: "Market one",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/market-one.jpg",
+            alt: "Market image one",
+            storefrontRightsConfirmed: true,
+          },
+        },
+        {
+          _key: "campaign-two",
+          galleryGroup: "campaign",
+          heading: "Campaign two",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/campaign-two.jpg",
+            alt: "Campaign image two",
+            storefrontRightsConfirmed: true,
+          },
+        },
+        {
+          _key: "market-two",
+          galleryGroup: "market",
+          heading: "Market two",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/market-two.jpg",
+            alt: "Market image two",
+            storefrontRightsConfirmed: true,
+          },
+        },
+      ]),
+    );
+
+    expect(page.campaignItems.map(({ id }) => id)).toEqual([
+      "campaign-one",
+      "campaign-two",
+    ]);
+    expect(page.marketItems.map(({ id }) => id)).toEqual([
+      "market-one",
+      "market-two",
+    ]);
+  });
+
+  it("omits unknown groups and incomplete or unconfirmed items", () => {
+    const page = withGalleryFallback(
+      galleryInput([
+        {
+          _key: "unknown",
+          galleryGroup: "other",
+          heading: "Unknown",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/unknown.jpg",
+            alt: "Unknown image",
+            storefrontRightsConfirmed: true,
+          },
+        },
+        {
+          _key: "unconfirmed",
+          galleryGroup: "market",
+          heading: "Unconfirmed",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/unconfirmed.jpg",
+            alt: "Unconfirmed image",
+            storefrontRightsConfirmed: false,
+          },
+        },
+        {
+          _key: "missing-title",
+          galleryGroup: "campaign",
+          heading: " ",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/missing.jpg",
+            alt: "Incomplete image",
+            storefrontRightsConfirmed: true,
+          },
+        },
+      ]),
+    );
+
+    expect(page.campaignItems).toEqual([]);
+    expect(page.marketItems).toEqual([]);
+  });
+
+  it("bounds valid Gallery items at ten across both groups", () => {
+    const page = withGalleryFallback(
+      galleryInput(
+        Array.from({ length: 12 }, (_, index) => ({
+          _key: `${index}`,
+          galleryGroup: index % 2 ? "market" : "campaign",
+          heading: `Item ${index}`,
+          body: "Caption",
+          image: {
+            src: `https://cdn.sanity.io/${index}.jpg`,
+            alt: "Factual image",
+            storefrontRightsConfirmed: true,
+          },
+        })),
+      ),
+    );
+    expect(page.campaignItems).toHaveLength(5);
+    expect(page.marketItems).toHaveLength(5);
   });
 });
 

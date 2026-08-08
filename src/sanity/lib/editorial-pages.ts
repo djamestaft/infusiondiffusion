@@ -4,7 +4,8 @@ import {
   sanityFetchMetadata,
   type DynamicFetchOptions,
 } from "@/sanity/lib/live";
-import { EDITORIAL_PAGE_QUERY } from "@/sanity/lib/queries";
+import type { GALLERY_PAGE_QUERY_RESULT } from "@/sanity/generated";
+import { EDITORIAL_PAGE_QUERY, GALLERY_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export type EditorialPage = {
   eyebrow: string;
@@ -166,6 +167,7 @@ export async function getFragranceGuideMetadata(
   }
 }
 
+export type GalleryGroup = "campaign" | "market";
 export type GalleryItem = {
   id: string;
   title: string;
@@ -175,13 +177,15 @@ export type GalleryItem = {
     alt: string;
     hotspot?: { x: number; y: number };
     crop?: { left: number; top: number; right: number; bottom: number };
+    dimensions?: { width: number; height: number; aspectRatio: number };
   };
 };
 export type GalleryPage = {
   title: string;
   introduction: string;
   closingLine: string;
-  items: GalleryItem[];
+  campaignItems: GalleryItem[];
+  marketItems: GalleryItem[];
   seoTitle: string;
   seoDescription: string;
   unavailable: boolean;
@@ -194,38 +198,16 @@ export const fallbackGalleryPage: GalleryPage = {
   introduction:
     "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
   closingLine: "Every room carries its own atmosphere.",
-  items: [],
+  campaignItems: [],
+  marketItems: [],
   seoTitle: "Gallery | Infusion Diffusion",
   seoDescription:
     "Explore Infusion Diffusion fragrance, vessel and atmosphere studies from lived-in rooms.",
   unavailable: false,
 };
-type GalleryInput = {
-  title?: string | null;
-  introduction?: string | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
-  sections?: Array<{
-    _key?: string | null;
-    heading?: string | null;
-    body?: string | null;
-    image?: {
-      src?: string | null;
-      alt?: string | null;
-      storefrontRightsConfirmed?: boolean | null;
-      hotspot?: { x?: number; y?: number } | null;
-      crop?: {
-        left?: number;
-        top?: number;
-        right?: number;
-        bottom?: number;
-      } | null;
-    } | null;
-  } | null> | null;
-};
 
 export function withGalleryFallback(
-  page: GalleryInput | null,
+  page: GALLERY_PAGE_QUERY_RESULT,
   unavailable = false,
 ): GalleryPage {
   const items = (page?.sections ?? [])
@@ -235,23 +217,35 @@ export function withGalleryFallback(
       const title = section.heading?.trim();
       const src = section.image?.src?.trim();
       const alt = section.image?.alt?.trim();
+      const authoredGroup = section.galleryGroup;
+      const group: GalleryGroup | undefined =
+        authoredGroup == null
+          ? "campaign"
+          : authoredGroup === "campaign" || authoredGroup === "market"
+            ? authoredGroup
+            : undefined;
       if (
         !id ||
         !title ||
         !src ||
         !alt ||
+        !group ||
         !section.image?.storefrontRightsConfirmed
       ) {
         return [];
       }
       const hotspot = normalizeHotspot(section.image.hotspot);
       const crop = normalizeCrop(section.image.crop);
+      const dimensions = normalizeDimensions(section.image.dimensions);
       return [
         {
-          id,
-          title,
-          caption: section.body?.trim() || malformedGalleryCaption,
-          image: { src, alt, hotspot, crop },
+          group,
+          item: {
+            id,
+            title,
+            caption: section.body?.trim() || malformedGalleryCaption,
+            image: { src, alt, hotspot, crop, dimensions },
+          },
         },
       ];
     })
@@ -260,7 +254,12 @@ export function withGalleryFallback(
     title: text(page?.title, fallbackGalleryPage.title),
     introduction: text(page?.introduction, fallbackGalleryPage.introduction),
     closingLine: fallbackGalleryPage.closingLine,
-    items,
+    campaignItems: items
+      .filter(({ group }) => group === "campaign")
+      .map(({ item }) => item),
+    marketItems: items
+      .filter(({ group }) => group === "market")
+      .map(({ item }) => item),
     seoTitle: text(page?.seoTitle, fallbackGalleryPage.seoTitle),
     seoDescription: text(
       page?.seoDescription,
@@ -271,16 +270,16 @@ export function withGalleryFallback(
 }
 
 export async function getGalleryPage(options: DynamicFetchOptions) {
+  "use cache";
   if (!isSanityConfigured) return fallbackGalleryPage;
   try {
     const { data } = await sanityFetch({
-      query: EDITORIAL_PAGE_QUERY,
-      params: { slug: "gallery" },
+      query: GALLERY_PAGE_QUERY,
       ...options,
     });
-    return withGalleryFallback(data as GalleryInput | null);
-  } catch {
-    console.error("Unable to load Sanity gallery page");
+    return withGalleryFallback(data as GALLERY_PAGE_QUERY_RESULT);
+  } catch (error) {
+    console.error("Unable to load Sanity gallery page", error);
     return withGalleryFallback(null, true);
   }
 }
@@ -290,11 +289,10 @@ export async function getGalleryPageMetadata(
   if (!isSanityConfigured) return fallbackGalleryPage;
   try {
     const { data } = await sanityFetchMetadata({
-      query: EDITORIAL_PAGE_QUERY,
-      params: { slug: "gallery" },
+      query: GALLERY_PAGE_QUERY,
       perspective,
     });
-    return withGalleryFallback(data as GalleryInput | null);
+    return withGalleryFallback(data as GALLERY_PAGE_QUERY_RESULT);
   } catch {
     console.error("Unable to load Sanity gallery metadata");
     return fallbackGalleryPage;
@@ -373,6 +371,39 @@ type AboutInput = {
     } | null;
   } | null> | null;
 };
+function normalizeDimensions(
+  dimensions:
+    | {
+        width?: number | null;
+        height?: number | null;
+        aspectRatio?: number | null;
+      }
+    | null
+    | undefined,
+) {
+  const { width, height, aspectRatio } = dimensions ?? {};
+  if (
+    typeof width !== "number" ||
+    !Number.isFinite(width) ||
+    width <= 0 ||
+    typeof height !== "number" ||
+    !Number.isFinite(height) ||
+    height <= 0
+  ) {
+    return undefined;
+  }
+  return {
+    width,
+    height,
+    aspectRatio:
+      typeof aspectRatio === "number" &&
+      Number.isFinite(aspectRatio) &&
+      aspectRatio > 0
+        ? aspectRatio
+        : width / height,
+  };
+}
+
 function normalizeCrop(
   crop:
     | { left?: number; top?: number; right?: number; bottom?: number }

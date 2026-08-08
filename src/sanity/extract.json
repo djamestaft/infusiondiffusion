@@ -179,6 +179,23 @@
                 },
                 "optional": true
               },
+              "galleryGroup": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "campaign"
+                    },
+                    {
+                      "type": "string",
+                      "value": "market"
+                    }
+                  ]
+                },
+                "optional": true
+              },
               "heading": {
                 "type": "objectAttribute",
                 "value": {
@@ -297,6 +314,10 @@
                           {
                             "type": "string",
                             "value": "Property release recorded"
+                          },
+                          {
+                            "type": "string",
+                            "value": "Model and property releases recorded"
                           }
                         ]
                       },

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-import type { GalleryItem } from "@/sanity/lib/editorial-pages";
+import type { GalleryGroup, GalleryItem } from "@/sanity/lib/editorial-pages";
 import {
   Dialog,
   DialogClose,
@@ -14,7 +14,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export type GalleryViewerProps = { items: GalleryItem[] };
+export type GalleryViewerProps = {
+  items: GalleryItem[];
+  layout?: GalleryGroup;
+  headingLevel?: 2 | 3;
+  prioritizeFirst?: boolean;
+};
+
+export function galleryMarketAspectRatio(item: GalleryItem, index: number) {
+  const dimensions = item.image.dimensions;
+  if (dimensions) {
+    const crop = item.image.crop;
+    const retainedWidth = crop ? 1 - crop.left - crop.right : 1;
+    const retainedHeight = crop ? 1 - crop.top - crop.bottom : 1;
+    const ratio = dimensions.aspectRatio * (retainedWidth / retainedHeight);
+    if (Number.isFinite(ratio) && ratio > 0) return ratio;
+  }
+  return index === 0 ? 16 / 9 : index === 1 ? 3 / 4 : 4 / 3;
+}
 
 export function galleryThumbnailStyle(item: GalleryItem) {
   const crop = item.image.crop;
@@ -38,6 +55,10 @@ export function galleryThumbnailStyle(item: GalleryItem) {
   };
 }
 
+export function galleryMarketImageStyle(item: GalleryItem) {
+  return { objectPosition: galleryThumbnailStyle(item).objectPosition };
+}
+
 function ImageFailure({ alt }: { alt: string }) {
   return (
     <span className="text-content-secondary absolute inset-0 flex items-center justify-center p-5 text-center font-sans text-sm leading-6 [overflow-wrap:anywhere]">
@@ -46,7 +67,12 @@ function ImageFailure({ alt }: { alt: string }) {
   );
 }
 
-export function GalleryViewer({ items }: GalleryViewerProps) {
+export function GalleryViewer({
+  items,
+  layout = "campaign",
+  headingLevel = 2,
+  prioritizeFirst = layout === "campaign",
+}: GalleryViewerProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
   const triggers = useRef<Array<HTMLButtonElement | null>>([]);
@@ -56,20 +82,39 @@ export function GalleryViewer({ items }: GalleryViewerProps) {
   const markFailed = (id: string) =>
     setFailedImages((current) => new Set(current).add(id));
   const close = () => setSelectedIndex(null);
+  const ItemHeading = headingLevel === 3 ? "h3" : "h2";
 
   return (
     <>
       <div
-        className="grid gap-x-20 gap-y-16 lg:grid-cols-2 lg:gap-y-24"
+        className={cn(
+          "grid",
+          layout === "campaign"
+            ? "gap-x-20 gap-y-16 lg:grid-cols-2 lg:gap-y-16"
+            : "gap-x-8 gap-y-4 lg:grid-cols-[repeat(3,minmax(0,400px))] lg:items-start lg:gap-y-8",
+        )}
         data-testid="gallery-grid"
+        data-layout={layout}
       >
         {items.map((item, index) => (
           <figure
             key={item.id}
             className={cn(
               "min-w-0",
-              index % 4 === 2 && "lg:col-start-2 lg:-mt-[300px]",
-              index % 4 === 3 && "lg:col-start-1",
+              layout === "campaign" &&
+                index % 4 === 0 &&
+                "lg:col-start-1 lg:row-start-1",
+              layout === "campaign" &&
+                index % 4 === 1 &&
+                "lg:col-start-2 lg:row-start-1",
+              layout === "campaign" &&
+                index % 4 === 2 &&
+                "lg:col-start-2 lg:row-start-2 lg:-mt-[332px]",
+              layout === "campaign" &&
+                index % 4 === 3 &&
+                "lg:col-start-1 lg:row-start-2",
+              layout === "market" && index === 0 && "lg:col-span-2",
+              layout === "market" && index === 1 && "min-[1400px]:w-[416px]",
             )}
           >
             <button
@@ -82,11 +127,20 @@ export function GalleryViewer({ items }: GalleryViewerProps) {
                 openerIndex.current = index;
                 setSelectedIndex(index);
               }}
+              style={
+                layout === "market"
+                  ? { aspectRatio: galleryMarketAspectRatio(item, index) }
+                  : undefined
+              }
               className={cn(
                 "focus-visible:outline-navigation-focus bg-content-surface-elevated relative block w-full overflow-hidden rounded-md focus-visible:outline-2 focus-visible:outline-offset-4",
-                index % 4 === 0 || index % 4 === 2
-                  ? "aspect-[350/438] lg:aspect-[600/760]"
-                  : "aspect-[350/270] lg:aspect-[600/460]",
+                layout === "campaign" &&
+                  (index % 4 === 0 || index % 4 === 2
+                    ? "aspect-[350/438] lg:aspect-[600/760]"
+                    : "aspect-[350/270] lg:aspect-[600/460]"),
+                layout === "market" && index === 0 && "aspect-video",
+                layout === "market" && index === 1 && "aspect-3/4",
+                layout === "market" && index > 1 && "aspect-4/3",
               )}
             >
               {hasFailed(item.id) ? (
@@ -96,18 +150,30 @@ export function GalleryViewer({ items }: GalleryViewerProps) {
                 src={item.image.src}
                 alt={item.image.alt}
                 fill
-                priority={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-                sizes="(max-width: 1023px) calc(100vw - 40px), 600px"
+                priority={prioritizeFirst && index === 0}
+                loading={prioritizeFirst && index === 0 ? "eager" : "lazy"}
+                sizes={
+                  layout === "campaign"
+                    ? "(max-width: 1023px) calc(100vw - 40px), 600px"
+                    : index === 0
+                      ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(66.667vw - 128px), 832px"
+                      : index === 1
+                        ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(33.333vw - 64px), 416px"
+                        : "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(33.333vw - 64px), 400px"
+                }
                 className={cn("object-cover", hasFailed(item.id) && "hidden")}
-                style={galleryThumbnailStyle(item)}
+                style={
+                  layout === "market"
+                    ? galleryMarketImageStyle(item)
+                    : galleryThumbnailStyle(item)
+                }
                 onError={() => markFailed(item.id)}
               />
             </button>
             <figcaption className="mt-4 min-w-0 [overflow-wrap:anywhere]">
-              <h2 className="font-display text-content-primary text-[28px] leading-9">
+              <ItemHeading className="font-display text-content-primary text-[28px] leading-9">
                 {item.title}
-              </h2>
+              </ItemHeading>
               <p className="text-content-secondary mt-2 font-sans text-base leading-[1.625] [overflow-wrap:anywhere]">
                 {item.caption}
               </p>

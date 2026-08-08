@@ -42,6 +42,7 @@ export type EditorialPage = {
   };
   sections?: Array<{
     role?: "origin" | "development" | "collaborator" | "principles";
+    galleryGroup?: "campaign" | "market";
     heading?: string;
     body?: string;
     image?: {
@@ -58,7 +59,8 @@ export type EditorialPage = {
       releaseStatus?:
         | "Not applicable"
         | "Model release recorded"
-        | "Property release recorded";
+        | "Property release recorded"
+        | "Model and property releases recorded";
       licenceReference?: string;
       _type: "image";
     };
@@ -349,6 +351,34 @@ export type EDITORIAL_PAGE_QUERY_RESULT = {
       storefrontRightsConfirmed: boolean | null;
       hotspot: SanityImageHotspot | null;
       crop: SanityImageCrop | null;
+    } | null;
+  }> | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: GALLERY_PAGE_QUERY
+// Query: *[_type == "editorialPage" && slug.current == "gallery"][0]{    title,    introduction,    sections[]{      _key,      galleryGroup,      heading,      body,      "image": image{        "src": asset->url,        alt,        storefrontRightsConfirmed,        hotspot,        crop,        "dimensions": asset->metadata.dimensions{          width,          height,          aspectRatio        }      }    },    seoTitle,    seoDescription  }
+export type GALLERY_PAGE_QUERY_RESULT = {
+  title: string | null;
+  introduction: string | null;
+  sections: Array<{
+    _key: string;
+    galleryGroup: "campaign" | "market" | null;
+    heading: string | null;
+    body: string | null;
+    image: {
+      src: string | null;
+      alt: string | null;
+      storefrontRightsConfirmed: boolean | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+      dimensions: {
+        width: number | null;
+        height: number | null;
+        aspectRatio: number | null;
+      } | null;
     } | null;
   }> | null;
   seoTitle: string | null;

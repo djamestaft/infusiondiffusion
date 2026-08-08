@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
+  galleryMarketAspectRatio,
+  galleryMarketImageStyle,
   galleryThumbnailStyle,
   GalleryViewer,
 } from "@/components/gallery-viewer";
@@ -25,6 +27,31 @@ const items = [
 afterEach(cleanup);
 
 describe("GalleryViewer", () => {
+  it("derives the documentary slot ratio from projected dimensions and crop", () => {
+    expect(
+      galleryMarketAspectRatio(
+        {
+          ...items[0],
+          image: {
+            ...items[0].image,
+            dimensions: { width: 720, height: 1280, aspectRatio: 9 / 16 },
+            crop: { left: 0, right: 0, top: 0.125, bottom: 0.125 },
+          },
+        },
+        1,
+      ),
+    ).toBe(3 / 4);
+    expect(
+      galleryMarketImageStyle({
+        ...items[0],
+        image: {
+          ...items[0].image,
+          crop: { left: 0, right: 0, top: 0.125, bottom: 0.125 },
+        },
+      }),
+    ).toEqual({ objectPosition: "50% 50%" });
+  });
+
   it("applies authored crop edges while preserving the hotspot anchor", () => {
     expect(
       galleryThumbnailStyle({
@@ -40,6 +67,34 @@ describe("GalleryViewer", () => {
       transform: "scale(1.25, 1.4285714285714284)",
       transformOrigin: "50% 54.99999999999999%",
     });
+  });
+
+  it("renders the documentary layout with H3 items and lazy media", () => {
+    render(
+      <GalleryViewer
+        items={items}
+        layout="market"
+        headingLevel={3}
+        prioritizeFirst={false}
+      />,
+    );
+
+    const grid = screen.getByTestId("gallery-grid");
+    expect(grid).toHaveAttribute("data-layout", "market");
+    expect(grid).toHaveClass(
+      "gap-y-4",
+      "lg:grid-cols-[repeat(3,minmax(0,400px))]",
+    );
+    expect(grid.children[1]).toHaveClass("min-[1400px]:w-[416px]");
+    expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(2);
+    expect(
+      screen.getByRole("button", { name: "View Quiet ritual" }),
+    ).toHaveClass("aspect-video");
+    expect(
+      screen.getByRole("button", { name: "View Evening atmosphere" }),
+    ).toHaveClass("aspect-3/4");
+    const images = screen.getAllByRole("img");
+    expect(images[0]).toHaveAttribute("loading", "lazy");
   });
 
   it("opens from a titled thumbnail and maintains honest navigation boundaries", async () => {

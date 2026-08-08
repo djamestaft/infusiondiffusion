@@ -79,11 +79,23 @@ The frames use the existing approved Perfumer's Cabinet values already recorded 
 
 ## Synchronization matrix
 
-| Layer                        | Status                   | Note                                                                  |
-| ---------------------------- | ------------------------ | --------------------------------------------------------------------- |
-| Figma page and eight frames  | `synced`                 | Exact Approved nodes and official screenshots captured.               |
-| Repository capture           | `synced`                 | This document plus eight PNG renders.                                 |
-| `DESIGN.md` Gallery contract | `pending implementation` | Update in the SDLC documentation boundary.                            |
-| Runtime CSS tokens           | `intentional reuse`      | No new token family required.                                         |
-| Components and templates     | `pending implementation` | Must consume this capture and existing primitives.                    |
-| Storybook                    | `pending implementation` | Must cover populated, viewer, empty, loading, extremes, and failures. |
+| Layer                        | Status              | Note                                                            |
+| ---------------------------- | ------------------- | --------------------------------------------------------------- |
+| Figma page and eight frames  | `synced`            | Exact Approved nodes and official screenshots captured.         |
+| Repository capture           | `synced`            | This document plus eight PNG renders.                           |
+| `DESIGN.md` Gallery contract | `synced`            | Includes the approved market extension.                         |
+| Runtime CSS tokens           | `intentional reuse` | No new token family required.                                   |
+| Components and templates     | `synced`            | Campaign and market compose the existing viewer and primitives. |
+| Storybook                    | `synced`            | Covers split groups, responsive states, extremes, and failures. |
+
+## Approved Campaign + In the Market addendum
+
+The user approved the content-direction board [`376:2`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=376-2) and the following implementation frames on 8 August 2026. Node `376:2` establishes selection and hierarchy; the `377:*` frames establish the market layout. Existing `357:*` frames remain authoritative for the campaign grid, shell, captions, viewer, empty, and loading states.
+
+| State               |                                                                                                          Node | Natural dimensions | Screenshot                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------: | -----------------: | ------------------------------------------------ |
+| Market desktop      |   [`377:2`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=377-2) |          1440×1120 | `evidence/gallery-figma/market-desktop-1440.png` |
+| Market mobile       |   [`377:9`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=377-9) |           390×1730 | `evidence/gallery-figma/market-mobile-390.png`   |
+| Market small mobile | [`377:16`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=377-16) |           320×1460 | `evidence/gallery-figma/market-mobile-320.png`   |
+
+The desktop market grid uses a 32px gap, three columns, and a two-column first image. Mobile uses one authored-order column and 16px vertical media spacing. The media sequence is 16:9, 3:4, then three 4:3 slots. Only `In the Market` is runtime section copy. Campaign and market viewers remain independently scoped, and either section may render without the other.

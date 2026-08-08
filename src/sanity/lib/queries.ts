@@ -11,3 +11,30 @@ export const EDITORIAL_PAGE_QUERY = defineQuery(`
     seoTitle, seoDescription
   }
 `);
+
+export const GALLERY_PAGE_QUERY = defineQuery(`
+  *[_type == "editorialPage" && slug.current == "gallery"][0]{
+    title,
+    introduction,
+    sections[]{
+      _key,
+      galleryGroup,
+      heading,
+      body,
+      "image": image{
+        "src": asset->url,
+        alt,
+        storefrontRightsConfirmed,
+        hotspot,
+        crop,
+        "dimensions": asset->metadata.dimensions{
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    },
+    seoTitle,
+    seoDescription
+  }
+`);

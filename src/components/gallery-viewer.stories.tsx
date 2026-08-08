@@ -53,6 +53,37 @@ export const Mobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   args: { items },
 };
+export const MixedRatioMarket: Story = {
+  args: {
+    layout: "market",
+    headingLevel: 3,
+    prioritizeFirst: false,
+    items: [
+      {
+        ...items[0],
+        image: {
+          ...items[0].image,
+          dimensions: { width: 1280, height: 720, aspectRatio: 16 / 9 },
+        },
+      },
+      {
+        ...items[1],
+        image: {
+          ...items[1].image,
+          dimensions: { width: 720, height: 1280, aspectRatio: 9 / 16 },
+          crop: { left: 0, right: 0, top: 0.125, bottom: 0.125 },
+        },
+      },
+      ...items.slice(2).map((item) => ({
+        ...item,
+        image: {
+          ...item.image,
+          dimensions: { width: 1280, height: 960, aspectRatio: 4 / 3 },
+        },
+      })),
+    ],
+  },
+};
 export const OneItem: Story = { args: { items: [items[0]] } };
 export const MaximumContent: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
@@ -118,7 +149,55 @@ export const ViewerMiddle: Story = {
     ).toBeEnabled();
   },
 };
+export const ViewerLast: Story = {
+  args: { items },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View A considered corner" }),
+    );
+    const page = within(document.body);
+    await expect(
+      page.getByRole("button", { name: "Previous image" }),
+    ).toBeEnabled();
+    await expect(
+      page.getByRole("button", { name: "Next image" }),
+    ).toBeDisabled();
+    await expect(page.getByText("Image 4 of 4")).toBeVisible();
+  },
+};
+export const KeyboardRestoration: Story = {
+  args: { items },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: "View Quiet ritual" });
+    await userEvent.click(trigger);
+    const page = within(document.body);
+    const close = page.getByRole("button", { name: "Close gallery viewer" });
+    await expect(close).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    await expect(trigger).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    await expect(
+      page.getByRole("button", { name: "Close gallery viewer" }),
+    ).toHaveFocus();
+    await userEvent.keyboard("{Escape}");
+    await expect(trigger).toHaveFocus();
+  },
+};
 export const ReducedMotion: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
+  parameters: { chromatic: { prefersReducedMotion: "reduce" } },
   args: { items },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View Quiet ritual" }),
+    );
+    const page = within(document.body);
+    const dialog = page.getByRole("dialog");
+    await expect(getComputedStyle(dialog).animationName).toBe("none");
+    await expect(getComputedStyle(dialog).transitionDuration).toBe("0s");
+    await userEvent.keyboard("{Escape}");
+  },
 };

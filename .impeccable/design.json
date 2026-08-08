@@ -337,14 +337,14 @@
     {
       "name": "GalleryViewer",
       "kind": "custom",
-      "description": "Approved Experience-mode Gallery composition: authored-order tall/short editorial media cadence with factual alternatives and captions. The full-viewport Deep Ink Dialog contains media, initially focuses Close, restores the invoking thumbnail, uses written position and honest non-wrapping Previous/Next boundaries.",
+      "description": "Approved Experience-mode Gallery composition: separate authored-order Campaign and In the Market grids with factual alternatives and captions. Campaign retains the tall/short cadence; market uses the approved responsive mixed-ratio documentary layout. Each full-viewport Deep Ink Dialog is group-local, initially focuses Close, restores the invoking thumbnail, and uses written position with honest non-wrapping Previous/Next boundaries.",
       "html": "<section class=\"ds-gallery\"><figure><button aria-label=\"View Quiet ritual\"><img alt=\"A factual room image\"></button><figcaption><h2>Quiet ritual</h2><p>Required authored caption.</p></figcaption></figure></section>",
       "css": ".ds-gallery { display:grid; gap:64px 80px; } .ds-gallery button { aspect-ratio:350/438; overflow:hidden; border-radius:4px; } .ds-gallery button:focus-visible { outline:2px solid var(--navigation-focus); outline-offset:4px; } @media (min-width:1024px) { .ds-gallery { grid-template-columns:repeat(2,600px); gap:96px 80px; } .ds-gallery button { aspect-ratio:600/760; } }"
     },
     {
       "name": "GalleryTemplate",
       "kind": "custom",
-      "description": "Approved Sanity-owned Gallery route: compact Sage introduction, measured gold divider, borderless gallery, centered Marcellus closing statement, and honest empty/unavailable/loading shells. No new Gallery tokens are required.",
+      "description": "Approved Sanity-owned Gallery route: compact Sage introduction, measured gold divider, Campaign first, a distinct In the Market H2 and documentary grid, centered Marcellus closing statement, and honest group-level or full-page empty/unavailable/loading behavior. No new Gallery tokens are required.",
       "html": "<main class=\"ds-gallery-template\"><header><h1>Rooms, composed in scent</h1><p>A study in fragrance, vessel and atmosphere.</p></header></main>",
       "css": ".ds-gallery-template { min-height:100dvh; background:var(--content-surface); color:var(--content-primary); } .ds-gallery-template > header { width:min(100% - 40px,1280px); margin-inline:auto; } @media (min-width:1024px) { .ds-gallery-template > header { width:min(100% - 160px,1280px); } }"
     }
@@ -391,7 +391,7 @@
       },
       {
         "name": "Gallery route contract",
-        "body": "Gallery uses approved Feature / Gallery nodes 357:3, 357:34, 357:64, 357:76, 357:88, 357:100, 357:111, and 357:131. Reuse semantic light/dark tokens; required authored captions retain one exact malformed-legacy fallback.",
+        "body": "Gallery uses approved Feature / Gallery nodes 357:3, 357:34, 357:64, 357:76, 357:88, 357:100, 357:111, and 357:131 plus content node 376:2 and market nodes 377:2, 377:9, and 377:16. Reuse semantic light/dark tokens; Campaign and In the Market remain separate authored-order grids with local viewers; required captions retain one exact malformed-legacy fallback.",
         "section": "components"
       }
     ],

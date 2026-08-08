@@ -143,40 +143,86 @@ const galleryItems = [
   image: {
     src: galleryFixture,
     alt: `Test-only factual gallery fixture ${index + 1}`,
+    dimensions: { width: 600, height: 760, aspectRatio: 600 / 760 },
   },
 }));
-export const Gallery: Story = {
-  render: () => (
-    <GalleryTemplate
-      title="Rooms, composed in scent"
-      introduction="A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms."
-      closingLine="Every room carries its own atmosphere."
-      items={galleryItems}
-      cartCount={2}
-    />
-  ),
+const marketItems = [
+  { title: "At the indoor market", width: 1280, height: 720 },
+  { title: "The market table", width: 720, height: 1280 },
+  { title: "Fragrance story", width: 1280, height: 960 },
+  { title: "The collection on display", width: 1280, height: 960 },
+  { title: "A table of fragrance", width: 1280, height: 960 },
+].map(({ title, width, height }, index) => ({
+  id: `market-${index}`,
+  title,
+  caption: "Test-only documentary gallery caption.",
+  image: {
+    src: galleryFixture,
+    alt: `Test-only factual market fixture ${index + 1}`,
+    dimensions: { width, height, aspectRatio: width / height },
+    ...(index === 1
+      ? { crop: { left: 0, right: 0, top: 0.125, bottom: 0.125 } }
+      : {}),
+  },
+}));
+const galleryTemplateProps = {
+  title: "Rooms, composed in scent",
+  introduction:
+    "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
+  closingLine: "Every room carries its own atmosphere.",
+  campaignItems: galleryItems,
+  marketItems,
 };
-export const GalleryMobile: Story = {
+export const Gallery: Story = {
+  render: () => <GalleryTemplate {...galleryTemplateProps} cartCount={2} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const page = within(document.body);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View Quiet ritual" }),
+    );
+    await expect(page.getByText("Image 1 of 4")).toBeVisible();
+    await userEvent.click(
+      page.getByRole("button", { name: "Close gallery viewer" }),
+    );
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View At the indoor market" }),
+    );
+    await expect(page.getByText("Image 1 of 5")).toBeVisible();
+    await userEvent.keyboard("{Escape}");
+  },
+};
+export const Gallery390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: Gallery.render,
+};
+export const Gallery320: Story = {
   globals: { viewport: { value: "contact320", isRotated: false } },
   render: Gallery.render,
+};
+export const GalleryCampaignOnly: Story = {
+  render: () => <GalleryTemplate {...galleryTemplateProps} marketItems={[]} />,
+};
+export const GalleryMarketOnly: Story = {
+  render: () => (
+    <GalleryTemplate {...galleryTemplateProps} campaignItems={[]} />
+  ),
 };
 export const GalleryEmpty: Story = {
   render: () => (
     <GalleryTemplate
-      title="Rooms, composed in scent"
-      introduction="A study in fragrance, vessel and atmosphere."
-      closingLine="Every room carries its own atmosphere."
-      items={[]}
+      {...galleryTemplateProps}
+      campaignItems={[]}
+      marketItems={[]}
     />
   ),
 };
 export const GalleryUnavailable: Story = {
   render: () => (
     <GalleryTemplate
-      title="Rooms, composed in scent"
-      introduction="A study in fragrance, vessel and atmosphere."
-      closingLine="Every room carries its own atmosphere."
-      items={[]}
+      {...galleryTemplateProps}
+      campaignItems={[]}
+      marketItems={[]}
       unavailable
     />
   ),
@@ -185,12 +231,18 @@ export const GalleryLongContent390: Story = {
   globals: { viewport: { value: "contact390", isRotated: false } },
   render: () => (
     <GalleryTemplate
+      {...galleryTemplateProps}
       title={"Rooms, composed in scent ".repeat(4)}
       introduction={"An extended introduction for a narrow gallery. ".repeat(
         12,
       )}
       closingLine={"Every room carries its own atmosphere. ".repeat(8)}
-      items={galleryItems.map((item) => ({
+      campaignItems={galleryItems.map((item) => ({
+        ...item,
+        title: `${item.title} ${"unbroken-".repeat(8)}`,
+        caption: "caption-".repeat(100),
+      }))}
+      marketItems={marketItems.map((item) => ({
         ...item,
         title: `${item.title} ${"unbroken-".repeat(8)}`,
         caption: "caption-".repeat(100),
@@ -201,11 +253,10 @@ export const GalleryLongContent390: Story = {
 export const GalleryMaximum: Story = {
   render: () => (
     <GalleryTemplate
-      title="Rooms, composed in scent"
-      introduction="A study in fragrance, vessel and atmosphere."
-      closingLine="Every room carries its own atmosphere."
-      items={Array.from({ length: 10 }, (_, index) => ({
-        ...galleryItems[index % galleryItems.length],
+      {...galleryTemplateProps}
+      campaignItems={galleryItems}
+      marketItems={Array.from({ length: 6 }, (_, index) => ({
+        ...marketItems[index % marketItems.length],
         id: `maximum-${index}`,
       }))}
     />

@@ -885,7 +885,8 @@ export type GalleryTemplateProps = TemplateNavigationProps & {
   title: string;
   introduction: string;
   closingLine: string;
-  items: GalleryItem[];
+  campaignItems: GalleryItem[];
+  marketItems: GalleryItem[];
   unavailable?: boolean;
 };
 
@@ -893,10 +894,13 @@ export function GalleryTemplate({
   title,
   introduction,
   closingLine,
-  items,
+  campaignItems,
+  marketItems,
   unavailable = false,
   cartCount,
 }: GalleryTemplateProps) {
+  const hasGalleryItems = campaignItems.length > 0 || marketItems.length > 0;
+
   return (
     <TemplateShell currentHref="/gallery" cartCount={cartCount}>
       <article data-testid="gallery-page">
@@ -909,16 +913,43 @@ export function GalleryTemplate({
           </p>
           <div className="border-navigation-divider mt-12 border-t lg:mt-16" />
         </header>
-        {items.length ? (
-          <section
-            className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-8 lg:px-12 lg:py-16 xl:px-0"
-            aria-label="Gallery images"
-          >
-            <GalleryViewer items={items} />
-            <p className="font-display text-content-primary mt-16 text-center text-[30px] leading-[1.2] [overflow-wrap:anywhere] lg:mt-24">
+        {hasGalleryItems ? (
+          <div>
+            {campaignItems.length ? (
+              <section
+                className="mx-auto w-full max-w-7xl px-5 pt-12 sm:px-8 lg:px-12 lg:pt-16 xl:px-0"
+                aria-label="Campaign gallery images"
+              >
+                <GalleryViewer items={campaignItems} layout="campaign" />
+              </section>
+            ) : null}
+            {marketItems.length ? (
+              <section
+                data-testid="market-gallery-section"
+                className={cn(
+                  "mx-auto w-full max-w-[1440px] px-4 min-[390px]:px-6 lg:px-16",
+                  campaignItems.length ? "mt-20 lg:mt-28" : "pt-12 lg:pt-16",
+                )}
+                aria-labelledby="market-gallery-heading"
+              >
+                <h2
+                  id="market-gallery-heading"
+                  className="font-display text-content-primary mb-8 text-[28px] leading-9 lg:mb-12"
+                >
+                  In the Market
+                </h2>
+                <GalleryViewer
+                  items={marketItems}
+                  layout="market"
+                  headingLevel={3}
+                  prioritizeFirst={false}
+                />
+              </section>
+            ) : null}
+            <p className="font-display text-content-primary mx-auto mt-16 w-full max-w-7xl px-5 pb-12 text-center text-[30px] leading-[1.2] [overflow-wrap:anywhere] sm:px-8 lg:mt-24 lg:px-12 lg:pb-16 xl:px-0">
               {closingLine}
             </p>
-          </section>
+          </div>
         ) : (
           <section
             className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0"
