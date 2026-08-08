@@ -11,8 +11,8 @@ Approved source: [Feature / Gallery `357:2`](https://www.figma.com/design/GYiQd7
 - The viewer is a full-viewport Dialog composition with Close-focused opening, Escape, focus restoration, written position, and honest non-wrapping Previous/Next boundaries. One item has no navigation controls.
 - No eligible items renders the approved text-first empty shell. A failed bounded read changes the wording to unavailable. Loading is labelled with `aria-busy` and has no required motion.
 - `galleryGroup` is additive and accepts only `campaign` or `market`. A legacy missing value normalizes to Campaign; an unknown value is omitted. The dedicated Gallery GROQ projection includes group, rights confirmation, hotspot/crop, and asset dimensions, and normalization remains bounded to ten valid items across both groups.
-- Campaign and market render as separate, authored-order grids and independent viewer scopes. On desktop, Campaign uses independent stacks with Blanc De Blanc followed by Botanical at left and Emerald followed by Library at right; each caption begins 16px below its image and each stack uses a 64px card interval. It collapses to one authored-order column on mobile. Campaign titles are H2s. The exact H2 `In the Market` introduces market H3s. Either group renders alone; the closing line follows whichever valid grids render.
-- Market uses the approved 16:9, 3:4, 4:3, 4:3, 4:3 slot sequence. Desktop uses three columns with the first item spanning two columns; mobile is one column. Only the first campaign thumbnail is eager/priority; all other media is lazy.
+- Campaign and market render as separate, authored-order grids and independent viewer scopes. At the approved 1440px desktop width, Campaign uses independent stacks with Blanc De Blanc followed by Botanical at left with a 64px same-column gap, and Emerald followed by Library at right with a 32px same-column gap; every caption begins 16px below its image. It collapses to one authored-order column on mobile. Campaign titles are H2s. The exact H2 `In the Market` introduces market H3s. Either group renders alone; the closing line follows whichever valid grids render.
+- Market uses the approved 16:9, 3:4, 4:3, 4:3, 4:3 slot sequence. Desktop uses three fluid columns with the first item spanning two columns from 1024px until the fixed approved composition fits at 1408px; mobile is one column. Only the first campaign thumbnail is eager/priority; all other media is lazy.
 
 ## Published content manifest
 
@@ -38,14 +38,14 @@ Runtime keeps the full five-destination Navigation plus account/cart, corrects t
 
 ## Synchronization matrix
 
-| Layer                                                        | Status                                                        |
-| ------------------------------------------------------------ | ------------------------------------------------------------- |
-| Approved Figma frames/capture                                | synced                                                        |
-| `DESIGN.md` route contract                                   | synced                                                        |
-| `.impeccable/design.json` Gallery sidecar                    | synced                                                        |
-| Runtime CSS tokens                                           | intentional reuse; no new Gallery token                       |
-| `GalleryViewer`, template, route                             | synced                                                        |
-| Storybook                                                    | synced; fixtures are test-only                                |
-| Local fixture comparison evidence                            | synced; see `evidence/gallery-local-verification.md`          |
-| Sanity publication, final media rights and authored captions | synced; `gallery` published in `j222nd1i.production`          |
-| Storybook visual review / merge / preview                    | local implementation synced; merge/Preview remain human gates |
+| Layer                                                        | Status                                                         |
+| ------------------------------------------------------------ | -------------------------------------------------------------- |
+| Approved Figma frames/capture                                | synced                                                         |
+| `DESIGN.md` route contract                                   | synced                                                         |
+| `.impeccable/design.json` Gallery sidecar                    | synced                                                         |
+| Runtime CSS tokens                                           | intentional reuse; no new Gallery token                        |
+| `GalleryViewer`, template, route                             | synced                                                         |
+| Storybook                                                    | synced; fixtures are test-only                                 |
+| Local fixture comparison evidence                            | synced; see `evidence/gallery-content-preview-verification.md` |
+| Sanity publication, final media rights and authored captions | synced; `gallery` published in `j222nd1i.production`           |
+| Storybook visual review / merge / preview                    | local implementation synced; merge/Preview remain human gates  |

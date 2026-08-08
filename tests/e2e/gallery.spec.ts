@@ -28,6 +28,7 @@ test.describe.configure({ mode: "serial" });
 
 for (const viewport of [
   { name: "desktop", width: 1440, height: 1000 },
+  { name: "intermediate", width: 1280, height: 1000 },
   { name: "mobile", width: 390, height: 844 },
   { name: "small", width: 320, height: 844 },
 ]) {
@@ -141,6 +142,18 @@ for (const viewport of [
             Math.max(figureBoxes[0].bottom, figureBoxes[1].bottom),
           32,
         );
+      } else if (viewport.width >= 1024) {
+        const expectedTrack = (viewport.width - 192) / 3;
+        expectClose(buttonBoxes[0].x, 64);
+        expectClose(buttonBoxes[0].width, expectedTrack * 2 + 32);
+        expectClose(buttonBoxes[1].width, expectedTrack);
+        expectClose(buttonBoxes[2].width, expectedTrack);
+        expectClose(buttonBoxes[3].x - buttonBoxes[2].right, 32);
+        expectClose(
+          figureBoxes[2].top -
+            Math.max(figureBoxes[0].bottom, figureBoxes[1].bottom),
+          32,
+        );
       } else {
         expect(campaignContentBoxes.map((figure) => figure.top)).toEqual(
           [...campaignContentBoxes]
@@ -160,6 +173,14 @@ for (const viewport of [
       const marketImages = page.locator('[data-layout="market"] img').all();
       const resolvedCampaignImages = await campaignImages;
       const resolvedMarketImages = await marketImages;
+      await expect(resolvedMarketImages[0]).toHaveAttribute(
+        "sizes",
+        "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(66.667vw - 96px), 832px",
+      );
+      await expect(resolvedMarketImages[1]).toHaveAttribute(
+        "sizes",
+        "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 416px",
+      );
       await expect(resolvedCampaignImages[0]).toHaveAttribute(
         "loading",
         "eager",

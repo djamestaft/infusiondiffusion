@@ -91,7 +91,7 @@ export function GalleryViewer({
           "grid",
           layout === "campaign"
             ? "gap-x-20 gap-y-16 lg:grid-cols-2 lg:gap-y-16"
-            : "gap-x-8 gap-y-4 lg:grid-cols-[repeat(3,minmax(0,400px))] lg:items-start lg:gap-y-8",
+            : "gap-x-8 gap-y-4 min-[1408px]:!grid-cols-[repeat(3,minmax(0,400px))] lg:grid-cols-3 lg:items-start lg:gap-y-8",
         )}
         data-testid="gallery-grid"
         data-layout={layout}
@@ -114,7 +114,7 @@ export function GalleryViewer({
                 index % 4 === 3 &&
                 "lg:col-start-1 lg:row-start-2",
               layout === "market" && index === 0 && "lg:col-span-2",
-              layout === "market" && index === 1 && "min-[1400px]:w-[416px]",
+              layout === "market" && index === 1 && "min-[1408px]:w-[416px]",
             )}
           >
             <button
@@ -156,10 +156,10 @@ export function GalleryViewer({
                   layout === "campaign"
                     ? "(max-width: 1023px) calc(100vw - 40px), 600px"
                     : index === 0
-                      ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(66.667vw - 128px), 832px"
+                      ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(66.667vw - 96px), 832px"
                       : index === 1
-                        ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(33.333vw - 64px), 416px"
-                        : "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1439px) calc(33.333vw - 64px), 400px"
+                        ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 416px"
+                        : "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 400px"
                 }
                 className={cn("object-cover", hasFailed(item.id) && "hidden")}
                 style={

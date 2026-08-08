@@ -83,9 +83,10 @@ describe("GalleryViewer", () => {
     expect(grid).toHaveAttribute("data-layout", "market");
     expect(grid).toHaveClass(
       "gap-y-4",
-      "lg:grid-cols-[repeat(3,minmax(0,400px))]",
+      "lg:grid-cols-3",
+      "min-[1408px]:!grid-cols-[repeat(3,minmax(0,400px))]",
     );
-    expect(grid.children[1]).toHaveClass("min-[1400px]:w-[416px]");
+    expect(grid.children[1]).toHaveClass("min-[1408px]:w-[416px]");
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(2);
     expect(
       screen.getByRole("button", { name: "View Quiet ritual" }),
