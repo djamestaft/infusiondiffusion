@@ -11,12 +11,131 @@ import {
   ContactErrorTemplate,
   ContactLoadingTemplate,
   ContactTemplate,
+  GalleryLoadingTemplate,
+  GalleryTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
 afterEach(cleanup);
 
+const galleryItem = (id: string, title: string) => ({
+  id,
+  title,
+  caption: `${title} caption.`,
+  image: {
+    src: "data:image/svg+xml,test",
+    alt: `${title} factual image`,
+    dimensions: { width: 1280, height: 960, aspectRatio: 4 / 3 },
+  },
+});
+
 describe("storefront templates", () => {
+  it("renders the Gallery with one H1, current navigation, and an honest empty state", () => {
+    render(
+      <GalleryTemplate
+        title="Rooms, composed in scent"
+        introduction="A study in fragrance, vessel and atmosphere."
+        closingLine="Every room carries its own atmosphere."
+        campaignItems={[]}
+        marketItems={[]}
+        cartCount={2}
+      />,
+    );
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(
+      screen.getByRole("link", { name: "Gallery", current: "page" }),
+    ).toBeVisible();
+    expect(screen.getByText("The gallery is being composed")).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Explore the collection" }),
+    ).toHaveAttribute("href", "/shop");
+    expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
+      2,
+    );
+  });
+
+  it("renders separate campaign and market grids with coherent headings and local viewers", async () => {
+    const user = userEvent.setup();
+    render(
+      <GalleryTemplate
+        title="Rooms, composed in scent"
+        introduction="A study in fragrance, vessel and atmosphere."
+        closingLine="Every room carries its own atmosphere."
+        campaignItems={[
+          galleryItem("campaign-one", "Campaign one"),
+          galleryItem("campaign-two", "Campaign two"),
+        ]}
+        marketItems={[
+          galleryItem("market-one", "Market one"),
+          galleryItem("market-two", "Market two"),
+        ]}
+      />,
+    );
+
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Campaign one" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "In the Market" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", { level: 3, name: "Market one" }),
+    ).toBeVisible();
+    expect(screen.getAllByTestId("gallery-grid")).toHaveLength(2);
+    expect(screen.getByTestId("market-gallery-section")).toHaveClass(
+      "max-w-[1440px]",
+      "px-4",
+      "min-[390px]:px-6",
+      "lg:px-16",
+    );
+    expect(
+      screen.getByText("Every room carries its own atmosphere."),
+    ).toBeVisible();
+
+    await user.click(screen.getByRole("button", { name: "View Market one" }));
+    expect(screen.getByText("Image 1 of 2")).toBeVisible();
+  });
+
+  it("renders either Gallery group independently", () => {
+    const { rerender } = render(
+      <GalleryTemplate
+        title="Rooms, composed in scent"
+        introduction="A study in fragrance, vessel and atmosphere."
+        closingLine="Every room carries its own atmosphere."
+        campaignItems={[galleryItem("campaign", "Campaign only")]}
+        marketItems={[]}
+      />,
+    );
+    expect(screen.queryByRole("heading", { name: "In the Market" })).toBeNull();
+
+    rerender(
+      <GalleryTemplate
+        title="Rooms, composed in scent"
+        introduction="A study in fragrance, vessel and atmosphere."
+        closingLine="Every room carries its own atmosphere."
+        campaignItems={[]}
+        marketItems={[galleryItem("market", "Market only")]}
+      />,
+    );
+    expect(
+      screen.getByRole("heading", { level: 2, name: "In the Market" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", { level: 3, name: "Market only" }),
+    ).toBeVisible();
+  });
+
+  it("labels Gallery loading without motion-dependent content", () => {
+    render(<GalleryLoadingTemplate />);
+    expect(screen.getByLabelText("Loading gallery")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(
+      screen.getByRole("link", { name: "Gallery", current: "page" }),
+    ).toBeVisible();
+  });
+
   it("composes the home journey from accessible landmarks and product cards", () => {
     render(
       <HomeTemplate

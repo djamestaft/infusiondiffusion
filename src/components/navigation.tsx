@@ -24,6 +24,7 @@ export type NavigationProps = {
 
 const defaultDestinations: NavigationDestination[] = [
   { label: "Shop", href: "/shop" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Fragrance Guide", href: "/fragrance-guide" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

@@ -8,6 +8,8 @@ import {
   ContactTemplate,
   CollectionTemplate,
   EditorialTemplate,
+  GalleryLoadingTemplate,
+  GalleryTemplate,
   HomeTemplate,
   ProductDetailTemplate,
 } from "@/components/templates/storefront-templates";
@@ -127,6 +129,142 @@ async function verifyCollectionSurface(
     await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
   }
 }
+
+const galleryFixture = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="760"><rect width="600" height="760" fill="#DDE2D4"/><rect x="160" y="120" width="280" height="520" fill="#45483A"/></svg>')}`;
+const galleryItems = [
+  "Quiet ritual",
+  "Material study",
+  "Evening atmosphere",
+  "A considered corner",
+].map((title, index) => ({
+  id: `gallery-${index}`,
+  title,
+  caption: "Test-only authored gallery caption.",
+  image: {
+    src: galleryFixture,
+    alt: `Test-only factual gallery fixture ${index + 1}`,
+    dimensions: { width: 600, height: 760, aspectRatio: 600 / 760 },
+  },
+}));
+const marketItems = [
+  { title: "At the indoor market", width: 1280, height: 720 },
+  { title: "The market table", width: 720, height: 1280 },
+  { title: "Fragrance story", width: 1280, height: 960 },
+  { title: "The collection on display", width: 1280, height: 960 },
+  { title: "A table of fragrance", width: 1280, height: 960 },
+].map(({ title, width, height }, index) => ({
+  id: `market-${index}`,
+  title,
+  caption: "Test-only documentary gallery caption.",
+  image: {
+    src: galleryFixture,
+    alt: `Test-only factual market fixture ${index + 1}`,
+    dimensions: { width, height, aspectRatio: width / height },
+    ...(index === 1
+      ? { crop: { left: 0, right: 0, top: 0.125, bottom: 0.125 } }
+      : {}),
+  },
+}));
+const galleryTemplateProps = {
+  title: "Rooms, composed in scent",
+  introduction:
+    "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
+  closingLine: "Every room carries its own atmosphere.",
+  campaignItems: galleryItems,
+  marketItems,
+};
+export const Gallery: Story = {
+  render: () => <GalleryTemplate {...galleryTemplateProps} cartCount={2} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const page = within(document.body);
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View Quiet ritual" }),
+    );
+    await expect(page.getByText("Image 1 of 4")).toBeVisible();
+    await userEvent.click(
+      page.getByRole("button", { name: "Close gallery viewer" }),
+    );
+    await userEvent.click(
+      canvas.getByRole("button", { name: "View At the indoor market" }),
+    );
+    await expect(page.getByText("Image 1 of 5")).toBeVisible();
+    await userEvent.keyboard("{Escape}");
+  },
+};
+export const Gallery390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: Gallery.render,
+};
+export const Gallery320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: Gallery.render,
+};
+export const GalleryCampaignOnly: Story = {
+  render: () => <GalleryTemplate {...galleryTemplateProps} marketItems={[]} />,
+};
+export const GalleryMarketOnly: Story = {
+  render: () => (
+    <GalleryTemplate {...galleryTemplateProps} campaignItems={[]} />
+  ),
+};
+export const GalleryEmpty: Story = {
+  render: () => (
+    <GalleryTemplate
+      {...galleryTemplateProps}
+      campaignItems={[]}
+      marketItems={[]}
+    />
+  ),
+};
+export const GalleryUnavailable: Story = {
+  render: () => (
+    <GalleryTemplate
+      {...galleryTemplateProps}
+      campaignItems={[]}
+      marketItems={[]}
+      unavailable
+    />
+  ),
+};
+export const GalleryLongContent390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: () => (
+    <GalleryTemplate
+      {...galleryTemplateProps}
+      title={"Rooms, composed in scent ".repeat(4)}
+      introduction={"An extended introduction for a narrow gallery. ".repeat(
+        12,
+      )}
+      closingLine={"Every room carries its own atmosphere. ".repeat(8)}
+      campaignItems={galleryItems.map((item) => ({
+        ...item,
+        title: `${item.title} ${"unbroken-".repeat(8)}`,
+        caption: "caption-".repeat(100),
+      }))}
+      marketItems={marketItems.map((item) => ({
+        ...item,
+        title: `${item.title} ${"unbroken-".repeat(8)}`,
+        caption: "caption-".repeat(100),
+      }))}
+    />
+  ),
+};
+export const GalleryMaximum: Story = {
+  render: () => (
+    <GalleryTemplate
+      {...galleryTemplateProps}
+      campaignItems={galleryItems}
+      marketItems={Array.from({ length: 6 }, (_, index) => ({
+        ...marketItems[index % marketItems.length],
+        id: `maximum-${index}`,
+      }))}
+    />
+  ),
+};
+export const GalleryLoading: Story = {
+  render: () => <GalleryLoadingTemplate />,
+};
 
 export const HomeIvory: Story = {
   render: () => (

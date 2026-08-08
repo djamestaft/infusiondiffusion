@@ -1,6 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 const aboutRoles = ["origin", "development", "collaborator", "principles"];
+const galleryGroups = ["campaign", "market"];
 
 const portraitFields = [
   defineField({
@@ -44,6 +45,7 @@ const portraitFields = [
         "Not applicable",
         "Model release recorded",
         "Property release recorded",
+        "Model and property releases recorded",
       ],
     },
   }),
@@ -106,16 +108,35 @@ export const editorialPage = defineType({
           const slug = (
             context.document?.slug as { current?: string } | undefined
           )?.current;
-          if (slug !== "about") return true;
-          const roles =
-            (sections as Array<{ role?: string }> | undefined)
-              ?.map((section) => section?.role)
-              .filter(Boolean) ?? [];
-          return (
-            (roles.length === 4 &&
-              aboutRoles.every((role, index) => roles[index] === role)) ||
-            "About requires origin, development, collaborator and principles in that exact order."
-          );
+          const authoredSections =
+            (sections as
+              | Array<{
+                  role?: string;
+                  galleryGroup?: string;
+                  image?: { asset?: unknown };
+                }>
+              | undefined) ?? [];
+          if (slug === "about") {
+            const roles = authoredSections
+              .map((section) => section?.role)
+              .filter(Boolean);
+            return (
+              (roles.length === 4 &&
+                aboutRoles.every((role, index) => roles[index] === role)) ||
+              "About requires origin, development, collaborator and principles in that exact order."
+            );
+          }
+          if (slug === "gallery") {
+            return (
+              authoredSections.every(
+                (section) =>
+                  galleryGroups.includes(section.galleryGroup ?? "") &&
+                  section.image?.asset,
+              ) ||
+              "Every Gallery section needs a Campaign or In the Market group and an image."
+            );
+          }
+          return true;
         }),
       of: [
         defineArrayMember({
@@ -135,6 +156,26 @@ export const editorialPage = defineType({
                   value,
                 })),
               },
+              hidden: ({ document }) =>
+                (document?.slug as { current?: string } | undefined)
+                  ?.current !== "about",
+            }),
+            defineField({
+              name: "galleryGroup",
+              title: "Gallery group",
+              type: "string",
+              description:
+                "Required only for Gallery. Campaign keeps the polished product cadence; In the Market uses the documentary grid.",
+              options: {
+                list: [
+                  { title: "Campaign", value: "campaign" },
+                  { title: "In the Market", value: "market" },
+                ],
+                layout: "radio",
+              },
+              hidden: ({ document }) =>
+                (document?.slug as { current?: string } | undefined)
+                  ?.current !== "gallery",
             }),
             defineField({
               name: "heading",
@@ -151,10 +192,10 @@ export const editorialPage = defineType({
             }),
             defineField({
               name: "image",
-              title: "Portrait artwork",
+              title: "Editorial artwork",
               type: "image",
               description:
-                "Optional rights-cleared 3:4 portrait for centered FIT inside a 4:3 slot. Keep key content in the central 70%; never author for crop-to-fill.",
+                "About uses an optional rights-cleared 3:4 portrait with centered FIT. Gallery requires rights-cleared media; Campaign uses a 3:4 crop and In the Market follows the approved documentary ratios. Use hotspot/crop to protect key content.",
               options: { hotspot: true },
               fields: portraitFields,
               validation: (rule) =>
@@ -188,7 +229,26 @@ export const editorialPage = defineType({
                 }),
             }),
           ],
-          preview: { select: { title: "heading", subtitle: "role" } },
+          preview: {
+            select: {
+              title: "heading",
+              role: "role",
+              galleryGroup: "galleryGroup",
+              media: "image",
+            },
+            prepare({ title, role, galleryGroup, media }) {
+              return {
+                title,
+                subtitle:
+                  galleryGroup === "market"
+                    ? "In the Market"
+                    : galleryGroup === "campaign"
+                      ? "Campaign"
+                      : role,
+                media,
+              };
+            },
+          },
         }),
       ],
     }),

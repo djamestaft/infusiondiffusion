@@ -5,6 +5,8 @@ import {
   type HeroCarouselSlide,
 } from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
+import { GalleryViewer } from "@/components/gallery-viewer";
+import type { GalleryItem } from "@/sanity/lib/editorial-pages";
 import { Button } from "@/components/ui/button";
 import {
   CommerceStatus,
@@ -875,6 +877,130 @@ export function AboutTemplate({
           </div>
         </section>
       </article>
+    </TemplateShell>
+  );
+}
+
+export type GalleryTemplateProps = TemplateNavigationProps & {
+  title: string;
+  introduction: string;
+  closingLine: string;
+  campaignItems: GalleryItem[];
+  marketItems: GalleryItem[];
+  unavailable?: boolean;
+};
+
+export function GalleryTemplate({
+  title,
+  introduction,
+  closingLine,
+  campaignItems,
+  marketItems,
+  unavailable = false,
+  cartCount,
+}: GalleryTemplateProps) {
+  const hasGalleryItems = campaignItems.length > 0 || marketItems.length > 0;
+
+  return (
+    <TemplateShell currentHref="/gallery" cartCount={cartCount}>
+      <article data-testid="gallery-page">
+        <header className="mx-auto w-full max-w-7xl px-5 pt-13 sm:px-8 lg:px-12 lg:pt-20 xl:px-0">
+          <h1 className="font-display text-content-primary max-w-[900px] text-[40px] leading-[1.15] tracking-[-0.02em] [overflow-wrap:anywhere] lg:text-7xl lg:leading-20">
+            {title}
+          </h1>
+          <p className="text-content-secondary mt-8 max-w-[720px] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+            {introduction}
+          </p>
+          <div className="border-navigation-divider mt-12 border-t lg:mt-16" />
+        </header>
+        {hasGalleryItems ? (
+          <div>
+            {campaignItems.length ? (
+              <section
+                className="mx-auto w-full max-w-7xl px-5 pt-12 sm:px-8 lg:px-12 lg:pt-16 xl:px-0"
+                aria-label="Campaign gallery images"
+              >
+                <GalleryViewer items={campaignItems} layout="campaign" />
+              </section>
+            ) : null}
+            {marketItems.length ? (
+              <section
+                data-testid="market-gallery-section"
+                className={cn(
+                  "mx-auto w-full max-w-[1440px] px-4 min-[390px]:px-6 lg:px-16",
+                  campaignItems.length ? "mt-20 lg:mt-28" : "pt-12 lg:pt-16",
+                )}
+                aria-labelledby="market-gallery-heading"
+              >
+                <h2
+                  id="market-gallery-heading"
+                  className="font-display text-content-primary mb-8 text-[28px] leading-9 lg:mb-12"
+                >
+                  In the Market
+                </h2>
+                <GalleryViewer
+                  items={marketItems}
+                  layout="market"
+                  headingLevel={3}
+                  prioritizeFirst={false}
+                />
+              </section>
+            ) : null}
+            <p className="font-display text-content-primary mx-auto mt-16 w-full max-w-7xl px-5 pb-12 text-center text-[30px] leading-[1.2] [overflow-wrap:anywhere] sm:px-8 lg:mt-24 lg:px-12 lg:pb-16 xl:px-0">
+              {closingLine}
+            </p>
+          </div>
+        ) : (
+          <section
+            className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0"
+            aria-labelledby="gallery-empty-title"
+          >
+            <h2
+              id="gallery-empty-title"
+              className="font-display text-content-primary text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]"
+            >
+              {unavailable
+                ? "The gallery is temporarily unavailable"
+                : "The gallery is being composed"}
+            </h2>
+            <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+              {unavailable
+                ? "We couldn’t load the gallery just now. Please try again later, or explore the fragrance collection."
+                : "Our next collection of rooms and rituals will appear here soon. In the meantime, explore the fragrance collection."}
+            </p>
+            <Button asChild variant="primary" className="mt-8">
+              <a href="/shop">Explore the collection</a>
+            </Button>
+          </section>
+        )}
+      </article>
+    </TemplateShell>
+  );
+}
+
+export function GalleryLoadingTemplate() {
+  return (
+    <TemplateShell currentHref="/gallery">
+      <section
+        aria-busy="true"
+        aria-label="Loading gallery"
+        className="mx-auto w-full max-w-7xl px-5 py-13 sm:px-8 lg:px-12 lg:py-20 xl:px-0"
+      >
+        <h1 className="font-display text-content-primary text-[40px] leading-[1.15] lg:text-[56px]">
+          Gathering the gallery
+        </h1>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }, (_, index) => (
+            <div
+              key={index}
+              className={cn("space-y-3", index > 2 && "hidden sm:block")}
+            >
+              <div className="bg-content-surface-elevated aspect-3/4 motion-reduce:animate-none" />
+              <div className="bg-content-surface-elevated h-4 w-2/3 motion-reduce:animate-none" />
+            </div>
+          ))}
+        </div>
+      </section>
     </TemplateShell>
   );
 }
