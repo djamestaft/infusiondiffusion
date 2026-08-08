@@ -47,8 +47,12 @@
 - `git diff --check`
 - Diff credential/private-key scan: no findings
 
-## Pending external release evidence
+## Pull request and Preview evidence
 
-No pull request or Vercel Preview existed during this build task, so PR number, Vercel deployment ID/URL, Preview `/api/health`, strict Preview console/network capture, and cache-propagation timing remain pending. Production deployment and merge are out of scope. On the exact Preview, rerun the published-mode Gallery test without the local CORS allowance, verify all required GitHub checks, and record the deployment identity before human merge.
+- Pull request: [#48](https://github.com/djamestaft/infusiondiffusion/pull/48), created from `agent/gallery-page` at evidence commit `0755bae3d9d181d7793bdded0092d79761612736`.
+- Required gate: `just pr-gate 48` completed successfully as ADW `4e14e3e6`; GitHub `quality`, `Vercel`, and `Vercel Preview Comments` were green. The quality run was [Actions run 31276149871, job 93149877021](https://github.com/djamestaft/infusiondiffusion/actions/runs/31276149871/job/93149877021).
+- Vercel deployment: Ready deployment `dpl_CpGTNSVErGEQHLEvG5BxzKVAR87g`; [deployment inspector](https://vercel.com/devon-james-tafts-projects/infusion-diffusion/CpGTNSVErGEQHLEvG5BxzKVAR87g); branch Preview URL `https://infusion-diffusion-git-agent-cbf9b6-devon-james-tafts-projects.vercel.app`.
+- Preview access result: anonymous requests to both `/api/health` and `/gallery` returned HTTP 302 to Vercel SSO. This checkout has no Vercel CLI authentication session and the repository exposes no automation-bypass credential. Therefore strict published-mode Playwright, Preview axe/zoom/viewer/CDN checks, console/network capture, and cache-propagation timing could not be executed without bypassing deployment protection. The green Vercel deployment check proves build readiness, not storefront behavior, and is not represented as full Preview verification.
+- Required human follow-up: provide an authorized Vercel Preview session or scoped protection-bypass credential, then run the documented health, Gallery, and published-mode commands against this exact deployment before merge review. Production deployment and merge remain out of scope.
 
 An earlier repository-wide Playwright attempt used a reused, non-fixture development server and therefore produced unrelated commerce and local-origin failures. The final isolated fixture-enabled run supersedes that attempt and passed with the existing project-contract skips noted above; no out-of-scope test or environment configuration was changed to mask results.
