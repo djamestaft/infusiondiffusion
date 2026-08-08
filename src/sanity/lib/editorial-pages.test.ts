@@ -12,6 +12,8 @@ import {
   withEditorialFallback,
   fallbackAboutPage,
   withAboutFallback,
+  malformedGalleryCaption,
+  withGalleryFallback,
 } from "@/sanity/lib/editorial-pages";
 
 describe("editorial page fallbacks", () => {
@@ -103,6 +105,108 @@ describe("editorial page fallbacks", () => {
       seoDescription: "Guide description.",
       sections: [{ heading: "Begin here", body: "Useful guidance." }],
     });
+  });
+});
+
+describe("gallery page normalization", () => {
+  it("keeps only rights-confirmed complete items in authored order and trims captions", () => {
+    const page = withGalleryFallback({
+      sections: [
+        {
+          _key: "one",
+          heading: "  First  ",
+          body: " Caption ",
+          image: {
+            src: "https://cdn.sanity.io/one.jpg",
+            alt: " One ",
+            storefrontRightsConfirmed: true,
+          },
+        },
+        {
+          _key: "bad",
+          heading: "Bad",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/bad.jpg",
+            alt: "",
+            storefrontRightsConfirmed: true,
+          },
+        },
+        {
+          _key: "two",
+          heading: "Second",
+          body: "Caption two",
+          image: {
+            src: "https://cdn.sanity.io/two.jpg",
+            alt: "Two",
+            storefrontRightsConfirmed: true,
+          },
+        },
+      ],
+    });
+    expect(page.items.map((item) => item.id)).toEqual(["one", "two"]);
+    expect(page.items[0]).toMatchObject({
+      title: "First",
+      caption: "Caption",
+      image: { alt: "One" },
+    });
+  });
+
+  it("preserves valid Sanity hotspot and crop data for thumbnail safety", () => {
+    const page = withGalleryFallback({
+      sections: [
+        {
+          _key: "crop",
+          heading: "Crop",
+          body: "Caption",
+          image: {
+            src: "https://cdn.sanity.io/crop.jpg",
+            alt: "A factual crop",
+            storefrontRightsConfirmed: true,
+            hotspot: { x: 0.3, y: 0.6 },
+            crop: { left: 0.1, top: 0.2, right: 0.1, bottom: 0.1 },
+          },
+        },
+      ],
+    });
+    expect(page.items[0].image).toMatchObject({
+      hotspot: { x: 0.3, y: 0.6 },
+      crop: { left: 0.1, top: 0.2, right: 0.1, bottom: 0.1 },
+    });
+  });
+
+  it("uses the honest caption fallback only for malformed legacy omissions", () => {
+    const page = withGalleryFallback({
+      sections: [
+        {
+          _key: "legacy",
+          heading: "Legacy",
+          body: " ",
+          image: {
+            src: "https://cdn.sanity.io/legacy.jpg",
+            alt: "A factual legacy image",
+            storefrontRightsConfirmed: true,
+          },
+        },
+      ],
+    });
+    expect(page.items[0].caption).toBe(malformedGalleryCaption);
+  });
+
+  it("bounds valid gallery items at ten", () => {
+    const page = withGalleryFallback({
+      sections: Array.from({ length: 12 }, (_, index) => ({
+        _key: `${index}`,
+        heading: `Item ${index}`,
+        body: "Caption",
+        image: {
+          src: `https://cdn.sanity.io/${index}.jpg`,
+          alt: "Factual image",
+          storefrontRightsConfirmed: true,
+        },
+      })),
+    });
+    expect(page.items).toHaveLength(10);
   });
 });
 

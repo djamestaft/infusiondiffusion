@@ -11,12 +11,48 @@ import {
   ContactErrorTemplate,
   ContactLoadingTemplate,
   ContactTemplate,
+  GalleryLoadingTemplate,
+  GalleryTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
 afterEach(cleanup);
 
 describe("storefront templates", () => {
+  it("renders the Gallery with one H1, current navigation, and an honest empty state", () => {
+    render(
+      <GalleryTemplate
+        title="Rooms, composed in scent"
+        introduction="A study in fragrance, vessel and atmosphere."
+        closingLine="Every room carries its own atmosphere."
+        items={[]}
+        cartCount={2}
+      />,
+    );
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(
+      screen.getByRole("link", { name: "Gallery", current: "page" }),
+    ).toBeVisible();
+    expect(screen.getByText("The gallery is being composed")).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Explore the collection" }),
+    ).toHaveAttribute("href", "/shop");
+    expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
+      2,
+    );
+  });
+
+  it("labels Gallery loading without motion-dependent content", () => {
+    render(<GalleryLoadingTemplate />);
+    expect(screen.getByLabelText("Loading gallery")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(
+      screen.getByRole("link", { name: "Gallery", current: "page" }),
+    ).toBeVisible();
+  });
+
   it("composes the home journey from accessible landmarks and product cards", () => {
     render(
       <HomeTemplate

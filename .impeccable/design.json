@@ -258,7 +258,7 @@
       "name": "ProductCard",
       "kind": "custom",
       "description": "A browse-only, whole-card product-detail link with inset 3:4 media, concise scent information, composed PriceDisplay, material commerce status, and a full-card focus ring.",
-      "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER \u00b7 200ML</p><h3>Bois de Santal</h3><p>Cardamom \u00b7 rose \u00b7 sandalwood</p><strong>R 420</strong></div></a>",
+      "html": "<a class=\"ds-product-card\" href=\"/products/bois-de-santal\"><img alt=\"Bois de Santal reed diffuser in an interior setting\"><div><p>REED DIFFUSER · 200ML</p><h3>Bois de Santal</h3><p>Cardamom · rose · sandalwood</p><strong>R 420</strong></div></a>",
       "css": ".ds-product-card { display: grid; grid-template-rows: auto 1fr; width: 100%; max-width: 288px; padding: 2px; border-radius: 4px; background: var(--product-card-surface); color: var(--product-card-text); text-decoration: none; } .ds-product-card img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; border-radius: 4px 4px 0 0; } .ds-product-card:focus-visible { outline: 2px solid var(--product-card-focus); outline-offset: -2px; } .ds-product-card h3, .ds-product-card div > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }"
     },
     {
@@ -279,7 +279,7 @@
       "name": "Navigation",
       "kind": "custom",
       "description": "The approved responsive storefront header with the editable text lockup as its production brand mark, primary destinations, account and cart utilities, and a full-height accessible mobile drawer. Ivory uses a Bone Light surface and Antique Gold bottom edge above the Porcelain page canvas; Midnight uses Deep Ink. The ornamental artwork is deferred reference material, not a release dependency.",
-      "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION \u2014 DIFFUSION \u2014</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
+      "html": "<header class=\"ds-navigation\"><nav aria-label=\"Primary\"><a href=\"/\" aria-label=\"Infusion Diffusion home\">INFUSION — DIFFUSION —</a><a href=\"/shop\" aria-current=\"page\">SHOP</a><a href=\"/account\" aria-label=\"Account\"></a><a href=\"/cart\" aria-label=\"Cart\"></a></nav></header>",
       "css": ".ds-navigation { min-height: 80px; padding-inline: 20px; background: var(--navigation-surface); color: var(--navigation-text); border-bottom: 1px solid var(--navigation-divider); } .ds-navigation a, .ds-navigation button { min-width: 44px; min-height: 44px; } .ds-navigation :focus-visible { outline: 2px solid var(--navigation-focus); outline-offset: 2px; } @media (min-width: 1024px) { .ds-navigation { min-height: 104px; padding-inline: 32px; } }"
     },
     {
@@ -333,6 +333,20 @@
       "name": "ContactTemplate",
       "kind": "custom",
       "description": "Approved direct-email Contact composition: Sage introduction, Bone 50 email region, static unavailable information, and optional Sanity editorial sections. It uses existing Navigation, Button, and FeedbackAlert semantics; no form or message collection is present."
+    },
+    {
+      "name": "GalleryViewer",
+      "kind": "custom",
+      "description": "Approved Experience-mode Gallery composition: authored-order tall/short editorial media cadence with factual alternatives and captions. The full-viewport Deep Ink Dialog contains media, initially focuses Close, restores the invoking thumbnail, uses written position and honest non-wrapping Previous/Next boundaries.",
+      "html": "<section class=\"ds-gallery\"><figure><button aria-label=\"View Quiet ritual\"><img alt=\"A factual room image\"></button><figcaption><h2>Quiet ritual</h2><p>Required authored caption.</p></figcaption></figure></section>",
+      "css": ".ds-gallery { display:grid; gap:64px 80px; } .ds-gallery button { aspect-ratio:350/438; overflow:hidden; border-radius:4px; } .ds-gallery button:focus-visible { outline:2px solid var(--navigation-focus); outline-offset:4px; } @media (min-width:1024px) { .ds-gallery { grid-template-columns:repeat(2,600px); gap:96px 80px; } .ds-gallery button { aspect-ratio:600/760; } }"
+    },
+    {
+      "name": "GalleryTemplate",
+      "kind": "custom",
+      "description": "Approved Sanity-owned Gallery route: compact Sage introduction, measured gold divider, borderless gallery, centered Marcellus closing statement, and honest empty/unavailable/loading shells. No new Gallery tokens are required.",
+      "html": "<main class=\"ds-gallery-template\"><header><h1>Rooms, composed in scent</h1><p>A study in fragrance, vessel and atmosphere.</p></header></main>",
+      "css": ".ds-gallery-template { min-height:100dvh; background:var(--content-surface); color:var(--content-primary); } .ds-gallery-template > header { width:min(100% - 40px,1280px); margin-inline:auto; } @media (min-width:1024px) { .ds-gallery-template > header { width:min(100% - 160px,1280px); } }"
     }
   ],
   "narrative": {
@@ -374,6 +388,11 @@
         "name": "Contact direct-email rule",
         "body": "Contact shows a visible validated mailto destination and static unavailable information only. It has no form, submit action, or message persistence; safe wrapping and natural height supersede clipped Figma export artifacts. Authority: Figma 329:58 and 329:100.",
         "section": "contact"
+      },
+      {
+        "name": "Gallery route contract",
+        "body": "Gallery uses approved Feature / Gallery nodes 357:3, 357:34, 357:64, 357:76, 357:88, 357:100, 357:111, and 357:131. Reuse semantic light/dark tokens; required authored captions retain one exact malformed-legacy fallback.",
+        "section": "components"
       }
     ],
     "dos": [

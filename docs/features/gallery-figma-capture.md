@@ -11,16 +11,16 @@
 
 ## Exact approved frames
 
-| State | Node | Natural dimensions | Screenshot |
-|---|---:|---:|---|
-| Populated desktop | [`357:3`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-3) | 1440×2380 | `evidence/gallery-figma/populated-desktop.png` |
-| Populated mobile | [`357:34`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-34) | 390×2920 | `evidence/gallery-figma/populated-mobile.png` |
-| Viewer desktop | [`357:64`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-64) | 1440×1040 | `evidence/gallery-figma/viewer-desktop.png` |
-| Viewer mobile | [`357:76`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-76) | 390×844 | `evidence/gallery-figma/viewer-mobile.png` |
-| Empty desktop | [`357:88`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-88) | 1440×900 | `evidence/gallery-figma/empty-desktop.png` |
-| Empty mobile | [`357:100`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-100) | 390×844 | `evidence/gallery-figma/empty-mobile.png` |
-| Loading desktop | [`357:111`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-111) | 1440×1000 | `evidence/gallery-figma/loading-desktop.png` |
-| Loading mobile | [`357:131`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-131) | 390×1000 | `evidence/gallery-figma/loading-mobile.png` |
+| State             |                                                                                                            Node | Natural dimensions | Screenshot                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------: | -----------------: | ---------------------------------------------- |
+| Populated desktop |     [`357:3`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-3) |          1440×2380 | `evidence/gallery-figma/populated-desktop.png` |
+| Populated mobile  |   [`357:34`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-34) |           390×2920 | `evidence/gallery-figma/populated-mobile.png`  |
+| Viewer desktop    |   [`357:64`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-64) |          1440×1040 | `evidence/gallery-figma/viewer-desktop.png`    |
+| Viewer mobile     |   [`357:76`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-76) |            390×844 | `evidence/gallery-figma/viewer-mobile.png`     |
+| Empty desktop     |   [`357:88`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-88) |           1440×900 | `evidence/gallery-figma/empty-desktop.png`     |
+| Empty mobile      | [`357:100`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-100) |            390×844 | `evidence/gallery-figma/empty-mobile.png`      |
+| Loading desktop   | [`357:111`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-111) |          1440×1000 | `evidence/gallery-figma/loading-desktop.png`   |
+| Loading mobile    | [`357:131`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-131) |           390×1000 | `evidence/gallery-figma/loading-mobile.png`    |
 
 ## Layout and hierarchy
 
@@ -79,12 +79,11 @@ The frames use the existing approved Perfumer's Cabinet values already recorded 
 
 ## Synchronization matrix
 
-| Layer | Status | Note |
-|---|---|---|
-| Figma page and eight frames | `synced` | Exact Approved nodes and official screenshots captured. |
-| Repository capture | `synced` | This document plus eight PNG renders. |
-| `DESIGN.md` Gallery contract | `pending implementation` | Update in the SDLC documentation boundary. |
-| Runtime CSS tokens | `intentional reuse` | No new token family required. |
-| Components and templates | `pending implementation` | Must consume this capture and existing primitives. |
-| Storybook | `pending implementation` | Must cover populated, viewer, empty, loading, extremes, and failures. |
-
+| Layer                        | Status                   | Note                                                                  |
+| ---------------------------- | ------------------------ | --------------------------------------------------------------------- |
+| Figma page and eight frames  | `synced`                 | Exact Approved nodes and official screenshots captured.               |
+| Repository capture           | `synced`                 | This document plus eight PNG renders.                                 |
+| `DESIGN.md` Gallery contract | `pending implementation` | Update in the SDLC documentation boundary.                            |
+| Runtime CSS tokens           | `intentional reuse`      | No new token family required.                                         |
+| Components and templates     | `pending implementation` | Must consume this capture and existing primitives.                    |
+| Storybook                    | `pending implementation` | Must cover populated, viewer, empty, loading, extremes, and failures. |

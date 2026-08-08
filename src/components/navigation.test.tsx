@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -37,6 +43,21 @@ describe("Navigation", () => {
       "href",
       "/cart",
     );
+  });
+
+  it("includes Gallery in the approved destination order and marks it current in the drawer", async () => {
+    const user = userEvent.setup();
+    render(<Navigation currentHref="/gallery" />);
+    const links = screen.getAllByRole("link", { name: "Gallery" });
+    expect(links[0]).toHaveAttribute("href", "/gallery");
+    expect(links[0]).toHaveAttribute("aria-current", "page");
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(
+      within(screen.getByRole("dialog", { name: "Navigation menu" })).getByRole(
+        "link",
+        { name: "Gallery" },
+      ),
+    ).toHaveAttribute("aria-current", "page");
   });
 
   it("omits malformed destinations and the menu control when none remain", () => {

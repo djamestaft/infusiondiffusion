@@ -8,6 +8,8 @@ import {
   ContactTemplate,
   CollectionTemplate,
   EditorialTemplate,
+  GalleryLoadingTemplate,
+  GalleryTemplate,
   HomeTemplate,
   ProductDetailTemplate,
 } from "@/components/templates/storefront-templates";
@@ -127,6 +129,91 @@ async function verifyCollectionSurface(
     await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
   }
 }
+
+const galleryFixture = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="760"><rect width="600" height="760" fill="#DDE2D4"/><rect x="160" y="120" width="280" height="520" fill="#45483A"/></svg>')}`;
+const galleryItems = [
+  "Quiet ritual",
+  "Material study",
+  "Evening atmosphere",
+  "A considered corner",
+].map((title, index) => ({
+  id: `gallery-${index}`,
+  title,
+  caption: "Test-only authored gallery caption.",
+  image: {
+    src: galleryFixture,
+    alt: `Test-only factual gallery fixture ${index + 1}`,
+  },
+}));
+export const Gallery: Story = {
+  render: () => (
+    <GalleryTemplate
+      title="Rooms, composed in scent"
+      introduction="A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms."
+      closingLine="Every room carries its own atmosphere."
+      items={galleryItems}
+      cartCount={2}
+    />
+  ),
+};
+export const GalleryMobile: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: Gallery.render,
+};
+export const GalleryEmpty: Story = {
+  render: () => (
+    <GalleryTemplate
+      title="Rooms, composed in scent"
+      introduction="A study in fragrance, vessel and atmosphere."
+      closingLine="Every room carries its own atmosphere."
+      items={[]}
+    />
+  ),
+};
+export const GalleryUnavailable: Story = {
+  render: () => (
+    <GalleryTemplate
+      title="Rooms, composed in scent"
+      introduction="A study in fragrance, vessel and atmosphere."
+      closingLine="Every room carries its own atmosphere."
+      items={[]}
+      unavailable
+    />
+  ),
+};
+export const GalleryLongContent390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: () => (
+    <GalleryTemplate
+      title={"Rooms, composed in scent ".repeat(4)}
+      introduction={"An extended introduction for a narrow gallery. ".repeat(
+        12,
+      )}
+      closingLine={"Every room carries its own atmosphere. ".repeat(8)}
+      items={galleryItems.map((item) => ({
+        ...item,
+        title: `${item.title} ${"unbroken-".repeat(8)}`,
+        caption: "caption-".repeat(100),
+      }))}
+    />
+  ),
+};
+export const GalleryMaximum: Story = {
+  render: () => (
+    <GalleryTemplate
+      title="Rooms, composed in scent"
+      introduction="A study in fragrance, vessel and atmosphere."
+      closingLine="Every room carries its own atmosphere."
+      items={Array.from({ length: 10 }, (_, index) => ({
+        ...galleryItems[index % galleryItems.length],
+        id: `maximum-${index}`,
+      }))}
+    />
+  ),
+};
+export const GalleryLoading: Story = {
+  render: () => <GalleryLoadingTemplate />,
+};
 
 export const HomeIvory: Story = {
   render: () => (

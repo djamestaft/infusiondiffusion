@@ -166,6 +166,141 @@ export async function getFragranceGuideMetadata(
   }
 }
 
+export type GalleryItem = {
+  id: string;
+  title: string;
+  caption: string;
+  image: {
+    src: string;
+    alt: string;
+    hotspot?: { x: number; y: number };
+    crop?: { left: number; top: number; right: number; bottom: number };
+  };
+};
+export type GalleryPage = {
+  title: string;
+  introduction: string;
+  closingLine: string;
+  items: GalleryItem[];
+  seoTitle: string;
+  seoDescription: string;
+  unavailable: boolean;
+};
+
+export const malformedGalleryCaption =
+  "Additional details are unavailable for this image.";
+export const fallbackGalleryPage: GalleryPage = {
+  title: "Rooms, composed in scent",
+  introduction:
+    "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
+  closingLine: "Every room carries its own atmosphere.",
+  items: [],
+  seoTitle: "Gallery | Infusion Diffusion",
+  seoDescription:
+    "Explore Infusion Diffusion fragrance, vessel and atmosphere studies from lived-in rooms.",
+  unavailable: false,
+};
+type GalleryInput = {
+  title?: string | null;
+  introduction?: string | null;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  sections?: Array<{
+    _key?: string | null;
+    heading?: string | null;
+    body?: string | null;
+    image?: {
+      src?: string | null;
+      alt?: string | null;
+      storefrontRightsConfirmed?: boolean | null;
+      hotspot?: { x?: number; y?: number } | null;
+      crop?: {
+        left?: number;
+        top?: number;
+        right?: number;
+        bottom?: number;
+      } | null;
+    } | null;
+  } | null> | null;
+};
+
+export function withGalleryFallback(
+  page: GalleryInput | null,
+  unavailable = false,
+): GalleryPage {
+  const items = (page?.sections ?? [])
+    .flatMap((section) => {
+      if (!section) return [];
+      const id = section._key?.trim();
+      const title = section.heading?.trim();
+      const src = section.image?.src?.trim();
+      const alt = section.image?.alt?.trim();
+      if (
+        !id ||
+        !title ||
+        !src ||
+        !alt ||
+        !section.image?.storefrontRightsConfirmed
+      ) {
+        return [];
+      }
+      const hotspot = normalizeHotspot(section.image.hotspot);
+      const crop = normalizeCrop(section.image.crop);
+      return [
+        {
+          id,
+          title,
+          caption: section.body?.trim() || malformedGalleryCaption,
+          image: { src, alt, hotspot, crop },
+        },
+      ];
+    })
+    .slice(0, 10);
+  return {
+    title: text(page?.title, fallbackGalleryPage.title),
+    introduction: text(page?.introduction, fallbackGalleryPage.introduction),
+    closingLine: fallbackGalleryPage.closingLine,
+    items,
+    seoTitle: text(page?.seoTitle, fallbackGalleryPage.seoTitle),
+    seoDescription: text(
+      page?.seoDescription,
+      fallbackGalleryPage.seoDescription,
+    ),
+    unavailable,
+  };
+}
+
+export async function getGalleryPage(options: DynamicFetchOptions) {
+  if (!isSanityConfigured) return fallbackGalleryPage;
+  try {
+    const { data } = await sanityFetch({
+      query: EDITORIAL_PAGE_QUERY,
+      params: { slug: "gallery" },
+      ...options,
+    });
+    return withGalleryFallback(data as GalleryInput | null);
+  } catch {
+    console.error("Unable to load Sanity gallery page");
+    return withGalleryFallback(null, true);
+  }
+}
+export async function getGalleryPageMetadata(
+  perspective: DynamicFetchOptions["perspective"],
+) {
+  if (!isSanityConfigured) return fallbackGalleryPage;
+  try {
+    const { data } = await sanityFetchMetadata({
+      query: EDITORIAL_PAGE_QUERY,
+      params: { slug: "gallery" },
+      perspective,
+    });
+    return withGalleryFallback(data as GalleryInput | null);
+  } catch {
+    console.error("Unable to load Sanity gallery metadata");
+    return fallbackGalleryPage;
+  }
+}
+
 export type AboutChapterRole =
   "origin" | "development" | "collaborator" | "principles";
 export type AboutPortrait = {
@@ -238,6 +373,25 @@ type AboutInput = {
     } | null;
   } | null> | null;
 };
+function normalizeCrop(
+  crop:
+    | { left?: number; top?: number; right?: number; bottom?: number }
+    | null
+    | undefined,
+) {
+  const { left, top, right, bottom } = crop ?? {};
+  const valid = [left, top, right, bottom].every(
+    (value) =>
+      typeof value === "number" &&
+      Number.isFinite(value) &&
+      value >= 0 &&
+      value < 1,
+  );
+  return valid && left! + right! < 1 && top! + bottom! < 1
+    ? { left: left!, top: top!, right: right!, bottom: bottom! }
+    : undefined;
+}
+
 function normalizeHotspot(
   hotspot: { x?: number; y?: number } | null | undefined,
 ) {
