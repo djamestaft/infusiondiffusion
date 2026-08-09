@@ -46,6 +46,7 @@ Respond with ONLY valid JSON matching `PlanOutput` — no prose before or after:
   "implementation_owner": "builder",
   "advisory_specialists": [],
   "review_owner": "reviewer",
+  "figma_targets": [{"file_key": "<canonical file key>", "node_ids": ["<exact node id>"], "expected_approval": "Approved", "evidence_categories": ["dimensions_layout", "semantic_variables", "typography", "spacing_assets", "responsive", "accessibility_interaction", "content_extremes", "divergences"]}],
   "notes_for_next_agent": "<what the builder must know>"
 }
 ```

@@ -38,6 +38,25 @@ observability:
   db: adws/adw_data/sssf.db        # tracer writes here directly; the UI polls it
   poll_ms: 500                     # visualizer live-poll cadence
 
+# Off by default: a human enables and authorizes each exact read-only smoke.
+workers:
+  figma_codex:
+    enabled: false
+    # Repository authority boundary; arbitrary --approved-by text is rejected.
+    trusted_design_approvers:
+      - design-authority
+    # Bare codex, connector name figma, and https://mcp.figma.com/mcp are
+    # production invariants in code, never overlay-configurable values.
+    connector: figma
+    attempt_timeout_seconds: 180
+    max_attempts: 2
+    retry_backoff_seconds: 2
+    overall_deadline_seconds: 370
+    max_nodes: 12
+    max_artifacts: 8
+    max_artifact_bytes: 26214400
+    max_json_bytes: 262144
+
 agents:
   - name: planner
     model: openai-codex/gpt-5.6-sol

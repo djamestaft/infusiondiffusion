@@ -2,6 +2,10 @@
 
 The envelope schema, the two-channel output contract, and the session directory layout — how context transfers in code, not in conversation.
 
+## Bounded Figma capture handoff
+
+`FigmaTarget`, `CodexFigmaRequest`, `FigmaSupervisorOutput`, and `CodexFigmaOutput` are the typed fallback contract. A result records requested/observed exact IDs, Approved labels, read-only call stamps, handoff-relative artifacts and SHA-256 digests, timestamps, limits, attempts, and a result hash. `ImplementationContext.figma_handoffs` and `figma_handoff.md` carry one current-session supervisor result per unique target; partial, duplicate, mixed, or wrong-target collections fail before implementation. `ready` additionally requires separately recorded human design approval; use the capture workflow's `--record-approval` path before capture, never an execution-time flag. Provenance is evidence, not approval. This provenance stamp proves factory-observed consistency only, not Figma authorship. Raw Codex JSONL/MCP responses, provider errors, headers, and credentials are never handoff data.
+
 ## Two output channels, exactly
 
 An agent may produce output in two ways and no others:

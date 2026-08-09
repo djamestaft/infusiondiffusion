@@ -45,6 +45,10 @@ The gate event payload carries `attempt` too, so the `gate_results` table and th
 
 **Streaming is solved by construction.** `agent_pi.py` tails pi's JSONL stdout line by line and the tracer inserts each event into `sssf.db` **while the agent is still working** — never batched at phase end (verified in the first smoke run: tool calls visible mid-run). Everything downstream is a poll → render.
 
+## Connector-worker events
+
+The bounded Figma worker writes only sanitized `worker_start`, `worker_tool`, `worker_retry`, and `worker_end` events and additive `connector_workers` lifecycle rows. `worker_tool` contains only validated allowlisted exact canonical file/node stamps plus final result and manifest hashes; it is emitted once only after those facts are complete and never contains raw MCP arguments or results. Events otherwise contain IDs, PID, terminal outcome, and safe failure class—not configuration, stderr, or environment values. Process rows are always closed, including timeout escalation.
+
 ## Tables
 
 ```sql

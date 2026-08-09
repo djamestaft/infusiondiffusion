@@ -43,13 +43,14 @@ pinned before the first commit phase and printed in the request phase.
 """
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
 
-from adw_modules import agents, changes, gates, git_helper, quality, session, utils
+from adw_modules import agents, changes, codex_worker, gates, git_helper, quality, session, utils
 from adw_modules.data_types import (AgentCall, BuildOutput, ChangeCapture,
-                                    DocumentOutput, PhaseParams, PlanOutput,
+                                    DocumentOutput, FigmaSupervisorOutput, ImplementationContext, PhaseParams, PlanOutput,
                                     ReviewOutput, SpecialistOutput)
 
 REQUIRED_AGENTS = ["planner", "builder", "reviewer", "documenter",
@@ -64,11 +65,12 @@ DOCUMENT_NOTES = ("Read diff_path in full before writing. Document only what the
                   "describes.")
 
 
-def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None,
-         resume_after_plan: bool = False) -> int:
+def _main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None,
+         resume_after_plan: bool = False, approved_by: str = "") -> int:
     cfg = agents.load_config(config)
     agents.validate(cfg, REQUIRED_AGENTS)
     run = session.ensure(cfg, adw_id)
+    main._active_run = run
     baseline = git_helper.rev("HEAD")     # pinned before this run commits anything
 
     def commit(ph, envelope) -> None:
@@ -106,26 +108,98 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
                                    description="Put the spec on record before any code exists to blur it")) as ph:
             commit(ph, plan)
 
+    # Direct/reused Figma handoffs are validated against this immutable planner
+    # snapshot as well as worker captures; an approval hash alone is not target
+    # provenance.
+    run.figma_targets = list(plan.figma_targets)
+    # This is a workflow invariant, not planner advice: a Figma-targeted plan
+    # cannot omit, duplicate, or substitute its product-design supervisor.
+    supervision_route = gates.figma_plan_supervision_required(plan)
+    if not supervision_route.passed:
+        return run.finish(accepted=False, reason="; ".join(supervision_route.violations))
+    if approved_by:
+        raise ValueError("--approved-by cannot authorize execution; record approval with adw_figma_capture --record-approval first")
+    implementation_handoffs: list[FigmaSupervisorOutput] = []
     for specialist in plan.advisory_specialists:
-        with run.phase(PhaseParams(
-                name=f"advise_{specialist}", kind="agent", owner=specialist,
-                description="Inspect the plan through the selected specialist boundary before implementation")) as ph:
-            advice_gates = [gates.artifacts_exist, gates.files_non_empty]
-            if specialist == "product_designer":
-                advice_gates.append(gates.figma_handoff_complete)
-            advice = ph.call(AgentCall(output_type=SpecialistOutput, prompt=prompt,
-                                       previous=plan, gates=advice_gates))
-            if not advice.ready:
-                return run.finish(accepted=False,
-                                  reason=f"{specialist} reported blocking findings: "
-                                         + "; ".join(advice.blocking))
+        if specialist == "product_designer" and run.figma_targets:
+            # A supervisor response is target-bound, never a batch assertion.
+            # The same Pi agent session is continued for each exact target.
+            for index, target in enumerate(run.figma_targets, start=1):
+                run.active_figma_target = target
+                try:
+                    target_prompt = prompt + "\n\nExact current Figma target (do not combine targets):\n" + target.model_dump_json()
+                    with run.phase(PhaseParams(name=f"advise_product_designer_{index}", kind="agent", owner="product_designer",
+                                               description="Supervise one exact planned Figma target before implementation")) as ph:
+                        advice = ph.call(AgentCall(output_type=FigmaSupervisorOutput, prompt=target_prompt,
+                            previous=plan, gates=[gates.artifacts_exist, gates.files_non_empty, gates.figma_supervisor_response]))
+                    if advice.stage == "delegate_codex":
+                        delegation = gates.supervisor_delegation_valid(advice, PlanOutput.model_validate({**plan.model_dump(), "figma_targets": [target]}), run)
+                        if not delegation.passed:
+                            return run.finish(accepted=False, reason="; ".join(delegation.violations))
+                        with run.phase(PhaseParams(name=f"figma_codex_capture_{index}", kind="code", owner="figma_codex",
+                                                   description="Capture only the separately authorized exact Figma target")) as worker_phase:
+                            capture = codex_worker.run(advice.request, cfg.workers.figma_codex, run, worker_phase.phase.phase_id)
+                            capture_gate = gates.figma_capture_complete(capture, run)
+                            worker_phase.log(capture_status=capture.capture_status, failure_code=capture.failure_code,
+                                             gate_violations=capture_gate.violations)
+                        if not capture_gate.passed:
+                            return run.finish(accepted=False, reason="; ".join(capture_gate.violations))
+                        with run.phase(PhaseParams(name=f"validate_figma_capture_{index}", kind="agent", owner="product_designer",
+                                                   description="Continue Pi supervision for the exact captured target")) as validation_phase:
+                            advice = validation_phase.call(AgentCall(output_type=FigmaSupervisorOutput, prompt=target_prompt,
+                                previous=capture, gates=[gates.figma_supervisor_response,
+                                                         lambda envelope, current_run: gates.figma_handoff_complete(envelope, current_run, target)]))
+                    handoff = gates.figma_handoff_complete(advice, run, target)
+                    if not handoff.passed or not advice.ready:
+                        return run.finish(accepted=False, reason="; ".join(handoff.violations or advice.blocking))
+                    implementation_handoffs.append(advice)
+                finally:
+                    # Never let a subsequent target inherit stale authorization.
+                    run.active_figma_target = None
+            coverage = gates.figma_handoff_coverage(implementation_handoffs, plan, run)
+            if not coverage.passed:
+                return run.finish(accepted=False, reason="; ".join(coverage.violations))
+            handoff_path = run.context_handoff_dir / "figma_handoff.md"
+            handoff_path.write_text("# Gated Figma handoffs\n\n```json\n" + json.dumps(
+                [handoff.model_dump() for handoff in implementation_handoffs], indent=2) + "\n```\n")
+            continue
+        with run.phase(PhaseParams(name=f"advise_{specialist}", kind="agent", owner=specialist,
+                                   description="Inspect the plan through the selected specialist boundary before implementation")) as ph:
+            advice = ph.call(AgentCall(output_type=SpecialistOutput, prompt=prompt, previous=plan,
+                                       gates=[gates.artifacts_exist, gates.files_non_empty]))
+        if not advice.ready:
+            return run.finish(accepted=False, reason=f"{specialist} reported blocking findings: " + "; ".join(advice.blocking))
+
+    if run.figma_targets and not implementation_handoffs:
+        return run.finish(accepted=False, reason="Figma targets lack validated human-approved product-designer handoffs")
+    implementation_handoff = implementation_handoffs[0] if implementation_handoffs else None
 
     implementation_owner = plan.implementation_owner
     review_owner = plan.review_owner
+    approval_trace_reference = ""
+    capture_trace_reference = ""
+    if implementation_handoffs:
+        approval_references = []
+        capture_references = []
+        for handoff in implementation_handoffs:
+            approval = handoff.human_design_approval
+            reference = run.tracer.human_design_approval_reference(run.adw_id, approval.target_hash, approval.approved_by)
+            if not reference:
+                return run.finish(accepted=False, reason="missing trusted approval trace reference")
+            approval.tracer_reference = reference
+            approval_references.append(reference)
+            if handoff.capture_request_id:
+                capture_references.append(f"worker:{handoff.capture_request_id}:{handoff.capture_result_hash}")
+        approval_trace_reference = ",".join(approval_references)
+        capture_trace_reference = ",".join(capture_references)
 
     with run.phase(PhaseParams(name="build", kind="agent", owner=implementation_owner,
                                description="Implement the plan exactly")) as ph:
-        build = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt, previous=plan,
+        build = ph.call(AgentCall(output_type=BuildOutput, prompt=prompt,
+                                  previous=ImplementationContext(plan=plan, figma_handoff=implementation_handoff,
+                                                               figma_handoffs=implementation_handoffs,
+                                                               approval_trace_reference=approval_trace_reference,
+                                                               capture_trace_reference=capture_trace_reference),
                                   gates=[gates.diff_matches_claims]))
 
     test = None
@@ -209,6 +283,19 @@ def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw
                       reason="the suite or the review never came back clean")
 
 
+def main(prompt: str, config: str = "adws/adw_sssf_config/sssf.config.yaml", adw_id: str | None = None,
+         resume_after_plan: bool = False, approved_by: str = "") -> int:
+    """Finalize rejected SDLC runs even when a cancellation escapes a phase."""
+    main._active_run = None
+    try:
+        return _main(prompt, config, adw_id, resume_after_plan, approved_by)
+    except BaseException as error:
+        run = main._active_run
+        if run is not None:
+            return run.finish(accepted=False, reason=type(error).__name__)
+        raise
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("prompt", help="inline text or a path to a prompt file")
@@ -216,6 +303,7 @@ if __name__ == "__main__":
     parser.add_argument("--adw-id", default=None, help="join or pin an existing session")
     parser.add_argument("--resume-after-plan", action="store_true",
                         help="reuse this session's validated planner envelope and continue with specialists")
+    parser.add_argument("--approved-by", default="", help=argparse.SUPPRESS)
     args = parser.parse_args()
     sys.exit(main(utils.resolve_prompt(args.prompt), args.config, args.adw_id,
-                  args.resume_after_plan))
+                  args.resume_after_plan, args.approved_by))

@@ -1,4 +1,4 @@
-# Product Design Review
+# Product Design Supervision
 
 ### prompt
 
@@ -14,21 +14,30 @@
 
 ## Task
 
-Review the plan from the product-design boundary. For approved Figma work, query the exact nodes through the configured Figma MCP server and write implementation evidence to `<context_handoff_dir>/figma_handoff.md`. Write your review to `<context_handoff_dir>/product_designer.md`, then report whether implementation is ready to begin.
+Scope or validate only the one exact planned Figma target appended to the prompt; never combine, substitute, or partially cover targets. Return complete only with a complete provenance-matched handoff; delegate only if the Pi connector is unavailable. For worker validation, copy the current worker request ID, phase ID, Pi supervisor session ID, and recomputed result hash from the typed capture result; declare only manifest paths. Complete handoffs must provide non-empty notes for dimensions/layout, semantic variables, typography, spacing/assets, responsive behavior, accessibility/interaction, content extremes, and intentional divergences. Human approval is a pre-existing deterministic target-bound trace and `approvals/<target_hash>.json` artifact; Pi cannot create it. Record missing approval as blocking.
 
 ## Report
 
-Respond with ONLY valid JSON matching `SpecialistOutput`:
+Respond with ONLY valid JSON matching `FigmaSupervisorOutput`:
 
 ```json
 {
   "status": "success",
-  "ready": true,
-  "summary": "<one-sentence verdict>",
-  "findings": ["<design finding with evidence>"],
+  "stage": "delegate_codex",
+  "ready": false,
+  "human_design_approval": null,
+  "summary": "Pi connector is unavailable; bounded read-only evidence capture is required.",
+  "findings": [],
   "blocking": [],
-  "figma_evidence": ["<context_handoff_dir>/figma_handoff.md"],
-  "artifacts": ["<context_handoff_dir>/product_designer.md", "<context_handoff_dir>/figma_handoff.md"],
-  "notes_for_next_agent": "<implementation guidance and human gates>"
+  "figma_evidence": [],
+  "handoff_sections": {},
+  "capture_request_id": "",
+  "capture_phase_id": "",
+  "capture_supervisor_session_id": "",
+  "capture_result_hash": "",
+  "supervisor_session_id": "<Pi session id>",
+  "request": {"request_id": "<id>", "reason": "pi_connector_unavailable", "supervisor_session_id": "<Pi session id>", "target": {"file_key": "<canonical key>", "node_ids": ["<exact id>"], "expected_approval": "Approved", "evidence_categories": ["dimensions_layout"]}, "operations": ["node_metadata"]},
+  "artifacts": [],
+  "notes_for_next_agent": "Human design approval remains required."
 }
 ```
