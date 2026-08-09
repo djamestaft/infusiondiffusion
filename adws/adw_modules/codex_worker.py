@@ -21,7 +21,7 @@ CANONICAL_CLI_PROVENANCE = {
  "exec_events_commit": "266c6920d9b82fe4d68959529565256b12a9be99",
  "mcp_commit": "420accf199e10bc908837ce5c7609b3bb9a38c8d",
 }
-RETRYABLE = {"timeout", "disconnect", "rate_limit", "provider_5xx"}
+RETRYABLE = {"timeout", "disconnect", "rate_limit", "provider_5xx", "missing_tool_trace"}
 ALLOWED_OPERATIONS = {"node_metadata", "node_context", "variables", "styles", "screenshot"}
 TOOL_OPERATION = {"get_metadata":"node_metadata", "node_metadata":"node_metadata",
  "get_design_context":"node_context", "node_context":"node_context", "get_variable_defs":"variables",
@@ -377,7 +377,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
      parsed=CodexFigmaOutput.model_validate_json(raw_result); sanitized=_redact(parsed.model_dump()); parsed=CodexFigmaOutput.model_validate(sanitized); stamps=_tool_stamps(raw)
      if stamps is None or parsed.request != request or not _stamps_match_request(stamps, request):
       _write(root/"diagnostic.json",_trace_diagnostic(raw,stamps,request,parsed.request))
-      raise ValueError("untraced_or_invalid_evidence")
+      raise ValueError("missing_tool_trace" if stamps == [] else "untraced_or_invalid_evidence")
      # Validate canonical target and redact before a call fact can be traced.
      safe_stamps=[CodexCallStamp.model_validate(_redact(s.model_dump())) for s in stamps]
      # Code, never the connector, derives observed target, stamps, and evidence.
@@ -396,7 +396,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
        [stamp.model_dump() for stamp in safe_stamps], parsed.result_hash,
        _hash([artifact.model_dump() for artifact in parsed.evidence_manifest]))
      _write(root/"result.json",parsed.model_dump()); return parsed
-    except ValueError as error: code=str(error) if str(error) in {"redaction_failure","json_limit_exceeded","artifact_limit_exceeded","untraced_or_invalid_evidence"} else "schema_mismatch"
+    except ValueError as error: code=str(error) if str(error) in {"redaction_failure","json_limit_exceeded","artifact_limit_exceeded","untraced_or_invalid_evidence","missing_tool_trace"} else "schema_mismatch"
     except (OSError,json.JSONDecodeError): code="schema_mismatch"
    else: code=outcome
    if code in RETRYABLE and attempt<config.max_attempts and time.monotonic()+config.retry_backoff_seconds<deadline:

@@ -250,10 +250,10 @@ else:
     def test_invalid_output_tools_targets_untraced_calls_and_redaction_fail_closed(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            for mode, code in (("invalid_json", "schema_mismatch"), ("unknown_tool", "untraced_or_invalid_evidence"), ("wrong_target", "untraced_or_invalid_evidence"), ("untraced", "untraced_or_invalid_evidence")):
+            for mode, code, attempts_expected in (("invalid_json", "schema_mismatch", 1), ("unknown_tool", "untraced_or_invalid_evidence", 1), ("wrong_target", "untraced_or_invalid_evidence", 1), ("untraced", "missing_tool_trace", 2)):
                 with self.subTest(mode=mode):
                     result, attempts = self.enabled(root / mode, mode)
-                    self.assertEqual((result.failure_code, attempts), (code, 1))
+                    self.assertEqual((result.failure_code, attempts), (code, attempts_expected))
             payload = {"status":"success", "summary":"authorization=secret-value", "capture_status":"complete", "request":self.request().model_dump(), "provenance":{"adw_id":"x","phase_id":"x","request_id":"x","supervisor_session_id":"x"}}
             executable = self.executable(root / "redaction", "success", payload=payload)
             result = run(self.request(), FigmaCodexWorkerConfig(enabled=True), self.runtime(root / "redaction"), "phase", test_executable=str(executable))
