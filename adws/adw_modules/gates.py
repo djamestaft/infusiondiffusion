@@ -154,7 +154,7 @@ def _capture_commit_compatible(repo_root: str, captured: str, current: str) -> b
         return True
     try:
         ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", captured, current],
-                                  cwd=repo_root, timeout=10).returncode == 0
+                                  cwd=repo_root, capture_output=True, timeout=10).returncode == 0
         changed = subprocess.run(["git", "diff", "--name-only", f"{captured}..{current}"],
                                  cwd=repo_root, capture_output=True, text=True, timeout=10,
                                  check=True).stdout.splitlines()
