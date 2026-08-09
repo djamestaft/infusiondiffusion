@@ -190,14 +190,29 @@ def _tool_stamps(raw_jsonl: str) -> list[CodexCallStamp] | None:
  stamps=[]
  for item in items:
   if item["type"] != "mcp_tool_call": continue
-  operation=TOOL_OPERATION.get(item["tool"].removeprefix("figma."))
+  tool=item["tool"].removeprefix("figma.")
+  operation=TOOL_OPERATION.get(tool)
   args=item["arguments"]
-  if operation is None or set(args) not in ({"file_key", "node_id"}, {"file_key", "node_ids"},
-                                             {"fileKey", "nodeId"}, {"fileKey", "nodeIds"}): return None
+  canonical_tool=OPERATION_TOOL.get(operation)
+  allowed={
+   "get_metadata": {"file_key", "node_id", "fileKey", "nodeId"},
+   "get_variable_defs": {"file_key", "node_id", "fileKey", "nodeId"},
+   "get_design_context": {"file_key", "node_id", "fileKey", "nodeId", "clientFrameworks",
+                          "clientLanguages", "disableCodeConnect", "excludeScreenshot", "forceCode", "skillNames"},
+   "get_screenshot": {"file_key", "node_id", "fileKey", "nodeId", "contentsOnly",
+                      "enableBase64Response", "maxDimension"},
+  }.get(canonical_tool)
+  if operation is None or allowed is None or not set(args).issubset(allowed): return None
   file_key=args.get("file_key", args.get("fileKey"))
   nodes=args.get("node_ids", args.get("node_id", args.get("nodeIds", args.get("nodeId"))))
   if isinstance(nodes, str): nodes=[nodes]
   if not isinstance(file_key, str) or not isinstance(nodes, list): return None
+  for key in ("clientFrameworks", "clientLanguages", "skillNames"):
+   if key in args and (not isinstance(args[key], str) or len(args[key]) > 256): return None
+  for key in ("disableCodeConnect", "excludeScreenshot", "forceCode", "contentsOnly", "enableBase64Response"):
+   if key in args and not isinstance(args[key], bool): return None
+  if "maxDimension" in args and (not isinstance(args["maxDimension"], int)
+                                  or not 1 <= args["maxDimension"] <= 65536): return None
   try: stamps.append(CodexCallStamp(operation=operation, file_key=file_key, node_ids=nodes))
   except ValueError: return None
  return stamps
