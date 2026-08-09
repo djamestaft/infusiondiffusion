@@ -31,11 +31,19 @@ def _size(path: Path) -> str:
     n = path.stat().st_size
     return f"{n}B" if n < 1024 else f"{n / 1024:.1f}KB"
 
+def _declared_artifact_path(value: str, run) -> Path:
+    direct = Path(value)
+    if direct.exists() or direct.is_absolute():
+        return direct
+    root = _handoff_root(run)
+    candidate = (root / direct).resolve()
+    return candidate if root in candidate.parents else direct
+
 
 def artifacts_exist(envelope: EnvelopeBase, run) -> GateReport:
     report = GateReport()
     for a in envelope.artifacts:
-        p = Path(a)
+        p = _declared_artifact_path(a, run)
         report.check(a, p.exists(),
                      f"exists, {_size(p)}" if p.exists() else "declared artifact does not exist")
     return report
@@ -44,7 +52,7 @@ def artifacts_exist(envelope: EnvelopeBase, run) -> GateReport:
 def files_non_empty(envelope: EnvelopeBase, run) -> GateReport:
     report = GateReport()
     for a in envelope.artifacts:
-        p = Path(a)
+        p = _declared_artifact_path(a, run)
         if not (p.exists() and p.is_file()):
             continue                       # existence is artifacts_exist's job
         empty = p.stat().st_size == 0
