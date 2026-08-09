@@ -227,6 +227,25 @@ def _stamps_match_request(stamps: list[CodexCallStamp], request: CodexFigmaReque
   if observed != expected_nodes: return False
  return True
 
+def _trace_diagnostic(raw_jsonl: str, stamps: list[CodexCallStamp] | None,
+                      request: CodexFigmaRequest, parsed_request: CodexFigmaRequest) -> dict[str, Any]:
+ events=[]
+ for line in raw_jsonl.splitlines():
+  try: event=json.loads(line)
+  except json.JSONDecodeError:
+   events.append({"type":"invalid_json"}); continue
+  item=event.get("item") if isinstance(event,dict) else None
+  summary={"type":event.get("type") if isinstance(event,dict) else "invalid_event"}
+  if isinstance(item,dict):
+   summary.update({"item_type":item.get("type"),"server":item.get("server"),"tool":item.get("tool"),
+                   "status":item.get("status"),"argument_keys":sorted(item.get("arguments",{}))
+                   if isinstance(item.get("arguments"),dict) else []})
+  events.append(summary)
+ return {"events":events,"stamps":[stamp.model_dump() for stamp in stamps or []],
+         "official_items_valid":_official_items(raw_jsonl) is not None,
+         "request_matches":parsed_request == request,
+         "coverage_matches":bool(stamps) and _stamps_match_request(stamps,request)}
+
 def _approval_labels(raw_jsonl: str, request: CodexFigmaRequest) -> dict[str, str] | None:
  items=_official_items(raw_jsonl)
  if items is None: return None
@@ -346,7 +365,9 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
      raw_result=output.read_bytes()
      if len(raw_result)>config.max_json_bytes: raise ValueError("json_limit_exceeded")
      parsed=CodexFigmaOutput.model_validate_json(raw_result); sanitized=_redact(parsed.model_dump()); parsed=CodexFigmaOutput.model_validate(sanitized); stamps=_tool_stamps(raw)
-     if stamps is None or parsed.request != request or not _stamps_match_request(stamps, request): raise ValueError("untraced_or_invalid_evidence")
+     if stamps is None or parsed.request != request or not _stamps_match_request(stamps, request):
+      _write(root/"diagnostic.json",_trace_diagnostic(raw,stamps,request,parsed.request))
+      raise ValueError("untraced_or_invalid_evidence")
      # Validate canonical target and redact before a call fact can be traced.
      safe_stamps=[CodexCallStamp.model_validate(_redact(s.model_dump())) for s in stamps]
      # Code, never the connector, derives observed target, stamps, and evidence.
