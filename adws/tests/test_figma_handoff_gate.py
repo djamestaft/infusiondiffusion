@@ -94,7 +94,7 @@ class FigmaHandoffGateTest(TestCase):
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = self._direct(root)
-            output.handoff_sections["accessibility_interaction"] = ["keyboard focus"]
+            output.handoff_sections["accessibility_interaction"] = []
             self.assertFalse(figma_handoff_complete(output, self._run(root)).passed)
 
     def test_direct_handoff_requires_complete_stage(self) -> None:
@@ -109,7 +109,10 @@ class FigmaHandoffGateTest(TestCase):
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = self._direct(root)
-            output.handoff_sections["divergences"] = ["unavailable static-Figma facts are a blocker"]
+            output.static_fact_status = "unavailable"
+            output.static_fact_reason = "required static-Figma facts are unavailable"
+            output.stage = "blocked"
+            output.ready = False
             self.assertFalse(figma_handoff_complete(output, self._run(root)).passed)
 
     def test_worker_handoff_accepts_current_exclusive_evidence(self) -> None:
@@ -143,6 +146,11 @@ class FigmaHandoffGateTest(TestCase):
             two = one.model_copy(deep=True)
             two.human_design_approval.target_hash = hashlib.sha256(json.dumps(second.model_dump(), sort_keys=True, separators=(",", ":")).encode()).hexdigest()
             self.assertTrue(figma_handoff_coverage([one, two], plan, run).passed)
+            one.handoff_sections["dimensions_layout"] = ["This frame owns typography facts; viewport obligations live in the sibling frame."]
+            self.assertTrue(figma_handoff_coverage([one, two], plan, run).passed)
+            two.handoff_sections["dimensions_layout"] = list(one.handoff_sections["dimensions_layout"])
+            self.assertFalse(figma_handoff_coverage([one, two], plan, run).passed)
+            two.handoff_sections["dimensions_layout"] = list(SECTIONS["dimensions_layout"])
             self.assertFalse(figma_handoff_coverage([one], plan, run).passed)
             self.assertFalse(figma_handoff_coverage([one, one], plan, run).passed)
             two.human_design_approval.target_hash = "0" * 64

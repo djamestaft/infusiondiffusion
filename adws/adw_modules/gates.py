@@ -25,6 +25,15 @@ TAIL_CHARS = 1000        # command output kept as evidence on a failure
 # A complete capture needs one final successful attempt; prior closed retry
 # attempts retain their own non-success terminal outcomes.
 ACCEPTABLE_CAPTURE_WORKER_OUTCOMES = frozenset(("completed",))
+HANDOFF_OBLIGATIONS = {
+    "dimensions_layout": ("320", "390", "desktop", "200%", "natural height"),
+    "semantic_variables": ("semantic",), "typography": ("semantic html", "heading"),
+    "spacing_assets": ("image alt", "rights applicability"),
+    "responsive": ("320", "390", "desktop", "natural height"),
+    "accessibility_interaction": ("keyboard", "focus", "wcag aa", "reduced motion"),
+    "content_extremes": ("long", "localized", "missing", "empty", "loading", "error", "disabled"),
+    "divergences": ("diverg",),
+}
 
 
 def _size(path: Path) -> str:
@@ -147,21 +156,11 @@ def figma_handoff_complete(envelope: FigmaSupervisorOutput, run, expected_target
     # These are concrete, reviewable obligations, not generic accessibility
     # labels.  Static Figma cannot establish all of them, so a handoff must say
     # which facts are unavailable and block implementation rather than inventing.
-    required_obligations = {
-        "dimensions_layout": ("320", "390", "desktop", "200%", "natural height"),
-        "semantic_variables": ("semantic",), "typography": ("semantic html", "heading"),
-        "spacing_assets": ("image alt", "rights applicability"),
-        "responsive": ("320", "390", "desktop", "natural height"),
-        "accessibility_interaction": ("keyboard", "focus", "wcag aa", "reduced motion"),
-        "content_extremes": ("long", "localized", "missing", "empty", "loading", "error", "disabled"),
-        "divergences": ("diverg",),
-    }
     for section in sorted(HANDOFF_SECTIONS):
         values = envelope.handoff_sections.get(section, [])
-        text = " ".join(str(value).casefold() for value in values)
-        missing = [word for word in required_obligations[section] if word not in text]
-        report.check(f"handoff section {section}", bool(values and all(str(value).strip() for value in values) and not missing),
-                     "concrete obligations documented" if not missing else "missing concrete obligations: " + ", ".join(missing))
+        complete = bool(values and all(str(value).strip() for value in values))
+        report.check(f"handoff section {section}", complete,
+                     "target-owned facts documented" if complete else "target-owned facts are missing")
     # An unavailable static fact is a hard stop.  A handoff cannot become
     # complete merely by mentioning the word “blocker” in its narrative.
     static_complete = (envelope.static_fact_status == "complete" and not envelope.static_fact_reason.strip()
@@ -419,6 +418,19 @@ def figma_handoff_coverage(handoffs: list[FigmaSupervisorOutput], plan: PlanOutp
     report.check("Figma handoff exact coverage", set(actual_hashes) == set(expected_hashes),
                  "all and only planned targets covered" if set(actual_hashes) == set(expected_hashes)
                  else "partial, mixed, missing, or wrong-target handoff coverage")
+    # Concrete cross-cutting obligations belong to the approved target set as
+    # a whole. Requiring every atomic frame (for example typography) to repeat
+    # unrelated image or viewport facts creates false blockers; the aggregate
+    # gate still requires the union to cover every release obligation.
+    for section in sorted(HANDOFF_SECTIONS):
+        aggregate = " ".join(
+            str(value).casefold() for handoff in handoffs
+            for value in handoff.handoff_sections.get(section, [])
+        )
+        missing = [word for word in HANDOFF_OBLIGATIONS[section] if word not in aggregate]
+        report.check(f"Figma aggregate {section}", not missing,
+                     "concrete obligations covered across target set" if not missing
+                     else "missing concrete obligations: " + ", ".join(missing))
     for target, target_hash in zip(targets, expected_hashes):
         matching = [handoff for handoff in handoffs if handoff.human_design_approval
                     and handoff.human_design_approval.target_hash == target_hash]
