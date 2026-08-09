@@ -17,7 +17,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
-from .codex_worker import SUPPORTED_CODEX_VERSION
+from .codex_worker import SUPPORTED_CODEX_VERSION, _output_schema, _worker_prompt
 from .data_types import (HANDOFF_SECTIONS, CodexFigmaOutput, CodexFigmaRequest,
                          EnvelopeBase, FigmaSupervisorOutput, GateReport, PlanOutput)
 
@@ -266,13 +266,10 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
     _append_worker_lifecycle(report, run, run.adw_id, provenance.phase_id,
                              provenance.request_id)
     cfg = run.cfg.workers.figma_codex
-    schema_hash = hashlib.sha256(json.dumps(CodexFigmaOutput.model_json_schema(), sort_keys=True,
+    schema_hash = hashlib.sha256(json.dumps(_output_schema(envelope.request), sort_keys=True,
                                             separators=(",", ":")).encode()).hexdigest()
     try:
-        prompt_dir = Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
-        prompt = ((prompt_dir / "system.md").read_text()
-                  + "\n" + (prompt_dir / "user.md").read_text()
-                  + "\n" + envelope.request.model_dump_json())
+        prompt = _worker_prompt(envelope.request)
         prompt_hash = hashlib.sha256(prompt.encode()).hexdigest()
         repo_root = str(getattr(run, "repo_root", Path.cwd()))
         commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, capture_output=True,

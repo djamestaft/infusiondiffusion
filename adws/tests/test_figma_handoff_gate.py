@@ -18,6 +18,7 @@ from adw_modules.data_types import (
     HumanDesignApproval,
     PlanOutput,
 )
+from adw_modules.codex_worker import _output_schema, _worker_prompt
 from adw_modules.gates import _result_hash, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
 from adw_modules.tracer import Tracer
 
@@ -306,15 +307,14 @@ class FigmaHandoffGateTest(TestCase):
         target_hash = hashlib.sha256(json.dumps(request.target.model_dump(), sort_keys=True,
                                                   separators=(",", ":")).encode()).hexdigest()
         repo_root = Path(__file__).resolve().parents[2]
-        prompt_dir = repo_root / "adws/adw_data/prompt_engineering/figma_codex_worker"
-        prompt = (prompt_dir / "system.md").read_text() + "\n" + (prompt_dir / "user.md").read_text() + "\n" + request.model_dump_json()
+        prompt = _worker_prompt(request)
         now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         provenance = CodexWorkerProvenance(
             adw_id="run", phase_id="capture-phase", request_id=request.request_id,
             supervisor_session_id="pi-session", endpoint_identity="https://mcp.figma.com/mcp",
             cli_version="codex-cli 0.147.0",
             repository_commit=subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, capture_output=True, text=True).stdout.strip(),
-            schema_hash=hashlib.sha256(json.dumps(CodexFigmaOutput.model_json_schema(), sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
+            schema_hash=hashlib.sha256(json.dumps(_output_schema(request), sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
             prompt_hash=hashlib.sha256(prompt.encode()).hexdigest(),
             target_hash=target_hash, started_at=now, ended_at=now, duration_seconds=0, attempts=1,
             timeout_seconds=180, overall_deadline_seconds=370, termination_outcome="completed",

@@ -297,6 +297,19 @@ def _output_schema(request: CodexFigmaRequest) -> dict[str, Any]:
  labels["required"] = list(request.target.node_ids)
  return schema
 
+def _worker_prompt(request: CodexFigmaRequest) -> str:
+ prompt_dir=Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
+ required_tools=sorted({"mcp__figma__" + OPERATION_TOOL[operation] for operation in request.operations})
+ exact_calls=[f'{tool} with {{"fileKey":"{request.target.file_key}","nodeId":"{node_id}"}}'
+              for node_id in request.target.node_ids for tool in required_tools]
+ tool_instruction=("\nMandatory connector execution: call each of these enabled official Figma tools "
+                   "for every exact target node before returning: " + ", ".join(required_tools) +
+                   ". Exact calls required: " + "; ".join(exact_calls) +
+                   ". Do not claim the connector or plugin is unavailable without first attempting "
+                   "the named tool calls. Never call any unlisted tool.\n")
+ return ((prompt_dir/"system.md").read_text()+"\n"+(prompt_dir/"user.md").read_text()
+         +tool_instruction+request.model_dump_json())
+
 def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_id: str, *, test_executable: str | None = None) -> CodexFigmaOutput:
  """Only ``test_executable`` is injectable, and it is a test seam, not config."""
  started=time.monotonic(); p=CodexWorkerProvenance(adw_id=run.adw_id,phase_id=phase_id,request_id=request.request_id,supervisor_session_id=request.supervisor_session_id,repository_commit=_commit(run),started_at=now_iso(),target_hash=_hash(request.target.model_dump()),timeout_seconds=config.attempt_timeout_seconds,overall_deadline_seconds=config.overall_deadline_seconds,endpoint_identity=FIGMA_OFFICIAL_ENDPOINT)
@@ -324,18 +337,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
   p.ended_at=now_iso(); p.termination_outcome="policy_denied"; return _failure("artifact_limit_exceeded",request,p)
  request_artifact = CodexArtifact(path=f"figma/{request.request_id}/request.json", media_type="application/json", byte_count=len(request_data), sha256=hashlib.sha256(request_data).hexdigest())
  schema=_output_schema(request); p.schema_hash=_hash(schema)
- prompt_dir=Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
- prompt_path=prompt_dir / "system.md"
- user_path=prompt_dir / "user.md"
- required_tools=sorted({"mcp__figma__" + OPERATION_TOOL[operation] for operation in request.operations})
- exact_calls=[f'{tool} with {{"fileKey":"{request.target.file_key}","nodeId":"{node_id}"}}'
-              for node_id in request.target.node_ids for tool in required_tools]
- tool_instruction=("\nMandatory connector execution: call each of these enabled official Figma tools "
-                   "for every exact target node before returning: " + ", ".join(required_tools) +
-                   ". Exact calls required: " + "; ".join(exact_calls) +
-                   ". Do not claim the connector or plugin is unavailable without first attempting "
-                   "the named tool calls. Never call any unlisted tool.\n")
- prompt=(prompt_path.read_text()+"\n"+user_path.read_text()+tool_instruction+request.model_dump_json())
+ prompt=_worker_prompt(request)
  p.prompt_hash=hashlib.sha256(prompt.encode()).hexdigest(); deadline=started+config.overall_deadline_seconds
  code="worker_failed"
  for attempt in range(1,config.max_attempts+1):
