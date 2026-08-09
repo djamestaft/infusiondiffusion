@@ -22,7 +22,7 @@ from adw_modules.data_types import (
     PlanOutput,
 )
 from adw_modules.codex_worker import _output_schema, _worker_prompt
-from adw_modules.gates import _result_hash, _worker_lifecycle_complete, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
+from adw_modules.gates import _capture_commit_compatible, _result_hash, _worker_lifecycle_complete, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
 from adw_modules.tracer import Tracer
 
 
@@ -39,6 +39,27 @@ SECTIONS = {
 
 
 class FigmaHandoffGateTest(TestCase):
+    def test_capture_commit_compatibility_allows_only_factory_internal_descendants(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+            subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=root, check=True)
+            subprocess.run(["git", "config", "user.name", "Test"], cwd=root, check=True)
+            (root / "src").mkdir(); (root / "src/app.ts").write_text("stable")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "base"], cwd=root, check=True)
+            base = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            (root / "adws").mkdir(); (root / "adws/gate.py").write_text("repair")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "factory"], cwd=root, check=True)
+            factory = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            self.assertTrue(_capture_commit_compatible(str(root), base, factory))
+            (root / "src/app.ts").write_text("changed")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "product"], cwd=root, check=True)
+            product = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            self.assertFalse(_capture_commit_compatible(str(root), base, product))
+
     def test_agent_call_accepts_typed_implementation_context(self) -> None:
         plan = PlanOutput(status="success")
         call = AgentCall(output_type=BuildOutput, prompt="build",

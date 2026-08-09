@@ -141,6 +141,28 @@ def _append_worker_lifecycle(report: GateReport, run, adw_id: str, phase_id: str
         report.check(check.item, check.ok, check.note)
 
 
+def _capture_commit_compatible(repo_root: str, captured: str, current: str) -> bool:
+    """Keep evidence only across descendant factory-internal repairs.
+
+    Product, design, configuration, content, and Storybook changes always
+    invalidate capture provenance. This narrowly avoids recapturing unchanged
+    Figma facts when only the SSSF harness itself was repaired.
+    """
+    if not captured or not current:
+        return False
+    if captured == current:
+        return True
+    try:
+        ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", captured, current],
+                                  cwd=repo_root, timeout=10).returncode == 0
+        changed = subprocess.run(["git", "diff", "--name-only", f"{captured}..{current}"],
+                                 cwd=repo_root, capture_output=True, text=True, timeout=10,
+                                 check=True).stdout.splitlines()
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return ancestor and bool(changed) and all(path.startswith("adws/") for path in changed)
+
+
 def figma_handoff_complete(envelope: FigmaSupervisorOutput, run, expected_target=None) -> GateReport:
     """Validate one same-session Pi handoff bound to one planned target."""
     report = GateReport()
@@ -296,7 +318,8 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
              and provenance.worker_kind == "codex" and provenance.connector_name == "figma"
              and provenance.schema_version == "1"
              and provenance.cli_version in (f"codex {SUPPORTED_CODEX_VERSION}", f"codex v{SUPPORTED_CODEX_VERSION}", f"codex-cli {SUPPORTED_CODEX_VERSION}", f"codex-cli v{SUPPORTED_CODEX_VERSION}")
-             and provenance.repository_commit == commit and provenance.schema_hash == schema_hash
+             and _capture_commit_compatible(repo_root, provenance.repository_commit, commit)
+             and provenance.schema_hash == schema_hash
              and provenance.prompt_hash == prompt_hash and duration_ok
              and provenance.attempts == len(lifecycle_rows) and provenance.attempts in range(1, cfg.max_attempts + 1)
              and provenance.termination_outcome == "completed")
