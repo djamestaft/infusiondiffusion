@@ -185,7 +185,7 @@ else:
             result = run(request, FigmaCodexWorkerConfig(enabled=True), self.runtime(root), "phase",
                          test_executable=str(self.executable(root, payload=payload)))
             self.assertEqual((result.status, result.capture_status, result.failure_code),
-                             ("success", "complete", None))
+                             ("success", "complete", ""))
             self.assertTrue((root / "handoff" / "figma" / "request" / "evidence.json").is_file())
 
     def test_preflight_missing_and_malformed_connectors_fail_before_attempt(self):
