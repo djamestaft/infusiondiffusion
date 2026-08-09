@@ -224,4 +224,3 @@ Before calling the redesign ready, explicitly mark each item complete, blocked, 
 ## Definition of done
 
 The redesign is done only when the selected direction is human-approved, Figma evidence is exact and provenance-gated, design tokens and Storybook contracts are synchronized, approved storefront behavior is implemented, required tests and preview checks pass, content and commerce owners have supplied production truth, the pre-go-live checklist has no unnamed blocker, and a human has approved merge. Production remains out of scope until separately authorized.
-
