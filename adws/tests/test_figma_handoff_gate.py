@@ -19,7 +19,7 @@ from adw_modules.data_types import (
     PlanOutput,
 )
 from adw_modules.codex_worker import _output_schema, _worker_prompt
-from adw_modules.gates import _result_hash, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
+from adw_modules.gates import _result_hash, _worker_lifecycle_complete, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
 from adw_modules.tracer import Tracer
 
 
@@ -36,6 +36,21 @@ SECTIONS = {
 
 
 class FigmaHandoffGateTest(TestCase):
+    def test_worker_lifecycle_accepts_closed_semantic_retry_before_final_success(self) -> None:
+        lifecycle = {
+            "rows": [
+                {"attempt_id": "request:1", "pid": 98, "status": "completed", "ended_at": "2026-01-01T00:00:01Z"},
+                {"attempt_id": "request:2", "pid": 99, "status": "completed", "ended_at": "2026-01-01T00:00:02Z"},
+            ],
+            "starts": [{"attempt_id": "request:1", "pid": 98}, {"attempt_id": "request:2", "pid": 99}],
+            "ends": [{"attempt_id": "request:1", "pid": 98}, {"attempt_id": "request:2", "pid": 99}],
+            "tools": [],
+            "malformed": 0,
+        }
+        tracer = SimpleNamespace(connector_worker_lifecycle=lambda *_: lifecycle)
+        report = _worker_lifecycle_complete(SimpleNamespace(tracer=tracer), "adw", "phase", "request")
+        self.assertTrue(report.passed)
+
     def test_explicit_handoff_root_does_not_evaluate_legacy_config(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)

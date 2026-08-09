@@ -82,10 +82,12 @@ def _result_hash(envelope: CodexFigmaOutput) -> str:
 
 
 def _worker_lifecycle_complete(run, adw_id: str, phase_id: str, request_id: str) -> GateReport:
-    """Require a closed, uniquely paired attempt history ending in one success.
+    """Require a closed, uniquely paired attempt history ending in success.
 
-    Retries are valid only when every prior attempt is closed with its actual
-    terminal outcome and the final attempt is the sole completed one.
+    A process can exit successfully yet fail semantic trace validation and be
+    retried. Every attempt must still close truthfully; the final attempt must
+    complete, while the separate tool-binding gate proves which attempt
+    produced accepted evidence.
     """
     report = GateReport()
     tracer = getattr(run, "tracer", None)
@@ -118,10 +120,9 @@ def _worker_lifecycle_complete(run, adw_id: str, phase_id: str, request_id: str)
     report.check("worker lifecycle events", paired,
                  "each attempt has one matching sanitized start/end pair" if paired
                  else "worker start/end events are missing, duplicate, malformed, or ambiguous")
-    completed = [row for row in rows if isinstance(row, dict) and row.get("status") in ACCEPTABLE_CAPTURE_WORKER_OUTCOMES]
-    accepted = len(completed) == 1 and bool(rows) and rows[-1] is completed[0]
+    accepted = bool(rows) and isinstance(rows[-1], dict) and rows[-1].get("status") in ACCEPTABLE_CAPTURE_WORKER_OUTCOMES
     report.check("worker lifecycle outcome", accepted,
-                 "final attempt completed" if accepted else "expected exactly one final completed attempt")
+                 "final attempt completed" if accepted else "expected the final attempt to complete")
     return report
 
 
