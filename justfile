@@ -70,6 +70,10 @@ resume-simple-sdlc *ARGS:
 review *ARGS:
     uv run adws/adw_review.py --config {{config}} "$@"
 
+# record a target-bound approval with --record-approval first, then capture it; never logs in or builds
+figma-capture *ARGS:
+    uv run adws/adw_figma_capture.py --config {{config}} "$@"
+
 # required after opening or updating a PR; the release handoff is red until GitHub is green
 pr-gate *ARGS:
     uv run adws/adw_pr_gate.py --repo djamestaft/infusiondiffusion --config {{config}} "$@"

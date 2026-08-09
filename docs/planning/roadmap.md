@@ -106,6 +106,8 @@ The repository has a proven agentic delivery baseline. Protected `main` runs gre
 - [x] Define human approval points for design, merge, production, editorial publishing, and rollback
 - [x] Trial Pi orchestration with Codex-backed specialist roles and scoped MCP
 - [x] Retire Pi orchestration after operator testing exposed insufficient worker visibility and autonomous multi-PR behavior
+- [x] Add an off-by-default bounded Codex `0.147.0` Figma connector fallback: Pi scopes/validates and deterministic code captures exact read-only evidence with trusted approvals, closed worker_tool binding, cancellation finalization, and structured static-fact blocking; this does not restore Pi orchestration or Pi Catalog approval/OAuth
+- [ ] After independent review, authorize one exact-node live smoke; offline compatibility evidence is not live connector evidence
 - [x] Activate the hard-required project-local Pi Figma MCP client (`pi-mcp-adapter`); this does not restore Pi orchestration
 - [x] Submit Figma MCP Catalog registration for the required Pi client
 - [ ] Obtain Figma Catalog approval for Pi — externally blocked; no response timeline is assumed

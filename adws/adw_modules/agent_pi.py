@@ -12,11 +12,14 @@ import json
 import os
 import subprocess
 import time
+import tempfile
+import shutil
 from functools import lru_cache
 from pathlib import Path
 from typing import Callable, Optional
 
 from .data_types import PiRequest, PiResult
+from . import process_policy
 from .utils import now_iso, operator_env
 
 PI_PATH = os.environ.get("PI_PATH", "pi")
@@ -29,6 +32,12 @@ LABEL_CHARS = 80                # "bash: <command>" shown as the event name
 
 # The arg that identifies a call at a glance, in the order tools tend to use.
 PRIMARY_ARGS = ("command", "path", "file_path", "pattern", "query", "url")
+# Only these Pi tool names execute a process or shell. Payloads from repository
+# tools are data, so they must never be interpreted as commands by this guard.
+EXECUTABLE_TOOL_NAMES = frozenset((
+    "bash", "shell", "sh", "zsh", "fish", "command", "execute", "exec",
+    "run", "run_command", "run_shell_command",
+))
 
 
 def _count(value: str) -> int:
@@ -126,6 +135,45 @@ def _text_of(container: dict) -> str:
 
 def _clip(text: str, limit: int) -> str:
     return text if len(text) <= limit else text[:limit].rstrip() + "…"
+
+
+def _is_executable_tool(tool: object) -> bool:
+    """Whether a Pi tool name is an executable process or shell boundary."""
+    if not isinstance(tool, str):
+        return False
+    name = tool.rsplit(".", 1)[-1].strip().casefold().replace("-", "_")
+    return name in EXECUTABLE_TOOL_NAMES
+
+
+def _event_commands(event: dict) -> list[str]:
+    """Extract commands only from executable process or shell tool calls.
+
+    Pi may announce a tool call in an assistant ``message_end`` before its
+    execution-start event. Repository-tool arguments are opaque data: in
+    particular, read, grep, edit, and write payloads are never inspected.
+    """
+    if event.get("type") == "tool_execution_start":
+        args = event.get("args")
+        # Older Pi streams omitted the tool name for this event; their
+        # command-shaped start record is the legacy process-tool representation.
+        executable = _is_executable_tool(event.get("toolName")) or (
+            event.get("toolName") is None and isinstance(args, dict)
+            and isinstance(args.get("command"), str)
+        )
+        if executable and isinstance(args, dict) and isinstance(args.get("command"), str):
+            return [args["command"]]
+        return []
+    if event.get("type") != "message_end":
+        return []
+    commands: list[str] = []
+    for block in event.get("message", {}).get("content", []) or []:
+        if (not isinstance(block, dict) or block.get("type") != "toolCall"
+                or not _is_executable_tool(block.get("name"))):
+            continue
+        arguments = block.get("arguments") or block.get("args") or {}
+        if isinstance(arguments, dict) and isinstance(arguments.get("command"), str):
+            commands.append(arguments["command"])
+    return commands
 
 
 def _label(tool: str, args: dict) -> str:
@@ -240,12 +288,17 @@ def run(request: PiRequest, on_event: Optional[Callable[[dict], None]] = None,
     # EOF. That failure is silent and total: no request goes out, no bytes come
     # back, and the ADW blocks on a read loop with nothing to read. Observed as
     # a run that sat idle at 0% CPU with an empty raw_output.jsonl.
+    # Pi never receives the operator's normal Codex resolution. This guard is
+    # cooperative (not an OS sandbox); tool-event inspection below fails closed.
+    shim_dir = Path(tempfile.mkdtemp(prefix="sssf-pi-deny-"))
     process = subprocess.Popen(cmd, stdin=subprocess.DEVNULL,
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                               text=True, bufsize=1, cwd=request.cwd,
-                               env=operator_env())
+                               text=True, bufsize=1, cwd=request.cwd, start_new_session=True,
+                               env=process_policy.pi_environment(process_policy.deny_shim(shim_dir)))
     if on_spawn:
         on_spawn(process.pid)
+    denied = False
+    termination: process_policy.TerminationOutcome | None = None
     with raw_path.open("a") as raw:
         assert process.stdout is not None
         for line in process.stdout:
@@ -274,13 +327,45 @@ def run(request: PiRequest, on_event: Optional[Callable[[dict], None]] = None,
                     if turn and message.get("stopReason") not in ("aborted", "error"):
                         result.context_tokens = turn
                     result.cost += (usage.get("cost", {}) or {}).get("total", 0.0) or 0.0
+            if any(process_policy.denies_codex(command, request.cwd) for command in _event_commands(event)):
+                denied = True
+                termination = process_policy.terminate_process_group(process)
+                if on_event:
+                    # Never trace model-supplied command text; the event records
+                    # the policy fact and any sanitized incomplete termination.
+                    on_event({"type": "nested_process_denied", "command": "codex",
+                              "termination": termination.status})
+                break
             if on_event:
                 on_event(event)
 
+    if denied:
+        # terminate_process_group has already used its bounded direct wait. Do
+        # not block reading pipes held open by an unkillable descendant.
+        try:
+            for stream in (process.stdout, process.stderr):
+                if stream:
+                    try:
+                        stream.close()
+                    except OSError:
+                        pass
+            result.returncode = process.returncode
+        finally:
+            # Close the known-child trace even when the group remains explicitly
+            # unconfirmed; the denial event records that distinction.
+            try:
+                if on_exit:
+                    on_exit(process.pid)
+            finally:
+                shutil.rmtree(shim_dir, ignore_errors=True)
+        assert termination is not None
+        raise RuntimeError("nested_process_denied: Pi agents cannot invoke codex"
+                           f" ({termination.status})")
     stderr = process.stderr.read() if process.stderr else ""
     result.returncode = process.wait()
     if on_exit:
         on_exit(process.pid)
+    shutil.rmtree(shim_dir, ignore_errors=True)
     if result.returncode != 0 and not result.text:
         raise RuntimeError(f"pi exited {result.returncode}: {stderr.strip()[-800:]}")
     return result

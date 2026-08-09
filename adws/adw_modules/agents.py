@@ -237,6 +237,15 @@ def _event_forwarder(run, phase: Phase, agent_name: str):
     tracker = agent_pi.ToolCallTracker()
 
     def forward(event: dict) -> None:
+        if event.get("type") == "nested_process_denied":
+            termination = event.get("termination")
+            # This is deterministic policy state, not model-supplied event data.
+            if termination not in {"group_gone", "group_permission_denied", "group_unconfirmed"}:
+                termination = "group_unconfirmed"
+            run.tracer.event(EventRecord(adw_id=run.adw_id, phase_id=phase.phase_id,
+                type="nested_process_denied", name=agent_name,
+                payload={"reason": "direct_or_wrapped_codex", "termination": termination}))
+            return
         record = tracker.observe(event)
         if record is None:
             return

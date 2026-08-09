@@ -69,7 +69,7 @@ approved, and protected GitHub pull requests remain the integration boundary.
 - Stop at the documented design, merge, production, editorial publish, and
   rollback gates.
 
-Pi orchestration remains retired because its background-worker model did not provide enough operator visibility. That decision is separate from this repository’s **hard-required Pi client** for the project-local Figma MCP route; Pi is not part of the storefront runtime.
+Pi orchestration remains retired because its background-worker model did not provide enough operator visibility. A narrow factory exception permits Pi to scope and validate typed Figma evidence when its connector is unavailable: deterministic SSSF code alone may run exact Codex CLI `0.147.0` as an ephemeral read-only worker against the configured official `figma` connector for exact approved nodes. Pi cannot spawn Codex; static shell/Python/Node indirection is denied, a closed sanitized `worker_tool` binding is required for readiness, and only the repository-configured trusted approver allowlist may authorize a target. Cancellation finalizes rejected runs. Codex has no repository write, merge, publish, deployment, production, or rollback authority. The path is off by default (`workers.figma_codex.enabled`), requires a human-authorized target, records only sanitized provenance, and is not a restoration of general Pi orchestration. That decision is separate from this repository’s **hard-required Pi client** for the project-local Figma MCP route; Pi is not part of the storefront runtime.
 
 ### Required Pi Figma MCP status and runbook
 

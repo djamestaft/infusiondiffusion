@@ -77,6 +77,15 @@ CREATE TABLE IF NOT EXISTS processes (
   command       TEXT,                -- what the pid was, so a recycled pid is not killed by mistake
   started_at    TEXT, ended_at TEXT  -- ended_at NULL = believed alive
 );
+CREATE TABLE IF NOT EXISTS connector_workers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  adw_id TEXT REFERENCES sessions, phase_id TEXT REFERENCES phases,
+  request_id TEXT, attempt_id TEXT, pid INTEGER, status TEXT, started_at TEXT, ended_at TEXT
+);
+CREATE TABLE IF NOT EXISTS human_design_approvals (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, adw_id TEXT, target_hash TEXT,
+  approved_by TEXT, approved_at TEXT, source TEXT
+);
 CREATE TABLE IF NOT EXISTS agent_sessions (
   adw_id        TEXT REFERENCES sessions,
   agent         TEXT,
@@ -96,7 +105,8 @@ MIGRATIONS = [("agent_sessions", "color", "TEXT"),
               ("sessions", "adw_name", "TEXT"),
               ("agent_sessions", "context_tokens", "INTEGER"),
               ("agent_sessions", "context_window", "INTEGER"),
-              ("sessions", "archived", "INTEGER DEFAULT 0")]
+              ("sessions", "archived", "INTEGER DEFAULT 0"),
+              ("connector_workers", "attempt_id", "TEXT")]
 
 
 class Tracer:
@@ -201,6 +211,101 @@ class Tracer:
             "UPDATE processes SET ended_at=? WHERE adw_id=? AND ended_at IS NULL",
             (now_iso(), adw_id),
         )
+
+    def human_design_approval(self, adw_id: str, target_hash: str, approved_by: str, trusted_approvers: set[str]) -> str:
+        """Record only a configured authority decision outside Pi-writable artifacts."""
+        if (not approved_by.strip() or approved_by.strip() not in trusted_approvers
+                or not len(target_hash) == 64):
+            raise ValueError("unauthorized_human_approval")
+        timestamp = now_iso()
+        cursor = self.conn.execute("INSERT INTO human_design_approvals (adw_id,target_hash,approved_by,approved_at,source) VALUES (?,?,?,?,?)",
+                          (adw_id, target_hash, approved_by.strip(), timestamp, "repository_allowlist"))
+        event_id = self.event(EventRecord(adw_id=adw_id, phase_id="", type="human_design_approval",
+                               name="trusted_authority", payload={"approval_id": cursor.lastrowid, "target_hash": target_hash, "approved_by": approved_by.strip()}))
+        return event_id
+
+    def human_design_approval_reference(self, adw_id: str, target_hash: str, approved_by: str) -> str | None:
+        row = self.conn.execute("SELECT id FROM human_design_approvals WHERE adw_id=? AND target_hash=? AND approved_by=? AND source='repository_allowlist' ORDER BY id DESC LIMIT 1",
+                                (adw_id, target_hash, approved_by)).fetchone()
+        return f"approval:{row[0]}" if row else None
+
+    def has_human_design_approval(self, adw_id: str, target_hash: str, approved_by: str) -> bool:
+        return self.human_design_approval_reference(adw_id, target_hash, approved_by) is not None
+
+    def has_trusted_human_design_approval(self, adw_id: str, target_hash: str,
+                                          trusted_approvers: set[str]) -> bool:
+        """Whether a configured authority recorded this exact target already."""
+        row = self.conn.execute(
+            "SELECT 1 FROM human_design_approvals WHERE adw_id=? AND target_hash=? "
+            "AND source='repository_allowlist' AND approved_by IN (%s) LIMIT 1"
+            % ",".join("?" for _ in trusted_approvers),
+            (adw_id, target_hash, *sorted(trusted_approvers)),
+        ).fetchone() if trusted_approvers else None
+        return row is not None
+
+    # ── sanitized connector worker lifecycle ───────────────────────────────
+    def connector_worker_start(self, adw_id: str, phase_id: str, request_id: str, attempt_id: str, pid: int) -> None:
+        """Open one uniquely identified connector-worker attempt."""
+        self.conn.execute("INSERT INTO connector_workers (adw_id, phase_id, request_id, attempt_id, pid, status, started_at) VALUES (?,?,?,?,?,?,?)", (adw_id, phase_id, request_id, attempt_id, pid, "running", now_iso()))
+        self.event(EventRecord(adw_id=adw_id, phase_id=phase_id, type="worker_start", name="figma_codex", payload={"request_id": request_id, "attempt_id": attempt_id, "pid": pid}))
+
+    def connector_worker_retry(self, adw_id: str, phase_id: str, request_id: str, attempt_id: str, code: str) -> None:
+        self.event(EventRecord(adw_id=adw_id, phase_id=phase_id, type="worker_retry", name="figma_codex", payload={"request_id": request_id, "attempt_id": attempt_id, "code": code}))
+
+    def connector_worker_tool(self, adw_id: str, phase_id: str, request_id: str, attempt_id: str, stamps: list[dict], result_hash: str, manifest_hash: str) -> None:
+        """Persist the final sanitized call/result/manifest binding, never raw payloads."""
+        allowed = {"operation", "file_key", "node_ids"}
+        if (not stamps or any(set(stamp) != allowed for stamp in stamps)
+                or not all(isinstance(value, str) and len(value) == 64 for value in (result_hash, manifest_hash))):
+            raise ValueError("redaction_failure")
+        self.event(EventRecord(adw_id=adw_id, phase_id=phase_id, type="worker_tool", name="figma_codex",
+            payload={"request_id": request_id, "attempt_id": attempt_id, "stamps": stamps,
+                     "result_hash": result_hash, "manifest_hash": manifest_hash}))
+
+    def connector_worker_end(self, adw_id: str, phase_id: str, pid: int, request_id: str, attempt_id: str, outcome: str) -> None:
+        """Close exactly the matching attempt row with its truthful terminal outcome."""
+        self.conn.execute("UPDATE connector_workers SET status=?, ended_at=? WHERE id=(SELECT id FROM connector_workers WHERE adw_id=? AND phase_id=? AND request_id=? AND attempt_id=? AND pid=? AND ended_at IS NULL ORDER BY id DESC LIMIT 1)", (outcome, now_iso(), adw_id, phase_id, request_id, attempt_id, pid))
+        self.event(EventRecord(adw_id=adw_id, phase_id=phase_id, type="worker_end", name="figma_codex", payload={"request_id": request_id, "attempt_id": attempt_id, "pid": pid, "outcome": outcome}))
+
+    def connector_worker_lifecycle(self, adw_id: str, phase_id: str, request_id: str) -> dict[str, object]:
+        """Return only sanitized lifecycle facts for one exact worker request."""
+        rows = self.conn.execute(
+            "SELECT attempt_id, pid, status, ended_at FROM connector_workers WHERE adw_id=? AND phase_id=? AND request_id=? ORDER BY id",
+            (adw_id, phase_id, request_id),
+        ).fetchall()
+        events = self.conn.execute(
+            "SELECT type, payload_json FROM events WHERE adw_id=? AND phase_id=? AND name='figma_codex' AND type IN ('worker_start', 'worker_end', 'worker_tool') ORDER BY started_at, event_id",
+            (adw_id, phase_id),
+        ).fetchall()
+        starts: list[dict[str, object]] = []
+        ends: list[dict[str, object]] = []
+        tools: list[dict[str, object]] = []
+        malformed = 0
+        for event_type, payload_json in events:
+            try:
+                payload = json.loads(payload_json)
+            except (TypeError, json.JSONDecodeError):
+                malformed += 1
+                continue
+            if not isinstance(payload, dict):
+                malformed += 1
+                continue
+            if payload.get("request_id") != request_id:
+                continue
+            if (event_type == "worker_start" and set(payload) == {"request_id", "attempt_id", "pid"}
+                    and isinstance(payload.get("attempt_id"), str) and isinstance(payload.get("pid"), int)):
+                starts.append(payload)
+            elif (event_type == "worker_end" and set(payload) == {"request_id", "attempt_id", "pid", "outcome"}
+                  and isinstance(payload.get("attempt_id"), str) and isinstance(payload.get("pid"), int)
+                  and isinstance(payload.get("outcome"), str)):
+                ends.append(payload)
+            elif (event_type == "worker_tool" and set(payload) == {"request_id", "attempt_id", "stamps", "result_hash", "manifest_hash"}
+                  and isinstance(payload.get("attempt_id"), str) and isinstance(payload.get("stamps"), list)):
+                tools.append(payload)
+            else:
+                malformed += 1
+        return {"rows": [{"attempt_id": row[0], "pid": row[1], "status": row[2], "ended_at": row[3]} for row in rows],
+                "starts": starts, "ends": ends, "tools": tools, "malformed": malformed}
 
     # ── phases ──────────────────────────────────────────────────────────────
     def max_phase_seq(self, adw_id: str) -> int:

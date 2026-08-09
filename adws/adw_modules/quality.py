@@ -56,12 +56,26 @@ def _check_dir(run, name: str) -> Path:
     return path
 
 
-def _run(spec: QualityCheckSpec, run) -> QualityCheckResult:
+def _timeout_output_text(output: str | bytes | None) -> str:
+    """Normalize TimeoutExpired output for artifacts and envelopes."""
+    if isinstance(output, bytes):
+        return output.decode("utf-8", errors="replace")
+    return output or ""
+
+
+def _run(
+    spec: QualityCheckSpec,
+    run,
+    *,
+    env_overrides: dict[str, str] | None = None,
+) -> QualityCheckResult:
     phase = run.phases[-1]
     output_dir = _check_dir(run, spec.name)
     output_artifact = output_dir / "command.log"
-    command = shlex.join(spec.argv)
     env = operator_env()             # the engineer's own shell environment
+    if env_overrides:
+        env.update(env_overrides)
+    command = shlex.join(spec.argv)
 
     run.console.note(f"quality {spec.name}: {command}")
     started_at = now_iso()
@@ -82,8 +96,8 @@ def _run(spec: QualityCheckSpec, run) -> QualityCheckResult:
         stderr = completed.stderr
     except subprocess.TimeoutExpired as error:
         returncode = 124
-        stdout = error.stdout or ""
-        stderr = (error.stderr or "") + f"\nTimed out after {spec.timeout_seconds}s."
+        stdout = _timeout_output_text(error.stdout)
+        stderr = _timeout_output_text(error.stderr) + f"\nTimed out after {spec.timeout_seconds}s."
     except OSError as error:
         # A missing binary lands here as exit 127 with the real message — no
         # pre-flight probe needed, and none wanted.
@@ -132,6 +146,17 @@ def _run(spec: QualityCheckSpec, run) -> QualityCheckResult:
 # ── Blocks ────────────────────────────────────────────────────────────────────
 # Project commands. Keep synchronized with AGENTS.md.
 
+def factory_python(run) -> QualityCheckResult:
+    return _run(
+        QualityCheckSpec(
+            name="factory-python", area="backend", operation="build",
+            argv=["uv", "run", "--with", "pydantic", "--with", "pyyaml", "--with", "python-dotenv", "--with", "rich", "python", "-m", "unittest", "discover", "-s", "adws/tests", "-p", "test_*.py"], timeout_seconds=600),
+        run,
+        # This represents documented `PYTHONPATH=adws` without invoking a shell.
+        env_overrides={"PYTHONPATH": "adws"},
+    )
+
+
 def test(run) -> QualityCheckResult:
     """Run the project's test suite. The highest-value block to wire up first."""
     return _run(QualityCheckSpec(
@@ -167,6 +192,7 @@ def build(run) -> QualityCheckResult:
         area="backend",
         operation="build",
         argv=["corepack", "pnpm", "check"],
+        timeout_seconds=600,
     ), run)
 
 
@@ -215,6 +241,7 @@ def run_quality(run) -> QualityResult:
     builder and let the bounded repair loop decide the run's fate.
     """
     blocks: list[Callable] = [
+        factory_python,
         test,
         lint,
         typecheck,

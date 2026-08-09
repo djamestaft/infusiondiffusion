@@ -4,6 +4,10 @@ The full `sssf.config.yaml` spec: every field, how defaults merge, and how model
 
 It lives at **`adws/adw_sssf_config/sssf.config.yaml`** — the default path every `adw_*.py` and the justfile resolve, and where `install.py` / `make_config.py` stamp it. Pass `--config <path>` to any ADW (or set `SSSF_CONFIG` for the justfile) to run against a different roster.
 
+## Bounded Figma Codex worker
+
+`workers.figma_codex` is a deterministic off-by-default worker configuration, not an agent roster entry. It fixes the bare executable, official `figma` endpoint, read-only ephemeral flags, 12-node/8-artifact/25MiB/256KiB limits, 180-second attempt, two attempts, two-second backoff, and 370-second deadline. @openai/codex 0.147.0 list-array/get-object and JSONL completion compatibility is pinned in `codex_worker.py`; a changed CLI shape is blocked rather than adapted at runtime. It grants no repository write permission and never stores credentials or OAuth material. Capture requires a pre-existing target-bound tracer approval from `trusted_design_approvers`; record it through the separate `--record-approval` workflow path, which never launches Codex. Only then may an authorized capture workflow enable it.
+
 ## Shape
 
 ```yaml
