@@ -30,7 +30,7 @@ TOOL_OPERATION = {"get_metadata":"node_metadata", "node_metadata":"node_metadata
 # boundary; returned events are validation evidence, not the first control.
 OPERATION_TOOL = {"node_metadata": "get_metadata", "node_context": "get_design_context",
                   "variables": "get_variable_defs", "styles": "get_design_context",
-                  "screenshot": "get_screenshot"}
+                  "screenshot": "get_design_context"}
 READ_ONLY_TOOLS = frozenset(OPERATION_TOOL.values())
 SECRET = re.compile(r"(?i)(?:-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:api[_-]?key|token|secret|password|authorization)\s*[:=]\s*\S+|bearer\s+\S+|sk-[A-Za-z0-9_-]{8,})")
 
@@ -222,7 +222,7 @@ def _stamps_match_request(stamps: list[CodexCallStamp], request: CodexFigmaReque
  if not stamps or any(stamp.file_key != request.target.file_key or not set(stamp.node_ids)
                       or not set(stamp.node_ids).issubset(expected_nodes) for stamp in stamps): return False
  for operation in request.operations:
-  evidence_operation="node_context" if operation == "styles" else operation
+  evidence_operation="node_context" if operation in {"styles", "screenshot"} else operation
   observed={node for stamp in stamps if stamp.operation == evidence_operation for node in stamp.node_ids}
   if observed != expected_nodes: return False
  return True
