@@ -327,7 +327,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
  prompt_dir=Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
  prompt_path=prompt_dir / "system.md"
  user_path=prompt_dir / "user.md"
- required_tools=sorted({OPERATION_TOOL[operation] for operation in request.operations})
+ required_tools=sorted({"mcp__figma__" + OPERATION_TOOL[operation] for operation in request.operations})
  tool_instruction=("\nMandatory connector execution: call each of these enabled official Figma tools "
                    "for every exact target node before returning: " + ", ".join(required_tools) +
                    ". Do not claim the connector or plugin is unavailable without first attempting "
