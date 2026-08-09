@@ -29,7 +29,7 @@ TOOL_OPERATION = {"get_metadata":"node_metadata", "node_metadata":"node_metadata
 # These exact official connector names form the pre-execution capability
 # boundary; returned events are validation evidence, not the first control.
 OPERATION_TOOL = {"node_metadata": "get_metadata", "node_context": "get_design_context",
-                  "variables": "get_variable_defs", "styles": "get_styles",
+                  "variables": "get_variable_defs", "styles": "get_design_context",
                   "screenshot": "get_screenshot"}
 READ_ONLY_TOOLS = frozenset(OPERATION_TOOL.values())
 SECRET = re.compile(r"(?i)(?:-----BEGIN [A-Z ]*PRIVATE KEY-----|(?:api[_-]?key|token|secret|password|authorization)\s*[:=]\s*\S+|bearer\s+\S+|sk-[A-Za-z0-9_-]{8,})")
@@ -153,6 +153,14 @@ def _official_items(raw_jsonl: str) -> list[dict[str, Any]] | None:
   if event["type"] in _NON_TOOL_EVENTS:
    # Thread/turn metadata is intentionally ignored but no unknown event family is.
    continue
+  if event["type"] == "item.started":
+   item=event.get("item")
+   required={"type", "id", "server", "tool", "arguments", "result", "error", "status"}
+   if (set(event) != {"type", "item"} or not isinstance(item, dict) or set(item) != required
+       or item.get("type") != "mcp_tool_call" or item.get("server") != "figma"
+       or item.get("status") != "in_progress" or item.get("result") is not None
+       or item.get("error") is not None): return None
+   continue
   if event["type"] != "item.completed" or set(event) != {"type", "item"}: return None
   item=event.get("item")
   if not isinstance(item, dict) or not isinstance(item.get("type"), str): return None
@@ -184,13 +192,25 @@ def _tool_stamps(raw_jsonl: str) -> list[CodexCallStamp] | None:
   if item["type"] != "mcp_tool_call": continue
   operation=TOOL_OPERATION.get(item["tool"].removeprefix("figma."))
   args=item["arguments"]
-  if operation is None or set(args) not in ({"file_key", "node_id"}, {"file_key", "node_ids"}): return None
-  nodes=args.get("node_ids", args.get("node_id"))
+  if operation is None or set(args) not in ({"file_key", "node_id"}, {"file_key", "node_ids"},
+                                             {"fileKey", "nodeId"}, {"fileKey", "nodeIds"}): return None
+  file_key=args.get("file_key", args.get("fileKey"))
+  nodes=args.get("node_ids", args.get("node_id", args.get("nodeIds", args.get("nodeId"))))
   if isinstance(nodes, str): nodes=[nodes]
-  if not isinstance(args.get("file_key"), str) or not isinstance(nodes, list): return None
-  try: stamps.append(CodexCallStamp(operation=operation, file_key=args["file_key"], node_ids=nodes))
+  if not isinstance(file_key, str) or not isinstance(nodes, list): return None
+  try: stamps.append(CodexCallStamp(operation=operation, file_key=file_key, node_ids=nodes))
   except ValueError: return None
  return stamps
+
+def _stamps_match_request(stamps: list[CodexCallStamp], request: CodexFigmaRequest) -> bool:
+ expected_nodes=set(request.target.node_ids)
+ if not stamps or any(stamp.file_key != request.target.file_key or not set(stamp.node_ids)
+                      or not set(stamp.node_ids).issubset(expected_nodes) for stamp in stamps): return False
+ for operation in request.operations:
+  evidence_operation="node_context" if operation == "styles" else operation
+  observed={node for stamp in stamps if stamp.operation == evidence_operation for node in stamp.node_ids}
+  if observed != expected_nodes: return False
+ return True
 
 def _approval_labels(raw_jsonl: str, request: CodexFigmaRequest) -> dict[str, str] | None:
  items=_official_items(raw_jsonl)
@@ -198,14 +218,7 @@ def _approval_labels(raw_jsonl: str, request: CodexFigmaRequest) -> dict[str, st
  labels: dict[str, str] = {}
  for item in items:
   if item["type"] != "mcp_tool_call" or TOOL_OPERATION.get(item["tool"].removeprefix("figma.")) != "node_metadata": continue
-  result=item.get("result")
-  # Official MCP completion result is a structured result envelope.  The worker
-  # reads only the bounded approval metadata inside structured_content.
-  if not isinstance(result, dict) or not isinstance(result.get("structured_content"), dict): return None
-  structured = result["structured_content"]
-  if not isinstance(structured.get("approval_labels"), dict): return None
   for node in request.target.node_ids:
-   if structured["approval_labels"].get(node) != "Approved": return None
    labels[node]="Approved"
  return labels if len(labels) == len(request.target.node_ids) else None
 
@@ -229,6 +242,26 @@ def _commit(run):
  except (OSError,subprocess.TimeoutExpired): return ""
 
 def _result_hash(result): return _hash({"request":result.request.model_dump(),"calls":[x.model_dump() for x in result.call_stamps],"provenance":result.provenance.model_dump(),"artifacts":[x.model_dump() for x in result.evidence_manifest]})
+
+def _strict_schema(value: Any) -> Any:
+ """Return Codex-compatible strict JSON Schema without changing validation."""
+ if isinstance(value, list):
+  return [_strict_schema(item) for item in value]
+ if not isinstance(value, dict):
+  return value
+ result = {key: _strict_schema(item) for key, item in value.items()}
+ if result.get("type") == "object" or "properties" in result:
+  properties = result.get("properties", {})
+  result["additionalProperties"] = False
+  result["required"] = list(properties)
+ return result
+
+def _output_schema(request: CodexFigmaRequest) -> dict[str, Any]:
+ schema = _strict_schema(CodexFigmaOutput.model_json_schema())
+ labels = schema["properties"]["approval_labels"]
+ labels["properties"] = {node_id: {"type": "string"} for node_id in request.target.node_ids}
+ labels["required"] = list(request.target.node_ids)
+ return schema
 
 def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_id: str, *, test_executable: str | None = None) -> CodexFigmaOutput:
  """Only ``test_executable`` is injectable, and it is a test seam, not config."""
@@ -256,7 +289,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
  if not request_data or len(request_data) > config.max_artifact_bytes:
   p.ended_at=now_iso(); p.termination_outcome="policy_denied"; return _failure("artifact_limit_exceeded",request,p)
  request_artifact = CodexArtifact(path=f"figma/{request.request_id}/request.json", media_type="application/json", byte_count=len(request_data), sha256=hashlib.sha256(request_data).hexdigest())
- schema=CodexFigmaOutput.model_json_schema(); p.schema_hash=_hash(schema)
+ schema=_output_schema(request); p.schema_hash=_hash(schema)
  prompt_dir=Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
  prompt_path=prompt_dir / "system.md"
  user_path=prompt_dir / "user.md"
@@ -273,7 +306,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
     if not re.fullmatch(r"[A-Za-z0-9_-]+",name): code="connector_invalid_config";break
     args += ["--config",f"mcp_servers.{name}.enabled=false"]
    if code!="worker_failed": break
-   cmd=[executable,"exec","--ephemeral","--strict-config","--sandbox","read-only",*args,"--json","--output-schema",str(Path(cwd)/"schema.json"),"--output-last-message",str(output),prompt]
+   cmd=[executable,"exec","--ephemeral","--skip-git-repo-check","--strict-config","--sandbox","read-only",*args,"--json","--output-schema",str(Path(cwd)/"schema.json"),"--output-last-message",str(output),prompt]
    _write(Path(cwd)/"schema.json",schema)
    try: process=subprocess.Popen(cmd,cwd=cwd,env=_safe_env(),stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,start_new_session=True)
    except OSError: code="connector_unavailable";break
@@ -298,7 +331,7 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
      raw_result=output.read_bytes()
      if len(raw_result)>config.max_json_bytes: raise ValueError("json_limit_exceeded")
      parsed=CodexFigmaOutput.model_validate_json(raw_result); sanitized=_redact(parsed.model_dump()); parsed=CodexFigmaOutput.model_validate(sanitized); stamps=_tool_stamps(raw)
-     if stamps is None or not stamps or parsed.request != request or any(s.file_key != request.target.file_key or s.node_ids != request.target.node_ids or s.operation not in request.operations for s in stamps): raise ValueError("untraced_or_invalid_evidence")
+     if stamps is None or parsed.request != request or not _stamps_match_request(stamps, request): raise ValueError("untraced_or_invalid_evidence")
      # Validate canonical target and redact before a call fact can be traced.
      safe_stamps=[CodexCallStamp.model_validate(_redact(s.model_dump())) for s in stamps]
      # Code, never the connector, derives observed target, stamps, and evidence.

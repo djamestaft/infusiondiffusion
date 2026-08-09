@@ -11,13 +11,22 @@ from types import SimpleNamespace
 from unittest import TestCase
 from unittest.mock import patch
 
-from adw_modules.codex_worker import _redact, _safe_env, _tool_stamps, run
-from adw_modules.data_types import (CodexArtifact, CodexFigmaRequest,
+from adw_modules.codex_worker import _output_schema, _redact, _safe_env, _strict_schema, _tool_stamps, run
+from adw_modules.data_types import (CodexArtifact, CodexFigmaOutput, CodexFigmaRequest,
                                     FigmaCodexWorkerConfig, FigmaTarget)
 from adw_modules.tracer import Tracer
 
 
 class WorkerTest(TestCase):
+    def test_output_schema_is_strict_at_every_object_boundary(self):
+        schema = _output_schema(self.request())
+        objects = [schema, *(definition for definition in schema.get("$defs", {}).values()
+                             if definition.get("type") == "object")]
+        for value in objects:
+            self.assertIs(value.get("additionalProperties"), False)
+            self.assertEqual(set(value.get("required", [])), set(value.get("properties", {})))
+        self.assertEqual(schema["properties"]["approval_labels"]["required"], ["93:6"])
+
     def request(self):
         return CodexFigmaRequest(request_id="request", supervisor_session_id="pi",
             reason="pi_connector_unavailable", operations=["node_metadata"],
@@ -161,6 +170,7 @@ else:
                     self.assertEqual((result.failure_code, attempts), ("connector_invalid_config", 0))
             result, _ = self.enabled(root / "command", "success")
             args = json.loads((root / "command" / "attempts.args").read_text())
+            self.assertIn("--skip-git-repo-check", args)
             self.assertIn('mcp_servers.figma.enabled_tools=["get_metadata"]', args)
             self.assertNotIn("post_comment", " ".join(args))
             self.assertEqual(result.capture_status, "complete")
