@@ -327,7 +327,12 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
  prompt_dir=Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
  prompt_path=prompt_dir / "system.md"
  user_path=prompt_dir / "user.md"
- prompt=(prompt_path.read_text()+"\n"+user_path.read_text()+"\n"+request.model_dump_json())
+ required_tools=sorted({OPERATION_TOOL[operation] for operation in request.operations})
+ tool_instruction=("\nMandatory connector execution: call each of these enabled official Figma tools "
+                   "for every exact target node before returning: " + ", ".join(required_tools) +
+                   ". Do not claim the connector or plugin is unavailable without first attempting "
+                   "the named tool calls. Never call any unlisted tool.\n")
+ prompt=(prompt_path.read_text()+"\n"+user_path.read_text()+tool_instruction+request.model_dump_json())
  p.prompt_hash=hashlib.sha256(prompt.encode()).hexdigest(); deadline=started+config.overall_deadline_seconds
  code="worker_failed"
  for attempt in range(1,config.max_attempts+1):
