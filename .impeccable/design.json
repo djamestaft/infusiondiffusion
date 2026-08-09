@@ -3,6 +3,25 @@
   "generatedAt": "2026-08-06T13:15:00+02:00",
   "title": "Design System: Infusion Diffusion",
   "extensions": {
+    "foundationRefresh": {
+      "approvedAt": "2026-08-09",
+      "fileKey": "GYiQd7QSAwCSaGtt0alKG2",
+      "nodes": ["403:3", "403:4", "403:5", "403:6", "403:7", "455:3", "456:2"],
+      "modes": ["Ivory", "Midnight"],
+      "viewports": ["320x844", "390x844", "768x1024", "1440x900", "1728x1117"],
+      "runtimeOnlyChecks": [
+        "natural height",
+        "200% zoom",
+        "keyboard",
+        "visible focus",
+        "WCAG AA",
+        "reduced motion",
+        "content extremes",
+        "image alt",
+        "rights applicability"
+      ],
+      "publicApiPolicy": "preserve exports, props, variants, sizes, aliases, asChild, events, attributes, native semantics, and data-slot markers"
+    },
     "colorMeta": {
       "ink-deep": {
         "role": "neutral",

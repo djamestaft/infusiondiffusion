@@ -27,10 +27,10 @@ Synchronize the approved design-system foundations and reusable atoms from the c
 
 Use exactly these typed, read-only targets in canonical file key `GYiQd7QSAwCSaGtt0alKG2`:
 
-| Typed target | Exact node | Expected state | Required evidence |
-| --- | --- | --- | --- |
-| `DESIGN_SYSTEM_FOUNDATIONS_AND_ATOMS` | `403:2` | `Approved` | dimensions/layout; semantic variables and mode values; typography; radii, spacing, depth, and assets; atom names/variants/states; responsive behavior; accessibility/interaction; content extremes; divergences |
-| `IMPLEMENTATION_CONTRACT` | `455:2` | `Approved` | component-to-code/Storybook mapping; preserved API requirements; state applicability; breakpoints; reduced-motion behavior; accessibility decisions; test/evidence requirements; intentional divergences |
+| Typed target                          | Exact node | Expected state | Required evidence                                                                                                                                                                                               |
+| ------------------------------------- | ---------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DESIGN_SYSTEM_FOUNDATIONS_AND_ATOMS` | `403:2`    | `Approved`     | dimensions/layout; semantic variables and mode values; typography; radii, spacing, depth, and assets; atom names/variants/states; responsive behavior; accessibility/interaction; content extremes; divergences |
+| `IMPLEMENTATION_CONTRACT`             | `455:2`    | `Approved`     | component-to-code/Storybook mapping; preserved API requirements; state applicability; breakpoints; reduced-motion behavior; accessibility decisions; test/evidence requirements; intentional divergences        |
 
 The request asserts that both targets are approved. Before code edits, the `product_designer` must record a sanitized structured capture for both exact nodes, confirm their `Approved` marker and canonical-file identity, and produce one frozen inventory of foundations and atoms. The capture must bind each approved Figma item to its semantic token, code component, Storybook title, applicable states, and responsive behavior. A complete previously captured handoff may be reused only if it names these exact file/node IDs and all evidence categories.
 

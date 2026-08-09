@@ -18,15 +18,15 @@ This is one substantive UI delivery by one writing owner on one delivery branch 
 
 Do not aggregate these into one multi-node target. Maintain seven separate target records, each containing exactly one node ID:
 
-| Target | File key | Node ID | Expected approval | Required evidence categories |
-| --- | --- | --- | --- | --- |
-| 1 | `GYiQd7QSAwCSaGtt0alKG2` | `403:3` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 2 | `GYiQd7QSAwCSaGtt0alKG2` | `403:4` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 3 | `GYiQd7QSAwCSaGtt0alKG2` | `403:5` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 4 | `GYiQd7QSAwCSaGtt0alKG2` | `403:6` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 5 | `GYiQd7QSAwCSaGtt0alKG2` | `403:7` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 6 | `GYiQd7QSAwCSaGtt0alKG2` | `455:3` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
-| 7 | `GYiQd7QSAwCSaGtt0alKG2` | `456:2` | `Approved` | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| Target | File key                 | Node ID | Expected approval | Required evidence categories                                                                                                                            |
+| ------ | ------------------------ | ------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1      | `GYiQd7QSAwCSaGtt0alKG2` | `403:3` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 2      | `GYiQd7QSAwCSaGtt0alKG2` | `403:4` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 3      | `GYiQd7QSAwCSaGtt0alKG2` | `403:5` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 4      | `GYiQd7QSAwCSaGtt0alKG2` | `403:6` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 5      | `GYiQd7QSAwCSaGtt0alKG2` | `403:7` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 6      | `GYiQd7QSAwCSaGtt0alKG2` | `455:3` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
+| 7      | `GYiQd7QSAwCSaGtt0alKG2` | `456:2` | `Approved`        | `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, `divergences` |
 
 Before implementation, the product designer must validate seven separate sanitized, node-bound evidence records. Each record must identify the node’s visible name and `Approved` state and capture the eight categories above, including component/state inventory, variable collection and modes, dimensions, breakpoints, typography, spacing/radius/depth, assets/icons, responsive behavior, interaction/accessibility decisions, content extremes, and divergences. Create a frozen crosswalk from each captured item to `DESIGN.md`, `.impeccable/design.json`, CSS token, code component/public API, Storybook title/state, and test.
 

@@ -258,6 +258,25 @@
 
 :root {
   --radius: 0.25rem;
+  --radius-control: 0.25rem;
+  --radius-surface: 0.5rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --shadow-subtle: 0 4px 12px rgb(17 17 15 / 12%);
+  --shadow-raised: 0 12px 32px -4px rgb(17 17 15 / 18%);
+  --shadow-floating: 0 20px 48px -8px rgb(17 17 15 / 22%);
+  --motion-state-duration: 150ms;
+  --motion-state-easing: ease;
+  --layout-mobile-gutter: 1.25rem;
+  --layout-desktop-gutter: 5rem;
+  --layout-content-max: 80rem;
   --background: #eef0e7;
   --foreground: #1d211b;
   --card: #eef0e7;
