@@ -175,6 +175,19 @@ else:
             self.assertNotIn("post_comment", " ".join(args))
             self.assertEqual(result.capture_status, "complete")
 
+    def test_validated_wrapper_persistence_overrides_model_persistence_self_report(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            request = self.request()
+            payload = {"status": "fail", "summary": "safe", "capture_status": "blocked",
+                "failure_code": "ARTIFACT_PERSISTENCE_UNAVAILABLE", "request": request.model_dump(),
+                "provenance": {"adw_id": "x", "phase_id": "x", "request_id": "x", "supervisor_session_id": "x"}}
+            result = run(request, FigmaCodexWorkerConfig(enabled=True), self.runtime(root), "phase",
+                         test_executable=str(self.executable(root, payload=payload)))
+            self.assertEqual((result.status, result.capture_status, result.failure_code),
+                             ("success", "complete", None))
+            self.assertTrue((root / "handoff" / "figma" / "request" / "evidence.json").is_file())
+
     def test_preflight_missing_and_malformed_connectors_fail_before_attempt(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)

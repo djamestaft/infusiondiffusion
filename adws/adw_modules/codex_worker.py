@@ -383,6 +383,10 @@ def run(request: CodexFigmaRequest, config: FigmaCodexWorkerConfig, run, phase_i
      # Code, never the connector, derives observed target, stamps, and evidence.
      labels=_approval_labels(raw, request)
      if labels is None: raise ValueError("untraced_or_invalid_evidence")
+     # Capture readiness is code-owned. Once exact-target calls are validated
+     # and the wrapper persists their sanitized evidence below, a model's
+     # stale self-reported persistence failure must not override that fact.
+     parsed.status="success"; parsed.capture_status="complete"; parsed.failure_code=None
      parsed.observed_file_key=request.target.file_key; parsed.observed_node_ids=request.target.node_ids; parsed.approval_labels=labels; parsed.call_stamps=safe_stamps; parsed.artifacts=[]; parsed.evidence_manifest=[]; parsed.provenance=p
      evidence=_redact({"summary":parsed.summary,"notes_for_next_agent":parsed.notes_for_next_agent,"approval_labels":labels,"call_stamps":[s.model_dump() for s in safe_stamps]})
      evidence_path=root/"evidence.json"; _write(evidence_path,evidence); data=evidence_path.read_bytes()
