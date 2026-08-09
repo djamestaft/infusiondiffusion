@@ -9,6 +9,8 @@ from unittest import TestCase
 
 from adw_modules.data_types import (
     CodexArtifact,
+    AgentCall,
+    BuildOutput,
     CodexCallStamp,
     CodexFigmaOutput,
     CodexFigmaRequest,
@@ -16,6 +18,7 @@ from adw_modules.data_types import (
     FigmaSupervisorOutput,
     FigmaTarget,
     HumanDesignApproval,
+    ImplementationContext,
     PlanOutput,
 )
 from adw_modules.codex_worker import _output_schema, _worker_prompt
@@ -36,6 +39,12 @@ SECTIONS = {
 
 
 class FigmaHandoffGateTest(TestCase):
+    def test_agent_call_accepts_typed_implementation_context(self) -> None:
+        plan = PlanOutput(status="success")
+        call = AgentCall(output_type=BuildOutput, prompt="build",
+                         previous=ImplementationContext(plan=plan))
+        self.assertIsInstance(call.previous, ImplementationContext)
+
     def test_worker_lifecycle_accepts_closed_semantic_retry_before_final_success(self) -> None:
         lifecycle = {
             "rows": [

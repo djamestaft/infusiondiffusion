@@ -572,7 +572,7 @@ class AgentCall(BaseModel):
 
     output_type: Type[EnvelopeBase]
     prompt: str
-    previous: Optional[EnvelopeBase] = None
+    previous: Optional[EnvelopeBase | ImplementationContext] = None
     gates: list[Callable] = Field(default_factory=list)   # gate(envelope, run) -> list[str]
 
 
