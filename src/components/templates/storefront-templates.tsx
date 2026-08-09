@@ -5,6 +5,7 @@ import {
   type HeroCarouselSlide,
 } from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
+import { StorefrontFooter } from "@/components/storefront-footer";
 import { GalleryViewer } from "@/components/gallery-viewer";
 import type { GalleryItem } from "@/sanity/lib/editorial-pages";
 import { Button } from "@/components/ui/button";
@@ -71,7 +72,9 @@ function TemplateShell({
         currentHref={currentHref}
         cartCount={cartCount}
       />
-      <main>{children}</main>
+      <ScrollRevealController />
+      <main className="storefront-page">{children}</main>
+      <StorefrontFooter />
     </div>
   );
 }
@@ -178,7 +181,6 @@ export function HomeTemplate({
         : heroSlides.slice(0, 1);
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <ScrollRevealController />
       <section
         data-testid="home-hero-section"
         className={cn(
@@ -980,28 +982,88 @@ export function GalleryTemplate({
 
 export function GalleryLoadingTemplate() {
   return (
-    <TemplateShell currentHref="/gallery">
+    <StorefrontLoadingTemplate
+      kind="gallery"
+      currentHref="/gallery"
+      accessibleLabel="Loading gallery"
+    />
+  );
+}
+
+export function StorefrontLoadingTemplate({
+  kind = "editorial",
+  currentHref,
+  accessibleLabel,
+}: {
+  kind?: "home" | "collection" | "product" | "gallery" | "editorial" | "cart";
+  currentHref?: string;
+  accessibleLabel?: string;
+}) {
+  const product = kind === "product";
+  const cards = kind === "collection" || kind === "gallery" || kind === "home";
+  return (
+    <TemplateShell
+      currentHref={currentHref}
+      surface={kind === "collection" ? "elevated" : "base"}
+    >
       <section
         aria-busy="true"
-        aria-label="Loading gallery"
+        aria-label={accessibleLabel ?? `Loading ${kind} page`}
         className="mx-auto w-full max-w-7xl px-5 py-13 sm:px-8 lg:px-12 lg:py-20 xl:px-0"
       >
-        <h1 className="font-display text-content-primary text-[40px] leading-[1.15] lg:text-[56px]">
-          Gathering the gallery
-        </h1>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }, (_, index) => (
-            <div
-              key={index}
-              className={cn("space-y-3", index > 2 && "hidden sm:block")}
-            >
-              <div className="bg-content-surface-elevated aspect-3/4 motion-reduce:animate-none" />
-              <div className="bg-content-surface-elevated h-4 w-2/3 motion-reduce:animate-none" />
-            </div>
-          ))}
+        <span className="sr-only">Loading</span>
+        <div
+          className={cn("grid gap-10", product && "lg:grid-cols-2 lg:gap-20")}
+        >
+          {product ? <SkeletonBlock className="aspect-3/4 w-full" /> : null}
+          <div className={cn("space-y-5", !product && "max-w-3xl")}>
+            <SkeletonBlock className="h-3 w-28" />
+            <SkeletonBlock className="h-14 w-full sm:h-20" />
+            <SkeletonBlock className="h-6 w-5/6" />
+            <SkeletonBlock className="h-6 w-2/3" />
+            {product ? <SkeletonBlock className="mt-8 h-12 w-44" /> : null}
+          </div>
         </div>
+        {cards ? (
+          <div className="mt-14 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+            {Array.from({ length: 6 }, (_, index) => (
+              <div
+                key={index}
+                className={cn("space-y-4", index > 3 && "hidden lg:block")}
+              >
+                <SkeletonBlock className="aspect-3/4 w-full" />
+                <SkeletonBlock className="h-4 w-1/3" />
+                <SkeletonBlock className="h-7 w-4/5" />
+                <SkeletonBlock className="h-4 w-2/3" />
+              </div>
+            ))}
+          </div>
+        ) : !product ? (
+          <div className="mt-16 max-w-3xl space-y-12">
+            <div className="space-y-4">
+              <SkeletonBlock className="h-9 w-1/2" />
+              <SkeletonBlock className="h-28 w-full" />
+            </div>
+            <div className="space-y-4">
+              <SkeletonBlock className="h-9 w-2/5" />
+              <SkeletonBlock className="h-24 w-full" />
+            </div>
+          </div>
+        ) : null}
       </section>
     </TemplateShell>
+  );
+}
+
+function SkeletonBlock({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "bg-content-surface-elevated animate-pulse rounded-sm motion-reduce:animate-none",
+        className,
+      )}
+    />
   );
 }
 

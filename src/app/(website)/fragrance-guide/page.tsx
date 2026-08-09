@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { EditorialTemplate } from "@/components/templates/storefront-templates";
+import {
+  EditorialTemplate,
+  StorefrontLoadingTemplate,
+} from "@/components/templates/storefront-templates";
 import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
 import { readCart } from "@/lib/shopify/cart-session";
 import { toProductCard } from "@/lib/shopify/presentation";
@@ -54,7 +57,10 @@ export default function FragranceGuidePage() {
   return (
     <Suspense
       fallback={
-        <div className="bg-content-surface min-h-dvh" aria-busy="true" />
+        <StorefrontLoadingTemplate
+          kind="editorial"
+          currentHref="/fragrance-guide"
+        />
       }
     >
       <FragranceGuideContent />

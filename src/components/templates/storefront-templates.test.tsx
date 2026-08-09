@@ -13,6 +13,7 @@ import {
   ContactTemplate,
   GalleryLoadingTemplate,
   GalleryTemplate,
+  StorefrontLoadingTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -134,6 +135,15 @@ describe("storefront templates", () => {
     expect(
       screen.getByRole("link", { name: "Gallery", current: "page" }),
     ).toBeVisible();
+  });
+
+  it("uses geometry-faithful skeletons without visible loading copy", () => {
+    render(<StorefrontLoadingTemplate kind="product" />);
+    expect(screen.getByLabelText("Loading product page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(screen.queryByText(/loading fragrance/i)).toBeNull();
   });
 
   it("composes the home journey from accessible landmarks and product cards", () => {
@@ -439,9 +449,11 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("about-chapter-principles")).toHaveClass(
       "bg-content-surface",
     );
-    expect(screen.getByRole("link", { name: "Shop" })).not.toHaveAttribute(
-      "aria-current",
-    );
+    expect(
+      screen
+        .getAllByRole("link", { name: "Shop" })
+        .every((link) => !link.hasAttribute("aria-current")),
+    ).toBe(true);
     expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
       2,
     );

@@ -12,6 +12,7 @@ import {
   GalleryTemplate,
   HomeTemplate,
   ProductDetailTemplate,
+  StorefrontLoadingTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -264,6 +265,21 @@ export const GalleryMaximum: Story = {
 };
 export const GalleryLoading: Story = {
   render: () => <GalleryLoadingTemplate />,
+};
+
+export const CollectionLoading: Story = {
+  render: () => (
+    <StorefrontLoadingTemplate kind="collection" currentHref="/shop" />
+  ),
+};
+export const ProductLoading: Story = {
+  render: () => <StorefrontLoadingTemplate kind="product" />,
+};
+export const EditorialLoading390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: () => (
+    <StorefrontLoadingTemplate kind="editorial" currentHref="/about" />
+  ),
 };
 
 export const HomeIvory: Story = {
@@ -660,7 +676,7 @@ export const AboutWithPortraits: Story = {
       getComputedStyle(canvas.getByTestId("about-chapter-development"))
         .backgroundColor,
     ).toBe("rgb(238, 240, 231)");
-    await expect(canvasElement.querySelector(".dark")).toBeNull();
+    await expect(canvasElement.querySelector("main .dark")).toBeNull();
     await expect(canvas.queryByText(/ROLE [A-D]/)).toBeNull();
   },
 };
