@@ -5,6 +5,8 @@ import {
   type HeroCarouselSlide,
 } from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
+import { StorefrontFooter } from "@/components/storefront-footer";
+import { StorefrontMedia } from "@/components/storefront-media";
 import { GalleryViewer } from "@/components/gallery-viewer";
 import type { GalleryItem } from "@/sanity/lib/editorial-pages";
 import { Button } from "@/components/ui/button";
@@ -37,11 +39,11 @@ type TemplateNavigationProps = {
 };
 
 const sectionClass =
-  "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
+  "mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:px-20 lg:py-24";
 const homeHeroSectionClass =
-  "mx-auto grid w-full max-w-7xl gap-10 px-5 pt-16 pb-0 sm:px-8 lg:px-12 lg:pt-24 lg:pb-0";
+  "mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-12 sm:px-8 lg:h-[796px] lg:grid-cols-[560px_496px] lg:items-center lg:justify-between lg:gap-16 lg:px-20 lg:py-0";
 const homeCollectionInnerClass =
-  "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
+  "mx-auto w-full max-w-[1440px] px-5 pt-[52px] pb-16 sm:px-8 lg:px-20 lg:pt-[72px] lg:pb-24";
 
 function TemplateShell({
   navigationTheme = "ivory",
@@ -71,20 +73,22 @@ function TemplateShell({
         currentHref={currentHref}
         cartCount={cartCount}
       />
-      <main>{children}</main>
+      <ScrollRevealController />
+      <main className="storefront-page">{children}</main>
+      <StorefrontFooter />
     </div>
   );
 }
 
 function ProductGrid({ products }: { products: ProductCardProps[] }) {
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+    <div className="grid grid-cols-1 gap-x-4 gap-y-10 min-[520px]:grid-cols-2 lg:grid-cols-[repeat(3,288px)] lg:gap-x-6 lg:gap-y-12">
       {products.map((product, index) => (
         <ProductCard
           key={product.href}
           {...product}
           imagePriority={index === 0}
-          className="max-w-none"
+          className="w-full max-w-[350px] lg:h-[602px] lg:max-w-[288px]"
         />
       ))}
     </div>
@@ -178,29 +182,25 @@ export function HomeTemplate({
         : heroSlides.slice(0, 1);
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <ScrollRevealController />
-      <section
-        data-testid="home-hero-section"
-        className={cn(
-          homeHeroSectionClass,
-          carouselSlides.length && "lg:grid-cols-2 lg:items-center",
-        )}
-      >
-        <ContentHeader
-          title={content.heroTitle}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={content.heroIntroduction}
-          action={{
-            type: "button",
-            label: content.heroActionLabel,
-            href: "/shop",
-          }}
-        />
+      <section data-testid="home-hero-section" className={homeHeroSectionClass}>
+        <div className="relative z-10 flex min-h-[500px] items-center lg:min-h-0">
+          <ContentHeader
+            title={content.heroTitle}
+            headingLevel={1}
+            headingTreatment="display"
+            lead={content.heroIntroduction}
+            action={{
+              type: "button",
+              label: content.heroActionLabel,
+              href: "/shop",
+            }}
+            className="max-w-[560px] [&_[data-slot=heading]]:text-[clamp(3rem,5vw,4.5rem)] [&_[data-slot=heading]]:leading-[1.05]"
+          />
+        </div>
         {carouselSlides.length ? (
           <HeroCarousel
             slides={carouselSlides}
-            className="lg:mx-auto lg:w-4/5"
+            className="mx-auto w-full max-w-[350px] lg:mx-0 lg:max-w-[496px] [&_[data-testid=hero-carousel-media]]:aspect-[350/438] [&_[data-testid=hero-carousel-media]]:lg:aspect-[496/620]"
           />
         ) : null}
       </section>
@@ -219,7 +219,7 @@ export function HomeTemplate({
               id="home-collection-title"
               level={2}
               treatment="title"
-              className="mb-8"
+              className="mb-10 max-w-2xl lg:mb-14 lg:text-[40px]"
             >
               {content.collectionTitle}
             </Heading>
@@ -298,7 +298,7 @@ export function HomeTemplate({
                 </div>
               </div>
               {storyImage ? (
-                <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
+                <div className="bg-product-card-media-fallback relative aspect-4/3 overflow-hidden rounded-sm">
                   <Image
                     src={storyImage.src}
                     alt={storyImage.alt}
@@ -383,25 +383,27 @@ export function ContactTemplate({
     <TemplateShell currentHref="/contact" cartCount={cartCount}>
       <article data-testid="contact-page">
         <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
-            {eyebrow ? <Eyebrow className="mb-4">{eyebrow}</Eyebrow> : null}
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
-              {title}
-            </h1>
-            <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+          <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-24 lg:px-12 lg:py-28 xl:px-0">
+            <div>
+              {eyebrow ? <Eyebrow className="mb-6">{eyebrow}</Eyebrow> : null}
+              <h1 className="font-display text-content-primary max-w-[820px] text-[clamp(3.5rem,8vw,6rem)] leading-[0.98] tracking-[-0.02em] [overflow-wrap:anywhere]">
+                {title}
+              </h1>
+            </div>
+            <p className="text-content-secondary max-w-[60ch] font-sans text-[17px] leading-[1.6] [overflow-wrap:anywhere] lg:pb-2 lg:text-xl">
               {introduction}
             </p>
           </div>
         </header>
         <section className="bg-bone-50" aria-labelledby="contact-email-heading">
-          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-6 lg:px-12 lg:py-24 xl:px-0">
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-8 lg:px-12 lg:py-28 xl:px-0">
             <h2
               id="contact-email-heading"
-              className="font-display text-content-primary text-[26px] leading-[1.2] lg:col-span-12 lg:text-[34px]"
+              className="font-display text-content-primary text-[32px] leading-[1.1] lg:col-span-5 lg:text-[48px]"
             >
               Email us
             </h2>
-            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-6">
+            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-7 lg:col-start-6">
               <a
                 className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline decoration-1 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
                 href={mailto}
@@ -412,7 +414,7 @@ export function ContactTemplate({
             <Button
               asChild
               variant="primary"
-              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-7 lg:ml-16 lg:justify-self-start"
+              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-6 lg:justify-self-start"
             >
               <a href={mailto}>Email Infusion Diffusion</a>
             </Button>
@@ -420,7 +422,7 @@ export function ContactTemplate({
               title="Online form unavailable"
               tone="info"
               announcement="none"
-              className="self-start lg:col-span-6"
+              className="self-start lg:col-span-7 lg:col-start-6"
             >
               Online submission is not available at launch. Your email opens in
               your own mail application; this website does not collect or store
@@ -466,17 +468,30 @@ export function ContactLoadingTemplate() {
   );
 }
 
-export function ContactErrorTemplate({ reset }: { reset: () => void }) {
-  const email = "hello@infusiondiffusion.co.za";
+export function StorefrontErrorTemplate({
+  reset,
+  title = "We couldn’t load this page.",
+  description = "Please try again, or return to the collection.",
+  currentHref,
+  recoveryAction,
+  recoveryMessage,
+}: {
+  reset: () => void;
+  title?: string;
+  description?: string;
+  currentHref?: string;
+  recoveryAction?: React.ReactNode;
+  recoveryMessage?: React.ReactNode;
+}) {
   return (
-    <TemplateShell currentHref="/contact">
+    <TemplateShell currentHref={currentHref}>
       <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-display text-content-primary text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
-            We couldn’t load this page.
+            {title}
           </h1>
           <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] lg:text-xl">
-            Nothing was submitted. Try again, or email us directly.
+            {description}
           </p>
           <FeedbackAlert
             title="Unexpected error"
@@ -484,18 +499,56 @@ export function ContactErrorTemplate({ reset }: { reset: () => void }) {
             announcement="alert"
             className="mt-8"
           >
-            Please retry. If the problem continues, use the direct email option
-            below.
+            {recoveryMessage ??
+              "Please retry or continue browsing the collection. No changes were made."}
           </FeedbackAlert>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button onClick={reset}>Try again</Button>
-            <a
-              className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
-              href={`mailto:${email}`}
-            >
-              {email}
-            </a>
+            {recoveryAction ?? (
+              <Button asChild variant="secondary">
+                <a href="/shop">Return to the collection</a>
+              </Button>
+            )}
           </div>
+        </div>
+      </section>
+    </TemplateShell>
+  );
+}
+
+export function ContactErrorTemplate({ reset }: { reset: () => void }) {
+  return (
+    <StorefrontErrorTemplate
+      reset={reset}
+      currentHref="/contact"
+      description="Nothing was submitted. Try again, or email us directly."
+      recoveryMessage="Nothing was submitted. Please retry or email us directly."
+      recoveryAction={
+        <a
+          className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+          href="mailto:hello@infusiondiffusion.co.za"
+        >
+          hello@infusiondiffusion.co.za
+        </a>
+      }
+    />
+  );
+}
+
+export function StorefrontNotFoundTemplate() {
+  return (
+    <TemplateShell>
+      <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-display text-content-primary text-[40px] leading-[1.15] lg:text-[56px]">
+            This page could not be found.
+          </h1>
+          <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] lg:text-xl">
+            The page may have moved, or the fragrance is no longer available.
+          </p>
+          <Button asChild className="mt-8">
+            <a href="/shop">Explore the collection</a>
+          </Button>
         </div>
       </section>
     </TemplateShell>
@@ -510,7 +563,7 @@ export interface CollectionTemplateProps extends TemplateNavigationProps {
 
 export function CollectionTemplate({
   products,
-  title = "The collection",
+  title = "The fragrance collection",
   description = "Layered home fragrance, described through the notes you will actually live with.",
   navigationTheme,
   cartCount,
@@ -522,22 +575,27 @@ export function CollectionTemplate({
       cartCount={cartCount}
       surface="elevated"
     >
-      <section className={sectionClass}>
-        <ContentHeader
-          context={{ type: "eyebrow", label: "Shop" }}
-          title={title}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={description}
-        />
-        <div className="mt-12 flex items-center justify-between py-4 font-sans text-sm">
+      <section className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-20 lg:py-20">
+        <header className="border-navigation-divider grid gap-8 border-b pb-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-24 lg:pb-16">
+          <Heading
+            level={1}
+            treatment="display"
+            className="max-w-3xl text-[40px] leading-[1.1] lg:text-[56px]"
+          >
+            {title}
+          </Heading>
+          <Lead className="max-w-xl lg:pb-2">{description}</Lead>
+        </header>
+        <div className="mt-8 flex items-center justify-between font-sans text-sm lg:mt-10">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>
-          <p className="text-content-secondary">Curated collection</p>
+          <p className="text-content-secondary hidden sm:block">
+            Composed for lived-in rooms
+          </p>
         </div>
         {products.length ? (
-          <div className="mt-10">
+          <div className="mt-8 lg:mt-12">
             <Heading level={2} treatment="title" className="sr-only">
               Products
             </Heading>
@@ -596,102 +654,118 @@ export function ProductDetailTemplate({
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <article
-        className={cn(sectionClass, "grid gap-10 lg:grid-cols-2 lg:gap-20")}
-      >
-        <div className="bg-product-card-media-fallback relative aspect-3/4 overflow-hidden rounded-lg">
-          {product.image ? (
-            <Image
-              src={product.image.src}
-              alt={product.image.alt}
-              fill
-              priority
-              loading="eager"
-              sizes="(max-width: 1023px) calc(100vw - 40px), 45vw"
-              className="object-cover"
-            />
-          ) : (
-            <span className="text-content-secondary flex size-full items-center justify-center font-sans text-sm">
-              Image coming soon
-            </span>
+      <article className="mx-auto w-full max-w-[1440px] px-5 py-12 sm:px-8 lg:px-20 lg:py-20">
+        <div
+          className={cn(
+            "grid gap-10",
+            product.image && "lg:grid-cols-[680px_440px] lg:gap-16",
           )}
-        </div>
-        <div className="flex flex-col justify-center gap-6">
-          <Eyebrow>{product.format}</Eyebrow>
-          <Heading level={1} treatment="display">
-            {product.name}
-          </Heading>
-          <p className="text-content-secondary font-sans text-lg leading-8">
-            {product.notes}
-          </p>
-          <PriceDisplay
-            price={product.price}
-            compareAtPrice={product.compareAtPrice}
-            type={product.priceType}
-            size="standard"
-          />
-          <CommerceStatus
-            status={product.availability ?? "in-stock"}
-            lowStockCount={product.lowStockCount}
-          />
-          <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
-            {description}
-          </p>
-          {variants.length ? (
-            <fieldset className="flex flex-wrap gap-3">
-              <legend className="mb-3 w-full font-sans text-sm font-semibold">
-                Choose a format
-              </legend>
-              {variants.map((variant) => (
-                <Button
-                  key={variant.id}
-                  type="button"
-                  variant={
-                    selectedVariantId === variant.id ? "primary" : "secondary"
-                  }
-                  aria-pressed={selectedVariantId === variant.id}
-                  disabled={!variant.available}
-                  onClick={() => onVariantChange?.(variant.id)}
-                >
-                  {variant.label}
-                  {!variant.available ? " — unavailable" : ""}
-                </Button>
-              ))}
-            </fieldset>
+        >
+          {product.image ? (
+            <div className="aspect-[350/438] lg:aspect-auto lg:h-[720px] lg:w-[680px]">
+              <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
+                <StorefrontMedia
+                  image={product.image}
+                  priority
+                  sizes="(max-width: 1023px) calc(100vw - 40px), 680px"
+                />
+              </div>
+            </div>
           ) : null}
-          {selectionUnavailable && !soldOut ? (
-            <p className="text-commerce-status-sold-out font-sans text-sm font-semibold">
-              Select an available format to continue.
+          <div className="flex flex-col justify-center gap-5 lg:min-h-[720px]">
+            <Eyebrow>{product.format}</Eyebrow>
+            <Heading
+              level={1}
+              treatment="display"
+              className="text-[40px] leading-[1.08] lg:text-[52px]"
+            >
+              {product.name}
+            </Heading>
+            <p className="text-content-secondary font-sans text-lg leading-8">
+              {product.notes}
             </p>
-          ) : null}
-          {purchaseAction ??
-            (showPurchaseAction ? (
-              <Button
-                type="button"
-                size="large"
-                disabled={purchaseDisabled}
-                onClick={onAddToCart}
-                className="w-full sm:w-fit"
-              >
-                {soldOut
-                  ? "Sold out"
-                  : selectionUnavailable
-                    ? "Choose a format"
-                    : "Add to bag"}
-              </Button>
-            ) : null)}
-          <dl className="border-navigation-border mt-4 divide-y border-y font-sans">
+            <PriceDisplay
+              price={product.price}
+              compareAtPrice={product.compareAtPrice}
+              type={product.priceType}
+              size="standard"
+            />
+            <CommerceStatus
+              status={product.availability ?? "in-stock"}
+              lowStockCount={product.lowStockCount}
+            />
+            <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
+              {description}
+            </p>
+            {variants.length ? (
+              <fieldset className="flex flex-wrap gap-3">
+                <legend className="mb-3 w-full font-sans text-sm font-semibold">
+                  Choose a format
+                </legend>
+                {variants.map((variant) => (
+                  <Button
+                    key={variant.id}
+                    type="button"
+                    variant={
+                      selectedVariantId === variant.id ? "primary" : "secondary"
+                    }
+                    aria-pressed={selectedVariantId === variant.id}
+                    disabled={!variant.available}
+                    onClick={() => onVariantChange?.(variant.id)}
+                  >
+                    {variant.label}
+                    {!variant.available ? " — unavailable" : ""}
+                  </Button>
+                ))}
+              </fieldset>
+            ) : null}
+            {selectionUnavailable && !soldOut ? (
+              <p className="text-commerce-status-sold-out font-sans text-sm font-semibold">
+                Select an available format to continue.
+              </p>
+            ) : null}
+            {purchaseAction ??
+              (showPurchaseAction ? (
+                <Button
+                  type="button"
+                  size="large"
+                  disabled={purchaseDisabled}
+                  onClick={onAddToCart}
+                  className="w-full sm:w-fit"
+                >
+                  {soldOut
+                    ? "Sold out"
+                    : selectionUnavailable
+                      ? "Choose a format"
+                      : "Add to bag"}
+                </Button>
+              ) : null)}
+          </div>
+        </div>
+        <section
+          className="border-navigation-divider mt-16 border-t pt-12 lg:mt-20 lg:grid lg:grid-cols-[360px_1fr] lg:gap-16 lg:pt-16"
+          aria-labelledby="product-facts-heading"
+        >
+          <Heading
+            id="product-facts-heading"
+            level={2}
+            treatment="title"
+            className="text-[34px]"
+          >
+            Scent, room and ritual
+          </Heading>
+          <dl className="border-navigation-border mt-8 divide-y border-y font-sans lg:mt-0">
             {details.map((detail) => (
               <div
                 key={detail.label}
-                className="grid gap-1 py-4 text-sm leading-5 sm:grid-cols-[8rem_1fr] sm:gap-4"
+                className="grid gap-1 py-5 text-sm leading-6 sm:grid-cols-[8rem_1fr] sm:gap-6"
               >
                 <dt className="font-semibold">{detail.label}</dt>
                 <dd className="text-content-secondary">{detail.value}</dd>
               </div>
             ))}
           </dl>
-        </div>
+        </section>
       </article>
     </TemplateShell>
   );
@@ -723,17 +797,25 @@ export function EditorialTemplate({
       cartCount={cartCount}
     >
       <article>
-        <header className={sectionClass}>
-          <ContentHeader
-            context={{ type: "eyebrow", label: eyebrow }}
-            title={title}
-            headingLevel={1}
-            headingTreatment="display"
-            lead={introduction}
-          />
+        <header className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:px-20 lg:py-24">
+          <div>
+            <p className="text-content-accent mb-6 font-sans text-xs font-semibold tracking-[0.08em] uppercase">
+              {eyebrow}
+            </p>
+            <Heading
+              level={1}
+              treatment="display"
+              className="text-[40px] leading-[1.1] lg:text-[56px]"
+            >
+              {title}
+            </Heading>
+          </div>
+          <Lead className="max-w-xl lg:justify-self-end lg:pb-2">
+            {introduction}
+          </Lead>
         </header>
         {image ? (
-          <div className="bg-product-card-media-fallback relative mx-auto aspect-[16/9] w-full max-w-7xl overflow-hidden sm:rounded-lg">
+          <div className="bg-product-card-media-fallback relative mx-auto h-[300px] w-[calc(100%-40px)] max-w-[1280px] overflow-hidden sm:w-[calc(100%-64px)] lg:h-[520px] lg:w-[calc(100%-160px)]">
             <Image
               src={image.src}
               alt={image.alt}
@@ -745,13 +827,23 @@ export function EditorialTemplate({
             />
           </div>
         ) : null}
-        <div className={cn(sectionClass, "max-w-3xl space-y-14")}>
-          {sections.map((section) => (
-            <section key={section.heading}>
-              <Heading level={2} treatment="title">
+        <div className="mx-auto w-full max-w-[760px] px-5 py-16 sm:px-8 lg:px-0 lg:py-28">
+          {sections.map((section, index) => (
+            <section
+              key={section.heading}
+              className={cn(
+                "border-navigation-divider border-t py-12 lg:py-16",
+                index === 0 && "border-t-0 pt-0",
+              )}
+            >
+              <Heading
+                level={2}
+                treatment="title"
+                className="text-[30px] lg:text-[40px]"
+              >
                 {section.heading}
               </Heading>
-              <p className="text-content-secondary mt-5 font-sans text-lg leading-8 whitespace-pre-line">
+              <p className="text-content-secondary mt-6 max-w-[70ch] font-sans text-[18px] leading-[1.65] whitespace-pre-line">
                 {section.body}
               </p>
             </section>
@@ -783,11 +875,11 @@ export function AboutTemplate({
     <TemplateShell currentHref="/about" cartCount={cartCount}>
       <article data-testid="about-page">
         <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 xl:px-0 xl:py-20">
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] xl:text-[56px]">
+          <div className="mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-14 sm:px-8 lg:px-20 xl:grid-cols-[1.1fr_0.9fr] xl:items-end xl:gap-24 xl:py-28">
+            <h1 className="font-display text-content-primary max-w-[820px] text-[clamp(3.5rem,8vw,6rem)] leading-[0.98] tracking-[-0.02em]">
               {title}
             </h1>
-            <p className="text-content-secondary mt-10 max-w-[720px] font-sans text-[17px] leading-[1.5] xl:text-xl">
+            <p className="text-content-secondary max-w-[640px] font-sans text-[17px] leading-[1.6] xl:pb-2 xl:text-xl">
               {introduction}
             </p>
           </div>
@@ -801,24 +893,16 @@ export function AboutTemplate({
               data-testid={`about-chapter-${chapter.role}`}
               className={cn(
                 isBone ? "bg-bone-50" : "bg-content-surface",
-                "py-11 xl:py-[110px]",
-                chapter.image && "min-h-[740px] xl:min-h-0",
+                "py-16 xl:py-[120px]",
+                "min-h-[740px] xl:min-h-0",
               )}
             >
               <div
                 className={cn(
-                  "mx-auto w-full max-w-7xl px-5 sm:px-8 xl:px-0",
-                  chapter.image
-                    ? "grid gap-24 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-10"
-                    : "text-center",
+                  "mx-auto grid w-full max-w-[1440px] gap-12 px-5 sm:px-8 lg:px-20 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-20",
                 )}
               >
-                <div
-                  className={cn(
-                    !chapter.image && "mx-auto max-w-[760px]",
-                    imageFirst && "xl:order-2",
-                  )}
-                >
+                <div className={cn(imageFirst && "xl:order-2")}>
                   <h2 className="font-display text-content-primary text-[26px] leading-[1.2] xl:text-[34px]">
                     {chapter.heading}
                   </h2>
@@ -828,14 +912,15 @@ export function AboutTemplate({
                     ))}
                   </div>
                 </div>
-                {chapter.image ? (
-                  <div
-                    data-testid={`about-media-slot-${chapter.role}`}
-                    className={cn(
-                      "relative aspect-4/3 w-full",
-                      imageFirst && "xl:order-1",
-                    )}
-                  >
+                <div
+                  data-testid={`about-media-slot-${chapter.role}`}
+                  className={cn(
+                    "relative aspect-4/3 w-full",
+                    !chapter.image && "bg-content-surface-elevated",
+                    imageFirst && "xl:order-1",
+                  )}
+                >
+                  {chapter.image ? (
                     <div
                       data-testid={`about-media-artwork-${chapter.role}`}
                       className="relative mx-auto aspect-3/4 h-full"
@@ -848,8 +933,12 @@ export function AboutTemplate({
                         className="object-contain"
                       />
                     </div>
-                  </div>
-                ) : null}
+                  ) : (
+                    <p className="text-content-secondary absolute inset-0 flex items-center justify-center px-8 text-center font-sans text-sm">
+                      Portrait unavailable
+                    </p>
+                  )}
+                </div>
               </div>
             </section>
           );
@@ -858,7 +947,7 @@ export function AboutTemplate({
           className="bg-bone-50 py-7 xl:py-[91px]"
           aria-labelledby="about-cta-heading"
         >
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 xl:flex-row xl:items-center xl:justify-between xl:px-0">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-5 sm:px-8 lg:px-20 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <h2
                 id="about-cta-heading"
@@ -904,7 +993,7 @@ export function GalleryTemplate({
   return (
     <TemplateShell currentHref="/gallery" cartCount={cartCount}>
       <article data-testid="gallery-page">
-        <header className="mx-auto w-full max-w-7xl px-5 pt-13 sm:px-8 lg:px-12 lg:pt-20 xl:px-0">
+        <header className="mx-auto w-full max-w-[1440px] px-5 pt-13 sm:px-8 lg:px-20 lg:pt-20">
           <h1 className="font-display text-content-primary max-w-[900px] text-[40px] leading-[1.15] tracking-[-0.02em] [overflow-wrap:anywhere] lg:text-7xl lg:leading-20">
             {title}
           </h1>
@@ -917,7 +1006,7 @@ export function GalleryTemplate({
           <div>
             {campaignItems.length ? (
               <section
-                className="mx-auto w-full max-w-7xl px-5 pt-12 sm:px-8 lg:px-12 lg:pt-16 xl:px-0"
+                className="mx-auto w-full max-w-[1440px] px-5 pt-12 sm:px-8 lg:px-20 lg:pt-16"
                 aria-label="Campaign gallery images"
               >
                 <GalleryViewer items={campaignItems} layout="campaign" />
@@ -927,7 +1016,7 @@ export function GalleryTemplate({
               <section
                 data-testid="market-gallery-section"
                 className={cn(
-                  "mx-auto w-full max-w-[1440px] px-4 min-[390px]:px-6 lg:px-16",
+                  "mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-20",
                   campaignItems.length ? "mt-20 lg:mt-28" : "pt-12 lg:pt-16",
                 )}
                 aria-labelledby="market-gallery-heading"
@@ -980,28 +1069,124 @@ export function GalleryTemplate({
 
 export function GalleryLoadingTemplate() {
   return (
-    <TemplateShell currentHref="/gallery">
+    <StorefrontLoadingTemplate
+      kind="gallery"
+      currentHref="/gallery"
+      accessibleLabel="Loading gallery"
+    />
+  );
+}
+
+export function StorefrontLoadingTemplate({
+  kind = "editorial",
+  currentHref,
+  accessibleLabel,
+}: {
+  kind?: "home" | "collection" | "product" | "gallery" | "editorial" | "cart";
+  currentHref?: string;
+  accessibleLabel?: string;
+}) {
+  const product = kind === "product";
+  const cart = kind === "cart";
+  const cards = kind === "collection" || kind === "gallery" || kind === "home";
+  return (
+    <TemplateShell
+      currentHref={currentHref}
+      surface={kind === "collection" ? "elevated" : "base"}
+    >
       <section
         aria-busy="true"
-        aria-label="Loading gallery"
+        aria-label={accessibleLabel ?? `Loading ${kind} page`}
         className="mx-auto w-full max-w-7xl px-5 py-13 sm:px-8 lg:px-12 lg:py-20 xl:px-0"
       >
-        <h1 className="font-display text-content-primary text-[40px] leading-[1.15] lg:text-[56px]">
-          Gathering the gallery
-        </h1>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }, (_, index) => (
-            <div
-              key={index}
-              className={cn("space-y-3", index > 2 && "hidden sm:block")}
-            >
-              <div className="bg-content-surface-elevated aspect-3/4 motion-reduce:animate-none" />
-              <div className="bg-content-surface-elevated h-4 w-2/3 motion-reduce:animate-none" />
+        <span className="sr-only">Loading</span>
+        {cart ? (
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)] lg:gap-16">
+            <div className="space-y-6">
+              {Array.from({ length: 2 }, (_, index) => (
+                <div
+                  key={index}
+                  data-testid="cart-loading-line"
+                  className="border-content-divider grid grid-cols-[6rem_minmax(0,1fr)] gap-5 border-b pb-6 sm:grid-cols-[8rem_minmax(0,1fr)]"
+                >
+                  <SkeletonBlock className="aspect-square w-full" />
+                  <div className="space-y-4 py-1">
+                    <SkeletonBlock className="h-7 w-4/5" />
+                    <SkeletonBlock className="h-4 w-2/3" />
+                    <SkeletonBlock className="h-4 w-1/3" />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <div
+              data-testid="cart-loading-summary"
+              className="dark bg-content-surface min-h-72 space-y-6 p-6 sm:p-8"
+            >
+              <SkeletonBlock className="h-8 w-2/3" />
+              <SkeletonBlock className="h-px w-full" />
+              <SkeletonBlock className="h-5 w-full" />
+              <SkeletonBlock className="h-12 w-full" />
+            </div>
+          </div>
+        ) : (
+          <>
+            <div
+              className={cn(
+                "grid gap-10",
+                product && "lg:grid-cols-2 lg:gap-20",
+              )}
+            >
+              {product ? <SkeletonBlock className="aspect-3/4 w-full" /> : null}
+              <div className={cn("space-y-5", !product && "max-w-3xl")}>
+                <SkeletonBlock className="h-3 w-28" />
+                <SkeletonBlock className="h-14 w-full sm:h-20" />
+                <SkeletonBlock className="h-6 w-5/6" />
+                <SkeletonBlock className="h-6 w-2/3" />
+                {product ? <SkeletonBlock className="mt-8 h-12 w-44" /> : null}
+              </div>
+            </div>
+            {cards ? (
+              <div className="mt-14 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+                {Array.from({ length: 6 }, (_, index) => (
+                  <div
+                    key={index}
+                    className={cn("space-y-4", index > 3 && "hidden lg:block")}
+                  >
+                    <SkeletonBlock className="aspect-3/4 w-full" />
+                    <SkeletonBlock className="h-4 w-1/3" />
+                    <SkeletonBlock className="h-7 w-4/5" />
+                    <SkeletonBlock className="h-4 w-2/3" />
+                  </div>
+                ))}
+              </div>
+            ) : !product ? (
+              <div className="mt-16 max-w-3xl space-y-12">
+                <div className="space-y-4">
+                  <SkeletonBlock className="h-9 w-1/2" />
+                  <SkeletonBlock className="h-28 w-full" />
+                </div>
+                <div className="space-y-4">
+                  <SkeletonBlock className="h-9 w-2/5" />
+                  <SkeletonBlock className="h-24 w-full" />
+                </div>
+              </div>
+            ) : null}
+          </>
+        )}
       </section>
     </TemplateShell>
+  );
+}
+
+function SkeletonBlock({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "bg-content-surface-elevated animate-pulse rounded-sm motion-reduce:animate-none",
+        className,
+      )}
+    />
   );
 }
 

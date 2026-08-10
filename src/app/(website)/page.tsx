@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { HomeTemplate } from "@/components/templates/storefront-templates";
+import {
+  HomeTemplate,
+  StorefrontLoadingTemplate,
+} from "@/components/templates/storefront-templates";
 import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
 import { readCart } from "@/lib/shopify/cart-session";
 import { toProductCard } from "@/lib/shopify/presentation";
@@ -50,11 +53,7 @@ async function HomeContent() {
 
 export default function HomePage() {
   return (
-    <Suspense
-      fallback={
-        <div className="bg-content-surface min-h-dvh" aria-busy="true" />
-      }
-    >
+    <Suspense fallback={<StorefrontLoadingTemplate kind="home" />}>
       <HomeContent />
     </Suspense>
   );

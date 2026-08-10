@@ -56,7 +56,7 @@ describe("editorial page fallbacks", () => {
 
     expect(page.title).toBe("A title from Sanity");
     expect(page.sections).toEqual(fallbackFragranceGuide.sections);
-    expect(page.image).toBeUndefined();
+    expect(page.image).toEqual(fallbackFragranceGuide.image);
   });
 
   it("uses an editor-provided image only when it has alternative text", () => {

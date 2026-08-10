@@ -17,7 +17,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
-from .codex_worker import SUPPORTED_CODEX_VERSION
+from .codex_worker import SUPPORTED_CODEX_VERSION, _output_schema, _worker_prompt
 from .data_types import (HANDOFF_SECTIONS, CodexFigmaOutput, CodexFigmaRequest,
                          EnvelopeBase, FigmaSupervisorOutput, GateReport, PlanOutput)
 
@@ -25,17 +25,34 @@ TAIL_CHARS = 1000        # command output kept as evidence on a failure
 # A complete capture needs one final successful attempt; prior closed retry
 # attempts retain their own non-success terminal outcomes.
 ACCEPTABLE_CAPTURE_WORKER_OUTCOMES = frozenset(("completed",))
+HANDOFF_OBLIGATIONS = {
+    "dimensions_layout": ("320", "390", "desktop", "200%", "natural height"),
+    "semantic_variables": ("semantic",), "typography": ("semantic html", "heading"),
+    "spacing_assets": ("image alt", "rights applicability"),
+    "responsive": ("320", "390", "desktop", "natural height"),
+    "accessibility_interaction": ("keyboard", "focus", "wcag aa", "reduced motion"),
+    "content_extremes": ("long", "localized", "missing", "empty", "loading", "error", "disabled"),
+    "divergences": ("diverg",),
+}
 
 
 def _size(path: Path) -> str:
     n = path.stat().st_size
     return f"{n}B" if n < 1024 else f"{n / 1024:.1f}KB"
 
+def _declared_artifact_path(value: str, run) -> Path:
+    direct = Path(value)
+    if direct.exists() or direct.is_absolute():
+        return direct
+    root = _handoff_root(run)
+    candidate = (root / direct).resolve()
+    return candidate if root in candidate.parents else direct
+
 
 def artifacts_exist(envelope: EnvelopeBase, run) -> GateReport:
     report = GateReport()
     for a in envelope.artifacts:
-        p = Path(a)
+        p = _declared_artifact_path(a, run)
         report.check(a, p.exists(),
                      f"exists, {_size(p)}" if p.exists() else "declared artifact does not exist")
     return report
@@ -44,7 +61,7 @@ def artifacts_exist(envelope: EnvelopeBase, run) -> GateReport:
 def files_non_empty(envelope: EnvelopeBase, run) -> GateReport:
     report = GateReport()
     for a in envelope.artifacts:
-        p = Path(a)
+        p = _declared_artifact_path(a, run)
         if not (p.exists() and p.is_file()):
             continue                       # existence is artifacts_exist's job
         empty = p.stat().st_size == 0
@@ -74,10 +91,12 @@ def _result_hash(envelope: CodexFigmaOutput) -> str:
 
 
 def _worker_lifecycle_complete(run, adw_id: str, phase_id: str, request_id: str) -> GateReport:
-    """Require a closed, uniquely paired attempt history ending in one success.
+    """Require a closed, uniquely paired attempt history ending in success.
 
-    Retries are valid only when every prior attempt is closed with its actual
-    terminal outcome and the final attempt is the sole completed one.
+    A process can exit successfully yet fail semantic trace validation and be
+    retried. Every attempt must still close truthfully; the final attempt must
+    complete, while the separate tool-binding gate proves which attempt
+    produced accepted evidence.
     """
     report = GateReport()
     tracer = getattr(run, "tracer", None)
@@ -110,10 +129,9 @@ def _worker_lifecycle_complete(run, adw_id: str, phase_id: str, request_id: str)
     report.check("worker lifecycle events", paired,
                  "each attempt has one matching sanitized start/end pair" if paired
                  else "worker start/end events are missing, duplicate, malformed, or ambiguous")
-    completed = [row for row in rows if isinstance(row, dict) and row.get("status") in ACCEPTABLE_CAPTURE_WORKER_OUTCOMES]
-    accepted = len(completed) == 1 and bool(rows) and rows[-1] is completed[0]
+    accepted = bool(rows) and isinstance(rows[-1], dict) and rows[-1].get("status") in ACCEPTABLE_CAPTURE_WORKER_OUTCOMES
     report.check("worker lifecycle outcome", accepted,
-                 "final attempt completed" if accepted else "expected exactly one final completed attempt")
+                 "final attempt completed" if accepted else "expected the final attempt to complete")
     return report
 
 
@@ -121,6 +139,28 @@ def _append_worker_lifecycle(report: GateReport, run, adw_id: str, phase_id: str
     lifecycle = _worker_lifecycle_complete(run, adw_id, phase_id, request_id)
     for check in lifecycle.checks:
         report.check(check.item, check.ok, check.note)
+
+
+def _capture_commit_compatible(repo_root: str, captured: str, current: str) -> bool:
+    """Keep evidence only across descendant factory-internal repairs.
+
+    Product, design, configuration, content, and Storybook changes always
+    invalidate capture provenance. This narrowly avoids recapturing unchanged
+    Figma facts when only the SSSF harness itself was repaired.
+    """
+    if not captured or not current:
+        return False
+    if captured == current:
+        return True
+    try:
+        ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", captured, current],
+                                  cwd=repo_root, capture_output=True, timeout=10).returncode == 0
+        changed = subprocess.run(["git", "diff", "--name-only", f"{captured}..{current}"],
+                                 cwd=repo_root, capture_output=True, text=True, timeout=10,
+                                 check=True).stdout.splitlines()
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return ancestor and bool(changed) and all(path.startswith("adws/") for path in changed)
 
 
 def figma_handoff_complete(envelope: FigmaSupervisorOutput, run, expected_target=None) -> GateReport:
@@ -138,21 +178,11 @@ def figma_handoff_complete(envelope: FigmaSupervisorOutput, run, expected_target
     # These are concrete, reviewable obligations, not generic accessibility
     # labels.  Static Figma cannot establish all of them, so a handoff must say
     # which facts are unavailable and block implementation rather than inventing.
-    required_obligations = {
-        "dimensions_layout": ("320", "390", "desktop", "200%", "natural height"),
-        "semantic_variables": ("semantic",), "typography": ("semantic html", "heading"),
-        "spacing_assets": ("image alt", "rights applicability"),
-        "responsive": ("320", "390", "desktop", "natural height"),
-        "accessibility_interaction": ("keyboard", "focus", "wcag aa", "reduced motion"),
-        "content_extremes": ("long", "localized", "missing", "empty", "loading", "error", "disabled"),
-        "divergences": ("diverg",),
-    }
     for section in sorted(HANDOFF_SECTIONS):
         values = envelope.handoff_sections.get(section, [])
-        text = " ".join(str(value).casefold() for value in values)
-        missing = [word for word in required_obligations[section] if word not in text]
-        report.check(f"handoff section {section}", bool(values and all(str(value).strip() for value in values) and not missing),
-                     "concrete obligations documented" if not missing else "missing concrete obligations: " + ", ".join(missing))
+        complete = bool(values and all(str(value).strip() for value in values))
+        report.check(f"handoff section {section}", complete,
+                     "target-owned facts documented" if complete else "target-owned facts are missing")
     # An unavailable static fact is a hard stop.  A handoff cannot become
     # complete merely by mentioning the word “blocker” in its narrative.
     static_complete = (envelope.static_fact_status == "complete" and not envelope.static_fact_reason.strip()
@@ -266,13 +296,10 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
     _append_worker_lifecycle(report, run, run.adw_id, provenance.phase_id,
                              provenance.request_id)
     cfg = run.cfg.workers.figma_codex
-    schema_hash = hashlib.sha256(json.dumps(CodexFigmaOutput.model_json_schema(), sort_keys=True,
+    schema_hash = hashlib.sha256(json.dumps(_output_schema(envelope.request), sort_keys=True,
                                             separators=(",", ":")).encode()).hexdigest()
     try:
-        prompt_dir = Path(__file__).resolve().parent.parent / "adw_data/prompt_engineering/figma_codex_worker"
-        prompt = ((prompt_dir / "system.md").read_text()
-                  + "\n" + (prompt_dir / "user.md").read_text()
-                  + "\n" + envelope.request.model_dump_json())
+        prompt = _worker_prompt(envelope.request)
         prompt_hash = hashlib.sha256(prompt.encode()).hexdigest()
         repo_root = str(getattr(run, "repo_root", Path.cwd()))
         commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, capture_output=True,
@@ -291,7 +318,8 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
              and provenance.worker_kind == "codex" and provenance.connector_name == "figma"
              and provenance.schema_version == "1"
              and provenance.cli_version in (f"codex {SUPPORTED_CODEX_VERSION}", f"codex v{SUPPORTED_CODEX_VERSION}", f"codex-cli {SUPPORTED_CODEX_VERSION}", f"codex-cli v{SUPPORTED_CODEX_VERSION}")
-             and provenance.repository_commit == commit and provenance.schema_hash == schema_hash
+             and _capture_commit_compatible(repo_root, provenance.repository_commit, commit)
+             and provenance.schema_hash == schema_hash
              and provenance.prompt_hash == prompt_hash and duration_ok
              and provenance.attempts == len(lifecycle_rows) and provenance.attempts in range(1, cfg.max_attempts + 1)
              and provenance.termination_outcome == "completed")
@@ -300,7 +328,23 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
     report.check("exact nodes", envelope.observed_node_ids == request.node_ids, "requested and observed nodes match" if envelope.observed_node_ids == request.node_ids else "observed nodes differ")
     report.check("approval", all(envelope.approval_labels.get(node) == request.expected_approval for node in request.node_ids), "all required nodes approved" if request.node_ids else "missing approval metadata")
     allowed = {"node_metadata", "node_context", "variables", "styles", "screenshot"}
-    stamps_match = bool(envelope.call_stamps) and all(stamp.operation in allowed and stamp.operation in envelope.request.operations and stamp.file_key == request.file_key and stamp.node_ids == request.node_ids for stamp in envelope.call_stamps)
+    requested_nodes = set(request.node_ids)
+    traced_nodes: set[str] = set()
+    stamps_match = bool(envelope.call_stamps)
+    for stamp in envelope.call_stamps:
+        stamp_nodes = set(stamp.node_ids)
+        stamp_valid = (
+            stamp.operation in allowed
+            and stamp.operation in envelope.request.operations
+            and stamp.file_key == request.file_key
+            and bool(stamp_nodes)
+            and len(stamp_nodes) == len(stamp.node_ids)
+            and stamp_nodes.issubset(requested_nodes)
+        )
+        stamps_match = stamps_match and stamp_valid
+        if stamp_valid:
+            traced_nodes.update(stamp_nodes)
+    stamps_match = stamps_match and traced_nodes == requested_nodes
     report.check("read-only traced calls", stamps_match, "allowlisted exact-target calls only" if stamps_match else "missing, untraced, or wrong-target calls")
     root = _handoff_root(run)
     capture_root = (root / "figma" / envelope.request.request_id).resolve()
@@ -413,6 +457,19 @@ def figma_handoff_coverage(handoffs: list[FigmaSupervisorOutput], plan: PlanOutp
     report.check("Figma handoff exact coverage", set(actual_hashes) == set(expected_hashes),
                  "all and only planned targets covered" if set(actual_hashes) == set(expected_hashes)
                  else "partial, mixed, missing, or wrong-target handoff coverage")
+    # Concrete cross-cutting obligations belong to the approved target set as
+    # a whole. Requiring every atomic frame (for example typography) to repeat
+    # unrelated image or viewport facts creates false blockers; the aggregate
+    # gate still requires the union to cover every release obligation.
+    for section in sorted(HANDOFF_SECTIONS):
+        aggregate = " ".join(
+            str(value).casefold() for handoff in handoffs
+            for value in handoff.handoff_sections.get(section, [])
+        )
+        missing = [word for word in HANDOFF_OBLIGATIONS[section] if word not in aggregate]
+        report.check(f"Figma aggregate {section}", not missing,
+                     "concrete obligations covered across target set" if not missing
+                     else "missing concrete obligations: " + ", ".join(missing))
     for target, target_hash in zip(targets, expected_hashes):
         matching = [handoff for handoff in handoffs if handoff.human_design_approval
                     and handoff.human_design_approval.target_hash == target_hash]

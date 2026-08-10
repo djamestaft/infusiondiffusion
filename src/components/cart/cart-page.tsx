@@ -52,11 +52,13 @@ export function CartPage({
   };
   if (!cart.lines.length)
     return (
-      <main className="mx-auto min-h-[70dvh] w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+      <main className="mx-auto min-h-[70dvh] w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:px-20 lg:py-28">
         <p className="text-content-accent font-sans text-xs font-semibold uppercase">
           Your selection
         </p>
-        <h1 className="font-display mt-3 text-5xl">Your bag is empty</h1>
+        <h1 className="font-display mt-5 max-w-3xl text-[clamp(3.5rem,8vw,6rem)] leading-[0.98]">
+          Your bag is empty
+        </h1>
         <p className="text-content-secondary mt-4 font-sans">
           Explore the collection and choose a fragrance for your space.
         </p>
@@ -66,12 +68,14 @@ export function CartPage({
       </main>
     );
   return (
-    <main className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-16">
-      <header>
+    <main className="mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:px-20 lg:py-20">
+      <header className="border-navigation-divider border-b pb-10 lg:pb-14">
         <p className="text-content-accent font-sans text-xs font-semibold uppercase">
           Your selection
         </p>
-        <h1 className="font-display mt-3 text-5xl">Your bag</h1>
+        <h1 className="font-display mt-5 text-[40px] leading-[1.1] lg:text-[56px]">
+          Your bag
+        </h1>
         <p className="text-content-secondary mt-3 font-sans">
           {cart.totalQuantity} items held for this visit. Prices and
           availability refresh with every change.
@@ -87,7 +91,7 @@ export function CartPage({
           {operationError}
         </p>
       ) : null}
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_22.5rem] lg:gap-16">
+      <div className="mt-12 grid gap-14 lg:grid-cols-[856px_360px] lg:gap-16">
         <div>
           {cart.lines.map((line) => (
             <CartLine

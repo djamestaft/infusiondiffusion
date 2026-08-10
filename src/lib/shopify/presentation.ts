@@ -1,3 +1,4 @@
+import { getApprovedProductMedia } from "@/content/storefront-media";
 import type { ProductCardProps } from "@/components/ui/product-card";
 import type {
   ShopifyProduct,
@@ -34,6 +35,7 @@ export function toProductCard(
       variant.price.currencyCode === product.priceRange.min.currencyCode,
   );
   const format = [product.productType, size].filter(Boolean).join(" · ");
+  const localMedia = getApprovedProductMedia(product.handle);
   return {
     href: `/products/${product.handle}`,
     name,
@@ -46,8 +48,12 @@ export function toProductCard(
       ? {
           src: product.featuredImage.url,
           alt: product.featuredImage.altText || `${name} product image`,
+          fallbackSrc: localMedia?.src,
+          fallbackAlt: localMedia?.alt,
         }
-      : undefined,
+      : localMedia
+        ? { src: localMedia.src, alt: localMedia.alt }
+        : undefined,
     availability: product.availableForSale ? "in-stock" : "sold-out",
   };
 }

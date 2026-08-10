@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { AboutTemplate } from "@/components/templates/storefront-templates";
+import {
+  AboutTemplate,
+  StorefrontLoadingTemplate,
+} from "@/components/templates/storefront-templates";
 import { readCart } from "@/lib/shopify/cart-session";
 import {
   getAboutPage,
@@ -41,7 +44,7 @@ export default function AboutPage() {
   return (
     <Suspense
       fallback={
-        <div className="bg-content-surface min-h-dvh" aria-busy="true" />
+        <StorefrontLoadingTemplate kind="editorial" currentHref="/about" />
       }
     >
       <AboutContent />

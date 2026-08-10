@@ -22,7 +22,7 @@ export default async function ShopPage() {
   return (
     <CollectionTemplate
       products={products}
-      title="The collection"
+      title="The fragrance collection"
       description="Considered home fragrance, with current catalogue pricing and availability."
       cartCount={cart.totalQuantity}
     />

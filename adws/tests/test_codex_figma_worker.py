@@ -11,13 +11,22 @@ from types import SimpleNamespace
 from unittest import TestCase
 from unittest.mock import patch
 
-from adw_modules.codex_worker import _redact, _safe_env, _tool_stamps, run
-from adw_modules.data_types import (CodexArtifact, CodexFigmaRequest,
+from adw_modules.codex_worker import _output_schema, _redact, _safe_env, _strict_schema, _tool_stamps, run
+from adw_modules.data_types import (CodexArtifact, CodexFigmaOutput, CodexFigmaRequest,
                                     FigmaCodexWorkerConfig, FigmaTarget)
 from adw_modules.tracer import Tracer
 
 
 class WorkerTest(TestCase):
+    def test_output_schema_is_strict_at_every_object_boundary(self):
+        schema = _output_schema(self.request())
+        objects = [schema, *(definition for definition in schema.get("$defs", {}).values()
+                             if definition.get("type") == "object")]
+        for value in objects:
+            self.assertIs(value.get("additionalProperties"), False)
+            self.assertEqual(set(value.get("required", [])), set(value.get("properties", {})))
+        self.assertEqual(schema["properties"]["approval_labels"]["required"], ["93:6"])
+
     def request(self):
         return CodexFigmaRequest(request_id="request", supervisor_session_id="pi",
             reason="pi_connector_unavailable", operations=["node_metadata"],
@@ -161,9 +170,23 @@ else:
                     self.assertEqual((result.failure_code, attempts), ("connector_invalid_config", 0))
             result, _ = self.enabled(root / "command", "success")
             args = json.loads((root / "command" / "attempts.args").read_text())
+            self.assertIn("--skip-git-repo-check", args)
             self.assertIn('mcp_servers.figma.enabled_tools=["get_metadata"]', args)
             self.assertNotIn("post_comment", " ".join(args))
             self.assertEqual(result.capture_status, "complete")
+
+    def test_validated_wrapper_persistence_overrides_model_persistence_self_report(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            request = self.request()
+            payload = {"status": "fail", "summary": "safe", "capture_status": "blocked",
+                "failure_code": "ARTIFACT_PERSISTENCE_UNAVAILABLE", "request": request.model_dump(),
+                "provenance": {"adw_id": "x", "phase_id": "x", "request_id": "x", "supervisor_session_id": "x"}}
+            result = run(request, FigmaCodexWorkerConfig(enabled=True), self.runtime(root), "phase",
+                         test_executable=str(self.executable(root, payload=payload)))
+            self.assertEqual((result.status, result.capture_status, result.failure_code),
+                             ("success", "complete", ""))
+            self.assertTrue((root / "handoff" / "figma" / "request" / "evidence.json").is_file())
 
     def test_preflight_missing_and_malformed_connectors_fail_before_attempt(self):
         with TemporaryDirectory() as directory:
@@ -240,10 +263,10 @@ else:
     def test_invalid_output_tools_targets_untraced_calls_and_redaction_fail_closed(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            for mode, code in (("invalid_json", "schema_mismatch"), ("unknown_tool", "untraced_or_invalid_evidence"), ("wrong_target", "untraced_or_invalid_evidence"), ("untraced", "untraced_or_invalid_evidence")):
+            for mode, code, attempts_expected in (("invalid_json", "schema_mismatch", 1), ("unknown_tool", "untraced_or_invalid_evidence", 1), ("wrong_target", "untraced_or_invalid_evidence", 1), ("untraced", "missing_tool_trace", 2)):
                 with self.subTest(mode=mode):
                     result, attempts = self.enabled(root / mode, mode)
-                    self.assertEqual((result.failure_code, attempts), (code, 1))
+                    self.assertEqual((result.failure_code, attempts), (code, attempts_expected))
             payload = {"status":"success", "summary":"authorization=secret-value", "capture_status":"complete", "request":self.request().model_dump(), "provenance":{"adw_id":"x","phase_id":"x","request_id":"x","supervisor_session_id":"x"}}
             executable = self.executable(root / "redaction", "success", payload=payload)
             result = run(self.request(), FigmaCodexWorkerConfig(enabled=True), self.runtime(root / "redaction"), "phase", test_executable=str(executable))

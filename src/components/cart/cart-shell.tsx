@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { CartPage } from "@/components/cart/cart-page";
 import { Navigation } from "@/components/navigation";
+import { StorefrontFooter } from "@/components/storefront-footer";
 import type { CartContract } from "@/lib/shopify/cart-contract";
 
 export function CartShell({
@@ -32,6 +33,7 @@ export function CartShell({
         checkoutAction={checkoutAction}
         onCartChange={(cart) => setCartCount(cart.totalQuantity)}
       />
+      <StorefrontFooter />
     </div>
   );
 }

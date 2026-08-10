@@ -13,6 +13,9 @@ import {
   ContactTemplate,
   GalleryLoadingTemplate,
   GalleryTemplate,
+  StorefrontErrorTemplate,
+  StorefrontLoadingTemplate,
+  StorefrontNotFoundTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -30,6 +33,26 @@ const galleryItem = (id: string, title: string) => ({
 });
 
 describe("storefront templates", () => {
+  it("uses the shared shell for recoverable errors and unavailable pages", () => {
+    render(<StorefrontErrorTemplate reset={vi.fn()} />);
+    expect(screen.getByRole("main")).toBeVisible();
+    expect(screen.getByRole("contentinfo")).toBeVisible();
+    expect(screen.getByRole("button", { name: "Try again" })).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Return to the collection" }),
+    ).toHaveAttribute("href", "/shop");
+
+    cleanup();
+    render(<StorefrontNotFoundTemplate />);
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: "This page could not be found.",
+      }),
+    ).toBeVisible();
+    expect(screen.getByRole("contentinfo")).toBeVisible();
+  });
+
   it("renders the Gallery with one H1, current navigation, and an honest empty state", () => {
     render(
       <GalleryTemplate
@@ -84,9 +107,9 @@ describe("storefront templates", () => {
     expect(screen.getAllByTestId("gallery-grid")).toHaveLength(2);
     expect(screen.getByTestId("market-gallery-section")).toHaveClass(
       "max-w-[1440px]",
-      "px-4",
-      "min-[390px]:px-6",
-      "lg:px-16",
+      "px-5",
+      "sm:px-8",
+      "lg:px-20",
     );
     expect(
       screen.getByText("Every room carries its own atmosphere."),
@@ -136,6 +159,30 @@ describe("storefront templates", () => {
     ).toBeVisible();
   });
 
+  it("uses geometry-faithful skeletons without visible loading copy", () => {
+    render(<StorefrontLoadingTemplate kind="product" />);
+    expect(screen.getByLabelText("Loading product page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    expect(screen.queryByText(/loading fragrance/i)).toBeNull();
+  });
+
+  it("uses responsive cart-line and Midnight-summary geometry while loading", () => {
+    render(<StorefrontLoadingTemplate kind="cart" currentHref="/cart" />);
+    const loadingRegion = screen.getByLabelText("Loading cart page");
+    expect(loadingRegion).toHaveAttribute("aria-busy", "true");
+    expect(screen.getAllByTestId("cart-loading-line")).toHaveLength(2);
+    expect(screen.getByTestId("cart-loading-summary")).toHaveClass(
+      "dark",
+      "bg-content-surface",
+    );
+    expect(loadingRegion.querySelectorAll("button, a, input")).toHaveLength(0);
+    expect(loadingRegion.querySelector(".animate-pulse")).toHaveClass(
+      "motion-reduce:animate-none",
+    );
+  });
+
   it("composes the home journey from accessible landmarks and product cards", () => {
     render(
       <HomeTemplate
@@ -150,6 +197,11 @@ describe("storefront templates", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
+    expect(screen.getByTestId("home-hero-section")).toHaveClass(
+      "lg:h-[796px]",
+      "lg:grid-cols-[560px_496px]",
+      "lg:px-20",
+    );
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(3);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface-elevated",
@@ -159,13 +211,13 @@ describe("storefront templates", () => {
       "shadow",
     );
     expect(screen.getByTestId("home-cabinet-inner")).toHaveClass(
-      "max-w-7xl",
+      "max-w-[1440px]",
       "pt-[52px]",
       "lg:pt-[72px]",
     );
     expect(
       screen.getByRole("heading", { name: "A cabinet of atmosphere" }),
-    ).toHaveClass("mb-8");
+    ).toHaveClass("mb-10", "lg:mb-14");
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" }),
     ).toHaveLength(2);
@@ -368,7 +420,7 @@ describe("storefront templates", () => {
     expect(
       screen.queryByRole("link", { current: "page" }),
     ).not.toBeInTheDocument();
-    expect(screen.getByText("Image coming soon")).toBeVisible();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 
   it("keeps an editorial article meaningful without optional imagery or sections", () => {
@@ -439,9 +491,11 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("about-chapter-principles")).toHaveClass(
       "bg-content-surface",
     );
-    expect(screen.getByRole("link", { name: "Shop" })).not.toHaveAttribute(
-      "aria-current",
-    );
+    expect(
+      screen
+        .getAllByRole("link", { name: "Shop" })
+        .every((link) => !link.hasAttribute("aria-current")),
+    ).toBe(true);
     expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
       2,
     );
@@ -476,12 +530,10 @@ describe("storefront templates", () => {
     expect(screen.getByRole("img", { name: "Test portrait" })).toHaveClass(
       "object-contain",
     );
-    expect(
-      screen.queryByTestId("about-media-slot-development"),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByTestId("about-chapter-development").firstElementChild,
-    ).toHaveClass("text-center");
+    expect(screen.getByTestId("about-media-slot-development")).toHaveClass(
+      "aspect-4/3",
+    );
+    expect(screen.getAllByText("Portrait unavailable")).toHaveLength(3);
     const origin = screen.getByTestId("about-chapter-origin");
     const heading = origin.querySelector("h2")!;
     const image = screen.getByRole("img", { name: "Test portrait" });

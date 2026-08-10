@@ -1,3 +1,5 @@
+import { approvedHomeSlides } from "@/content/storefront-media";
+
 export type SiteSettings = {
   brandName: string;
   eyebrow: string;
@@ -23,6 +25,8 @@ export type SiteSettings = {
       alt: string;
       caption?: string;
       hotspot?: { x: number; y: number };
+      fallbackSrc?: string;
+      fallbackAlt?: string;
     }>;
     collectionTitle: string;
     guidanceEyebrow: string;
@@ -68,7 +72,7 @@ export const fallbackSiteSettings: SiteSettings = {
     heroIntroduction:
       "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
     heroActionLabel: "Shop the collection",
-    heroSlides: [],
+    heroSlides: approvedHomeSlides,
     collectionTitle: "A cabinet of atmosphere",
     guidanceEyebrow: "Fragrance guidance",
     guidanceTitle: "Choose by the room, then by the feeling",
@@ -83,6 +87,10 @@ export const fallbackSiteSettings: SiteSettings = {
       "Clear care guidance, transparent delivery expectations and dependable stock information accompany every product.",
     showFounderStory: true,
     founderTitle: "Born from fragrance",
+    founderImage: {
+      src: "/images/storefront/approved/home/santuaire-serein-library.png",
+      alt: "Santuaire Serein fragrance in a library interior",
+    },
     founderStory:
       "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling. More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances.\n\nCreated with the guidance and encouragement of Jacqui Kirchmann, founder of Jacqui Candles – Scented Wax Melts, each fragrance is composed with passion, elegance and soul.",
     showLongevity: true,

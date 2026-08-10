@@ -9,6 +9,8 @@ from unittest import TestCase
 
 from adw_modules.data_types import (
     CodexArtifact,
+    AgentCall,
+    BuildOutput,
     CodexCallStamp,
     CodexFigmaOutput,
     CodexFigmaRequest,
@@ -16,9 +18,11 @@ from adw_modules.data_types import (
     FigmaSupervisorOutput,
     FigmaTarget,
     HumanDesignApproval,
+    ImplementationContext,
     PlanOutput,
 )
-from adw_modules.gates import _result_hash, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
+from adw_modules.codex_worker import _output_schema, _worker_prompt
+from adw_modules.gates import _capture_commit_compatible, _result_hash, _worker_lifecycle_complete, figma_handoff_complete, figma_handoff_coverage, figma_plan_supervision_required
 from adw_modules.tracer import Tracer
 
 
@@ -35,6 +39,48 @@ SECTIONS = {
 
 
 class FigmaHandoffGateTest(TestCase):
+    def test_capture_commit_compatibility_allows_only_factory_internal_descendants(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+            subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=root, check=True)
+            subprocess.run(["git", "config", "user.name", "Test"], cwd=root, check=True)
+            (root / "src").mkdir(); (root / "src/app.ts").write_text("stable")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "base"], cwd=root, check=True)
+            base = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            (root / "adws").mkdir(); (root / "adws/gate.py").write_text("repair")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "factory"], cwd=root, check=True)
+            factory = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            self.assertTrue(_capture_commit_compatible(str(root), base, factory))
+            (root / "src/app.ts").write_text("changed")
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            subprocess.run(["git", "commit", "-qm", "product"], cwd=root, check=True)
+            product = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+            self.assertFalse(_capture_commit_compatible(str(root), base, product))
+
+    def test_agent_call_accepts_typed_implementation_context(self) -> None:
+        plan = PlanOutput(status="success")
+        call = AgentCall(output_type=BuildOutput, prompt="build",
+                         previous=ImplementationContext(plan=plan))
+        self.assertIsInstance(call.previous, ImplementationContext)
+
+    def test_worker_lifecycle_accepts_closed_semantic_retry_before_final_success(self) -> None:
+        lifecycle = {
+            "rows": [
+                {"attempt_id": "request:1", "pid": 98, "status": "completed", "ended_at": "2026-01-01T00:00:01Z"},
+                {"attempt_id": "request:2", "pid": 99, "status": "completed", "ended_at": "2026-01-01T00:00:02Z"},
+            ],
+            "starts": [{"attempt_id": "request:1", "pid": 98}, {"attempt_id": "request:2", "pid": 99}],
+            "ends": [{"attempt_id": "request:1", "pid": 98}, {"attempt_id": "request:2", "pid": 99}],
+            "tools": [],
+            "malformed": 0,
+        }
+        tracer = SimpleNamespace(connector_worker_lifecycle=lambda *_: lifecycle)
+        report = _worker_lifecycle_complete(SimpleNamespace(tracer=tracer), "adw", "phase", "request")
+        self.assertTrue(report.passed)
+
     def test_explicit_handoff_root_does_not_evaluate_legacy_config(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)
@@ -78,7 +124,7 @@ class FigmaHandoffGateTest(TestCase):
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = self._direct(root)
-            output.handoff_sections["accessibility_interaction"] = ["keyboard focus"]
+            output.handoff_sections["accessibility_interaction"] = []
             self.assertFalse(figma_handoff_complete(output, self._run(root)).passed)
 
     def test_direct_handoff_requires_complete_stage(self) -> None:
@@ -93,7 +139,10 @@ class FigmaHandoffGateTest(TestCase):
         with TemporaryDirectory() as directory:
             root = Path(directory)
             output = self._direct(root)
-            output.handoff_sections["divergences"] = ["unavailable static-Figma facts are a blocker"]
+            output.static_fact_status = "unavailable"
+            output.static_fact_reason = "required static-Figma facts are unavailable"
+            output.stage = "blocked"
+            output.ready = False
             self.assertFalse(figma_handoff_complete(output, self._run(root)).passed)
 
     def test_worker_handoff_accepts_current_exclusive_evidence(self) -> None:
@@ -101,6 +150,29 @@ class FigmaHandoffGateTest(TestCase):
             root = Path(directory)
             output, run = self._worker_handoff(root)
             self.assertTrue(figma_handoff_complete(output, run).passed)
+
+    def test_worker_handoff_accepts_complete_per_node_traces_for_multi_node_target(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            output, run = self._worker_handoff(
+                root,
+                target_node_ids=["93:6", "93:7"],
+                stamp_node_groups=[["93:6"], ["93:7"]],
+            )
+            self.assertTrue(figma_handoff_complete(output, run).passed)
+            plan = PlanOutput(status="success", figma_targets=run.figma_targets,
+                              advisory_specialists=["product_designer"])
+            self.assertTrue(figma_handoff_coverage([output], plan, run).passed)
+
+    def test_worker_handoff_rejects_partial_per_node_trace_coverage(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            output, run = self._worker_handoff(
+                root,
+                target_node_ids=["93:6", "93:7"],
+                stamp_node_groups=[["93:6"]],
+            )
+            self.assertFalse(figma_handoff_complete(output, run).passed)
 
     def test_worker_handoff_rejects_missing_or_tampered_request_artifact(self) -> None:
         with TemporaryDirectory() as directory:
@@ -127,6 +199,11 @@ class FigmaHandoffGateTest(TestCase):
             two = one.model_copy(deep=True)
             two.human_design_approval.target_hash = hashlib.sha256(json.dumps(second.model_dump(), sort_keys=True, separators=(",", ":")).encode()).hexdigest()
             self.assertTrue(figma_handoff_coverage([one, two], plan, run).passed)
+            one.handoff_sections["dimensions_layout"] = ["This frame owns typography facts; viewport obligations live in the sibling frame."]
+            self.assertTrue(figma_handoff_coverage([one, two], plan, run).passed)
+            two.handoff_sections["dimensions_layout"] = list(one.handoff_sections["dimensions_layout"])
+            self.assertFalse(figma_handoff_coverage([one, two], plan, run).passed)
+            two.handoff_sections["dimensions_layout"] = list(SECTIONS["dimensions_layout"])
             self.assertFalse(figma_handoff_coverage([one], plan, run).passed)
             self.assertFalse(figma_handoff_coverage([one, one], plan, run).passed)
             two.human_design_approval.target_hash = "0" * 64
@@ -288,13 +365,16 @@ class FigmaHandoffGateTest(TestCase):
             handoff_sections=dict(SECTIONS), static_fact_status="complete", supervisor_session_id="pi-session",
         )
 
-    def _worker_handoff(self, root: Path, *, observed_node_ids=None):
+    def _worker_handoff(self, root: Path, *, observed_node_ids=None,
+                        target_node_ids=None, stamp_node_groups=None):
+        target_node_ids = target_node_ids or ["93:6"]
+        stamp_node_groups = stamp_node_groups or [target_node_ids]
         request = CodexFigmaRequest(
             request_id="request",
             supervisor_session_id="pi-session",
             reason="pi_connector_unavailable",
             operations=["node_metadata"],
-            target=FigmaTarget(file_key="GYiQd7QSAwCSaGtt0alKG2", node_ids=["93:6"],
+            target=FigmaTarget(file_key="GYiQd7QSAwCSaGtt0alKG2", node_ids=target_node_ids,
                                evidence_categories=["dimensions_layout"]),
         )
         capture_root = root / "figma" / request.request_id
@@ -306,15 +386,14 @@ class FigmaHandoffGateTest(TestCase):
         target_hash = hashlib.sha256(json.dumps(request.target.model_dump(), sort_keys=True,
                                                   separators=(",", ":")).encode()).hexdigest()
         repo_root = Path(__file__).resolve().parents[2]
-        prompt_dir = repo_root / "adws/adw_data/prompt_engineering/figma_codex_worker"
-        prompt = (prompt_dir / "system.md").read_text() + "\n" + (prompt_dir / "user.md").read_text() + "\n" + request.model_dump_json()
+        prompt = _worker_prompt(request)
         now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         provenance = CodexWorkerProvenance(
             adw_id="run", phase_id="capture-phase", request_id=request.request_id,
             supervisor_session_id="pi-session", endpoint_identity="https://mcp.figma.com/mcp",
             cli_version="codex-cli 0.147.0",
             repository_commit=subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root, capture_output=True, text=True).stdout.strip(),
-            schema_hash=hashlib.sha256(json.dumps(CodexFigmaOutput.model_json_schema(), sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
+            schema_hash=hashlib.sha256(json.dumps(_output_schema(request), sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
             prompt_hash=hashlib.sha256(prompt.encode()).hexdigest(),
             target_hash=target_hash, started_at=now, ended_at=now, duration_seconds=0, attempts=1,
             timeout_seconds=180, overall_deadline_seconds=370, termination_outcome="completed",
@@ -329,9 +408,9 @@ class FigmaHandoffGateTest(TestCase):
             status="success", summary="capture", capture_status="complete", request=request,
             observed_file_key=request.target.file_key,
             observed_node_ids=observed_node_ids or request.target.node_ids,
-            approval_labels={"93:6": "Approved"},
+            approval_labels={node_id: "Approved" for node_id in request.target.node_ids},
             call_stamps=[CodexCallStamp(operation="node_metadata", file_key=request.target.file_key,
-                                        node_ids=request.target.node_ids)],
+                                        node_ids=node_ids) for node_ids in stamp_node_groups],
             evidence_manifest=[request_artifact, artifact], provenance=provenance,
         )
         capture.result_hash = _result_hash(capture)
@@ -358,4 +437,6 @@ class FigmaHandoffGateTest(TestCase):
                                  has_human_design_approval=lambda *_: True,
                                  human_design_approval_reference=lambda *_: "approval:1",
                                  has_trusted_human_design_approval=lambda *_: True)
-        return output, self._run(root, tracer=tracer)
+        run = self._run(root, tracer=tracer)
+        run.figma_targets = [request.target]
+        return output, run

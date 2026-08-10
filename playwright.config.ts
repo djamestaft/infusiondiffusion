@@ -2,7 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const nextServer = {
   command:
-    "SHOPIFY_E2E_FIXTURES=1 SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true corepack pnpm dev",
+    "CI=true SHOPIFY_E2E_FIXTURES=1 SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true corepack pnpm dev",
   url: "http://127.0.0.1:3000/api/health",
   reuseExistingServer: !process.env.CI,
   timeout: 120_000,

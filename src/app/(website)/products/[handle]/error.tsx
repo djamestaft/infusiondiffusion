@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Heading, Lead } from "@/components/ui/content-primitives";
+import { StorefrontErrorTemplate } from "@/components/templates/storefront-templates";
 
 export default function ProductError({
   reset,
@@ -10,19 +9,10 @@ export default function ProductError({
   reset: () => void;
 }) {
   return (
-    <main className="bg-content-surface min-h-dvh px-5 py-20">
-      <div className="mx-auto max-w-2xl">
-        <Heading level={1}>This fragrance is temporarily unavailable</Heading>
-        <Lead className="mt-4">
-          Please try again or return to the collection.
-        </Lead>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button onClick={reset}>Try again</Button>
-          <Button asChild variant="secondary">
-            <a href="/shop">Return to shop</a>
-          </Button>
-        </div>
-      </div>
-    </main>
+    <StorefrontErrorTemplate
+      reset={reset}
+      title="This fragrance is temporarily unavailable"
+      description="Please try again or return to the collection."
+    />
   );
 }

@@ -1,0 +1,336 @@
+command=corepack pnpm check
+started_at=2026-08-10T03:24:50Z
+source_sha=01fd51c9dc71f7abae583037ece5e68d85dc8f99
+
+> infusion-diffusion@0.1.0 check /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion
+> prettier --check . && eslint . --max-warnings=0 && tsc --noEmit && vitest run --config vitest.config.ts && vitest run --config vitest.storybook.config.ts && storybook build && next build
+
+Checking formatting...
+All matched files use Prettier code style!
+
+ RUN  v4.1.10 /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion
+
+ ✓ src/components/navigation.test.tsx (5 tests) 626ms
+     ✓ renders the approved destinations and commerce utilities  321ms
+ ✓ src/components/ui/overlay-primitives.test.tsx (3 tests) 549ms
+     ✓ names a dialog, closes with Escape, and restores focus  333ms
+ ✓ src/app/(website)/account/page.test.tsx (7 tests) 639ms
+     ✓ renders normalized { status: 'disabled' } state through AccountEntry  372ms
+ ✓ src/components/gallery-viewer.test.tsx (7 tests) 924ms
+     ✓ renders the documentary layout with H3 items and lazy media  334ms
+ ✓ src/components/account/account-entry.test.tsx (7 tests) 993ms
+     ✓ uses one H1, a same-tab hosted anchor, and no local credential or order UI  496ms
+ ✓ src/components/hero-carousel.test.tsx (12 tests) 1056ms
+ ✓ src/components/templates/storefront-templates.test.tsx (22 tests) 2512ms
+     ✓ uses the shared shell for recoverable errors and unavailable pages  472ms
+     ✓ composes the home journey from accessible landmarks and product cards  308ms
+ ✓ src/components/ui/content-primitives.test.tsx (11 tests) 252ms
+ ✓ src/components/ui/commerce-status.test.tsx (6 tests) 255ms
+ ✓ src/components/ui/price-display.test.tsx (5 tests) 285ms
+ ✓ src/components/storefront-footer.test.tsx (1 test) 320ms
+     ✓ completes discovery, support, and commerce navigation  318ms
+ ✓ src/components/ui/button.test.tsx (5 tests) 396ms
+ ✓ src/components/ui/product-card.test.tsx (10 tests) 765ms
+     ✓ uses one named product-detail link  473ms
+ ✓ src/components/ui/field.test.tsx (4 tests) 266ms
+ ✓ src/components/ui/input.test.tsx (3 tests) 247ms
+ ✓ src/components/announcement-bar.test.tsx (3 tests) 236ms
+ ✓ src/components/ui/textarea.test.tsx (2 tests) 230ms
+ ✓ src/components/ui/feedback-alert.test.tsx (7 tests) 293ms
+ ✓ src/components/ui/text-link.test.tsx (3 tests) 257ms
+ ✓ src/components/holding-page.test.tsx (3 tests) 458ms
+     ✓ renders the CMS content and contact action  432ms
+ ✓ src/components/ui/scroll-reveal.test.tsx (2 tests) 66ms
+ ✓ src/components/ui/badge.test.tsx (6 tests) 72ms
+ ✓ src/lib/shopify/account-entry.test.ts (5 tests) 22ms
+ ✓ src/lib/shopify/catalog.test.ts (6 tests) 20ms
+ ✓ src/lib/shopify/client.test.ts (6 tests) 14ms
+stderr | src/sanity/lib/editorial-pages.contact.test.ts > Contact editorial reads > returns the complete Contact fallback when the content read fails
+Unable to load Sanity editorial page: contact Error: unavailable
+    at /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/src/sanity/lib/editorial-pages.contact.test.ts:51:35
+    at file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+stderr | src/sanity/lib/editorial-pages.contact.test.ts > Contact editorial reads > returns Contact metadata fallback when the metadata read fails
+Unable to load Sanity contact metadata
+
+ ✓ src/sanity/lib/editorial-pages.contact.test.ts (4 tests) 19ms
+ ✓ src/app/api/revalidate-tags/route.test.ts (3 tests) 16ms
+ ✓ src/lib/shopify/cart-session.test.ts (7 tests) 8ms
+ ✓ src/lib/utils.test.ts (1 test) 11ms
+ ✓ src/sanity/lib/settings.test.ts (6 tests) 12ms
+ ✓ src/app/(website)/layout.test.tsx (2 tests) 4ms
+ ✓ src/sanity/lib/editorial-pages.test.ts (18 tests) 11ms
+ ✓ src/lib/shopify/presentation.test.ts (4 tests) 4ms
+ ✓ src/app/(website)/contact/page.test.tsx (4 tests) 5ms
+ ✓ src/lib/shopify/cart.test.ts (2 tests) 7ms
+ ✓ src/app/design-tokens.test.ts (6 tests) 5ms
+ ✓ src/lib/shopify/cached-catalog.test.ts (2 tests) 7ms
+ ✓ src/lib/shopify/cart-identifiers.test.ts (6 tests) 2ms
+ ✓ src/components/cart/optimistic-cart.test.ts (3 tests) 3ms
+
+ Test Files  39 passed (39)
+      Tests  219 passed (219)
+   Start at  05:25:00
+   Duration  11.53s (transform 1.25s, setup 8.11s, import 8.96s, tests 11.87s, environment 40.61s)
+
+
+ RUN  v4.1.10 /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion
+
+ ✓  storybook (chromium)  src/components/ui/design-foundations.stories.tsx (5 tests) 1731ms
+   ✓ Ivory  1010ms
+ ✓  storybook (chromium)  src/components/hero-carousel.stories.tsx (14 tests) 1698ms
+   ✓ Desktop  628ms
+ ✓  storybook (chromium)  src/components/ui/product-card.stories.tsx (14 tests) 1995ms
+   ✓ Default  563ms
+ ✓  storybook (chromium)  src/components/gallery-viewer.stories.tsx (12 tests) 2179ms
+   ✓ Populated  626ms
+ ✓  storybook (chromium)  src/components/account/account-entry.stories.tsx (10 tests) 2447ms
+   ✓ Hosted Desktop  834ms
+ ✓  storybook (chromium)  src/components/cart/cart.stories.tsx (9 tests) 2543ms
+   ✓ Line  780ms
+   ✓ Page Failed Quantity  638ms
+ ✓  storybook (chromium)  src/components/ui/button.stories.tsx (16 tests) 1204ms
+ ✓  storybook (chromium)  src/components/ui/field.stories.tsx (7 tests) 672ms
+ ✓  storybook (chromium)  src/components/navigation.stories.tsx (10 tests) 1140ms
+ ✓  storybook (chromium)  src/components/ui/price-display.stories.tsx (6 tests) 470ms
+ ✓  storybook (chromium)  src/components/ui/content-primitives.stories.tsx (11 tests) 1085ms
+ ✓  storybook (chromium)  src/components/ui/dialog.stories.tsx (6 tests) 718ms
+ ✓  storybook (chromium)  src/components/ui/commerce-status.stories.tsx (8 tests) 580ms
+ ✓  storybook (chromium)  src/components/ui/input.stories.tsx (9 tests) 894ms
+ ✓  storybook (chromium)  src/components/ui/feedback-alert.stories.tsx (8 tests) 785ms
+ ✓  storybook (chromium)  src/components/ui/drawer.stories.tsx (5 tests) 560ms
+ ✓  storybook (chromium)  src/components/ui/alert-dialog.stories.tsx (5 tests) 719ms
+ ✓  storybook (chromium)  src/components/ui/textarea.stories.tsx (8 tests) 814ms
+   ✓ Default  315ms
+ ✓  storybook (chromium)  src/components/ui/text-link.stories.tsx (5 tests) 472ms
+ ✓  storybook (chromium)  src/components/announcement-bar.stories.tsx (4 tests) 357ms
+ ✓  storybook (chromium)  src/components/storefront-footer.stories.tsx (2 tests) 427ms
+ ✓  storybook (chromium)  src/components/holding-page.stories.tsx (3 tests) 455ms
+ ✓  storybook (chromium)  src/components/ui/badge.stories.tsx (4 tests) 316ms
+ ✓  storybook (chromium)  src/components/templates/storefront-templates.stories.tsx (62 tests) 9131ms
+   ✓ Shared Error  812ms
+   ✓ Gallery  795ms
+   ✓ Gallery 320  352ms
+   ✓ Gallery Long Content 390  329ms
+   ✓ Gallery Maximum  328ms
+   ✓ Collection Loading  322ms
+   ✓ Home Ivory  376ms
+
+ Test Files  24 passed (24)
+      Tests  243 passed (243)
+   Start at  05:25:13
+   Duration  13.35s (transform 0ms, setup 16.17s, import 5.93s, tests 33.39s, environment 0ms)
+
+
+┌  Building storybook v10.5.5
+│
+◇  Cleaning outputDir: storybook-static
+│
+◇  Loading presets
+│
+◇  Building manager..
+│
+●  Building open services..
+│
+●  Building preview..
+│  Vite vite v8.2.0 building client environment for production...
+│
+●  Copying static files: public at storybook-static
+
+transforming...✓ 2124 modules transformed.
+rendering chunks...
+computing gzip size...
+│  Vite storybook-static/iframe.html
+│  18.98 kB │ gzip:   5.30 kB
+│  storybook-static/assets/iframe-DFfyPf8U.css
+│  73.06 kB │ gzip:  13.98 kB
+│  storybook-static/assets/iframe-CQ6Ht-bp.js
+│  0.04 kB │ gzip:   0.06 kB
+│  storybook-static/assets/x-BOKQxlj-.js
+│  0.27 kB │ gzip:   0.22 kB
+│  storybook-static/assets/arrow-up-right-BF0DH85X.js
+│  0.28 kB │ gzip:   0.23 kB
+│  storybook-static/assets/logo-text-lockup-DM8bz23h.js
+│  0.64 kB │ gzip:   0.42 kB
+│  storybook-static/assets/storefront-footer.stories-CeGjGL8F.js
+│  0.74 kB │ gzip:   0.40 kB
+│  storybook-static/assets/dist-Ch0bEcoH.js
+│  0.75 kB │ gzip:   0.45 kB
+│  storybook-static/assets/textarea-BBiP3WYW.js
+│  1.07 kB │ gzip:   0.51 kB
+│  storybook-static/assets/input-CC_FFONr.js
+│  1.14 kB │ gzip:   0.56 kB
+│  storybook-static/assets/rolldown-runtime-CsOFd3vK.js
+│  1.25 kB │ gzip:   0.69 kB
+│  storybook-static/assets/badge-DgR-3ewY.js
+│  1.30 kB │ gzip:   0.64 kB
+│  storybook-static/assets/preload-helper-8jINIF9P.js
+│  1.31 kB │ gzip:   0.74 kB
+│  storybook-static/assets/link-ClB_qDbx.js
+│  1.41 kB │ gzip:   0.81 kB
+│  storybook-static/assets/text-link-uzrfh9Q0.js
+│  1.50 kB │ gzip:   0.71 kB
+│  storybook-static/assets/announcement-bar.stories-mqFICito.js
+│  1.56 kB │ gzip:   0.64 kB
+│  storybook-static/assets/createLucideIcon-DbQtuDS8.js
+│  1.85 kB │ gzip:   0.94 kB
+│  storybook-static/assets/announcement-bar-DrpXWeeO.js
+│  1.91 kB │ gzip:   0.81 kB
+│  storybook-static/assets/price-display-BMyDVGAK.js
+│  2.20 kB │ gzip:   0.95 kB
+│  storybook-static/assets/badge.stories-BzIHZUcF.js
+│  2.21 kB │ gzip:   0.91 kB
+│  storybook-static/assets/drawer-pmgARQ-D.js
+│  2.21 kB │ gzip:   0.93 kB
+│  storybook-static/assets/commerce-status-Li1UjuQ6.js
+│  2.27 kB │ gzip:   0.89 kB
+│  storybook-static/assets/dialog-CfXi_pL-.js
+│  2.58 kB │ gzip:   1.06 kB
+│  storybook-static/assets/storefront-footer-DGkxwQos.js
+│  2.68 kB │ gzip:   1.08 kB
+│  storybook-static/assets/feedback-alert-CHy0Rdwk.js
+│  2.75 kB │ gzip:   1.22 kB
+│  storybook-static/assets/price-display.stories-BXOkMwIg.js
+│  2.96 kB │ gzip:   0.96 kB
+│  storybook-static/assets/drawer.stories-Djlb60HR.js
+│  3.05 kB │ gzip:   1.24 kB
+│  storybook-static/assets/text-link.stories-DlUSxwXl.js
+│  3.07 kB │ gzip:   1.09 kB
+│  storybook-static/assets/textarea.stories-B2Z8I_xu.js
+│  3.45 kB │ gzip:   1.23 kB
+│  storybook-static/assets/input.stories-BH7URkbg.js
+│  3.60 kB │ gzip:   1.26 kB
+│  storybook-static/assets/dialog.stories-B53JTgZL.js
+│  3.62 kB │ gzip:   1.36 kB
+│  storybook-static/assets/commerce-status.stories-jRSkNF3b.js
+│  3.63 kB │ gzip:   0.88 kB
+│  storybook-static/assets/feedback-alert.stories-CJ6O-2Jd.js
+│  3.97 kB │ gzip:   1.20 kB
+│  storybook-static/assets/navigation.stories-C4UXAloG.js
+│  4.24 kB │ gzip:   1.05 kB
+│  storybook-static/assets/content-primitives-Dh3WBtUf.js
+│  5.23 kB │ gzip:   1.49 kB
+│  storybook-static/assets/product-card.fixtures-DbQec1uF.js
+│  5.43 kB │ gzip:   1.89 kB
+│  storybook-static/assets/design-foundations.stories-HBkQW_yX.js
+│  5.60 kB │ gzip:   1.90 kB
+│  storybook-static/assets/field.stories-BHViKis-.js
+│  6.27 kB │ gzip:   2.08 kB
+│  storybook-static/assets/gallery-viewer-utvK7PCV.js
+│  6.54 kB │ gzip:   2.48 kB
+│  storybook-static/assets/alert-dialog.stories-BLQSrDcH.js
+│  6.57 kB │ gzip:   2.34 kB
+│  storybook-static/assets/content-primitives.stories-BXd2fUj3.js
+│  6.64 kB │ gzip:   1.86 kB
+│  storybook-static/assets/hero-carousel.stories-CUYcV7Ma.js
+│  6.69 kB │ gzip:   1.92 kB
+│  storybook-static/assets/product-card.stories-DIiZuXwb.js
+│  7.21 kB │ gzip:   2.11 kB
+│  storybook-static/assets/button-CDmwl9Dt.js
+│  7.79 kB │ gzip:   2.58 kB
+│  storybook-static/assets/navigation-CSUy_XhA.js
+│  7.91 kB │ gzip:   2.63 kB
+│  storybook-static/assets/holding-page.stories-BkBdYa21.js
+│  8.08 kB │ gzip:   3.17 kB
+│  storybook-static/assets/hero-carousel-CKOZfwxh.js
+│  8.39 kB │ gzip:   3.01 kB
+│  storybook-static/assets/button.stories-COVS8Iba.js
+│  8.76 kB │ gzip:   2.19 kB
+│  storybook-static/assets/account-entry.stories-WQjDhdJU.js
+│  9.93 kB │ gzip:   2.93 kB
+│  storybook-static/assets/gallery-viewer.stories-CWIn-n2T.js
+│  10.20 kB │ gzip:   2.46 kB
+│  storybook-static/assets/image-BZ3MJaSi.js
+│  16.30 kB │ gzip:   6.14 kB
+│  storybook-static/assets/cart.stories-C8kShGJJ.js
+│  21.23 kB │ gzip:   5.32 kB
+│  storybook-static/assets/utils-DTEGmkNc.js
+│  27.68 kB │ gzip:   8.95 kB
+│  storybook-static/vite-inject-mocker-entry.js
+│  27.84 kB │ gzip:   9.66 kB
+│  storybook-static/assets/matchers-JIUQ3HVY-D2RxGVML.js
+│  28.79 kB │ gzip:   9.68 kB
+│  storybook-static/assets/dist-RdPjCUxU.js
+│  37.50 kB │ gzip:  12.95 kB
+│  storybook-static/assets/storefront-templates.stories-CyQPu67n.js
+│  98.55 kB │ gzip:  18.90 kB
+│  storybook-static/assets/react-18-QlEdk8qC.js
+│  204.14 kB │ gzip:  64.12 kB
+│  storybook-static/assets/axe-ZBeKgLEh.js
+│  579.13 kB │ gzip: 158.39 kB
+│  storybook-static/assets/iframe-BkZPc0hN.js
+│  1,334.50 kB │ gzip: 372.90 kB
+
+│
+▲  Vite [plugin builtin:vite-reporter]
+│  (!) Some chunks are larger than 500 kB after minification. Consider:
+│  - Using dynamic import() to code-split the application
+│  - Use build.rolldownOptions.output.codeSplitting to improve chunking:
+│  ]8;;https://rolldown.rs/reference/OutputOptions.codeSplittinghttps://rolldown.rs/reference/OutputOptions.codeSplitting]8;;
+│  - Adjust chunk size limit for this warning via
+│  build.chunkSizeWarningLimit.
+│  Vite ✓ built in 2.55s
+│
+◇  Output directory:
+│  /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/storybook-static
+│
+└  Storybook build completed successfully
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/devontaft/Documents/Projects/Client/infusion-diffusion/pnpm-workspace.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/pnpm-workspace.yaml
+
+▲ Next.js 16.2.12 (Turbopack)
+- Cache Components enabled
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 14.5s
+  Running TypeScript ...
+  Finished TypeScript in 5.9s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/18) ...
+Shopify Storefront API is not configured; rendering the homepage catalogue fallback.
+  Generating static pages using 7 workers (4/18) 
+  Generating static pages using 7 workers (8/18) 
+  Generating static pages using 7 workers (13/18) 
+✓ Generating static pages using 7 workers (18/18) in 998ms
+  Finalizing page optimization ...
+
+Route (app)                  Revalidate  Expire
+┌ ◐ /                                5m     15m
+├ ○ /_not-found
+├ ◐ /about
+├ ◐ /account
+├ ƒ /api/draft-mode/disable
+├ ƒ /api/draft-mode/enable
+├ ƒ /api/health
+├ ƒ /api/revalidate-tags
+├ ◐ /cart
+├ ◐ /contact                         1y      1y
+├ ○ /e2e-carousel
+├ ◐ /fragrance-guide                 5m     15m
+├ ◐ /gallery                         1y      1y
+├ ◐ /products/[handle]
+│ └ /products/[handle]
+├ ◐ /shop
+└ ◐ /studio/[[...index]]
+  └ /studio/[[...index]]
+
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+ƒ  (Dynamic)            server-rendered on demand
+
+finished_at=2026-08-10T03:25:56Z
+exit_status=0

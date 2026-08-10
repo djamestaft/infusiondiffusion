@@ -47,6 +47,16 @@ export const LowStock: Story = {
 export const SoldOut: Story = { args: { availability: "sold-out" } };
 export const PreOrder: Story = { args: { availability: "pre-order" } };
 export const MissingImage: Story = { args: { image: undefined } };
+export const FailedMediaUsesApprovedFallback: Story = {
+  args: {
+    image: {
+      src: "/images/storefront/approved/products/not-found.png",
+      alt: "Bois De Santal home-fragrance vessel",
+      fallbackSrc: "/images/storefront/approved/products/bois-de-santal.png",
+      fallbackAlt: "Bois De Santal home-fragrance vessel",
+    },
+  },
+};
 export const LongContent: Story = {
   args: {
     name: "A Very Long Fragrance Name for an Intimate Evening Room",

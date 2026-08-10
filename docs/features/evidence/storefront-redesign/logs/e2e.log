@@ -1,0 +1,134 @@
+command=corepack pnpm test:e2e
+started_at=2026-08-10T03:26:26Z
+source_sha=01fd51c9dc71f7abae583037ece5e68d85dc8f99
+
+> infusion-diffusion@0.1.0 test:e2e /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion
+> playwright test
+
+[WebServer] ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+[WebServer]  We detected multiple lockfiles and selected the directory of /Users/devontaft/Documents/Projects/Client/infusion-diffusion/pnpm-workspace.yaml as the root directory.
+[WebServer]  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+[WebServer]    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+[WebServer]  Detected additional lockfiles: 
+[WebServer]    * /Users/devontaft/Documents/Projects/Client/infusion-diffusion/worktrees/.treehouse/infusion-diffusion-2348e6/5/infusion-diffusion/pnpm-workspace.yaml
+[WebServer] 
+
+Running 112 tests using 4 workers
+
+  ✓    4 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at desktop (4.7s)
+  ✓    1 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at small (4.8s)
+  ✓    2 [chromium] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at mobile (4.8s)
+  ✓    3 [chromium] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at desktop (5.0s)
+  ✓    6 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at desktop (2.7s)
+  ✓    8 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at desktop (2.6s)
+  ✓    7 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at desktop (2.8s)
+  ✓    5 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at desktop (2.8s)
+  ✓   11 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at mobile (2.1s)
+  ✓   12 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at mobile (2.1s)
+  ✓    9 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at desktop (2.2s)
+  ✓   10 [chromium] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at mobile (2.3s)
+  ✓   14 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at mobile (1.3s)
+  ✓   15 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at mobile (1.3s)
+  ✓   13 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at mobile (2.0s)
+  ✓   16 [chromium] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at small (2.0s)
+  ✓   18 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at small (1.5s)
+  ✓   17 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at small (1.6s)
+  ✓   22 [chromium] › tests/e2e/account.spec.ts:106:1 › does not expose an account-state fixture route (483ms)
+  ✓   19 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at small (1.6s)
+  ✓   20 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at small (1.4s)
+  ✓   21 [chromium] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at small (1.5s)
+  ✓   25 [chromium] › tests/e2e/account.spec.ts:159:1 › removes the Storybook loading pulse when reduced motion is requested (1.6s)
+  ✓   24 [chromium] › tests/e2e/account.spec.ts:146:1 › reflows long account content at an effective 200% zoom viewport (1.7s)
+  ✓   23 [chromium] › tests/e2e/account.spec.ts:111:1 › follows the mobile account Tab order and exposes visible focus (2.1s)
+  ✓   29 [chromium] › tests/e2e/catalog.spec.ts:29:1 › collection cards navigate to a purchasable product (2.3s)
+  ✓   28 [chromium] › tests/e2e/catalog.spec.ts:5:3 › /products/bois-de-santal-200ml renders live catalogue content accessibly (2.8s)
+  ✓   27 [chromium] › tests/e2e/catalog.spec.ts:5:3 › /shop renders live catalogue content accessibly (2.9s)
+  ✓   30 [chromium] › tests/e2e/catalog.spec.ts:39:1 › collection uses the elevated browsing surface without card effects (1.9s)
+  ✓   31 [chromium] › tests/e2e/catalog.spec.ts:63:1 › unknown product handles return 404 (2.0s)
+  ✓   32 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at desktop (2.8s)
+  ✓   26 [chromium] › tests/e2e/cart.spec.ts:4:1 › adds, persists, updates and removes a Shopify fixture cart (7.6s)
+  ✓   33 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at mobile (2.2s)
+  ✓   34 [chromium] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at small (2.1s)
+  ✓   35 [chromium] › tests/e2e/contact.spec.ts:86:1 › keeps the mobile drawer keyboard-operable and restores the unobscured page (1.3s)
+  ✓   36 [chromium] › tests/e2e/contact.spec.ts:121:1 › keeps Contact readable at 200% zoom and with reduced motion (1.9s)
+  ✓   37 [chromium] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly (2.7s)
+  ✓   41 [chromium] › tests/e2e/homepage.spec.ts:81:1 › reports a healthy deployment (18ms)
+  ✓   38 [chromium] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at desktop (2.5s)
+  ✓   39 [chromium] › tests/e2e/homepage.spec.ts:4:1 › renders the live homepage journey accessibly (2.5s)
+  ✓   40 [chromium] › tests/e2e/homepage.spec.ts:59:1 › reveals each following section at the viewport edge (1.1s)
+  ✓   42 [chromium] › tests/e2e/homepage.spec.ts:87:1 › keeps the hero, CTA, and navigation divider intact at 320px (1.7s)
+  ✓   44 [chromium] › tests/e2e/homepage.spec.ts:110:1 › renders the full-width elevated cabinet band with exact spacing (1.8s)
+  ✓   45 [chromium] › tests/e2e/homepage.spec.ts:156:1 › supports keyboard pagination and manual pause/play (1.9s)
+  ✓   43 [chromium] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at intermediate (2.4s)
+  ✓   46 [chromium] › tests/e2e/homepage.spec.ts:185:1 › renders responsive corner brackets outside the image (998ms)
+  ✓   48 [chromium] › tests/e2e/homepage.spec.ts:339:1 › suppresses autoplay for reduced motion (1.4s)
+  ✓   49 [chromium] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at mobile (1.8s)
+  ✓   52 [chromium] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at small (898ms)
+  ✓   53 [chromium] › tests/e2e/gallery.spec.ts:235:1 › keeps Gallery readable with reduced motion and 200% zoom (736ms)
+  ✓   47 [chromium] › tests/e2e/homepage.spec.ts:307:1 › restarts a full cycle after explicit pause and play (7.7s)
+  ✓   50 [chromium] › tests/e2e/homepage.spec.ts:355:1 › autoplays continuously every three seconds and ignores hover (10.8s)
+  ✓   54 [chromium] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 390px (11.3s)
+  ✓   51 [chromium] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 1440px (14.2s)
+  ✓   57 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at desktop (2.5s)
+  ✓   58 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at mobile (2.2s)
+  ✓   59 [mobile] › tests/e2e/about.spec.ts:9:3 › renders the text-first About fallback accessibly at small (2.0s)
+  ✓   61 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at desktop (921ms)
+  ✓   60 [mobile] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at desktop (2.9s)
+  ✓   55 [chromium] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 320px (14.2s)
+  ✓   62 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at desktop (1.0s)
+  ✓   63 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at desktop (961ms)
+  ✓   65 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at desktop (1.6s)
+  ✓   64 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at desktop (1.5s)
+  ✓   56 [chromium] › tests/e2e/storefront-visual.spec.ts:170:1 › reflows every public route at an effective 200% zoom viewport (12.6s)
+  ✓   66 [mobile] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at mobile (3.0s)
+  ✓   67 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at mobile (1.7s)
+  ✓   68 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at mobile (1.9s)
+  ✓   69 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at mobile (1.5s)
+  ✓   70 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at mobile (1.6s)
+  ✓   71 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at mobile (1.6s)
+  ✓   73 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps disabled account story content responsive at small (1.5s)
+  ✓   72 [mobile] › tests/e2e/account.spec.ts:36:3 › renders the fixture hosted account handoff at small (2.2s)
+  ✓   76 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps provider-error account story content responsive at small (954ms)
+  ✓   75 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps not-provisioned account story content responsive at small (1.7s)
+  ✓   74 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps missing-configuration account story content responsive at small (1.8s)
+  -   79 [mobile] › tests/e2e/account.spec.ts:111:1 › follows the mobile account Tab order and exposes visible focus
+  ✓   78 [mobile] › tests/e2e/account.spec.ts:106:1 › does not expose an account-state fixture route (445ms)
+  ✓   77 [mobile] › tests/e2e/account.spec.ts:78:5 › keeps long-content account story content responsive at small (2.0s)
+  ✓   80 [mobile] › tests/e2e/account.spec.ts:146:1 › reflows long account content at an effective 200% zoom viewport (1.6s)
+  ✓   81 [mobile] › tests/e2e/account.spec.ts:159:1 › removes the Storybook loading pulse when reduced motion is requested (1.7s)
+  ✓   83 [mobile] › tests/e2e/catalog.spec.ts:5:3 › /shop renders live catalogue content accessibly (1.6s)
+  ✓   84 [mobile] › tests/e2e/catalog.spec.ts:5:3 › /products/bois-de-santal-200ml renders live catalogue content accessibly (1.8s)
+  ✓   85 [mobile] › tests/e2e/catalog.spec.ts:29:1 › collection cards navigate to a purchasable product (1.9s)
+  ✓   86 [mobile] › tests/e2e/catalog.spec.ts:39:1 › collection uses the elevated browsing surface without card effects (1.6s)
+  ✓   87 [mobile] › tests/e2e/catalog.spec.ts:63:1 › unknown product handles return 404 (2.0s)
+  ✓   82 [mobile] › tests/e2e/cart.spec.ts:4:1 › adds, persists, updates and removes a Shopify fixture cart (5.2s)
+  ✓   88 [mobile] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at desktop (2.2s)
+  ✓   89 [mobile] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at mobile (2.3s)
+  ✓   92 [mobile] › tests/e2e/contact.spec.ts:121:1 › keeps Contact readable at 200% zoom and with reduced motion (1.5s)
+  ✓   91 [mobile] › tests/e2e/contact.spec.ts:86:1 › keeps the mobile drawer keyboard-operable and restores the unobscured page (2.0s)
+  ✓   90 [mobile] › tests/e2e/contact.spec.ts:72:3 › renders the unobscured Contact fallback at small (2.5s)
+  ✓   93 [mobile] › tests/e2e/fragrance-guide.spec.ts:4:1 › renders the Sanity-backed fragrance guide accessibly (1.6s)
+  ✓   97 [mobile] › tests/e2e/homepage.spec.ts:81:1 › reports a healthy deployment (49ms)
+  ✓   98 [mobile] › tests/e2e/homepage.spec.ts:87:1 › keeps the hero, CTA, and navigation divider intact at 320px (1.1s)
+  ✓   96 [mobile] › tests/e2e/homepage.spec.ts:59:1 › reveals each following section at the viewport edge (1.6s)
+  -  100 [mobile] › tests/e2e/homepage.spec.ts:156:1 › supports keyboard pagination and manual pause/play
+  ✓   94 [mobile] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at desktop (2.3s)
+  ✓   95 [mobile] › tests/e2e/homepage.spec.ts:4:1 › renders the live homepage journey accessibly (2.2s)
+  -  103 [mobile] › tests/e2e/homepage.spec.ts:307:1 › restarts a full cycle after explicit pause and play
+  -  104 [mobile] › tests/e2e/homepage.spec.ts:339:1 › suppresses autoplay for reduced motion
+  -  105 [mobile] › tests/e2e/homepage.spec.ts:355:1 › autoplays continuously every three seconds and ignores hover
+  ✓  101 [mobile] › tests/e2e/homepage.spec.ts:185:1 › renders responsive corner brackets outside the image (1.3s)
+  ✓   99 [mobile] › tests/e2e/homepage.spec.ts:110:1 › renders the full-width elevated cabinet band with exact spacing (1.6s)
+  ✓  102 [mobile] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at intermediate (1.6s)
+  ✓  109 [mobile] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at mobile (1.4s)
+  ✓  110 [mobile] › tests/e2e/gallery.spec.ts:35:3 › renders the Gallery contract at small (1.3s)
+  ✓  111 [mobile] › tests/e2e/gallery.spec.ts:235:1 › keeps Gallery readable with reduced motion and 200% zoom (971ms)
+  ✓  106 [mobile] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 1440px (15.2s)
+  ✓  107 [mobile] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 390px (15.4s)
+  ✓  108 [mobile] › tests/e2e/storefront-visual.spec.ts:52:3 › captures every public storefront route at 320px (15.3s)
+  ✓  112 [mobile] › tests/e2e/storefront-visual.spec.ts:170:1 › reflows every public route at an effective 200% zoom viewport (12.6s)
+
+  5 skipped
+  107 passed (1.6m)
+finished_at=2026-08-10T03:28:00Z
+exit_status=0

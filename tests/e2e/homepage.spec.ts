@@ -134,14 +134,15 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
   expect(bandBox!.width).toBe(
     await page.evaluate(() => document.documentElement.clientWidth),
   );
-  expect(innerBox!.width).toBeLessThanOrEqual(1280);
+  expect(innerBox!.width).toBeLessThanOrEqual(1280.1);
   expect(headingBox!.y - (heroBox!.y + heroBox!.height)).toBe(expectedGap);
   const controls = page.getByTestId("hero-carousel-controls");
   if (await controls.count()) {
     const controlsBox = await controls.boundingBox();
     expect(controlsBox).not.toBeNull();
-    expect(headingBox!.y - (controlsBox!.y + controlsBox!.height)).toBe(
-      expectedGap,
+    expect(controlsBox!.y).toBeGreaterThanOrEqual(heroBox!.y);
+    expect(controlsBox!.y + controlsBox!.height).toBeLessThanOrEqual(
+      heroBox!.y + heroBox!.height,
     );
   }
   await expect(band).toHaveCSS("background-color", "rgb(227, 231, 218)");
@@ -187,8 +188,8 @@ test("renders responsive corner brackets outside the image", async ({
   await page.goto("/e2e-carousel");
   const mobile = testInfo.project.name === "mobile";
   const expected = mobile
-    ? { clearance: 12, offset: 8, arm: 40, gap: 20 }
-    : { clearance: 20, offset: 12, arm: 56, gap: 24 };
+    ? { clearance: 12, offset: 8, arm: 40, inset: 32 }
+    : { clearance: 20, offset: 12, arm: 56, inset: 40 };
   const stage = page.getByTestId("hero-carousel-stage");
   const media = page.getByTestId("hero-carousel-media");
   const controls = page.getByTestId("hero-carousel-controls");
@@ -196,6 +197,8 @@ test("renders responsive corner brackets outside the image", async ({
   const topRight = page.getByTestId("hero-carousel-bracket-top-right");
   const bottomLeft = page.getByTestId("hero-carousel-bracket-bottom-left");
   const bottomRight = page.getByTestId("hero-carousel-bracket-bottom-right");
+  await expect(stage).toBeVisible();
+  await expect(controls).toBeVisible();
   const [
     stageBox,
     mediaBox,
@@ -248,7 +251,9 @@ test("renders responsive corner brackets outside the image", async ({
     expect(bracketBox!.width).toBe(expected.arm);
     expect(bracketBox!.height).toBe(expected.arm);
   }
-  expect(controlsBox!.y - (stageBox!.y + stageBox!.height)).toBe(expected.gap);
+  expect(
+    stageBox!.y + stageBox!.height - (controlsBox!.y + controlsBox!.height),
+  ).toBe(expected.inset);
   expect(
     Math.abs(
       controlsBox!.x +

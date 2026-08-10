@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Minus, Plus } from "lucide-react";
 
+import { StorefrontMedia } from "@/components/storefront-media";
+import { getApprovedProductMediaForTitle } from "@/content/storefront-media";
 import type { CartLineContract } from "@/lib/shopify/cart-contract";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -21,6 +22,16 @@ export function CartLine({
   onQuantityChange?: (quantity: number) => void;
   onRemove?: () => void;
 }) {
+  const localMedia = getApprovedProductMediaForTitle(line.title);
+  const image = line.image
+    ? {
+        ...line.image,
+        fallbackSrc: localMedia?.src,
+        fallbackAlt: localMedia?.alt,
+      }
+    : localMedia
+      ? { src: localMedia.src, alt: localMedia.alt }
+      : undefined;
   return (
     <article
       className={cn(
@@ -28,26 +39,16 @@ export function CartLine({
       )}
       aria-busy={pending || undefined}
     >
-      <div
-        className={cn(
-          "bg-product-card-media-fallback relative shrink-0 overflow-hidden rounded-md",
-          compact ? "h-28 w-21" : "h-32 w-24 sm:h-40 sm:w-30",
-        )}
-      >
-        {line.image ? (
-          <Image
-            src={line.image.src}
-            alt={line.image.alt}
-            fill
-            sizes="120px"
-            className="object-cover"
-          />
-        ) : (
-          <span className="text-content-secondary flex size-full items-center justify-center px-2 text-center font-sans text-xs">
-            Image coming soon
-          </span>
-        )}
-      </div>
+      {image ? (
+        <div
+          className={cn(
+            "bg-product-card-media-fallback relative shrink-0 overflow-hidden rounded-md",
+            compact ? "h-28 w-21" : "h-32 w-24 sm:h-40 sm:w-30",
+          )}
+        >
+          <StorefrontMedia image={image} sizes="120px" />
+        </div>
+      ) : null}
       <div className="min-w-0 flex-1">
         <p className="text-content-accent font-sans text-xs font-semibold tracking-[0.08em] uppercase">
           {line.format || "Home fragrance"}

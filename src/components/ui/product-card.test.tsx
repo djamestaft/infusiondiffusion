@@ -38,15 +38,15 @@ describe("ProductCard", () => {
 
   it("keeps the destination and details when the image is absent", () => {
     render(<ProductCard {...product} image={undefined} />);
-    expect(screen.getByText("Image coming soon")).toBeVisible();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
     expect(screen.getByText("Bois de Santal")).toBeVisible();
     expect(screen.getByText("R 420")).toBeVisible();
   });
 
-  it("falls back without losing details when the image fails", () => {
+  it("removes failed unmapped media without losing details", () => {
     render(<ProductCard {...product} />);
     fireEvent.error(screen.getByRole("img"));
-    expect(screen.getByText("Image coming soon")).toBeVisible();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
     expect(screen.getByText("Bois de Santal")).toBeVisible();
   });
 

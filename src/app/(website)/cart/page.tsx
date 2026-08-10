@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CartShell } from "@/components/cart/cart-shell";
+import { StorefrontLoadingTemplate } from "@/components/templates/storefront-templates";
 import {
   checkoutAction,
   removeLineAction,
@@ -27,11 +28,7 @@ async function CartContent() {
 
 export default function CartRoute() {
   return (
-    <Suspense
-      fallback={
-        <div className="bg-content-surface min-h-dvh" aria-busy="true" />
-      }
-    >
+    <Suspense fallback={<StorefrontLoadingTemplate kind="cart" />}>
       <CartContent />
     </Suspense>
   );

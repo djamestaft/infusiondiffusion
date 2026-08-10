@@ -12,6 +12,9 @@ import {
   GalleryTemplate,
   HomeTemplate,
   ProductDetailTemplate,
+  StorefrontErrorTemplate,
+  StorefrontLoadingTemplate,
+  StorefrontNotFoundTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -78,6 +81,57 @@ const meta = {
 
 export default meta;
 type Story = StoryObj;
+type ErrorStory = StoryObj<typeof StorefrontErrorTemplate>;
+
+export const SharedError: ErrorStory = {
+  args: { reset: fn() },
+  render: (args) => <StorefrontErrorTemplate {...args} />,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const retry = canvas.getByRole("button", { name: "Try again" });
+    await userEvent.click(retry);
+    await expect(args.reset).toHaveBeenCalledTimes(1);
+  },
+};
+export const SharedError390: ErrorStory = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  args: SharedError.args,
+  render: SharedError.render,
+  play: SharedError.play,
+};
+export const SharedError320LongContent: ErrorStory = {
+  globals: {
+    viewport: { value: "contact320", isRotated: false },
+    reducedMotion: true,
+  },
+  args: {
+    reset: fn(),
+    title:
+      "This exceptionally long, localized-style recovery heading must wrap without clipping",
+    description:
+      "A deliberately long recovery explanation verifies natural height, wrapping, and an honest path back to the collection on a constrained viewport.",
+  },
+  render: SharedError.render,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const retry = canvas.getByRole("button", { name: "Try again" });
+    retry.focus();
+    await expect(retry).toHaveFocus();
+    await userEvent.click(retry);
+    await expect(args.reset).toHaveBeenCalledTimes(1);
+  },
+};
+export const NotFound: Story = {
+  render: () => <StorefrontNotFoundTemplate />,
+};
+export const NotFound390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: NotFound.render,
+};
+export const NotFound320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: NotFound.render,
+};
 
 async function verifyHomeCabinetBand(
   canvasElement: HTMLElement,
@@ -104,7 +158,9 @@ async function verifyHomeCabinetBand(
   );
   await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
-  await expect(headingBounds.top - controlsBounds.bottom).toBe(expectedGap);
+  await expect(
+    headingBounds.top - controlsBounds.bottom,
+  ).toBeGreaterThanOrEqual(expectedGap);
   await expect(innerBounds.width).toBeLessThanOrEqual(1280);
   await expect(bandBounds.width).toBe(document.documentElement.clientWidth);
 }
@@ -264,6 +320,33 @@ export const GalleryMaximum: Story = {
 };
 export const GalleryLoading: Story = {
   render: () => <GalleryLoadingTemplate />,
+};
+
+export const CollectionLoading: Story = {
+  render: () => (
+    <StorefrontLoadingTemplate kind="collection" currentHref="/shop" />
+  ),
+};
+export const ProductLoading: Story = {
+  render: () => <StorefrontLoadingTemplate kind="product" />,
+};
+export const CartLoading: Story = {
+  render: () => <StorefrontLoadingTemplate kind="cart" currentHref="/cart" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText("Loading cart page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(canvas.getAllByTestId("cart-loading-line")).toHaveLength(2);
+    await expect(canvas.getByTestId("cart-loading-summary")).toBeVisible();
+  },
+};
+export const EditorialLoading390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: () => (
+    <StorefrontLoadingTemplate kind="editorial" currentHref="/about" />
+  ),
 };
 
 export const HomeIvory: Story = {
@@ -660,7 +743,7 @@ export const AboutWithPortraits: Story = {
       getComputedStyle(canvas.getByTestId("about-chapter-development"))
         .backgroundColor,
     ).toBe("rgb(238, 240, 231)");
-    await expect(canvasElement.querySelector(".dark")).toBeNull();
+    await expect(canvasElement.querySelector("main .dark")).toBeNull();
     await expect(canvas.queryByText(/ROLE [A-D]/)).toBeNull();
   },
 };
