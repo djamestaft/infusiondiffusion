@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Heading, Lead } from "@/components/ui/content-primitives";
+import { StorefrontErrorTemplate } from "@/components/templates/storefront-templates";
 
 export default function ShopError({
   reset,
@@ -10,16 +9,11 @@ export default function ShopError({
   reset: () => void;
 }) {
   return (
-    <main className="bg-content-surface min-h-dvh px-5 py-20">
-      <div className="mx-auto max-w-2xl">
-        <Heading level={1}>The collection is temporarily unavailable</Heading>
-        <Lead className="mt-4">
-          Please try again. No order or account information has been affected.
-        </Lead>
-        <Button className="mt-8" onClick={reset}>
-          Try again
-        </Button>
-      </div>
-    </main>
+    <StorefrontErrorTemplate
+      reset={reset}
+      currentHref="/shop"
+      title="The collection is temporarily unavailable"
+      description="Please try again. No order or account information has been affected."
+    />
   );
 }

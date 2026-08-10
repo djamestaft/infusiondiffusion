@@ -12,7 +12,9 @@ import {
   GalleryTemplate,
   HomeTemplate,
   ProductDetailTemplate,
+  StorefrontErrorTemplate,
   StorefrontLoadingTemplate,
+  StorefrontNotFoundTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -79,6 +81,57 @@ const meta = {
 
 export default meta;
 type Story = StoryObj;
+type ErrorStory = StoryObj<typeof StorefrontErrorTemplate>;
+
+export const SharedError: ErrorStory = {
+  args: { reset: fn() },
+  render: (args) => <StorefrontErrorTemplate {...args} />,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const retry = canvas.getByRole("button", { name: "Try again" });
+    await userEvent.click(retry);
+    await expect(args.reset).toHaveBeenCalledTimes(1);
+  },
+};
+export const SharedError390: ErrorStory = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  args: SharedError.args,
+  render: SharedError.render,
+  play: SharedError.play,
+};
+export const SharedError320LongContent: ErrorStory = {
+  globals: {
+    viewport: { value: "contact320", isRotated: false },
+    reducedMotion: true,
+  },
+  args: {
+    reset: fn(),
+    title:
+      "This exceptionally long, localized-style recovery heading must wrap without clipping",
+    description:
+      "A deliberately long recovery explanation verifies natural height, wrapping, and an honest path back to the collection on a constrained viewport.",
+  },
+  render: SharedError.render,
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const retry = canvas.getByRole("button", { name: "Try again" });
+    retry.focus();
+    await expect(retry).toHaveFocus();
+    await userEvent.click(retry);
+    await expect(args.reset).toHaveBeenCalledTimes(1);
+  },
+};
+export const NotFound: Story = {
+  render: () => <StorefrontNotFoundTemplate />,
+};
+export const NotFound390: Story = {
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  render: NotFound.render,
+};
+export const NotFound320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  render: NotFound.render,
+};
 
 async function verifyHomeCabinetBand(
   canvasElement: HTMLElement,

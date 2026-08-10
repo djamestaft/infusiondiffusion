@@ -121,11 +121,12 @@ test("follows the mobile account Tab order and exposes visible focus", async ({
   await page.locator("body").focus();
   await expect(page.locator("body")).toBeFocused();
 
+  const navigation = page.getByRole("navigation", { name: "Primary" });
   const expectedOrder = [
-    page.getByRole("link", { name: "Infusion Diffusion home" }),
-    page.getByRole("link", { name: "Account", exact: true }),
-    page.getByRole("link", { name: "Cart", exact: true }),
-    page.getByRole("button", { name: "Open menu", exact: true }),
+    navigation.getByRole("link", { name: "Infusion Diffusion home" }),
+    navigation.getByRole("link", { name: "Account", exact: true }),
+    navigation.getByRole("link", { name: "Cart", exact: true }),
+    navigation.getByRole("button", { name: "Open menu", exact: true }),
     page.getByRole("link", { name: "Continue to your account", exact: true }),
   ];
   for (const target of expectedOrder) {

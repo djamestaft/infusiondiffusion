@@ -1,0 +1,52 @@
+# Storefront redesign verification
+
+## Scope and provenance
+
+- Workspace branch: `agent/storefront-redesign-phase-1`.
+- Figma foundations/release gate: approved nodes `455:3` and `456:2`, capture request `figma-706eadfe-e335-enabled`, phase `df28dccf_24_figma_codex_capture_1`, result hash `b64f05f159f47a692d06c063d90eb2ac9eed531db48ebd7c65a19df59396cc78`, with design-authority approval `706eadfe555a02aa9d0fab48b03290264506f4e532ad64e36cc87fb9cec890cc`.
+- Route authority: approved nodes `255:616`, `255:638`, `203:137`, `203:294`, `203:373`, `357:2`, `316:198`, `329:58`, `337:321`, and `229:2`, with design-authority approval `9e5b74525942b60d674a12cb1568aac53c5a9e3d13124a96cc2432144330255b` (trace `evt_c454a3e38078`).
+- Static capture facts are limited to composition, semantic variables, typography, spacing, assets, and approved divergences. Runtime-only behavior is verified by Storybook/browser tests.
+
+## Provenance-backed discrepancy and disposition matrix
+
+| Target / route            | Approved source                        | Finding and owner                                                                                                                                                                                 | Severity | Disposition                                                         |
+| ------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------- |
+| `455:3` Foundations       | gated capture and approval `706eadfe…` | Existing semantic token, typography, layout, focus, and motion primitives were retained; no raw replacement palette or primitive was introduced. Owner: `src/app/globals.css`, shared primitives. | none     | fixed / preserved                                                   |
+| `456:2` Release QA        | gated capture and approval `706eadfe…` | Shared website error/not-found shell had been absent. Owner: `src/app/(website)/error.tsx`, `not-found.tsx`, `storefront-templates.tsx`.                                                          | P1       | fixed                                                               |
+| `255:616`, `255:638` Home | approved Home desktop/mobile           | Shared shell/footer, elevated Cabinet band, carousel, and reduced-motion capture are present. Owner: `HomeTemplate`.                                                                              | none     | fixed / verified by browser test                                    |
+| `203:137` Shop            | approved Collection                    | Shop error previously bypassed shared navigation/footer. Owner: `shop/error.tsx`.                                                                                                                 | P1       | fixed                                                               |
+| `203:294` Product         | approved Product detail                | Product error/not-found previously bypassed shared shell. Owner: `products/[handle]/error.tsx`, website not-found boundary.                                                                       | P1       | fixed                                                               |
+| `203:373` Fragrance Guide | approved Editorial                     | Existing constrained reading composition/loading/footer retained. Owner: `EditorialTemplate`.                                                                                                     | none     | verified by browser test                                            |
+| `357:2` Gallery           | approved Gallery packet                | Authored campaign/market cadence, viewer boundaries, and fallback remain unchanged. Owner: `GalleryTemplate`, `GalleryViewer`.                                                                    | none     | approved divergence preserved                                       |
+| `316:198` About           | corrected About handoff                | FIT/contain 3:4 artwork in 4:3 slots and About-current navigation retained. Owner: `AboutTemplate`.                                                                                               | none     | approved divergence preserved                                       |
+| `329:58` Contact          | approved Contact packet                | Direct-email fallback/error retains Contact-current navigation and truthful submitted-message wording. Owner: `ContactTemplate`, `ContactErrorTemplate`.                                          | none     | approved divergence preserved                                       |
+| `337:321` Account         | approved Account board                 | Account had no shared footer. Owner: `account-entry.tsx`.                                                                                                                                         | P1       | fixed; no Account-current navigation remains an approved divergence |
+| `229:2` Cart              | approved Cart                          | Midnight summary, checkout gating, and shared footer remain on Shopify normalized contract. Owner: Cart compositions.                                                                             | none     | verified by browser test                                            |
+
+Content/provider-blocked items are final editorial assets, factual image alternatives, rights applicability, hosted account provisioning, and checkout enablement; no code fallback invents those facts. No out-of-scope Shopify or Sanity contract change was made.
+
+## Local evidence manifest
+
+`tests/e2e/storefront-visual.spec.ts` emits the 27 deterministic full-page captures below only with `SAVE_STOREFRONT_EVIDENCE=1` and local Shopify fixtures. It waits for the H1, reduced-motion rendering, network idle, and loaded fonts; it seeds the fixture cart before each Cart capture.
+
+- `desktop-1440/{home,shop,product-bois-de-santal,gallery,fragrance-guide,about,contact,account,cart}.png`
+- `mobile-390/{home,shop,product-bois-de-santal,gallery,fragrance-guide,about,contact,account,cart}.png`
+- `mobile-320/{home,shop,product-bois-de-santal,gallery,fragrance-guide,about,contact,account,cart}.png`
+
+## Required execution record
+
+Evidence was captured at `2026-08-10T02:55:13Z` from workspace base `7cdd2c471a13116921725522bd7fbaa23fe6ed5c` plus the uncommitted implementation diff. A review commit and Preview run remain required; this local evidence is not a merge or production claim.
+
+| Command                                                                                                                                                                                                                                                                                      | Result                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `corepack pnpm test -- src/components/templates/storefront-templates.test.tsx src/components/storefront-footer.test.tsx src/components/navigation.test.tsx src/components/account/account-entry.test.tsx`                                                                                    | passed: 39 files / 218 tests                                  |
+| `corepack pnpm test:stories`                                                                                                                                                                                                                                                                 | passed via `corepack pnpm check`: 24 files / 239 tests        |
+| `corepack pnpm build-storybook`                                                                                                                                                                                                                                                              | passed via `corepack pnpm check`                              |
+| `SAVE_STOREFRONT_EVIDENCE=1 corepack pnpm exec playwright test tests/e2e/storefront-visual.spec.ts --project=chromium`                                                                                                                                                                       | passed: 3 Chromium viewport matrix tests; 27 captures emitted |
+| `corepack pnpm exec playwright test tests/e2e/homepage.spec.ts tests/e2e/catalog.spec.ts tests/e2e/gallery.spec.ts tests/e2e/fragrance-guide.spec.ts tests/e2e/about.spec.ts tests/e2e/contact.spec.ts tests/e2e/account.spec.ts tests/e2e/cart.spec.ts tests/e2e/storefront-visual.spec.ts` | passed through `corepack pnpm test:e2e`                       |
+| `corepack pnpm check`                                                                                                                                                                                                                                                                        | passed                                                        |
+| `corepack pnpm test:e2e`                                                                                                                                                                                                                                                                     | passed: 105 tests, 5 expected mobile skips                    |
+
+## Release gates and residual risk
+
+No Preview, PR quality gate, merge, editorial publication, production deployment, or rollback was performed. Final editorial imagery, factual image alternatives, and rights applicability remain content-owner obligations; Shopify account/customer provisioning and checkout availability remain provider-owned gates. The footer deliberately links only to existing public routes and the existing public email; legal, policy, social, newsletter, and support-destination completeness is still a human launch-readiness decision.

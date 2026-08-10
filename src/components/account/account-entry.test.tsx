@@ -24,6 +24,7 @@ describe("AccountEntry", () => {
     expect(screen.getAllByRole("link", { name: "Cart, 3 items" })).toHaveLength(
       2,
     );
+    expect(screen.getByRole("contentinfo")).toBeVisible();
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     expect(screen.queryByLabelText(/password/i)).not.toBeInTheDocument();
     expect(document.querySelector("form")).toBeNull();

@@ -13,7 +13,9 @@ import {
   ContactTemplate,
   GalleryLoadingTemplate,
   GalleryTemplate,
+  StorefrontErrorTemplate,
   StorefrontLoadingTemplate,
+  StorefrontNotFoundTemplate,
 } from "@/components/templates/storefront-templates";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 
@@ -31,6 +33,26 @@ const galleryItem = (id: string, title: string) => ({
 });
 
 describe("storefront templates", () => {
+  it("uses the shared shell for recoverable errors and unavailable pages", () => {
+    render(<StorefrontErrorTemplate reset={vi.fn()} />);
+    expect(screen.getByRole("main")).toBeVisible();
+    expect(screen.getByRole("contentinfo")).toBeVisible();
+    expect(screen.getByRole("button", { name: "Try again" })).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Return to the collection" }),
+    ).toHaveAttribute("href", "/shop");
+
+    cleanup();
+    render(<StorefrontNotFoundTemplate />);
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: "This page could not be found.",
+      }),
+    ).toBeVisible();
+    expect(screen.getByRole("contentinfo")).toBeVisible();
+  });
+
   it("renders the Gallery with one H1, current navigation, and an honest empty state", () => {
     render(
       <GalleryTemplate

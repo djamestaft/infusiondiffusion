@@ -36,19 +36,19 @@ Finish and verify the current `agent/storefront-redesign-phase-1` delivery so Ho
 
 Canonical file: `GYiQd7QSAwCSaGtt0alKG2` (`Infusion Diffusion Designs WEB`). Scope live evidence to the following 12 unique exact targets; do not browse the file broadly or substitute screenshots/inference for unavailable connector evidence.
 
-| Contract | Exact node(s) | Expected state | Required evidence categories |
-| --- | --- | --- | --- |
-| Foundations implementation | `455:3` | Approved | dimensions/layout, semantic variables, typography, spacing/assets, responsive obligations, accessibility/interaction, content extremes, divergences |
-| Release QA board | `456:2` | Approved | dimensions/layout, responsive obligations, accessibility/interaction, content extremes, divergences |
-| Home | `255:616`, `255:638` | Approved | desktop/mobile composition, hierarchy, media, carousel spacing, semantic surfaces, typography, motion intent, divergences |
-| Collection | `203:137` | Approved | browsing surface, ProductCard treatment, grid, hierarchy, long/empty behavior, responsive obligations |
-| Product detail | `203:294` | Approved | media/details split, commerce hierarchy, purchase states, responsive obligations, divergences |
-| Fragrance Guide / Editorial | `203:373` | Approved | reading hierarchy, measure, editorial sections, imagery, responsive obligations, content extremes |
-| Gallery review section | `357:2` | Approved source containing the recorded populated/viewer/empty/loading contracts | authored order, layout cadence, viewer interaction, responsive states, empty/loading, divergences |
-| About corrected handoff | `316:198` | Approved | light chapter composition, portrait FIT behavior, responsive states, content extremes, divergences |
-| Contact default | `329:58` | Approved | direct-email composition, hierarchy, semantic feedback, responsive obligations, divergences |
-| Account review board | `337:321` | Approved | hosted/loading/unavailable/error/long states, responsive behavior, intentional no-current-nav divergence |
-| Cart page | `229:2` | Approved | populated/empty hierarchy, line and summary treatment, commerce truth, responsive obligations |
+| Contract                    | Exact node(s)        | Expected state                                                                   | Required evidence categories                                                                                                                        |
+| --------------------------- | -------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Foundations implementation  | `455:3`              | Approved                                                                         | dimensions/layout, semantic variables, typography, spacing/assets, responsive obligations, accessibility/interaction, content extremes, divergences |
+| Release QA board            | `456:2`              | Approved                                                                         | dimensions/layout, responsive obligations, accessibility/interaction, content extremes, divergences                                                 |
+| Home                        | `255:616`, `255:638` | Approved                                                                         | desktop/mobile composition, hierarchy, media, carousel spacing, semantic surfaces, typography, motion intent, divergences                           |
+| Collection                  | `203:137`            | Approved                                                                         | browsing surface, ProductCard treatment, grid, hierarchy, long/empty behavior, responsive obligations                                               |
+| Product detail              | `203:294`            | Approved                                                                         | media/details split, commerce hierarchy, purchase states, responsive obligations, divergences                                                       |
+| Fragrance Guide / Editorial | `203:373`            | Approved                                                                         | reading hierarchy, measure, editorial sections, imagery, responsive obligations, content extremes                                                   |
+| Gallery review section      | `357:2`              | Approved source containing the recorded populated/viewer/empty/loading contracts | authored order, layout cadence, viewer interaction, responsive states, empty/loading, divergences                                                   |
+| About corrected handoff     | `316:198`            | Approved                                                                         | light chapter composition, portrait FIT behavior, responsive states, content extremes, divergences                                                  |
+| Contact default             | `329:58`             | Approved                                                                         | direct-email composition, hierarchy, semantic feedback, responsive obligations, divergences                                                         |
+| Account review board        | `337:321`            | Approved                                                                         | hosted/loading/unavailable/error/long states, responsive behavior, intentional no-current-nav divergence                                            |
+| Cart page                   | `229:2`              | Approved                                                                         | populated/empty hierarchy, line and summary treatment, commerce truth, responsive obligations                                                       |
 
 The repository records additional approved companion frames in `DESIGN.md` and feature documents, but the live capture remains bounded to the 12 targets above. Runtime-only 320px, 390px, tablet, wide desktop, keyboard, focus, reduced motion, loading/error, zoom, console, and content-extreme behavior is test-owned and must not be claimed as static Figma evidence.
 
@@ -110,7 +110,7 @@ The single `storefront_engineer` owns these files for this task. “As evidenced
   - `docs/features/evidence/storefront-redesign/desktop-1440/`
   - `docs/features/evidence/storefront-redesign/mobile-390/`
   - `docs/features/evidence/storefront-redesign/mobile-320/`
-  with one full-page capture named `home.png`, `shop.png`, `product-bois-de-santal.png`, `gallery.png`, `fragrance-guide.png`, `about.png`, `contact.png`, `account.png`, and `cart.png` in each directory.
+    with one full-page capture named `home.png`, `shop.png`, `product-bois-de-santal.png`, `gallery.png`, `fragrance-guide.png`, `about.png`, `contact.png`, `account.png`, and `cart.png` in each directory.
 
 ### Truth reconciliation
 

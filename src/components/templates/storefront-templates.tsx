@@ -214,7 +214,7 @@ export function HomeTemplate({
           >
             <div className="border-navigation-border absolute inset-8 border lg:inset-12" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-content-accent text-[clamp(7rem,18vw,15rem)] leading-none tracking-[-0.08em] opacity-30">
+              <span className="font-display text-content-accent text-[clamp(7rem,18vw,15rem)] leading-none tracking-[-0.08em] opacity-50">
                 I·D
               </span>
             </div>
@@ -489,17 +489,30 @@ export function ContactLoadingTemplate() {
   );
 }
 
-export function ContactErrorTemplate({ reset }: { reset: () => void }) {
-  const email = "hello@infusiondiffusion.co.za";
+export function StorefrontErrorTemplate({
+  reset,
+  title = "We couldn’t load this page.",
+  description = "Please try again, or return to the collection.",
+  currentHref,
+  recoveryAction,
+  recoveryMessage,
+}: {
+  reset: () => void;
+  title?: string;
+  description?: string;
+  currentHref?: string;
+  recoveryAction?: React.ReactNode;
+  recoveryMessage?: React.ReactNode;
+}) {
   return (
-    <TemplateShell currentHref="/contact">
+    <TemplateShell currentHref={currentHref}>
       <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-display text-content-primary text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
-            We couldn’t load this page.
+            {title}
           </h1>
           <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] lg:text-xl">
-            Nothing was submitted. Try again, or email us directly.
+            {description}
           </p>
           <FeedbackAlert
             title="Unexpected error"
@@ -507,18 +520,56 @@ export function ContactErrorTemplate({ reset }: { reset: () => void }) {
             announcement="alert"
             className="mt-8"
           >
-            Please retry. If the problem continues, use the direct email option
-            below.
+            {recoveryMessage ??
+              "Please retry or continue browsing the collection. No changes were made."}
           </FeedbackAlert>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button onClick={reset}>Try again</Button>
-            <a
-              className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
-              href={`mailto:${email}`}
-            >
-              {email}
-            </a>
+            {recoveryAction ?? (
+              <Button asChild variant="secondary">
+                <a href="/shop">Return to the collection</a>
+              </Button>
+            )}
           </div>
+        </div>
+      </section>
+    </TemplateShell>
+  );
+}
+
+export function ContactErrorTemplate({ reset }: { reset: () => void }) {
+  return (
+    <StorefrontErrorTemplate
+      reset={reset}
+      currentHref="/contact"
+      description="Nothing was submitted. Try again, or email us directly."
+      recoveryMessage="Nothing was submitted. Please retry or email us directly."
+      recoveryAction={
+        <a
+          className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+          href="mailto:hello@infusiondiffusion.co.za"
+        >
+          hello@infusiondiffusion.co.za
+        </a>
+      }
+    />
+  );
+}
+
+export function StorefrontNotFoundTemplate() {
+  return (
+    <TemplateShell>
+      <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-display text-content-primary text-[40px] leading-[1.15] lg:text-[56px]">
+            This page could not be found.
+          </h1>
+          <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] lg:text-xl">
+            The page may have moved, or the fragrance is no longer available.
+          </p>
+          <Button asChild className="mt-8">
+            <a href="/shop">Explore the collection</a>
+          </Button>
         </div>
       </section>
     </TemplateShell>
