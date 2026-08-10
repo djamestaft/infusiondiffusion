@@ -12,7 +12,7 @@ export function CartSummary({
   checkoutAction?: () => void | Promise<void>;
 }) {
   return (
-    <aside className="dark bg-content-surface text-content-primary w-full self-start p-7 sm:p-9 lg:sticky lg:top-32 lg:w-96">
+    <aside className="dark bg-content-surface text-content-primary min-h-[480px] w-full self-start p-7 sm:p-9 lg:sticky lg:top-32 lg:w-[360px]">
       <h2 className="font-display text-[2rem] leading-9">Order summary</h2>
       <div className="mt-6 flex items-center justify-between font-sans">
         <span>Subtotal</span>

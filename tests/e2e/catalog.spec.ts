@@ -41,7 +41,7 @@ test("collection uses the elevated browsing surface without card effects", async
 }) => {
   await page.goto("/shop");
   await expect(
-    page.getByRole("heading", { level: 1, name: "The collection" }),
+    page.getByRole("heading", { level: 1, name: "The fragrance collection" }),
   ).toBeVisible();
   const surface = page.getByTestId("collection-browsing-surface").last();
   const firstCard = page.getByRole("link", { name: /^View / }).first();

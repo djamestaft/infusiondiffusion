@@ -74,7 +74,7 @@ export function AccountEntry({
       <Navigation cartCount={cartCount} />
       <main
         aria-busy={isLoading || undefined}
-        className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-7xl items-center px-5 py-16 sm:px-8 lg:min-h-[calc(100dvh-6.5rem)] lg:px-12 lg:py-24"
+        className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-[1440px] items-center px-5 py-16 sm:px-8 lg:min-h-[calc(100dvh-6.5rem)] lg:px-20 lg:py-24"
       >
         <section className="w-full max-w-2xl">
           {isLoading ? (
@@ -105,7 +105,7 @@ export function AccountEntry({
                     <Button onClick={onRetry}>Try again</Button>
                   ) : null}
                   <TextLink href="/shop" variant="standalone">
-                    Shop the collection
+                    Continue shopping
                   </TextLink>
                 </div>
               ) : null}

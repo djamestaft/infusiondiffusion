@@ -107,9 +107,9 @@ describe("storefront templates", () => {
     expect(screen.getAllByTestId("gallery-grid")).toHaveLength(2);
     expect(screen.getByTestId("market-gallery-section")).toHaveClass(
       "max-w-[1440px]",
-      "px-4",
-      "min-[390px]:px-6",
-      "lg:px-16",
+      "px-5",
+      "sm:px-8",
+      "lg:px-20",
     );
     expect(
       screen.getByText("Every room carries its own atmosphere."),
@@ -197,6 +197,11 @@ describe("storefront templates", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
+    expect(screen.getByTestId("home-hero-section")).toHaveClass(
+      "lg:h-[796px]",
+      "lg:grid-cols-[560px_496px]",
+      "lg:px-20",
+    );
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(3);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface-elevated",
@@ -206,7 +211,7 @@ describe("storefront templates", () => {
       "shadow",
     );
     expect(screen.getByTestId("home-cabinet-inner")).toHaveClass(
-      "max-w-7xl",
+      "max-w-[1440px]",
       "pt-[52px]",
       "lg:pt-[72px]",
     );
@@ -525,12 +530,10 @@ describe("storefront templates", () => {
     expect(screen.getByRole("img", { name: "Test portrait" })).toHaveClass(
       "object-contain",
     );
-    expect(
-      screen.queryByTestId("about-media-slot-development"),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByTestId("about-chapter-development").firstElementChild,
-    ).toHaveClass("text-center");
+    expect(screen.getByTestId("about-media-slot-development")).toHaveClass(
+      "aspect-4/3",
+    );
+    expect(screen.getAllByText("Portrait unavailable")).toHaveLength(3);
     const origin = screen.getByTestId("about-chapter-origin");
     const heading = origin.querySelector("h2")!;
     const image = screen.getByRole("img", { name: "Test portrait" });

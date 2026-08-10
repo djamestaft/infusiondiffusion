@@ -27,7 +27,7 @@ async function recoveryContract(canvasElement: HTMLElement, text: string) {
   ).toBeNull();
   await expect(canvas.getByText(text)).toBeVisible();
   await expect(
-    canvas.getByRole("link", { name: "Shop the collection" }),
+    canvas.getByRole("link", { name: "Continue shopping" }),
   ).toHaveAttribute("href", "/shop");
 }
 

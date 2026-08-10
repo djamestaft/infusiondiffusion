@@ -47,7 +47,7 @@ describe("AccountEntry", () => {
         screen.queryByRole("link", { name: "Continue to your account" }),
       ).not.toBeInTheDocument();
       expect(
-        screen.getByRole("link", { name: "Shop the collection" }),
+        screen.getByRole("link", { name: "Continue shopping" }),
       ).toHaveAttribute("href", "/shop");
     },
   );

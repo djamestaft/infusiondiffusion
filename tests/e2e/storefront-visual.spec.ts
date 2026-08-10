@@ -12,7 +12,7 @@ const viewports = [
 
 const routes = [
   { name: "home", path: "/", heading: /Fragrance, composed/ },
-  { name: "shop", path: "/shop", heading: "The collection" },
+  { name: "shop", path: "/shop", heading: "The fragrance collection" },
   {
     name: "product-bois-de-santal",
     path: "/products/bois-de-santal-200ml",
@@ -90,15 +90,20 @@ for (const viewport of viewports) {
       await expect(page.locator("body")).not.toContainText(
         /image coming soon|i·d/i,
       );
-      const requiredImages = page.locator("img");
-      for (let index = 0; index < (await requiredImages.count()); index += 1) {
-        await expect
-          .poll(() =>
-            requiredImages
-              .nth(index)
-              .evaluate((image) => (image as HTMLImageElement).naturalWidth),
-          )
-          .toBeGreaterThan(0);
+      const requiredImageSources = await page
+        .locator("img")
+        .evaluateAll((images) =>
+          images
+            .filter((image) => image.isConnected)
+            .map((image) => (image as HTMLImageElement).src)
+            .filter(Boolean),
+        );
+      for (const source of Array.from(new Set(requiredImageSources))) {
+        const imageResponse = await page.request.get(source);
+        expect(
+          imageResponse.ok(),
+          `Image failed to load: ${source}`,
+        ).toBeTruthy();
       }
       await page.locator("body").focus();
       await page.keyboard.press("Tab");

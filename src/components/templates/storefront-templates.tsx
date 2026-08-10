@@ -39,11 +39,11 @@ type TemplateNavigationProps = {
 };
 
 const sectionClass =
-  "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
+  "mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:px-20 lg:py-24";
 const homeHeroSectionClass =
-  "mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-12 sm:px-8 lg:min-h-[calc(100dvh-104px)] lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-0 lg:px-0 lg:py-0";
+  "mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-12 sm:px-8 lg:h-[796px] lg:grid-cols-[560px_496px] lg:items-center lg:justify-between lg:gap-16 lg:px-20 lg:py-0";
 const homeCollectionInnerClass =
-  "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
+  "mx-auto w-full max-w-[1440px] px-5 pt-[52px] pb-16 sm:px-8 lg:px-20 lg:pt-[72px] lg:pb-24";
 
 function TemplateShell({
   navigationTheme = "ivory",
@@ -82,13 +82,13 @@ function TemplateShell({
 
 function ProductGrid({ products }: { products: ProductCardProps[] }) {
   return (
-    <div className="grid grid-cols-1 gap-x-5 gap-y-12 min-[520px]:grid-cols-2 lg:grid-cols-3 lg:gap-x-7 lg:gap-y-16">
+    <div className="grid grid-cols-1 gap-x-4 gap-y-10 min-[520px]:grid-cols-2 lg:grid-cols-[repeat(3,288px)] lg:gap-x-6 lg:gap-y-12">
       {products.map((product, index) => (
         <ProductCard
           key={product.href}
           {...product}
           imagePriority={index === 0}
-          className="max-w-none"
+          className="w-full max-w-[350px] lg:h-[602px] lg:max-w-[288px]"
         />
       ))}
     </div>
@@ -182,14 +182,8 @@ export function HomeTemplate({
         : heroSlides.slice(0, 1);
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <section
-        data-testid="home-hero-section"
-        className={cn(
-          homeHeroSectionClass,
-          carouselSlides.length && "lg:grid-cols-2 lg:items-center",
-        )}
-      >
-        <div className="relative z-10 flex min-h-[500px] items-center lg:min-h-full lg:px-16 xl:px-24">
+      <section data-testid="home-hero-section" className={homeHeroSectionClass}>
+        <div className="relative z-10 flex min-h-[500px] items-center lg:min-h-0">
           <ContentHeader
             title={content.heroTitle}
             headingLevel={1}
@@ -200,13 +194,13 @@ export function HomeTemplate({
               label: content.heroActionLabel,
               href: "/shop",
             }}
-            className="max-w-xl [&_[data-slot=heading]]:text-[clamp(3.25rem,6vw,5.75rem)] [&_[data-slot=heading]]:leading-[0.98]"
+            className="max-w-[560px] [&_[data-slot=heading]]:text-[clamp(3rem,5vw,4.5rem)] [&_[data-slot=heading]]:leading-[1.05]"
           />
         </div>
         {carouselSlides.length ? (
           <HeroCarousel
             slides={carouselSlides}
-            className="lg:w-full [&_[data-testid=hero-carousel-media]]:lg:aspect-[1/1.08]"
+            className="mx-auto w-full max-w-[350px] lg:mx-0 lg:max-w-[496px] [&_[data-testid=hero-carousel-media]]:aspect-[350/438] [&_[data-testid=hero-carousel-media]]:lg:aspect-[496/620]"
           />
         ) : null}
       </section>
@@ -225,7 +219,7 @@ export function HomeTemplate({
               id="home-collection-title"
               level={2}
               treatment="title"
-              className="mb-10 max-w-2xl lg:mb-14 lg:text-5xl"
+              className="mb-10 max-w-2xl lg:mb-14 lg:text-[40px]"
             >
               {content.collectionTitle}
             </Heading>
@@ -304,7 +298,7 @@ export function HomeTemplate({
                 </div>
               </div>
               {storyImage ? (
-                <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
+                <div className="bg-product-card-media-fallback relative aspect-4/3 overflow-hidden rounded-sm">
                   <Image
                     src={storyImage.src}
                     alt={storyImage.alt}
@@ -569,7 +563,7 @@ export interface CollectionTemplateProps extends TemplateNavigationProps {
 
 export function CollectionTemplate({
   products,
-  title = "The collection",
+  title = "The fragrance collection",
   description = "Layered home fragrance, described through the notes you will actually live with.",
   navigationTheme,
   cartCount,
@@ -581,12 +575,12 @@ export function CollectionTemplate({
       cartCount={cartCount}
       surface="elevated"
     >
-      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
+      <section className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-20 lg:py-20">
         <header className="border-navigation-divider grid gap-8 border-b pb-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-24 lg:pb-16">
           <Heading
             level={1}
             treatment="display"
-            className="max-w-3xl text-[clamp(3.5rem,8vw,6rem)] leading-[0.96]"
+            className="max-w-3xl text-[40px] leading-[1.1] lg:text-[56px]"
           >
             {title}
           </Heading>
@@ -596,7 +590,9 @@ export function CollectionTemplate({
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>
-          <p className="text-content-secondary">Composed for lived-in rooms</p>
+          <p className="text-content-secondary hidden sm:block">
+            Composed for lived-in rooms
+          </p>
         </div>
         {products.length ? (
           <div className="mt-8 lg:mt-12">
@@ -658,92 +654,107 @@ export function ProductDetailTemplate({
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <article
-        className={cn(
-          "mx-auto w-full max-w-[1440px]",
-          product.image && "grid lg:grid-cols-[1.08fr_0.92fr]",
-        )}
-      >
-        {product.image ? (
-          <div className="aspect-3/4 lg:sticky lg:top-26 lg:aspect-auto lg:h-[calc(100dvh-104px)]">
-            <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
-              <StorefrontMedia
-                image={product.image}
-                priority
-                sizes="(max-width: 1023px) 100vw, 54vw"
-              />
+      <article className="mx-auto w-full max-w-[1440px] px-5 py-12 sm:px-8 lg:px-20 lg:py-20">
+        <div
+          className={cn(
+            "grid gap-10",
+            product.image && "lg:grid-cols-[680px_440px] lg:gap-16",
+          )}
+        >
+          {product.image ? (
+            <div className="aspect-[350/438] lg:aspect-auto lg:h-[720px] lg:w-[680px]">
+              <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
+                <StorefrontMedia
+                  image={product.image}
+                  priority
+                  sizes="(max-width: 1023px) calc(100vw - 40px), 680px"
+                />
+              </div>
             </div>
-          </div>
-        ) : null}
-        <div className="flex flex-col justify-center gap-6 px-5 py-14 sm:px-8 lg:min-h-[calc(100dvh-104px)] lg:px-16 lg:py-20 xl:px-20">
-          <Eyebrow>{product.format}</Eyebrow>
-          <Heading
-            level={1}
-            treatment="display"
-            className="text-[clamp(3rem,5vw,5rem)] leading-[1]"
-          >
-            {product.name}
-          </Heading>
-          <p className="text-content-secondary font-sans text-lg leading-8">
-            {product.notes}
-          </p>
-          <PriceDisplay
-            price={product.price}
-            compareAtPrice={product.compareAtPrice}
-            type={product.priceType}
-            size="standard"
-          />
-          <CommerceStatus
-            status={product.availability ?? "in-stock"}
-            lowStockCount={product.lowStockCount}
-          />
-          <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
-            {description}
-          </p>
-          {variants.length ? (
-            <fieldset className="flex flex-wrap gap-3">
-              <legend className="mb-3 w-full font-sans text-sm font-semibold">
-                Choose a format
-              </legend>
-              {variants.map((variant) => (
-                <Button
-                  key={variant.id}
-                  type="button"
-                  variant={
-                    selectedVariantId === variant.id ? "primary" : "secondary"
-                  }
-                  aria-pressed={selectedVariantId === variant.id}
-                  disabled={!variant.available}
-                  onClick={() => onVariantChange?.(variant.id)}
-                >
-                  {variant.label}
-                  {!variant.available ? " — unavailable" : ""}
-                </Button>
-              ))}
-            </fieldset>
           ) : null}
-          {selectionUnavailable && !soldOut ? (
-            <p className="text-commerce-status-sold-out font-sans text-sm font-semibold">
-              Select an available format to continue.
+          <div className="flex flex-col justify-center gap-5 lg:min-h-[720px]">
+            <Eyebrow>{product.format}</Eyebrow>
+            <Heading
+              level={1}
+              treatment="display"
+              className="text-[40px] leading-[1.08] lg:text-[52px]"
+            >
+              {product.name}
+            </Heading>
+            <p className="text-content-secondary font-sans text-lg leading-8">
+              {product.notes}
             </p>
-          ) : null}
-          {purchaseAction ??
-            (showPurchaseAction ? (
-              <Button
-                type="button"
-                size="large"
-                disabled={purchaseDisabled}
-                onClick={onAddToCart}
-                className="w-full sm:w-fit"
-              >
-                {soldOut
-                  ? "Sold out"
-                  : selectionUnavailable
-                    ? "Choose a format"
-                    : "Add to bag"}
-              </Button>
-            ) : null)}
-          <dl className="border-navigation-border mt-6 divide-y border-y font-sans">
+            <PriceDisplay
+              price={product.price}
+              compareAtPrice={product.compareAtPrice}
+              type={product.priceType}
+              size="standard"
+            />
+            <CommerceStatus
+              status={product.availability ?? "in-stock"}
+              lowStockCount={product.lowStockCount}
+            />
+            <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
+              {description}
+            </p>
+            {variants.length ? (
+              <fieldset className="flex flex-wrap gap-3">
+                <legend className="mb-3 w-full font-sans text-sm font-semibold">
+                  Choose a format
+                </legend>
+                {variants.map((variant) => (
+                  <Button
+                    key={variant.id}
+                    type="button"
+                    variant={
+                      selectedVariantId === variant.id ? "primary" : "secondary"
+                    }
+                    aria-pressed={selectedVariantId === variant.id}
+                    disabled={!variant.available}
+                    onClick={() => onVariantChange?.(variant.id)}
+                  >
+                    {variant.label}
+                    {!variant.available ? " — unavailable" : ""}
+                  </Button>
+                ))}
+              </fieldset>
+            ) : null}
+            {selectionUnavailable && !soldOut ? (
+              <p className="text-commerce-status-sold-out font-sans text-sm font-semibold">
+                Select an available format to continue.
+              </p>
+            ) : null}
+            {purchaseAction ??
+              (showPurchaseAction ? (
+                <Button
+                  type="button"
+                  size="large"
+                  disabled={purchaseDisabled}
+                  onClick={onAddToCart}
+                  className="w-full sm:w-fit"
+                >
+                  {soldOut
+                    ? "Sold out"
+                    : selectionUnavailable
+                      ? "Choose a format"
+                      : "Add to bag"}
+                </Button>
+              ) : null)}
+          </div>
+        </div>
+        <section
+          className="border-navigation-divider mt-16 border-t pt-12 lg:mt-20 lg:grid lg:grid-cols-[360px_1fr] lg:gap-16 lg:pt-16"
+          aria-labelledby="product-facts-heading"
+        >
+          <Heading
+            id="product-facts-heading"
+            level={2}
+            treatment="title"
+            className="text-[34px]"
+          >
+            Scent, room and ritual
+          </Heading>
+          <dl className="border-navigation-border mt-8 divide-y border-y font-sans lg:mt-0">
             {details.map((detail) => (
               <div
                 key={detail.label}
@@ -754,7 +765,7 @@ export function ProductDetailTemplate({
               </div>
             ))}
           </dl>
-        </div>
+        </section>
       </article>
     </TemplateShell>
   );
@@ -786,7 +797,7 @@ export function EditorialTemplate({
       cartCount={cartCount}
     >
       <article>
-        <header className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:px-12 lg:py-24 xl:px-0">
+        <header className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:px-20 lg:py-24">
           <div>
             <p className="text-content-accent mb-6 font-sans text-xs font-semibold tracking-[0.08em] uppercase">
               {eyebrow}
@@ -794,7 +805,7 @@ export function EditorialTemplate({
             <Heading
               level={1}
               treatment="display"
-              className="text-[clamp(3.5rem,7vw,6rem)] leading-[0.98]"
+              className="text-[40px] leading-[1.1] lg:text-[56px]"
             >
               {title}
             </Heading>
@@ -804,7 +815,7 @@ export function EditorialTemplate({
           </Lead>
         </header>
         {image ? (
-          <div className="bg-product-card-media-fallback relative mx-auto aspect-[16/9] w-full max-w-[1440px] overflow-hidden">
+          <div className="bg-product-card-media-fallback relative mx-auto h-[300px] w-[calc(100%-40px)] max-w-[1280px] overflow-hidden sm:w-[calc(100%-64px)] lg:h-[520px] lg:w-[calc(100%-160px)]">
             <Image
               src={image.src}
               alt={image.alt}
@@ -816,19 +827,23 @@ export function EditorialTemplate({
             />
           </div>
         ) : null}
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-28 xl:px-0">
+        <div className="mx-auto w-full max-w-[760px] px-5 py-16 sm:px-8 lg:px-0 lg:py-28">
           {sections.map((section, index) => (
             <section
               key={section.heading}
               className={cn(
-                "border-navigation-divider grid gap-6 border-t py-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24 lg:py-16",
+                "border-navigation-divider border-t py-12 lg:py-16",
                 index === 0 && "border-t-0 pt-0",
               )}
             >
-              <Heading level={2} treatment="title" className="lg:text-4xl">
+              <Heading
+                level={2}
+                treatment="title"
+                className="text-[30px] lg:text-[40px]"
+              >
                 {section.heading}
               </Heading>
-              <p className="text-content-secondary max-w-[70ch] font-sans text-lg leading-8 whitespace-pre-line">
+              <p className="text-content-secondary mt-6 max-w-[70ch] font-sans text-[18px] leading-[1.65] whitespace-pre-line">
                 {section.body}
               </p>
             </section>
@@ -860,7 +875,7 @@ export function AboutTemplate({
     <TemplateShell currentHref="/about" cartCount={cartCount}>
       <article data-testid="about-page">
         <header className="bg-content-surface">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-14 sm:px-8 xl:grid-cols-[1.1fr_0.9fr] xl:items-end xl:gap-24 xl:px-0 xl:py-28">
+          <div className="mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-14 sm:px-8 lg:px-20 xl:grid-cols-[1.1fr_0.9fr] xl:items-end xl:gap-24 xl:py-28">
             <h1 className="font-display text-content-primary max-w-[820px] text-[clamp(3.5rem,8vw,6rem)] leading-[0.98] tracking-[-0.02em]">
               {title}
             </h1>
@@ -879,23 +894,15 @@ export function AboutTemplate({
               className={cn(
                 isBone ? "bg-bone-50" : "bg-content-surface",
                 "py-16 xl:py-[120px]",
-                chapter.image && "min-h-[740px] xl:min-h-0",
+                "min-h-[740px] xl:min-h-0",
               )}
             >
               <div
                 className={cn(
-                  "mx-auto w-full max-w-7xl px-5 sm:px-8 xl:px-0",
-                  chapter.image
-                    ? "grid gap-12 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-20"
-                    : "text-center",
+                  "mx-auto grid w-full max-w-[1440px] gap-12 px-5 sm:px-8 lg:px-20 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-20",
                 )}
               >
-                <div
-                  className={cn(
-                    !chapter.image && "mx-auto max-w-[760px]",
-                    imageFirst && "xl:order-2",
-                  )}
-                >
+                <div className={cn(imageFirst && "xl:order-2")}>
                   <h2 className="font-display text-content-primary text-[26px] leading-[1.2] xl:text-[34px]">
                     {chapter.heading}
                   </h2>
@@ -905,14 +912,15 @@ export function AboutTemplate({
                     ))}
                   </div>
                 </div>
-                {chapter.image ? (
-                  <div
-                    data-testid={`about-media-slot-${chapter.role}`}
-                    className={cn(
-                      "relative aspect-4/3 w-full",
-                      imageFirst && "xl:order-1",
-                    )}
-                  >
+                <div
+                  data-testid={`about-media-slot-${chapter.role}`}
+                  className={cn(
+                    "relative aspect-4/3 w-full",
+                    !chapter.image && "bg-content-surface-elevated",
+                    imageFirst && "xl:order-1",
+                  )}
+                >
+                  {chapter.image ? (
                     <div
                       data-testid={`about-media-artwork-${chapter.role}`}
                       className="relative mx-auto aspect-3/4 h-full"
@@ -925,8 +933,12 @@ export function AboutTemplate({
                         className="object-contain"
                       />
                     </div>
-                  </div>
-                ) : null}
+                  ) : (
+                    <p className="text-content-secondary absolute inset-0 flex items-center justify-center px-8 text-center font-sans text-sm">
+                      Portrait unavailable
+                    </p>
+                  )}
+                </div>
               </div>
             </section>
           );
@@ -935,7 +947,7 @@ export function AboutTemplate({
           className="bg-bone-50 py-7 xl:py-[91px]"
           aria-labelledby="about-cta-heading"
         >
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-5 sm:px-8 xl:flex-row xl:items-center xl:justify-between xl:px-0">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 px-5 sm:px-8 lg:px-20 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <h2
                 id="about-cta-heading"
@@ -981,7 +993,7 @@ export function GalleryTemplate({
   return (
     <TemplateShell currentHref="/gallery" cartCount={cartCount}>
       <article data-testid="gallery-page">
-        <header className="mx-auto w-full max-w-7xl px-5 pt-13 sm:px-8 lg:px-12 lg:pt-20 xl:px-0">
+        <header className="mx-auto w-full max-w-[1440px] px-5 pt-13 sm:px-8 lg:px-20 lg:pt-20">
           <h1 className="font-display text-content-primary max-w-[900px] text-[40px] leading-[1.15] tracking-[-0.02em] [overflow-wrap:anywhere] lg:text-7xl lg:leading-20">
             {title}
           </h1>
@@ -994,7 +1006,7 @@ export function GalleryTemplate({
           <div>
             {campaignItems.length ? (
               <section
-                className="mx-auto w-full max-w-7xl px-5 pt-12 sm:px-8 lg:px-12 lg:pt-16 xl:px-0"
+                className="mx-auto w-full max-w-[1440px] px-5 pt-12 sm:px-8 lg:px-20 lg:pt-16"
                 aria-label="Campaign gallery images"
               >
                 <GalleryViewer items={campaignItems} layout="campaign" />
@@ -1004,7 +1016,7 @@ export function GalleryTemplate({
               <section
                 data-testid="market-gallery-section"
                 className={cn(
-                  "mx-auto w-full max-w-[1440px] px-4 min-[390px]:px-6 lg:px-16",
+                  "mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-20",
                   campaignItems.length ? "mt-20 lg:mt-28" : "pt-12 lg:pt-16",
                 )}
                 aria-labelledby="market-gallery-heading"
