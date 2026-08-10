@@ -330,6 +330,18 @@ export const CollectionLoading: Story = {
 export const ProductLoading: Story = {
   render: () => <StorefrontLoadingTemplate kind="product" />,
 };
+export const CartLoading: Story = {
+  render: () => <StorefrontLoadingTemplate kind="cart" currentHref="/cart" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByLabelText("Loading cart page")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(canvas.getAllByTestId("cart-loading-line")).toHaveLength(2);
+    await expect(canvas.getByTestId("cart-loading-summary")).toBeVisible();
+  },
+};
 export const EditorialLoading390: Story = {
   globals: { viewport: { value: "contact390", isRotated: false } },
   render: () => (

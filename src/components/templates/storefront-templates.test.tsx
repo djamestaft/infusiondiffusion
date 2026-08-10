@@ -168,6 +168,21 @@ describe("storefront templates", () => {
     expect(screen.queryByText(/loading fragrance/i)).toBeNull();
   });
 
+  it("uses responsive cart-line and Midnight-summary geometry while loading", () => {
+    render(<StorefrontLoadingTemplate kind="cart" currentHref="/cart" />);
+    const loadingRegion = screen.getByLabelText("Loading cart page");
+    expect(loadingRegion).toHaveAttribute("aria-busy", "true");
+    expect(screen.getAllByTestId("cart-loading-line")).toHaveLength(2);
+    expect(screen.getByTestId("cart-loading-summary")).toHaveClass(
+      "dark",
+      "bg-content-surface",
+    );
+    expect(loadingRegion.querySelectorAll("button, a, input")).toHaveLength(0);
+    expect(loadingRegion.querySelector(".animate-pulse")).toHaveClass(
+      "motion-reduce:animate-none",
+    );
+  });
+
   it("composes the home journey from accessible landmarks and product cards", () => {
     render(
       <HomeTemplate

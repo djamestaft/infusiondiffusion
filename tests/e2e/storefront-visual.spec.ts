@@ -2,7 +2,7 @@ import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const viewports = [
   { name: "desktop-1440", width: 1440, height: 1000 },
@@ -37,6 +37,17 @@ function directoryFor(viewport: (typeof viewports)[number]) {
       : "mobile-320";
 }
 
+async function openSeededCart(page: Page) {
+  await page.goto("/products/bois-de-santal-200ml", {
+    waitUntil: "networkidle",
+  });
+  await page.getByRole("button", { name: "Add to bag" }).click();
+  await page.getByRole("link", { name: "Review your bag" }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Your bag" }),
+  ).toBeVisible();
+}
+
 for (const viewport of viewports) {
   test(`captures every public storefront route at ${viewport.width}px`, async ({
     page,
@@ -45,15 +56,21 @@ for (const viewport of viewports) {
     const consoleErrors: string[] = [];
     const pageErrors: string[] = [];
     const failedFirstPartyRequests: string[] = [];
+    let firstPartyOrigin = "";
     page.on("console", (message) => {
       if (message.type() === "error") consoleErrors.push(message.text());
     });
     page.on("pageerror", (error) => pageErrors.push(error.message));
     page.on("requestfailed", (request) => {
-      if (new URL(request.url()).origin === "http://127.0.0.1:3000")
+      if (
+        firstPartyOrigin &&
+        new URL(request.url()).origin === firstPartyOrigin
+      )
         failedFirstPartyRequests.push(request.url());
     });
-    expect((await page.request.get("/api/health")).ok()).toBeTruthy();
+    const healthResponse = await page.request.get("/api/health");
+    expect(healthResponse.ok()).toBeTruthy();
+    firstPartyOrigin = new URL(healthResponse.url()).origin;
     await page.setViewportSize(viewport);
     await page.emulateMedia({ reducedMotion: "reduce" });
 
@@ -111,14 +128,23 @@ for (const viewport of viewports) {
       }
     }
 
-    await page.goto("/products/bois-de-santal-200ml", {
-      waitUntil: "networkidle",
-    });
-    await page.getByRole("button", { name: "Add to bag" }).click();
-    await page.getByRole("link", { name: "Review your bag" }).click();
+    await openSeededCart(page);
+    await page.locator("body").focus();
+    await page.keyboard.press("Tab");
     await expect(
-      page.getByRole("heading", { level: 1, name: "Your bag" }),
-    ).toBeVisible();
+      page
+        .getByRole("navigation", { name: "Primary" })
+        .getByRole("link", { name: "Infusion Diffusion home" }),
+    ).toBeFocused();
+    if (viewport.name === "desktop-1440") {
+      expect(
+        (
+          await new AxeBuilder({ page })
+            .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+            .analyze()
+        ).violations,
+      ).toEqual([]);
+    }
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBeLessThanOrEqual(viewport.width);
@@ -155,4 +181,8 @@ test("reflows every public route at an effective 200% zoom viewport", async ({
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBeLessThanOrEqual(640);
   }
+  await openSeededCart(page);
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(640);
 });
