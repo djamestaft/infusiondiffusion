@@ -40,7 +40,7 @@ type TemplateNavigationProps = {
 const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
 const homeHeroSectionClass =
-  "mx-auto grid w-full max-w-7xl gap-10 px-5 pt-16 pb-0 sm:px-8 lg:px-12 lg:pt-24 lg:pb-0";
+  "mx-auto grid w-full max-w-[1440px] gap-10 px-5 py-12 sm:px-8 lg:min-h-[calc(100dvh-104px)] lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-0 lg:px-0 lg:py-0";
 const homeCollectionInnerClass =
   "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
 
@@ -81,7 +81,7 @@ function TemplateShell({
 
 function ProductGrid({ products }: { products: ProductCardProps[] }) {
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+    <div className="grid grid-cols-1 gap-x-5 gap-y-12 min-[520px]:grid-cols-2 lg:grid-cols-3 lg:gap-x-7 lg:gap-y-16">
       {products.map((product, index) => (
         <ProductCard
           key={product.href}
@@ -188,23 +188,42 @@ export function HomeTemplate({
           carouselSlides.length && "lg:grid-cols-2 lg:items-center",
         )}
       >
-        <ContentHeader
-          title={content.heroTitle}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={content.heroIntroduction}
-          action={{
-            type: "button",
-            label: content.heroActionLabel,
-            href: "/shop",
-          }}
-        />
+        <div className="relative z-10 flex min-h-[500px] items-center lg:min-h-full lg:px-16 xl:px-24">
+          <ContentHeader
+            title={content.heroTitle}
+            headingLevel={1}
+            headingTreatment="display"
+            lead={content.heroIntroduction}
+            action={{
+              type: "button",
+              label: content.heroActionLabel,
+              href: "/shop",
+            }}
+            className="max-w-xl [&_[data-slot=heading]]:text-[clamp(3.25rem,6vw,5.75rem)] [&_[data-slot=heading]]:leading-[0.98]"
+          />
+        </div>
         {carouselSlides.length ? (
           <HeroCarousel
             slides={carouselSlides}
-            className="lg:mx-auto lg:w-4/5"
+            className="lg:w-full [&_[data-testid=hero-carousel-media]]:lg:aspect-[1/1.08]"
           />
-        ) : null}
+        ) : (
+          <div
+            className="dark bg-content-surface text-content-primary relative min-h-[360px] overflow-hidden lg:min-h-full"
+            aria-hidden="true"
+          >
+            <div className="border-navigation-border absolute inset-8 border lg:inset-12" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-content-accent text-[clamp(7rem,18vw,15rem)] leading-none tracking-[-0.08em] opacity-30">
+                I·D
+              </span>
+            </div>
+            <div className="border-navigation-border absolute right-10 bottom-10 left-10 flex items-end justify-between border-t pt-5 font-sans text-xs tracking-[0.18em] uppercase lg:right-16 lg:bottom-16 lg:left-16">
+              <span>Room · Ritual · Atmosphere</span>
+              <span>South Africa</span>
+            </div>
+          </div>
+        )}
       </section>
 
       <ScrollReveal direction="left">
@@ -221,7 +240,7 @@ export function HomeTemplate({
               id="home-collection-title"
               level={2}
               treatment="title"
-              className="mb-8"
+              className="mb-10 max-w-2xl lg:mb-14 lg:text-5xl"
             >
               {content.collectionTitle}
             </Heading>
@@ -385,25 +404,27 @@ export function ContactTemplate({
     <TemplateShell currentHref="/contact" cartCount={cartCount}>
       <article data-testid="contact-page">
         <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
-            {eyebrow ? <Eyebrow className="mb-4">{eyebrow}</Eyebrow> : null}
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
-              {title}
-            </h1>
-            <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+          <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-24 lg:px-12 lg:py-28 xl:px-0">
+            <div>
+              {eyebrow ? <Eyebrow className="mb-6">{eyebrow}</Eyebrow> : null}
+              <h1 className="font-display text-content-primary max-w-[820px] text-[clamp(3.5rem,8vw,6rem)] leading-[0.98] tracking-[-0.02em] [overflow-wrap:anywhere]">
+                {title}
+              </h1>
+            </div>
+            <p className="text-content-secondary max-w-[60ch] font-sans text-[17px] leading-[1.6] [overflow-wrap:anywhere] lg:pb-2 lg:text-xl">
               {introduction}
             </p>
           </div>
         </header>
         <section className="bg-bone-50" aria-labelledby="contact-email-heading">
-          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-6 lg:px-12 lg:py-24 xl:px-0">
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-8 lg:px-12 lg:py-28 xl:px-0">
             <h2
               id="contact-email-heading"
-              className="font-display text-content-primary text-[26px] leading-[1.2] lg:col-span-12 lg:text-[34px]"
+              className="font-display text-content-primary text-[32px] leading-[1.1] lg:col-span-5 lg:text-[48px]"
             >
               Email us
             </h2>
-            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-6">
+            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-7 lg:col-start-6">
               <a
                 className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline decoration-1 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
                 href={mailto}
@@ -414,7 +435,7 @@ export function ContactTemplate({
             <Button
               asChild
               variant="primary"
-              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-7 lg:ml-16 lg:justify-self-start"
+              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-6 lg:justify-self-start"
             >
               <a href={mailto}>Email Infusion Diffusion</a>
             </Button>
@@ -422,7 +443,7 @@ export function ContactTemplate({
               title="Online form unavailable"
               tone="info"
               announcement="none"
-              className="self-start lg:col-span-6"
+              className="self-start lg:col-span-7 lg:col-start-6"
             >
               Online submission is not available at launch. Your email opens in
               your own mail application; this website does not collect or store
@@ -524,22 +545,25 @@ export function CollectionTemplate({
       cartCount={cartCount}
       surface="elevated"
     >
-      <section className={sectionClass}>
-        <ContentHeader
-          context={{ type: "eyebrow", label: "Shop" }}
-          title={title}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={description}
-        />
-        <div className="mt-12 flex items-center justify-between py-4 font-sans text-sm">
+      <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
+        <header className="border-navigation-divider grid gap-8 border-b pb-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-24 lg:pb-16">
+          <Heading
+            level={1}
+            treatment="display"
+            className="max-w-3xl text-[clamp(3.5rem,8vw,6rem)] leading-[0.96]"
+          >
+            {title}
+          </Heading>
+          <Lead className="max-w-xl lg:pb-2">{description}</Lead>
+        </header>
+        <div className="mt-8 flex items-center justify-between font-sans text-sm lg:mt-10">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>
-          <p className="text-content-secondary">Curated collection</p>
+          <p className="text-content-secondary">Composed for lived-in rooms</p>
         </div>
         {products.length ? (
-          <div className="mt-10">
+          <div className="mt-8 lg:mt-12">
             <Heading level={2} treatment="title" className="sr-only">
               Products
             </Heading>
@@ -598,29 +622,33 @@ export function ProductDetailTemplate({
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <article
-        className={cn(sectionClass, "grid gap-10 lg:grid-cols-2 lg:gap-20")}
-      >
-        <div className="bg-product-card-media-fallback relative aspect-3/4 overflow-hidden rounded-lg">
-          {product.image ? (
-            <Image
-              src={product.image.src}
-              alt={product.image.alt}
-              fill
-              priority
-              loading="eager"
-              sizes="(max-width: 1023px) calc(100vw - 40px), 45vw"
-              className="object-cover"
-            />
-          ) : (
-            <span className="text-content-secondary flex size-full items-center justify-center font-sans text-sm">
-              Image coming soon
-            </span>
-          )}
+      <article className="mx-auto grid w-full max-w-[1440px] lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="aspect-3/4 lg:sticky lg:top-26 lg:aspect-auto lg:h-[calc(100dvh-104px)]">
+          <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
+            {product.image ? (
+              <Image
+                src={product.image.src}
+                alt={product.image.alt}
+                fill
+                priority
+                loading="eager"
+                sizes="(max-width: 1023px) 100vw, 54vw"
+                className="object-cover"
+              />
+            ) : (
+              <span className="text-content-secondary flex size-full items-center justify-center font-sans text-sm">
+                Image coming soon
+              </span>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col justify-center gap-6">
+        <div className="flex flex-col justify-center gap-6 px-5 py-14 sm:px-8 lg:min-h-[calc(100dvh-104px)] lg:px-16 lg:py-20 xl:px-20">
           <Eyebrow>{product.format}</Eyebrow>
-          <Heading level={1} treatment="display">
+          <Heading
+            level={1}
+            treatment="display"
+            className="text-[clamp(3rem,5vw,5rem)] leading-[1]"
+          >
             {product.name}
           </Heading>
           <p className="text-content-secondary font-sans text-lg leading-8">
@@ -682,11 +710,11 @@ export function ProductDetailTemplate({
                     : "Add to bag"}
               </Button>
             ) : null)}
-          <dl className="border-navigation-border mt-4 divide-y border-y font-sans">
+          <dl className="border-navigation-border mt-6 divide-y border-y font-sans">
             {details.map((detail) => (
               <div
                 key={detail.label}
-                className="grid gap-1 py-4 text-sm leading-5 sm:grid-cols-[8rem_1fr] sm:gap-4"
+                className="grid gap-1 py-5 text-sm leading-6 sm:grid-cols-[8rem_1fr] sm:gap-6"
               >
                 <dt className="font-semibold">{detail.label}</dt>
                 <dd className="text-content-secondary">{detail.value}</dd>
@@ -725,17 +753,25 @@ export function EditorialTemplate({
       cartCount={cartCount}
     >
       <article>
-        <header className={sectionClass}>
-          <ContentHeader
-            context={{ type: "eyebrow", label: eyebrow }}
-            title={title}
-            headingLevel={1}
-            headingTreatment="display"
-            lead={introduction}
-          />
+        <header className="mx-auto grid w-full max-w-7xl gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:px-12 lg:py-24 xl:px-0">
+          <div>
+            <p className="text-content-accent mb-6 font-sans text-xs font-semibold tracking-[0.08em] uppercase">
+              {eyebrow}
+            </p>
+            <Heading
+              level={1}
+              treatment="display"
+              className="text-[clamp(3.5rem,7vw,6rem)] leading-[0.98]"
+            >
+              {title}
+            </Heading>
+          </div>
+          <Lead className="max-w-xl lg:justify-self-end lg:pb-2">
+            {introduction}
+          </Lead>
         </header>
         {image ? (
-          <div className="bg-product-card-media-fallback relative mx-auto aspect-[16/9] w-full max-w-7xl overflow-hidden sm:rounded-lg">
+          <div className="bg-product-card-media-fallback relative mx-auto aspect-[16/9] w-full max-w-[1440px] overflow-hidden">
             <Image
               src={image.src}
               alt={image.alt}
@@ -747,13 +783,19 @@ export function EditorialTemplate({
             />
           </div>
         ) : null}
-        <div className={cn(sectionClass, "max-w-3xl space-y-14")}>
-          {sections.map((section) => (
-            <section key={section.heading}>
-              <Heading level={2} treatment="title">
+        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-28 xl:px-0">
+          {sections.map((section, index) => (
+            <section
+              key={section.heading}
+              className={cn(
+                "border-navigation-divider grid gap-6 border-t py-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24 lg:py-16",
+                index === 0 && "border-t-0 pt-0",
+              )}
+            >
+              <Heading level={2} treatment="title" className="lg:text-4xl">
                 {section.heading}
               </Heading>
-              <p className="text-content-secondary mt-5 font-sans text-lg leading-8 whitespace-pre-line">
+              <p className="text-content-secondary max-w-[70ch] font-sans text-lg leading-8 whitespace-pre-line">
                 {section.body}
               </p>
             </section>
@@ -785,11 +827,11 @@ export function AboutTemplate({
     <TemplateShell currentHref="/about" cartCount={cartCount}>
       <article data-testid="about-page">
         <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 xl:px-0 xl:py-20">
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] xl:text-[56px]">
+          <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-14 sm:px-8 xl:grid-cols-[1.1fr_0.9fr] xl:items-end xl:gap-24 xl:px-0 xl:py-28">
+            <h1 className="font-display text-content-primary max-w-[820px] text-[clamp(3.5rem,8vw,6rem)] leading-[0.98] tracking-[-0.02em]">
               {title}
             </h1>
-            <p className="text-content-secondary mt-10 max-w-[720px] font-sans text-[17px] leading-[1.5] xl:text-xl">
+            <p className="text-content-secondary max-w-[640px] font-sans text-[17px] leading-[1.6] xl:pb-2 xl:text-xl">
               {introduction}
             </p>
           </div>
@@ -803,7 +845,7 @@ export function AboutTemplate({
               data-testid={`about-chapter-${chapter.role}`}
               className={cn(
                 isBone ? "bg-bone-50" : "bg-content-surface",
-                "py-11 xl:py-[110px]",
+                "py-16 xl:py-[120px]",
                 chapter.image && "min-h-[740px] xl:min-h-0",
               )}
             >
@@ -811,7 +853,7 @@ export function AboutTemplate({
                 className={cn(
                   "mx-auto w-full max-w-7xl px-5 sm:px-8 xl:px-0",
                   chapter.image
-                    ? "grid gap-24 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-10"
+                    ? "grid gap-12 xl:grid-cols-[560px_560px] xl:items-center xl:justify-between xl:gap-20"
                     : "text-center",
                 )}
               >

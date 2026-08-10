@@ -42,7 +42,8 @@ async function verifyBracketLayout(canvasElement: HTMLElement) {
   await expect(mediaBounds.right).toBeLessThan(stageBounds.right);
   await expect(bracketBounds.top).toBeLessThan(mediaBounds.top);
   await expect(bracketBounds.left).toBeLessThan(mediaBounds.left);
-  await expect(controlsBounds.top).toBeGreaterThan(stageBounds.bottom);
+  await expect(controlsBounds.top).toBeGreaterThan(mediaBounds.top);
+  await expect(controlsBounds.bottom).toBeLessThan(stageBounds.bottom);
   await expect(
     Math.abs(
       controlsBounds.left +

@@ -173,6 +173,7 @@
   --color-field-error-border: var(--field-error-border);
   --color-field-error-text: var(--field-error-text);
   --color-product-card-surface: var(--product-card-surface);
+  --color-product-card-content-surface: var(--product-card-content-surface);
   --color-product-card-hover: var(--product-card-hover);
   --color-product-card-text: var(--product-card-text);
   --color-product-card-meta: var(--product-card-meta);
@@ -355,6 +356,7 @@
   --field-error-border: #a64237;
   --field-error-text: #a64237;
   --product-card-surface: #eef0e7;
+  --product-card-content-surface: #f5f1e8;
   --product-card-hover: #e3e7da;
   --product-card-text: #11110f;
   --product-card-meta: #3c3b35;
@@ -500,6 +502,7 @@
   --field-error-border: #a64237;
   --field-error-text: #ddc77f;
   --product-card-surface: #11110f;
+  --product-card-content-surface: #191916;
   --product-card-hover: #191916;
   --product-card-text: #fcfaf5;
   --product-card-meta: #e8e2d5;

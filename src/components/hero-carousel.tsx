@@ -240,7 +240,7 @@ export function HeroCarousel({
       </figcaption>
       {slides.length > 1 ? (
         <div
-          className="mt-5 flex items-center justify-center gap-1 lg:mt-6"
+          className="dark bg-content-surface/90 text-content-primary absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center justify-center gap-1 rounded-full px-2 shadow-lg backdrop-blur-sm lg:bottom-10"
           data-testid="hero-carousel-controls"
         >
           <div className="flex" aria-label="Choose a hero slide">

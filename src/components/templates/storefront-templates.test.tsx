@@ -175,7 +175,7 @@ describe("storefront templates", () => {
     );
     expect(
       screen.getByRole("heading", { name: "A cabinet of atmosphere" }),
-    ).toHaveClass("mb-8");
+    ).toHaveClass("mb-10", "lg:mb-14");
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" }),
     ).toHaveLength(2);

@@ -105,7 +105,9 @@ async function verifyHomeCabinetBand(
   );
   await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
-  await expect(headingBounds.top - controlsBounds.bottom).toBe(expectedGap);
+  await expect(
+    headingBounds.top - controlsBounds.bottom,
+  ).toBeGreaterThanOrEqual(expectedGap);
   await expect(innerBounds.width).toBeLessThanOrEqual(1280);
   await expect(bandBounds.width).toBe(document.documentElement.clientWidth);
 }

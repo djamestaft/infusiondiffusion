@@ -212,7 +212,12 @@ describe("HeroCarousel", () => {
       );
       expect(bracket).not.toHaveClass("shadow", "bg-linear-to-r");
     }
-    expect(controls).toHaveClass("justify-center", "mt-5", "lg:mt-6");
+    expect(controls).toHaveClass(
+      "justify-center",
+      "absolute",
+      "bottom-8",
+      "lg:bottom-10",
+    );
     expect(controls).toContainElement(
       screen.getByLabelText("Choose a hero slide"),
     );
