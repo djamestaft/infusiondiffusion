@@ -151,6 +151,26 @@ class FigmaHandoffGateTest(TestCase):
             output, run = self._worker_handoff(root)
             self.assertTrue(figma_handoff_complete(output, run).passed)
 
+    def test_worker_handoff_accepts_complete_per_node_traces_for_multi_node_target(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            output, run = self._worker_handoff(
+                root,
+                target_node_ids=["93:6", "93:7"],
+                stamp_node_groups=[["93:6"], ["93:7"]],
+            )
+            self.assertTrue(figma_handoff_complete(output, run).passed)
+
+    def test_worker_handoff_rejects_partial_per_node_trace_coverage(self) -> None:
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            output, run = self._worker_handoff(
+                root,
+                target_node_ids=["93:6", "93:7"],
+                stamp_node_groups=[["93:6"]],
+            )
+            self.assertFalse(figma_handoff_complete(output, run).passed)
+
     def test_worker_handoff_rejects_missing_or_tampered_request_artifact(self) -> None:
         with TemporaryDirectory() as directory:
             root = Path(directory)
@@ -342,13 +362,16 @@ class FigmaHandoffGateTest(TestCase):
             handoff_sections=dict(SECTIONS), static_fact_status="complete", supervisor_session_id="pi-session",
         )
 
-    def _worker_handoff(self, root: Path, *, observed_node_ids=None):
+    def _worker_handoff(self, root: Path, *, observed_node_ids=None,
+                        target_node_ids=None, stamp_node_groups=None):
+        target_node_ids = target_node_ids or ["93:6"]
+        stamp_node_groups = stamp_node_groups or [target_node_ids]
         request = CodexFigmaRequest(
             request_id="request",
             supervisor_session_id="pi-session",
             reason="pi_connector_unavailable",
             operations=["node_metadata"],
-            target=FigmaTarget(file_key="GYiQd7QSAwCSaGtt0alKG2", node_ids=["93:6"],
+            target=FigmaTarget(file_key="GYiQd7QSAwCSaGtt0alKG2", node_ids=target_node_ids,
                                evidence_categories=["dimensions_layout"]),
         )
         capture_root = root / "figma" / request.request_id
@@ -382,9 +405,9 @@ class FigmaHandoffGateTest(TestCase):
             status="success", summary="capture", capture_status="complete", request=request,
             observed_file_key=request.target.file_key,
             observed_node_ids=observed_node_ids or request.target.node_ids,
-            approval_labels={"93:6": "Approved"},
+            approval_labels={node_id: "Approved" for node_id in request.target.node_ids},
             call_stamps=[CodexCallStamp(operation="node_metadata", file_key=request.target.file_key,
-                                        node_ids=request.target.node_ids)],
+                                        node_ids=node_ids) for node_ids in stamp_node_groups],
             evidence_manifest=[request_artifact, artifact], provenance=provenance,
         )
         capture.result_hash = _result_hash(capture)
@@ -411,4 +434,6 @@ class FigmaHandoffGateTest(TestCase):
                                  has_human_design_approval=lambda *_: True,
                                  human_design_approval_reference=lambda *_: "approval:1",
                                  has_trusted_human_design_approval=lambda *_: True)
-        return output, self._run(root, tracer=tracer)
+        run = self._run(root, tracer=tracer)
+        run.figma_targets = [request.target]
+        return output, run

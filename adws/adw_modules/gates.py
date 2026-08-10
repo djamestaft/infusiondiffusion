@@ -328,7 +328,23 @@ def figma_capture_complete(envelope: CodexFigmaOutput, run) -> GateReport:
     report.check("exact nodes", envelope.observed_node_ids == request.node_ids, "requested and observed nodes match" if envelope.observed_node_ids == request.node_ids else "observed nodes differ")
     report.check("approval", all(envelope.approval_labels.get(node) == request.expected_approval for node in request.node_ids), "all required nodes approved" if request.node_ids else "missing approval metadata")
     allowed = {"node_metadata", "node_context", "variables", "styles", "screenshot"}
-    stamps_match = bool(envelope.call_stamps) and all(stamp.operation in allowed and stamp.operation in envelope.request.operations and stamp.file_key == request.file_key and stamp.node_ids == request.node_ids for stamp in envelope.call_stamps)
+    requested_nodes = set(request.node_ids)
+    traced_nodes: set[str] = set()
+    stamps_match = bool(envelope.call_stamps)
+    for stamp in envelope.call_stamps:
+        stamp_nodes = set(stamp.node_ids)
+        stamp_valid = (
+            stamp.operation in allowed
+            and stamp.operation in envelope.request.operations
+            and stamp.file_key == request.file_key
+            and bool(stamp_nodes)
+            and len(stamp_nodes) == len(stamp.node_ids)
+            and stamp_nodes.issubset(requested_nodes)
+        )
+        stamps_match = stamps_match and stamp_valid
+        if stamp_valid:
+            traced_nodes.update(stamp_nodes)
+    stamps_match = stamps_match and traced_nodes == requested_nodes
     report.check("read-only traced calls", stamps_match, "allowlisted exact-target calls only" if stamps_match else "missing, untraced, or wrong-target calls")
     root = _handoff_root(run)
     capture_root = (root / "figma" / envelope.request.request_id).resolve()
