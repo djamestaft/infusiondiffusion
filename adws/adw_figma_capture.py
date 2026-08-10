@@ -16,8 +16,9 @@ from adw_modules.data_types import AgentCall, FigmaSupervisorOutput, FigmaTarget
 REQUIRED_AGENTS = ["product_designer"]
 
 
-def _target(file_key: str, node_id: str) -> FigmaTarget:
-    return FigmaTarget(file_key=file_key, node_ids=[node_id], expected_approval="Approved",
+def _target(file_key: str, node_id: str | list[str]) -> FigmaTarget:
+    node_ids = [node_id] if isinstance(node_id, str) else list(node_id)
+    return FigmaTarget(file_key=file_key, node_ids=node_ids, expected_approval="Approved",
         evidence_categories=["dimensions_layout", "semantic_variables", "typography", "spacing_assets",
                              "responsive", "accessibility_interaction", "content_extremes", "divergences"])
 
@@ -26,7 +27,7 @@ def _target_hash(target: FigmaTarget) -> str:
     return hashlib.sha256(json.dumps(target.model_dump(), sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def record_approval(file_key: str, node_id: str, config: str, adw_id: str, approved_by: str) -> int:
+def record_approval(file_key: str, node_id: str | list[str], config: str, adw_id: str, approved_by: str) -> int:
     """Auditable authorization path; it deliberately never preflights or runs Codex."""
     if not adw_id or not approved_by:
         raise ValueError("--record-approval requires --adw-id and --approved-by")
@@ -49,7 +50,7 @@ def record_approval(file_key: str, node_id: str, config: str, adw_id: str, appro
         return run.finish(accepted=False, reason=type(error).__name__)
 
 
-def _main(file_key: str, node_id: str, config: str, adw_id: str | None = None) -> int:
+def _main(file_key: str, node_id: str | list[str], config: str, adw_id: str | None = None) -> int:
     cfg = agents.load_config(config)
     agents.validate(cfg, REQUIRED_AGENTS)
     run = session.ensure(cfg, adw_id)
@@ -66,7 +67,7 @@ def _main(file_key: str, node_id: str, config: str, adw_id: str | None = None) -
             return run.finish(accepted=False, reason="missing trusted approval for exact target")
         with run.phase(PhaseParams(name="capture_request", kind="engineer", owner=run.engineer,
                                    description="Request evidence for one previously authorized exact Figma target")) as ph:
-            ph.log(file_key=file_key, node_id=node_id)
+            ph.log(file_key=file_key, node_ids=target.node_ids)
         target_prompt = "Capture only this exact previously authorized Figma target:\n" + target.model_dump_json()
         with run.phase(PhaseParams(name="scope_figma_capture", kind="agent", owner="product_designer",
                                    description="Scope exact-node evidence before the authorized worker starts")) as ph:
@@ -96,7 +97,7 @@ def _main(file_key: str, node_id: str, config: str, adw_id: str | None = None) -
         run.active_figma_target = None
 
 
-def main(file_key: str, node_id: str, config: str, adw_id: str | None = None) -> int:
+def main(file_key: str, node_id: str | list[str], config: str, adw_id: str | None = None) -> int:
     main._active_run = None
     try:
         return _main(file_key, node_id, config, adw_id)
@@ -107,17 +108,22 @@ def main(file_key: str, node_id: str, config: str, adw_id: str | None = None) ->
         raise
 
 
-if __name__ == "__main__":
+def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="adws/adw_sssf_config/sssf.config.yaml")
     parser.add_argument("--adw-id", default=None, help="existing session that owns the approval and capture")
     parser.add_argument("--file-key", required=True)
-    parser.add_argument("--node-id", required=True)
+    parser.add_argument("--node-id", action="append", required=True)
     parser.add_argument("--record-approval", action="store_true", help="record approval only; never launches the worker")
     parser.add_argument("--approved-by", default="", help="configured human approver; valid only with --record-approval")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    if args.approved_by and not args.record_approval:
+        parser.error("--approved-by is only valid with --record-approval; it cannot authorize a capture")
+    return args
+
+
+if __name__ == "__main__":
+    args = _parse_args()
     if args.record_approval:
         sys.exit(record_approval(args.file_key, args.node_id, args.config, args.adw_id or "", args.approved_by))
-    if args.approved_by:
-        parser.error("--approved-by is only valid with --record-approval; it cannot authorize a capture")
     sys.exit(main(args.file_key, args.node_id, args.config, args.adw_id))

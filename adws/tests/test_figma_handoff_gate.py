@@ -160,6 +160,9 @@ class FigmaHandoffGateTest(TestCase):
                 stamp_node_groups=[["93:6"], ["93:7"]],
             )
             self.assertTrue(figma_handoff_complete(output, run).passed)
+            plan = PlanOutput(status="success", figma_targets=run.figma_targets,
+                              advisory_specialists=["product_designer"])
+            self.assertTrue(figma_handoff_coverage([output], plan, run).passed)
 
     def test_worker_handoff_rejects_partial_per_node_trace_coverage(self) -> None:
         with TemporaryDirectory() as directory:
