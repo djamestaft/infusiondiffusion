@@ -41,18 +41,18 @@ Canonical typed target: Figma design file `GYiQd7QSAwCSaGtt0alKG2` (`Infusion Di
 
 Use exactly these 12 unique live targets for the bounded evidence capture:
 
-| Surface | Node IDs | Evidence required |
-| --- | --- | --- |
-| Home | `255:616`, `255:638` | desktop/mobile composition, hierarchy, media role/crop, surface roles, typography, spacing, responsive reading order, content extremes, divergences |
-| HeroCarousel | `296:100`, `296:174` | media dimensions, brackets, controls, spacing, responsive behavior, motion/interaction intent, assets, divergences |
-| Collection | `203:137` | approved browse hierarchy, elevated canvas, ProductCard geometry/grid, assets, long/empty intent and companion responsive rules recorded in `docs/features/responsive-page-templates.md` |
-| Product detail | `203:294` | media/details split, sticky behavior, purchase hierarchy, media role, content/commerce states and companion responsive rules |
-| Editorial / Fragrance Guide | `203:373` | introduction, reading grid/measure, imagery, section cadence, long/missing content and companion responsive rules |
-| Gallery | `357:2` | populated/viewer/empty/loading packet, authored cadence, image roles, focus interaction, responsive rules and approved divergences |
-| About | `316:198` | corrected light composition, alternating chapters, portrait FIT contract, responsive/content extremes and assets |
-| Contact | `329:58` | direct-email composition, asymmetric grid, feedback treatment, responsive/natural-height divergences |
-| Account | `337:321` | hosted/loading/unavailable/error/long states, responsive behavior, no-current-nav divergence |
-| Cart | `229:2` | populated/empty hierarchy, line media, Midnight summary, responsive/commerce states |
+| Surface                     | Node IDs             | Evidence required                                                                                                                                                                        |
+| --------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home                        | `255:616`, `255:638` | desktop/mobile composition, hierarchy, media role/crop, surface roles, typography, spacing, responsive reading order, content extremes, divergences                                      |
+| HeroCarousel                | `296:100`, `296:174` | media dimensions, brackets, controls, spacing, responsive behavior, motion/interaction intent, assets, divergences                                                                       |
+| Collection                  | `203:137`            | approved browse hierarchy, elevated canvas, ProductCard geometry/grid, assets, long/empty intent and companion responsive rules recorded in `docs/features/responsive-page-templates.md` |
+| Product detail              | `203:294`            | media/details split, sticky behavior, purchase hierarchy, media role, content/commerce states and companion responsive rules                                                             |
+| Editorial / Fragrance Guide | `203:373`            | introduction, reading grid/measure, imagery, section cadence, long/missing content and companion responsive rules                                                                        |
+| Gallery                     | `357:2`              | populated/viewer/empty/loading packet, authored cadence, image roles, focus interaction, responsive rules and approved divergences                                                       |
+| About                       | `316:198`            | corrected light composition, alternating chapters, portrait FIT contract, responsive/content extremes and assets                                                                         |
+| Contact                     | `329:58`             | direct-email composition, asymmetric grid, feedback treatment, responsive/natural-height divergences                                                                                     |
+| Account                     | `337:321`            | hosted/loading/unavailable/error/long states, responsive behavior, no-current-nav divergence                                                                                             |
+| Cart                        | `229:2`              | populated/empty hierarchy, line media, Midnight summary, responsive/commerce states                                                                                                      |
 
 For every target, the capture/handoff must contain these categories: `dimensions_layout`, `semantic_variables`, `typography`, `spacing_assets`, `responsive`, `accessibility_interaction`, `content_extremes`, and `divergences`. Companion mobile/state node IDs already recorded in `DESIGN.md` and feature documents inform implementation, but the bounded live capture must not broaden beyond the 12 nodes above.
 

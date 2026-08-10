@@ -37,18 +37,18 @@ Use `specs/e59196a4_storefront-redesign-fidelity.md` and `DESIGN.md` as the appr
 
 Canonical Figma file recorded by `DESIGN.md`: `GYiQd7QSAwCSaGtt0alKG2`, expected state **Approved**. The following exact IDs remain the typed design references, but implementation proceeds from `DESIGN.md`, feature docs, existing captures, and `specs/e59196a4_storefront-redesign-fidelity.md`; do not invoke or wait for a live connector.
 
-| Surface | Approved reference IDs |
-| --- | --- |
-| Home | `255:616`, `255:638` |
-| HeroCarousel | `296:100`, `296:174` |
-| Collection | `203:137` |
-| Product detail | `203:294` |
-| Editorial / Fragrance Guide | `203:373` |
-| Gallery | `357:2` |
-| About | `316:198` |
-| Contact | `329:58` |
-| Account | `337:321` |
-| Cart | `229:2` |
+| Surface                     | Approved reference IDs |
+| --------------------------- | ---------------------- |
+| Home                        | `255:616`, `255:638`   |
+| HeroCarousel                | `296:100`, `296:174`   |
+| Collection                  | `203:137`              |
+| Product detail              | `203:294`              |
+| Editorial / Fragrance Guide | `203:373`              |
+| Gallery                     | `357:2`                |
+| About                       | `316:198`              |
+| Contact                     | `329:58`               |
+| Account                     | `337:321`              |
+| Cart                        | `229:2`                |
 
 The repository guidance supplies dimensions/layout, semantic variables, typography, spacing/assets, responsive behavior, accessibility/interaction, content extremes, and intentional divergences. If the repository guidance is genuinely contradictory or lacks a necessary decision, the product designer makes the smallest recommendation consistent with the approved direction; only a new direction or unsupported claim returns to a specific human approval gate.
 
