@@ -62,9 +62,13 @@ for (const viewport of viewports) {
     });
     page.on("pageerror", (error) => pageErrors.push(error.message));
     page.on("requestfailed", (request) => {
+      const navigationCancelledImage =
+        request.resourceType() === "image" &&
+        request.failure()?.errorText === "net::ERR_ABORTED";
       if (
         firstPartyOrigin &&
-        new URL(request.url()).origin === firstPartyOrigin
+        new URL(request.url()).origin === firstPartyOrigin &&
+        !navigationCancelledImage
       )
         failedFirstPartyRequests.push(request.url());
     });
@@ -81,19 +85,21 @@ for (const viewport of viewports) {
       ).toBeVisible();
       await page.evaluate(() => document.fonts.ready);
       await expect
-        .poll(() =>
-          page.evaluate(
-            () =>
-              document.images.length > 0 ||
-              document.querySelector("h1") !== null ||
-              document.body.textContent?.includes(
-                "Room · Ritual · Atmosphere",
-              ) ||
-              document.body.textContent?.includes("Image coming soon") ||
-              document.body.textContent?.includes("A practical guide"),
-          ),
-        )
+        .poll(() => page.evaluate(() => document.querySelector("h1") !== null))
         .toBeTruthy();
+      await expect(page.locator("body")).not.toContainText(
+        /image coming soon|i·d/i,
+      );
+      const requiredImages = page.locator("img");
+      for (let index = 0; index < (await requiredImages.count()); index += 1) {
+        await expect
+          .poll(() =>
+            requiredImages
+              .nth(index)
+              .evaluate((image) => (image as HTMLImageElement).naturalWidth),
+          )
+          .toBeGreaterThan(0);
+      }
       await page.locator("body").focus();
       await page.keyboard.press("Tab");
       await expect(

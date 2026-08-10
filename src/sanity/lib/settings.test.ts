@@ -98,7 +98,9 @@ describe("site settings", () => {
         longevityTitle: fallbackSiteSettings.homepage.longevityTitle,
       },
     });
-    expect(settings.homepage.founderImage).toBeUndefined();
+    expect(settings.homepage.founderImage).toEqual(
+      fallbackSiteSettings.homepage.founderImage,
+    );
   });
 
   it("keeps only the first three complete visible hero slide projections", async () => {

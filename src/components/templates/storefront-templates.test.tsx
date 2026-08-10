@@ -415,7 +415,7 @@ describe("storefront templates", () => {
     expect(
       screen.queryByRole("link", { current: "page" }),
     ).not.toBeInTheDocument();
-    expect(screen.getByText("Image coming soon")).toBeVisible();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 
   it("keeps an editorial article meaningful without optional imagery or sections", () => {

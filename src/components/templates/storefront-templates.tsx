@@ -6,6 +6,7 @@ import {
 } from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
 import { StorefrontFooter } from "@/components/storefront-footer";
+import { StorefrontMedia } from "@/components/storefront-media";
 import { GalleryViewer } from "@/components/gallery-viewer";
 import type { GalleryItem } from "@/sanity/lib/editorial-pages";
 import { Button } from "@/components/ui/button";
@@ -207,23 +208,7 @@ export function HomeTemplate({
             slides={carouselSlides}
             className="lg:w-full [&_[data-testid=hero-carousel-media]]:lg:aspect-[1/1.08]"
           />
-        ) : (
-          <div
-            className="dark bg-content-surface text-content-primary relative min-h-[360px] overflow-hidden lg:min-h-full"
-            aria-hidden="true"
-          >
-            <div className="border-navigation-border absolute inset-8 border lg:inset-12" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-content-accent text-[clamp(7rem,18vw,15rem)] leading-none tracking-[-0.08em] opacity-50">
-                I·D
-              </span>
-            </div>
-            <div className="border-navigation-border absolute right-10 bottom-10 left-10 flex items-end justify-between border-t pt-5 font-sans text-xs tracking-[0.18em] uppercase lg:right-16 lg:bottom-16 lg:left-16">
-              <span>Room · Ritual · Atmosphere</span>
-              <span>South Africa</span>
-            </div>
-          </div>
-        )}
+        ) : null}
       </section>
 
       <ScrollReveal direction="left">
@@ -673,26 +658,23 @@ export function ProductDetailTemplate({
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
     <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <article className="mx-auto grid w-full max-w-[1440px] lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="aspect-3/4 lg:sticky lg:top-26 lg:aspect-auto lg:h-[calc(100dvh-104px)]">
-          <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
-            {product.image ? (
-              <Image
-                src={product.image.src}
-                alt={product.image.alt}
-                fill
+      <article
+        className={cn(
+          "mx-auto w-full max-w-[1440px]",
+          product.image && "grid lg:grid-cols-[1.08fr_0.92fr]",
+        )}
+      >
+        {product.image ? (
+          <div className="aspect-3/4 lg:sticky lg:top-26 lg:aspect-auto lg:h-[calc(100dvh-104px)]">
+            <div className="bg-product-card-media-fallback relative size-full overflow-hidden">
+              <StorefrontMedia
+                image={product.image}
                 priority
-                loading="eager"
                 sizes="(max-width: 1023px) 100vw, 54vw"
-                className="object-cover"
               />
-            ) : (
-              <span className="text-content-secondary flex size-full items-center justify-center font-sans text-sm">
-                Image coming soon
-              </span>
-            )}
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="flex flex-col justify-center gap-6 px-5 py-14 sm:px-8 lg:min-h-[calc(100dvh-104px)] lg:px-16 lg:py-20 xl:px-20">
           <Eyebrow>{product.format}</Eyebrow>
           <Heading

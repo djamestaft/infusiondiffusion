@@ -70,7 +70,7 @@ export function HoldingPage({ settings }: { settings: SiteSettings }) {
         <aside className="border-foreground/20 bg-card/55 relative mx-auto aspect-[4/5] w-full max-w-sm border p-5 backdrop-blur-sm lg:mx-0 lg:justify-self-end">
           <div className="border-foreground/15 flex h-full flex-col justify-between border p-6">
             <span className="font-display text-primary/80 text-7xl leading-none">
-              I·D
+              ID
             </span>
             <div>
               <p className="text-muted-foreground mb-3 text-xs font-semibold tracking-[0.16em] uppercase">

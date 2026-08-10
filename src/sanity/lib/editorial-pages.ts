@@ -1,3 +1,7 @@
+import {
+  approvedEditorialImage,
+  approvedGalleryItems,
+} from "@/content/storefront-media";
 import { isSanityConfigured } from "@/env";
 import {
   sanityFetch,
@@ -47,6 +51,7 @@ export const fallbackContactPage: EditorialPage = {
 
 export const fallbackFragranceGuide: EditorialPage = {
   eyebrow: "Fragrance guide",
+  image: approvedEditorialImage,
   title: "A practical guide to choosing home fragrance",
   introduction:
     "Choose a scent by paying attention to the room, the time of day and the atmosphere you want to return to.",
@@ -198,8 +203,8 @@ export const fallbackGalleryPage: GalleryPage = {
   introduction:
     "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
   closingLine: "Every room carries its own atmosphere.",
-  campaignItems: [],
-  marketItems: [],
+  campaignItems: approvedGalleryItems.slice(0, 3),
+  marketItems: approvedGalleryItems.slice(3),
   seoTitle: "Gallery | Infusion Diffusion",
   seoDescription:
     "Explore Infusion Diffusion fragrance, vessel and atmosphere studies from lived-in rooms.",
@@ -250,16 +255,19 @@ export function withGalleryFallback(
       ];
     })
     .slice(0, 10);
+  const fallbackItems = !page && unavailable ? approvedGalleryItems : [];
   return {
     title: text(page?.title, fallbackGalleryPage.title),
     introduction: text(page?.introduction, fallbackGalleryPage.introduction),
     closingLine: fallbackGalleryPage.closingLine,
-    campaignItems: items
-      .filter(({ group }) => group === "campaign")
-      .map(({ item }) => item),
-    marketItems: items
-      .filter(({ group }) => group === "market")
-      .map(({ item }) => item),
+    campaignItems: items.length
+      ? items
+          .filter(({ group }) => group === "campaign")
+          .map(({ item }) => item)
+      : fallbackItems.slice(0, 3),
+    marketItems: items.length
+      ? items.filter(({ group }) => group === "market").map(({ item }) => item)
+      : fallbackItems.slice(3),
     seoTitle: text(page?.seoTitle, fallbackGalleryPage.seoTitle),
     seoDescription: text(
       page?.seoDescription,

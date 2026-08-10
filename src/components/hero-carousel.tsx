@@ -13,6 +13,8 @@ export type HeroCarouselSlide = {
   alt: string;
   caption?: string;
   hotspot?: { x: number; y: number };
+  fallbackSrc?: string;
+  fallbackAlt?: string;
 };
 
 export type HeroCarouselProps = {
@@ -44,6 +46,9 @@ export function HeroCarousel({
   const [hidden, setHidden] = React.useState(false);
   const [offscreen, setOffscreen] = React.useState(false);
   const [failedSlideIds, setFailedSlideIds] = React.useState<Set<string>>(
+    () => new Set(),
+  );
+  const [fallbackSlideIds, setFallbackSlideIds] = React.useState<Set<string>>(
     () => new Set(),
   );
   const [manualAnnouncement, setManualAnnouncement] = React.useState("");
@@ -163,6 +168,15 @@ export function HeroCarousel({
     if (nextIndex >= 0) setActive(nextIndex);
   };
 
+  const recoverSlide = (index: number) => {
+    const slide = slides[index];
+    if (slide.fallbackSrc && !fallbackSlideIds.has(slide.id)) {
+      setFallbackSlideIds((current) => new Set(current).add(slide.id));
+      return;
+    }
+    markFailed(index);
+  };
+
   return (
     <figure
       ref={carouselRef}
@@ -206,8 +220,16 @@ export function HeroCarousel({
             {slides.map((slide, index) => (
               <Image
                 key={slide.id}
-                src={slide.src}
-                alt={slide.alt}
+                src={
+                  fallbackSlideIds.has(slide.id) && slide.fallbackSrc
+                    ? slide.fallbackSrc
+                    : slide.src
+                }
+                alt={
+                  fallbackSlideIds.has(slide.id)
+                    ? (slide.fallbackAlt ?? slide.alt)
+                    : slide.alt
+                }
                 fill
                 priority={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
@@ -223,7 +245,7 @@ export function HeroCarousel({
                     ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
                     : undefined,
                 }}
-                onError={() => markFailed(index)}
+                onError={() => recoverSlide(index)}
               />
             ))}
             {loading ? (

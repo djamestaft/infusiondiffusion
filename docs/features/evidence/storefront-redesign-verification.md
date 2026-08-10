@@ -33,9 +33,24 @@ Content/provider-blocked items are final editorial assets, factual image alterna
 - `mobile-390/{home,shop,product-bois-de-santal,gallery,fragrance-guide,about,contact,account,cart}.png`
 - `mobile-320/{home,shop,product-bois-de-santal,gallery,fragrance-guide,about,contact,account,cart}.png`
 
-## Required execution record
+## Current media-resilience verification
 
-The final local gate was executed against exact source commit `01fd51c9dc71f7abae583037ece5e68d85dc8f99`. Sanitized command logs are committed under `docs/features/evidence/storefront-redesign/logs/`; the subsequent evidence-record commit changes documentation only. Remote GitHub quality and Vercel Preview checks must still validate the final branch SHA before release readiness.
+The current uncommitted media-resilience update was verified locally at `2026-08-10T05:09:30Z`; it must be rerun on the final pushed SHA. The approved registry is recorded in [`media-manifest.md`](./storefront-redesign/media-manifest.md). Provider images remain first priority, exact mapped repository media is the one-shot second priority, and unknown products or intentional published-empty Gallery content remain honest omissions.
+
+| Command                                                                                                                                                                                                                                                                  | Result                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| `corepack pnpm typecheck`                                                                                                                                                                                                                                                | exit 0                                            |
+| `corepack pnpm test -- src/components/ui/product-card.test.tsx src/components/templates/storefront-templates.test.tsx src/components/hero-carousel.test.tsx src/sanity/lib/editorial-pages.test.ts src/sanity/lib/settings.test.ts src/lib/shopify/presentation.test.ts` | exit 0: 39 files / 219 tests                      |
+| `corepack pnpm lint`                                                                                                                                                                                                                                                     | exit 0                                            |
+| `corepack pnpm build`                                                                                                                                                                                                                                                    | exit 0                                            |
+| `corepack pnpm test:stories`                                                                                                                                                                                                                                             | exit 0: 24 files / 244 tests                      |
+| `corepack pnpm build-storybook`                                                                                                                                                                                                                                          | exit 0                                            |
+| `corepack pnpm exec playwright test tests/e2e/storefront-visual.spec.ts --project=chromium`                                                                                                                                                                              | exit 0: 4 passed at 1440/390/320 plus 200% reflow |
+| `git diff --check`                                                                                                                                                                                                                                                       | exit 0                                            |
+
+## Prior baseline execution record
+
+The prior full local gate was executed against exact source commit `01fd51c9dc71f7abae583037ece5e68d85dc8f99`. Sanitized command logs are committed under `docs/features/evidence/storefront-redesign/logs/`; the subsequent evidence-record commit changes documentation only. Remote GitHub quality and Vercel Preview checks must still validate the final branch SHA before release readiness.
 
 | Command                                                                                     | Started (UTC)          | Finished (UTC)         | Result                                                                                                              |
 | ------------------------------------------------------------------------------------------- | ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |

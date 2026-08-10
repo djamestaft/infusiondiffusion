@@ -68,10 +68,11 @@ describe("Shopify presentation adapter", () => {
     );
   });
 
-  it("does not invent absent catalogue details", () => {
+  it("uses no media fallback for an unmapped product", () => {
     const result = toProductDetails({
       ...product,
       title: "Untitled fragrance",
+      handle: "untitled-fragrance",
       description: "",
       vendor: undefined,
       featuredImage: undefined,

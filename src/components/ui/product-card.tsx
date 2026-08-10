@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
+import { StorefrontMedia } from "@/components/storefront-media";
 import {
   CommerceStatus,
   type CommerceStatusValue,
@@ -21,6 +20,8 @@ export type ProductCardMoney = CommerceMoney;
 export interface ProductCardImage {
   src: string;
   alt: string;
+  fallbackSrc?: string;
+  fallbackAlt?: string;
 }
 
 export interface ProductCardProps {
@@ -55,8 +56,7 @@ export function ProductCard({
   imagePriority = false,
 }: ProductCardProps) {
   const showStatus = availability !== "in-stock";
-  const [imageFailed, setImageFailed] = useState(false);
-  const showImage = image && !imageFailed;
+  const showImage = Boolean(image);
 
   return (
     <Link
@@ -68,22 +68,14 @@ export function ProductCard({
       )}
     >
       <div className="bg-product-card-media-fallback relative aspect-3/4 w-full overflow-hidden">
-        {showImage ? (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
+        {showImage && image ? (
+          <StorefrontMedia
+            image={image}
             priority={imagePriority}
-            loading={imagePriority ? "eager" : "lazy"}
             sizes="(max-width: 767px) calc((100vw - 56px) / 2), 284px"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
-            onError={() => setImageFailed(true)}
+            className="transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
           />
-        ) : (
-          <span className="text-product-card-meta flex size-full items-center justify-center px-4 text-center font-sans text-xs leading-4 font-semibold tracking-[0.08em] uppercase">
-            Image coming soon
-          </span>
-        )}
+        ) : null}
         {showStatus ? (
           <CommerceStatus
             status={availability}
