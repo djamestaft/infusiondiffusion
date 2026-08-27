@@ -69,23 +69,6 @@ approved, and protected GitHub pull requests remain the integration boundary.
 - Stop at the documented design, merge, production, editorial publish, and
   rollback gates.
 
-Pi orchestration remains retired because its background-worker model did not provide enough operator visibility. A narrow factory exception permits Pi to scope and validate typed Figma evidence when its connector is unavailable: deterministic SSSF code alone may run exact Codex CLI `0.147.0` as an ephemeral read-only worker against the configured official `figma` connector for exact approved nodes. Pi cannot spawn Codex; static shell/Python/Node indirection is denied, a closed sanitized `worker_tool` binding is required for readiness, and only the repository-configured trusted approver allowlist may authorize a target. Cancellation finalizes rejected runs. Codex has no repository write, merge, publish, deployment, production, or rollback authority. The path is off by default (`workers.figma_codex.enabled`), requires a human-authorized target, records only sanitized provenance, and is not a restoration of general Pi orchestration. That decision is separate from this repository’s **hard-required Pi client** for the project-local Figma MCP route; Pi is not part of the storefront runtime.
-
-### Required Pi Figma MCP status and runbook
-
-- **Activation complete:** `.pi/settings.json` activates exactly `pi-mcp-adapter@2.20.1` with bundled skills disabled. The adapter is aligned with the exact `package.json` development dependency. `.pi/mcp.json` contains the single lazy `figma` server at `https://mcp.figma.com/mcp` with host discovery off.
-- **Catalog registration submitted; approval pending:** Figma MCP Catalog registration has been submitted. Approval is provider-owned and pending; no response timeline or approval outcome is implied.
-- **Observed provider boundary:** a Dynamic Client Registration attempt received HTTP 403 **before** browser OAuth. This is a coarse, upstream DCR-policy observation, not an OAuth denial, successful registration, or proof of live Pi/Figma support.
-- **Post-approval gates:** only after Figma approval is independently confirmed and a human authorizes a new task may browser OAuth, tool enumeration, and one bounded read-only lookup be attempted.
-
-Until that approval, `python3 -m unittest adws.tests.test_pi_mcp_config` is the unconditionally permitted offline activation check. Run `pi list --approve` or the RPC command-surface check only after a human has recorded review and approval of Pi project trust for this exact checkout. If that evidence is absent, do not run or repeat either `--approve` command, and do not treat a prior invocation as verification evidence. Do not run `/mcp-auth figma`, `/mcp tools`, a Figma tool, a direct endpoint probe, a DCR retry or workaround, or another Catalog submission. Do not add OAuth credentials, client identifiers, headers, tokens, or claims of current live support.
-
-A human must review project trust for the exact checkout before its extension executes. Any future OAuth credential belongs only in the OS credential store. Never retain or report OAuth URLs, codes, tokens, identities, registration payloads or responses, or MCP result payloads. Sanitized evidence is limited to the adapter version, endpoint policy, submitted/pending state, the coarse pre-OAuth HTTP 403 location, and post-approval success or failure.
-
-After approval, a separately authorized human-gated task may inspect the tool schema, enumerate tools, and make exactly one bounded read-only lookup. If `figma_whoami` is unavailable, use only a clearly read-only metadata lookup for the approved file/node after schema inspection; do not request exports, comments, broad file data, or modifying tools. OAuth denial, unavailable browser, insufficient scope, or another provider policy response remains a human approval gate, not a configuration workaround.
-
-Rollback is a reviewed documentation/configuration revert that preserves the hosted endpoint in `.pi/mcp.json`; never restore immediate-auth guidance, expose credentials, or treat another client’s Figma MCP history as evidence that Pi is approved.
-
 ## Incident response
 
 Capture the failing URL, deployment ID, commit SHA, timestamp, browser evidence, console/network output, and Vercel logs. Reproduce before changing code. If production is materially broken, recommend restoring the last known-good Vercel deployment; only a human may authorize the rollback. After resolution, add the missed regression check to CI or the relevant skill.
