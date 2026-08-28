@@ -12,9 +12,9 @@ organization and an approved design brief.
 
 ## Redesign sequence
 
-- [ ] Separate and label legacy Figma material; create the new redesign pages.
-- [ ] Approve a decision-complete visual direction and exact Figma frames.
-- [ ] Record approved frame URLs, semantic variables, responsive states,
+- [x] Separate and label legacy Figma material; create the new redesign pages.
+- [x] Approve a decision-complete visual direction and exact Figma frames.
+- [x] Record approved frame URLs, semantic variables, responsive states,
       accessibility decisions, content extremes, and intentional divergences in
       `DESIGN.md`.
 - [ ] Map the approved system to runtime tokens and Storybook.
@@ -32,9 +32,16 @@ organization and an approved design brief.
 - Figma is the sole source of approved visual direction.
 - Storybook is the executable contract for reusable UI states.
 
-## Current blockers
+## Current phase
 
-- Figma page organization has not been completed in a write-enabled session.
-- No new visual direction or implementation frame has human approval.
+- Figma organization, foundation/component approval, responsive proofs, and the
+  repository-readable `DESIGN.md` handoff are complete on
+  `agent/design-pattern-sync`.
+- Runtime semantic tokens, reusable components, Storybook contracts, and
+  customer-facing templates remain pending.
+- Existing live-site content must be migrated from Sanity and Shopify without
+  generated replacements. Generate draft copy only for a confirmed new page.
 
-No redesign implementation work may start until both blockers are resolved.
+Implementation may begin after the documentation branch is reviewed and merged,
+using the exact approved Figma frames recorded in `DESIGN.md`. See
+`docs/planning/redesign-context.md` for the complete handoff and residual risks.
