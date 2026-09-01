@@ -1,8 +1,8 @@
 # Infusion Diffusion design system
 
 Status: approved Figma foundation, reusable component contract, and INF-16
-homepage direction. The INF-16 Storybook and storefront homepage are
-synchronized; broader runtime token and component synchronization remains.
+homepage direction. The runtime foundation and Home-required component
+contracts are synchronized; broader template synchronization remains.
 
 Last approved: 1 September 2026
 
@@ -122,8 +122,10 @@ applicable.
 - Figma approved frames: synced
 - `DESIGN.md`: synced
 - Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive is intentionally deferred
-- Reusable components: pending
-- Storybook contracts: INF-16 homepage and INF-17 runtime foundation synced; remaining contracts pending
+- Reusable components: Home-required navigation, actions, content primitives,
+  product-card commerce states, and media fallback synchronized in INF-18
+- Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18
+  Home-required component states synchronized; remaining templates pending
 - Customer-facing templates: INF-16 homepage synced; remaining templates pending
 
 Do not implement from the provisional holding-page styles or archived frames.

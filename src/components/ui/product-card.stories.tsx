@@ -47,6 +47,7 @@ export const LowStock: Story = {
 export const SoldOut: Story = { args: { availability: "sold-out" } };
 export const PreOrder: Story = { args: { availability: "pre-order" } };
 export const MissingImage: Story = { args: { image: undefined } };
+export const Loading: Story = { args: { loading: true } };
 export const LongContent: Story = {
   args: {
     name: "A Very Long Fragrance Name for an Intimate Evening Room",
@@ -90,26 +91,30 @@ export const MidnightKeyboardFocus: Story = {
   ),
   play: KeyboardFocus.play,
 };
-export const TwoCardMobile: Story = {
+export const MobileCollection: Story = {
   decorators: [],
   render: () => (
     <div>
       <FixtureLabel />
-      <div className="grid w-[320px] grid-cols-2 gap-4">
+      <div className="grid w-[350px] max-w-full grid-cols-1 gap-6">
         {productCardFixtures.slice(0, 2).map((item, index) => (
           <ProductCard key={item.href} {...item} imagePriority={index === 0} />
         ))}
       </div>
     </div>
   ),
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+  globals: { viewport: { value: "contact390", isRotated: false } },
   play: async ({ canvasElement }) => {
     const cards = within(canvasElement).getAllByRole("link");
     await expect(cards).toHaveLength(2);
     for (const card of cards) {
-      await expect(card.getBoundingClientRect().width).toBeLessThanOrEqual(152);
+      await expect(card.getBoundingClientRect().width).toBeLessThanOrEqual(350);
     }
   },
+};
+export const MobileCollection320: Story = {
+  ...MobileCollection,
+  globals: { viewport: { value: "contact320", isRotated: false } },
 };
 export const DesktopCollection: Story = {
   decorators: [],

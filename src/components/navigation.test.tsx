@@ -35,13 +35,18 @@ describe("Navigation", () => {
       "aria-current",
       "page",
     );
-    expect(screen.getAllByRole("link", { name: "Account" })[0]).toHaveAttribute(
-      "href",
-      "/account",
-    );
+    expect(screen.queryByRole("link", { name: "Account" })).toBeNull();
     expect(screen.getAllByRole("link", { name: "Cart" })[0]).toHaveAttribute(
       "href",
       "/cart",
+    );
+  });
+
+  it("shows Account only when a provisioned destination is supplied", () => {
+    render(<Navigation accountHref="/account" />);
+    expect(screen.getAllByRole("link", { name: "Account" })[0]).toHaveAttribute(
+      "href",
+      "/account",
     );
   });
 

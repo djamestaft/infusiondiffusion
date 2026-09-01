@@ -115,7 +115,7 @@ export const Midnight: Story = {
 };
 
 export const Mobile: Story = {
-  parameters: { viewport: { defaultViewport: "mobile1" } },
+  globals: { viewport: { value: "contact390", isRotated: false } },
   args: {
     headingTreatment: "title",
     action: {
@@ -124,6 +124,11 @@ export const Mobile: Story = {
       href: "#fragrances",
     },
   },
+};
+
+export const Mobile320: Story = {
+  ...Mobile,
+  globals: { viewport: { value: "contact320", isRotated: false } },
 };
 
 export const LongContent: Story = {

@@ -92,4 +92,25 @@ describe("ProductCard", () => {
       "R 420",
     );
   });
+
+  it("preserves full long content without line clamping", () => {
+    const { container } = render(
+      <ProductCard
+        {...product}
+        name="Cedar Veil — Limited Presentation Edition for Considered Living Rooms"
+        notes="Resin · citrus · warm wood · a complete note description that remains visible"
+      />,
+    );
+    expect(container.querySelector("h3")).not.toHaveClass("line-clamp-2");
+    expect(screen.getByText(/Limited Presentation Edition/)).toBeVisible();
+  });
+
+  it("announces loading while preserving a non-animated reduced-motion fallback", () => {
+    render(<ProductCard {...product} loading />);
+    const card = screen.getByRole("link", { name: "View Bois de Santal" });
+    expect(card).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByText("Loading product image")).toHaveClass(
+      "motion-reduce:animate-none",
+    );
+  });
 });

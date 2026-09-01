@@ -119,7 +119,7 @@ export const MobileReflow: Story = {
       </div>
     ),
   ],
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+  globals: { viewport: { value: "contact390", isRotated: false } },
   play: async ({ canvasElement }) => {
     const button = within(canvasElement).getByRole("button");
     await expect(button).toBeVisible();
@@ -128,6 +128,10 @@ export const MobileReflow: Story = {
     await expect(bounds.height).toBeGreaterThan(44);
     await expect(bounds.width).toBeLessThanOrEqual(320);
   },
+};
+export const MobileReflow320: Story = {
+  ...MobileReflow,
+  globals: { viewport: { value: "contact320", isRotated: false } },
 };
 export const KeyboardFocus: Story = {
   play: async ({ canvasElement }) => {
