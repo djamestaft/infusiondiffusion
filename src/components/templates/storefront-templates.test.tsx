@@ -150,7 +150,7 @@ describe("storefront templates", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
-    expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(3);
+    expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(4);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface-elevated",
     );
@@ -170,9 +170,32 @@ describe("storefront templates", () => {
       screen.getAllByRole("link", { name: "Shop the collection" }),
     ).toHaveLength(2);
     expect(
-      screen.getByRole("heading", { name: "Born from fragrance" }),
+      screen.getByRole("heading", { name: "Artistry in Fragrance" }),
     ).toBeVisible();
-    expect(screen.getByText(/Jacqui Kirchmann/)).toBeVisible();
+    expect(screen.getByText(/Designed for themed elegance/)).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "Discover our story" }),
+    ).toHaveAttribute("href", "/about");
+    const guidance = screen.getByRole("heading", {
+      name: "Choose by the room, then by the feeling",
+    });
+    const bespoke = screen.getByRole("region", { name: "Bespoke diffusers" });
+    const longevity = screen.getByRole("heading", { name: "Made to linger" });
+    const artistry = screen.getByRole("heading", {
+      name: "Artistry in Fragrance",
+    });
+    expect(
+      guidance.compareDocumentPosition(bespoke) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      bespoke.compareDocumentPosition(longevity) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      longevity.compareDocumentPosition(artistry) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
     expect(screen.getByText(/8–12 months/)).toBeVisible();
   });
 
@@ -346,14 +369,18 @@ describe("storefront templates", () => {
     ).toBeVisible();
   });
 
-  it("does not claim Shop is the current page on Home or Product detail", () => {
+  it("marks Shop current on Home but not on Product detail", () => {
     const { unmount } = render(
       <HomeTemplate products={[]} heroImage={undefined} />,
     );
     expect(
-      screen.queryByRole("link", { current: "page" }),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+      screen.getByRole("link", { name: "Shop", current: "page" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("img", {
+        name: "A reed diffuser arranged in a serene living space",
+      }),
+    ).toBeVisible();
     expect(
       screen.getByRole("heading", { level: 1 }).closest("section"),
     ).not.toHaveClass("lg:grid-cols-2");

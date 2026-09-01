@@ -1,9 +1,10 @@
 # Infusion Diffusion design system
 
-Status: approved Figma foundation and reusable component contract. Runtime
-tokens, Storybook, and storefront templates remain pending synchronization.
+Status: approved Figma foundation, reusable component contract, and INF-16
+homepage direction. The INF-16 Storybook and storefront homepage are
+synchronized; broader runtime token and component synchronization remains.
 
-Last approved: 28 August 2026
+Last approved: 1 September 2026
 
 ## Source of truth
 
@@ -23,11 +24,30 @@ the [Infusion Diffusion Redesign file](https://www.figma.com/design/jIMvwSBkilg7
 - Commerce and product cards: `2039:644`
 - Feedback, content, and organisms: `2039:710`
 - Component responsive proofs: `2039:759` (390), `2039:797` (320)
+- INF-16 Home: `2070:2` (1440), `2072:2` (768), `2073:2` (390),
+  `2073:70` (320)
+- INF-16 Home state contract: `2073:3389`
 
 Only frames on `30 — Redesign / Approved` are implementation authority.
 `00 — Archive / Legacy` is historical evidence, `10 — Redesign / Brief &
 References` supplies context, and `20 — Redesign / Exploration` remains
 non-approved experimentation.
+
+## Approved INF-16 homepage direction
+
+The homepage uses the archived navigation `LogoTextLockup` in its Midnight
+variants, with the desktop page navigation centred between the logo and cart.
+`Shop` carries the Gold 300 active-page underline. The responsive content order
+is hero, live Shopify catalogue entry, room-led guidance, bespoke diffuser
+image blurb, 200 ml longevity, Artistry in Fragrance, service reassurance, and
+the closing invitation. The former Born from fragrance block is not part of the
+homepage; its responsive source remains preserved for future About-page work.
+
+Homepage catalogue names, prices, formats, and ordering come from Shopify and
+must not be replaced with invented fragrance data. Product imagery remains a
+Shopify-owned runtime field. The approved editorial image treatments are backed
+by `public/images/homepage-bespoke-diffuser-blurb.png` and
+`public/images/homepage-artistry-in-fragrance.png`.
 
 ## Visual direction
 
@@ -103,8 +123,8 @@ applicable.
 - `DESIGN.md`: synced
 - Runtime semantic CSS tokens: pending
 - Reusable components: pending
-- Storybook contracts: pending
-- Customer-facing templates: pending
+- Storybook contracts: INF-16 homepage synced; remaining contracts pending
+- Customer-facing templates: INF-16 homepage synced; remaining templates pending
 
 Do not implement from the provisional holding-page styles or archived frames.
 Any intentional divergence from the approved Figma evidence must be recorded

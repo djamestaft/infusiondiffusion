@@ -38,7 +38,10 @@ organization and an approved design brief.
   repository-readable `DESIGN.md` handoff are complete on
   `agent/design-pattern-sync`.
 - Runtime semantic tokens, reusable components, Storybook contracts, and
-  customer-facing templates remain pending.
+  customer-facing templates remain pending beyond INF-16. The approved INF-16
+  homepage is implemented on `agent/inf-16-home` with responsive Storybook,
+  unit, production-build, accessibility, and browser evidence; review and merge
+  are the immediate next actions.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 
