@@ -17,7 +17,8 @@ organization and an approved design brief.
 - [x] Record approved frame URLs, semantic variables, responsive states,
       accessibility decisions, content extremes, and intentional divergences in
       `DESIGN.md`.
-- [ ] Map the approved system to runtime tokens and Storybook.
+- [x] Map the approved color, typography, spacing, and focus system to runtime
+      tokens and Storybook. The background primitive is intentionally deferred.
 - [ ] Implement reusable components and states.
 - [ ] Implement templates and customer journeys from approved Figma evidence.
 - [ ] Verify accessibility, performance, Storybook, unit, integration, and
@@ -37,11 +38,10 @@ organization and an approved design brief.
 - Figma organization, foundation/component approval, responsive proofs, and the
   repository-readable `DESIGN.md` handoff are complete on
   `agent/design-pattern-sync`.
-- Runtime semantic tokens, reusable components, Storybook contracts, and
-  customer-facing templates remain pending beyond INF-16. The approved INF-16
-  homepage is implemented on `agent/inf-16-home` with responsive Storybook,
-  unit, production-build, accessibility, and browser evidence; review and merge
-  are the immediate next actions.
+- The INF-16 homepage is merged. INF-17 synchronizes the approved color,
+  typography, spacing, and focus foundation with runtime semantic tokens and
+  responsive Storybook proofs. The tapered-reed background primitive is
+  deferred by product-owner direction; reusable component/state work is next.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 
