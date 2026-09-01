@@ -294,8 +294,8 @@
   --card-foreground: var(--ink-900);
   --popover: var(--porcelain-0);
   --popover-foreground: var(--ink-900);
-  --primary: var(--gold-500);
-  --primary-foreground: var(--ink-900);
+  --primary: var(--ink-900);
+  --primary-foreground: var(--sage-50);
   --secondary: var(--sage-100);
   --secondary-foreground: var(--ink-900);
   --muted: var(--sage-100);

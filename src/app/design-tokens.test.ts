@@ -14,6 +14,7 @@ describe("storefront surface tokens", () => {
     expect(styles).toMatch(/--gold-700:\s*#a9842d;/);
     expect(styles).toMatch(/--background:\s*var\(--sage-50\);/);
     expect(styles).toMatch(/--foreground:\s*var\(--ink-900\);/);
+    expect(styles).toMatch(/--primary:\s*var\(--ink-900\);/);
     expect(styles).toMatch(/--action-primary:\s*var\(--gold-500\);/);
     expect(styles).toMatch(/--action-focus:\s*var\(--gold-700\);/);
   });
