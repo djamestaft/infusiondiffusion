@@ -178,6 +178,7 @@ export function HomeTemplate({
   heroSlides = [],
   navigationTheme,
   cartCount,
+  accountHref,
   content: suppliedContent,
 }: HomeTemplateProps) {
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
@@ -192,6 +193,7 @@ export function HomeTemplate({
       navigationTheme={navigationTheme ?? "midnight"}
       currentHref="/shop"
       cartCount={cartCount}
+      accountHref={accountHref}
     >
       <ScrollRevealController />
       <section

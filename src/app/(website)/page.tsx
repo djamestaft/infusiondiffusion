@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { Suspense } from "react";
 
 import { HomeTemplate } from "@/components/templates/storefront-templates";
@@ -28,6 +29,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function HomeContent() {
+  // Account availability is environment- and request-dependent. Opt this
+  // subtree out of build-time prerendering so CI fixtures and live Shopify
+  // configuration cannot inherit the preceding production-build result.
+  await connection();
   const options = await getDynamicFetchOptions();
   const [settings, catalogue, cart, accountEntry] = await Promise.all([
     getSiteSettings(options),
