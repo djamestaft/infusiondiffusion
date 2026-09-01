@@ -10,6 +10,11 @@ const preview: Preview = {
     a11y: { test: "error" },
     viewport: {
       options: {
+        foundationDesktop: {
+          name: "Foundation desktop",
+          styles: { width: "1440px", height: "1000px" },
+          type: "desktop",
+        },
         homepageTablet: {
           name: "Homepage tablet",
           styles: { width: "768px", height: "1024px" },

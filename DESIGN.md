@@ -121,9 +121,9 @@ applicable.
 
 - Figma approved frames: synced
 - `DESIGN.md`: synced
-- Runtime semantic CSS tokens: pending
+- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive is intentionally deferred
 - Reusable components: pending
-- Storybook contracts: INF-16 homepage synced; remaining contracts pending
+- Storybook contracts: INF-16 homepage and INF-17 runtime foundation synced; remaining contracts pending
 - Customer-facing templates: INF-16 homepage synced; remaining templates pending
 
 Do not implement from the provisional holding-page styles or archived frames.
