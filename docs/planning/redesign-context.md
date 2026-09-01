@@ -109,14 +109,14 @@ sync matrix.
 
 Current synchronization matrix:
 
-| Layer | State |
-| --- | --- |
-| Approved Figma frames | Synced |
-| `DESIGN.md` | Synced |
+| Layer                       | State   |
+| --------------------------- | ------- |
+| Approved Figma frames       | Synced  |
+| `DESIGN.md`                 | Synced  |
 | Runtime semantic CSS tokens | Pending |
-| Reusable components | Pending |
-| Storybook contracts | Pending |
-| Customer-facing templates | Pending |
+| Reusable components         | Pending |
+| Storybook contracts         | Pending |
+| Customer-facing templates   | Pending |
 
 No `.impeccable/design.json` sidecar existed on the branch when `DESIGN.md` was
 updated. Do not invent one manually; generate it through the project-approved
