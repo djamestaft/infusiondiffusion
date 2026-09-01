@@ -70,7 +70,10 @@ export function AccountEntry({
         : messages[state];
   return (
     <div className="bg-content-surface text-content-primary min-h-dvh">
-      <Navigation cartCount={cartCount} />
+      <Navigation
+        cartCount={cartCount}
+        accountHref={state === "available" ? "/account" : undefined}
+      />
       <main
         aria-busy={isLoading || undefined}
         className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-7xl items-center px-5 py-16 sm:px-8 lg:min-h-[calc(100dvh-6.5rem)] lg:px-12 lg:py-24"

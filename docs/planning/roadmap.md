@@ -19,7 +19,7 @@ organization and an approved design brief.
       `DESIGN.md`.
 - [x] Map the approved color, typography, spacing, and focus system to runtime
       tokens and Storybook. The background primitive is intentionally deferred.
-- [ ] Implement reusable components and states.
+- [x] Implement the Home-required reusable components and states.
 - [ ] Implement templates and customer journeys from approved Figma evidence.
 - [ ] Verify accessibility, performance, Storybook, unit, integration, and
       browser coverage before release review.
@@ -38,10 +38,11 @@ organization and an approved design brief.
 - Figma organization, foundation/component approval, responsive proofs, and the
   repository-readable `DESIGN.md` handoff are complete on
   `agent/design-pattern-sync`.
-- The INF-16 homepage is merged. INF-17 synchronizes the approved color,
-  typography, spacing, and focus foundation with runtime semantic tokens and
-  responsive Storybook proofs. The tapered-reed background primitive is
-  deferred by product-owner direction; reusable component/state work is next.
+- The INF-16 homepage and INF-17 runtime foundation are merged. INF-18
+  synchronizes Home-required navigation, actions, content primitives,
+  product-card commerce states, and media fallback with responsive Storybook
+  proofs. The tapered-reed background primitive remains deferred by
+  product-owner direction; template and journey work is next.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 

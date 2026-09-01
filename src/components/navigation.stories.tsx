@@ -47,17 +47,26 @@ export const Midnight: Story = {
   args: { theme: "midnight" },
 };
 
+export const ProvisionedAccount: Story = {
+  args: { accountHref: "/account" },
+};
+
 export const MobileClosed: Story = {
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+  globals: { viewport: { value: "contact390", isRotated: false } },
 };
 
 export const MobileOpen: Story = {
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+  globals: { viewport: { value: "contact390", isRotated: false } },
   play: async ({ canvasElement }) => {
     await userEvent.click(
       within(canvasElement).getByRole("button", { name: "Open menu" }),
     );
   },
+};
+
+export const MobileOpen320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  play: MobileOpen.play,
 };
 
 export const LongLabels: Story = {

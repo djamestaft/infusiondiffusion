@@ -12,7 +12,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
+          "action-primary-material isolate overflow-hidden bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground [&>*]:relative [&>*]:z-10",
         secondary:
           "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         quiet:
@@ -21,7 +21,7 @@ const buttonVariants = cva(
           "bg-action-destructive text-action-destructive-foreground hover:bg-action-destructive-hover active:bg-action-destructive-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         // Temporary compatibility aliases; remove after downstream consumers migrate.
         default:
-          "bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
+          "action-primary-material isolate overflow-hidden bg-action-primary text-action-primary-foreground hover:bg-action-primary-hover active:bg-action-primary-active disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground [&>*]:relative [&>*]:z-10",
         outline:
           "border border-action-secondary-border bg-transparent text-action-secondary-foreground hover:bg-action-secondary-hover active:bg-action-secondary-active disabled:border-action-disabled-border disabled:bg-action-disabled disabled:text-action-disabled-foreground aria-disabled:border-action-disabled-border aria-disabled:bg-action-disabled aria-disabled:text-action-disabled-foreground",
         ghost:

@@ -314,6 +314,14 @@
   --action-primary-foreground: var(--ink-900);
   --action-primary-hover: var(--gold-300);
   --action-primary-active: var(--gold-700);
+  --action-primary-material: linear-gradient(
+    90deg,
+    rgb(180 142 52) 0%,
+    rgb(197 164 71) 30%,
+    rgb(213 187 103) 48%,
+    rgb(197 164 71) 62%,
+    rgb(183 143 55) 100%
+  );
   --action-secondary-border: rgb(60 59 53 / 72%);
   --action-secondary-foreground: var(--ink-900);
   --action-secondary-hover: #dde2d4;
@@ -565,6 +573,26 @@
   }
   ::selection {
     background: color-mix(in oklab, var(--accent) 55%, transparent);
+  }
+}
+
+@layer components {
+  .action-primary-material::before {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image: var(--action-primary-material);
+    box-shadow:
+      inset 0 -1px 1px rgb(115 87 22 / 7%),
+      inset 0 1px 1px rgb(255 255 255 / 10%);
+    content: "";
+    opacity: 0.6;
+  }
+
+  .action-primary-material:disabled::before,
+  .action-primary-material[aria-disabled="true"]::before {
+    opacity: 0;
   }
 }
 

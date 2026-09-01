@@ -15,7 +15,7 @@ export type NavigationDestination = {
 export type NavigationProps = {
   destinations?: NavigationDestination[] | null;
   currentHref?: string;
-  accountHref?: string;
+  accountHref?: string | null;
   cartHref?: string;
   cartCount?: number;
   theme?: "ivory" | "midnight";
@@ -81,8 +81,9 @@ function DestinationLink({
       aria-current={current ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "group focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-3 text-xs leading-4 font-semibold tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2",
-        mobile && "min-h-13 w-full px-5",
+        "group focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-3 text-xs leading-4 font-semibold tracking-[0.08em] uppercase focus-visible:outline-[3px] focus-visible:outline-offset-2",
+        mobile &&
+          "border-navigation-border font-display min-h-16 w-full justify-start border-b px-0 text-[1.75rem] leading-10 font-normal tracking-normal normal-case",
       )}
     >
       <span className="relative">
@@ -102,7 +103,7 @@ function DestinationLink({
 export function Navigation({
   destinations = defaultDestinations,
   currentHref,
-  accountHref = "/account",
+  accountHref,
   cartHref = "/cart",
   cartCount = 0,
   theme = "ivory",
@@ -154,12 +155,14 @@ export function Navigation({
 
   const utilities = (
     <>
-      <UtilityLink href={accountHref} label="Account">
-        <UserRound
-          aria-hidden="true"
-          className="size-[1.125rem] stroke-[1.5]"
-        />
-      </UtilityLink>
+      {accountHref ? (
+        <UtilityLink href={accountHref} label="Account">
+          <UserRound
+            aria-hidden="true"
+            className="size-[1.125rem] stroke-[1.5]"
+          />
+        </UtilityLink>
+      ) : null}
       <UtilityLink
         href={cartHref}
         label={
@@ -196,37 +199,40 @@ export function Navigation({
     >
       <nav
         aria-label="Primary"
-        className="flex h-20 items-center justify-between px-5 lg:h-26 lg:px-8"
+        className="grid h-20 grid-cols-[1fr_auto] items-center px-5 lg:h-22 lg:grid-cols-[1fr_auto_1fr] lg:px-8"
       >
         <Link
           href="/"
           aria-label="Infusion Diffusion home"
-          className="focus-visible:outline-navigation-focus inline-flex focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="focus-visible:outline-navigation-focus inline-flex justify-self-start focus-visible:outline-[3px] focus-visible:outline-offset-2"
         >
           <LogoTextLockup className="w-31 lg:w-55" />
         </Link>
 
-        <div className="hidden items-center gap-5 lg:flex">
-          {links.length ? (
-            <div
-              className="flex items-center"
-              aria-label="Primary destinations"
-            >
-              {links.map((destination) => (
-                <DestinationLink
-                  key={`${destination.href}-${destination.label}`}
-                  destination={destination}
-                  current={currentHref === destination.href}
-                />
-              ))}
-            </div>
-          ) : null}
-          <div className="flex items-center gap-1" aria-label="Commerce">
-            {utilities}
+        {links.length ? (
+          <div
+            className="hidden items-center justify-self-center lg:flex"
+            aria-label="Primary destinations"
+          >
+            {links.map((destination) => (
+              <DestinationLink
+                key={`${destination.href}-${destination.label}`}
+                destination={destination}
+                current={currentHref === destination.href}
+              />
+            ))}
           </div>
+        ) : (
+          <span className="hidden lg:block" />
+        )}
+        <div
+          className="hidden items-center justify-self-end lg:flex"
+          aria-label="Commerce"
+        >
+          {utilities}
         </div>
 
-        <div className="flex items-center lg:hidden">
+        <div className="flex items-center justify-self-end lg:hidden">
           {utilities}
           {links.length ? (
             <button
@@ -236,7 +242,7 @@ export function Navigation({
               aria-expanded={open}
               aria-controls={drawerId}
               onClick={() => setOpen(true)}
-              className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
               <Menu aria-hidden="true" className="size-5 stroke-[1.5]" />
             </button>
@@ -257,23 +263,22 @@ export function Navigation({
             <Link
               href="/"
               aria-label="Infusion Diffusion home"
-              className="focus-visible:outline-navigation-focus focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="focus-visible:outline-navigation-focus focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
               <LogoTextLockup className="w-31" />
             </Link>
             <div className="flex items-center">
-              {utilities}
               <button
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
               >
                 <X aria-hidden="true" className="size-5 stroke-[1.5]" />
               </button>
             </div>
           </div>
-          <div className="flex flex-1 flex-col items-center gap-5 px-5 py-10">
+          <div className="flex flex-1 flex-col items-start px-6 py-10">
             {links.map((destination) => (
               <DestinationLink
                 key={`${destination.href}-${destination.label}`}
@@ -283,6 +288,12 @@ export function Navigation({
                 onClick={() => setOpen(false)}
               />
             ))}
+            <a
+              href={cartHref}
+              className="text-navigation-accent focus-visible:outline-navigation-focus mt-8 inline-flex min-h-11 items-center font-sans text-sm font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
+            >
+              Cart{cartCount ? ` (${cartCount > 99 ? "99+" : cartCount})` : ""}
+            </a>
           </div>
         </div>
       ) : null}

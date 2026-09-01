@@ -9,7 +9,9 @@ afterEach(cleanup);
 describe("Button", () => {
   it("uses button semantics and does not submit forms by default", () => {
     render(<Button>Shop fragrance</Button>);
-    expect(screen.getByRole("button")).toHaveAttribute("type", "button");
+    const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("type", "button");
+    expect(button.className).toContain("action-primary-material");
   });
 
   it("supports anchor semantics through asChild", () => {
