@@ -34,6 +34,7 @@ import { cn } from "@/lib/utils";
 type TemplateNavigationProps = {
   navigationTheme?: NavigationProps["theme"];
   cartCount?: number;
+  accountHref?: string | null;
 };
 
 const sectionClass =
@@ -46,6 +47,7 @@ const homeCollectionInnerClass =
 function TemplateShell({
   navigationTheme = "ivory",
   cartCount,
+  accountHref,
   currentHref,
   surface = "base",
   children,
@@ -70,6 +72,7 @@ function TemplateShell({
         theme={navigationTheme}
         currentHref={currentHref}
         cartCount={cartCount}
+        accountHref={accountHref}
       />
       <main>{children}</main>
     </div>

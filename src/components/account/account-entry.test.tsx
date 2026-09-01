@@ -21,6 +21,7 @@ describe("AccountEntry", () => {
     });
     expect(handoff).toHaveAttribute("href", destination);
     expect(handoff).not.toHaveAttribute("target");
+    expect(screen.getAllByRole("link", { name: "Account" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "Cart, 3 items" })).toHaveLength(
       2,
     );
@@ -44,6 +45,9 @@ describe("AccountEntry", () => {
       expect(screen.queryByRole("alert")).not.toBeInTheDocument();
       expect(
         screen.queryByRole("link", { name: "Continue to your account" }),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole("link", { name: "Account" }),
       ).not.toBeInTheDocument();
       expect(
         screen.getByRole("link", { name: "Shop the collection" }),
