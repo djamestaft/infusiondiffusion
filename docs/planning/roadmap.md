@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 27 August 2026
+Last updated: 1 September 2026
 
 ## Current program state
 

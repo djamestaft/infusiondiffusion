@@ -1,6 +1,6 @@
 # Redesign context handoff
 
-Last updated: 28 August 2026
+Last updated: 1 September 2026
 
 This file records the current redesign state so work can continue without
 reconstructing decisions from conversation history. Figma remains the visual
@@ -14,7 +14,7 @@ truth.
   `C:\Users\User\Documents\work-projects\infusiondiffusion-design-pattern-sync`
 - Documentation commit before this handoff: `e609343`
 - Remote branch: `origin/agent/design-pattern-sync`
-- Pull-request entry point:
+- No pull request exists yet. Pull-request entry point:
   <https://github.com/djamestaft/infusiondiffusion/pull/new/agent/design-pattern-sync>
 - The primary checkout remains on `main`. Its unrelated modified
   `.env.example` and untracked `package-lock.json` were not copied, edited, or
@@ -34,8 +34,8 @@ The file is organized as:
 - `20 — Redesign / Exploration`: provisional work, never implementation truth
 - `30 — Redesign / Approved`: the only implementation source
 
-The gold background experiment remains available at exploration node `2046:2`.
-The approved page is `2004:14`.
+Exploration material remains non-authoritative and is intentionally not cited by
+node ID in this implementation handoff. The approved page is `2004:14`.
 
 ## Approved Figma evidence
 
@@ -183,17 +183,20 @@ Resolve these without broadly rewriting the site:
 
 ## Work-item context
 
-The redesign work progressed through the archived-system audit and foundation,
-component, and responsive approvals associated with INF-11, INF-10, INF-13,
-INF-12, and INF-9. The last locally known ticket state is that INF-9 was done.
-Plane must be checked before treating any other ticket status as current.
+Plane was checked on 1 September 2026. INF-14 through INF-20 are assigned to
+Shawnee and remain in Backlog. INF-14 is the Home-first rollout parent; INF-15
+is the first actionable child and covers review and human-approved merge of
+this documentation handoff. INF-16 through INF-19 then sequence approved Home
+design, runtime foundations, Storybook contracts, and Home integration. INF-20
+is an independent content and metadata follow-up that does not block the design
+system or Home implementation.
 
 ## Immediate next actions
 
-1. Review and merge `agent/design-pattern-sync` through a human-approved pull
-   request.
-2. Confirm the current Plane task and acceptance criteria from fresh remote and
-   roadmap state.
+1. Finish INF-15 review, open a pull request for `agent/design-pattern-sync`,
+   pass required checks, and obtain human approval before merge.
+2. After merge, re-check Plane and begin INF-16 from fresh remote and roadmap
+   state.
 3. Create a delivery branch from the then-current `origin/main`.
 4. Implement the background once as a reusable semantic primitive rather than
    duplicating SVG/CSS on every page.
