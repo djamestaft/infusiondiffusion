@@ -288,8 +288,8 @@ export const HomeMidnightNavigation: Story = {
     />
   ),
 };
-export const HomeMobile: Story = {
-  globals: { viewport: { value: "mobile1", isRotated: false } },
+export const HomeTablet: Story = {
+  globals: { viewport: { value: "homepageTablet", isRotated: false } },
   render: () => (
     <HomeTemplate
       products={productCardFixtures}
@@ -301,6 +301,14 @@ export const HomeMobile: Story = {
     />
   ),
   play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 52),
+};
+export const HomeMobile390: Story = {
+  ...HomeTablet,
+  globals: { viewport: { value: "contact390", isRotated: false } },
+};
+export const HomeMobile320: Story = {
+  ...HomeTablet,
+  globals: { viewport: { value: "contact320", isRotated: false } },
 };
 export const HomeEmptyCatalogue: Story = {
   render: () => <HomeTemplate products={[]} heroImage={undefined} />,

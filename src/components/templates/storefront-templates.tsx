@@ -78,13 +78,13 @@ function TemplateShell({
 
 function ProductGrid({ products }: { products: ProductCardProps[] }) {
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+    <div className="grid grid-cols-1 gap-x-3 gap-y-10 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
       {products.map((product, index) => (
         <ProductCard
           key={product.href}
           {...product}
           imagePriority={index === 0}
-          className="max-w-none"
+          className={cn("max-w-none", index === 3 && "lg:hidden")}
         />
       ))}
     </div>
@@ -104,6 +104,7 @@ export type HomeTemplateContent = {
   heroIntroduction: string;
   heroActionLabel: string;
   collectionTitle: string;
+  bespokeBlurb: string;
   guidanceEyebrow: string;
   guidanceTitle: string;
   guidanceIntroduction: string;
@@ -112,6 +113,9 @@ export type HomeTemplateContent = {
   showServiceReassurance: boolean;
   serviceTitle: string;
   serviceIntroduction: string;
+  artistryTitle: string;
+  artistryIntroduction: string;
+  artistryActionLabel: string;
   showFounderStory: boolean;
   founderTitle: string;
   founderStory: string;
@@ -131,6 +135,8 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
     "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
   heroActionLabel: "Shop the collection",
   collectionTitle: "A cabinet of atmosphere",
+  bespokeBlurb:
+    "We craft bespoke diffusers that transform living spaces into serene sanctuaries. Our mission is to enhance your environment with elegance and intention.",
   guidanceEyebrow: "Fragrance guidance",
   guidanceTitle: "Choose by the room, then by the feeling",
   guidanceIntroduction:
@@ -142,6 +148,10 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
   serviceTitle: "Made meaningful by the details",
   serviceIntroduction:
     "Clear care guidance, transparent delivery expectations and dependable stock information accompany every product.",
+  artistryTitle: "Artistry in Fragrance",
+  artistryIntroduction:
+    "Designed for themed elegance, our diffusers blend aesthetics and aroma to enrich your living experience.",
+  artistryActionLabel: "Discover our story",
   showFounderStory: true,
   founderTitle: "Born from fragrance",
   founderStory:
@@ -163,13 +173,11 @@ export function HomeTemplate({
   products,
   heroImage,
   heroSlides = [],
-  founderImage,
   navigationTheme,
   cartCount,
   content: suppliedContent,
 }: HomeTemplateProps) {
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
-  const storyImage = founderImage ?? heroImage;
   const carouselSlides =
     heroSlides.length >= 2
       ? heroSlides.slice(0, 3)
@@ -177,7 +185,11 @@ export function HomeTemplate({
         ? [{ id: "catalogue-fallback", ...heroImage }]
         : heroSlides.slice(0, 1);
   return (
-    <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
+    <TemplateShell
+      navigationTheme={navigationTheme ?? "midnight"}
+      currentHref="/shop"
+      cartCount={cartCount}
+    >
       <ScrollRevealController />
       <section
         data-testid="home-hero-section"
@@ -224,7 +236,7 @@ export function HomeTemplate({
               {content.collectionTitle}
             </Heading>
             {products.length ? (
-              <ProductGrid products={products.slice(0, 3)} />
+              <ProductGrid products={products.slice(0, 4)} />
             ) : (
               <p className="text-content-secondary max-w-prose font-sans">
                 The collection is being prepared. Please return soon to explore
@@ -261,57 +273,24 @@ export function HomeTemplate({
         </section>
       </ScrollReveal>
 
-      {content.showServiceReassurance ? (
-        <ScrollReveal direction="left">
-          <section
-            className={sectionClass}
-            aria-labelledby="home-service-title"
-          >
-            <Heading id="home-service-title" level={2} treatment="title">
-              {content.serviceTitle}
-            </Heading>
-            <p className="text-content-secondary mt-4 max-w-2xl font-sans text-base leading-7">
-              {content.serviceIntroduction}
-            </p>
-          </section>
-        </ScrollReveal>
-      ) : null}
-
-      {content.showFounderStory ? (
-        <ScrollReveal variant="unveil">
-          <section className="dark bg-content-surface text-content-primary">
-            <div
-              className={cn(
-                sectionClass,
-                "grid gap-12",
-                storyImage && "lg:grid-cols-2 lg:items-center",
-              )}
-            >
-              <div>
-                <Heading level={2} treatment="headline">
-                  {content.founderTitle}
-                </Heading>
-                <div className="text-content-secondary mt-8 max-w-xl space-y-6 font-sans text-base leading-7 lg:text-lg">
-                  {content.founderStory.split(/\n\s*\n/).map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
-              </div>
-              {storyImage ? (
-                <div className="bg-product-card-media-fallback relative aspect-7/6 overflow-hidden rounded-lg">
-                  <Image
-                    src={storyImage.src}
-                    alt={storyImage.alt}
-                    fill
-                    sizes="(max-width: 1023px) calc(100vw - 40px), 40vw"
-                    className="object-cover"
-                  />
-                </div>
-              ) : null}
-            </div>
-          </section>
-        </ScrollReveal>
-      ) : null}
+      <section
+        className="bg-content-primary relative isolate min-h-[30rem] overflow-hidden"
+        aria-label="Bespoke diffusers"
+      >
+        <Image
+          src="/images/homepage-bespoke-diffuser-blurb.png"
+          alt="A reed diffuser arranged in a serene living space"
+          fill
+          sizes="100vw"
+          className="-z-20 object-cover"
+        />
+        <div className="bg-overlay-scrim absolute inset-0 -z-10" />
+        <div className="flex min-h-[30rem] items-center justify-center px-5 py-16 sm:px-10">
+          <p className="font-display text-bone-50 max-w-4xl text-center text-[1.7rem] leading-[1.45] sm:text-[2rem] lg:text-[2.25rem]">
+            {content.bespokeBlurb}
+          </p>
+        </div>
+      </section>
 
       {content.showLongevity ? (
         <ScrollReveal direction="right">
@@ -319,18 +298,84 @@ export function HomeTemplate({
             <div
               className={cn(
                 sectionClass,
-                "grid gap-8 lg:grid-cols-2 lg:gap-24",
+                "grid gap-8 text-center sm:grid-cols-2 sm:text-left lg:gap-24",
               )}
             >
+              <div>
+                <p className="font-display text-5xl leading-none lg:text-7xl">
+                  200 ml
+                </p>
+                <p className="mt-3 font-sans text-sm font-semibold">
+                  approximately 8–12 months
+                </p>
+              </div>
               <div>
                 <Heading level={2} treatment="headline">
                   {content.longevityTitle}
                 </Heading>
-                <Lead className="mt-6">{content.longevityIntroduction}</Lead>
+                <p className="text-content-secondary mt-5 font-sans text-base leading-7">
+                  {content.longevityConditions}
+                </p>
               </div>
-              <p className="text-content-secondary max-w-xl font-sans text-base leading-7 lg:pt-4 lg:text-lg">
-                {content.longevityConditions}
-              </p>
+            </div>
+          </section>
+        </ScrollReveal>
+      ) : null}
+
+      <ScrollReveal variant="unveil">
+        <section className="dark bg-content-surface text-content-primary grid md:grid-cols-2">
+          <div className="flex flex-col items-start justify-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
+            <Heading level={2} treatment="headline">
+              {content.artistryTitle}
+            </Heading>
+            <p className="text-content-secondary mt-6 max-w-xl font-sans text-base leading-7 lg:text-lg">
+              {content.artistryIntroduction}
+            </p>
+            <Button asChild variant="primary" className="mx-auto mt-8 md:mx-0">
+              <a href="/about">{content.artistryActionLabel}</a>
+            </Button>
+          </div>
+          <div className="relative min-h-[23rem] md:min-h-[34rem]">
+            <Image
+              src="/images/homepage-artistry-in-fragrance.png"
+              alt="A dark glass reed diffuser styled on stone and linen"
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {content.showServiceReassurance ? (
+        <ScrollReveal variant="unveil">
+          <section
+            className={sectionClass}
+            aria-labelledby="home-service-title"
+          >
+            <Heading
+              id="home-service-title"
+              level={2}
+              treatment="title"
+              className="text-center"
+            >
+              {content.serviceTitle}
+            </Heading>
+            <div className="mt-10 grid gap-8 text-center sm:grid-cols-3">
+              {[
+                ["Care guidance", "Clear use and placement advice"],
+                ["Delivery", "Transparent delivery expectations"],
+                ["Stock", "Dependable availability information"],
+              ].map(([title, body]) => (
+                <div key={title}>
+                  <h3 className="font-sans text-sm font-semibold tracking-[0.08em] uppercase">
+                    {title}
+                  </h3>
+                  <p className="text-content-secondary mt-2 font-sans text-base leading-7">
+                    {body}
+                  </p>
+                </div>
+              ))}
             </div>
           </section>
         </ScrollReveal>

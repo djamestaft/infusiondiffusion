@@ -39,10 +39,13 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
     page.getByRole("link", { name: /^View / }).first(),
   ).toHaveAttribute("href", /\/products\//);
   await expect(
-    page.getByRole("heading", { level: 2, name: "Born from fragrance" }),
+    page.getByRole("heading", { level: 2, name: "Artistry in Fragrance" }),
   ).toBeVisible();
   await expect(page.getByText(/8–12 months/)).toBeVisible();
-  await expect(page.getByText(/Jacqui Kirchmann/)).toBeVisible();
+  await expect(page.getByText(/Designed for themed elegance/)).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Discover our story" }),
+  ).toHaveAttribute("href", "/about");
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(
