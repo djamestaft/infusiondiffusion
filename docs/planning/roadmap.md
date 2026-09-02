@@ -41,8 +41,10 @@ organization and an approved design brief.
 - The INF-16 homepage and INF-17 runtime foundation are merged. INF-18
   synchronizes Home-required navigation, actions, content primitives,
   product-card commerce states, and media fallback with responsive Storybook
-  proofs. The tapered-reed background primitive remains deferred by
-  product-owner direction; template and journey work is next.
+  proofs. INF-19 integrates and verifies the live Home vertical slice at all
+  four approved widths while preserving Sanity and Shopify ownership. The
+  tapered-reed background primitive remains deferred by product-owner
+  direction; remaining template and journey work is next.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 

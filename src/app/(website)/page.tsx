@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const { perspective } = await getDynamicFetchOptions();
   const settings = await getSiteSettingsMetadata(perspective);
   return {
-    title: settings.seoTitle,
+    title: { absolute: settings.seoTitle },
     description: settings.seoDescription,
     openGraph: {
       title: settings.seoTitle,
