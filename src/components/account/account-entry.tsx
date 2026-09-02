@@ -38,11 +38,11 @@ const messages: Record<
   },
   disabled: {
     title: "Account access is not currently available",
-    body: "Account access is not currently available. You can continue browsing the collection while this service is unavailable.",
+    body: "You can continue browsing the collection while this service is unavailable.",
   },
   "configuration-missing": {
     title: "Account access is not currently available",
-    body: "Account access is not currently available. You can continue browsing the collection while this service is unavailable.",
+    body: "You can continue browsing the collection while this service is unavailable.",
   },
   "not-provisioned": {
     title: "Account destination is not available",

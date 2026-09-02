@@ -7,6 +7,7 @@ import { addToCartAction } from "@/app/(website)/cart/actions";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getCachedProduct } from "@/lib/shopify/cached-catalog";
 import { toProductDetails } from "@/lib/shopify/presentation";
+import { absoluteStorefrontTitle } from "@/lib/metadata-title";
 
 type Props = { params: Promise<{ handle: string }> };
 
@@ -19,7 +20,7 @@ async function findProduct(handle: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await findProduct((await params).handle);
   return {
-    title: product.seo.title || `${product.title} | Infusion Diffusion`,
+    title: absoluteStorefrontTitle(product.seo.title || product.title),
     description: product.seo.description || product.description.slice(0, 160),
     openGraph: {
       images: product.featuredImage

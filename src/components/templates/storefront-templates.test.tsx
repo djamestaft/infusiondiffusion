@@ -225,7 +225,7 @@ describe("storefront templates", () => {
     ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
     expect(screen.queryByRole("form")).not.toBeInTheDocument();
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
-    expect(screen.getByText("Online form unavailable")).toBeVisible();
+    expect(screen.getByText("Contact us by email")).toBeVisible();
     expect(screen.getAllByRole("link", { name: "Cart, 3 items" })).toHaveLength(
       2,
     );

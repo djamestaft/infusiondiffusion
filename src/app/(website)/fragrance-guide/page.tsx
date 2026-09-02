@@ -5,6 +5,7 @@ import { EditorialTemplate } from "@/components/templates/storefront-templates";
 import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
 import { readCart } from "@/lib/shopify/cart-session";
 import { toProductCard } from "@/lib/shopify/presentation";
+import { absoluteStorefrontTitle, storefrontTitle } from "@/lib/metadata-title";
 import {
   getFragranceGuide,
   getFragranceGuideMetadata,
@@ -15,10 +16,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const { perspective } = await getDynamicFetchOptions();
   const page = await getFragranceGuideMetadata(perspective);
   return {
-    title: page.seoTitle,
+    title: absoluteStorefrontTitle(page.seoTitle),
     description: page.seoDescription,
     openGraph: {
-      title: page.seoTitle,
+      title: storefrontTitle(page.seoTitle),
       description: page.seoDescription,
       locale: "en_ZA",
       type: "article",

@@ -45,6 +45,7 @@ for (const viewport of viewports) {
     await page.goto("/");
     await page.getByRole("link", { name: "Account" }).first().click();
     await expect(page).toHaveURL(/\/account$/);
+    await expect(page).toHaveTitle("Your account | Infusion Diffusion");
     await expectAccountLayout(page);
     await expect(
       page.getByRole("link", { name: "Continue to your account" }),

@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 1 September 2026
+Last updated: 2 September 2026
 
 ## Current program state
 
@@ -44,7 +44,10 @@ organization and an approved design brief.
   proofs. INF-19 integrates and verifies the live Home vertical slice at all
   four approved widths while preserving Sanity and Shopify ownership. The
   tapered-reed background primitive remains deferred by product-owner
-  direction; remaining template and journey work is next.
+  direction. INF-20 records the owner-approved content corrections, fixes
+  duplicate metadata suffixes and truthful Contact/account wording in the
+  repository, and leaves canonical product-title mutation as an export-first
+  Shopify Admin handoff. Remaining template and journey work is next.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 

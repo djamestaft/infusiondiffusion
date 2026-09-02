@@ -10,6 +10,9 @@ test("renders the Sanity-backed fragrance guide accessibly", async ({
   });
 
   await page.goto("/fragrance-guide");
+  await expect(page).toHaveTitle(
+    "A practical home fragrance guide | Infusion Diffusion",
+  );
 
   await expect(
     page.getByRole("heading", {

@@ -377,7 +377,7 @@ export const Contact: Story = {
       canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
     ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
     await expect(canvas.queryByRole("form")).toBeNull();
-    await expect(canvas.getByText("Online form unavailable")).toBeVisible();
+    await expect(canvas.getByText("Contact us by email")).toBeVisible();
   },
 };
 export const ContactDefault390: Story = {
