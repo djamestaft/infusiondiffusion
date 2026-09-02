@@ -467,14 +467,13 @@ export function ContactTemplate({
               <a href={mailto}>Email Infusion Diffusion</a>
             </Button>
             <FeedbackAlert
-              title="Online form unavailable"
+              title="Contact us by email"
               tone="info"
               announcement="none"
               className="self-start lg:col-span-6"
             >
-              Online submission is not available at launch. Your email opens in
-              your own mail application; this website does not collect or store
-              your message.
+              Email is the intended contact route. The link opens your own mail
+              application; this website does not collect or store your message.
             </FeedbackAlert>
           </div>
         </section>

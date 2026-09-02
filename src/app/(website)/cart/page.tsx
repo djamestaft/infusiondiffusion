@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { absoluteStorefrontTitle } from "@/lib/metadata-title";
 import { Suspense } from "react";
 import { CartShell } from "@/components/cart/cart-shell";
 import {
@@ -9,7 +11,7 @@ import {
 import { checkoutIsEnabled, readCart } from "@/lib/shopify/cart-session";
 
 export const metadata: Metadata = {
-  title: "Your bag | Infusion Diffusion",
+  title: absoluteStorefrontTitle("Your bag"),
   robots: { index: false, follow: false },
 };
 async function CartContent() {

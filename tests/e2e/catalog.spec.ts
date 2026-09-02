@@ -11,6 +11,11 @@ for (const path of ["/shop", "/products/bois-de-santal-200ml"]) {
     });
 
     await page.goto(path);
+    await expect(page).toHaveTitle(
+      path === "/shop"
+        ? "Shop home fragrance | Infusion Diffusion"
+        : "Bois De Santal | Infusion Diffusion",
+    );
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByText(/R\s?(395|430)/).first()).toBeVisible();
     expect(

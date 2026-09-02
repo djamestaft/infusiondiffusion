@@ -5,9 +5,10 @@ import { CollectionTemplate } from "@/components/templates/storefront-templates"
 import { getCachedProducts } from "@/lib/shopify/cached-catalog";
 import { toProductCard } from "@/lib/shopify/presentation";
 import { readCart } from "@/lib/shopify/cart-session";
+import { absoluteStorefrontTitle } from "@/lib/metadata-title";
 
 export const metadata: Metadata = {
-  title: "Shop home fragrance | Infusion Diffusion",
+  title: absoluteStorefrontTitle("Shop home fragrance"),
   description:
     "Shop Infusion Diffusion home fragrance, with current catalogue pricing and availability.",
 };

@@ -23,6 +23,7 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
   await expect(page.getByRole("button", { name: "Add to bag" })).toBeFocused();
   await page.getByRole("button", { name: "Add to bag" }).click();
   await page.getByRole("link", { name: "Review your bag" }).click();
+  await expect(page).toHaveTitle("Your bag | Infusion Diffusion");
   await expect(
     page.getByRole("heading", { level: 1, name: "Your bag" }),
   ).toBeVisible();

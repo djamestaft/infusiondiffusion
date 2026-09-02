@@ -5,9 +5,10 @@ import { Suspense } from "react";
 import { AccountEntry } from "@/components/account/account-entry";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getAccountEntry } from "@/lib/shopify/account-entry";
+import { absoluteStorefrontTitle } from "@/lib/metadata-title";
 
 export const metadata: Metadata = {
-  title: "Your account | Infusion Diffusion",
+  title: absoluteStorefrontTitle("Your account"),
   description: "Continue to your hosted Shopify customer account.",
   robots: { index: false, follow: false },
 };

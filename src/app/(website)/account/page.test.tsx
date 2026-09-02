@@ -74,7 +74,7 @@ describe("account route", () => {
 
   it("has accurate private account metadata", () => {
     expect(metadata).toMatchObject({
-      title: "Your account | Infusion Diffusion",
+      title: { absolute: "Your account | Infusion Diffusion" },
       robots: { index: false, follow: false },
     });
   });

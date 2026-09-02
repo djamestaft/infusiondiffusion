@@ -40,7 +40,7 @@ async function assertDefaultContact(
   await expect(visibleEmail).toHaveAttribute("href", mailtoHref!);
   await expect(page.locator("form")).toHaveCount(0);
   await expect(page.getByRole("textbox")).toHaveCount(0);
-  await expect(page.getByText("Online form unavailable")).toBeVisible();
+  await expect(page.getByText("Contact us by email")).toBeVisible();
   await expect(page.getByRole("link", { name: "Cart" })).toBeVisible();
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
