@@ -1,6 +1,102 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+const approvedHomeViewports = [
+  { name: "desktop", width: 1440, height: 1000 },
+  { name: "tablet", width: 768, height: 1024 },
+  { name: "mobile", width: 390, height: 844 },
+  { name: "small", width: 320, height: 844 },
+] as const;
+
+const homeStoryUrl = (story: string) =>
+  `http://127.0.0.1:6006/iframe.html?id=templates-storefront--${story}&viewMode=story`;
+
+for (const viewport of approvedHomeViewports) {
+  test(`preserves the approved Home composition at ${viewport.width}px`, async ({
+    page,
+  }) => {
+    test.setTimeout(60_000);
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const orderedSections = [
+      page.getByRole("heading", { level: 1 }),
+      page.getByRole("heading", { name: "A cabinet of atmosphere" }),
+      page.getByRole("heading", {
+        name: "Choose by the room, then by the feeling",
+      }),
+      page.getByRole("region", { name: "Bespoke diffusers" }),
+      page.getByRole("heading", { name: "Made to linger" }),
+      page.getByRole("heading", { name: "Artistry in Fragrance" }),
+      page.getByRole("heading", { name: "Made meaningful by the details" }),
+      page.getByRole("heading", {
+        name: "Six fragrances. A roomful of possibility.",
+      }),
+    ];
+
+    const positions: number[] = [];
+    for (const section of orderedSections) {
+      await expect(section).toBeVisible();
+      positions.push((await section.boundingBox())!.y);
+    }
+    expect(positions).toEqual([...positions].sort((a, b) => a - b));
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(viewport.width);
+
+    for (const action of await page
+      .getByRole("link", { name: /Shop the collection|Discover our story/ })
+      .all()) {
+      const box = await action.boundingBox();
+      expect(box?.height).toBeGreaterThanOrEqual(44);
+    }
+
+    if (process.env.SAVE_HOME_EVIDENCE) {
+      await page.screenshot({
+        path: `docs/features/evidence/home-${viewport.width}.png`,
+        fullPage: true,
+      });
+    }
+  });
+}
+
+test("renders Home SEO metadata from the site-settings boundary", async ({
+  page,
+}) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await expect(page).toHaveTitle("Infusion Diffusion");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    /room sprays, reed diffusers, and candles/i,
+  );
+});
+
+test("reflows Home long content and preserves an empty-catalogue recovery", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  await page.goto(homeStoryUrl("home-long-content"), {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible({
+    timeout: 20_000,
+  });
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(320);
+
+  await page.goto(homeStoryUrl("home-empty-catalogue"), {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(
+    page.getByText("The collection is being prepared.", { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Shop the collection" }).first(),
+  ).toHaveAttribute("href", "/shop");
+});
+
 test("renders the live homepage journey accessibly", async ({ page }) => {
   const consoleErrors: string[] = [];
   page.on("console", (message) => {

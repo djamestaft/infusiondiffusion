@@ -1,6 +1,6 @@
 # Home component contracts
 
-Status: Review ready in INF-18
+Status: Completed in INF-18
 
 ## User outcome
 

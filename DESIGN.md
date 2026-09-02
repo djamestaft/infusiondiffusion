@@ -126,7 +126,8 @@ applicable.
   product-card commerce states, and media fallback synchronized in INF-18
 - Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18
   Home-required component states synchronized; remaining templates pending
-- Customer-facing templates: INF-16 homepage synced; remaining templates pending
+- Customer-facing templates: Home template and live route synchronized through
+  INF-19; remaining templates pending
 
 Do not implement from the provisional holding-page styles or archived frames.
 Any intentional divergence from the approved Figma evidence must be recorded
