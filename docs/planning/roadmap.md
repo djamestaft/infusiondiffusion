@@ -41,7 +41,7 @@ sequence changes; do not silently infer readiness from a Done state alone.
 - [x] Approve the global shell and commerce-journey scope: retain the current
       route order, responsive cart treatment, truthful Shopify-owned commerce
       and account states, and add the shared footer to the Figma shell contract.
-- [ ] Design and approve Shop/product templates from `30 — Redesign / Approved`
+- [x] Design and approve Shop/product templates from `30 — Redesign / Approved`
       before implementation begins; editorial route templates follow.
 - [ ] Implement templates and customer journeys from their approved Figma
       evidence.
@@ -74,11 +74,12 @@ sequence changes; do not silently infer readiness from a Done state alone.
   checkout, and account states, and a shared footer in the global-shell Figma
   contract. INF-28 separately records the source-owned content and metadata
   approvals.
-- Shawnee's active tasks are INF-25 independent Home verification and INF-26
-  Shop/product Figma approval. INF-27 editorial route Figma approval remains
-  in Todo until the Shop/product design is approved. Implementation tickets for
-  those remaining route families are intentionally not scheduled before their
-  Figma contracts exist.
+- INF-26 Shop/product design approval is complete. Approved Shop frames are
+  `2209:24`–`2209:27`, approved product-detail frames are `2209:28`–`2209:31`,
+  and the approved state contract is `2209:32`. INF-29 implements those frames
+  through Storybook and the normalized Shopify boundary; Preview approval and
+  protected-branch merge remain human gates. INF-27 editorial route design may
+  proceed independently.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 
