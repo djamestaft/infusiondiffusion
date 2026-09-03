@@ -10,6 +10,19 @@ design direction is retired and must not be used as approval for further UI
 work. The redesign starts as a new program, beginning with Figma
 organization and an approved design brief.
 
+## Roadmap governance
+
+`docs/planning/roadmap.md` is the strategic source of truth for delivery order,
+scope, decision gates, and system boundaries. The Infusion Diffusion Plane
+project (`INF`) is the execution ledger: every active delivery item must name
+its approved Figma evidence, accountable owner, dependencies, and required
+human gate.
+
+Before starting a roadmap item, the core agent must refresh protected `main`,
+re-read this document, retrieve the matching Plane ticket, and reconcile any
+conflict. Update this roadmap and Plane together when the approved direction or
+sequence changes; do not silently infer readiness from a Done state alone.
+
 ## Redesign sequence
 
 - [x] Separate and label legacy Figma material; create the new redesign pages.
