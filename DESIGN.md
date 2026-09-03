@@ -27,6 +27,11 @@ the [Infusion Diffusion Redesign file](https://www.figma.com/design/jIMvwSBkilg7
 - INF-16 Home: `2070:2` (1440), `2072:2` (768), `2073:2` (390),
   `2073:70` (320)
 - INF-16 Home state contract: `2073:3389`
+- INF-26 Shop: `2209:24` (1440), `2209:25` (768), `2209:26` (390),
+  `2209:27` (320)
+- INF-26 Product detail: `2209:28` (1440), `2209:29` (768), `2209:30`
+  (390), `2209:31` (320)
+- INF-26 Shop and product-detail state contract: `2209:32`
 
 Only frames on `30 — Redesign / Approved` are implementation authority.
 `00 — Archive / Legacy` is historical evidence, `10 — Redesign / Brief &
@@ -131,9 +136,10 @@ applicable.
 - Reusable components: Home-required navigation, actions, content primitives,
   product-card commerce states, and media fallback synchronized in INF-18
 - Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18
-  Home-required component states synchronized; remaining templates pending
+  Home-required component states synchronized; INF-26 Shop and product-detail
+  states are approved in Figma and pending INF-29 Storybook implementation
 - Customer-facing templates: Home template and live route synchronized through
-  INF-19; remaining templates pending
+  INF-19; Shop and product-detail implementation is active in INF-29
 
 Do not implement from the provisional holding-page styles or archived frames.
 Any intentional divergence from the approved Figma evidence must be recorded
