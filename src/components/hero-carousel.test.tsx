@@ -229,6 +229,10 @@ describe("HeroCarousel", () => {
       screen.queryByTestId("hero-carousel-bracket-top-left"),
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("hero-carousel-controls")).toBeVisible();
+    expect(screen.getByTestId("hero-carousel-media")).toHaveClass(
+      "aspect-[342/470]",
+      "lg:aspect-[656/680]",
+    );
   });
 
   it("keeps a stable fallback for empty and failed media", () => {

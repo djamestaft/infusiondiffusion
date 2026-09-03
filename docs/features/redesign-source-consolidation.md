@@ -53,3 +53,12 @@ review.
 5. Preview evidence includes visual comparison, keyboard, reduced-motion, axe,
    long-content, empty/media-fallback, and console checks before human release
    review.
+
+## Intentional Home-media divergence
+
+The approved desktop fallback box is 656×692. The live Home carousel renders
+at 656×680 when multiple slides need visible controls inside the fixed
+above-the-fold hero. This prevents the control row from being clipped by the
+following collection section. The 390px fallback remains the approved
+342×470. Reconcile this 12px desktop adjustment in Figma if the carousel
+control treatment itself is approved as a permanent Home contract.

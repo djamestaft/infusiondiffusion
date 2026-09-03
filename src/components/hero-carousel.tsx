@@ -209,7 +209,12 @@ export function HeroCarousel({
             </>
           ) : null}
           <div
-            className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-[8px]"
+            className={cn(
+              "bg-product-card-media-fallback relative overflow-hidden rounded-[8px]",
+              presentation === "plain"
+                ? "aspect-[342/470] lg:aspect-[656/680]"
+                : "aspect-4/5",
+            )}
             data-testid="hero-carousel-media"
           >
             {slides.map((slide, index) => (
