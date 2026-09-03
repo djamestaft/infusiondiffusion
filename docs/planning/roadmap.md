@@ -34,13 +34,15 @@ sequence changes; do not silently infer readiness from a Done state alone.
       tokens and Storybook. The approved tapered-reed background returns to
       scope for the Home delivery.
 - [x] Implement the initial Home-required reusable components and states.
-- [ ] Complete the Home source-consolidation PR and secure human parity/merge
-      approval. The protected branch and current production do not yet render
-      the approved midnight Home composition.
-- [ ] Approve the global shell and commerce-journey scope before route-family
-      design begins.
-- [ ] Design and approve Shop/product and editorial route templates from
-      `30 — Redesign / Approved` before their implementation begins.
+- [x] Merge the Home source-consolidation PR into protected `main` at
+      `e6ea435`. The approved midnight Home composition is now in the release
+      branch; INF-25 owns the remaining independent Preview and post-merge
+      evidence.
+- [x] Approve the global shell and commerce-journey scope: retain the current
+      route order, responsive cart treatment, truthful Shopify-owned commerce
+      and account states, and add the shared footer to the Figma shell contract.
+- [ ] Design and approve Shop/product templates from `30 — Redesign / Approved`
+      before implementation begins; editorial route templates follow.
 - [ ] Implement templates and customer journeys from their approved Figma
       evidence.
 - [ ] Verify accessibility, performance, Storybook, unit, integration, and
@@ -61,19 +63,22 @@ sequence changes; do not silently infer readiness from a Done state alone.
   approved redesign is live. Their stated Home release and shared-background
   completion must be reconciled with current Figma, source, and preview
   evidence.
-- Protected `main` and the production deployment at `8573d8e` remain healthy
-  but render the legacy light/sage Home hero. The approved midnight Home has
-  unmerged implementation work and requires reviewable Preview evidence before
-  a human merge decision.
+- Protected `main` contains the approved-source Home consolidation via merged
+  PR #60 (`e6ea435`). Its Preview is deployed; independent responsive,
+  accessibility, and post-merge release evidence remains active in INF-25
+  before the Home is treated as design-complete.
 - INF-21 has locked visual authority and returned the approved tapered-reed
-  background to the Home delivery scope. INF-22 and INF-23 remain Devon's
-  required product/release decisions: Home parity/merge approval; and global
-  shell plus commerce-journey scope. INF-28 separately records the
-  source-owned content and metadata approvals.
-- After those gates, Shawnee owns INF-24 Home consolidation, INF-25 independent
-  Home verification, INF-26 Shop/product Figma approval, and INF-27 editorial
-  route Figma approval. Implementation tickets for those remaining route
-  families are intentionally not scheduled before their Figma contracts exist.
+  background to the Home delivery scope. INF-22 remains Devon's review of the
+  parity evidence. INF-23 is approved: use text `Cart (n)` on desktop, cart
+  icon/count plus accessible menu on mobile, truthful Shopify-owned cart,
+  checkout, and account states, and a shared footer in the global-shell Figma
+  contract. INF-28 separately records the source-owned content and metadata
+  approvals.
+- Shawnee's active tasks are INF-25 independent Home verification and INF-26
+  Shop/product Figma approval. INF-27 editorial route Figma approval remains
+  in Todo until the Shop/product design is approved. Implementation tickets for
+  those remaining route families are intentionally not scheduled before their
+  Figma contracts exist.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
 
