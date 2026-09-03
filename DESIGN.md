@@ -127,7 +127,7 @@ applicable.
 
 - Figma approved frames: synced
 - `DESIGN.md`: synced
-- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive is intentionally deferred
+- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive returns to scope in INF-24 and must be implemented as the shared contract described above
 - Reusable components: Home-required navigation, actions, content primitives,
   product-card commerce states, and media fallback synchronized in INF-18
 - Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18

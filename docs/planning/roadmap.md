@@ -18,7 +18,8 @@ organization and an approved design brief.
       accessibility decisions, content extremes, and intentional divergences in
       `DESIGN.md`.
 - [x] Map the approved color, typography, spacing, and focus system to runtime
-      tokens and Storybook. The background primitive is intentionally deferred.
+      tokens and Storybook. The approved tapered-reed background returns to
+      scope for the Home delivery.
 - [x] Implement the initial Home-required reusable components and states.
 - [ ] Complete the Home source-consolidation PR and secure human parity/merge
       approval. The protected branch and current production do not yet render
@@ -51,9 +52,10 @@ organization and an approved design brief.
   but render the legacy light/sage Home hero. The approved midnight Home has
   unmerged implementation work and requires reviewable Preview evidence before
   a human merge decision.
-- INF-21, INF-22, and INF-23 are Devon's required product/release decisions:
-  visual authority and reed-background scope; Home parity/merge approval; and
-  global shell plus commerce-journey scope. INF-28 separately records the
+- INF-21 has locked visual authority and returned the approved tapered-reed
+  background to the Home delivery scope. INF-22 and INF-23 remain Devon's
+  required product/release decisions: Home parity/merge approval; and global
+  shell plus commerce-journey scope. INF-28 separately records the
   source-owned content and metadata approvals.
 - After those gates, Shawnee owns INF-24 Home consolidation, INF-25 independent
   Home verification, INF-26 Shop/product Figma approval, and INF-27 editorial
