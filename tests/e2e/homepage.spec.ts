@@ -237,11 +237,17 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
   expect(headingBox!.y - (heroBox!.y + heroBox!.height)).toBe(expectedGap);
   const controls = page.getByTestId("hero-carousel-controls");
   if (await controls.count()) {
-    const controlsBox = await controls.boundingBox();
-    expect(controlsBox).not.toBeNull();
-    expect(headingBox!.y - (controlsBox!.y + controlsBox!.height)).toBe(
-      expectedGap,
-    );
+    await expect(controls).toBeVisible();
+    await expect(
+      page.getByTestId("hero-carousel-bracket-top-left"),
+    ).toHaveCount(0);
+    const mediaBox = await page
+      .getByTestId("hero-carousel-media")
+      .boundingBox();
+    expect(mediaBox).not.toBeNull();
+    if (testInfo.project.name === "chromium") {
+      expect(mediaBox!.height).toBeLessThanOrEqual(680);
+    }
   }
   await expect(band).toHaveCSS("background-color", "rgb(227, 231, 218)");
   await expect(band).toHaveCSS("border-top-width", "0px");

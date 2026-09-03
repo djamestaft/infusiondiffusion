@@ -93,7 +93,6 @@ async function verifyHomeCabinetBand(
   const firstCard = canvas.getAllByRole("link", { name: /^View / })[0];
   const bandBounds = band.getBoundingClientRect();
   const innerBounds = inner.getBoundingClientRect();
-  const controlsBounds = controls.getBoundingClientRect();
   const headingBounds = heading.getBoundingClientRect();
 
   await expect(getComputedStyle(band).backgroundColor).toBe(
@@ -104,7 +103,8 @@ async function verifyHomeCabinetBand(
   );
   await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
-  await expect(headingBounds.top - controlsBounds.bottom).toBe(expectedGap);
+  await expect(controls).toBeVisible();
+  await expect(headingBounds.top - bandBounds.top).toBe(expectedGap);
   await expect(innerBounds.width).toBeLessThanOrEqual(1280);
   await expect(bandBounds.width).toBe(document.documentElement.clientWidth);
 }

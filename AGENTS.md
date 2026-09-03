@@ -22,7 +22,7 @@ Keep this file short. Put reusable procedures in `.agents/skills` and deeper exp
 
 ## Non-negotiable rules
 
-1. Before selecting or starting roadmap work, confirm the checkout is safe to update, fetch the configured remote, fast-forward the protected branch, and re-read `docs/planning/roadmap.md`. Never choose the next task from stale local state; if local changes prevent a safe update, report that before proceeding.
+1. Before selecting or starting roadmap work, confirm the checkout is safe to update, fetch the configured remote, fast-forward the protected branch, and re-read `docs/planning/roadmap.md`. Treat that document as the strategic source of truth and Plane as its execution ledger: retrieve the relevant Plane ticket, confirm its owner, state, dependencies, and human approval gates, and reconcile any mismatch before work begins. Never choose the next task from stale local state; if local changes prevent a safe update, report that before proceeding.
 2. Work from explicit acceptance criteria. For UI work, shape and critique the design before implementation.
 3. Use semantic design tokens and existing shadcn-based primitives. Do not introduce one-off raw colors or duplicate primitives.
 4. Add or update Storybook stories whenever a reusable component or meaningful state changes.

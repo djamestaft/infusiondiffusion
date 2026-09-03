@@ -150,6 +150,14 @@ describe("storefront templates", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
+    expect(screen.getByTestId("home-hero-section")).toHaveClass(
+      "dark",
+      "bg-content-surface",
+      "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.093fr)]",
+    );
+    expect(
+      screen.getAllByRole("link", { name: "Shop the collection" })[0],
+    ).toHaveClass("rounded-full", "w-[236px]");
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(4);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface-elevated",

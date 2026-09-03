@@ -33,6 +33,12 @@ Only frames on `30 — Redesign / Approved` are implementation authority.
 References` supplies context, and `20 — Redesign / Exploration` remains
 non-approved experimentation.
 
+The former `Infusion Diffusion Designs WEB` Figma file (`GYiQd7QSAwCSaGtt0alKG2`)
+is retired. Its links may remain in historical delivery records, but it must
+not be cited by new implementation work, visual review, Storybook contracts,
+or release approval. When a historical record needs a current counterpart,
+link the applicable frame on `30 — Redesign / Approved` instead.
+
 ## Approved INF-16 homepage direction
 
 The homepage uses the archived navigation `LogoTextLockup` in its Midnight
@@ -121,7 +127,7 @@ applicable.
 
 - Figma approved frames: synced
 - `DESIGN.md`: synced
-- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive is intentionally deferred
+- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive returns to scope in INF-24 and must be implemented as the shared contract described above
 - Reusable components: Home-required navigation, actions, content primitives,
   product-card commerce states, and media fallback synchronized in INF-18
 - Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18

@@ -40,7 +40,7 @@ type TemplateNavigationProps = {
 const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
 const homeHeroSectionClass =
-  "mx-auto grid w-full max-w-7xl gap-10 px-5 pt-16 pb-0 sm:px-8 lg:px-12 lg:pt-24 lg:pb-0";
+  "dark grid w-full gap-10 bg-content-surface px-5 py-16 text-content-primary sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.093fr)] lg:justify-center lg:gap-14 lg:px-16 lg:py-16";
 const homeCollectionInnerClass =
   "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
 
@@ -200,24 +200,33 @@ export function HomeTemplate({
         data-testid="home-hero-section"
         className={cn(
           homeHeroSectionClass,
-          carouselSlides.length && "lg:grid-cols-2 lg:items-center",
+          carouselSlides.length && "lg:items-center",
         )}
       >
-        <ContentHeader
-          title={content.heroTitle}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={content.heroIntroduction}
-          action={{
-            type: "button",
-            label: content.heroActionLabel,
-            href: "/shop",
-          }}
-        />
+        <div className="flex max-w-[600px] flex-col gap-7 lg:py-[34px]">
+          <Heading
+            level={1}
+            treatment="display"
+            className="text-[clamp(3.25rem,5vw,4.5rem)] leading-[1.097]"
+          >
+            {content.heroTitle}
+          </Heading>
+          <Lead className="max-w-[520px] text-[1.1875rem] leading-[1.632]">
+            {content.heroIntroduction}
+          </Lead>
+          <Button
+            asChild
+            variant="primary"
+            className="min-h-12 w-[236px] rounded-full px-5 text-xs tracking-[0.08em]"
+          >
+            <a href="/shop">{content.heroActionLabel}</a>
+          </Button>
+        </div>
         {carouselSlides.length ? (
           <HeroCarousel
             slides={carouselSlides}
-            className="lg:mx-auto lg:w-4/5"
+            presentation="plain"
+            className="w-full lg:h-[692px] lg:max-w-[656px]"
           />
         ) : null}
       </section>
