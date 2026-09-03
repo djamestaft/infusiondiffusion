@@ -221,6 +221,16 @@ describe("HeroCarousel", () => {
     );
   });
 
+  it("supports the approved plain presentation without legacy corner brackets", () => {
+    render(<HeroCarousel slides={slides} presentation="plain" />);
+
+    expect(screen.getByTestId("hero-carousel-stage")).not.toHaveClass("p-3");
+    expect(
+      screen.queryByTestId("hero-carousel-bracket-top-left"),
+    ).not.toBeInTheDocument();
+    expect(screen.getByTestId("hero-carousel-controls")).toBeVisible();
+  });
+
   it("keeps a stable fallback for empty and failed media", () => {
     const { rerender } = render(<HeroCarousel slides={[]} />);
     expect(screen.getByTestId("hero-carousel-fallback")).toHaveClass(

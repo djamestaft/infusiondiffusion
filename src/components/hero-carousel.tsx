@@ -18,6 +18,7 @@ export type HeroCarouselSlide = {
 export type HeroCarouselProps = {
   slides: HeroCarouselSlide[];
   className?: string;
+  presentation?: "framed" | "plain";
   initialPaused?: boolean;
   forceReducedMotion?: boolean;
   forceSaveData?: boolean;
@@ -29,6 +30,7 @@ const AUTOPLAY_MS = 3_000;
 export function HeroCarousel({
   slides: suppliedSlides,
   className,
+  presentation = "framed",
   initialPaused = false,
   forceReducedMotion,
   forceSaveData,
@@ -177,28 +179,35 @@ export function HeroCarousel({
       aria-label="Homepage campaign imagery"
       data-autoplay={canAutoplay ? "running" : "paused"}
     >
-      <div className="relative p-3 lg:p-5" data-testid="hero-carousel-stage">
+      <div
+        className={cn("relative", presentation === "framed" && "p-3 lg:p-5")}
+        data-testid="hero-carousel-stage"
+      >
         <div className="relative" data-testid="hero-carousel-bracket-envelope">
-          <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -left-2 size-10 rounded-tl-[8px] border-t border-l lg:-top-3 lg:-left-3 lg:size-14"
-            data-testid="hero-carousel-bracket-top-left"
-            aria-hidden="true"
-          />
-          <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -right-2 size-10 rounded-tr-[8px] border-t border-r lg:-top-3 lg:-right-3 lg:size-14"
-            data-testid="hero-carousel-bracket-top-right"
-            aria-hidden="true"
-          />
-          <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -bottom-2 -left-2 size-10 rounded-bl-[8px] border-b border-l lg:-bottom-3 lg:-left-3 lg:size-14"
-            data-testid="hero-carousel-bracket-bottom-left"
-            aria-hidden="true"
-          />
-          <span
-            className="border-hero-carousel-bracket pointer-events-none absolute -right-2 -bottom-2 size-10 rounded-br-[8px] border-r border-b lg:-right-3 lg:-bottom-3 lg:size-14"
-            data-testid="hero-carousel-bracket-bottom-right"
-            aria-hidden="true"
-          />
+          {presentation === "framed" ? (
+            <>
+              <span
+                className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -left-2 size-10 rounded-tl-[8px] border-t border-l lg:-top-3 lg:-left-3 lg:size-14"
+                data-testid="hero-carousel-bracket-top-left"
+                aria-hidden="true"
+              />
+              <span
+                className="border-hero-carousel-bracket pointer-events-none absolute -top-2 -right-2 size-10 rounded-tr-[8px] border-t border-r lg:-top-3 lg:-right-3 lg:size-14"
+                data-testid="hero-carousel-bracket-top-right"
+                aria-hidden="true"
+              />
+              <span
+                className="border-hero-carousel-bracket pointer-events-none absolute -bottom-2 -left-2 size-10 rounded-bl-[8px] border-b border-l lg:-bottom-3 lg:-left-3 lg:size-14"
+                data-testid="hero-carousel-bracket-bottom-left"
+                aria-hidden="true"
+              />
+              <span
+                className="border-hero-carousel-bracket pointer-events-none absolute -right-2 -bottom-2 size-10 rounded-br-[8px] border-r border-b lg:-right-3 lg:-bottom-3 lg:size-14"
+                data-testid="hero-carousel-bracket-bottom-right"
+                aria-hidden="true"
+              />
+            </>
+          ) : null}
           <div
             className="bg-product-card-media-fallback relative aspect-4/5 overflow-hidden rounded-[8px]"
             data-testid="hero-carousel-media"

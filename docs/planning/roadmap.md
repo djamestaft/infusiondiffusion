@@ -20,6 +20,10 @@ organization and an approved design brief.
 - [x] Map the approved color, typography, spacing, and focus system to runtime
       tokens and Storybook. The background primitive is intentionally deferred.
 - [x] Implement the Home-required reusable components and states.
+- [ ] Finish retiring active legacy Figma implementation references and
+      reconcile the remaining templates with `30 — Redesign / Approved`; the
+      Home hero's midnight surface and plain media treatment are aligned in the
+      initial consolidation slice.
 - [ ] Implement templates and customer journeys from approved Figma evidence.
 - [ ] Verify accessibility, performance, Storybook, unit, integration, and
       browser coverage before release review.
@@ -50,6 +54,15 @@ organization and an approved design brief.
   Shopify Admin handoff. Remaining template and journey work is next.
 - Existing live-site content must be migrated from Sanity and Shopify without
   generated replacements. Generate draft copy only for a confirmed new page.
+
+## Active remediation: redesign-source consolidation
+
+- The new `Infusion Diffusion Redesign` file (`jIMvwSBkilg7eplo3IiHPa`) is the
+  only active design file.
+- `30 — Redesign / Approved` (`2004:14`) is the sole implementation authority.
+- `20 — Redesign / Exploration` (`2004:8`) may inform future review but cannot
+  authorize runtime styling or replace an approved frame.
+- The retired `GYiQd7QSAwCSaGtt0alKG2` file remains historical evidence only.
 
 Implementation may begin after the documentation branch is reviewed and merged,
 using the exact approved Figma frames recorded in `DESIGN.md`. See

@@ -48,16 +48,21 @@ function UtilityLink({
   href,
   label,
   children,
+  className,
 }: {
   href: string;
   label: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <a
       href={href}
       aria-label={label}
-      className="hover:text-navigation-accent focus-visible:outline-navigation-focus inline-flex size-11 shrink-0 items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+      className={cn(
+        "hover:text-navigation-accent focus-visible:outline-navigation-focus inline-flex size-11 shrink-0 items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none",
+        className,
+      )}
     >
       {children}
     </a>
@@ -170,11 +175,12 @@ export function Navigation({
             ? `Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
             : "Cart"
         }
+        className="lg:w-auto lg:px-3"
       >
         <span className="relative">
           <ShoppingCart
             aria-hidden="true"
-            className="size-[1.375rem] stroke-[1.5]"
+            className="size-[1.375rem] stroke-[1.5] lg:hidden"
           />
           {cartCount ? (
             <span
@@ -185,6 +191,7 @@ export function Navigation({
             </span>
           ) : null}
         </span>
+        <span className="hidden lg:inline">Cart ({cartCount})</span>
       </UtilityLink>
     </>
   );
