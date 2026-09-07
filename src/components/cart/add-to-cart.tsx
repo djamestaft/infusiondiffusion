@@ -33,7 +33,7 @@ export function AddToCart({
       <div ref={opener}>
         <Button
           size="large"
-          className="w-full sm:w-fit"
+          className="w-full sm:w-[236px]"
           disabled={disabled || pending}
           loading={pending}
           onClick={() =>
@@ -50,7 +50,7 @@ export function AddToCart({
             })
           }
         >
-          {pending ? "Adding" : disabled ? "Sold out" : "Add to bag"}
+          {pending ? "Adding" : disabled ? "Sold out" : "Add to cart"}
         </Button>
         {error ? (
           <p

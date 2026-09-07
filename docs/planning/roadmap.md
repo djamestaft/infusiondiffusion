@@ -52,8 +52,9 @@ and production promotion retain their named human gates.
   `2209:32`. Approved layouts still require final content acceptance.
 - INF-29 implementation is in open
   [PR #62](https://github.com/djamestaft/infusiondiffusion/pull/62) at
-  `501e0ab`. GitHub quality, including browser tests, and Vercel deployment
-  passed. Visual review and human merge remain outstanding.
+  `f5fad67`. GitHub quality passed, and Devon approved the Shop and product
+  layouts at desktop, tablet and mobile widths. Human merge and post-merge
+  verification remain outstanding.
 - Review PR #62 before commissioning overlapping changes. Its documentation
   changes must preserve this newer roadmap when integrated; do not restore
   the earlier Home-first sequence during conflict resolution.
@@ -81,7 +82,7 @@ design and merge decisions. Independent verification is required for release.
 | INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35              |
 | INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                      |
 
-Immediate actions are INF-29 preview review, INF-25/22 evidence reconciliation,
+Immediate actions are INF-29 human merge, INF-25/22 evidence reconciliation,
 INF-30 asset audit and INF-28 factual decisions. These can progress together.
 INF-32 must review related INF-29 evidence, but does not require the older
 implementation to merge before revised design can proceed.

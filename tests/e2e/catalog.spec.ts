@@ -38,7 +38,7 @@ test("collection cards navigate to a purchasable product", async ({ page }) => {
   await expect(
     page.getByRole("heading", { level: 1, name: "Bois De Santal" }),
   ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Add to bag" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Add to cart" })).toBeVisible();
 });
 
 test("collection uses the elevated browsing surface without card effects", async ({
@@ -47,10 +47,10 @@ test("collection uses the elevated browsing surface without card effects", async
   await page.goto("/shop");
   const surface = page.getByTestId("collection-browsing-surface");
   const firstCard = page.getByRole("link", { name: /^View / }).first();
-  await expect(surface).toHaveCSS("background-color", "rgb(227, 231, 218)");
+  await expect(surface).toHaveCSS("max-width", "1440px");
   await expect(surface).toHaveCSS("border-top-width", "0px");
   await expect(surface).toHaveCSS("box-shadow", "none");
-  await expect(firstCard).toHaveCSS("background-color", "rgb(238, 240, 231)");
+  await expect(firstCard).toHaveCSS("background-color", "rgb(252, 250, 245)");
   await expect(firstCard).toHaveCSS("border-top-width", "0px");
   await expect(firstCard).toHaveCSS("box-shadow", "none");
   const navigationHeader = page

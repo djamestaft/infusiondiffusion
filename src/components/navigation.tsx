@@ -206,7 +206,7 @@ export function Navigation({
     >
       <nav
         aria-label="Primary"
-        className="grid h-20 grid-cols-[1fr_auto] items-center px-5 lg:h-22 lg:grid-cols-[1fr_auto_1fr] lg:px-8"
+        className="mx-auto grid h-20 w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 lg:h-22 lg:grid-cols-[1fr_auto_1fr] lg:px-[88px]"
       >
         <Link
           href="/"

@@ -56,9 +56,9 @@ describe("ProductCard", () => {
     expect(screen.getByRole("link")).toHaveAttribute("href", product.href);
   });
 
-  it("keeps the ordinary in-stock state quiet", () => {
+  it("shows Shopify availability for the ordinary in-stock state", () => {
     render(<ProductCard {...product} availability="in-stock" />);
-    expect(screen.queryByText("In stock")).not.toBeInTheDocument();
+    expect(screen.getByText("In stock")).toBeVisible();
   });
 
   it("composes low-stock status with a truthful quantity", () => {

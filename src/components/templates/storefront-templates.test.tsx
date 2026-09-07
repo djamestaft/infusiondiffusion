@@ -260,7 +260,7 @@ describe("storefront templates", () => {
   it("gives an empty collection a useful route back", () => {
     render(<CollectionTemplate products={[]} />);
     expect(screen.getByTestId("collection-browsing-surface")).toHaveClass(
-      "bg-content-surface-elevated",
+      "max-w-[1440px]",
     );
     expect(screen.getByText("0 products")).toBeVisible();
     expect(
@@ -273,12 +273,21 @@ describe("storefront templates", () => {
 
   it("keeps collection cards on the base surface without borders or shadows", () => {
     render(<CollectionTemplate products={productCardFixtures} />);
-    const card = screen.getAllByRole("link", { name: /^View / })[0];
+    const cards = screen.getAllByRole("link", { name: /^View / });
+    const card = cards[0];
+    expect(cards).toHaveLength(6);
     expect(card).toHaveClass("bg-product-card-surface");
     expect(card).not.toHaveClass("border", "shadow");
     expect(screen.getByText("6 products").parentElement).not.toHaveClass(
       "border-y",
     );
+    const shopHeader = screen
+      .getByRole("heading", { name: "Shop" })
+      .closest("header");
+    expect(screen.getByRole("heading", { name: "Shop" })).toHaveClass(
+      "text-bone-50",
+    );
+    expect(shopHeader?.parentElement).not.toHaveClass("max-w-[1440px]");
   });
 
   it("keeps the home journey meaningful without catalogue data", () => {
@@ -350,6 +359,12 @@ describe("storefront templates", () => {
         selector: "span[data-slot='commerce-status']",
       }),
     ).toBeVisible();
+    expect(screen.getByText("A warm, composed scent.").closest("article")).toBe(
+      screen.getByRole("article"),
+    );
+    expect(
+      screen.getByRole("heading", { name: "Care guidance" }),
+    ).toBeVisible();
     expect(screen.getByRole("button", { name: "Sold out" })).toBeDisabled();
   });
 
@@ -377,7 +392,7 @@ describe("storefront templates", () => {
     ).toBeVisible();
   });
 
-  it("marks Shop current on Home but not on Product detail", () => {
+  it("marks Shop current across the Home and product-shopping journey", () => {
     const { unmount } = render(
       <HomeTemplate products={[]} heroImage={undefined} />,
     );
@@ -401,8 +416,8 @@ describe("storefront templates", () => {
       />,
     );
     expect(
-      screen.queryByRole("link", { current: "page" }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("link", { name: "Shop", current: "page" }),
+    ).toBeVisible();
     expect(screen.getByText("Image coming soon")).toBeVisible();
   });
 

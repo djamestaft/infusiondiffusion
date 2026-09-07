@@ -115,15 +115,13 @@ async function verifyCollectionSurface(
 ) {
   const canvas = within(canvasElement);
   const surface = canvas.getByTestId("collection-browsing-surface");
-  await expect(getComputedStyle(surface).backgroundColor).toBe(
-    "rgb(227, 231, 218)",
-  );
+  await expect(getComputedStyle(surface).maxWidth).toBe("1440px");
   await expect(getComputedStyle(surface).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(surface).boxShadow).toBe("none");
   if (expectCards) {
     const firstCard = canvas.getAllByRole("link", { name: /^View / })[0];
     await expect(getComputedStyle(firstCard).backgroundColor).toBe(
-      "rgb(238, 240, 231)",
+      "rgb(252, 250, 245)",
     );
     await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
     await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
@@ -500,6 +498,29 @@ export const CollectionEmpty: Story = {
   play: async ({ canvasElement }) =>
     verifyCollectionSurface(canvasElement, false),
 };
+export const CollectionLoading: Story = {
+  render: () => (
+    <CollectionTemplate
+      products={productCardFixtures.slice(0, 3).map((product) => ({
+        ...product,
+        loading: true,
+      }))}
+    />
+  ),
+};
+export const CollectionLongTitleAndMissingMedia: Story = {
+  render: () => (
+    <CollectionTemplate
+      products={[
+        {
+          ...productCardFixtures[0],
+          name: "A deliberately long fragrance title that wraps without changing the media ratio",
+          image: undefined,
+        },
+      ]}
+    />
+  ),
+};
 export const CollectionMidnightNavigation: Story = {
   render: () => (
     <CollectionTemplate
@@ -576,6 +597,19 @@ export const ProductDetailBrowseOnly: Story = {
       description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
       details={productDetails}
       showPurchaseAction={false}
+    />
+  ),
+};
+export const ProductDetailTablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <ProductDetailTemplate
+      product={featured}
+      description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
+      details={productDetails}
+      variants={variants}
+      selectedVariantId="200ml"
+      onAddToCart={fn()}
     />
   ),
 };

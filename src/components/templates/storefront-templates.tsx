@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 import {
   HeroCarousel,
@@ -39,6 +40,7 @@ type TemplateNavigationProps = {
 
 const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
+const shopSectionClass = "w-full px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16";
 const homeHeroSectionClass =
   "dark grid w-full gap-10 bg-content-surface px-5 py-16 text-content-primary sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.093fr)] lg:justify-center lg:gap-14 lg:px-16 lg:py-16";
 const homeCollectionInnerClass =
@@ -79,15 +81,27 @@ function TemplateShell({
   );
 }
 
-function ProductGrid({ products }: { products: ProductCardProps[] }) {
+function ProductGrid({
+  products,
+  collectionSurface = false,
+}: {
+  products: ProductCardProps[];
+  collectionSurface?: boolean;
+}) {
   return (
-    <div className="grid grid-cols-1 gap-x-3 gap-y-10 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-3 lg:gap-x-6">
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3",
+        collectionSurface &&
+          "[--product-card-hover:var(--bone-50)] [--product-card-surface:var(--porcelain-0)]",
+      )}
+    >
       {products.map((product, index) => (
         <ProductCard
           key={product.href}
           {...product}
           imagePriority={index === 0}
-          className={cn("max-w-none", index === 3 && "lg:hidden")}
+          className="max-w-none"
         />
       ))}
     </div>
@@ -568,53 +582,74 @@ export interface CollectionTemplateProps extends TemplateNavigationProps {
 
 export function CollectionTemplate({
   products,
-  title = "The collection",
-  description = "Layered home fragrance, described through the notes you will actually live with.",
+  title = "Shop",
+  description = "Browse products, prices and availability supplied by Shopify.",
   navigationTheme,
   cartCount,
 }: CollectionTemplateProps) {
   return (
     <TemplateShell
-      navigationTheme={navigationTheme}
+      navigationTheme={navigationTheme ?? "midnight"}
       currentHref="/shop"
       cartCount={cartCount}
-      surface="elevated"
+      surface="base"
     >
-      <section className={sectionClass}>
-        <ContentHeader
-          context={{ type: "eyebrow", label: "Shop" }}
-          title={title}
-          headingLevel={1}
-          headingTreatment="display"
-          lead={description}
+      <header className="relative flex min-h-[260px] w-full items-center justify-center overflow-hidden px-5 py-12 text-center sm:min-h-[300px] lg:min-h-[330px] lg:px-16">
+        <Image
+          src="/images/homepage-bespoke-diffuser-blurb.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
-        <div className="mt-12 flex items-center justify-between py-4 font-sans text-sm">
+        <div className="absolute inset-0 bg-[rgb(25_25_22/54%)]" />
+        <div className="text-bone-50 relative z-10 max-w-4xl">
+          <Heading
+            level={1}
+            treatment="display"
+            className="text-bone-50 text-[clamp(3rem,6vw,4rem)]"
+          >
+            {title}
+          </Heading>
+          <Lead className="mt-4 max-w-none text-inherit">{description}</Lead>
+        </div>
+      </header>
+      <div
+        className="mx-auto w-full max-w-[1440px]"
+        data-testid="collection-browsing-surface"
+      >
+        <div className="bg-content-surface-elevated flex min-h-[92px] items-center justify-between gap-6 px-5 font-sans text-xs font-semibold sm:px-8 lg:px-16">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}
           </p>
-          <p className="text-content-secondary">Curated collection</p>
+          <p className="text-content-secondary">
+            Sort and filter when supported
+          </p>
         </div>
-        {products.length ? (
-          <div className="mt-10">
-            <Heading level={2} treatment="title" className="sr-only">
-              Products
-            </Heading>
-            <ProductGrid products={products} />
-          </div>
-        ) : (
-          <div className="py-20 text-center">
-            <Heading level={2} treatment="title">
-              No fragrances found
-            </Heading>
-            <Lead className="mx-auto mt-4">
-              Try another collection or return to the complete range.
-            </Lead>
-            <Button asChild variant="secondary" className="mt-8">
-              <a href="/shop">View all products</a>
-            </Button>
-          </div>
-        )}
-      </section>
+        <section className={shopSectionClass}>
+          {products.length ? (
+            <div>
+              <Heading level={2} treatment="title" className="sr-only">
+                Products
+              </Heading>
+              <ProductGrid products={products} collectionSurface />
+            </div>
+          ) : (
+            <div className="flex min-h-80 flex-col items-center justify-center py-16 text-center">
+              <Heading level={2} treatment="title">
+                No fragrances found
+              </Heading>
+              <Lead className="mx-auto mt-4">
+                Try another collection or return to the complete range.
+              </Lead>
+              <Button asChild className="mt-8 min-w-59">
+                <a href="/shop">View all products</a>
+              </Button>
+            </div>
+          )}
+        </section>
+      </div>
     </TemplateShell>
   );
 }
@@ -653,11 +688,13 @@ export function ProductDetailTemplate({
   );
   const purchaseDisabled = soldOut || selectionUnavailable;
   return (
-    <TemplateShell navigationTheme={navigationTheme} cartCount={cartCount}>
-      <article
-        className={cn(sectionClass, "grid gap-10 lg:grid-cols-2 lg:gap-20")}
-      >
-        <div className="bg-product-card-media-fallback relative aspect-3/4 overflow-hidden rounded-lg">
+    <TemplateShell
+      navigationTheme={navigationTheme ?? "midnight"}
+      currentHref="/shop"
+      cartCount={cartCount}
+    >
+      <article className="mx-auto grid w-full max-w-[1440px] gap-0 px-5 py-8 sm:px-8 sm:py-12 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:py-16">
+        <div className="bg-product-card-media-fallback relative aspect-[31/36] w-full overflow-hidden">
           {product.image ? (
             <Image
               src={product.image.src}
@@ -674,14 +711,14 @@ export function ProductDetailTemplate({
             </span>
           )}
         </div>
-        <div className="flex flex-col justify-center gap-6">
-          <Eyebrow>{product.format}</Eyebrow>
-          <Heading level={1} treatment="display">
+        <div className="flex flex-col items-start gap-[18px] pt-8 lg:min-h-full lg:justify-start lg:pt-0">
+          <Heading
+            level={1}
+            treatment="display"
+            className="text-[2.5rem] leading-[1.25] sm:text-[2.75rem] lg:text-5xl"
+          >
             {product.name}
           </Heading>
-          <p className="text-content-secondary font-sans text-lg leading-8">
-            {product.notes}
-          </p>
           <PriceDisplay
             price={product.price}
             compareAtPrice={product.compareAtPrice}
@@ -692,27 +729,30 @@ export function ProductDetailTemplate({
             status={product.availability ?? "in-stock"}
             lowStockCount={product.lowStockCount}
           />
-          <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
+          <p className="text-content-secondary w-full max-w-[65ch] font-sans text-sm leading-6">
             {description}
           </p>
           {variants.length ? (
-            <fieldset className="flex flex-wrap gap-3">
-              <legend className="mb-3 w-full font-sans text-sm font-semibold">
-                Choose a format
+            <fieldset className="flex w-full max-w-[520px] flex-col items-center gap-2.5 pt-2 sm:items-start">
+              <legend className="mb-1 w-full text-center font-sans text-sm font-semibold sm:text-left">
+                Choose an available Shopify variant
               </legend>
               {variants.map((variant) => (
                 <Button
                   key={variant.id}
                   type="button"
-                  variant={
-                    selectedVariantId === variant.id ? "primary" : "secondary"
-                  }
+                  variant="quiet"
                   aria-pressed={selectedVariantId === variant.id}
                   disabled={!variant.available}
                   onClick={() => onVariantChange?.(variant.id)}
+                  className="bg-content-surface-elevated w-full justify-between rounded-none px-3.5 text-left normal-case sm:w-[236px] [&>span:nth-last-child(2)]:hidden"
                 >
-                  {variant.label}
-                  {!variant.available ? " — unavailable" : ""}
+                  <span>
+                    {variant.label}
+                    {!variant.available ? " — unavailable" : ""}
+                  </span>
+                  <span aria-hidden="true">⌄</span>
+                  <ChevronDown aria-hidden="true" className="size-4 shrink-0" />
                 </Button>
               ))}
             </fieldset>
@@ -729,16 +769,23 @@ export function ProductDetailTemplate({
                 size="large"
                 disabled={purchaseDisabled}
                 onClick={onAddToCart}
-                className="w-full sm:w-fit"
+                className="w-full sm:w-[236px]"
               >
                 {soldOut
                   ? "Sold out"
                   : selectionUnavailable
                     ? "Choose a format"
-                    : "Add to bag"}
+                    : "Add to cart"}
               </Button>
             ) : null)}
-          <dl className="border-navigation-border mt-4 divide-y border-y font-sans">
+        </div>
+      </article>
+      <section className="bg-content-surface-elevated w-full">
+        <div className="mx-auto w-full max-w-[1440px] px-5 py-11 sm:px-8 lg:px-16">
+          <Heading level={2} treatment="title">
+            Care guidance
+          </Heading>
+          <dl className="border-navigation-border mt-6 w-full divide-y border-y font-sans">
             {details.map((detail) => (
               <div
                 key={detail.label}
@@ -750,7 +797,7 @@ export function ProductDetailTemplate({
             ))}
           </dl>
         </div>
-      </article>
+      </section>
     </TemplateShell>
   );
 }
