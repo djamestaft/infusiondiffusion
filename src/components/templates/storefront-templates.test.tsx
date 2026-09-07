@@ -260,7 +260,7 @@ describe("storefront templates", () => {
   it("gives an empty collection a useful route back", () => {
     render(<CollectionTemplate products={[]} />);
     expect(screen.getByTestId("collection-browsing-surface")).toHaveClass(
-      "bg-content-surface-elevated",
+      "max-w-[1440px]",
     );
     expect(screen.getByText("0 products")).toBeVisible();
     expect(
@@ -377,7 +377,7 @@ describe("storefront templates", () => {
     ).toBeVisible();
   });
 
-  it("marks Shop current on Home but not on Product detail", () => {
+  it("marks Shop current across the Home and product-shopping journey", () => {
     const { unmount } = render(
       <HomeTemplate products={[]} heroImage={undefined} />,
     );
@@ -401,8 +401,8 @@ describe("storefront templates", () => {
       />,
     );
     expect(
-      screen.queryByRole("link", { current: "page" }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("link", { name: "Shop", current: "page" }),
+    ).toBeVisible();
     expect(screen.getByText("Image coming soon")).toBeVisible();
   });
 

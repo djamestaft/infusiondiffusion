@@ -9,7 +9,7 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
     if (message.type() === "error") consoleErrors.push(message.text());
   });
   await page.goto("/products/bois-de-santal-200ml");
-  await page.getByRole("button", { name: "Add to bag" }).click();
+  await page.getByRole("button", { name: "Add to cart" }).click();
   await expect(page.getByRole("dialog")).toContainText("Added to your bag");
   await expect(
     page.locator('a[aria-label="Cart, 1 item"]').first(),
@@ -20,8 +20,8 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
   expect(cookie).toMatchObject({ httpOnly: true, sameSite: "Lax" });
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Add to bag" })).toBeFocused();
-  await page.getByRole("button", { name: "Add to bag" }).click();
+  await expect(page.getByRole("button", { name: "Add to cart" })).toBeFocused();
+  await page.getByRole("button", { name: "Add to cart" }).click();
   await page.getByRole("link", { name: "Review your bag" }).click();
   await expect(page).toHaveTitle("Your bag | Infusion Diffusion");
   await expect(

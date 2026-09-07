@@ -50,7 +50,7 @@ export function AddToCart({
             })
           }
         >
-          {pending ? "Adding" : disabled ? "Sold out" : "Add to bag"}
+          {pending ? "Adding" : disabled ? "Sold out" : "Add to cart"}
         </Button>
         {error ? (
           <p

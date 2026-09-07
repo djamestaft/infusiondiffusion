@@ -115,15 +115,13 @@ async function verifyCollectionSurface(
 ) {
   const canvas = within(canvasElement);
   const surface = canvas.getByTestId("collection-browsing-surface");
-  await expect(getComputedStyle(surface).backgroundColor).toBe(
-    "rgb(227, 231, 218)",
-  );
+  await expect(getComputedStyle(surface).maxWidth).toBe("1440px");
   await expect(getComputedStyle(surface).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(surface).boxShadow).toBe("none");
   if (expectCards) {
     const firstCard = canvas.getAllByRole("link", { name: /^View / })[0];
     await expect(getComputedStyle(firstCard).backgroundColor).toBe(
-      "rgb(238, 240, 231)",
+      "rgb(252, 250, 245)",
     );
     await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
     await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
