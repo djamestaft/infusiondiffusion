@@ -101,7 +101,7 @@ function ProductGrid({
           key={product.href}
           {...product}
           imagePriority={index === 0}
-          className={cn("max-w-none", index === 3 && "lg:hidden")}
+          className="max-w-none"
         />
       ))}
     </div>
@@ -594,31 +594,31 @@ export function CollectionTemplate({
       cartCount={cartCount}
       surface="base"
     >
+      <header className="relative flex min-h-[260px] w-full items-center justify-center overflow-hidden px-5 py-12 text-center sm:min-h-[300px] lg:min-h-[330px] lg:px-16">
+        <Image
+          src="/images/homepage-bespoke-diffuser-blurb.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[rgb(25_25_22/54%)]" />
+        <div className="text-bone-50 relative z-10 max-w-4xl">
+          <Heading
+            level={1}
+            treatment="display"
+            className="text-[clamp(3rem,6vw,4rem)]"
+          >
+            {title}
+          </Heading>
+          <Lead className="mt-4 max-w-none text-inherit">{description}</Lead>
+        </div>
+      </header>
       <div
         className="mx-auto w-full max-w-[1440px]"
         data-testid="collection-browsing-surface"
       >
-        <header className="relative flex min-h-[260px] items-center justify-center overflow-hidden px-5 py-12 text-center sm:min-h-[300px] lg:min-h-[330px] lg:px-16">
-          <Image
-            src="/images/homepage-bespoke-diffuser-blurb.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-[rgb(25_25_22/54%)]" />
-          <div className="text-bone-50 relative z-10 max-w-4xl">
-            <Heading
-              level={1}
-              treatment="display"
-              className="text-[clamp(3rem,6vw,4rem)]"
-            >
-              {title}
-            </Heading>
-            <Lead className="mt-4 max-w-none text-inherit">{description}</Lead>
-          </div>
-        </header>
         <div className="bg-content-surface-elevated flex min-h-[92px] items-center justify-between gap-6 px-5 font-sans text-xs font-semibold sm:px-8 lg:px-16">
           <p aria-live="polite">
             {products.length} {products.length === 1 ? "product" : "products"}

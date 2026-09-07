@@ -273,12 +273,18 @@ describe("storefront templates", () => {
 
   it("keeps collection cards on the base surface without borders or shadows", () => {
     render(<CollectionTemplate products={productCardFixtures} />);
-    const card = screen.getAllByRole("link", { name: /^View / })[0];
+    const cards = screen.getAllByRole("link", { name: /^View / });
+    const card = cards[0];
+    expect(cards).toHaveLength(6);
     expect(card).toHaveClass("bg-product-card-surface");
     expect(card).not.toHaveClass("border", "shadow");
     expect(screen.getByText("6 products").parentElement).not.toHaveClass(
       "border-y",
     );
+    const shopHeader = screen
+      .getByRole("heading", { name: "Shop" })
+      .closest("header");
+    expect(shopHeader?.parentElement).not.toHaveClass("max-w-[1440px]");
   });
 
   it("keeps the home journey meaningful without catalogue data", () => {
