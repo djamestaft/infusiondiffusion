@@ -31,4 +31,4 @@ Infusion Diffusion is a South African luxury home-fragrance brand selling fragra
 
 ## Current milestone
 
-Connect the approved responsive storefront templates to a normalized, server-side Shopify commerce boundary. Home, Collection, Product detail, and Editorial are approved in Figma and represented as responsive Storybook compositions; their current products and imagery are provisional. Cart and checkout behavior remain out of scope until the corresponding commerce milestone.
+Evolve the existing brand into a cohesive premium shopping journey: Home, Shop, product detail, the existing cart and Shopify-hosted checkout handoff, plus essential brand and service pages. Shopify commerce and Sanity CMS integrations already exist and must be preserved. Complete the launch asset/content workstream, approve revised real-content Figma compositions, and verify the integrated journey. Gallery refinement follows the shopping milestone. See `docs/planning/roadmap.md` for current approval status, Plane tickets and delivery order.
