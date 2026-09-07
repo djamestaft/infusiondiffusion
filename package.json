@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "pr:gate": "node scripts/pr-gate.mjs",
+    "test:gate": "node --test scripts/pr-gate.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

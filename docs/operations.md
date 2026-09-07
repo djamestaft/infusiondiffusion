@@ -17,13 +17,36 @@ Copy `.env.example` to `.env.local`. Obtain secrets from the relevant service; n
 
 ## Release gate
 
-1. After every pull-request push, run `just pr-gate <PR number>`. Do not call the handoff ready, request merge, or move to Preview review until the factory records GitHub's required `quality` check as passed. Pending, missing, skipped, cancelled, timed-out, or failed checks are red gates.
+1. After every pull-request push, run `corepack pnpm pr:gate <PR number>` (or `just pr-gate <PR number>`) from the delivery checkout. Do not call the handoff ready, request merge, or move to Preview review until the gate records GitHub's required `quality` check as passed for that checkout's HEAD and the current PR head. Pending, missing, skipped, cancelled, timed-out, or failed checks are red gates. The command checks once; rerun it when CI finishes.
    If GitHub drops a pull-request synchronize run, dispatch `CI` manually on the exact pull-request branch and run the same gate again; never substitute local evidence for a missing GitHub check.
 2. CI passes formatting, lint, types, Vitest, Storybook tests/build, Next build, and Playwright.
 3. Reviewer confirms acceptance criteria, accessibility, security boundaries, and screenshots.
 4. Browser release debugger verifies the Vercel Preview and `/api/health`.
 5. A human approves and merges the pull request.
 6. Verify production homepage, metadata, health, content publishing, and runtime logs.
+
+### Local PR gate
+
+The SSSF factory and its old `justfile` were intentionally removed in the
+27 August redesign reset (`15181f0`). The remaining factory-only instruction
+was stale. `scripts/pr-gate.mjs` now performs this bounded check without the
+retired factory, Python, or GitHub CLI dependencies.
+
+The gate derives the GitHub repository from `origin` (or the sole configured
+remote), requires local HEAD to equal the PR head in that repository, checks
+the latest GitHub Actions `quality` result, and rechecks the PR head before
+recording success. It accepts only completed/success. Authentication uses
+`GH_TOKEN`, `GITHUB_TOKEN`, or the existing Git credential manager; credentials
+are never written to the result. GitHub access is read-only.
+
+Results are stored under `git rev-parse --git-path pr-gates/<PR number>.json`,
+outside tracked files and separately for each worktree. Starting a new check
+invalidates older success; failures remain red. A record is a timestamped
+observation, not permanent permission: rerun after a push or CI rerun. It does
+not replace independent review, Preview verification or human merge approval.
+
+Use the pnpm command if `just` is not on PATH. Run `corepack pnpm test:gate`
+for the gate's regression tests; CI runs the same suite.
 
 ## Human approval points
 
