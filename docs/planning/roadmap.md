@@ -44,9 +44,9 @@ and production promotion retain their named human gates.
 
 - Home PR #60 was human-merged at `e6ea435`; main and live health reported
   `b4feec3` during the 7 September assessment. INF-24 remains Done.
-- INF-25 owns baseline verification and unresolved deviations. Its 3 September
-  report includes visual differences and environment-specific test failures.
-  INF-22 is Devon's review, not a future authorization for the completed merge.
+- INF-25 baseline verification and INF-22 Devon review are Done. The merged
+  7 September evidence distinguishes resolved findings from remaining visual
+  and missing-media work transferred to INF-32/33/34; transfer is not correction.
 - INF-26 Shop/product design approval is complete. Shop frames:
   `2209:24`–`2209:27`; product detail: `2209:28`–`2209:31`; states:
   `2209:32`. Approved layouts still require final content acceptance.
@@ -73,7 +73,7 @@ design and merge decisions. Independent verification is required for release.
 | INF-22 | Devon reviews Home baseline acceptance and outstanding deviations                      | INF-25                      |
 | INF-29 | Review and finish existing Shop/product delivery without overlapping rework            | INF-23, INF-26              |
 | INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit |
-| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Ready now                   |
+| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Approved and merged         |
 | INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28              |
 | INF-32 | Approve real-content responsive Home/Shop/product/cart/footer journey                  | INF-31                      |
 | INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32              |
@@ -83,8 +83,18 @@ design and merge decisions. Independent verification is required for release.
 | INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35              |
 | INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                      |
 
-Immediate actions are INF-25/22 evidence reconciliation, INF-30 asset audit and
-INF-28 factual decisions. These can progress together.
+INF-30's audit and owner approval are merged through PRs #66/#67; the required
+quality check passed on `d79b673`, and its Plane status is reconciled to Done.
+Final asset acquisition, source manifests, expenditure and publication retain
+their downstream gates.
+
+The immediate action is Devon's outstanding INF-28 factual decisions. The
+[launch content decision sheet](../features/inf-28-launch-content-decisions.md)
+preserves the 2 September naming/claims/contact/metadata approvals, identifies
+unapplied source corrections, and records unresolved launch range, scent notes,
+care, service, mailbox and metadata choices against a fresh source snapshot.
+INF-28 remains Todo for Devon's decision; INF-31 remains blocked until its
+content decision gate closes. Preparation of a decision sheet is not approval.
 INF-32 must review related INF-29 evidence, but does not require the older
 implementation to merge before revised design can proceed.
 Dependent implementation remains in Backlog until approval contracts exist.
