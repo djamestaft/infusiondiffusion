@@ -97,7 +97,11 @@ On 7 September Devon confirmed the current launch is the six existing 200 ml
 reed diffusers only. Candles and room sprays must not be advertised as launch
 products. INF-28 U2 is Accepted; U1's range is Accepted while the title suffix
 and Shopify product-type field remain unresolved. INF-31 owns the corresponding
-source wording preview and later approved publication.
+source wording preview and later approved publication. Devon subsequently
+authorized Home and metadata wording implementation. The Fragrance Guide is
+deferred to Devon's new format; image replacement and missing information will
+be added later. Those deferrals permit this wording delivery without treating
+the final launch-content or revised-design gates as complete.
 INF-28 remains Todo for outstanding decisions. On 7 September the user deferred
 Santuaire Serein’s specific fragrance notes and authorized continued preparation.
 INF-31 may progress approved naming and asset-source inventory while those notes

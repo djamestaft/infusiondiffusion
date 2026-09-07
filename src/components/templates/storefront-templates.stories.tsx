@@ -320,7 +320,7 @@ export const HomeLongContent: Story = {
         heroTitle:
           "Fragrance composed with clarity for every room you return to",
         heroIntroduction:
-          "Discover considered diffusers, room sprays and candles with plainly described notes, useful format guidance and details designed for everyday South African homes.",
+          "Discover considered reed diffusers with details designed for everyday South African homes.",
         collectionTitle:
           "A considered cabinet of atmosphere for rooms of every rhythm",
         guidanceTitle:

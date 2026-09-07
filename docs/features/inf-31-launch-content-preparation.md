@@ -59,7 +59,11 @@ Devon confirmed on 7 September that the current launch is the six existing
 200 ml reed diffusers only. Candles and room sprays are excluded for now.
 The [wording preview](evidence/inf-31-reed-diffuser-copy-preview.md) identifies
 the source, fallback, metadata and Storybook corrections. These are prepared
-values; no live source or runtime wording has changed in this increment.
+values. Devon subsequently authorized Home and metadata implementation: matching
+repository defaults and the Home story are updated on the delivery branch.
+Sanity still needs the source correction documented in the wording preview.
+The Fragrance Guide awaits Devon's new format. Images and missing information
+are deferred; the photography handoff is retained for later use.
 Product title suffix and Shopify product-type decisions remain open.
 
 ## Content and source handoff

@@ -2,8 +2,12 @@
 
 Prepared 7 September 2026. Devon confirmed the six existing 200 ml reed diffusers
 are the current launch range. Candles and room sprays are excluded for now.
-The range decision is accepted; the following exact wording is prepared for
-source review. Nothing in this preview has been published or changed at runtime.
+The range decision is accepted. Devon subsequently authorized Home and metadata
+wording implementation, deferred the Fragrance Guide to a new format, and
+deferred replacement images and missing information. Home/template defaults,
+root metadata, site-settings fallbacks and the Home Storybook example are now
+updated on the delivery branch. The guide and holding-page proposals below
+remain unapplied. No Sanity publication has occurred.
 
 ## Proposed source values
 
@@ -31,6 +35,16 @@ founder attribution to **Jacqui Candles – Scented Wax Melts** in all sources a
 stories: it is an approved collaborator name, not an advertised launch product.
 
 ## Source handoff and verification
+
+Read-only Sanity verification on 7 September still returned the old introduction
+and SEO description on published `siteSettings`, revision
+`zoys6rIPUNIFY1LepICbUN`. No hero introduction value was returned. The prepared
+[conditional source patch](inf-31-home-source-patch.json) updates only introduction
+and SEO description and rejects that revision if an editor has changed it.
+It is review evidence, not an automatically executed migration. A Sanity editor
+must preview and publish the corresponding values; no authenticated write
+connection is available in this session. Until that happens, published Home SEO
+continues to override the corrected repository fallback.
 
 The current repository wording was inspected at base `c6a2be5`. The earlier
 dated Sanity snapshot is evidence of published state at capture time only.

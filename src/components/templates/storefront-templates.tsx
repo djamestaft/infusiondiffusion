@@ -149,7 +149,7 @@ export type HomeTemplateContent = {
 export const fallbackHomeTemplateContent: HomeTemplateContent = {
   heroTitle: "Fragrance, composed for the rooms you live in",
   heroIntroduction:
-    "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
+    "Reed diffusers shaped by considered materials and everyday ritual.",
   heroActionLabel: "Shop the collection",
   collectionTitle: "A cabinet of atmosphere",
   bespokeBlurb:
