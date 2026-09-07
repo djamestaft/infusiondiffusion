@@ -1,0 +1,324 @@
+{
+  "capturedAt": "2026-09-07T13:35:25.247Z",
+  "scope": "Read-only published Shopify catalogue and Sanity editorial content; no prices or inventory duplicated.",
+  "products": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Product/10067255558430",
+        "handle": "home-decor-example-product-4",
+        "title": "Ambre Egyptian - 200ml",
+        "description": "Where Golden Light Meets Timeless Warmth Embrace the quiet allure of Ambré Egyptian — a fragrance that captures the gentle transition from golden afternoon to a softly lit evening. A warm glow filters through the air as bright mandarin and subtle fruity notes create a delicate, uplifting opening that feels both inviting and serene. At its heart, a graceful bouquet of muguet and jasmine unfolds, bringing a light floral elegance that adds softness and refinement. This delicate middle layer evokes a sense of calm sophistication, like the stillness of dusk settling in. As the fragrance deepens, a comforting base of creamy vanilla, rich tonka, and smooth sandalwood emerges, wrapping the senses in warm amber sweetness and subtle musk.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50805684338974",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/10067255394590",
+        "handle": "home-decor-example-product-1",
+        "title": "Blanc De Blanc - 200ml",
+        "description": "Understated Opulence, Effortlessly Worn Step into understated opulence with Blanc De Blanc — a fragrance that captures the essence of a perfectly tailored evening. It opens with a luminous burst of bergamot, lifted by a refined blend of pink and black pepper, softened with aromatic chamomile, clary sage, and rosemary. The effect is both crisp and intriguing, setting the tone for a scent that is effortlessly sophisticated. At its heart, a sumptuous fusion of leather and orris unfolds, enriched by delicate mimosa, soft freesia, and a subtle hint of almond. This elegant composition brings depth and texture, balancing smooth florals with a velvety, smoky richness that feels both modern and timeless. As the fragrance lingers, a warm and enveloping base of tonka bean, amber, and smooth sandalwood emerges, enriched by whispers of white musk and soft vanilla. The dry-down is beautifully balanced — intimate yet lingering, like the quiet confidence of a perfectly chosen accessory.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50805684207902",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/10067989987614",
+        "handle": "bois-de-santal-200ml",
+        "title": "Bois De Santal - 200ml",
+        "description": "A Fragrance That Invites Balance, Reflection, and Calm PresenceDiscover the quiet sophistication of Bois de Santal — a fragrance that invites balance, reflection, and calm presence. It opens with the gentle warmth of cardamom, softened by delicate rose and the creamy richness of sandalwood, creating an immediate sense of serenity and composure. At its heart, myrtle and jasmine unfold with subtle elegance, bringing a fresh, uplifting clarity that evokes confidence and quiet confidence. This refined floral core adds depth while maintaining a beautifully understated character. As the scent lingers, a grounding base of deep sandalwood, amber, and smooth vanilla emerges, wrapping the space in warmth and stability. Comforting yet refined, Bois de Santal leaves a soft, enduring impression.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50806635888926",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/10068135641374",
+        "handle": "ete-mystique-200ml",
+        "title": "Ete Mystique - 200ml",
+        "description": "Where Twilight Dances With Enchanted Summers Immerse yourself in the captivating world of Ete Mystique — a fragrance that evokes the magic of a summer evening as golden light fades into violet dusk. It opens with a radiant blend of sun-warmed fig and crisp bergamot, intertwined with delicate neroli and a whisper of blackcurrant, creating an opening that is both luminous and intriguing.At its heart, a spellbinding bouquet of night-blooming jasmine and tuberose unfolds, enriched by velvety iris and a touch of warm cinnamon. This intoxicating middle layer captures the essence of a moonlit garden, where exotic florals release their most seductive scents under the stars.As the fragrance settles, a sensual base of rich amber, smoky incense, and creamy musk emerges, softened by hints of cedarwood and warm patchouli. The dry-down is mysterious and alluring — a lingering trail that evokes the enchantment of an endless summer night.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50806784491806",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/10067255460126",
+        "handle": "home-decor-example-product-2",
+        "title": "Noir De La Noit - 200ml",
+        "description": "Where Brightness and Depth Meet in Perfect Harmony Unveil the allure of Noir De La Nuit — a sophisticated fragrance where brightness and depth meet in perfect harmony. The journey begins with a crisp burst of orange zest, bergamot, and a whisper of eucalyptus, creating a fresh and invigorating opening that awakens the senses. At its heart, a rich and intriguing blend of raspberry, saffron, neroli, and clove bud unfolds, adding warmth, subtle spice, and a touch of refined sweetness. This captivating middle layer brings complexity and elegance, evoking a sense of quiet indulgence. As the fragrance settles, it reveals a smooth and grounding base of sandalwood, cedar, patchouli, and soft amber. The result is a warm, woody finish that lingers beautifully, wrapping the senses in a refined and enduring elegance.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50805684240670",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/10067255492894",
+        "handle": "home-decor-example-product-3",
+        "title": "Santuaire Serein - 200ml",
+        "description": "A Serene Escape Immerse yourself in a scent designed to transform everyday moments into a serene escape. This refined fragrance creates a calming, luxurious atmosphere that elevates self-care rituals, wrapping the senses in a gentle sense of ease. Inspired by the tranquil ambiance of a high-end spa, it brings a soothing, restorative quality to bathrooms and treatment spaces alike. Crafted for a premium wellness experience, the fragrance appeals to those who seek relaxation with a touch of indulgence. Its soft, lingering finish subtly lingers in the air, leaving behind a delicate impression that invites you to return, time and time again.",
+        "productType": "",
+        "vendor": "InfusionDiffusion",
+        "seo": {
+          "title": null,
+          "description": null
+        },
+        "variants": {
+          "nodes": [
+            {
+              "id": "gid://shopify/ProductVariant/50805684273438",
+              "title": "Default Title",
+              "sku": null,
+              "selectedOptions": [
+                {
+                  "name": "Title",
+                  "value": "Default Title"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "pageInfo": {
+      "hasNextPage": false
+    }
+  },
+  "sanity": [
+    {
+      "_id": "siteSettings",
+      "_type": "siteSettings",
+      "_updatedAt": "2026-08-06T11:39:28Z",
+      "brandName": "Infusion Diffusions",
+      "contactEmail": "dione.smith@infusiondiffusion.co.za",
+      "headline": "Scent for living",
+      "homepage": {
+        "heroSlides": [
+          {
+            "_key": "santuaire-serein",
+            "_type": "heroSlide",
+            "alt": "Santuaire Serein reed diffuser among white flowers, lavender, smooth stones and rolled towels.",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-c63a96a8071af98403fab9cc54146228d41c6062-480x640-png",
+                "_type": "reference"
+              }
+            },
+            "visible": true
+          },
+          {
+            "_key": "bois-de-santal",
+            "_type": "heroSlide",
+            "alt": "Bois De Santal reed diffuser on a wooden desk with an orchid, books and dark green curtains.",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-175ecb607538fa94bff2ea30df08155ea394e456-480x640-png",
+                "_type": "reference"
+              }
+            },
+            "visible": true
+          },
+          {
+            "_key": "ete-mystique",
+            "_type": "heroSlide",
+            "alt": "Ete Mystique reed diffuser against a soft ivory and blush marbled background with gold details.",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-7bebde241bf718bd13f81edd976054555cdfeb28-480x640-png",
+                "_type": "reference"
+              }
+            },
+            "visible": true
+          }
+        ]
+      },
+      "introduction": "We are preparing a considered collection of room sprays, reed diffusers, and candles for layered, lived-in rooms.",
+      "sections": null,
+      "seoDescription": "Discover room sprays, reed diffusers, and candles designed to bring considered fragrance into lived-in rooms.",
+      "seoTitle": "Infusion Diffusion",
+      "slug": null,
+      "title": null
+    }
+  ],
+  "sources": {
+    "shopify": {
+      "domain": "infusiondiffusion.myshopify.com",
+      "apiVersion": "2026-07",
+      "operation": "products(first:100,sortKey:TITLE)",
+      "access": "Storefront read only"
+    },
+    "sanity": {
+      "projectId": "j222nd1i",
+      "dataset": "production",
+      "apiVersion": "2026-07-01",
+      "perspective": "published",
+      "scope": "siteSettings and editorialPage slugs about, contact, fragrance-guide"
+    }
+  },
+  "liveInspection": {
+    "capturedAt": "2026-09-07T13:35:56.073Z",
+    "baseUrl": "https://infusion-diffusion.vercel.app",
+    "method": "HTTP HTML text/title inspection; not hydrated browser verification",
+    "pages": [
+      {
+        "path": "/api/health",
+        "status": 200,
+        "health": {
+          "status": "ok",
+          "service": "infusion-diffusion",
+          "version": "ada8fa8",
+          "timestamp": "2026-09-07T13:39:31.671Z"
+        }
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "title": "Infusion Diffusion"
+      },
+      {
+        "path": "/shop",
+        "status": 200,
+        "title": "Shop home fragrance | Infusion Diffusion"
+      },
+      {
+        "path": "/contact",
+        "status": 200,
+        "title": "Contact | Infusion Diffusion"
+      },
+      {
+        "path": "/about",
+        "status": 200,
+        "title": "About Infusion Diffusion | Infusion Diffusion"
+      },
+      {
+        "path": "/fragrance-guide",
+        "status": 200,
+        "title": "A practical home fragrance guide | Infusion Diffusion"
+      },
+      {
+        "path": "/account",
+        "status": 200,
+        "title": "Your account | Infusion Diffusion"
+      },
+      {
+        "path": "/products/home-decor-example-product-4",
+        "status": 200,
+        "title": "Ambre Egyptian - 200ml | Infusion Diffusion"
+      },
+      {
+        "path": "/products/home-decor-example-product-1",
+        "status": 200,
+        "title": "Blanc De Blanc - 200ml | Infusion Diffusion"
+      },
+      {
+        "path": "/products/bois-de-santal-200ml",
+        "status": 200,
+        "title": "Bois De Santal - 200ml | Infusion Diffusion"
+      },
+      {
+        "path": "/products/ete-mystique-200ml",
+        "status": 200,
+        "title": "Ete Mystique - 200ml | Infusion Diffusion"
+      },
+      {
+        "path": "/products/home-decor-example-product-2",
+        "status": 200,
+        "title": "Noir De La Noit - 200ml | Infusion Diffusion"
+      },
+      {
+        "path": "/products/home-decor-example-product-3",
+        "status": 200,
+        "title": "Santuaire Serein - 200ml | Infusion Diffusion"
+      }
+    ]
+  }
+}

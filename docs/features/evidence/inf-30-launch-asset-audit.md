@@ -89,14 +89,19 @@ second commerce source of truth. Devon confirmed commercial reuse rights on
 - two wide/vertical event-overview photographs;
 - two isolated bottle photographs: Bois De Santal and Blanc De Blanc;
 - four isolated Santuaire Serein close views;
-- three brochure-layout exports using current composite imagery; and
-- four event/group/product-display photographs.
+- four brochure-layout exports using current composite imagery; and
+- three event/group/product-display photographs.
 
 The photos are credible documentary references for the physical bottle,
 packaging, label, tassel, cap and event presentation. Devon confirmed the brand
 took and may commercially reuse them. Consent for identifiable people, capture
 dates, and original-file records remain unrecorded. Files containing
 identifiable people must not be published without confirmed consent.
+
+The counts above were corrected by direct per-file inspection during INF-31 on
+7 September: files `(2)`–`(5)` are four brochure layouts; `(10)`–`(12)` are
+three event-detail photographs. This corrects the inventory, not the prior
+owner approval. See [the reviewed shortlist](inf-31-asset-shortlist.md).
 
 ### Derived and generated review assets
 
