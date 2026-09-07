@@ -77,6 +77,12 @@ exist with matching hashes, and all document links resolve. Check formatting
 and the diff for unintended changes. No new runtime tests are needed for this
 documentation-only increment; the PR still runs the repository's required CI.
 
+The [photography handoff](evidence/inf-31-photography-handoff.md) turns the
+approved capture brief into a 33-row intake sheet: 18 required product shots,
+12 conditional packaging/scale shots and three range-level lifestyle scenes.
+Product rows use the existing six Shopify GIDs; new-source provenance and
+acceptance remain empty until evidence is supplied. No supplier is booked.
+
 The next concrete work is completing the per-file source records and obtaining
 approved final imagery, while the remaining factual decisions are gathered.
 Santuaire's missing notes alone no longer stop that work. This package does not
