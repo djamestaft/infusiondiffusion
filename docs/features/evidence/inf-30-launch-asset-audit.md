@@ -1,6 +1,6 @@
 # INF-30 launch asset audit and photography brief
 
-Status: Ready for owner review
+Status: Owner-approved
 
 Audit date: 7 September 2026
 
@@ -16,11 +16,11 @@ the repository's provisional Storybook fixtures; Shopify's copies differ only
 by negligible export/compression changes. They are sufficient as temporary
 catalogue media, but they are not an approved launch photography set.
 
-The repository does not contain a licence, model/property release, photographer
-credit, generation record, or written transfer of commercial usage rights for
-the six brochure composites. Their creation method and rights therefore remain
-**unverified**. Do not describe them as owned photography or approved generated
-imagery until Devon supplies the source record.
+On 7 September 2026, Devon confirmed that the brochure composites are generated
+images owned by Infusion Diffusion and that the WhatsApp photographs were taken
+by the brand. Devon confirmed commercial reuse rights for both groups and
+approved this photography brief. The repository still needs the per-file source
+manifest defined below before replacement assets move through INF-31.
 
 The available owner-supplied WhatsApp images document real products and an
 event display. They establish a useful product reference, but they do not form
@@ -41,14 +41,14 @@ All current Shopify images are 480 x 640 PNGs and have generic generated alt
 text in the storefront. `Rights` means the repository evidence available to
 this audit, not a legal conclusion.
 
-| SKU / current Shopify title | Current handle                 | Shopify featured image | Current classification                                                                           | Owner-supplied source available                                                                 | Launch gaps                                                                                                      | Rights     | Acquisition estimate                                                                                             |
-| --------------------------- | ------------------------------ | ---------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| Ambre Egyptian              | `home-decor-example-product-4` | `ambre-egyptian.png`   | Provisional brochure composite; generation method unverified                                     | Appears in event/group photographs only                                                         | Primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle                            | Unverified | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
-| Blanc De Blanc              | `home-decor-example-product-1` | `blanc-de-blanc.png`   | Provisional brochure composite; generation method unverified                                     | Isolated bottle image `WhatsApp Image 2026-08-08 at 18.11.02 (1).jpeg`; event/group photographs | Consistent primary with reeds, detail view, clean crop, room-led lifestyle                                       | Unverified | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
-| Bois De Santal              | `bois-de-santal-200ml`         | `bois-de-santal.png`   | Provisional brochure composite; generation method unverified                                     | Isolated bottle image `WhatsApp Image 2026-08-08 at 18.11.02.jpeg`; event/group photographs     | Consistent primary with reeds, detail view, clean crop, room-led lifestyle                                       | Unverified | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
-| Ete Mystique                | `ete-mystique-200ml`           | `ete-mystique.png`     | Provisional brochure composite; generation method unverified                                     | Appears in event/group photographs only                                                         | Primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle                            | Unverified | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
-| Noir De La Noit             | `home-decor-example-product-2` | `noir-de-la-noit.png`  | Provisional brochure composite; generation method unverified; image label uses “Noir De La Nuit” | Appears in event/group photographs only                                                         | Canonical naming decision, primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle | Unverified | Naming gate in INF-28, then studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session |
-| Santuaire Serein            | `home-decor-example-product-3` | `santuaire-serein.png` | Provisional brochure composite; generation method unverified                                     | Four isolated close views `(6)`-`(9)` plus event/group photographs                              | Consistent primary with reeds, controlled reflections, detail view, room-led lifestyle                           | Unverified | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
+| SKU / current Shopify title | Current handle                 | Shopify featured image | Current classification                                                       | Owner-supplied source available                                                                 | Launch gaps                                                                                                      | Rights             | Acquisition estimate                                                                                             |
+| --------------------------- | ------------------------------ | ---------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| Ambre Egyptian              | `home-decor-example-product-4` | `ambre-egyptian.png`   | Brand-owned generated brochure composite                                     | Appears in event/group photographs only                                                         | Primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle                            | Confirmed by Devon | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
+| Blanc De Blanc              | `home-decor-example-product-1` | `blanc-de-blanc.png`   | Brand-owned generated brochure composite                                     | Isolated bottle image `WhatsApp Image 2026-08-08 at 18.11.02 (1).jpeg`; event/group photographs | Consistent primary with reeds, detail view, clean crop, room-led lifestyle                                       | Confirmed by Devon | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
+| Bois De Santal              | `bois-de-santal-200ml`         | `bois-de-santal.png`   | Brand-owned generated brochure composite                                     | Isolated bottle image `WhatsApp Image 2026-08-08 at 18.11.02.jpeg`; event/group photographs     | Consistent primary with reeds, detail view, clean crop, room-led lifestyle                                       | Confirmed by Devon | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
+| Ete Mystique                | `ete-mystique-200ml`           | `ete-mystique.png`     | Brand-owned generated brochure composite                                     | Appears in event/group photographs only                                                         | Primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle                            | Confirmed by Devon | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
+| Noir De La Noit             | `home-decor-example-product-2` | `noir-de-la-noit.png`  | Brand-owned generated brochure composite; image label uses “Noir De La Nuit” | Appears in event/group photographs only                                                         | Canonical naming decision, primary packshot, label/detail view, complete diffuser with reeds, room-led lifestyle | Confirmed by Devon | Naming gate in INF-28, then studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session |
+| Santuaire Serein            | `home-decor-example-product-3` | `santuaire-serein.png` | Brand-owned generated brochure composite                                     | Four isolated close views `(6)`-`(9)` plus event/group photographs                              | Consistent primary with reeds, controlled reflections, detail view, room-led lifestyle                           | Confirmed by Devon | Studio set: 20-30 min capture plus shared retouch; lifestyle: shared one-day session                             |
 
 ## Source and provenance inventory
 
@@ -63,7 +63,7 @@ The current Shopify exports and the repository fixtures have the same
 dimensions and near-identical pixels. Five sampled pairs have a mean absolute
 RGB difference below 0.35 levels on a 0-255 scale; Santuaire Serein is 1.23.
 This supports a shared visual source while avoiding a false byte-identical
-claim. Shopify file metadata alone does not prove authorship or rights.
+claim. Devon separately confirmed the generated assets are brand-owned.
 
 ### Provisional brochure fixtures
 
@@ -79,8 +79,8 @@ Figma file `1T7m9MfQoAHFiSVmSKVeVt`, with Hero Image nodes:
 - Bois de Santal `96:28`
 
 The historical brief explicitly says these fixtures are provisional and not a
-second commerce source of truth. Approval to use them in the product-card
-design does not establish commercial image rights or launch approval.
+second commerce source of truth. Devon confirmed commercial reuse rights on
+7 September 2026; they remain a holding set rather than final launch media.
 
 ### Owner-supplied documentary photographs
 
@@ -93,10 +93,10 @@ design does not establish commercial image rights or launch approval.
 - four event/group/product-display photographs.
 
 The photos are credible documentary references for the physical bottle,
-packaging, label, tassel, cap and event presentation. Commercial web rights,
-photographer identity, people consent, capture dates, and original files remain
-unrecorded. Files containing identifiable people must not be published without
-confirmed consent.
+packaging, label, tassel, cap and event presentation. Devon confirmed the brand
+took and may commercially reuse them. Consent for identifiable people, capture
+dates, and original-file records remain unrecorded. Files containing
+identifiable people must not be published without confirmed consent.
 
 ### Derived and generated review assets
 
@@ -174,13 +174,11 @@ For every accepted asset, record:
 
 ## Acceptance recommendation
 
-Accept this audit as the INF-30 evidence baseline with three explicit open
-gates:
+Devon accepted this audit and photography contract as the INF-30 evidence
+baseline on 7 September 2026. Two explicit gates remain for subsequent work:
 
-1. Devon confirms or rejects commercial rights for the current brochure and
-   WhatsApp assets.
-2. Devon approves the photography contract and any quote before expenditure.
-3. INF-28 resolves canonical product naming before labels, filenames, alt text,
+1. Any supplier quote and expenditure requires Devon's separate approval.
+2. INF-28 resolves canonical product naming before labels, filenames, alt text,
    handles or new photography are treated as final.
 
 Until those gates close, current media may remain live as a reversible holding
