@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Infusion Diffusion is a South African luxury home-fragrance brand selling fragrant room diffusers, room sprays, and candles. The storefront should make scent feel like a considered part of an interior while keeping product choice, care, delivery, and purchase paths direct and trustworthy.
+Infusion Diffusion is a South African luxury home-fragrance brand. The current launch range is the six existing 200 ml reed diffusers; candles and room sprays are outside this launch, as confirmed by Devon on 7 September 2026. The storefront should make scent feel like a considered part of an interior while keeping product choice, care, delivery, and purchase paths direct and trustworthy.
 
 ## Audience
 

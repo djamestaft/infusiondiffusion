@@ -1,5 +1,14 @@
 # Infusion Diffusion design system
 
+## 7 September Home wording correction
+
+Devon authorized reed-diffuser-only wording on Home and in metadata. Runtime
+Home defaults and its Storybook long-content example use that scope. This is an
+intentional content divergence from earlier Figma copy; layout, imagery,
+semantic tokens and component contracts are unchanged. Figma copy synchronization
+remains pending the revised real-content journey in INF-32. The Fragrance Guide
+awaits Devon's new format; replacement images and missing facts are deferred.
+
 Status: approved Figma foundation, reusable component contract, and INF-16
 homepage direction. The runtime foundation and Home-required component
 contracts are synchronized; broader template synchronization remains.

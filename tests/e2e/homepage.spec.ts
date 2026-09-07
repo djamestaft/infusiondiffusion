@@ -68,7 +68,7 @@ test("renders Home SEO metadata from the site-settings boundary", async ({
   await expect(page).toHaveTitle("Infusion Diffusion");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     "content",
-    /room sprays, reed diffusers, and candles/i,
+    "Discover reed diffusers designed to bring considered fragrance into lived-in rooms.",
   );
 });
 

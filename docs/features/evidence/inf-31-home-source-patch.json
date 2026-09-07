@@ -1,0 +1,14 @@
+{
+  "mutations": [
+    {
+      "patch": {
+        "id": "siteSettings",
+        "ifRevisionID": "zoys6rIPUNIFY1LepICbUN",
+        "set": {
+          "introduction": "We are preparing a considered collection of reed diffusers for layered, lived-in rooms.",
+          "seoDescription": "Discover reed diffusers designed to bring considered fragrance into lived-in rooms."
+        }
+      }
+    }
+  ]
+}

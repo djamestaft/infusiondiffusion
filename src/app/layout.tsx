@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Infusion Diffusion",
   },
   description:
-    "Discover room sprays, reed diffusers, and candles designed to bring considered fragrance into lived-in rooms.",
+    "Discover reed diffusers designed to bring considered fragrance into lived-in rooms.",
 };
 
 export default function RootLayout({

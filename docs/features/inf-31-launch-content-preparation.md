@@ -53,6 +53,19 @@ primary packshots, detail views and lifestyle media still follow the approved
 [INF-30 brief](evidence/inf-30-launch-asset-audit.md). None of these records
 authorizes upload, publication, commissioning or expenditure.
 
+## Accepted launch range
+
+Devon confirmed on 7 September that the current launch is the six existing
+200 ml reed diffusers only. Candles and room sprays are excluded for now.
+The [wording preview](evidence/inf-31-reed-diffuser-copy-preview.md) identifies
+the source, fallback, metadata and Storybook corrections. These are prepared
+values. Devon subsequently authorized Home and metadata implementation: matching
+repository defaults and the Home story are updated on the delivery branch.
+Sanity still needs the source correction documented in the wording preview.
+The Fragrance Guide awaits Devon's new format. Images and missing information
+are deferred; the photography handoff is retained for later use.
+Product title suffix and Shopify product-type decisions remain open.
+
 ## Content and source handoff
 
 | Work                         | Prepared treatment                                                 | Remaining gate                                                                       |
@@ -76,6 +89,12 @@ Inspect that every product has one stable GID and review asset, all 21 files
 exist with matching hashes, and all document links resolve. Check formatting
 and the diff for unintended changes. No new runtime tests are needed for this
 documentation-only increment; the PR still runs the repository's required CI.
+
+The [photography handoff](evidence/inf-31-photography-handoff.md) turns the
+approved capture brief into a 33-row intake sheet: 18 required product shots,
+12 conditional packaging/scale shots and three range-level lifestyle scenes.
+Product rows use the existing six Shopify GIDs; new-source provenance and
+acceptance remain empty until evidence is supplied. No supplier is booked.
 
 The next concrete work is completing the per-file source records and obtaining
 approved final imagery, while the remaining factual decisions are gathered.

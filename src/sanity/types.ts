@@ -57,16 +57,16 @@ export const fallbackSiteSettings: SiteSettings = {
   },
   headline: "Scent for living.",
   introduction:
-    "We are preparing a considered collection of room sprays, reed diffusers, and candles for layered, lived-in rooms.",
+    "We are preparing a considered collection of reed diffusers for layered, lived-in rooms.",
   contactEmail: "hello@infusiondiffusion.co.za",
   callToActionLabel: "Say hello",
   seoTitle: "Infusion Diffusion",
   seoDescription:
-    "Discover room sprays, reed diffusers, and candles designed to bring considered fragrance into lived-in rooms.",
+    "Discover reed diffusers designed to bring considered fragrance into lived-in rooms.",
   homepage: {
     heroTitle: "Fragrance, composed for the rooms you live in",
     heroIntroduction:
-      "Diffusers, room sprays and candles shaped by clear scent notes, considered materials and everyday ritual.",
+      "Reed diffusers shaped by considered materials and everyday ritual.",
     heroActionLabel: "Shop the collection",
     heroSlides: [],
     collectionTitle: "A cabinet of atmosphere",
