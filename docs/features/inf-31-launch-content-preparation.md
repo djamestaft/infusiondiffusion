@@ -53,6 +53,15 @@ primary packshots, detail views and lifestyle media still follow the approved
 [INF-30 brief](evidence/inf-30-launch-asset-audit.md). None of these records
 authorizes upload, publication, commissioning or expenditure.
 
+## Accepted launch range
+
+Devon confirmed on 7 September that the current launch is the six existing
+200 ml reed diffusers only. Candles and room sprays are excluded for now.
+The [wording preview](evidence/inf-31-reed-diffuser-copy-preview.md) identifies
+the source, fallback, metadata and Storybook corrections. These are prepared
+values; no live source or runtime wording has changed in this increment.
+Product title suffix and Shopify product-type decisions remain open.
+
 ## Content and source handoff
 
 | Work                         | Prepared treatment                                                 | Remaining gate                                                                       |
