@@ -38,11 +38,15 @@ owner-supplied WhatsApp JPEGs using SHA-256 and byte counts. Every fixture maps
 to a Shopify product GID. Files were inventoried without modification.
 
 INF-30 supplies the group-level ownership and reuse-rights confirmation. Each
-record keeps missing creation dates, masters, transformation history, detailed
-photo/composite classification, consent, crop/alt text and final destination
+record keeps missing creation dates, masters, transformation history, consent and final destination
 explicitly unresolved. A hash identifies the local file; it does not establish
 authorship or turn a provisional composite into final photography. Derived
 images in subfolders are outside this source inventory and are not promoted.
+
+Direct inspection now classifies all fifteen WhatsApp JPEGs, maps eleven single-product
+images to product GIDs, and supplies draft alt text, role recommendations and
+limitations. See [the reviewed shortlist](evidence/inf-31-asset-shortlist.md).
+The remaining four are mixed-product/event images without a single-product GID.
 
 This is a partial source manifest, not a completed launch asset set. Final
 primary packshots, detail views and lifestyle media still follow the approved
