@@ -284,6 +284,9 @@ describe("storefront templates", () => {
     const shopHeader = screen
       .getByRole("heading", { name: "Shop" })
       .closest("header");
+    expect(screen.getByRole("heading", { name: "Shop" })).toHaveClass(
+      "text-bone-50",
+    );
     expect(shopHeader?.parentElement).not.toHaveClass("max-w-[1440px]");
   });
 

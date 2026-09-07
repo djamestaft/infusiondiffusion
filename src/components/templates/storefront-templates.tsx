@@ -608,7 +608,7 @@ export function CollectionTemplate({
           <Heading
             level={1}
             treatment="display"
-            className="text-[clamp(3rem,6vw,4rem)]"
+            className="text-bone-50 text-[clamp(3rem,6vw,4rem)]"
           >
             {title}
           </Heading>
