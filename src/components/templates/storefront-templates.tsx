@@ -729,6 +729,9 @@ export function ProductDetailTemplate({
             status={product.availability ?? "in-stock"}
             lowStockCount={product.lowStockCount}
           />
+          <p className="text-content-secondary w-full max-w-[65ch] font-sans text-sm leading-6">
+            {description}
+          </p>
           {variants.length ? (
             <fieldset className="flex w-full max-w-[520px] flex-col items-center gap-2.5 pt-2 sm:items-start">
               <legend className="mb-1 w-full text-center font-sans text-sm font-semibold sm:text-left">
@@ -780,11 +783,8 @@ export function ProductDetailTemplate({
       <section className="bg-content-surface-elevated w-full">
         <div className="mx-auto w-full max-w-[1440px] px-5 py-11 sm:px-8 lg:px-16">
           <Heading level={2} treatment="title">
-            Fragrance details
+            Care guidance
           </Heading>
-          <p className="text-content-secondary mt-3 w-full max-w-[75ch] font-sans text-sm leading-6">
-            {description}
-          </p>
           <dl className="border-navigation-border mt-6 w-full divide-y border-y font-sans">
             {details.map((detail) => (
               <div

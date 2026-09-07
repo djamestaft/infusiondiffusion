@@ -359,6 +359,12 @@ describe("storefront templates", () => {
         selector: "span[data-slot='commerce-status']",
       }),
     ).toBeVisible();
+    expect(screen.getByText("A warm, composed scent.").closest("article")).toBe(
+      screen.getByRole("article"),
+    );
+    expect(
+      screen.getByRole("heading", { name: "Care guidance" }),
+    ).toBeVisible();
     expect(screen.getByRole("button", { name: "Sold out" })).toBeDisabled();
   });
 
