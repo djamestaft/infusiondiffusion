@@ -73,7 +73,7 @@ design and merge decisions. Independent verification is required for release.
 | INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit |
 | INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Ready now                   |
 | INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28              |
-| INF-32 | Approve real-content responsive Home/Shop/product/cart/footer journey                  | INF-31, INF-29              |
+| INF-32 | Approve real-content responsive Home/Shop/product/cart/footer journey                  | INF-31                      |
 | INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32              |
 | INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33              |
 | INF-27 | Approve essential Fragrance Guide, About and Contact templates                         | INF-32, INF-21, INF-23      |
@@ -83,6 +83,8 @@ design and merge decisions. Independent verification is required for release.
 
 Immediate actions are INF-29 preview review, INF-25/22 evidence reconciliation,
 INF-30 asset audit and INF-28 factual decisions. These can progress together.
+INF-32 must review related INF-29 evidence, but does not require the older
+implementation to merge before revised design can proceed.
 Dependent implementation remains in Backlog until approval contracts exist.
 One delivery branch is the default; multiple writing agents require separately
 approved topology and isolated Treehouse worktrees.
