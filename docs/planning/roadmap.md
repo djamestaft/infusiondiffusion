@@ -93,8 +93,13 @@ The immediate action is Devon's outstanding INF-28 factual decisions. The
 preserves the 2 September naming/claims/contact/metadata approvals, identifies
 unapplied source corrections, and records unresolved launch range, scent notes,
 care, service, mailbox and metadata choices against a fresh source snapshot.
-INF-28 remains Todo for Devon's decision; INF-31 remains blocked until its
-content decision gate closes. Preparation of a decision sheet is not approval.
+INF-28 remains Todo for outstanding decisions. On 7 September the user deferred
+Santuaire Serein’s specific fragrance notes and authorized continued preparation.
+INF-31 may progress approved naming and asset-source inventory while those notes
+remain unlisted; it is In Progress for preparation only. Its completion and
+publication still require the remaining applicable factual and asset approvals.
+The proposed short Santuaire replacement description is not an accepted change.
+See the [preparation package](../features/inf-31-launch-content-preparation.md).
 INF-32 must review related INF-29 evidence, but does not require the older
 implementation to merge before revised design can proceed.
 Dependent implementation remains in Backlog until approval contracts exist.
