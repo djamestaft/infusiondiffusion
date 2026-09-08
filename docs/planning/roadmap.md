@@ -18,7 +18,7 @@ The [shopping-journey brief](../features/inf-32-shopping-journey.md) records
 the reviewed implementation baseline, scope, observable acceptance criteria
 and required design/state evidence. Shawnee owns delivery; Devon approves
 the revised design. Repository and Figma exploration do not approve release.
-The Fragrance Guide remains deferred to Devon's new format. Sanity publication
+The replacement Fragrance Guide remains deferred to Devon's new format. Sanity publication
 is paused, including credential remediation for the deferred SEO description.
 
 INF-32 no longer has a blocking dependency on completion of INF-31. Devon's
@@ -26,12 +26,27 @@ approval of exact revised Figma frames still gates downstream implementation;
 merge and release verification gates remain. Final-asset acceptance remains
 open and must not be reported as complete from this interim design review.
 
+## INF-32 review correction — 8 September 2026
+
+Restore the existing Home Fragrance Guide, 200 ml / Made to linger, and
+Made meaningful by the details sections in their original order. Content
+deferrals do not authorize removing those sections. Correct Home hero image
+letterboxing so the existing imagery fills its frames at every width.
+
+Devon also directed combining Gallery and About. Remove Gallery from the
+responsive header and keep About; INF-27/35 must shape and implement the
+combined editorial destination. Preserve the existing Gallery route and
+footer link until that transition is defined. INF-37 now represents later
+refinement of the combined About/Gallery experience, not a separate Gallery
+redesign. Existing design, source publication and merge gates still apply.
+
 ## Goal and existing systems
 
 Evolve the recognizable Infusion Diffusion brand into a cohesive premium
 shopping experience. The first milestone covers Home, Shop, product detail,
 the existing cart and Shopify checkout handoff, plus essential brand and
-service pages. Gallery refinement follows.
+service pages, with Gallery and About planned as one editorial destination.
+Further refinement of that combined experience follows.
 
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
@@ -102,10 +117,10 @@ design and merge decisions. Independent verification is required for release.
 | INF-32 | Approve responsive Home/Shop/product/cart/footer using available verified content      | INF-31 final assets deferred |
 | INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32               |
 | INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33               |
-| INF-27 | Approve essential Fragrance Guide, About and Contact templates                         | INF-32, INF-21, INF-23       |
+| INF-27 | Approve essential Fragrance Guide, combined About/Gallery and Contact templates        | INF-32, INF-21, INF-23       |
 | INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34       |
 | INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35               |
-| INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                       |
+| INF-37 | Refine combined About/Gallery after the shopping milestone; preserve existing URLs     | INF-36                       |
 
 INF-30's audit and owner approval are merged through PRs #66/#67; the required
 quality check passed on `d79b673`, and its Plane status is reconciled to Done.

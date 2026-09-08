@@ -18,6 +18,26 @@ deferring final photography, outstanding product/service facts and Sanity SEO.
 Use existing imagery and verified content; omit unavailable facts. Record
 provisional imagery and content omissions outside customer frames.
 
+## Review correction — 8 September 2026
+
+Devon rejected removal of the Home Fragrance Guide, 200 ml / Made to linger,
+and Made meaningful by the details sections. Restore all three in their
+existing responsive order. Deferring new facts or the replacement guide
+does not authorize removing existing sections. Preserve existing source copy;
+any factual concern stays in the deferred decision record until its specific
+replacement is approved.
+
+Home hero images must fill their frames, with intentional crops and readable
+product subjects at every width. Do not use portrait FIT letterboxing for the
+hero. Check the Shop header image as well; existing product imagery remains
+provisional and no replacement photography is commissioned.
+
+Gallery and About will be combined. Remove Gallery from desktop and mobile
+header navigation across the journey, retaining About as the destination.
+Plan the combined editorial page through INF-27/35; preserve the existing
+Gallery URL and current footer link until its content/route transition is
+explicitly defined. This revision does not implement the combined page.
+
 The new Fragrance Guide, photography acquisition, invented fragrance notes,
 service promises, Shopify source edits, Sanity publication, new backend,
 customer accounts, custom checkout and Gallery refinement are out of scope.
@@ -35,7 +55,7 @@ design milestone; preserve existing instrumentation during later delivery.
 | Variant labels expose Shopify implementation language.                                                        | Use a clear option label only when meaningful choices exist; omit a selector for a sole default variant.                                                                 |
 | TemplateShell and website layout have no shared footer.                                                       | Define one responsive footer using existing valid destinations, brand identity and verified contact/service content only. Omit unknown policy destinations and promises. |
 | Navigation says Cart while cart headings say bag; cart copy implies items are held.                           | Use consistent Cart naming, neutral quantity copy and no claim that adding an item reserves stock.                                                                       |
-| Home guidance and reassurance contain claims about complete notes/care information.                           | Do not repeat unsupported completeness claims. Keep the deferred guide route working without designing its replacement.                                                  |
+| Home guidance and reassurance contain claims awaiting factual review.                                         | Preserve existing Home sections and source copy as requested; retain concerns in INF-28/31 and do not invent new claims or redesign the deferred guide.                  |
 
 Sources: `src/components/templates/storefront-templates.tsx`,
 `src/components/product-purchase.tsx`, `src/components/navigation.tsx`,
