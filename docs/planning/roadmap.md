@@ -1,6 +1,26 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 7 September 2026
+Last updated: 8 September 2026
+
+## Current user deferrals — 8 September 2026
+
+Devon deferred the Sanity SEO description update, final photography, and
+outstanding product/service facts until later. These items remain open in
+INF-28/31; they are not prerequisites for the next shopping-journey design
+milestone. This decision supersedes the final-content prerequisites below.
+
+The immediate next action is INF-32: shape and review Home, Shop, product,
+existing cart and shared footer using existing imagery and verified content.
+Omit unavailable facts and unsupported claims. Record provisional imagery and
+content omissions outside customer frames; do not invent replacement facts.
+Final photography and factual enrichment return through INF-28/31 later.
+The Fragrance Guide remains deferred to Devon's new format. Sanity publication
+is paused, including credential remediation for the deferred SEO description.
+
+INF-32 no longer has a blocking dependency on completion of INF-31. Devon's
+approval of exact revised Figma frames still gates downstream implementation;
+merge and release verification gates remain. Final-asset acceptance remains
+open and must not be reported as complete from this interim design review.
 
 ## Goal and existing systems
 
@@ -67,28 +87,28 @@ and production promotion retain their named human gates.
 Shawnee owns delivery preparation unless otherwise stated. Devon owns factual,
 design and merge decisions. Independent verification is required for release.
 
-| Item   | Outcome                                                                                | Depends on                  |
-| ------ | -------------------------------------------------------------------------------------- | --------------------------- |
-| INF-25 | Resolve or explicitly transfer each Home baseline finding with evidence                | INF-24                      |
-| INF-22 | Devon reviews Home baseline acceptance and outstanding deviations                      | INF-25                      |
-| INF-29 | Review and finish existing Shop/product delivery without overlapping rework            | INF-23, INF-26              |
-| INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit |
-| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Approved and merged         |
-| INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28              |
-| INF-32 | Approve real-content responsive Home/Shop/product/cart/footer journey                  | INF-31                      |
-| INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32              |
-| INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33              |
-| INF-27 | Approve essential Fragrance Guide, About and Contact templates                         | INF-32, INF-21, INF-23      |
-| INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34      |
-| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35              |
-| INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                      |
+| Item   | Outcome                                                                                | Depends on                   |
+| ------ | -------------------------------------------------------------------------------------- | ---------------------------- |
+| INF-25 | Resolve or explicitly transfer each Home baseline finding with evidence                | INF-24                       |
+| INF-22 | Devon reviews Home baseline acceptance and outstanding deviations                      | INF-25                       |
+| INF-29 | Review and finish existing Shop/product delivery without overlapping rework            | INF-23, INF-26               |
+| INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit  |
+| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Approved and merged          |
+| INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28               |
+| INF-32 | Approve responsive Home/Shop/product/cart/footer using available verified content      | INF-31 final assets deferred |
+| INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32               |
+| INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33               |
+| INF-27 | Approve essential Fragrance Guide, About and Contact templates                         | INF-32, INF-21, INF-23       |
+| INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34       |
+| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35               |
+| INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                       |
 
 INF-30's audit and owner approval are merged through PRs #66/#67; the required
 quality check passed on `d79b673`, and its Plane status is reconciled to Done.
 Final asset acquisition, source manifests, expenditure and publication retain
 their downstream gates.
 
-The immediate action is Devon's outstanding INF-28 factual decisions. The
+The outstanding INF-28 factual decisions are deferred as recorded above. The
 [launch content decision sheet](../features/inf-28-launch-content-decisions.md)
 preserves the 2 September naming/claims/contact/metadata approvals, identifies
 unapplied source corrections, and records unresolved title convention, scent notes,
