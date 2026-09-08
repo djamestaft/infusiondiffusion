@@ -39,21 +39,18 @@ removing Gallery from the shared footer; reflow the four remaining destinations.
 Preserve the existing Gallery URL until its content/route transition is
 explicitly defined. This revision does not implement the combined page.
 
-The approved product-card design remains the authority on Home and Shop.
-Compare the draft with Approved Home/Shop frames and the commerce component
-contract before correcting it. Restore approved image fitting, proportions,
-spacing, typography, surfaces and commerce-state presentation; changing an
-image asset is not approval to restyle its card. Preserve the current six-product
-Shop catalogue and the independently defined Home selection.
+Devon explicitly selected the approved Shop product-card format for Home too.
+Use Shop cards `2210:40`, `2210:104`, `2210:164`, `2210:224`
+(1440/768/390/320) as the shared visual authority: square FILL media, elevated
+160px content panel, 12px top and 16px side/bottom padding, Marcellus 20px
+title, Manrope 12px format/status and 15px price. This supersedes the previous
+flat Home-card restoration; the change is now an explicit user decision.
 
-The page-specific Approved cards are the visual authority: Home
-`2070:39`, `2072:28`, `2073:26`, `2073:94`; Shop
-`2210:40`, `2210:104`, `2210:164`, `2210:224` (1440/768/390/320).
-Home restores its flat surface, approved typography and unboxed content,
-with three cards at desktop/mobile and four in the approved tablet 2×2 grid.
-Shop retains its approved elevated content panel and all six products.
-Restore each approved media-fit mode; do not substitute the generic component
-specimen board for these later page-specific approvals.
+Preserve Home's independent selection and grid: three cards at desktop/mobile
+and four in the tablet 2×2 grid. Shop retains all six products. Preserve current
+product data and imagery when reusing the card; resize to the host grid without
+changing the shared image, content or commerce-state format. Do not substitute
+the generic component specimen board for the page-specific Shop approval.
 
 The new Fragrance Guide, photography acquisition, invented fragrance notes,
 service promises, Shopify source edits, Sanity publication, new backend,

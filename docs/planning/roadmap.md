@@ -41,10 +41,12 @@ that transition is defined. INF-37 now represents later
 refinement of the combined About/Gallery experience, not a separate Gallery
 redesign. Existing design, source publication and merge gates still apply.
 
-The approved product-card treatment must be retained on Home and Shop.
-INF-32 must compare against exact Approved card evidence and restore any
-unapproved image-fitting, geometry, typography, spacing or state changes.
-The current image assets do not authorize a different card design.
+Devon selected the approved Shop product-card format for Home as well.
+Reuse its square FILL media, elevated content panel, typography, spacing
+and commerce states across both surfaces. This explicit choice supersedes
+the earlier flat Home-card restoration. Keep Home's 3/4/3/3 selection across
+1440/768/390/320 widths and all six Shop products; the card format is shared,
+while each page retains its own selection and grid.
 
 ## Goal and existing systems
 
