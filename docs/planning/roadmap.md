@@ -18,8 +18,15 @@ The [shopping-journey brief](../features/inf-32-shopping-journey.md) records
 the reviewed implementation baseline, scope, observable acceptance criteria
 and required design/state evidence. Shawnee owns delivery; Devon approves
 the revised design. Repository and Figma exploration do not approve release.
-The replacement Fragrance Guide remains deferred to Devon's new format. Sanity publication
-is paused, including credential remediation for the deferred SEO description.
+Devon has now authorized a card-by-card Fragrance Guide exploration under
+INF-27: one question per screen, answer selection and explicit Next.
+Use the existing separate Figma page `2153:3`
+(`eploration-fragrance guide system`) and preserve its earlier concepts.
+This exploration may proceed before whole-journey approval; INF-32 remains
+the dependency for final editorial approval and downstream implementation.
+Question copy and product matching remain provisional. See the
+[guide exploration brief](../features/inf-27-fragrance-guide-system.md).
+Sanity publication is paused, including the deferred SEO description.
 
 INF-32 no longer has a blocking dependency on completion of INF-31. Devon's
 approval of exact revised Figma frames still gates downstream implementation;
