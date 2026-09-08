@@ -9,11 +9,15 @@ outstanding product/service facts until later. These items remain open in
 INF-28/31; they are not prerequisites for the next shopping-journey design
 milestone. This decision supersedes the final-content prerequisites below.
 
-The immediate next action is INF-32: shape and review Home, Shop, product,
+INF-32 is now In Progress: shape and review Home, Shop, product,
 existing cart and shared footer using existing imagery and verified content.
 Omit unavailable facts and unsupported claims. Record provisional imagery and
 content omissions outside customer frames; do not invent replacement facts.
 Final photography and factual enrichment return through INF-28/31 later.
+The [shopping-journey brief](../features/inf-32-shopping-journey.md) records
+the reviewed implementation baseline, scope, observable acceptance criteria
+and required design/state evidence. Shawnee owns delivery; Devon approves
+the revised design. Repository and Figma exploration do not approve release.
 The Fragrance Guide remains deferred to Devon's new format. Sanity publication
 is paused, including credential remediation for the deferred SEO description.
 
