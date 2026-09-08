@@ -2,6 +2,28 @@
 
 Last updated: 8 September 2026
 
+## Current approval and next delivery — 8 September 2026
+
+Devon approved all 24 current main-Exploration customer layouts: Home, Shop,
+Product, Cart, combined About and Fragrance Guide Variation 02 at four widths.
+Promote these exact frames and their separate supporting contracts to Approved;
+the [dated handoff](../features/2026-09-08-design-approval.md) is the current
+page-level authority and supersedes the pending visual-approval statements
+in the earlier chronological notes below.
+
+INF-32's shopping-journey visual approval is complete. INF-27's combined About
+and Guide layouts are approved; Contact has no frame in this set and remains
+open. The separate card-by-card guide experiment is retained as exploration.
+The approved Guide is Variation 02, not an approval of a working matching
+engine or its unverified product mappings.
+
+Next delivery is INF-33/34 implementation against these approved frames,
+preserving existing commerce and editorial boundaries. Complete Contact and
+remaining Guide content/matching decisions under INF-27 before INF-35's full
+editorial release. Final photography, product/service facts, care guidance,
+Sanity SEO and source publication remain deferred through INF-28/31.
+Human merge and release verification gates remain unchanged.
+
 ## Current user deferrals — 8 September 2026
 
 Devon deferred the Sanity SEO description update, final photography, and

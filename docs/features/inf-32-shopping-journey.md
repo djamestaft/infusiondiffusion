@@ -1,8 +1,12 @@
 # INF-32 shopping journey design brief
 
-Status: In Progress — design exploration; human approval pending.
+Status: visual design approved by Devon on 8 September 2026.
 Date: 8 September 2026. Delivery owner: Shawnee. Design decision: Devon.
 Code baseline: `9c79a85`; review includes merged PR #62 (`30a7003`).
+
+The [dated approval handoff](2026-09-08-design-approval.md) records the exact
+approved frames and supersedes earlier pending-approval and layout notes
+below. Runtime implementation and final deferred content remain open.
 
 ## User outcome and scope
 

@@ -1,5 +1,14 @@
 # INF-27 Fragrance Guide system exploration
 
+## Selected design — 8 September 2026
+
+Devon subsequently selected and approved the main-Exploration Variation 02
+responsive pages: `2172:2`, `2457:601`, `2457:749`, `2457:897`.
+See the [dated approval handoff](2026-09-08-design-approval.md).
+The card-by-card experiment documented below remains on its separate
+exploration page; it is not the selected implementation target.
+Product matching remains a separate unresolved content/behavior decision.
+
 Status: design exploration authorized and created on 8 September 2026;
 interaction verification and owner review remain pending.
 Owner: Shawnee. Design, question copy and product-matching approval: Devon.
