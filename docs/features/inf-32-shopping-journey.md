@@ -34,9 +34,26 @@ provisional and no replacement photography is commissioned.
 
 Gallery and About will be combined. Remove Gallery from desktop and mobile
 header navigation across the journey, retaining About as the destination.
-Plan the combined editorial page through INF-27/35; preserve the existing
-Gallery URL and current footer link until its content/route transition is
+Plan the combined editorial page through INF-27/35. Devon also authorized
+removing Gallery from the shared footer; reflow the four remaining destinations.
+Preserve the existing Gallery URL until its content/route transition is
 explicitly defined. This revision does not implement the combined page.
+
+The approved product-card design remains the authority on Home and Shop.
+Compare the draft with Approved Home/Shop frames and the commerce component
+contract before correcting it. Restore approved image fitting, proportions,
+spacing, typography, surfaces and commerce-state presentation; changing an
+image asset is not approval to restyle its card. Preserve the current six-product
+Shop catalogue and the independently defined Home selection.
+
+The page-specific Approved cards are the visual authority: Home
+`2070:39`, `2072:28`, `2073:26`, `2073:94`; Shop
+`2210:40`, `2210:104`, `2210:164`, `2210:224` (1440/768/390/320).
+Home restores its flat surface, approved typography and unboxed content,
+with three cards at desktop/mobile and four in the approved tablet 2×2 grid.
+Shop retains its approved elevated content panel and all six products.
+Restore each approved media-fit mode; do not substitute the generic component
+specimen board for these later page-specific approvals.
 
 The new Fragrance Guide, photography acquisition, invented fragrance notes,
 service promises, Shopify source edits, Sanity publication, new backend,
@@ -71,7 +88,7 @@ It is not a full journey regression or accessibility release verdict.
 - Make primary browsing and purchase actions obvious at every width. Preserve
   reading order and avoid horizontal overflow with the longest current title,
   enlarged text and future long-content examples.
-- Show all six Shop items; use a deliberate product-card image ratio and crop.
+- Show all six Shop items; retain the approved product-card image ratio and crop.
   A missing image retains readable identity, price and stable geometry.
 - Specify loading, empty, failed-load/retry, missing media, sold out,
   unavailable option and successful add-to-cart states. Unavailable products

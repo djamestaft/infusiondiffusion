@@ -35,10 +35,16 @@ letterboxing so the existing imagery fills its frames at every width.
 
 Devon also directed combining Gallery and About. Remove Gallery from the
 responsive header and keep About; INF-27/35 must shape and implement the
-combined editorial destination. Preserve the existing Gallery route and
-footer link until that transition is defined. INF-37 now represents later
+combined editorial destination. Gallery is also removed from the shared footer
+under Devon's follow-up correction. Preserve the existing Gallery route until
+that transition is defined. INF-37 now represents later
 refinement of the combined About/Gallery experience, not a separate Gallery
 redesign. Existing design, source publication and merge gates still apply.
+
+The approved product-card treatment must be retained on Home and Shop.
+INF-32 must compare against exact Approved card evidence and restore any
+unapproved image-fitting, geometry, typography, spacing or state changes.
+The current image assets do not authorize a different card design.
 
 ## Goal and existing systems
 
