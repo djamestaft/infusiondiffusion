@@ -43,8 +43,8 @@ describe("storefront templates", () => {
     );
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(
-      screen.getByRole("link", { name: "Gallery", current: "page" }),
-    ).toBeVisible();
+      screen.queryByRole("link", { name: "Gallery", current: "page" }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText("The gallery is being composed")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "Explore the collection" }),
@@ -132,8 +132,8 @@ describe("storefront templates", () => {
       "true",
     );
     expect(
-      screen.getByRole("link", { name: "Gallery", current: "page" }),
-    ).toBeVisible();
+      screen.queryByRole("link", { name: "Gallery", current: "page" }),
+    ).not.toBeInTheDocument();
   });
 
   it("composes the home journey from accessible landmarks and product cards", () => {
@@ -153,27 +153,27 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("home-hero-section")).toHaveClass(
       "dark",
       "bg-content-surface",
-      "lg:grid-cols-[minmax(0,1fr)_minmax(0,1.093fr)]",
+      "lg:grid-cols-[minmax(0,600fr)_minmax(0,656fr)]",
     );
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" })[0],
-    ).toHaveClass("rounded-full", "w-[236px]");
+    ).toHaveClass("rounded-full", "w-[232px]");
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(4);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
-      "bg-content-surface-elevated",
+      "bg-content-surface",
     );
     expect(screen.getByTestId("home-cabinet-band")).not.toHaveClass(
       "border",
       "shadow",
     );
     expect(screen.getByTestId("home-cabinet-inner")).toHaveClass(
-      "max-w-7xl",
-      "pt-[52px]",
-      "lg:pt-[72px]",
+      "max-w-[1440px]",
+      "py-10",
+      "lg:py-16",
     );
     expect(
       screen.getByRole("heading", { name: "A cabinet of atmosphere" }),
-    ).toHaveClass("mb-8");
+    ).toBeVisible();
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" }),
     ).toHaveLength(2);
@@ -419,17 +419,15 @@ describe("storefront templates", () => {
     ).toBeVisible();
   });
 
-  it("marks Shop current across the Home and product-shopping journey", () => {
+  it("marks Shop current only on the product-shopping journey", () => {
     const { unmount } = render(
       <HomeTemplate products={[]} heroImage={undefined} />,
     );
     expect(
-      screen.getByRole("link", { name: "Shop", current: "page" }),
-    ).toBeVisible();
+      screen.queryByRole("link", { name: "Shop", current: "page" }),
+    ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("img", {
-        name: "A reed diffuser arranged in a serene living space",
-      }),
+      screen.getByRole("region", { name: "Bespoke diffusers" }),
     ).toBeVisible();
     expect(
       screen.getByRole("heading", { level: 1 }).closest("section"),
@@ -516,9 +514,9 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("about-chapter-principles")).toHaveClass(
       "bg-content-surface",
     );
-    expect(screen.getByRole("link", { name: "Shop" })).not.toHaveAttribute(
-      "aria-current",
-    );
+    expect(
+      screen.getAllByRole("link", { name: "Shop" })[0],
+    ).not.toHaveAttribute("aria-current");
     expect(screen.getAllByRole("link", { name: "Cart, 2 items" })).toHaveLength(
       2,
     );

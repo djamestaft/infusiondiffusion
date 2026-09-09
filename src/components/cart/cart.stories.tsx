@@ -139,7 +139,7 @@ export const PageOptimisticQuantity: Story = {
       canvas.getAllByRole("link", { name: "Cart, 2 items" })[0],
     ).toBeVisible();
     await expect(
-      canvas.getByText("2 items held for this visit.", { exact: false }),
+      canvas.getByText("2 items in your cart", { exact: false }),
     ).toBeVisible();
   },
 };

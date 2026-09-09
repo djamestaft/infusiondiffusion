@@ -50,17 +50,17 @@ describe("Navigation", () => {
     );
   });
 
-  it("includes Gallery in the approved destination order and marks it current in the drawer", async () => {
+  it("uses About in the combined editorial destination and marks it current in the drawer", async () => {
     const user = userEvent.setup();
-    render(<Navigation currentHref="/gallery" />);
-    const links = screen.getAllByRole("link", { name: "Gallery" });
-    expect(links[0]).toHaveAttribute("href", "/gallery");
+    render(<Navigation currentHref="/about" />);
+    const links = screen.getAllByRole("link", { name: "About" });
+    expect(links[0]).toHaveAttribute("href", "/about");
     expect(links[0]).toHaveAttribute("aria-current", "page");
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     expect(
       within(screen.getByRole("dialog", { name: "Navigation menu" })).getByRole(
         "link",
-        { name: "Gallery" },
+        { name: "About" },
       ),
     ).toHaveAttribute("aria-current", "page");
   });

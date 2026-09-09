@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { ContentHeader } from "@/components/ui/content-primitives";
 import { FeedbackAlert } from "@/components/ui/feedback-alert";
@@ -124,6 +125,7 @@ export function AccountEntry({
           )}
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

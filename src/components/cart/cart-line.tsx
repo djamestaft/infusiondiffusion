@@ -23,15 +23,13 @@ export function CartLine({
 }) {
   return (
     <article
-      className={cn(
-        "border-navigation-border flex gap-4 border-b py-6 sm:gap-8",
-      )}
+      className={cn("border-navigation-border flex gap-4 border-b pb-6")}
       aria-busy={pending || undefined}
     >
       <div
         className={cn(
-          "bg-product-card-media-fallback relative shrink-0 overflow-hidden rounded-md",
-          compact ? "h-28 w-21" : "h-32 w-24 sm:h-40 sm:w-30",
+          "bg-content-surface relative shrink-0 overflow-hidden",
+          compact ? "h-28 w-21" : "h-[118px] w-[88px]",
         )}
       >
         {line.image ? (
@@ -40,7 +38,7 @@ export function CartLine({
             alt={line.image.alt}
             fill
             sizes="120px"
-            className="object-cover"
+            className="object-contain"
           />
         ) : (
           <span className="text-content-secondary flex size-full items-center justify-center px-2 text-center font-sans text-xs">
@@ -49,27 +47,30 @@ export function CartLine({
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-content-accent font-sans text-xs font-semibold tracking-[0.08em] uppercase">
+        <h2 className="font-display text-2xl leading-[1.35]">{line.title}</h2>
+        <p className="text-content-secondary mt-2 font-sans text-[13px] leading-[1.35]">
           {line.format || "Home fragrance"}
         </p>
-        <h2 className="font-display mt-2 text-2xl leading-8">{line.title}</h2>
         {line.variantTitle ? (
           <p className="text-content-secondary mt-1 font-sans text-sm">
             {line.variantTitle}
           </p>
         ) : null}
-        <PriceDisplay price={line.total} className="mt-3 sm:hidden" />
+        <PriceDisplay
+          price={line.total}
+          className="mt-2 [&>span]:text-base [&>span]:leading-[1.35]"
+        />
         {!line.available ? (
           <p className="text-commerce-status-sold-out mt-2 font-sans text-sm font-semibold">
             Currently unavailable. Remove this item to continue.
           </p>
         ) : null}
         {!compact ? (
-          <div className="mt-4 grid w-fit grid-cols-[2.75rem_2.75rem_2.75rem] items-center gap-2">
+          <div className="mt-2 grid w-fit grid-cols-[2.75rem_2.75rem_2.75rem] items-center gap-2">
             <Button
               size="icon"
               variant="secondary"
-              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground disabled:bg-transparent"
+              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground rounded-none disabled:bg-transparent"
               aria-label={`Decrease ${line.title} quantity`}
               disabled={pending}
               onClick={() => onQuantityChange?.(line.quantity - 1)}
@@ -85,7 +86,7 @@ export function CartLine({
             <Button
               size="icon"
               variant="secondary"
-              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground disabled:bg-transparent"
+              className="disabled:border-action-secondary-border disabled:text-action-secondary-foreground rounded-none disabled:bg-transparent"
               aria-label={`Increase ${line.title} quantity`}
               disabled={pending || !line.available}
               onClick={() => onQuantityChange?.(line.quantity + 1)}
@@ -103,10 +104,6 @@ export function CartLine({
           </div>
         ) : null}
       </div>
-      <PriceDisplay
-        price={line.total}
-        className="hidden shrink-0 sm:inline-flex"
-      />
     </article>
   );
 }

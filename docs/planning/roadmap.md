@@ -2,13 +2,17 @@
 
 ## INF-33 implementation — 9 September 2026
 
-INF-33 is In Progress on agent/inf33-approved-shop-product, owned by Devon.
+INF-33 is Done: Devon authorized merge and PR #72 landed at 9615957.
 PR #62 already exposes the complete Shop catalogue. The current delivery
 corrects the remaining hero/grid/card presentation and purchase hierarchy;
 see [acceptance and comparison record](../features/inf-33-approved-shop-product.md).
-Independent code review found no blockers; final verification and human
-preview/merge remain gates. INF-34's shared header/footer, Home and Cart are
-next. Content/photography/care/SEO deferrals remain unchanged.
+Independent review, current-head GitHub quality and PR gate passed. The Vercel
+preview was Ready, with authenticated route verification limited by SSO.
+INF-34 is now In Progress on agent/inf34-approved-home-shell-cart, owned by
+Devon, implementing the shared header/footer, Home and Cart. See the
+[delivery contract](../features/inf-34-approved-home-shell-cart.md).
+Verification and human preview/merge gate this new delivery.
+Content/photography/care/SEO deferrals remain unchanged.
 
 Last updated: 8 September 2026
 

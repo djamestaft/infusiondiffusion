@@ -210,7 +210,7 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
   page,
 }, testInfo) => {
   await page.goto("/");
-  const expectedGap = testInfo.project.name === "mobile" ? 52 : 72;
+  const expectedGap = testInfo.project.name === "mobile" ? 40 : 64;
   const band = page.getByTestId("home-cabinet-band");
   const inner = page.getByTestId("home-cabinet-inner");
   const hero = page.getByTestId("home-hero-section");
@@ -233,7 +233,7 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
   expect(bandBox!.width).toBe(
     await page.evaluate(() => document.documentElement.clientWidth),
   );
-  expect(innerBox!.width).toBeLessThanOrEqual(1280);
+  expect(innerBox!.width).toBeLessThanOrEqual(1440);
   expect(headingBox!.y - (heroBox!.y + heroBox!.height)).toBe(expectedGap);
   const controls = page.getByTestId("hero-carousel-controls");
   if (await controls.count()) {
@@ -249,7 +249,7 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
       expect(mediaBox!.height).toBeLessThanOrEqual(680);
     }
   }
-  await expect(band).toHaveCSS("background-color", "rgb(227, 231, 218)");
+  await expect(band).toHaveCSS("background-color", "rgb(238, 240, 231)");
   await expect(band).toHaveCSS("border-top-width", "0px");
   await expect(band).toHaveCSS("box-shadow", "none");
   await expect(firstCard).toHaveCSS("background-color", "rgb(252, 250, 245)");

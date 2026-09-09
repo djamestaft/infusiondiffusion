@@ -12,47 +12,51 @@ export function CartSummary({
   checkoutAction?: () => void | Promise<void>;
 }) {
   return (
-    <aside className="bg-muted w-full self-start p-6 sm:p-8 lg:sticky lg:top-8 lg:w-90">
-      <h2 className="font-display text-[1.75rem] leading-9">Order summary</h2>
-      <div className="mt-6 flex items-center justify-between font-sans">
-        <span>Subtotal</span>
-        <PriceDisplay price={cart.subtotal} size="standard" />
+    <aside className="w-full self-start lg:sticky lg:top-28 lg:w-90">
+      <h2 className="font-display mb-4 text-[28px] leading-[1.5]">
+        Order summary
+      </h2>
+      <div
+        className="bg-content-surface-quiet flex flex-col gap-5 p-6"
+        data-testid="cart-summary-panel"
+      >
+        <div className="flex items-center justify-between gap-3 font-sans">
+          <span>Subtotal</span>
+          <PriceDisplay
+            price={cart.subtotal}
+            className="[&>span]:text-base [&>span]:leading-[1.5]"
+          />
+        </div>
+        {cart.discounts?.map((discount) => (
+          <div
+            key={discount.label}
+            className="flex items-center justify-between font-sans text-sm"
+          >
+            <span>{discount.label}</span>
+            <span className="inline-flex items-center">
+              −<PriceDisplay price={discount.amount} />
+            </span>
+          </div>
+        ))}
+        <p className="text-content-secondary font-sans text-sm leading-[1.5]">
+          Shipping and final taxes are confirmed at checkout.
+        </p>
+        {!checkoutEnabled ? (
+          <p className="text-content-secondary font-sans text-sm leading-[1.5]">
+            Checkout is being prepared. Your cart is saved.
+          </p>
+        ) : null}
+        <form action={checkoutAction}>
+          <Button
+            type="submit"
+            size="large"
+            className="disabled:bg-cart-checkout-disabled-surface w-full text-[13px] leading-[18px]"
+            disabled={!checkoutEnabled}
+          >
+            {checkoutEnabled ? "Continue to checkout" : "Checkout unavailable"}
+          </Button>
+        </form>
       </div>
-      {cart.discounts?.map((discount) => (
-        <div
-          key={discount.label}
-          className="mt-3 flex items-center justify-between font-sans text-sm"
-        >
-          <span>{discount.label}</span>
-          <span className="inline-flex items-center">
-            −<PriceDisplay price={discount.amount} />
-          </span>
-        </div>
-      ))}
-      <p className="text-content-secondary mt-5 font-sans text-sm leading-6">
-        Shipping and final taxes are confirmed in Shopify checkout.
-      </p>
-      {!checkoutEnabled ? (
-        <div className="bg-content-surface mt-6 p-4">
-          <p className="font-sans text-sm font-semibold">
-            Checkout is being prepared
-          </p>
-          <p className="text-content-secondary mt-2 font-sans text-xs leading-5">
-            Your bag is saved. Payment will open after our launch checks are
-            complete.
-          </p>
-        </div>
-      ) : null}
-      <form action={checkoutAction} className="mt-6">
-        <Button
-          type="submit"
-          size="large"
-          className="w-full"
-          disabled={!checkoutEnabled}
-        >
-          {checkoutEnabled ? "Continue to checkout" : "Checkout unavailable"}
-        </Button>
-      </form>
     </aside>
   );
 }
