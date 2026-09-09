@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { AboutTemplate } from "@/components/templates/storefront-templates";
+import { CombinedAboutTemplate } from "@/components/templates/combined-about";
 import { readCart } from "@/lib/shopify/cart-session";
 import {
   getAboutPage,
   getAboutPageMetadata,
+  getGalleryPage,
 } from "@/sanity/lib/editorial-pages";
+import { getSiteSettings } from "@/sanity/lib/settings";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,12 +28,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function AboutContent() {
   const options = await getDynamicFetchOptions();
-  const [page, cart] = await Promise.all([getAboutPage(options), readCart()]);
+  const [page, gallery, settings, cart] = await Promise.all([
+    getAboutPage(options),
+    getGalleryPage(options),
+    getSiteSettings(options),
+    readCart(),
+  ]);
   return (
-    <AboutTemplate
-      title={page.title}
-      introduction={page.introduction}
-      chapters={page.chapters}
+    <CombinedAboutTemplate
+      page={page}
+      gallery={gallery}
+      heroImage={settings.homepage.heroSlides[0]}
+      bornStory={settings.homepage.founderStory}
       cartCount={cart.totalQuantity}
     />
   );

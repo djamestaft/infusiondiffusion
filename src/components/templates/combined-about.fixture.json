@@ -1,0 +1,122 @@
+﻿{
+  "heroImage": {
+    "alt": "Santuaire Serein reed diffuser among white flowers, lavender, smooth stones and rolled towels.",
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/c63a96a8071af98403fab9cc54146228d41c6062-480x640.png"
+  },
+  "gallery": {
+    "campaignItems": [
+      {
+        "caption": "Blanc De Blanc composed against warm travertine and shifting light.",
+        "title": "Blanc De Blanc — Travertine Light",
+        "id": "campaign-blanc-travertine",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/a1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png",
+          "alt": "Blanc De Blanc reed diffuser with black reeds on a travertine plinth in warm sunlight."
+        }
+      },
+      {
+        "caption": "Bois De Santal set against emerald panelling and green marble.",
+        "title": "Bois De Santal — Emerald Study",
+        "id": "campaign-bois-emerald",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/c8bbce9fd0797f9339051897f1e93dd2ab607d31-1086x1448.png",
+          "alt": "Bois De Santal reed diffuser with black reeds on a green marble plinth against emerald panelling."
+        }
+      },
+      {
+        "caption": "Santuaire Serein in a warm library setting of polished wood, books and deep green fabric.",
+        "title": "Santuaire Serein — Library Study",
+        "id": "campaign-serein-library",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/482f3fed91eafe53e9284d45a5e643676fa2cebe-1086x1448.png",
+          "alt": "Santuaire Serein reed diffuser with black reeds on a polished wooden desk beside leather-bound books and green curtains."
+        }
+      },
+      {
+        "caption": "Santuaire Serein framed by soft daylight, pale stone and botanical greens.",
+        "title": "Santuaire Serein — Botanical Light",
+        "id": "campaign-serein-botanical",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/86fcafd161ed2ee696112ee0f8ec18ad8ab42c3e-1086x1448.png",
+          "alt": "Santuaire Serein reed diffuser with black reeds on pale stone among green leaves beside a sunlit window."
+        }
+      }
+    ],
+    "marketItems": [
+      {
+        "caption": "The Infusion Diffusion stand among neighbouring makers at an indoor market.",
+        "title": "At the Indoor Market",
+        "id": "market-indoor-stall",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/f8e727c63dc1967bb87bf04604973f46a3f49d01-1280x720.jpg",
+          "alt": "Wide view of an Infusion Diffusion market stall with gold-covered tables, product boxes and visitors inside a hall."
+        }
+      },
+      {
+        "caption": "A market display bringing together boxed diffusers, display vessels and floral detail.",
+        "title": "The Market Table",
+        "id": "market-table",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/628b9bae37a3f40921fe6f0bd141e5cf471a5abe-720x1280.jpg",
+          "alt": "Infusion Diffusion display table with boxed reed diffusers, white vessels and red flowers, with a person behind the stall."
+        }
+      },
+      {
+        "caption": "Blanc De Blanc presented with its packaging and fragrance story at the market table.",
+        "title": "Blanc De Blanc at Market",
+        "id": "market-blanc",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/0f5cfddb23c71c35e3d86c09661b3f9e7d2eb110-1280x960.jpg",
+          "alt": "Blanc De Blanc reed diffuser and kraft box on a wood slice beside a framed product card and flowers."
+        }
+      },
+      {
+        "caption": "A selection of Infusion Diffusion fragrances arranged for market visitors.",
+        "title": "The Collection on Display",
+        "id": "market-collection",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/d186dfbcab793cdbcbca2942d8a42679d248f49b-1280x960.jpg",
+          "alt": "Several Infusion Diffusion reed diffusers and kraft boxes arranged on a patterned market table beside a framed brand sign."
+        }
+      },
+      {
+        "caption": "The collection displayed across natural wood stands with flowers and brand materials.",
+        "title": "A Table of Fragrance",
+        "id": "market-fragrance-table",
+        "image": {
+          "src": "https://cdn.sanity.io/images/j222nd1i/production/d06af4517eb55a33b096658c4ee26e5f99e8a714-1280x960.jpg",
+          "alt": "Infusion Diffusion reed diffusers and kraft boxes displayed on round wood slices with flowers and branded notebooks."
+        }
+      }
+    ],
+    "title": "Rooms, composed in scent",
+    "seoDescription": "Explore Infusion Diffusion fragrance, vessel and atmosphere studies from lived-in rooms.",
+    "introduction": "A study in fragrance, vessel and atmosphere — moments gathered from lived-in rooms.",
+    "closingLine": "",
+    "unavailable": false,
+    "seoTitle": "Gallery | Infusion Diffusion"
+  },
+  "page": {
+    "title": "The story behind the atmosphere.",
+    "introduction": "A considered collection shaped by a lasting fascination with fragrance, refined for the rooms we live in.",
+    "chapters": [
+      {
+        "role": "origin",
+        "heading": "Born from fragrance",
+        "body": "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling."
+      },
+      {
+        "role": "development",
+        "heading": "From more than 130 oils to six fragrances",
+        "body": "More than 130 fragrance oils sourced from around the world were explored before the collection was refined to six distinctive room fragrances. The result is a focused cabinet of atmosphere: clear enough to choose with confidence, expressive enough to change the feeling of a room."
+      },
+      {
+        "role": "principles",
+        "heading": "Composed for lived-in rooms",
+        "body": "Infusion Diffusion treats scent as a considered part of an interior. Each fragrance is presented with clarity, restraint and a belief that luxury is earned through material detail, proportion and trust."
+      }
+    ],
+    "seoTitle": "About Infusion Diffusion | Infusion Diffusion",
+    "seoDescription": "Discover the Infusion Diffusion story, from more than 130 fragrance oils to six fragrances composed for lived-in rooms."
+  }
+}

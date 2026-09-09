@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 
 for (const viewport of [
   { name: "desktop", width: 1440, height: 1000 },
+  { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
   { name: "small", width: 320, height: 844 },
 ]) {
@@ -35,18 +36,16 @@ for (const viewport of [
         "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",
       ),
     ).toBeVisible();
-    await expect(
-      page.getByText(
-        /More than 130 fragrance oils sourced from around the world/,
-      ),
-    ).toBeVisible();
+    await expect(page.getByTestId("about-chapter-origin")).toContainText(
+      "More than 130 fragrance oils sourced from around the world",
+    );
     await expect(
       page.getByText(/guidance and encouragement of Jacqui Kirchmann/),
     ).toBeVisible();
     await expect(
       page.getByText(/luxury is earned through material detail/),
     ).toBeVisible();
-    await expect(page.getByRole("link", { name: "Cart" })).toBeVisible();
+    await expect(page.getByRole("link", { name: /^Cart/ })).toBeVisible();
     await expect(
       page.getByRole("link", { name: /Explore the Fragrance Guide/i }),
     ).toHaveAttribute("href", "/fragrance-guide");
@@ -58,16 +57,22 @@ for (const viewport of [
     await expect(about).toBeVisible();
     await expect(
       page.locator('[data-testid="about-chapter-origin"]'),
-    ).toHaveCSS("background-color", "rgb(245, 241, 232)");
+    ).toHaveCSS("background-color", "rgb(25, 25, 22)");
+    await expect(page.getByTestId("about-page").locator("..")).toHaveCSS(
+      "background-color",
+      "rgba(0, 0, 0, 0)",
+    );
     await expect(
-      page.locator('[data-testid="about-chapter-development"]'),
-    ).toHaveCSS("background-color", "rgb(238, 240, 231)");
+      page.getByRole("heading", { name: "Guidance and encouragement" }),
+    ).toHaveCount(0);
     await expect(
-      page.locator('[data-testid="about-chapter-collaborator"]'),
-    ).toHaveCSS("background-color", "rgb(245, 241, 232)");
-    await expect(
-      page.locator('[data-testid="about-chapter-principles"]'),
-    ).toHaveCSS("background-color", "rgb(238, 240, 231)");
+      page.getByRole("heading", {
+        name: "Find your fragrance with confidence.",
+      }),
+    ).toBeVisible();
+    await expect(page.getByTestId("about-chapter-principles")).toContainText(
+      "luxury is earned through material detail",
+    );
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBeLessThanOrEqual(

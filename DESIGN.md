@@ -1,5 +1,22 @@
 # Infusion Diffusion design system
 
+## About and Guide implementation — 9 September 2026
+
+The [INF-35 contract](docs/features/inf-35-approved-editorial.md) maps combined
+About and Guide Variation 02 to the exact approved frames. About combines
+Sanity gallery media with editorial chapters and preserves the complete
+source-owned Born text. Campaign roles use stable IDs, 3:4 imagery and no
+visible captions. Market roles preserve their captions; the lead uses 16:9,
+the remaining four use 4:3, with the Market Table anchored at 58.81%.
+
+Guide remains Storybook-only pending matching approval; its sample shortlist
+does not power the live route. Approved answer surface `#F7F3EA`, border
+`rgb(132 101 35 / 55%)` and question-number ink `#846523` now have named
+semantic roles. Existing button material, focus, typography and shared shell
+are retained. Stories and the application share the same Marcellus/Manrope
+font definitions; native fallback fonts are not visual comparison evidence.
+Verification and human review are pending; source publication remains paused.
+
 ## Home/shared shell/Cart implementation — 9 September 2026
 
 The [INF-34 contract](docs/features/inf-34-approved-home-shell-cart.md) maps the

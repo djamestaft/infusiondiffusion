@@ -1,5 +1,17 @@
 # Infusion Diffusion Roadmap
 
+## INF-35 editorial implementation — 9 September 2026
+
+Devon authorized continuing INF-35 after INF-34 merged in PR #73 at
+`33a826c`. The single delivery branch is `agent/inf35-approved-editorial`.
+Combined About integrates approved story chapters and source-owned gallery
+imagery; Guide Variation 02 is prepared in Storybook. The existing live Guide
+remains until recommendation matching is approved. Contact, final assets/facts,
+care, SEO and source publication retain their open/deferred status.
+See the [bounded delivery contract](../features/inf-35-approved-editorial.md).
+Implementation verification and independent/human review remain in progress;
+this does not complete INF-35 or authorize publication or merge.
+
 ## INF-33 implementation — 9 September 2026
 
 INF-33 is Done: Devon authorized merge and PR #72 landed at 9615957.
@@ -8,10 +20,10 @@ corrects the remaining hero/grid/card presentation and purchase hierarchy;
 see [acceptance and comparison record](../features/inf-33-approved-shop-product.md).
 Independent review, current-head GitHub quality and PR gate passed. The Vercel
 preview was Ready, with authenticated route verification limited by SSO.
-INF-34 is now In Progress on agent/inf34-approved-home-shell-cart, owned by
-Devon, implementing the shared header/footer, Home and Cart. See the
+INF-34 is Done: Devon merged PR #73 at `33a826c`, including the shared
+header/footer, Home and Cart. See the
 [delivery contract](../features/inf-34-approved-home-shell-cart.md).
-Verification and human preview/merge gate this new delivery.
+Plane records successful post-merge Home, Cart and health smoke checks.
 Content/photography/care/SEO deferrals remain unchanged.
 
 Last updated: 8 September 2026

@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Manrope, Marcellus } from "next/font/google";
+import { manrope, marcellus } from "./fonts";
 import "./globals.css";
-
-const manrope = Manrope({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const marcellus = Marcellus({
-  variable: "--font-display",
-  weight: "400",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
