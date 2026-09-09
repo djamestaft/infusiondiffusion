@@ -53,6 +53,8 @@ their deferral does not authorize changing the observed public address.
    requirements. No new motion is required.
 5. Show or specify loading, page failure, content extremes and missing/invalid
    contact-data handling, preserving the current route's safe fallback boundary.
+   If the placeholder hero image is unavailable, retain a solid dark surface
+   and readable hero text.
 6. Reuse actual design-system components and record source/target node IDs,
    composition decisions, screenshot comparison and known limitations outside
    customer frames.
@@ -71,10 +73,14 @@ customer communication or production deployment is part of this preparation.
 
 ## Design handoff
 
-Contact exploration uses the approved midnight header/footer and a compact,
-text-led introduction. The email address and gold action form the primary
-contact block; existing writing guidance follows. Photography and additional
-marketing sections are unnecessary for this direct service task.
+Contact exploration uses the approved midnight header/footer. Devon requested
+a centered hero heading and introduction over the same placeholder image used
+by Shop: /images/homepage-bespoke-diffuser-blurb.png, with the existing collection
+hero scrim for readable text. The main email section is centered, including its
+heading, address, gold action and helper. The bottom Before you write section
+uses Home's invitation surface (collection-invitation-surface / gold-300), and
+its text spans the full content rail within the responsive gutters. No new
+marketing sections or factual copy are introduced.
 
 | Width | Exploration frame                                                                                               |
 | ----- | --------------------------------------------------------------------------------------------------------------- |
@@ -102,14 +108,23 @@ records source copy, design decisions, behavior and state requirements.
 The designer inspected all four responsive screenshots and top-level bounds;
 the coordinator independently inspected desktop and mobile compositions.
 The email address link has a minimum 44px target, with natural height growth
-specified for long addresses. No photography, new tokens or source mutations
-were introduced.
+specified for long addresses. The existing Shop photograph is a user-requested
+placeholder, not final Contact imagery. No new tokens or source mutations are
+introduced.
 
-Final frames measure 1440×1129, 768×994, 390×1220 and 320×1295. All four email
+Final revised frames measure 1440×1167, 768×994, 390×1220 and 320×1295. All four email
 targets are 44px high; primary actions are 48px high. Nested overflow and
 font-mismatch checks returned no findings. Final captures:
 [desktop](evidence/inf27-contact-1440.png) and
 [mobile](evidence/inf27-contact-390.png).
+
+The hero reuses Shop image nodes `2349:405/544`, image hash
+`caf5cbcb8c998c1d7137be59874787e1178c997e`, with centered cover and the 54% ink
+scrim. The gold section matches Home invitation `2349:89`, using existing
+`#DDC77F` / gold-300. The bottom text spans 1312/688/342/280px content rails.
+The designer checked all revised frames; the coordinator re-inspected the
+desktop/mobile captures. Centered alignment, unchanged copy, existing fonts
+and no nested horizontal overflow were confirmed.
 
 Changed-document formatting and diff checks pass. These are design/documentation
 checks, not runtime accessibility evidence. Keyboard behavior, contrast under

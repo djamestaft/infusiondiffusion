@@ -12,7 +12,9 @@ Guide recommendations remain unavailable pending matching.
 INF-27 remains In Progress, owned by Shawnee, with Devon approving exact
 Contact frames. Prepare Contact at 1440/768/390/320 using the existing direct-email
 behavior, published mailbox and approved copy. Preserve the shared shell,
-semantic tokens and fonts. No contact form, new service facts or source
+semantic tokens and fonts. Devon requested Shop's placeholder hero image with
+centered hero text, a centered email section and Home's gold invitation surface
+for full-width writing guidance. No contact form, new service facts or source
 publication is authorized. See the [Contact brief](../features/inf-27-contact.md).
 
 INF-35's bounded delivery in [PR #74](https://github.com/djamestaft/infusiondiffusion/pull/74)
