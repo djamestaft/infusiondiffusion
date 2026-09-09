@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "colorMeta": {},
+  "typographyMeta": {},
+  "tokens": {
+    "shadows": [],
+    "motion": [],
+    "breakpoints": []
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "A considered South African home-fragrance object",
+    "overview": "Approved visual authority is Figma file jIMvwSBkilg7eplo3IiHPa, page 2004:14. The 8 September 2026 handoff owns the current 24 page frames in section 2484:736 and supporting contracts in 2484:737. Retain existing foundations. Runtime and Storybook synchronization remains pending INF-33/34/35; this sidecar records guidance, not completed component examples.",
+    "keyCharacteristics": [
+      "Marcellus display and Manrope interface typography",
+      "Semantic tokens and shared primitives",
+      "Atomic composition with Storybook-first verification"
+    ],
+    "rules": [
+      {
+        "name": "Current design authority",
+        "body": "Use DESIGN.md and docs/features/2026-09-08-design-approval.md. Historical links do not override the current Approved frames.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do verify changed components and consuming pages against exact approved frames at 1440, 768, 390 and 320 where supplied.",
+      "Do preserve source-owned content and existing commerce behavior."
+    ],
+    "donts": [
+      "Do not infer visual fidelity from passing tests alone.",
+      "Do not turn static Guide examples into unverified recommendation claims."
+    ]
+  }
+}

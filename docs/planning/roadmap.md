@@ -1,15 +1,17 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 8 September 2026
+Last updated: 9 September 2026
 
-## Current approval and next delivery — 8 September 2026
+## Current approval and next delivery — 9 September 2026
 
 Devon approved all 24 current main-Exploration customer layouts: Home, Shop,
 Product, Cart, combined About and Fragrance Guide Variation 02 at four widths.
-Promote these exact frames and their separate supporting contracts to Approved;
+These exact frames and their separate supporting contracts are on Approved;
 the [dated handoff](../features/2026-09-08-design-approval.md) is the current
 page-level authority and supersedes the pending visual-approval statements
-in the earlier chronological notes below.
+in historical records. PR #70 was human-merged as `b11ad6f`; the protected
+branch now contains this authority. Use the [atomic implementation contract](../design-implementation.md)
+for component mapping, Storybook-first delivery and visual comparison evidence.
 
 INF-32's shopping-journey visual approval is complete. INF-27's combined About
 and Guide layouts are approved; Contact has no frame in this set and remains
@@ -24,58 +26,20 @@ editorial release. Final photography, product/service facts, care guidance,
 Sanity SEO and source publication remain deferred through INF-28/31.
 Human merge and release verification gates remain unchanged.
 
-## Current user deferrals — 8 September 2026
+## Deferred content and retained scope
 
-Devon deferred the Sanity SEO description update, final photography, and
-outstanding product/service facts until later. These items remain open in
-INF-28/31; they are not prerequisites for the next shopping-journey design
-milestone. This decision supersedes the final-content prerequisites below.
+INF-28/31 retain final photography, outstanding product/service facts, care,
+Sanity SEO and source publication. The user deferred these on 8 September;
+INF-32 is Done and has no blocking dependency on INF-31. Use existing imagery
+and verified content for implementation; omit unsupported claims and keep
+technical annotations out of customer pages. Deferral does not authorize
+removing approved Home sections or changing image crops and card styling.
 
-INF-32 is now In Progress: shape and review Home, Shop, product,
-existing cart and shared footer using existing imagery and verified content.
-Omit unavailable facts and unsupported claims. Record provisional imagery and
-content omissions outside customer frames; do not invent replacement facts.
-Final photography and factual enrichment return through INF-28/31 later.
-The [shopping-journey brief](../features/inf-32-shopping-journey.md) records
-the reviewed implementation baseline, scope, observable acceptance criteria
-and required design/state evidence. Shawnee owns delivery; Devon approves
-the revised design. Repository and Figma exploration do not approve release.
-Devon has now authorized a card-by-card Fragrance Guide exploration under
-INF-27: one question per screen, answer selection and explicit Next.
-Use the existing separate Figma page `2153:3`
-(`eploration-fragrance guide system`) and preserve its earlier concepts.
-This exploration may proceed before whole-journey approval; INF-32 remains
-the dependency for final editorial approval and downstream implementation.
-Question copy and product matching remain provisional. See the
-[guide exploration brief](../features/inf-27-fragrance-guide-system.md).
-Sanity publication is paused, including the deferred SEO description.
-
-INF-32 no longer has a blocking dependency on completion of INF-31. Devon's
-approval of exact revised Figma frames still gates downstream implementation;
-merge and release verification gates remain. Final-asset acceptance remains
-open and must not be reported as complete from this interim design review.
-
-## INF-32 review correction — 8 September 2026
-
-Restore the existing Home Fragrance Guide, 200 ml / Made to linger, and
-Made meaningful by the details sections in their original order. Content
-deferrals do not authorize removing those sections. Correct Home hero image
-letterboxing so the existing imagery fills its frames at every width.
-
-Devon also directed combining Gallery and About. Remove Gallery from the
-responsive header and keep About; INF-27/35 must shape and implement the
-combined editorial destination. Gallery is also removed from the shared footer
-under Devon's follow-up correction. Preserve the existing Gallery route until
-that transition is defined. INF-37 now represents later
-refinement of the combined About/Gallery experience, not a separate Gallery
-redesign. Existing design, source publication and merge gates still apply.
-
-Devon selected the approved Shop product-card format for Home as well.
-Reuse its square FILL media, elevated content panel, typography, spacing
-and commerce states across both surfaces. This explicit choice supersedes
-the earlier flat Home-card restoration. Keep Home's 3/4/3/3 selection across
-1440/768/390/320 widths and all six Shop products; the card format is shared,
-while each page retains its own selection and grid.
+Guide Variation 02 and combined About layouts are approved. Contact and Guide
+matching decisions remain under INF-27. The separate card-by-card trial is
+historical exploration, not the selected design. Preserve the Gallery URL
+while removing Gallery from navigation as approved. INF-37 covers later
+refinement. [Earlier decision notes](design-decision-history.md) retain history.
 
 ## Goal and existing systems
 
@@ -140,8 +104,10 @@ and production promotion retain their named human gates.
 
 ## Delivery tickets and dependencies
 
-Shawnee owns delivery preparation unless otherwise stated. Devon owns factual,
-design and merge decisions. Independent verification is required for release.
+Devon owns implementation (INF-33, INF-34 and INF-35), plus factual, design
+and merge decisions. Shawnee owns design/content preparation (INF-27/31)
+and coordinates independent verification (INF-36). Review must be independent
+of the implementation author. One delivery branch is the default.
 
 | Item   | Outcome                                                                                | Depends on                   |
 | ------ | -------------------------------------------------------------------------------------- | ---------------------------- |
@@ -174,8 +140,7 @@ reed diffusers only. Candles and room sprays must not be advertised as launch
 products. INF-28 U2 is Accepted; U1's range is Accepted while the title suffix
 and Shopify product-type field remain unresolved. INF-31 owns the corresponding
 source wording preview and later approved publication. Devon subsequently
-authorized Home and metadata wording implementation. The Fragrance Guide is
-deferred to Devon's new format; image replacement and missing information will
+authorized Home and metadata wording implementation. The Fragrance Guide implementation awaits remaining matching decisions; image replacement and missing information will
 be added later. Those deferrals permit this wording delivery without treating
 the final launch-content or revised-design gates as complete.
 INF-28 remains Todo for outstanding decisions. On 7 September the user deferred
@@ -185,9 +150,11 @@ remain unlisted; it is In Progress for preparation only. Its completion and
 publication still require the remaining applicable factual and asset approvals.
 The proposed short Santuaire replacement description is not an accepted change.
 See the [preparation package](../features/inf-31-launch-content-preparation.md).
-INF-32 must review related INF-29 evidence, but does not require the older
-implementation to merge before revised design can proceed.
-Dependent implementation remains in Backlog until approval contracts exist.
+INF-29 and INF-32 are Done. INF-33 starts by reconciling delivered INF-29
+fixes, then INF-34 implements the revised shopping journey. INF-35 retains
+its INF-27/31/34 dependencies. These implementation tickets remain Backlog
+until delivery starts; their state does not mean the approved designs need
+to be approved again.
 One delivery branch is the default; multiple writing agents require separately
 approved topology and isolated Treehouse worktrees.
 

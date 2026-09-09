@@ -5,7 +5,7 @@
 Devon approved all current customer pages on the main Exploration page.
 The approved delivery set is Home, Shop, Product, Cart, combined About and
 Fragrance Guide Variation 02 at 1440, 768, 390 and 320 widths. These exact
-frames move intact to `30 — Redesign / Approved` (`2004:14`).
+frames were promoted intact to `30 — Redesign / Approved` (`2004:14`).
 The [approval and implementation handoff](docs/features/2026-09-08-design-approval.md)
 records all 24 frame IDs, current contracts and remaining work.
 
@@ -21,27 +21,25 @@ Final photography, deferred facts/care copy and Sanity SEO remain open.
 Visual approval does not validate fragrance matching or authorize publication,
 merge, checkout enablement or production deployment.
 
-## 7 September Home wording correction
+## Implementation authority
 
-Devon authorized reed-diffuser-only wording on Home and in metadata. Runtime
-Home defaults and its Storybook long-content example use that scope. This is an
-intentional content divergence from earlier Figma copy; layout, imagery,
-semantic tokens and component contracts are unchanged. Figma copy synchronization
-remains pending the revised real-content journey in INF-32. The Fragrance Guide
-awaits Devon's new format; replacement images and missing facts are deferred.
+Last approved: 8 September 2026. Consolidated after PR #70 merged as
+`b11ad6f` on 9 September 2026. The user reaffirmed Approved page `2004:14`
+as the project visual authority.
 
-Status: approved Figma foundation, reusable component contract, and INF-16
-homepage direction. The runtime foundation and Home-required component
-contracts are synchronized; broader template synchronization remains.
-
-Last approved: 1 September 2026
+Follow the [atomic implementation contract](docs/design-implementation.md).
+The dated handoff owns current page compositions and shared component changes;
+the retained foundation below supplies unchanged tokens and primitives.
+Historical approvals do not override the current 24-frame delivery set.
 
 ## Source of truth
 
 The implementation source is the Figma page `30 — Redesign / Approved` in
-the [Infusion Diffusion Redesign file](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2039-32&m=dev).
+the [Infusion Diffusion Redesign file](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2004-14).
 
-- Implementation handoff: `2039:32`
+- Current customer layouts: `2484:736` (exact frames in the dated handoff)
+- Current supporting components and states: `2484:737`
+- Retained foundation handoff: `2039:32`
 - Foundation direction: `2039:69`
 - Color roles: `2039:106`
 - Typography: `2039:211`
@@ -54,12 +52,12 @@ the [Infusion Diffusion Redesign file](https://www.figma.com/design/jIMvwSBkilg7
 - Commerce and product cards: `2039:644`
 - Feedback, content, and organisms: `2039:710`
 - Component responsive proofs: `2039:759` (390), `2039:797` (320)
-- INF-16 Home: `2070:2` (1440), `2072:2` (768), `2073:2` (390),
+- Historical INF-16 Home: `2070:2` (1440), `2072:2` (768), `2073:2` (390),
   `2073:70` (320)
 - INF-16 Home state contract: `2073:3389`
-- INF-26 Shop: `2209:24` (1440), `2209:25` (768), `2209:26` (390),
+- Historical INF-26 Shop: `2209:24` (1440), `2209:25` (768), `2209:26` (390),
   `2209:27` (320)
-- INF-26 Product detail: `2209:28` (1440), `2209:29` (768), `2209:30`
+- Historical INF-26 Product detail: `2209:28` (1440), `2209:29` (768), `2209:30`
   (390), `2209:31` (320)
 - INF-26 Shop and product-detail state contract: `2209:32`
 
@@ -74,7 +72,10 @@ not be cited by new implementation work, visual review, Storybook contracts,
 or release approval. When a historical record needs a current counterpart,
 link the applicable frame on `30 — Redesign / Approved` instead.
 
-## Approved INF-16 homepage direction
+## Historical INF-16 homepage baseline
+
+The 8 September handoff supersedes this baseline wherever it differs. This
+section explains the existing runtime; it is not the new implementation target.
 
 The homepage uses the archived navigation `LogoTextLockup` in its Midnight
 variants, with the desktop page navigation centred between the logo and cart.
@@ -160,20 +161,18 @@ applicable.
 
 ## Synchronization status
 
-- Figma approved frames: synced
-- `DESIGN.md`: synced
-- Runtime semantic CSS tokens: synchronized for color, typography, spacing, and focus in INF-17; the approved background primitive returns to scope in INF-24 and must be implemented as the shared contract described above
-- Reusable components: Home-required navigation, actions, content primitives,
-  product-card commerce states, and media fallback synchronized in INF-18
-- Storybook contracts: INF-16 homepage, INF-17 runtime foundation, and INF-18
-  Home-required component states synchronized; INF-26 Shop and product-detail
-  states are approved in Figma and pending INF-29 Storybook implementation
-- Customer-facing templates: Home template and live route synchronized through
-  INF-19; Shop and product-detail implementation is active in INF-29
+| Layer                        | Current status                                                                                 |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- |
+| Figma                        | Approved page `2004:14`; current layouts `2484:736`, support `2484:737`                        |
+| DESIGN.md and dated handoff  | Current design authority synchronized                                                          |
+| Foundation tokens            | Existing foundation retained; no visual token values changed by this consolidation             |
+| Runtime components/templates | Existing Home and Shop/product baseline delivered; revised designs pending INF-33/34/35        |
+| Storybook                    | Existing contracts retained; revised states and composition comparisons pending implementation |
 
-Do not implement from the provisional holding-page styles or archived frames.
-Any intentional divergence from the approved Figma evidence must be recorded
-here before implementation is treated as complete.
+A component is complete only when its Figma reference, semantic tokens,
+implementation and Storybook states agree, with comparison evidence at the
+applicable approved widths. Passing CI alone is not visual acceptance.
+Intentional divergences require a named reason and human approval.
 
 ## Product and architecture constraints
 

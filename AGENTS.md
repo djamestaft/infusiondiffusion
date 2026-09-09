@@ -6,6 +6,7 @@ This repository is a headless commerce storefront. Next.js owns the customer-fac
 
 - Product intent and audience: `PRODUCT.md`
 - Visual system and UI rules: `DESIGN.md`
+- Approved frames and atomic Storybook-first delivery: `docs/design-implementation.md`
 - Architecture and system boundaries: `docs/architecture.md`
 - Delivery, environments, and incidents: `docs/operations.md`
 
@@ -36,3 +37,4 @@ Keep this file short. Put reusable procedures in `.agents/skills` and deeper exp
 12. Keep approved Figma, `DESIGN.md`, runtime semantic tokens, and Storybook component contracts synchronized. Follow `.agents/skills/design-to-storybook/SKILL.md`, name any intentional divergence, and never treat the provisional holding-page styles as approved brand truth.
 13. Concurrent implementation agents must use separate Treehouse-managed worktrees and task branches. Follow `.agents/skills/parallel-agent-worktrees/SKILL.md`; never let two writing agents share a checkout or branch, and integrate through reviewed pull requests rather than editing `main`.
 14. Codex is the project agent coordinator. Before delegating, tell the user which roles will run, what each owns, and where human approval is required. Keep implementation on one delivery branch by default; create multiple writing agents, worktrees, or pull requests only when the user approves that topology.
+15. Devon is the default implementation owner (INF-33/34/35); Shawnee owns preparation and coordinates independent verification. Use the exact current frames on Figma Approved page `2004:14` and the dated handoff. Build foundations, atoms, composed components and templates in Storybook before live-page integration; require visual comparison evidence, not CI alone, for fidelity sign-off.

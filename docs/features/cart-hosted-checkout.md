@@ -1,5 +1,10 @@
 # Cart and hosted checkout
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 Status: Product brief and all four Figma frames approved on 4 August 2026; gated implementation complete pending human merge and live Preview contract verification.
 
 ## Design review

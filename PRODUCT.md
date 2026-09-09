@@ -36,7 +36,12 @@ About and Fragrance Guide Variation 02 layouts on 8 September 2026.
 The dated approval in `DESIGN.md` now governs downstream implementation.
 Contact and verified Guide matching remain open; the separate card-by-card
 trial remains exploratory. Final photography, missing facts/care copy and
-Sanity SEO remain deferred. The following paragraph records the workstream
-context leading to that approval.
+Sanity SEO remain deferred.
 
-Evolve the existing brand into a cohesive premium shopping journey: Home, Shop, product detail, the existing cart and Shopify-hosted checkout handoff, plus essential brand and service pages. Shopify commerce and Sanity CMS integrations already exist and must be preserved. INF-32 is shaping the revised journey using existing imagery and verified content. Final photography, outstanding product/service facts and Sanity SEO are deferred by Devon's 8 September decision. Devon has now authorized a separate card-by-card Fragrance Guide exploration under INF-27; question copy and product matching remain provisional. Approve revised Figma compositions before implementation, then verify the integrated journey. Gallery refinement follows the shopping milestone. See `docs/planning/roadmap.md` for current approval status, Plane tickets and delivery order.
+Devon owns implementation through INF-33/34/35. Reuse existing Shopify and
+Sanity integrations, build and verify reusable components in Storybook before
+page integration, and compare against exact Approved Figma frames. Shawnee
+owns design/content preparation and coordinates independent release verification.
+See `docs/planning/roadmap.md` for dependencies and `docs/design-implementation.md`
+for the atomic delivery contract. Later Gallery refinement follows the shopping
+release; preserve existing public URLs meanwhile.

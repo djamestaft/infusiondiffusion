@@ -1,5 +1,10 @@
 # Responsive page templates
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 Status: Figma approved by the product owner on 4 August 2026; reusable Storybook implementation complete on 4 August 2026; Home and Fragrance Guide runtime integrations implemented on 4 August 2026; remaining route integration continues in the launch-readiness phase.
 
 ## Summary

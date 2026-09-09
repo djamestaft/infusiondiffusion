@@ -1,5 +1,10 @@
 # Navigation system
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 Status: Complete and merged in PR #21 on 3 August 2026.
 
 ## Summary
