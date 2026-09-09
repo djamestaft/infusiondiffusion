@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { connection } from "next/server";
 
 import { FragranceGuideTemplate } from "@/components/templates/fragrance-guide";
 import { readCart } from "@/lib/shopify/cart-session";
+import { getGuideProducts } from "@/lib/fragrance-guide/catalog";
 import { absoluteStorefrontTitle, storefrontTitle } from "@/lib/metadata-title";
 import { getFragranceGuideMetadata } from "@/sanity/lib/editorial-pages";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
@@ -23,9 +25,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function FragranceGuideContent() {
-  const cart = await readCart();
+  await connection();
+  const [cart, products] = await Promise.all([readCart(), getGuideProducts()]);
 
-  return <FragranceGuideTemplate cartCount={cart.totalQuantity} />;
+  return (
+    <FragranceGuideTemplate
+      cartCount={cart.totalQuantity}
+      products={products}
+    />
+  );
 }
 
 export default function FragranceGuidePage() {

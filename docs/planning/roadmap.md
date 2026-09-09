@@ -1,5 +1,27 @@
 # Infusion Diffusion Roadmap
 
+## Fragrance matching preparation - 9 September 2026
+
+Contact is complete and live: Devon merged PR #75 at `3e768c7`.
+Post-merge main CI and production Home/Contact/Shop/Cart/health checks passed.
+This supersedes pending Contact delivery and merge statements below.
+
+Devon authorized starting the remaining INF-35 matching work. The
+[matching review](../features/inf-35-fragrance-matching.md) records a read-only
+source audit, proposed associations/scoring, example results and acceptance
+criteria. The current proposal uses note/character choices only; using room,
+mood, comparative presence and time requires further owner-approved mappings.
+Devon approved this narrower first version and exact rules. INF-35 now implements
+source-explained matches, current Shopify product links, ties and recovery states.
+Figma and Storybook are synchronized; verification and preview delivery are in progress.
+Further dimensions and Sanity source publication retain their separate gates.
+
+INF-35 remains In Progress, owned by Devon. INF-27 remains In Progress, owned
+by Shawnee; INF-34 is Done. INF-31 content/source deferrals remain open.
+INF-36 remains downstream. One delivery branch is
+`agent/inf35-fragrance-matching`; the coordinator writes repository files and
+the content/commerce engineer performs read-only source review.
+
 ## Contact implementation - 9 September 2026
 
 Devon authorized continuing Contact under INF-27 after approving PR #74 on

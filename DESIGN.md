@@ -1,5 +1,25 @@
 # Infusion Diffusion design system
 
+## Guide matching implementation - 9 September 2026
+
+Devon's subsequent review puts Suggested fragrances above Your fragrance
+preferences, after the form controls. Continue focuses the suggestions heading
+when matches exist, or the preferences heading for empty/unavailable results.
+Keep the original section styling; the preferences section uses the shared
+gutters and 48px vertical padding below the suggestions.
+
+Devon approved the [matching contract](docs/features/inf-35-fragrance-matching.md)
+for a notes/character-only first version. Room, mood, presence and time remain
+summary preferences, explicitly excluded from scoring. Preserve Variation 02
+frames 2172:2, 2457:601/749/897 and state contract 2458:676, now synchronized
+by the designer. Suggested fragrances replaces the fixed-three/ranked-atmosphere
+claim. Show 1-3 source-explained matches only after valid submission; edits clear
+results, equal scores indicate equal editorial ranking, and unavailable products
+have a visible status. Empty/failure states retain the summary and Shop recovery.
+Use the existing fluid result grid, tokens, typography and shared shell.
+The accepted versioned repository mapping is interim while Sanity publication
+remains paused. This supersedes earlier unavailable-matching statements below.
+
 ## Contact implementation — 9 September 2026
 
 The [Contact brief](docs/features/inf-27-contact.md) records INF-27 approved

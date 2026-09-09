@@ -2,36 +2,18 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { FragranceGuideTemplate } from "./fragrance-guide";
 
-const approvedShortlist = [
-  {
-    title: "Ambre Egyptian",
-    description:
-      "Strongest for a warm, enveloping evening with amber, vanilla and sandalwood.",
-    href: "/products/ambre-egyptian",
-  },
-  {
-    title: "Été Mystique",
-    description:
-      "A more mysterious evening profile with fig, night florals, incense, amber and musk.",
-    href: "/products/ete-mystique",
-  },
-  {
-    title: "Noir de la Nuit",
-    description:
-      "A balanced fresh-to-warm journey: citrus and eucalyptus settle into spice, woods and amber.",
-    href: "/products/noir-de-la-nuit",
-  },
-];
+import { shopifyE2EProducts } from "@/lib/shopify/e2e-fixtures";
+
 const meta = {
   title: "Templates/Fragrance Guide Variation 02",
   component: FragranceGuideTemplate,
-  args: { onContinue: fn() },
+  args: { onContinue: fn(), products: shopifyE2EProducts },
   parameters: {
     layout: "fullscreen",
     docs: {
       description: {
         component:
-          "Approved Figma layout 2172:2 and 2457:601/749/897. The live route provides preference controls and a summary; recommendations remain unavailable. Sample rankings and product links in populated stories are design references only.",
+          "Approved Figma layout 2172:2 and 2457:601/749/897. The live route provides preference controls, a summary and source-backed suggestions. Owner-approved note/character matching resolves products by GID. Other four answers remain summary-only.",
       },
     },
   },
@@ -49,7 +31,7 @@ export const Desktop: Story = {
       ["Noticeable balance"],
       ["Evening"],
     ],
-    shortlist: approvedShortlist,
+    initialReviewed: true,
   },
 };
 export const Tablet: Story = {
@@ -65,6 +47,121 @@ export const Small: Story = {
   globals: { viewport: { value: "contact320" } },
 };
 export const Empty: Story = {};
+export const SourceUnavailable: Story = {
+  ...Desktop,
+  args: { ...Desktop.args, products: null },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText(/Fragrance suggestions are temporarily unavailable/),
+    ).toBeVisible();
+    await expect(
+      canvas.queryByRole("region", { name: "Suggested fragrances" }),
+    ).not.toBeInTheDocument();
+    await expect(
+      canvas.getByRole("link", { name: "EXPLORE THE COLLECTION" }),
+    ).toHaveAttribute("href", "/shop");
+  },
+};
+export const NoProducts: Story = {
+  ...Desktop,
+  args: { ...Desktop.args, products: [] },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByText(/No fragrances with an approved connection/),
+    ).toBeVisible();
+    await expect(
+      canvas.queryByRole("region", { name: "Suggested fragrances" }),
+    ).not.toBeInTheDocument();
+  },
+};
+export const SoldOut: Story = {
+  ...Desktop,
+  args: {
+    ...Desktop.args,
+    products: shopifyE2EProducts.map((p) => ({
+      ...p,
+      availableForSale: false,
+    })),
+  },
+  play: async ({ canvasElement }) => {
+    const region = within(
+      within(canvasElement).getByRole("region", {
+        name: "Suggested fragrances",
+      }),
+    );
+    await expect(region.getAllByText("Currently unavailable")).toHaveLength(3);
+    await expect(region.queryByRole("button")).not.toBeInTheDocument();
+  },
+};
+export const OneMatch: Story = {
+  ...Desktop,
+  args: {
+    ...Desktop.args,
+    initialAnswers: [
+      ["Bedroom"],
+      ["Soft & restful"],
+      ["Spa-like calm"],
+      ["Quiet background"],
+      ["Any time"],
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const region = within(
+      canvas.getByRole("region", { name: "Suggested fragrances" }),
+    );
+    await expect(region.getAllByRole("link")).toHaveLength(1);
+    await expect(region.getByRole("link")).toHaveTextContent(
+      "Santuaire Serein",
+    );
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Spa-like calm" }),
+    );
+    await expect(
+      canvas.queryByRole("region", { name: "Suggested fragrances" }),
+    ).not.toBeInTheDocument();
+    await userEvent.click(
+      canvas.getByRole("checkbox", { name: "Amber & vanilla" }),
+    );
+    await userEvent.click(canvas.getByRole("button", { name: "CONTINUE" }));
+    const updated = within(
+      canvas.getByRole("region", { name: "Suggested fragrances" }),
+    );
+    await expect(updated.getAllByRole("link")).toHaveLength(3);
+    await expect(updated.getAllByRole("link")[0]).toHaveTextContent(
+      "Ambre Egyptian",
+    );
+  },
+};
+export const TwoMatches: Story = {
+  ...Desktop,
+  args: {
+    ...Desktop.args,
+    products: shopifyE2EProducts.filter(
+      (p) => p.id.endsWith("10067255558430") || p.id.endsWith("10067255394590"),
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const region = within(
+      within(canvasElement).getByRole("region", {
+        name: "Suggested fragrances",
+      }),
+    );
+    await expect(region.getAllByRole("link")).toHaveLength(2);
+  },
+};
+export const LongContent: Story = {
+  ...Desktop,
+  args: {
+    ...Desktop.args,
+    products: shopifyE2EProducts.map((p) => ({
+      ...p,
+      title: p.title + " with an unusually long editorial product name",
+    })),
+  },
+};
 export const TwoNotesAndValidation: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
@@ -121,10 +218,26 @@ export const TwoNotesAndValidation: Story = {
       canvas.getByRole("heading", { name: "Your fragrance preferences" }),
     ).toBeVisible();
     await expect(
-      canvas.getByText(/Personalised recommendations are not available yet/),
+      canvas.getByRole("heading", { name: "Suggested fragrances" }),
     ).toBeVisible();
     await expect(
-      canvas.queryByRole("heading", { name: "Your room, shortlisted" }),
+      canvas.getByRole("heading", { name: "Suggested fragrances" }),
+    ).toHaveFocus();
+    const suggestions = canvas.getByRole("region", {
+      name: "Suggested fragrances",
+    });
+    const preferences = canvas.getByRole("region", {
+      name: "Your fragrance preferences",
+    });
+    await expect(
+      Boolean(
+        suggestions.compareDocumentPosition(preferences) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      ),
+    ).toBe(true);
+    await userEvent.click(canvas.getByRole("radio", { name: "Bedroom" }));
+    await expect(
+      canvas.queryByRole("heading", { name: "Suggested fragrances" }),
     ).not.toBeInTheDocument();
   },
 };

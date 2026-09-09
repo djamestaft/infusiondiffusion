@@ -2,7 +2,7 @@ import type { ShopifyProduct } from "@/lib/shopify/types";
 
 export const shopifyE2EProducts: ShopifyProduct[] = [
   {
-    id: "gid://shopify/Product/e2e-bois-de-santal",
+    id: "gid://shopify/Product/10067989987614",
     handle: "bois-de-santal-200ml",
     title: "Bois De Santal - 200ml",
     description:
@@ -40,16 +40,16 @@ export const shopifyE2EProducts: ShopifyProduct[] = [
 
 // Six deterministic products exercise catalogue completeness without a live API.
 // These records are only selected by the existing development + CI fixture gate.
-for (const [handle, title] of [
-  ["santuaire-serein", "Santuaire Serein"],
-  ["ambre-egyptian", "Ambre Egyptian"],
-  ["blanc-de-blanc", "Blanc de Blanc"],
-  ["ete-mystique", "Été Mystique"],
-  ["noir-de-la-nuit", "Noir de la Nuit"],
+for (const [handle, title, productId] of [
+  ["santuaire-serein", "Santuaire Serein", "10067255492894"],
+  ["ambre-egyptian", "Ambre Egyptian", "10067255558430"],
+  ["blanc-de-blanc", "Blanc de Blanc", "10067255394590"],
+  ["ete-mystique", "Été Mystique", "10068135641374"],
+  ["noir-de-la-nuit", "Noir de la Nuit", "10067255460126"],
 ]) {
   shopifyE2EProducts.push({
     ...shopifyE2EProducts[0],
-    id: `gid://shopify/Product/e2e-${handle}`,
+    id: `gid://shopify/Product/${productId}`,
     handle: `${handle}-200ml`,
     title: `${title} - 200ml`,
     description: "A complete test-only fragrance description.",
