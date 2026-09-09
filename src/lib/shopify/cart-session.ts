@@ -33,14 +33,14 @@ export async function readCart(): Promise<CartContract> {
   if (!id) return emptyCart;
   try {
     const cart = await getCart(id);
-    if (!cart) {
-      await clearCartId();
-      return emptyCart;
-    }
+    // Page renders can read cookies but cannot mutate them. The add action
+    // replaces a confirmed expired session when the customer next adds an item.
+    if (!cart) return emptyCart;
     return toPublicCart(cart);
   } catch {
     return {
       ...emptyCart,
+      unavailable: true,
       message: "We could not refresh your bag. Please try again.",
     };
   }

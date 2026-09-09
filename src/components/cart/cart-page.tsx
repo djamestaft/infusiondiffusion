@@ -50,18 +50,29 @@ export function CartPage({
       }
     });
   };
-  if (!cart.lines.length)
+  if (cart.unavailable || !cart.lines.length)
     return (
       <main className="mx-auto min-h-[70dvh] w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <p className="text-content-accent font-sans text-xs font-semibold uppercase">
           Your selection
         </p>
-        <h1 className="font-display mt-3 text-5xl">Your bag is empty</h1>
-        <p className="text-content-secondary mt-4 font-sans">
-          Explore the collection and choose a fragrance for your space.
+        <h1 className="font-display mt-3 text-5xl">
+          {cart.unavailable
+            ? "Your bag is temporarily unavailable"
+            : "Your bag is empty"}
+        </h1>
+        <p
+          role={cart.unavailable ? "alert" : undefined}
+          className="text-content-secondary mt-4 font-sans"
+        >
+          {cart.unavailable
+            ? "We could not refresh your bag. Please try again."
+            : "Explore the collection and choose a fragrance for your space."}
         </p>
         <Button asChild className="mt-8">
-          <a href="/shop">Shop the collection</a>
+          <a href={cart.unavailable ? "/cart" : "/shop"}>
+            {cart.unavailable ? "Try again" : "Shop the collection"}
+          </a>
         </Button>
       </main>
     );

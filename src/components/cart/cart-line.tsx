@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { RecoverableImage } from "@/components/ui/recoverable-image";
 import { Minus, Plus } from "lucide-react";
 
 import type { CartLineContract } from "@/lib/shopify/cart-contract";
@@ -33,12 +33,13 @@ export function CartLine({
         )}
       >
         {line.image ? (
-          <Image
+          <RecoverableImage
             src={line.image.src}
             alt={line.image.alt}
             fill
             sizes="120px"
             className="object-contain"
+            fallbackClassName="bg-content-surface text-content-secondary rounded-none px-2 text-xs font-normal tracking-normal normal-case"
           />
         ) : (
           <span className="text-content-secondary flex size-full items-center justify-center px-2 text-center font-sans text-xs">

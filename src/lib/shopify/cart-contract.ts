@@ -18,6 +18,7 @@ export type CartContract = {
   subtotal: ShopifyMoney;
   discounts?: Array<{ label: string; amount: ShopifyMoney }>;
   message?: string;
+  unavailable?: boolean;
 };
 
 export const emptyCart: CartContract = {

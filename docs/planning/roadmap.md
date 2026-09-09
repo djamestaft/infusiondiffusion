@@ -1,5 +1,18 @@
 # Infusion Diffusion Roadmap
 
+## Storefront recovery preparation - 9 September 2026
+
+Devon merged mobile PR #78 at `c7b6016` and authorized continuing technical
+readiness. Continue the [recovery contract](../features/storefront-recovery.md):
+honest cart-read failure and retry, expired-session handling, failed image
+fallbacks and verification of quantity retry/unavailable products.
+Use one delivery branch, `agent/storefront-recovery`, with the coordinator as
+sole writer. Existing approved layouts, checkout gate and source deferrals stay.
+
+INF-36 remains blocked for full release (owner Shawnee); this is advance
+technical preparation. INF-35 remains In Progress and INF-28/31 deferrals remain.
+Current-change preview acceptance and human merge remain gates.
+
 ## Mobile performance preparation - 9 September 2026
 
 PR #77 is approved, merged and live at `8f5fd98`; production cart focus
