@@ -1,5 +1,20 @@
 # Infusion Diffusion design system
 
+## Contact implementation — 9 September 2026
+
+The [Contact brief](docs/features/inf-27-contact.md) records INF-27 approved
+frames `2529:2/19/37/55` at 1440/768/390/320. Reuse the approved midnight shell,
+Marcellus/Manrope and corrected gold action. Keep the existing source-owned
+mailbox, direct-email behavior and factual copy. Devon requested centered hero
+text over the existing Shop placeholder image, a centered email section, and
+a gold-300 Before you write section with text spanning the full content rail.
+Reuse collection-hero-scrim and collection-invitation-surface.
+The duplicate email headings become “Contact us by email.”
+
+Devon approved these frames and implementation on 9 September. They are now in
+Approved with unchanged IDs; runtime and Storybook use the captured composition.
+No new tokens, contact backend or source publication is included.
+
 ## About and Guide implementation — 9 September 2026
 
 The [INF-35 contract](docs/features/inf-35-approved-editorial.md) maps combined

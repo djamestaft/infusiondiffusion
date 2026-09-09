@@ -375,7 +375,23 @@ export const Contact: Story = {
       canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
     ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
     await expect(canvas.queryByRole("form")).toBeNull();
-    await expect(canvas.getByText("Contact us by email")).toBeVisible();
+    await expect(canvas.getByText("Contact us by email.")).toBeVisible();
+  },
+};
+export const ContactPublished: Story = {
+  render: () => (
+    <ContactTemplate
+      {...contactProps}
+      email="dione.smith@infusiondiffusion.co.za"
+    />
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Approved Contact composition with the observed published mailbox. Fallback-mailbox states remain separate.",
+      },
+    },
   },
 };
 export const ContactDefault390: Story = {
@@ -391,6 +407,20 @@ export const ContactDefault390: Story = {
       canvas.getByRole("link", { name: "Contact", current: "page" }),
     ).toBeVisible();
     await userEvent.keyboard("{Escape}");
+    await expect(
+      canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
+    ).toBeVisible();
+  },
+};
+export const ContactTablet768: Story = {
+  globals: { viewport: { value: "homepageTablet" } },
+  render: Contact.render,
+};
+export const ContactHeroUnavailable: Story = {
+  render: () => <ContactTemplate {...contactProps} heroImageSrc={null} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(
       canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
     ).toBeVisible();

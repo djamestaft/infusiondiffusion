@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Footer } from "@/components/footer";
+import { ContactHeroMedia } from "@/components/templates/contact-hero-media";
 import { HomeContent } from "@/components/templates/home-content";
 import { ChevronDown } from "lucide-react";
 
@@ -213,12 +214,17 @@ export function HomeTemplate({
 }
 
 export type ContactTemplateProps = TemplateNavigationProps & {
+  heroImageSrc?: string | null;
   eyebrow?: string;
   title: string;
   introduction: string;
   sections: Array<{ heading: string; body: string }>;
   email: string;
 };
+
+const contactGutters = "px-5 min-[375px]:px-6 sm:px-10 lg:px-16";
+const contactHeading =
+  "font-display text-[28px] leading-[1.2] font-normal [overflow-wrap:anywhere] lg:text-[34px]";
 
 export function ContactTemplate({
   eyebrow,
@@ -227,33 +233,50 @@ export function ContactTemplate({
   sections,
   email,
   cartCount,
+  heroImageSrc = "/images/homepage-bespoke-diffuser-blurb.png",
 }: ContactTemplateProps) {
-  const mailto = `mailto:${email}`;
+  const mailto = "mailto:" + email;
   return (
-    <TemplateShell currentHref="/contact" cartCount={cartCount}>
+    <TemplateShell
+      currentHref="/contact"
+      navigationTheme="midnight"
+      cartCount={cartCount}
+    >
       <article data-testid="contact-page">
-        <header className="bg-content-surface">
-          <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
-            {eyebrow ? <Eyebrow className="mb-4">{eyebrow}</Eyebrow> : null}
-            <h1 className="font-display text-content-primary max-w-[760px] text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
+        <header
+          className={cn(
+            contactGutters,
+            "dark bg-content-surface text-bone-50 relative overflow-hidden pt-12 pb-10 text-center lg:pt-[72px] lg:pb-14",
+          )}
+        >
+          {heroImageSrc ? (
+            <ContactHeroMedia key={heroImageSrc} src={heroImageSrc} />
+          ) : null}
+          <div className="bg-collection-hero-scrim absolute inset-0" />
+          <div className="relative z-10 flex flex-col items-center gap-6">
+            {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+            <h1 className="font-display w-full text-[40px] leading-[1.15] font-normal [overflow-wrap:anywhere] sm:text-5xl lg:text-[64px]">
               {title}
             </h1>
-            <p className="text-content-secondary mt-8 max-w-[70ch] font-sans text-[17px] leading-[1.5] [overflow-wrap:anywhere] lg:text-xl">
+            <p className="w-full max-w-[740px] text-[17px] leading-[1.55] [overflow-wrap:anywhere] sm:text-xl">
               {introduction}
             </p>
           </div>
         </header>
-        <section className="bg-bone-50" aria-labelledby="contact-email-heading">
-          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-y-8 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:gap-x-6 lg:px-12 lg:py-24 xl:px-0">
-            <h2
-              id="contact-email-heading"
-              className="font-display text-content-primary text-[26px] leading-[1.2] lg:col-span-12 lg:text-[34px]"
-            >
-              Email us
-            </h2>
-            <address className="text-content-secondary max-w-prose font-sans text-base leading-7 [overflow-wrap:anywhere] not-italic lg:col-span-6">
+        <section
+          className={cn(
+            contactGutters,
+            "bg-content-surface-elevated text-content-primary flex flex-col items-center gap-6 py-10 text-center",
+          )}
+          aria-labelledby="contact-email-heading"
+        >
+          <h2 id="contact-email-heading" className={contactHeading}>
+            Contact us by email.
+          </h2>
+          <div className="flex w-full min-w-0 flex-col items-center gap-5">
+            <address className="w-full min-w-0 text-base leading-[1.55] not-italic sm:text-[22px] lg:text-2xl">
               <a
-                className="focus-visible:outline-action-focus inline-flex min-h-11 items-center [overflow-wrap:anywhere] underline decoration-1 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="focus-visible:outline-action-focus inline-flex min-h-11 max-w-full items-center justify-center [overflow-wrap:anywhere] underline decoration-1 underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
                 href={mailto}
               >
                 {email}
@@ -261,39 +284,34 @@ export function ContactTemplate({
             </address>
             <Button
               asChild
-              variant="primary"
-              className="max-w-full whitespace-normal lg:col-span-4 lg:col-start-7 lg:ml-16 lg:justify-self-start"
+              className="min-h-12 w-full max-w-full whitespace-normal sm:w-72"
             >
               <a href={mailto}>Email Infusion Diffusion</a>
             </Button>
-            <FeedbackAlert
-              title="Contact us by email"
-              tone="info"
-              announcement="none"
-              className="self-start lg:col-span-6"
-            >
-              Email is the intended contact route. The link opens your own mail
-              application; this website does not collect or store your message.
-            </FeedbackAlert>
           </div>
+          <p className="max-w-[660px] text-[15px] leading-[1.55]">
+            The link opens your own mail application; this website does not
+            collect or store your message.
+          </p>
         </section>
         {sections.length ? (
-          <div className="bg-content-surface">
-            <div className="mx-auto w-full max-w-[840px] space-y-16 px-5 py-16 sm:px-8 lg:px-12 lg:py-24 xl:px-0">
-              {sections.map((section) => (
-                <section
-                  key={`${section.heading}-${section.body}`}
-                  className="max-w-[70ch]"
-                >
-                  <h2 className="font-display text-content-primary text-[26px] leading-[1.2] [overflow-wrap:anywhere] lg:text-[34px]">
-                    {section.heading}
-                  </h2>
-                  <p className="text-content-secondary mt-6 font-sans text-base leading-[1.625] [overflow-wrap:anywhere] whitespace-pre-line">
-                    {section.body}
-                  </p>
-                </section>
-              ))}
-            </div>
+          <div
+            className={cn(
+              contactGutters,
+              "bg-collection-invitation-surface text-content-primary space-y-12 pt-10 pb-12 lg:pt-14 lg:pb-[72px]",
+            )}
+          >
+            {sections.map((section) => (
+              <section
+                key={section.heading + "-" + section.body}
+                className="w-full"
+              >
+                <h2 className={contactHeading}>{section.heading}</h2>
+                <p className="mt-5 w-full text-[17px] leading-[1.55] [overflow-wrap:anywhere] whitespace-pre-line">
+                  {section.body}
+                </p>
+              </section>
+            ))}
           </div>
         ) : null}
       </article>
@@ -303,7 +321,7 @@ export function ContactTemplate({
 
 export function ContactLoadingTemplate() {
   return (
-    <TemplateShell currentHref="/contact">
+    <TemplateShell currentHref="/contact" navigationTheme="midnight">
       <section aria-busy="true" aria-label="Loading contact page">
         <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
           <div className="bg-content-surface-elevated h-16 w-full max-w-[760px] animate-pulse motion-reduce:animate-none" />
@@ -318,7 +336,7 @@ export function ContactLoadingTemplate() {
 export function ContactErrorTemplate({ reset }: { reset: () => void }) {
   const email = "hello@infusiondiffusion.co.za";
   return (
-    <TemplateShell currentHref="/contact">
+    <TemplateShell currentHref="/contact" navigationTheme="midnight">
       <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-3xl">
           <h1 className="font-display text-content-primary text-[40px] leading-[1.15] [overflow-wrap:anywhere] lg:text-[56px]">
