@@ -231,6 +231,9 @@
   --color-content-surface-elevated: var(--content-surface-elevated);
   --color-content-surface-quiet: var(--content-surface-quiet);
   --color-collection-invitation-surface: var(--collection-invitation-surface);
+  --color-guide-answer-surface: var(--guide-answer-surface);
+  --color-guide-answer-border: var(--guide-answer-border);
+  --color-guide-question-number: var(--guide-question-number);
   --color-cart-checkout-disabled-surface: var(--cart-checkout-disabled-surface);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
@@ -422,6 +425,9 @@
   --content-surface-elevated: #e3e7da;
   --content-surface-quiet: var(--sage-100);
   --collection-invitation-surface: var(--gold-300);
+  --guide-answer-surface: #f7f3ea;
+  --guide-answer-border: rgb(132 101 35 / 55%);
+  --guide-question-number: #846523;
   --cart-checkout-disabled-surface: #e8e2d5;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -587,6 +593,7 @@
 @layer components {
   .action-primary-material::before {
     position: absolute;
+    z-index: -1;
     inset: 0;
     pointer-events: none;
     border-radius: inherit;

@@ -1,8 +1,20 @@
 import type { Preview } from "@storybook/nextjs-vite";
+import { createElement } from "react";
+import { manrope, marcellus } from "../src/app/fonts";
 
 import "../src/app/globals.css";
 
 const preview: Preview = {
+  decorators: [
+    (Story) =>
+      createElement(
+        "div",
+        {
+          className: `${manrope.variable} ${marcellus.variable} font-sans font-normal`,
+        },
+        createElement(Story),
+      ),
+  ],
   parameters: {
     nextjs: { appDirectory: true },
     layout: "fullscreen",

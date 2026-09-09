@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 import type { GalleryGroup, GalleryItem } from "@/sanity/lib/editorial-pages";
 import {
@@ -19,6 +19,8 @@ export type GalleryViewerProps = {
   layout?: GalleryGroup;
   headingLevel?: 2 | 3;
   prioritizeFirst?: boolean;
+  presentation?: "gallery" | "about";
+  renderGallery?: (figures: ReactNode[]) => ReactNode;
 };
 
 export function galleryMarketAspectRatio(item: GalleryItem, index: number) {
@@ -72,6 +74,8 @@ export function GalleryViewer({
   layout = "campaign",
   headingLevel = 2,
   prioritizeFirst = layout === "campaign",
+  presentation = "gallery",
+  renderGallery,
 }: GalleryViewerProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
@@ -84,103 +88,173 @@ export function GalleryViewer({
   const close = () => setSelectedIndex(null);
   const ItemHeading = headingLevel === 3 ? "h3" : "h2";
 
+  const figures = items.map((item, index) => (
+    <figure
+      key={item.id}
+      className={cn(
+        "min-w-0",
+        layout === "campaign" && "mx-auto w-full max-w-[calc(75svh-96px)]",
+        item.id === "market-indoor-stall" && "sm:col-span-2",
+      )}
+    >
+      <button
+        ref={(node) => {
+          triggers.current[index] = node;
+        }}
+        type="button"
+        aria-label={`View ${item.title}`}
+        onClick={() => {
+          openerIndex.current = index;
+          setSelectedIndex(index);
+        }}
+        className="focus-visible:outline-navigation-focus bg-product-card-surface relative block w-full overflow-hidden rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-4"
+        style={{
+          aspectRatio:
+            layout === "campaign"
+              ? 3 / 4
+              : item.id === "market-indoor-stall"
+                ? 16 / 9
+                : 4 / 3,
+        }}
+      >
+        {hasFailed(item.id) ? <ImageFailure alt={item.image.alt} /> : null}
+        <Image
+          src={item.image.src}
+          alt={item.image.alt}
+          fill
+          sizes={
+            layout === "market" && item.id === "market-indoor-stall"
+              ? "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 80px), calc(100vw - 128px)"
+              : "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 80px), calc(50vw - 88px)"
+          }
+          className={cn(
+            layout === "campaign" ? "object-contain" : "object-cover",
+            hasFailed(item.id) && "hidden",
+          )}
+          style={
+            layout === "market" && item.id === "market-table"
+              ? { objectPosition: "center 58.81%" }
+              : galleryMarketImageStyle(item)
+          }
+          onError={() => markFailed(item.id)}
+        />
+      </button>
+      {layout === "market" ? (
+        <figcaption className="text-content-secondary mt-3 space-y-3 [overflow-wrap:anywhere]">
+          <ItemHeading className="font-display text-lg leading-[26px]">
+            {item.title}
+          </ItemHeading>
+          <p className="text-sm leading-5">{item.caption}</p>
+        </figcaption>
+      ) : null}
+    </figure>
+  ));
+
   return (
     <>
-      <div
-        className={cn(
-          "grid",
-          layout === "campaign"
-            ? "gap-x-20 gap-y-16 lg:grid-cols-2 lg:gap-y-16"
-            : "gap-x-8 gap-y-4 min-[1408px]:!grid-cols-[repeat(3,minmax(0,400px))] lg:grid-cols-3 lg:items-start lg:gap-y-8",
-        )}
-        data-testid="gallery-grid"
-        data-layout={layout}
-      >
-        {items.map((item, index) => (
-          <figure
-            key={item.id}
-            className={cn(
-              "min-w-0",
-              layout === "campaign" &&
-                index % 4 === 0 &&
-                "lg:col-start-1 lg:row-start-1",
-              layout === "campaign" &&
-                index % 4 === 1 &&
-                "lg:col-start-2 lg:row-start-1",
-              layout === "campaign" &&
-                index % 4 === 2 &&
-                "lg:col-start-2 lg:row-start-2 lg:-mt-[332px]",
-              layout === "campaign" &&
-                index % 4 === 3 &&
-                "lg:col-start-1 lg:row-start-2",
-              layout === "market" && index === 0 && "lg:col-span-2",
-              layout === "market" && index === 1 && "min-[1408px]:w-[416px]",
-            )}
-          >
-            <button
-              ref={(node) => {
-                triggers.current[index] = node;
-              }}
-              type="button"
-              aria-label={`View ${item.title}`}
-              onClick={() => {
-                openerIndex.current = index;
-                setSelectedIndex(index);
-              }}
-              style={
-                layout === "market"
-                  ? { aspectRatio: galleryMarketAspectRatio(item, index) }
-                  : undefined
-              }
+      {presentation === "about" ? (
+        renderGallery ? (
+          renderGallery(figures)
+        ) : (
+          <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2">{figures}</div>
+        )
+      ) : (
+        <div
+          className={cn(
+            "grid",
+            layout === "campaign"
+              ? "gap-x-20 gap-y-16 lg:grid-cols-2 lg:gap-y-16"
+              : "gap-x-8 gap-y-4 min-[1408px]:!grid-cols-[repeat(3,minmax(0,400px))] lg:grid-cols-3 lg:items-start lg:gap-y-8",
+          )}
+          data-testid="gallery-grid"
+          data-layout={layout}
+        >
+          {items.map((item, index) => (
+            <figure
+              key={item.id}
               className={cn(
-                "focus-visible:outline-navigation-focus bg-content-surface-elevated relative block w-full overflow-hidden rounded-md focus-visible:outline-2 focus-visible:outline-offset-4",
+                "min-w-0",
                 layout === "campaign" &&
-                  (index % 4 === 0 || index % 4 === 2
-                    ? "aspect-[350/438] lg:aspect-[600/760]"
-                    : "aspect-[350/270] lg:aspect-[600/460]"),
-                layout === "market" && index === 0 && "aspect-video",
-                layout === "market" && index === 1 && "aspect-3/4",
-                layout === "market" && index > 1 && "aspect-4/3",
+                  index % 4 === 0 &&
+                  "lg:col-start-1 lg:row-start-1",
+                layout === "campaign" &&
+                  index % 4 === 1 &&
+                  "lg:col-start-2 lg:row-start-1",
+                layout === "campaign" &&
+                  index % 4 === 2 &&
+                  "lg:col-start-2 lg:row-start-2 lg:-mt-[332px]",
+                layout === "campaign" &&
+                  index % 4 === 3 &&
+                  "lg:col-start-1 lg:row-start-2",
+                layout === "market" && index === 0 && "lg:col-span-2",
+                layout === "market" && index === 1 && "min-[1408px]:w-[416px]",
               )}
             >
-              {hasFailed(item.id) ? (
-                <ImageFailure alt={item.image.alt} />
-              ) : null}
-              <Image
-                src={item.image.src}
-                alt={item.image.alt}
-                fill
-                priority={prioritizeFirst && index === 0}
-                loading={prioritizeFirst && index === 0 ? "eager" : "lazy"}
-                sizes={
-                  layout === "campaign"
-                    ? "(max-width: 1023px) calc(100vw - 40px), 600px"
-                    : index === 0
-                      ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(66.667vw - 96px), 832px"
-                      : index === 1
-                        ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 416px"
-                        : "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 400px"
-                }
-                className={cn("object-cover", hasFailed(item.id) && "hidden")}
+              <button
+                ref={(node) => {
+                  triggers.current[index] = node;
+                }}
+                type="button"
+                aria-label={`View ${item.title}`}
+                onClick={() => {
+                  openerIndex.current = index;
+                  setSelectedIndex(index);
+                }}
                 style={
                   layout === "market"
-                    ? galleryMarketImageStyle(item)
-                    : galleryThumbnailStyle(item)
+                    ? { aspectRatio: galleryMarketAspectRatio(item, index) }
+                    : undefined
                 }
-                onError={() => markFailed(item.id)}
-              />
-            </button>
-            <figcaption className="mt-4 min-w-0 [overflow-wrap:anywhere]">
-              <ItemHeading className="font-display text-content-primary text-[28px] leading-9">
-                {item.title}
-              </ItemHeading>
-              <p className="text-content-secondary mt-2 font-sans text-base leading-[1.625] [overflow-wrap:anywhere]">
-                {item.caption}
-              </p>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+                className={cn(
+                  "focus-visible:outline-navigation-focus bg-content-surface-elevated relative block w-full overflow-hidden rounded-md focus-visible:outline-2 focus-visible:outline-offset-4",
+                  layout === "campaign" &&
+                    (index % 4 === 0 || index % 4 === 2
+                      ? "aspect-[350/438] lg:aspect-[600/760]"
+                      : "aspect-[350/270] lg:aspect-[600/460]"),
+                  layout === "market" && index === 0 && "aspect-video",
+                  layout === "market" && index === 1 && "aspect-3/4",
+                  layout === "market" && index > 1 && "aspect-4/3",
+                )}
+              >
+                {hasFailed(item.id) ? (
+                  <ImageFailure alt={item.image.alt} />
+                ) : null}
+                <Image
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  fill
+                  priority={prioritizeFirst && index === 0}
+                  loading={prioritizeFirst && index === 0 ? "eager" : "lazy"}
+                  sizes={
+                    layout === "campaign"
+                      ? "(max-width: 1023px) calc(100vw - 40px), 600px"
+                      : index === 0
+                        ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(66.667vw - 96px), 832px"
+                        : index === 1
+                          ? "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 416px"
+                          : "(max-width: 389px) calc(100vw - 32px), (max-width: 1023px) calc(100vw - 48px), (max-width: 1407px) calc(33.333vw - 64px), 400px"
+                  }
+                  className={cn("object-cover", hasFailed(item.id) && "hidden")}
+                  style={
+                    layout === "market"
+                      ? galleryMarketImageStyle(item)
+                      : galleryThumbnailStyle(item)
+                  }
+                  onError={() => markFailed(item.id)}
+                />
+              </button>
+              <figcaption className="mt-4 min-w-0 [overflow-wrap:anywhere]">
+                <ItemHeading className="font-display text-content-primary text-[28px] leading-9">
+                  {item.title}
+                </ItemHeading>
+                <p className="text-content-secondary mt-2 font-sans text-base leading-[1.625] [overflow-wrap:anywhere]">
+                  {item.caption}
+                </p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
 
       <Dialog
         open={selected !== null}

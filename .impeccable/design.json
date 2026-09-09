@@ -10,7 +10,7 @@
   "components": [],
   "narrative": {
     "northStar": "A considered South African home-fragrance object",
-    "overview": "Approved visual authority is Figma file jIMvwSBkilg7eplo3IiHPa, page 2004:14. The 8 September 2026 handoff owns the current 24 page frames in section 2484:736 and supporting contracts in 2484:737. Retain existing foundations. Runtime and Storybook synchronization remains pending INF-33/34/35; this sidecar records guidance, not completed component examples. INF-33 implements the bounded Shop/Product contract recorded in docs/features/inf-33-approved-shop-product.md for review; shared-shell and full-page fidelity remain pending INF-34. INF-34 now implements the approved shared shell, Home and Cart for review; see docs/features/inf-34-approved-home-shell-cart.md. Static hero proofs exclude the retained interactive control row.",
+    "overview": "Approved visual authority is Figma file jIMvwSBkilg7eplo3IiHPa, page 2004:14. The 8 September 2026 handoff owns the current 24 page frames in section 2484:736 and supporting contracts in 2484:737. Retain existing foundations. Runtime and Storybook synchronization remains pending INF-33/34/35; this sidecar records guidance, not completed component examples. INF-33 implements the bounded Shop/Product contract recorded in docs/features/inf-33-approved-shop-product.md for review; shared-shell and full-page fidelity remain pending INF-34. INF-34 now implements the approved shared shell, Home and Cart for review; see docs/features/inf-34-approved-home-shell-cart.md. Static hero proofs exclude the retained interactive control row. INF-35 implements combined About and integrates Guide Variation 02 with preferences and a summary after Devon's authorization; recommendations and source publication remain gated. App and Storybook now share actual Marcellus/Manrope font definitions. See docs/features/inf-35-approved-editorial.md.",
     "keyCharacteristics": [
       "Marcellus display and Manrope interface typography",
       "Semantic tokens and shared primitives",
@@ -30,6 +30,11 @@
       {
         "name": "Home and shared shell",
         "body": "Retain all Home sections. Quiet surfaces use sage-100; invitation uses gold-300. Footer links are frame-centered on desktop and left-aligned in mobile columns below a centered logo. Plain hero and failure frames use5:4; square quantity controls retain44px targets.",
+        "section": "components"
+      },
+      {
+        "name": "About and Guide contract",
+        "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
         "section": "components"
       }
     ],

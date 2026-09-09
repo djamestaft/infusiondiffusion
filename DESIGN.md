@@ -1,5 +1,26 @@
 # Infusion Diffusion design system
 
+## About and Guide implementation — 9 September 2026
+
+The [INF-35 contract](docs/features/inf-35-approved-editorial.md) maps combined
+About and Guide Variation 02 to the exact approved frames. About combines
+Sanity gallery media with editorial chapters and preserves the complete
+source-owned Born text. Campaign roles use stable IDs, 3:4 imagery and no
+visible captions. Devon subsequently requested smaller, fully visible first-four
+images: center them, cap height at calc(100svh - 128px), with width following the 3:4 ratio, and use contain
+fitting. This explicitly supersedes the original full-column image size in Figma.
+Market roles preserve their captions; the lead uses 16:9,
+the remaining four use 4:3, with the Market Table anchored at 58.81%.
+
+Devon approved About and authorized Guide route integration on 9 September.
+Guide now shows working preferences and a summary, with recommendations
+explicitly unavailable. Sample rankings remain Storybook-only. Approved answer surface `#F7F3EA`, border
+`rgb(132 101 35 / 55%)` and question-number ink `#846523` now have named
+semantic roles. Existing button material, focus, typography and shared shell
+are retained. Stories and the application share the same Marcellus/Manrope
+font definitions; native fallback fonts are not visual comparison evidence.
+Devon approved About; Guide visual review and independent review remain pending. Source publication remains paused.
+
 ## Home/shared shell/Cart implementation — 9 September 2026
 
 The [INF-34 contract](docs/features/inf-34-approved-home-shell-cart.md) maps the
@@ -207,3 +228,8 @@ here before implementation is treated as complete.
 - Next.js owns the customer-facing storefront.
 - The experience must be accessible, mobile-first, and resilient to content
   extremes and constrained connections.
+
+Button rendering correction: primary link labels must match the product Add to
+Cart foreground. Keep the decorative gold material behind all content within
+the isolated button stacking context, including plain-text anchor labels.
+Components/Button/Primary Link Parity records native/link visual parity.

@@ -21,6 +21,9 @@ These layers describe different parts of one system. A change is unfinished whil
 5. Implement the component in Storybook first with default, interaction, error/empty/loading, long-content, and responsive stories as applicable.
 6. Run Storybook tests, Vitest, Impeccable detection/audit, and Playwright against the integrated page.
 7. Compare screenshots to the approved frame at mobile and desktop sizes. Report intentional deviations.
+   Load the application's actual font definitions in Storybook and wait for
+   `document.fonts.ready` before comparison. CSS font-family names without
+   loaded font assets do not establish typography parity.
 
 ## Synchronization workflow
 

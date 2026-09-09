@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { EditorialTemplate } from "@/components/templates/storefront-templates";
-import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
+import { FragranceGuideTemplate } from "@/components/templates/fragrance-guide";
 import { readCart } from "@/lib/shopify/cart-session";
-import { toProductCard } from "@/lib/shopify/presentation";
 import { absoluteStorefrontTitle, storefrontTitle } from "@/lib/metadata-title";
-import {
-  getFragranceGuide,
-  getFragranceGuideMetadata,
-} from "@/sanity/lib/editorial-pages";
+import { getFragranceGuideMetadata } from "@/sanity/lib/editorial-pages";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,27 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function FragranceGuideContent() {
-  const options = await getDynamicFetchOptions();
-  const [page, catalogue, cart] = await Promise.all([
-    getFragranceGuide(options),
-    getCachedHomepageProducts(),
-    readCart(),
-  ]);
-  const provisionalImage = catalogue
-    .map(toProductCard)
-    .find((item) => item.image)?.image;
+  const cart = await readCart();
 
-  return (
-    <EditorialTemplate
-      eyebrow={page.eyebrow}
-      title={page.title}
-      introduction={page.introduction}
-      image={page.image ?? provisionalImage}
-      sections={page.sections}
-      currentHref="/fragrance-guide"
-      cartCount={cart.totalQuantity}
-    />
-  );
+  return <FragranceGuideTemplate cartCount={cart.totalQuantity} />;
 }
 
 export default function FragranceGuidePage() {

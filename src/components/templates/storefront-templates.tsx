@@ -40,7 +40,7 @@ const sectionClass =
 const shopSectionClass =
   "w-full px-5 pt-6 pb-10 min-[375px]:px-6 sm:px-16 lg:pb-16";
 
-function TemplateShell({
+export function TemplateShell({
   navigationTheme = "ivory",
   cartCount,
   accountHref,

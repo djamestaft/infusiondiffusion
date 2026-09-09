@@ -15,6 +15,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {};
+export const PrimaryLinkParity: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Button>Explore the collection</Button>
+      <Button asChild>
+        <a href="#collection">Explore the collection</a>
+      </Button>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Native and link buttons must render the same dark foreground. The gold material stays behind both labels, including plain-text link children.",
+      },
+    },
+  },
+};
 export const Secondary: Story = { args: { variant: "secondary" } };
 export const Quiet: Story = { args: { variant: "quiet" } };
 export const Destructive: Story = {
