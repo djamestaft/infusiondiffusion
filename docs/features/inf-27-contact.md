@@ -1,7 +1,7 @@
-# INF-27 Contact design
+# INF-27 / INF-35 Contact delivery
 
 Prepared 9 September 2026 from protected main `d6c2018`, after human-merged
-PR #74. User authorized continuing Contact. Design owner: Shawnee; visual
+PR #74. Devon approved the revised Contact frames and authorized implementation on 9 September. Design owner: Shawnee; visual
 approval: Devon. Parent coordinates repository evidence on
 `agent/inf27-contact-design`; the designer edits Figma only.
 
@@ -36,7 +36,7 @@ their deferral does not authorize changing the observed public address.
   guidance. “Contact us by email” is a recorded approval in INF-28 A4.
 - Exact responsive design authority is Figma
   `jIMvwSBkilg7eplo3IiHPa`, current Approved page `2004:14`.
-  New Contact frames belong on Exploration `2004:8` until Devon approves them.
+  The approved Contact frames are in section `2484:736`, with contract `2532:102` in `2484:737`; original node IDs are preserved.
 - Reuse the approved shared header/footer, Marcellus/Manrope, semantic colors
   and corrected gold primary button material. Mark Contact current.
 
@@ -65,15 +65,20 @@ their deferral does not authorize changing the observed public address.
 
 ## Verification and rollback
 
-This delivery prepares design and repository evidence only. Figma bounds,
-text/image visibility and desktop/mobile screenshots must be inspected.
-Those checks do not establish runtime accessibility. Existing Contact remains
-live throughout review. No runtime rollback, content publication, spending,
-customer communication or production deployment is part of this preparation.
+The approved Contact layout is implemented in PR #75, preserving existing
+Sanity data/metadata and direct-email behavior. Local Chromium checks passed
+at 1440/768/390/320 with axe, plus keyboard navigation, 200% zoom/reduced motion
+and a blocked hero-image request. The first desktop/tablet run timed out during
+cold compilation; the warmed rerun passed all seven checks. Twenty template
+unit tests and ten targeted Contact Storybook checks passed. Lint, typecheck
+and Impeccable detection passed. Production builds and final CI are recorded
+in the PR before handoff. No message was sent or source content published.
+The existing live page remains until human merge; reverting this PR restores
+the prior layout without a data migration.
 
 ## Design handoff
 
-Contact exploration uses the approved midnight header/footer. Devon requested
+The approved Contact layout uses the approved midnight header/footer. Devon requested
 a centered hero heading and introduction over the same placeholder image used
 by Shop: /images/homepage-bespoke-diffuser-blurb.png, with the existing collection
 hero scrim for readable text. The main email section is centered, including its
@@ -82,26 +87,26 @@ uses Home's invitation surface (collection-invitation-surface / gold-300), and
 its text spans the full content rail within the responsive gutters. No new
 marketing sections or factual copy are introduced.
 
-| Width | Exploration frame                                                                                               |
+| Width | Approved frame                                                                                                  |
 | ----- | --------------------------------------------------------------------------------------------------------------- |
 | 1440  | [Desktop](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2529-2)       |
 | 768   | [Tablet](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2529-19)       |
 | 390   | [Mobile](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2529-37)       |
 | 320   | [Small mobile](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2529-55) |
 
-The proposed heading “Contact us by email.” consolidates the current “Email us”
+The approved heading “Contact us by email.” consolidates the current “Email us”
 and information-alert heading. The helper retains the mail-application and
 message-storage explanation, omitting the redundant sentence “Email is the
-intended contact route.” This is proposed display-copy consolidation, not a
+intended contact route.” This is approved display-copy consolidation, not a
 Sanity publication or a change to the contact channel.
 
-| Layer               | Status                                                     |
-| ------------------- | ---------------------------------------------------------- |
-| Figma               | Contact exploration; awaiting Devon's exact-frame approval |
-| DESIGN.md / brief   | Proposed composition and source boundaries recorded        |
-| Semantic tokens     | Existing approved roles reused; no new runtime values      |
-| Runtime / Storybook | Existing Contact retained until visual approval            |
-| Source content      | Read-only inspection; no publication                       |
+| Layer               | Status                                                       |
+| ------------------- | ------------------------------------------------------------ |
+| Figma               | Approved exact frames, promoted with IDs preserved           |
+| DESIGN.md / brief   | Approved composition and source boundaries recorded          |
+| Semantic tokens     | Existing approved roles reused; no new runtime values        |
+| Runtime / Storybook | Approved layout, responsive and fallback stories implemented |
+| Source content      | Read-only inspection; no publication                         |
 
 The [off-frame handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa/Infusion-Diffusion-Redesign?node-id=2532-102)
 records source copy, design decisions, behavior and state requirements.
@@ -126,7 +131,21 @@ The designer checked all revised frames; the coordinator re-inspected the
 desktop/mobile captures. Centered alignment, unchanged copy, existing fonts
 and no nested horizontal overflow were confirmed.
 
-Changed-document formatting and diff checks pass. These are design/documentation
-checks, not runtime accessibility evidence. Keyboard behavior, contrast under
-browser rendering, loading/error behavior and mail handling still require
-verification during implementation after Devon's approval.
+## Runtime comparison and review
+
+The designer independently compared all four rendered screenshots and reviewed
+the changed Contact components. No material design/accessibility blockers were
+found. Minor browser/Figma text-wrap and pixel-height differences are accepted
+rendering differences, without clipping. Browser interaction/axe checks were
+run by the coordinator, not independently rerun by the designer.
+
+Runtime captures: [desktop](evidence/inf27-contact-runtime-1440.png) and
+[mobile](evidence/inf27-contact-runtime-390.png). All four viewport captures
+loaded the hero image and had zero horizontal overflow.
+
+Component mapping: ContactTemplate consumes approved frames 2529:2/19/37/55
+on /contact; ContactHeroMedia removes failed decorative media while preserving
+the solid dark hero. ContactLoadingTemplate and ContactErrorTemplate reuse the
+midnight shell and existing recovery semantics. Templates/Storefront contains
+Contact published/fallback, tablet, mobile/small, long content, missing hero,
+loading and error stories.

@@ -40,8 +40,8 @@ async function assertDefaultContact(
   await expect(visibleEmail).toHaveAttribute("href", mailtoHref!);
   await expect(page.locator("form")).toHaveCount(0);
   await expect(page.getByRole("textbox")).toHaveCount(0);
-  await expect(page.getByText("Contact us by email")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Cart" })).toBeVisible();
+  await expect(page.getByText("Contact us by email.")).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Cart/ })).toBeVisible();
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(
@@ -66,6 +66,7 @@ async function assertDefaultContact(
 
 for (const viewport of [
   { name: "desktop", width: 1440, height: 1000 },
+  { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
   { name: "small", width: 320, height: 844 },
 ]) {
@@ -139,4 +140,25 @@ test("keeps Contact readable at 200% zoom and with reduced motion", async ({
   ).toBeLessThanOrEqual(
     await page.evaluate(() => document.documentElement.clientWidth),
   );
+});
+
+test("keeps the Contact hero readable when its placeholder image fails", async ({
+  page,
+}) => {
+  let blockedHero = false;
+  await page.route(/\/_next\/image\?.*homepage-bespoke/, async (route) => {
+    blockedHero = true;
+    await route.abort();
+  });
+  await page.goto("/contact");
+  await expect(
+    page.getByRole("heading", { level: 1, name: fallbackTitle }),
+  ).toBeVisible();
+  await expect.poll(() => blockedHero).toBe(true);
+  await expect(
+    page.locator('[data-testid="contact-page"] header img'),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("link", { name: "Email Infusion Diffusion" }),
+  ).toBeVisible();
 });

@@ -1,6 +1,6 @@
 # Infusion Diffusion Roadmap
 
-## Contact design next ? 9 September 2026
+## Contact implementation - 9 September 2026
 
 Devon authorized continuing Contact under INF-27 after approving PR #74 on
 desktop, tablet and mobile and human-merging it at `d6c2018`.
@@ -9,8 +9,9 @@ Home, About, Guide, Cart and health smoke checks passed; the health version
 matched the merge. Post-merge main CI passed on `d6c2018`.
 Guide recommendations remain unavailable pending matching.
 
-INF-27 remains In Progress, owned by Shawnee, with Devon approving exact
-Contact frames. Prepare Contact at 1440/768/390/320 using the existing direct-email
+Devon approved Contact at 1440/768/390/320 and authorized implementation.
+INF-27 remains In Progress for Guide matching; Contact visual approval is complete.
+PR #75 implements Contact under INF-35 using the existing direct-email
 behavior, published mailbox and approved copy. Preserve the shared shell,
 semantic tokens and fonts. Devon requested Shop's placeholder hero image with
 centered hero text, a centered email section and Home's gold invitation surface
@@ -21,7 +22,8 @@ INF-35's bounded delivery in [PR #74](https://github.com/djamestaft/infusiondiff
 is merged. The full ticket remains In Progress for Contact, matching and
 remaining editorial/service scope. INF-36 remains downstream of that scope;
 final photography, facts, care, SEO and source publication retain their deferrals.
-Contact visual approval precedes implementation. One delivery branch is
+Seven Contact Chromium checks, template units, Storybook checks and independent
+visual/source review passed. Final CI and human merge remain gates. One delivery branch is
 `agent/inf27-contact-design`; the designer edits Figma only.
 
 ## INF-33 implementation — 9 September 2026
