@@ -262,7 +262,7 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("collection-browsing-surface")).toHaveClass(
       "max-w-[1440px]",
     );
-    expect(screen.getByText("0 products")).toBeVisible();
+    expect(screen.queryByText("0 products")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "No fragrances found" }),
     ).toBeVisible();
@@ -278,9 +278,10 @@ describe("storefront templates", () => {
     expect(cards).toHaveLength(6);
     expect(card).toHaveClass("bg-product-card-surface");
     expect(card).not.toHaveClass("border", "shadow");
-    expect(screen.getByText("6 products").parentElement).not.toHaveClass(
-      "border-y",
-    );
+    expect(screen.queryByText("6 products")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Sort and filter when supported"),
+    ).not.toBeInTheDocument();
     const shopHeader = screen
       .getByRole("heading", { name: "Shop" })
       .closest("header");
@@ -363,9 +364,35 @@ describe("storefront templates", () => {
       screen.getByRole("article"),
     );
     expect(
-      screen.getByRole("heading", { name: "Care guidance" }),
-    ).toBeVisible();
+      screen.queryByRole("heading", { name: "Care guidance" }),
+    ).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sold out" })).toBeDisabled();
+  });
+
+  it("places the complete story after purchase and reserves care for authored guidance", () => {
+    render(
+      <ProductDetailTemplate
+        product={productCardFixtures[5]}
+        description="The complete fragrance story appears once."
+        details={[{ label: "Made by", value: "Fixture maker" }]}
+        careGuidance={[{ label: "Care", value: "Verified care fixture" }]}
+      />,
+    );
+    const action = screen.getByRole("button", { name: "Add to cart" });
+    const story = screen.getByText(
+      "The complete fragrance story appears once.",
+    );
+    expect(
+      action.compareDocumentPosition(story) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      screen.getAllByText("The complete fragrance story appears once."),
+    ).toHaveLength(1);
+    const care = screen
+      .getByRole("heading", { name: "Care guidance" })
+      .closest("section");
+    expect(care).toHaveTextContent("Verified care fixture");
+    expect(care).not.toHaveTextContent("Fixture maker");
   });
 
   it("requires an available variant before the purchase action", () => {

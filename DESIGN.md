@@ -1,5 +1,15 @@
 # Infusion Diffusion design system
 
+## Shop/Product implementation — 9 September 2026
+
+The [INF-33 component contract](docs/features/inf-33-approved-shop-product.md)
+records the bounded reconciliation against the current approved frames.
+Light ProductCard surface maps to porcelain-0 (#FCFAF5), with 20px titles,
+12px metadata/status, 15px prices and 145% line height. The named
+collection-hero-scrim preserves the approved #191916 / 54% overlay.
+Shop/Product component synchronization is implemented for review; full-page
+fidelity remains pending the shared shell in INF-34 and human acceptance.
+
 ## Current page approval — 8 September 2026
 
 Devon approved all current customer pages on the main Exploration page.

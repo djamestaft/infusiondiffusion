@@ -85,7 +85,7 @@ export function ProductCard({
             fill
             priority={imagePriority}
             loading={imagePriority ? "eager" : "lazy"}
-            sizes="(max-width: 767px) calc((100vw - 56px) / 2), 284px"
+            sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) 50vw, 33vw"
             className="object-cover"
             onError={() => setImageFailed(true)}
           />
@@ -97,7 +97,7 @@ export function ProductCard({
       <div className="flex min-h-40 flex-col gap-2 px-4 pt-3 pb-4">
         <h3
           className={cn(
-            "font-display text-product-card-text group-hover:text-product-card-accent text-xl leading-7 font-normal decoration-1 underline-offset-4 group-hover:underline",
+            "font-display text-product-card-text group-hover:text-product-card-accent text-xl leading-[1.45] font-normal decoration-1 underline-offset-4 group-hover:underline",
             loading &&
               "bg-product-card-media-fallback h-7 w-3/4 animate-pulse text-transparent motion-reduce:animate-none",
           )}
@@ -106,7 +106,7 @@ export function ProductCard({
         </h3>
         <p
           className={cn(
-            "text-product-card-meta font-sans text-xs leading-4",
+            "text-product-card-meta font-sans text-xs leading-[1.45]",
             loading &&
               "bg-product-card-media-fallback h-4 w-28 animate-pulse text-transparent motion-reduce:animate-none",
           )}
@@ -124,7 +124,7 @@ export function ProductCard({
             compareAtPrice={compareAtPrice}
             type={priceType}
             size="compact"
-            className=""
+            className="[&>span:last-of-type]:text-[15px] [&>span:last-of-type]:leading-[1.45]"
           />
         )}
         {loading ? (
@@ -136,7 +136,7 @@ export function ProductCard({
           <CommerceStatus
             status={availability}
             lowStockCount={lowStockCount}
-            className="py-0 text-xs font-normal"
+            className="py-0 text-xs leading-[1.45] font-normal [&>span[aria-hidden]]:hidden"
           />
         )}
       </div>

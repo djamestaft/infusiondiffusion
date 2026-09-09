@@ -72,3 +72,50 @@ test("unknown product handles return 404", async ({ page }) => {
     /noindex/,
   );
 });
+
+for (const width of [1440, 768, 390, 320]) {
+  test(`complete catalogue and purchase hierarchy at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/shop");
+    const cards = page.getByRole("link", { name: /^View / });
+    await expect(cards).toHaveCount(6);
+    for (const card of await cards.all()) await expect(card).toBeVisible();
+    await expect(page.getByText("Sort and filter when supported")).toHaveCount(
+      0,
+    );
+    await expect(page.getByText(/^6 products$/)).toHaveCount(0);
+    await expect(
+      page.getByText("Six fragrances. 200 ml reed diffusers."),
+    ).toBeVisible();
+    const hero = page.getByRole("heading", { level: 1 }).locator("..");
+    const heroBox = await hero.boundingBox();
+    const frameBox = await hero.locator("..").boundingBox();
+    expect(
+      Math.abs(
+        heroBox!.y + heroBox!.height / 2 - (frameBox!.y + frameBox!.height / 2),
+      ),
+    ).toBeLessThan(1);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBe(width);
+
+    await page.goto("/products/bois-de-santal-200ml");
+    const action = page.getByRole("button", { name: "Add to cart" });
+    const article = page.getByRole("article");
+    const paragraphs = article.locator("p");
+    const story = paragraphs.last();
+    await expect(action).toBeVisible();
+    expect(
+      (await action.boundingBox())!.y + (await action.boundingBox())!.height,
+    ).toBeLessThan((await story.boundingBox())!.y);
+    await expect(article.locator("img")).toHaveCSS("object-fit", "contain");
+    await expect(
+      page.getByRole("heading", { name: "Care guidance" }),
+    ).toHaveCount(0);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBe(width);
+  });
+}
