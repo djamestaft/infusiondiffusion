@@ -93,7 +93,7 @@ export function GalleryViewer({
       key={item.id}
       className={cn(
         "min-w-0",
-        layout === "campaign" && "mx-auto w-full max-w-[min(480px,52.5svh)]",
+        layout === "campaign" && "mx-auto w-full max-w-[calc(75svh-96px)]",
         item.id === "market-indoor-stall" && "sm:col-span-2",
       )}
     >

@@ -7,7 +7,7 @@ About and Guide Variation 02 to the exact approved frames. About combines
 Sanity gallery media with editorial chapters and preserves the complete
 source-owned Born text. Campaign roles use stable IDs, 3:4 imagery and no
 visible captions. Devon subsequently requested smaller, fully visible first-four
-images: center them, cap width at 480px and height at 70svh, and use contain
+images: center them, cap height at calc(100svh - 128px), with width following the 3:4 ratio, and use contain
 fitting. This explicitly supersedes the original full-column image size in Figma.
 Market roles preserve their captions; the lead uses 16:9,
 the remaining four use 4:3, with the Market Table anchored at 58.81%.

@@ -120,6 +120,8 @@ Sanity-owned; no content publication or product matching was introduced.
 
 Devon requested slightly smaller first-four images so each fits on screen.
 The campaign figures now center within their columns, retain the 3:4 frame,
-and cap width at min(480px, 52.5svh), limiting height to 70svh. Contain fitting
+and cap width at calc(75svh - 96px), limiting height to the viewport minus 128px.
+Devon found the initial 70% height cap too small and requested near-full-height
+images while scrolling; that intermediate cap and the 480px width cap are superseded. Contain fitting
 preserves the full image. This user-directed refinement supersedes the initial
 Figma full-column sizing; Figma frame synchronization remains pending.

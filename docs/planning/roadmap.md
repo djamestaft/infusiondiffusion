@@ -16,7 +16,7 @@ Chromium viewport checks, formatting, lint, typecheck and both builds.
 delivery. Final-commit GitHub quality, independent/human review and authenticated
 preview verification remain gates; Vercel is Ready but route checks require SSO.
 Devon requested a further About refinement: the first four images now fit within
-70% of the screen height, capped at 480px wide, with the full photo visible.
+the available screen height beneath the header, with the full photo visible.
 This does not complete INF-35 or authorize publication or merge.
 
 ## INF-33 implementation — 9 September 2026
