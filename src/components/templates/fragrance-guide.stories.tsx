@@ -221,8 +221,20 @@ export const TwoNotesAndValidation: Story = {
       canvas.getByRole("heading", { name: "Suggested fragrances" }),
     ).toBeVisible();
     await expect(
-      canvas.getByRole("heading", { name: "Your fragrance preferences" }),
+      canvas.getByRole("heading", { name: "Suggested fragrances" }),
     ).toHaveFocus();
+    const suggestions = canvas.getByRole("region", {
+      name: "Suggested fragrances",
+    });
+    const preferences = canvas.getByRole("region", {
+      name: "Your fragrance preferences",
+    });
+    await expect(
+      Boolean(
+        suggestions.compareDocumentPosition(preferences) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+      ),
+    ).toBe(true);
     await userEvent.click(canvas.getByRole("radio", { name: "Bedroom" }));
     await expect(
       canvas.queryByRole("heading", { name: "Suggested fragrances" }),

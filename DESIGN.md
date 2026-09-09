@@ -2,6 +2,12 @@
 
 ## Guide matching implementation - 9 September 2026
 
+Devon's subsequent review puts Suggested fragrances above Your fragrance
+preferences, after the form controls. Continue focuses the suggestions heading
+when matches exist, or the preferences heading for empty/unavailable results.
+Keep the original section styling; the preferences section uses the shared
+gutters and 48px vertical padding below the suggestions.
+
 Devon approved the [matching contract](docs/features/inf-35-fragrance-matching.md)
 for a notes/character-only first version. Room, mood, presence and time remain
 summary preferences, explicitly excluded from scoring. Preserve Variation 02

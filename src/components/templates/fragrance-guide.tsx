@@ -274,41 +274,12 @@ export function FragranceGuideTemplate({
           </Button>
         </div>
         <p role="status" className="sr-only">
-          {reviewed ? "Your preferences are ready to review." : ""}
+          {reviewed
+            ? matches.length
+              ? "Your fragrance suggestions are ready to review."
+              : "Your preferences are ready to review."
+            : ""}
         </p>
-        {reviewed ? (
-          <section
-            className="space-y-6 pb-12"
-            aria-labelledby="guide-preferences-heading"
-          >
-            <h2
-              id="guide-preferences-heading"
-              ref={reviewHeading}
-              tabIndex={-1}
-              className="font-display focus-visible:outline-action-focus scroll-mt-28 text-3xl font-normal focus-visible:outline-3 focus-visible:outline-offset-4"
-            >
-              Your fragrance preferences
-            </h2>
-            <dl className="grid gap-6 sm:grid-cols-2">
-              {guideQuestions.map((question, index) => (
-                <div key={question.title}>
-                  <dt className="font-semibold">{question.title}</dt>
-                  <dd className="mt-2">{answers[index].join(", ")}</dd>
-                </div>
-              ))}
-            </dl>
-            {!matches.length ? (
-              <p>
-                {products === null
-                  ? "Fragrance suggestions are temporarily unavailable. Your preferences are still here; explore the collection or try again later."
-                  : "No fragrances with an approved connection to your selected notes or character are available to show. Explore the collection to discover more."}
-              </p>
-            ) : null}
-            <Button asChild>
-              <a href="/shop">EXPLORE THE COLLECTION</a>
-            </Button>
-          </section>
-        ) : null}
       </form>
       {reviewed && matches.length > 0 ? (
         <section
@@ -321,7 +292,9 @@ export function FragranceGuideTemplate({
           <div className="space-y-[18px]">
             <h2
               id="guide-shortlist-heading"
-              className="font-display text-5xl leading-[1.12] font-normal"
+              ref={reviewHeading}
+              tabIndex={-1}
+              className="font-display focus-visible:outline-action-focus scroll-mt-28 text-5xl leading-[1.12] font-normal focus-visible:outline-3 focus-visible:outline-offset-4"
             >
               Suggested fragrances
             </h2>
@@ -358,6 +331,39 @@ export function FragranceGuideTemplate({
               </a>
             ))}
           </div>
+        </section>
+      ) : null}
+      {reviewed ? (
+        <section
+          className={cn(gutters, "space-y-6 py-12")}
+          aria-labelledby="guide-preferences-heading"
+        >
+          <h2
+            id="guide-preferences-heading"
+            ref={matches.length ? undefined : reviewHeading}
+            tabIndex={-1}
+            className="font-display focus-visible:outline-action-focus scroll-mt-28 text-3xl font-normal focus-visible:outline-3 focus-visible:outline-offset-4"
+          >
+            Your fragrance preferences
+          </h2>
+          <dl className="grid gap-6 sm:grid-cols-2">
+            {guideQuestions.map((question, index) => (
+              <div key={question.title}>
+                <dt className="font-semibold">{question.title}</dt>
+                <dd className="mt-2">{answers[index].join(", ")}</dd>
+              </div>
+            ))}
+          </dl>
+          {!matches.length ? (
+            <p>
+              {products === null
+                ? "Fragrance suggestions are temporarily unavailable. Your preferences are still here; explore the collection or try again later."
+                : "No fragrances with an approved connection to your selected notes or character are available to show. Explore the collection to discover more."}
+            </p>
+          ) : null}
+          <Button asChild>
+            <a href="/shop">EXPLORE THE COLLECTION</a>
+          </Button>
         </section>
       ) : null}
       <section

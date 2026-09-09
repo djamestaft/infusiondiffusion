@@ -53,7 +53,16 @@ for (const width of [1440, 768, 390, 320]) {
     });
     await expect(suggestions).toBeVisible();
     await expect(suggestions.getByRole("link")).toHaveCount(3);
-    await expect(summary.getByRole("heading")).toBeFocused();
+    await expect(suggestions.getByRole("heading", { level: 2 })).toBeFocused();
+    expect(
+      await suggestions.evaluate((node) =>
+        Boolean(
+          node.compareDocumentPosition(
+            document.getElementById("guide-preferences-heading")!,
+          ) & Node.DOCUMENT_POSITION_FOLLOWING,
+        ),
+      ),
+    ).toBe(true);
     const links = await suggestions
       .getByRole("link")
       .evaluateAll((nodes) => nodes.map((a) => a.getAttribute("href")));

@@ -1,5 +1,15 @@
 # INF-35 fragrance matching review
 
+## Preview ordering refinement
+
+Devon requested Suggested fragrances above Your fragrance preferences during
+PR #76 review. The DOM and visual order is now questions/controls, suggestions,
+preferences, gold invitation. Continue focuses the suggestions heading when
+matches exist, with preferences focus retained for empty/source-failure states.
+The summary moves outside the form and uses existing gutters with 48px vertical
+padding. Scoring, content, links and recovery behavior are unchanged. This
+supersedes the earlier summary-first focus/order evidence below.
+
 Status: Devon approved the exact rules and narrower first version on 9 September
 2026: "Yes that is fine for now, we can adjust later." Implementation and verification
 are in progress. Devon owns INF-35; Shawnee owns the
