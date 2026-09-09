@@ -1,7 +1,8 @@
 # INF-35 fragrance matching review
 
-Status: source audit and draft rules ready for owner review, 9 September 2026. Runtime matching is not yet
-approved. Devon owns INF-35 and approves matching decisions; Shawnee owns the
+Status: Devon approved the exact rules and narrower first version on 9 September
+2026: "Yes that is fine for now, we can adjust later." Implementation and verification
+are in progress. Devon owns INF-35; Shawnee owns the
 related INF-27 design/content contract. The coordinator is the sole repository
 writer on `agent/inf35-fragrance-matching`; the content/commerce engineer audits
 sources read-only.
@@ -14,9 +15,10 @@ Retain the approved Variation 02 questions and responsive composition unless
 Devon approves a concrete revision. Do not treat illustrative Storybook rankings
 as a product recommendation rule.
 
-This increment prepares the evidence and rule decision. Implementation follows
-approval of the exact mapping, dimensions that influence ranking, tie behavior
-and result wording. Final photography, care/service facts and source publication
+This increment implements the accepted mapping, scoring, tie behavior and
+notes/character-only scope. The proposed rules below are now accepted, including
+the three-result limit and unavailable-product handling. Final photography,
+care/service facts and source publication
 retain their existing deferrals. No new analytics, customer profile, stored
 answers, AI-generated recommendation service or commerce backend is proposed.
 
@@ -36,15 +38,15 @@ the runtime scoring contract. Its guessed product handles must not be reused.
 
 ## Proposed behavior for owner review
 
-### Proposed first version: note and character matching
+### Accepted first version: note and character matching
 
-The source audit supports a useful first version based on question three only.
+Devon accepted the source-backed first version based on question three only.
 Room, feeling, presence and time would remain in the preference summary but would
-not affect ranking until their mappings are approved. This is a proposed scope
-choice, not an implementation assumption: the introduction/result explanation
+not affect ranking until their mappings are approved. This is an accepted scope
+choice: the introduction/result explanation
 must say that suggestions use selected notes/character, rather than claiming all
-five answers determine the shortlist. Devon must accept this limitation or supply
-the remaining associations before a full five-dimension engine can be built.
+five answers determine the shortlist. Further associations can be approved later
+for a full five-dimension engine.
 
 Draft primary associations receive 2 points per selected choice; secondary
 associations receive 1. Sum the one or two selected choices, with no duplicate
@@ -80,10 +82,9 @@ Review examples, assuming all candidates can resolve to published products:
 - Soft florals plus Incense & musk: Été scores 4; Blanc and Ambre score 2 each;
   Bois and Noir score 1. Suggested order is Été, Blanc, Ambre.
 
-Owner decisions: approve/correct this primary/secondary matrix, accept a
-notes/character-only first version and its explicit wording, or provide the room,
-mood, comparative presence and time associations for a full five-input version.
-Also confirm the proposed tie treatment, three-result limit and sold-out handling.
+Devon accepted this matrix, notes/character-only first version, explicit wording,
+tie treatment, three-result limit and sold-out handling. The room, mood,
+comparative presence and time associations remain future decisions.
 
 ### Shared implementation contract
 
@@ -114,7 +115,7 @@ Also confirm the proposed tie treatment, three-result limit and sold-out handlin
 - Every association records source evidence and owner approval; Santuaire's
   deferred notes remain absent. Runtime values use stable identifiers rather
   than translated or display-label strings as rule keys.
-- Unit checks exercise all valid answer combinations, equal-score stability,
+- Unit checks exercise all 21 valid note combinations, equal-score stability,
   order independence for two note selections, invalid input, missing mappings,
   and explanation contributions. Golden examples come from Devon's accepted
   combinations, not the scoring implementation itself.
@@ -139,7 +140,7 @@ post-merge main CI and production smoke checks passed. About and the preference
 Guide are live from PR #74. INF-34 is Done. INF-27 and INF-31 remain actual Plane
 dependencies of INF-35; matching approval and deferred source facts respectively
 remain open. Their open state permits this preparation, not an unsupported full
-release. INF-36 remains downstream. No runtime change is made by this brief.
+release. INF-36 remains downstream.
 
 ## Source audit and limitations
 
@@ -175,9 +176,52 @@ The engine must not turn prose, images or product names into missing factual cla
 
 Verification for this preparation: source/route audit, current code and stories,
 actual Plane dependencies, manual score examples, formatting and diff checks.
-No runtime tests are claimed for an unimplemented matching engine. Further content
-approval and designer review of resulting copy/states remain required.
+Implementation evidence is recorded below; the initial preparation itself made
+no runtime change. Further content and source publication remain separate.
 
 Independent read-only content review confirmed the draft associations and score examples.
 Its corrections are incorporated: numeric-GID tie ordering, and equal editorial
 ranking rather than a claim of equal sensory suitability.
+
+## Implementation and verification
+
+`src/lib/fragrance-guide/matching.ts` contains the exact accepted editorial
+snapshot `2026-09-09-notes-v1`, with stable note IDs, GIDs, weights and evidence
+phrases. It contains no price, stock, title or handle copies. This repository
+snapshot is the explicit interim delivery mechanism while Sanity publication is
+paused. Sanity remains the intended editable editorial owner; no schema or
+published document was changed. New mappings require owner approval and a reviewed
+version change rather than inference from mutable product prose.
+
+`catalog.ts` resolves the six GIDs from the existing normalized cached Shopify
+catalogue and sends only IDs, titles, handles and availability to the client.
+It preserves the existing five-minute revalidation policy and safe source-failure
+fallback. Existing Storefront API version 2026-07 was confirmed against official
+Shopify documentation through Context7; no API query or integration changed.
+Fixtures use the real product GIDs to exercise the join, with test-only variants
+and commerce behavior still confined to the development/CI fixture gate.
+
+The Guide route reads products alongside cart state. Results render only after
+submission, edit invalidates the previous results, and the summary heading
+receives focus. Clear introduction/result wording names the limited ranking inputs.
+Only matched associations appear in reasons; ties indicate equal editorial ranking,
+and sold-out products display Currently unavailable. Result counts may be 1-3;
+zero candidates and failed sources keep the summary and collection recovery link.
+
+The designer synchronized Approved frames 2172:2, 2457:601/749/897 and contract
+2458:676, retaining existing tokens and geometry. The inherited desktop result-rail
+overflow is normalized by the existing fluid grid. No new tokens or primitives.
+
+Independent content/commerce source-code review found no runtime/security blockers.
+Its wording correction and explicit state assertions were incorporated. The
+reviewer did not independently execute tests. Verification is ongoing; final
+check counts, runtime screenshots and release evidence will be recorded before
+handoff. Preview acceptance and human merge remain gates.
+
+| Layer                  | Status                                                         |
+| ---------------------- | -------------------------------------------------------------- |
+| Figma                  | Synced to approved notes/character behavior and result states  |
+| DESIGN.md / sidecar    | Synced to accepted rules and current implementation            |
+| Semantic tokens        | Unchanged, existing Guide roles reused                         |
+| Components / Storybook | Matching, result counts, ties and recovery implemented         |
+| Sanity publication     | Intentionally deferred; approved versioned repository snapshot |

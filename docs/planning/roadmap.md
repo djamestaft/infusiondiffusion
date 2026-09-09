@@ -11,8 +11,10 @@ Devon authorized starting the remaining INF-35 matching work. The
 source audit, proposed associations/scoring, example results and acceptance
 criteria. The current proposal uses note/character choices only; using room,
 mood, comparative presence and time requires further owner-approved mappings.
-This limitation and the exact draft rules require Devon's decision under INF-27
-before runtime implementation. No rankings or source changes are approved yet.
+Devon approved this narrower first version and exact rules. INF-35 now implements
+source-explained matches, current Shopify product links, ties and recovery states.
+Figma and Storybook are synchronized; verification and preview delivery are in progress.
+Further dimensions and Sanity source publication retain their separate gates.
 
 INF-35 remains In Progress, owned by Devon. INF-27 remains In Progress, owned
 by Shawnee; INF-34 is Done. INF-31 content/source deferrals remain open.

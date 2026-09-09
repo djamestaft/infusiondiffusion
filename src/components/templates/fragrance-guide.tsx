@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { TemplateShell } from "@/components/templates/storefront-templates";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { homeInvitationCopy } from "@/components/templates/home-copy";
+import {
+  matchFragrances,
+  noteChoices,
+  type GuideProduct,
+} from "@/lib/fragrance-guide/matching";
 
 export const guideQuestions = [
   {
@@ -51,15 +56,11 @@ export const guideQuestions = [
 ] as const;
 
 export type GuideAnswers = string[][];
-export type GuideShortlist = Array<{
-  title: string;
-  description: string;
-  href: string;
-}>;
 export type FragranceGuideProps = {
   initialAnswers?: GuideAnswers;
   initialQuestion?: number;
-  shortlist?: GuideShortlist;
+  products?: GuideProduct[] | null;
+  initialReviewed?: boolean;
   onContinue?: (answers: GuideAnswers) => void;
   cartCount?: number;
 };
@@ -68,7 +69,8 @@ const gutters = "px-5 min-[375px]:px-6 sm:px-10 lg:px-16";
 export function FragranceGuideTemplate({
   initialAnswers,
   initialQuestion = 0,
-  shortlist,
+  products = null,
+  initialReviewed = false,
   onContinue,
   cartCount,
 }: FragranceGuideProps) {
@@ -83,7 +85,17 @@ export function FragranceGuideTemplate({
   const [active, setActive] = useState(
     Math.min(4, Math.max(0, initialQuestion)),
   );
-  const [reviewed, setReviewed] = useState(false);
+  const [reviewed, setReviewed] = useState(initialReviewed);
+  const reviewHeading = useRef<HTMLHeadingElement>(null);
+  const submitted = useRef(false);
+  const selectedNotes = noteChoices
+    .filter((note) => answers[2].includes(note.label))
+    .map((note) => note.id);
+  const matches =
+    reviewed && products ? matchFragrances(selectedNotes, products) : [];
+  useEffect(() => {
+    if (reviewed && submitted.current) reviewHeading.current?.focus();
+  }, [reviewed]);
   const groups = useRef<Array<HTMLFieldSetElement | null>>([]);
   const update = (index: number, value: string) => {
     setReviewed(false);
@@ -123,6 +135,7 @@ export function FragranceGuideTemplate({
       return;
     }
     setError("");
+    submitted.current = true;
     setReviewed(true);
     onContinue?.(answers.map((selected) => [...selected]));
   };
@@ -144,9 +157,8 @@ export function FragranceGuideTemplate({
             Find the atmosphere that belongs in your room
           </h1>
           <p className="max-w-[520px] text-[17px] leading-[1.5] opacity-85">
-            {shortlist
-              ? "A guided fragrance shortlist built from room, feeling and scent-note preferences. Every recommendation explains why it fits."
-              : "Explore the room, feeling and scent notes you enjoy. Start with your preferences, then discover the collection."}
+            Find suggestions based on your selected notes and fragrance
+            character. Your other answers are kept in your preference summary.
           </p>
         </div>
         <div className="border-navigation-accent/55 relative aspect-2/1 w-full border">
@@ -261,20 +273,19 @@ export function FragranceGuideTemplate({
             CONTINUE
           </Button>
         </div>
-        <p
-          role="status"
-          className={reviewed && !shortlist ? "pb-8" : "sr-only"}
-        >
+        <p role="status" className="sr-only">
           {reviewed ? "Your preferences are ready to review." : ""}
         </p>
-        {reviewed && !shortlist ? (
+        {reviewed ? (
           <section
             className="space-y-6 pb-12"
             aria-labelledby="guide-preferences-heading"
           >
             <h2
               id="guide-preferences-heading"
-              className="font-display text-3xl font-normal"
+              ref={reviewHeading}
+              tabIndex={-1}
+              className="font-display focus-visible:outline-action-focus scroll-mt-28 text-3xl font-normal focus-visible:outline-3 focus-visible:outline-offset-4"
             >
               Your fragrance preferences
             </h2>
@@ -286,21 +297,24 @@ export function FragranceGuideTemplate({
                 </div>
               ))}
             </dl>
-            <p>
-              Personalised recommendations are not available yet. Explore the
-              collection to learn about each fragrance.
-            </p>
+            {!matches.length ? (
+              <p>
+                {products === null
+                  ? "Fragrance suggestions are temporarily unavailable. Your preferences are still here; explore the collection or try again later."
+                  : "No fragrances with an approved connection to your selected notes or character are available to show. Explore the collection to discover more."}
+              </p>
+            ) : null}
             <Button asChild>
               <a href="/shop">EXPLORE THE COLLECTION</a>
             </Button>
           </section>
         ) : null}
       </form>
-      {shortlist ? (
+      {reviewed && matches.length > 0 ? (
         <section
           className={cn(
             gutters,
-            "dark bg-content-surface text-content-primary grid gap-8 py-16 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16",
+            "dark bg-content-surface text-content-primary grid gap-6 py-16 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16",
           )}
           aria-labelledby="guide-shortlist-heading"
         >
@@ -309,23 +323,38 @@ export function FragranceGuideTemplate({
               id="guide-shortlist-heading"
               className="font-display text-5xl leading-[1.12] font-normal"
             >
-              Your room, shortlisted
+              Suggested fragrances
             </h2>
             <p className="text-base leading-6">
-              Three fragrances ranked against the atmosphere you described.
+              Based on your selected notes and character. Each suggestion
+              explains the connection. Room, feeling, presence and time do not
+              affect this list yet.
             </p>
           </div>
-          <div className="grid gap-7 lg:grid-cols-3">
-            {shortlist.map((item) => (
+          <div className="grid gap-6 lg:grid-cols-3 lg:gap-7">
+            {matches.map((item) => (
               <a
-                key={item.href}
-                href={item.href}
-                className="border-action-primary focus-visible:outline-action-focus flex min-h-[220px] flex-col gap-4 border p-6 focus-visible:outline-3 focus-visible:outline-offset-4"
+                key={item.id}
+                href={`/products/${encodeURIComponent(item.handle)}`}
+                className="border-action-primary focus-visible:outline-action-focus flex flex-col gap-4 border p-6 focus-visible:outline-3 focus-visible:outline-offset-4 lg:min-h-[220px]"
               >
                 <h3 className="font-display text-[25px] leading-[1.45] font-normal">
                   {item.title}
                 </h3>
-                <p className="text-[15px] leading-[1.45]">{item.description}</p>
+                <p className="text-[15px] leading-[1.45]">
+                  {item.reasons.join(" ")}
+                </p>
+                {item.tied ? (
+                  <p className="text-[15px] leading-[1.45]">
+                    Shares its ranking with other fragrances under these
+                    preferences.
+                  </p>
+                ) : null}
+                {!item.availableForSale ? (
+                  <p className="text-[15px] leading-[1.45] font-semibold">
+                    Currently unavailable
+                  </p>
+                ) : null}
               </a>
             ))}
           </div>
