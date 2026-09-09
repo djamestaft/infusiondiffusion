@@ -22,7 +22,7 @@ care/service facts and source publication
 retain their existing deferrals. No new analytics, customer profile, stored
 answers, AI-generated recommendation service or commerce backend is proposed.
 
-## Current implementation
+## Baseline before matching implementation
 
 `src/components/templates/fragrance-guide.tsx` defines five choice groups:
 room, feeling, up to two note families, presence and time. All five currently
@@ -48,7 +48,7 @@ must say that suggestions use selected notes/character, rather than claiming all
 five answers determine the shortlist. Further associations can be approved later
 for a full five-dimension engine.
 
-Draft primary associations receive 2 points per selected choice; secondary
+Approved primary associations receive 2 points per selected choice; secondary
 associations receive 1. Sum the one or two selected choices, with no duplicate
 points. Return only products scoring above zero, ordered by score descending,
 then stable numeric GID ascending. Equal scores receive equal ranking under these rules;
@@ -214,9 +214,30 @@ overflow is normalized by the existing fluid grid. No new tokens or primitives.
 
 Independent content/commerce source-code review found no runtime/security blockers.
 Its wording correction and explicit state assertions were incorporated. The
-reviewer did not independently execute tests. Verification is ongoing; final
-check counts, runtime screenshots and release evidence will be recorded before
-handoff. Preview acceptance and human merge remain gates.
+reviewer did not independently execute tests. Final independent desktop/mobile
+visual review also passed after correcting the smaller-screen gap and capture
+artifacts. No remaining visual blockers were found.
+
+Local verification: all 256 unit tests passed, including 30 matching/catalogue
+tests; all 12 Guide Storybook checks passed. Five Chromium journeys passed across
+1440/768/390/320, including actual product navigation, axe, editing/invalidation,
+summary-only room changes and a keyboard flow at simulated 200% page scale with
+reduced motion. Under simultaneous local build load the browser rerun timed out;
+the bounded single-worker rerun passed. The scale test uses keyboard input because
+CDP page scaling does not preserve Playwright pointer hit coordinates. Initial
+source-fixture and server-only test harness setup failures were corrected.
+Typecheck and formatting passed; Impeccable detection returned no findings.
+Final build, lint and exact-commit CI evidence is recorded in the delivery PR.
+
+All four screenshot captures awaited font and image decoding and showed no
+horizontal overflow. Full-page captures start at page top. Focused result crops
+hide the sticky navigation and development portal only during capture; runtime
+navigation remains unchanged. Summary-heading scroll clearance was checked.
+
+- [Desktop runtime](evidence/inf35-matching-runtime-1440.png)
+- [Small-mobile runtime](evidence/inf35-matching-runtime-320.png)
+
+Preview acceptance and human merge remain gates.
 
 | Layer                  | Status                                                         |
 | ---------------------- | -------------------------------------------------------------- |

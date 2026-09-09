@@ -102,9 +102,15 @@ test("Guide single-result recovery remains usable with zoom and reduced motion",
     "Quiet background",
     "Any time",
   ]) {
-    await page.getByText(name, { exact: true }).click();
+    const input = page.getByRole(
+      name === "Spa-like calm" ? "checkbox" : "radio",
+      { name, exact: true },
+    );
+    await input.focus();
+    await input.press("Space");
   }
-  await page.getByRole("button", { name: "CONTINUE", exact: true }).click();
+  await page.getByRole("button", { name: "CONTINUE", exact: true }).focus();
+  await page.keyboard.press("Enter");
   const suggestions = page.getByRole("region", {
     name: "Suggested fragrances",
   });
@@ -120,6 +126,7 @@ test("Guide single-result recovery remains usable with zoom and reduced motion",
     .focus();
   await page.keyboard.press("Space");
   await expect(suggestions).toHaveCount(0);
-  await page.getByRole("button", { name: "CONTINUE", exact: true }).click();
+  await page.getByRole("button", { name: "CONTINUE", exact: true }).focus();
+  await page.keyboard.press("Enter");
   await expect(page.locator("form").getByRole("alert")).toBeVisible();
 });
