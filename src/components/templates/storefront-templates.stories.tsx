@@ -99,7 +99,7 @@ async function verifyHomeCabinetBand(
     "rgb(227, 231, 218)",
   );
   await expect(getComputedStyle(firstCard).backgroundColor).toBe(
-    "rgb(238, 240, 231)",
+    "rgb(252, 250, 245)",
   );
   await expect(getComputedStyle(firstCard).borderTopWidth).toBe("0px");
   await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
@@ -597,6 +597,41 @@ export const ProductDetailBrowseOnly: Story = {
       description="A warm, composed scent with a dry sandalwood base and a soft floral centre."
       details={productDetails}
       showPurchaseAction={false}
+    />
+  ),
+};
+export const ProductDetailDeferredCare: Story = {
+  render: () => (
+    <ProductDetailTemplate
+      product={featured}
+      description="A complete test fragrance story."
+      details={[]}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const action = canvas.getByRole("button", { name: "Add to cart" });
+    const story = canvas.getByText("A complete test fragrance story.");
+    await expect(action.getBoundingClientRect().bottom).toBeLessThan(
+      story.getBoundingClientRect().top,
+    );
+    await expect(
+      canvas.queryByRole("heading", { name: "Care guidance" }),
+    ).toBeNull();
+  },
+};
+export const ProductDetailWithCare: Story = {
+  render: () => (
+    <ProductDetailTemplate
+      product={featured}
+      description="A complete test fragrance story."
+      details={[]}
+      careGuidance={[
+        {
+          label: "Care fixture",
+          value: "Authored care guidance is displayed here when available.",
+        },
+      ]}
     />
   ),
 };

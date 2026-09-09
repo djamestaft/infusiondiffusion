@@ -1,5 +1,15 @@
 # Infusion Diffusion Roadmap
 
+## INF-33 implementation — 9 September 2026
+
+INF-33 is In Progress on agent/inf33-approved-shop-product, owned by Devon.
+PR #62 already exposes the complete Shop catalogue. The current delivery
+corrects the remaining hero/grid/card presentation and purchase hierarchy;
+see [acceptance and comparison record](../features/inf-33-approved-shop-product.md).
+Independent code review found no blockers; final verification and human
+preview/merge remain gates. INF-34's shared header/footer, Home and Cart are
+next. Content/photography/care/SEO deferrals remain unchanged.
+
 Last updated: 8 September 2026
 
 ## Current approval and next delivery — 8 September 2026

@@ -30,6 +30,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+export const ApprovedResponsiveWidths: Story = {
+  parameters: { layout: "fullscreen" },
+  render: (args) => (
+    <div className="flex flex-wrap items-start gap-6 p-5">
+      {[421.333, 310, 342, 280].map((width) => (
+        <div key={width} style={{ width }} className="max-w-full">
+          <ProductCard {...args} className="max-w-none" />
+        </div>
+      ))}
+    </div>
+  ),
+};
 export const Hover: Story = {
   args: {
     className:

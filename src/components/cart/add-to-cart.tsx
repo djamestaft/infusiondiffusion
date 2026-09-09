@@ -30,10 +30,10 @@ export function AddToCart({
   };
   return (
     <>
-      <div ref={opener}>
+      <div ref={opener} className="w-full">
         <Button
           size="large"
-          className="w-full sm:w-[236px]"
+          className="w-full text-[13px] leading-[18px]"
           disabled={disabled || pending}
           loading={pending}
           onClick={() =>

@@ -23,10 +23,10 @@ export function ProductPurchase({
   const selected = variants.find((variant) => variant.id === selectedId);
 
   return (
-    <div className="flex w-full max-w-[520px] flex-col items-center gap-3 sm:items-start">
+    <div className="flex w-full flex-col items-start gap-4">
       {variants.length > 1 ? (
         <label className="w-full text-center font-sans text-sm font-semibold sm:text-left">
-          Choose an available Shopify variant
+          Choose a format
           <span className="relative mt-2.5 block w-full sm:w-[236px]">
             <select
               value={selectedId}

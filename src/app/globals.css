@@ -203,6 +203,7 @@
   --color-navigation-border: var(--navigation-border);
   --color-navigation-focus: var(--navigation-focus);
   --color-overlay-scrim: var(--overlay-scrim);
+  --color-collection-hero-scrim: var(--collection-hero-scrim);
   --color-overlay-surface: var(--overlay-surface);
   --color-overlay-text: var(--overlay-text);
   --color-overlay-muted: var(--overlay-muted);
@@ -355,7 +356,7 @@
   --field-readonly-surface: #e3e7da;
   --field-error-border: #a64237;
   --field-error-text: #a64237;
-  --product-card-surface: #eef0e7;
+  --product-card-surface: var(--porcelain-0);
   --product-card-hover: #e3e7da;
   --product-card-text: #11110f;
   --product-card-meta: #3c3b35;
@@ -391,6 +392,7 @@
   --navigation-border: var(--sage-100);
   --navigation-focus: var(--gold-700);
   --overlay-scrim: rgb(17 17 15 / 72%);
+  --collection-hero-scrim: rgb(25 25 22 / 54%);
   --overlay-surface: #eef0e7;
   --overlay-text: #11110f;
   --overlay-muted: #3c3b35;
