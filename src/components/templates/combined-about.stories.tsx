@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "INF-35: approved About 2426:516/614/708/796. Gallery snapshot from published, rights-confirmed Sanity media on 9 September 2026; editorial copy from approved Figma and existing fallbacks. Runtime uses live Sanity data.",
+          "INF-35: approved About 2426:516/614/708/796. Gallery snapshot from published, rights-confirmed Sanity media on 9 September 2026; editorial copy from approved Figma and existing fallbacks. Runtime uses live Sanity data. User-requested refinement: the first four images are centered, uncropped and capped at 480px wide / 70svh high.",
       },
     },
   },

@@ -93,6 +93,7 @@ export function GalleryViewer({
       key={item.id}
       className={cn(
         "min-w-0",
+        layout === "campaign" && "mx-auto w-full max-w-[min(480px,52.5svh)]",
         item.id === "market-indoor-stall" && "sm:col-span-2",
       )}
     >
@@ -126,7 +127,10 @@ export function GalleryViewer({
               ? "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 80px), calc(100vw - 128px)"
               : "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 80px), calc(50vw - 88px)"
           }
-          className={cn("object-cover", hasFailed(item.id) && "hidden")}
+          className={cn(
+            layout === "campaign" ? "object-contain" : "object-cover",
+            hasFailed(item.id) && "hidden",
+          )}
           style={
             layout === "market" && item.id === "market-table"
               ? { objectPosition: "center 58.81%" }

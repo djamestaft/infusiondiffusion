@@ -6,7 +6,10 @@ The [INF-35 contract](docs/features/inf-35-approved-editorial.md) maps combined
 About and Guide Variation 02 to the exact approved frames. About combines
 Sanity gallery media with editorial chapters and preserves the complete
 source-owned Born text. Campaign roles use stable IDs, 3:4 imagery and no
-visible captions. Market roles preserve their captions; the lead uses 16:9,
+visible captions. Devon subsequently requested smaller, fully visible first-four
+images: center them, cap width at 480px and height at 70svh, and use contain
+fitting. This explicitly supersedes the original full-column image size in Figma.
+Market roles preserve their captions; the lead uses 16:9,
 the remaining four use 4:3, with the Market Table anchored at 58.81%.
 
 Devon approved About and authorized Guide route integration on 9 September.

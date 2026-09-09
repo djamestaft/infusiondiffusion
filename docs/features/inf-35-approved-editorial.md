@@ -115,3 +115,11 @@ and recommendations pending. Four Chromium viewport flows passed, including
 keyboard, two-note rejection, Back persistence, summary, no rankings, overflow
 and axe. Desktop/mobile route captures show all images loaded. Metadata remains
 Sanity-owned; no content publication or product matching was introduced.
+
+## About image sizing refinement
+
+Devon requested slightly smaller first-four images so each fits on screen.
+The campaign figures now center within their columns, retain the 3:4 frame,
+and cap width at min(480px, 52.5svh), limiting height to 70svh. Contain fitting
+preserves the full image. This user-directed refinement supersedes the initial
+Figma full-column sizing; Figma frame synchronization remains pending.
