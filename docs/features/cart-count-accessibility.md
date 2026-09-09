@@ -80,3 +80,15 @@ explicit focus outside the menu remains untouched. Remove the focus listener
 alongside the existing keyboard/resize listeners. Acceptance: deterministic
 blur-before-resize regression, repeated browser transitions, normal Escape and
 outside-focus preservation. No visual or commerce changes.
+
+The focus follow-up also isolates CI browser setup from the runner's unrelated
+Google Chrome APT source. Two runs failed before browser tests with the same
+upstream package-index hash mismatch. Disable only google-chrome.list when
+present, retaining package verification and Playwright-managed Chromium.
+GitHub's runner-image installer likewise removes this source after installing
+its bundled Chrome. This changes only the disposable CI runner.
+
+The six focused browser runs passed without retries, including 30 rapid
+open/desktop-resize cycles. The initial local browser attempt hit cold page
+compilation; its warm reruns passed. Local lint/types passed. Final exact-commit
+CI, unit/Storybook and build evidence are recorded in PR #81.

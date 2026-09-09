@@ -27,7 +27,14 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test:gate
       - run: pnpm test:coverage
-      - run: pnpm exec playwright install --with-deps chromium
+      - name: Install Playwright Chromium
+        run: |
+          # Playwright uses its own Chromium; the runner's Chrome APT index can
+          # be temporarily inconsistent and is not needed for system libraries.
+          if [ -f /etc/apt/sources.list.d/google-chrome.list ]; then
+            sudo mv /etc/apt/sources.list.d/google-chrome.list /etc/apt/sources.list.d/google-chrome.list.disabled
+          fi
+          pnpm exec playwright install --with-deps chromium
       - run: pnpm test:stories
       - run: pnpm build-storybook
       - run: pnpm build
