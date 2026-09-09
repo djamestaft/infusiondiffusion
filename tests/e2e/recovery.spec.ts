@@ -55,17 +55,26 @@ test("restores confirmed quantity after a failed update and allows retry", async
   await page.goto("/products/bois-de-santal-200ml");
   await page.getByRole("button", { name: "Add to cart", exact: true }).click();
   await page.getByRole("link", { name: "Review your bag" }).click();
-  await page.route("**/cart", (route) =>
-    route.request().method() === "POST"
+  await page.waitForURL("**/cart");
+  await page.route("**/*", (route) =>
+    route.request().method() === "POST" &&
+    route.request().headers()["next-action"]
       ? route.fulfill({ status: 500, body: "Simulated failure" })
       : route.continue(),
   );
+  const failedUpdate = page.waitForResponse(
+    (response) =>
+      response.request().method() === "POST" &&
+      Boolean(response.request().headers()["next-action"]) &&
+      response.status() === 500,
+  );
   await page.getByRole("button", { name: /Increase Bois/ }).click();
+  await failedUpdate;
   await expect(page.locator("main").getByRole("alert")).toContainText(
     "last confirmed selection",
   );
   await expect(page.getByLabel("Quantity 1", { exact: true })).toBeVisible();
-  await page.unroute("**/cart");
+  await page.unroute("**/*");
   await page.getByRole("button", { name: /Increase Bois/ }).click();
   await expect(
     page.getByRole("button", { name: /Increase Bois/ }),
