@@ -44,9 +44,19 @@ release gates. INF-35 is not complete from this bounded preparation alone.
 Initial 14 Storybook checks passed. About fallback passed Chromium at
 1440/768/390/320, including axe, metadata, current-page navigation and content.
 The first cold route run timed out; the warm rerun passed all four.
-The full unit run encountered seven worker-start timeouts; a bounded worker
-rerun is in progress. The initial formatting gate rejected Windows checkout
+The full unit run encountered seven worker-start timeouts; the bounded-worker
+rerun passed all 226 tests across 40 files. All 267 Storybook checks across
+27 files passed. Formatting, lint, typecheck and the Next production build
+passed. Storybook production build passed on retry after an external Google
+Fonts download failure. The initial formatting gate rejected Windows checkout
 CRLF; local normalization to LF produced no unrelated Git content changes.
+The targeted Impeccable detector returned no findings.
+
+Delivery is [draft PR #74](https://github.com/djamestaft/infusiondiffusion/pull/74).
+GitHub quality and the corresponding PR gate must pass for the final commit.
+Vercel deployed implementation commit `a0086e4` successfully. Browser requests
+to preview /about and /api/health both redirected to Vercel login, so
+authenticated preview route and health verification remain pending.
 
 ## Component mapping
 
@@ -65,14 +75,14 @@ record the rights-confirmed public gallery snapshot from 9 September.
 The hero image follows Home's current first visible slide; this provisional
 source can differ from the historical image frozen in Figma.
 
-| Layer                                            | Status                                                           |
-| ------------------------------------------------ | ---------------------------------------------------------------- |
-| Figma                                            | Approved exact frames; no design mutation                        |
-| DESIGN.md                                        | Current bounded implementation recorded                          |
-| Semantic CSS                                     | Guide roles mapped to captured values; retained foundation       |
-| Components                                       | About integrated; Guide prepared without ranking engine          |
-| Storybook                                        | Responsive/state stories implemented; final verification pending |
-| Source publication / Guide release / human merge | Pending named gates                                              |
+| Layer                                            | Status                                                     |
+| ------------------------------------------------ | ---------------------------------------------------------- |
+| Figma                                            | Approved exact frames; no design mutation                  |
+| DESIGN.md                                        | Current bounded implementation recorded                    |
+| Semantic CSS                                     | Guide roles mapped to captured values; retained foundation |
+| Components                                       | About integrated; Guide prepared without ranking engine    |
+| Storybook                                        | Responsive/state stories and production build passed       |
+| Source publication / Guide release / human merge | Pending named gates                                        |
 
 ## Visual comparison
 

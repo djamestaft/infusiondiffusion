@@ -9,8 +9,12 @@ imagery; Guide Variation 02 is prepared in Storybook. The existing live Guide
 remains until recommendation matching is approved. Contact, final assets/facts,
 care, SEO and source publication retain their open/deferred status.
 See the [bounded delivery contract](../features/inf-35-approved-editorial.md).
-Implementation verification and independent/human review remain in progress;
-this does not complete INF-35 or authorize publication or merge.
+Local verification passed: 226 unit tests, 267 Storybook checks, four About
+Chromium viewport checks, formatting, lint, typecheck and both builds.
+[Draft PR #74](https://github.com/djamestaft/infusiondiffusion/pull/74) holds the
+delivery. Final-commit GitHub quality, independent/human review and authenticated
+preview verification remain gates; Vercel is Ready but route checks require SSO.
+This does not complete INF-35 or authorize publication or merge.
 
 ## INF-33 implementation — 9 September 2026
 
