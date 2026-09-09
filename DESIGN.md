@@ -228,3 +228,8 @@ here before implementation is treated as complete.
 - Next.js owns the customer-facing storefront.
 - The experience must be accessible, mobile-first, and resilient to content
   extremes and constrained connections.
+
+Button rendering correction: primary link labels must match the product Add to
+Cart foreground. Keep the decorative gold material behind all content within
+the isolated button stacking context, including plain-text anchor labels.
+Components/Button/Primary Link Parity records native/link visual parity.

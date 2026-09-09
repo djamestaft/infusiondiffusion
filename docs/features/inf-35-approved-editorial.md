@@ -125,3 +125,8 @@ Devon found the initial 70% height cap too small and requested near-full-height
 images while scrolling; that intermediate cap and the 480px width cap are superseded. Contain fitting
 preserves the full image. This user-directed refinement supersedes the initial
 Figma full-column sizing; Figma frame synchronization remains pending.
+
+Button rendering correction: primary link labels must match the product Add to
+Cart foreground. Keep the decorative gold material behind all content within
+the isolated button stacking context, including plain-text anchor labels.
+Components/Button/Primary Link Parity records native/link visual parity.

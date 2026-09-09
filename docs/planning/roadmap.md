@@ -17,6 +17,8 @@ delivery. Final-commit GitHub quality, independent/human review and authenticate
 preview verification remain gates; Vercel is Ready but route checks require SSO.
 Devon requested a further About refinement: the first four images now fit within
 the available screen height beneath the header, with the full photo visible.
+Devon also identified faded primary button labels across pages. The shared
+gold material now stays behind plain-text link labels, matching Add to Cart.
 This does not complete INF-35 or authorize publication or merge.
 
 ## INF-33 implementation — 9 September 2026

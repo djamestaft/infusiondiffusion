@@ -34,7 +34,7 @@
       },
       {
         "name": "About and Guide contract",
-        "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Guide sample rankings remain Storybook-only.",
+        "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
         "section": "components"
       }
     ],
