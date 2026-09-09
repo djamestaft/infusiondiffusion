@@ -218,6 +218,42 @@ export const Empty: Story = {
     />
   ),
 };
+export const ReadUnavailable: Story = {
+  render: () => (
+    <CartPage
+      initialCart={{ ...cart, unavailable: true }}
+      checkoutEnabled={false}
+      updateLine={async () => cart}
+      removeLine={async () => cart}
+      checkoutAction={async () => undefined}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("heading", {
+        name: "Your bag is temporarily unavailable",
+      }),
+    ).toBeVisible();
+    await expect(canvas.getByRole("alert")).toHaveTextContent(
+      "Please try again",
+    );
+    await expect(
+      canvas.getByRole("link", { name: "Try again" }),
+    ).toHaveAttribute("href", "/cart");
+    await expect(
+      canvas.queryByText("Your bag is empty"),
+    ).not.toBeInTheDocument();
+    await expect(canvas.queryByText("Order summary")).not.toBeInTheDocument();
+    await expect(
+      canvas.queryByRole("button", { name: /checkout/i }),
+    ).not.toBeInTheDocument();
+  },
+};
+export const ReadUnavailableMobile: Story = {
+  ...ReadUnavailable,
+  globals: { viewport: { value: "contact320" } },
+};
 export const AddedDrawer: Story = {
   render: () => (
     <CartDrawer

@@ -86,6 +86,10 @@ function fixtureCart(id: string, quantity = 1): RawCart {
                 id: "gid://shopify/ProductVariant/e2e-bois-de-santal",
                 title: "Default Title",
                 availableForSale: true,
+                image: {
+                  url: "/images/products/fixtures/bois-de-santal.png",
+                  altText: "Bois De Santal reed diffuser",
+                },
                 product: {
                   title: "Bois De Santal - 200ml",
                   productType: "Reed diffuser",

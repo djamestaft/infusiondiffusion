@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RecoverableImage } from "@/components/ui/recoverable-image";
 import { Footer } from "@/components/footer";
 import { ContactHeroMedia } from "@/components/templates/contact-hero-media";
 import { HomeContent } from "@/components/templates/home-content";
@@ -487,7 +488,7 @@ export function ProductDetailTemplate({
       <article className="mx-auto grid w-full max-w-[1440px] gap-6 px-5 pt-8 pb-10 min-[375px]:px-6 sm:px-16 sm:pt-16 lg:grid-cols-2 lg:gap-16 lg:pb-16">
         <div className="bg-content-surface relative h-[280px] w-full overflow-hidden sm:h-[400px] lg:aspect-square lg:h-auto lg:self-start">
           {product.image ? (
-            <Image
+            <RecoverableImage
               src={product.image.src}
               alt={product.image.alt}
               fill
@@ -495,6 +496,7 @@ export function ProductDetailTemplate({
               loading="eager"
               sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 128px), 45vw"
               className="object-contain"
+              fallbackClassName="bg-content-surface text-content-secondary rounded-none text-sm font-normal tracking-normal normal-case"
             />
           ) : (
             <span className="text-content-secondary flex size-full items-center justify-center font-sans text-sm">
