@@ -65,3 +65,31 @@ No upstream outage or real customer cart was induced. The designer reviewed
 [the unavailable state](evidence/cart-count-unavailable-390.png) and the mobile
 menu, approving the state and a small spacing correction beside its count.
 The final menu state is included in Storybook.
+
+## Post-merge resize race
+
+Devon approved the preview and merged PR #80 at `0a24c0c`. Production health
+and mobile/desktop smoke checks passed. Main CI 34382271092 succeeded with
+84 browser tests passing immediately and the resize-focus test passing on retry.
+A production reproduction failed 3 of 20 transitions: CSS hides the menu and
+blurs its focused link to body before the resize event is delivered.
+
+The follow-up preserves the last focusin target while the menu is open. Only
+when current focus has fallen to body does desktop cleanup use that target;
+explicit focus outside the menu remains untouched. Remove the focus listener
+alongside the existing keyboard/resize listeners. Acceptance: deterministic
+blur-before-resize regression, repeated browser transitions, normal Escape and
+outside-focus preservation. No visual or commerce changes.
+
+The focus follow-up also isolates CI browser setup from the runner's unrelated
+Google Chrome APT source. Two runs failed before browser tests with the same
+upstream package-index hash mismatch. Identify Chrome-specific .list/.sources files by repository URL and disable
+them, retaining package verification and Playwright-managed Chromium.
+A filename-only guard did not cover the runner's remaining enabled entry.
+GitHub's runner-image installer likewise removes this source after installing
+its bundled Chrome. This changes only the disposable CI runner.
+
+The six focused browser runs passed without retries, including 30 rapid
+open/desktop-resize cycles. The initial local browser attempt hit cold page
+compilation; its warm reruns passed. Local lint/types passed. Final exact-commit
+CI, unit/Storybook and build evidence are recorded in PR #81.

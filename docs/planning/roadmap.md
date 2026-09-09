@@ -1,5 +1,16 @@
 # Infusion Diffusion Roadmap
 
+## Post-merge navigation focus correction - 9 September 2026
+
+Devon approved and merged PR #80 at `0a24c0c`; production health and smoke checks
+passed. This supersedes its pending preview/merge statements below. Main CI
+34382271092 passed with one resize-focus retry; production reproduction confirmed
+a browser blur-before-resize race. The [follow-up contract](../features/cart-count-accessibility.md#post-merge-resize-race)
+restores the already-approved focus behavior on `agent/navigation-resize-focus`.
+Coordinator remains sole writer in the retained worktree. INF-36 stays Backlog
+(owner Shawnee); INF-35 and checkout/content deferrals remain unchanged.
+The correction needs its own green CI, preview review and human merge.
+
 ## Cart count and accessibility preparation - 9 September 2026
 
 PR #79 is merged and live at `3afc3e5`; post-merge main CI 34374822016 passed.
