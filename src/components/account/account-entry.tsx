@@ -17,7 +17,7 @@ export type AccountEntryState =
 export type AccountEntryProps = {
   state: AccountEntryState;
   destination?: string;
-  cartCount?: number;
+  cartCount?: number | null;
   longContent?: boolean;
   onRetry?: () => void;
 };

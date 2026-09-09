@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { CollectionTemplate } from "@/components/templates/storefront-templates";
 import { getCachedProducts } from "@/lib/shopify/cached-catalog";
 import { toProductCard } from "@/lib/shopify/presentation";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { absoluteStorefrontTitle } from "@/lib/metadata-title";
 
@@ -25,7 +26,7 @@ export default async function ShopPage() {
       products={products}
       title="Shop"
       description="Six fragrances. 200 ml reed diffusers."
-      cartCount={cart.totalQuantity}
+      cartCount={cartNavigationCount(cart)}
     />
   );
 }

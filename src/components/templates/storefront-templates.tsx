@@ -33,7 +33,7 @@ import { cn } from "@/lib/utils";
 
 type TemplateNavigationProps = {
   navigationTheme?: NavigationProps["theme"];
-  cartCount?: number;
+  cartCount?: number | null;
   accountHref?: string | null;
 };
 

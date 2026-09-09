@@ -55,8 +55,9 @@ Never induce an upstream outage or alter real product availability.
 Exact-commit CI and preview results are recorded in the PR. Human merge remains
 the release gate; the prior merged commit is the rollback reference.
 
-The shared navigation still renders a zero count when a cart read is unavailable;
-this existing unknown-count presentation is outside this bounded recovery change.
+At PR #79 delivery, navigation rendered a zero count for unavailable reads;
+this was outside PR #79 and is addressed by the subsequent
+[cart-count accessibility work](cart-count-accessibility.md).
 Independent read-only code review found no correctness/security blockers.
 The complete failed-read/recovered-read behavior is covered across session units
 and Storybook; a real upstream outage/recovery is not induced in production.

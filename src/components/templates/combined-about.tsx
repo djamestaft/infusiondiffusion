@@ -14,7 +14,7 @@ export type CombinedAboutProps = {
   gallery?: GalleryPage;
   heroImage?: { src: string; alt: string };
   bornStory?: string;
-  cartCount?: number;
+  cartCount?: number | null;
 };
 
 const gutters = "px-5 min-[375px]:px-6 sm:px-10 lg:px-16";

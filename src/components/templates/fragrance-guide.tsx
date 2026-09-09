@@ -62,7 +62,7 @@ export type FragranceGuideProps = {
   products?: GuideProduct[] | null;
   initialReviewed?: boolean;
   onContinue?: (answers: GuideAnswers) => void;
-  cartCount?: number;
+  cartCount?: number | null;
 };
 
 const gutters = "px-5 min-[375px]:px-6 sm:px-10 lg:px-16";

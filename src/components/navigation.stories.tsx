@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { userEvent, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
 import { Navigation } from "@/components/navigation";
 
@@ -82,4 +82,26 @@ export const LongLabels: Story = {
 
 export const EmptyDestinations: Story = {
   args: { destinations: [] },
+};
+
+export const CartUnavailable: Story = {
+  args: { cartCount: null, theme: "midnight" },
+};
+
+export const CartUnavailableMobile: Story = {
+  ...CartUnavailable,
+  globals: MobileClosed.globals,
+};
+
+export const CartUnavailableMobileOpen: Story = {
+  ...CartUnavailableMobile,
+  play: async (context) => {
+    await MobileOpen.play?.(context);
+    await expect(
+      within(within(context.canvasElement).getByRole("dialog")).getByRole(
+        "link",
+        { name: "Cart, item count unavailable" },
+      ),
+    ).toHaveAttribute("href", "/cart");
+  },
 };

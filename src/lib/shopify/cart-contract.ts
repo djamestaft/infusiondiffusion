@@ -26,3 +26,8 @@ export const emptyCart: CartContract = {
   lines: [],
   subtotal: { amount: "0", currencyCode: "ZAR" },
 };
+
+/** Unknown is distinct from a confirmed empty cart. */
+export function cartNavigationCount(cart: CartContract): number | null {
+  return cart.unavailable ? null : cart.totalQuantity;
+}

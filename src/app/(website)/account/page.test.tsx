@@ -72,6 +72,18 @@ describe("account route", () => {
     expect(connection).toHaveBeenCalled();
   });
 
+  it("preserves an unavailable cart count through the route", async () => {
+    vi.mocked(getAccountEntry).mockResolvedValueOnce({ status: "disabled" });
+    vi.mocked(readCart).mockResolvedValueOnce({
+      totalQuantity: 0,
+      unavailable: true,
+    } as never);
+    render(await AccountContent());
+    expect(
+      screen.getAllByRole("link", { name: "Cart, item count unavailable" }),
+    ).toHaveLength(2);
+  });
+
   it("has accurate private account metadata", () => {
     expect(metadata).toMatchObject({
       title: { absolute: "Your account | Infusion Diffusion" },

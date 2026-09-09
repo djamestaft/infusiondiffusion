@@ -119,3 +119,60 @@ describe("Navigation", () => {
     expect(first).toHaveFocus();
   });
 });
+
+describe("cart availability", () => {
+  it("keeps unknown distinct from zero and recovers to confirmed counts", async () => {
+    const { rerender } = render(<Navigation cartCount={null} />);
+    expect(screen.getAllByText("Cart (\u2014)")).toHaveLength(2);
+    expect(
+      screen.getAllByRole("link", { name: "Cart, item count unavailable" }),
+    ).toHaveLength(2);
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    expect(
+      within(screen.getByRole("dialog")).getByRole("link", {
+        name: "Cart, item count unavailable",
+      }),
+    ).toHaveAttribute("href", "/cart");
+    expect(
+      within(screen.getByRole("dialog")).getByText("(\u2014)"),
+    ).toHaveAttribute("aria-hidden", "true");
+    fireEvent.keyDown(document, { key: "Escape" });
+    rerender(<Navigation cartCount={0} />);
+    expect(screen.queryByRole("link", { name: /unavailable/ })).toBeNull();
+    expect(screen.getAllByRole("link", { name: "Cart" })).toHaveLength(2);
+    rerender(<Navigation cartCount={1} />);
+    expect(screen.getAllByRole("link", { name: "Cart, 1 item" })).toHaveLength(
+      2,
+    );
+    rerender(<Navigation cartCount={123} />);
+    expect(
+      screen.getAllByRole("link", { name: "Cart, 123 items" }),
+    ).toHaveLength(2);
+  });
+
+  it("releases scroll lock and restores visible focus at the desktop breakpoint", async () => {
+    render(<Navigation />);
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    fireEvent.resize(window);
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(document.body.style.overflow).toBe("");
+    expect(
+      screen.getByRole("link", { name: "Infusion Diffusion home" }),
+    ).toHaveFocus();
+  });
+
+  it("preserves outside focus when the menu closes on desktop resize", async () => {
+    render(
+      <>
+        <Navigation />
+        <button>Outside</button>
+      </>,
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    const outside = screen.getByRole("button", { name: "Outside" });
+    outside.focus();
+    fireEvent.resize(window);
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(outside).toHaveFocus();
+  });
+});

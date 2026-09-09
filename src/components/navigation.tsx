@@ -18,7 +18,7 @@ export type NavigationProps = {
   currentHref?: string;
   accountHref?: string | null;
   cartHref?: string;
-  cartCount?: number;
+  cartCount?: number | null;
   theme?: "ivory" | "midnight";
   className?: string;
 };
@@ -112,12 +112,24 @@ export function Navigation({
   const links = validDestinations(destinations ?? []);
   const [open, setOpen] = useState(false);
   const drawerId = useId();
+  const homeRef = useRef<HTMLAnchorElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
     const opener = openerRef.current;
+    const home = homeRef.current;
+    let desktopClose = false;
+    let restoreHome = false;
+    const onResize = () => {
+      if (window.innerWidth < 1024) return;
+      desktopClose = true;
+      restoreHome =
+        document.activeElement === opener ||
+        Boolean(drawerRef.current?.contains(document.activeElement));
+      setOpen(false);
+    };
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const focusable = () =>
@@ -146,10 +158,16 @@ export function Navigation({
       }
     };
     document.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
       document.body.style.overflow = previousOverflow;
-      opener?.focus();
+      if (desktopClose) {
+        if (restoreHome) home?.focus();
+      } else {
+        opener?.focus();
+      }
     };
   }, [open]);
 
@@ -166,9 +184,11 @@ export function Navigation({
       <UtilityLink
         href={cartHref}
         label={
-          cartCount
-            ? `Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
-            : "Cart"
+          cartCount === null
+            ? "Cart, item count unavailable"
+            : cartCount
+              ? `Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
+              : "Cart"
         }
         className="w-[54px] gap-1 text-[13px] font-semibold lg:w-auto lg:justify-start"
       >
@@ -179,9 +199,11 @@ export function Navigation({
           />
         </span>
         <span aria-hidden="true" className="text-xs lg:hidden">
-          {cartCount > 99 ? "99+" : cartCount}
+          {cartCount === null ? "\u2014" : cartCount > 99 ? "99+" : cartCount}
         </span>
-        <span className="hidden lg:inline">Cart ({cartCount})</span>
+        <span aria-hidden="true" className="hidden lg:inline">
+          Cart ({cartCount === null ? "\u2014" : cartCount})
+        </span>
       </UtilityLink>
     </>
   );
@@ -199,9 +221,10 @@ export function Navigation({
         className="mx-auto grid h-[63px] w-full max-w-[1440px] grid-cols-[1fr_auto] items-center pr-3 pl-5 min-[375px]:pl-6 sm:pl-10 lg:h-[85px] lg:grid-cols-[220px_minmax(0,1fr)_127px] lg:px-8 xl:px-[88px]"
       >
         <Link
+          ref={homeRef}
           href="/"
           aria-label="Infusion Diffusion home"
-          className="focus-visible:outline-navigation-focus inline-flex justify-self-start focus-visible:outline-[3px] focus-visible:outline-offset-2"
+          className="focus-visible:outline-navigation-focus inline-flex min-h-11 items-center justify-self-start focus-visible:outline-[3px] focus-visible:outline-offset-2"
         >
           <LogoTextLockup className="w-31 lg:w-55" />
         </Link>
@@ -254,13 +277,13 @@ export function Navigation({
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          className="bg-navigation-surface fixed inset-0 z-50 flex min-h-dvh flex-col lg:hidden"
+          className="bg-navigation-surface fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto lg:hidden"
         >
           <div className="border-navigation-border flex h-20 shrink-0 items-center justify-between border-b px-5">
             <Link
               href="/"
               aria-label="Infusion Diffusion home"
-              className="focus-visible:outline-navigation-focus focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              className="focus-visible:outline-navigation-focus inline-flex min-h-11 items-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
               <LogoTextLockup className="w-31" />
             </Link>
@@ -287,9 +310,19 @@ export function Navigation({
             ))}
             <a
               href={cartHref}
-              className="text-navigation-accent focus-visible:outline-navigation-focus mt-8 inline-flex min-h-11 items-center font-sans text-sm font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              aria-label={
+                cartCount === null ? "Cart, item count unavailable" : undefined
+              }
+              className="text-navigation-accent focus-visible:outline-navigation-focus mt-8 inline-flex min-h-11 items-center gap-1 font-sans text-sm font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
-              Cart{cartCount ? ` (${cartCount > 99 ? "99+" : cartCount})` : ""}
+              Cart
+              {cartCount === null ? (
+                <span aria-hidden="true"> {"(\u2014)"}</span>
+              ) : cartCount ? (
+                ` (${cartCount > 99 ? "99+" : cartCount})`
+              ) : (
+                ""
+              )}
             </a>
           </div>
         </div>
