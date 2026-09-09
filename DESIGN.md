@@ -1,5 +1,17 @@
 # Infusion Diffusion design system
 
+## Contact exploration — 9 September 2026
+
+The [Contact brief](docs/features/inf-27-contact.md) records INF-27 exploration
+frames `2529:2/19/37/55` at 1440/768/390/320. Reuse the approved midnight shell,
+Marcellus/Manrope and corrected gold action. Keep the existing source-owned
+mailbox, direct-email behavior and factual copy. Proposed composition: compact
+introductory block, prominent email address/action and existing writing guidance.
+The duplicate email headings become “Contact us by email.”
+
+These frames are exploratory. Devon approves them before runtime and Storybook
+integration; no new tokens, contact backend or source publication is included.
+
 ## About and Guide implementation — 9 September 2026
 
 The [INF-35 contract](docs/features/inf-35-approved-editorial.md) maps combined

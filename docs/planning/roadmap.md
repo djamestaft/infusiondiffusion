@@ -1,25 +1,26 @@
 # Infusion Diffusion Roadmap
 
-## INF-35 editorial implementation — 9 September 2026
+## Contact design next ? 9 September 2026
 
-Devon authorized continuing INF-35 after INF-34 merged in PR #73 at
-`33a826c`. The single delivery branch is `agent/inf35-approved-editorial`.
-Combined About integrates approved story chapters and source-owned gallery
-imagery. Devon approved About and authorized Guide Variation 02 on the preview.
-The Guide route now supports preferences and a summary; recommendations remain
-unavailable until matching is approved. Contact, final assets/facts,
-care, SEO and source publication retain their open/deferred status.
-See the [bounded delivery contract](../features/inf-35-approved-editorial.md).
-Local verification passed: 226 unit tests, 267 Storybook checks, four About
-Chromium viewport checks, formatting, lint, typecheck and both builds.
-[Draft PR #74](https://github.com/djamestaft/infusiondiffusion/pull/74) holds the
-delivery. Final-commit GitHub quality, independent/human review and authenticated
-preview verification remain gates; Vercel is Ready but route checks require SSO.
-Devon requested a further About refinement: the first four images now fit within
-the available screen height beneath the header, with the full photo visible.
-Devon also identified faded primary button labels across pages. The shared
-gold material now stays behind plain-text link labels, matching Add to Cart.
-This does not complete INF-35 or authorize publication or merge.
+Devon authorized continuing Contact under INF-27 after approving PR #74 on
+desktop, tablet and mobile and human-merging it at `d6c2018`.
+About, Guide preferences and shared button corrections are live. Production
+Home, About, Guide, Cart and health smoke checks passed; the health version
+matched the merge. Post-merge main CI passed on `d6c2018`.
+Guide recommendations remain unavailable pending matching.
+
+INF-27 remains In Progress, owned by Shawnee, with Devon approving exact
+Contact frames. Prepare Contact at 1440/768/390/320 using the existing direct-email
+behavior, published mailbox and approved copy. Preserve the shared shell,
+semantic tokens and fonts. No contact form, new service facts or source
+publication is authorized. See the [Contact brief](../features/inf-27-contact.md).
+
+INF-35's bounded delivery in [PR #74](https://github.com/djamestaft/infusiondiffusion/pull/74)
+is merged. The full ticket remains In Progress for Contact, matching and
+remaining editorial/service scope. INF-36 remains downstream of that scope;
+final photography, facts, care, SEO and source publication retain their deferrals.
+Contact visual approval precedes implementation. One delivery branch is
+`agent/inf27-contact-design`; the designer edits Figma only.
 
 ## INF-33 implementation — 9 September 2026
 
