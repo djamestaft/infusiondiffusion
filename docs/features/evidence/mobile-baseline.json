@@ -1,0 +1,1429 @@
+[
+  {
+    "route": "/",
+    "metrics": {
+      "lcp": 2356,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1272.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 801.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1156.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 821.6999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1055.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1609.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1466.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1180.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 610.2000000029802
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 281.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 830.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 371.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3_x2vjdo8s470.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5610,
+        "duration": 623.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 1004.1999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 1002.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 1176
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc63a96a8071af98403fab9cc54146228d41c6062-480x640.png&w=750&q=75",
+        "type": "link",
+        "bytes": 17862,
+        "duration": 786
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 202.10000000149012
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F175ecb607538fa94bff2ea30df08155ea394e456-480x640.png&w=750&q=75",
+        "type": "img",
+        "bytes": 17316,
+        "duration": 666.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F7bebde241bf718bd13f81edd976054555cdfeb28-480x640.png&w=750&q=75",
+        "type": "img",
+        "bytes": 20212,
+        "duration": 728.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fambre-egyptian.png%3Fv%3D1778392285&w=750&q=75",
+        "type": "img",
+        "bytes": 21962,
+        "duration": 759.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fblanc-de-blanc.png%3Fv%3D1778392512&w=750&q=75",
+        "type": "img",
+        "bytes": 20906,
+        "duration": 741.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "type": "img",
+        "bytes": 16388,
+        "duration": 647.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=828&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "img",
+        "bytes": 22976,
+        "duration": 770.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1q078_p47uul1.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 6979,
+        "duration": 262.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3v14gnma_63sj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 29648,
+        "duration": 403.80000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1x-kd9l2-m82l.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 9342,
+        "duration": 305
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=5CB68i4pnAekjehf",
+        "type": "fetch",
+        "bytes": 1135,
+        "duration": 553.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=7h4NYy5eoyMcNlUN",
+        "type": "fetch",
+        "bytes": 1005,
+        "duration": 173.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=yIp22O3xgPPxC28X",
+        "type": "fetch",
+        "bytes": 1277,
+        "duration": 186.60000000149012
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=x0-LSR3WRamHtsx1",
+        "type": "fetch",
+        "bytes": 1319,
+        "duration": 185.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=dexQON50PxG-ggHD",
+        "type": "fetch",
+        "bytes": 749,
+        "duration": 181.09999999776483
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=7h4NYy5eoyMcNlUN",
+        "type": "fetch",
+        "bytes": 1163,
+        "duration": 542.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=S0eADT_wWjhOSXwc",
+        "type": "fetch",
+        "bytes": 861,
+        "duration": 539.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=l38GT0PDLCPunV3U",
+        "type": "fetch",
+        "bytes": 991,
+        "duration": 558.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=P5O5S2ckpbEtnju9",
+        "type": "fetch",
+        "bytes": 1222,
+        "duration": 584.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2dekbf-_a452n.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 2141,
+        "duration": 184.30000000074506
+      }
+    ],
+    "images": [
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc63a96a8071af98403fab9cc54146228d41c6062-480x640.png&w=750&q=75",
+        "width": 342,
+        "height": 274,
+        "naturalWidth": 224,
+        "loading": "eager",
+        "top": 417,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F175ecb607538fa94bff2ea30df08155ea394e456-480x640.png&w=750&q=75",
+        "width": 342,
+        "height": 274,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 417,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F7bebde241bf718bd13f81edd976054555cdfeb28-480x640.png&w=750&q=75",
+        "width": 342,
+        "height": 274,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 417,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fambre-egyptian.png%3Fv%3D1778392285&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 1010.59375,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fblanc-de-blanc.png%3Fv%3D1778392512&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 1538.59375,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 2066.59375,
+        "complete": true
+      },
+      {
+        "src": "",
+        "width": 0,
+        "height": 0,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 0,
+        "complete": false
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=828&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "width": 390,
+        "height": 480,
+        "naturalWidth": 390,
+        "loading": "lazy",
+        "top": 3271.59375,
+        "complete": true
+      },
+      {
+        "src": "",
+        "width": 390,
+        "height": 370,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 4507.59375,
+        "complete": false
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/shop",
+    "metrics": {
+      "lcp": 2388,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1396.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 1052
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1208.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 769.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1068.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1771.4000000022352
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1629.199999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1205
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 591.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 231.80000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 798.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 371.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/00lnywjg1q-tx.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 2112,
+        "duration": 370.69999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 1000.2000000029802
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3_x2vjdo8s470.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5610,
+        "duration": 617.1999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 999.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 1202.2000000029802
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=828&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 22976,
+        "duration": 945.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fambre-egyptian.png%3Fv%3D1778392285&w=750&q=75",
+        "type": "link",
+        "bytes": 21962,
+        "duration": 909.8000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 220.10000000149012
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fblanc-de-blanc.png%3Fv%3D1778392512&w=750&q=75",
+        "type": "img",
+        "bytes": 20906,
+        "duration": 613.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "type": "img",
+        "bytes": 16388,
+        "duration": 540.7999999970198
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fete-mystique.png%3Fv%3D1778392022&w=750&q=75",
+        "type": "img",
+        "bytes": 19000,
+        "duration": 609.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fnoir-de-la-noit.png%3Fv%3D1778392445&w=750&q=75",
+        "type": "img",
+        "bytes": 17054,
+        "duration": 579.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fsantuaire-serein.png%3Fv%3D1778392381&w=750&q=75",
+        "type": "img",
+        "bytes": 16964,
+        "duration": 593.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1q078_p47uul1.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 6979,
+        "duration": 281.20000000298023
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3v14gnma_63sj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 29648,
+        "duration": 415.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1x-kd9l2-m82l.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 9342,
+        "duration": 289
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-1?_rsc=XyVmYtFX6zHDMoh_",
+        "type": "fetch",
+        "bytes": 1135,
+        "duration": 185
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=XyVmYtFX6zHDMoh_",
+        "type": "fetch",
+        "bytes": 1135,
+        "duration": 162.39999999850988
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=XyVmYtFX6zHDMoh_",
+        "type": "fetch",
+        "bytes": 958,
+        "duration": 166.80000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=DYQ6xeu1WzGBuOtK",
+        "type": "fetch",
+        "bytes": 1163,
+        "duration": 183.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=KPjGRY_gIDDPUf4W",
+        "type": "fetch",
+        "bytes": 1277,
+        "duration": 551
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=svf2ZKUVsrzAzOjk",
+        "type": "fetch",
+        "bytes": 1267,
+        "duration": 584.2999999970198
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-1?_rsc=DYQ6xeu1WzGBuOtK",
+        "type": "fetch",
+        "bytes": 1163,
+        "duration": 180.10000000149012
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-1?_rsc=5GlE3l-gKZqOLseD",
+        "type": "fetch",
+        "bytes": 861,
+        "duration": 175.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-1?_rsc=sB1wjWvchCeCTey2",
+        "type": "fetch",
+        "bytes": 991,
+        "duration": 167.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-1?_rsc=eKYeR65RWdYcklcG",
+        "type": "fetch",
+        "bytes": 1222,
+        "duration": 163.10000000149012
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2dekbf-_a452n.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 2141,
+        "duration": 194.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=sB1wjWvchCeCTey2",
+        "type": "fetch",
+        "bytes": 991,
+        "duration": 177.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/products/home-decor-example-product-4?_rsc=eKYeR65RWdYcklcG",
+        "type": "fetch",
+        "bytes": 1222,
+        "duration": 186
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=DYQ6xeu1WzGBuOtK",
+        "type": "fetch",
+        "bytes": 1005,
+        "duration": 178.39999999850988
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=Kj0YKI04tUpHkqTp",
+        "type": "fetch",
+        "bytes": 749,
+        "duration": 174.5
+      }
+    ],
+    "images": [
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=828&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "width": 390,
+        "height": 164,
+        "naturalWidth": 390,
+        "loading": "auto",
+        "top": 64,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fambre-egyptian.png%3Fv%3D1778392285&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "eager",
+        "top": 252.078125,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fblanc-de-blanc.png%3Fv%3D1778392512&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 778.078125,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 1304.078125,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fete-mystique.png%3Fv%3D1778392022&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 1830.078125,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fnoir-de-la-noit.png%3Fv%3D1778392445&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 2356.078125,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fsantuaire-serein.png%3Fv%3D1778392381&w=750&q=75",
+        "width": 342,
+        "height": 342,
+        "naturalWidth": 224,
+        "loading": "lazy",
+        "top": 2882.078125,
+        "complete": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/products/bois-de-santal-200ml",
+    "metrics": {
+      "lcp": 2180,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1281.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 965.1999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1127.7999999970198
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 761.6999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1074.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1703.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1529.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1153.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 564.6999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 294.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 784.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 388
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2dekbf-_a452n.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 2141,
+        "duration": 419.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 972.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ymk0ncn7ad2w.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8031,
+        "duration": 831.0999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 985.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 1160.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "type": "link",
+        "bytes": 16388,
+        "duration": 497.4000000022352
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 321
+      }
+    ],
+    "images": [
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0992%2F3723%2F2926%2Ffiles%2Fbois-de-santal.png%3Fv%3D1778392174&w=750&q=75",
+        "width": 342,
+        "height": 280,
+        "naturalWidth": 224,
+        "loading": "eager",
+        "top": 96,
+        "complete": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/about",
+    "metrics": {
+      "lcp": 3768,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1281
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 916.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1101.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 703
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1003.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1634.0999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1492.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1131.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 539.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 228.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 746.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 348.4000000022352
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2no6huwtvjn6i.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 7414,
+        "duration": 916.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/09yvdlfz93n49.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11852,
+        "duration": 1057.699999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 930.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1x--3_5sakctn.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16257,
+        "duration": 1214.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/056ynhgvrfea6.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 3551,
+        "duration": 434.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc63a96a8071af98403fab9cc54146228d41c6062-480x640.png&w=828&q=75",
+        "type": "link",
+        "bytes": 17862,
+        "duration": 551.1999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 213.89999999850988
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+        "type": "img",
+        "bytes": 42638,
+        "duration": 1238.1000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc8bbce9fd0797f9339051897f1e93dd2ab607d31-1086x1448.png&w=750&q=75",
+        "type": "img",
+        "bytes": 30406,
+        "duration": 905.3000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F86fcafd161ed2ee696112ee0f8ec18ad8ab42c3e-1086x1448.png&w=750&q=75",
+        "type": "img",
+        "bytes": 53326,
+        "duration": 1427.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F482f3fed91eafe53e9284d45a5e643676fa2cebe-1086x1448.png&w=750&q=75",
+        "type": "img",
+        "bytes": 38280,
+        "duration": 1140.699999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Ff8e727c63dc1967bb87bf04604973f46a3f49d01-1280x720.jpg&w=750&q=75",
+        "type": "img",
+        "bytes": 52572,
+        "duration": 1522.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1q078_p47uul1.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 6979,
+        "duration": 393.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3v14gnma_63sj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 29648,
+        "duration": 768.9000000022352
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1x-kd9l2-m82l.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 9342,
+        "duration": 495.0999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=Sdev7PUlRw12F58X",
+        "type": "fetch",
+        "bytes": 958,
+        "duration": 197.39999999850988
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=5oha_MqiFWlStH9F",
+        "type": "fetch",
+        "bytes": 1005,
+        "duration": 181.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=6Q1v7HcIw7d_mkmQ",
+        "type": "fetch",
+        "bytes": 1277,
+        "duration": 180.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=B0E8N0VD6Y0DSkL9",
+        "type": "fetch",
+        "bytes": 1319,
+        "duration": 172.40000000223517
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=beKgpZ0T7IEEwVba",
+        "type": "fetch",
+        "bytes": 749,
+        "duration": 195.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3_x2vjdo8s470.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5610,
+        "duration": 242.09999999776483
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 302.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 329.4000000022352
+      }
+    ],
+    "images": [
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc63a96a8071af98403fab9cc54146228d41c6062-480x640.png&w=828&q=75",
+        "width": 390,
+        "height": 292,
+        "naturalWidth": 226,
+        "loading": "auto",
+        "top": 64,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+        "width": 342,
+        "height": 456,
+        "naturalWidth": 342,
+        "loading": "lazy",
+        "top": 376.1875,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fc8bbce9fd0797f9339051897f1e93dd2ab607d31-1086x1448.png&w=750&q=75",
+        "width": 342,
+        "height": 456,
+        "naturalWidth": 342,
+        "loading": "lazy",
+        "top": 1644.6875,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F86fcafd161ed2ee696112ee0f8ec18ad8ab42c3e-1086x1448.png&w=750&q=75",
+        "width": 342,
+        "height": 456,
+        "naturalWidth": 342,
+        "loading": "lazy",
+        "top": 2431.6875,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F482f3fed91eafe53e9284d45a5e643676fa2cebe-1086x1448.png&w=750&q=75",
+        "width": 342,
+        "height": 456,
+        "naturalWidth": 342,
+        "loading": "lazy",
+        "top": 3244.6875,
+        "complete": true
+      },
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Ff8e727c63dc1967bb87bf04604973f46a3f49d01-1280x720.jpg&w=750&q=75",
+        "width": 342,
+        "height": 192,
+        "naturalWidth": 342,
+        "loading": "lazy",
+        "top": 3808.1875,
+        "complete": true
+      },
+      {
+        "src": "",
+        "width": 342,
+        "height": 257,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 4122.5625,
+        "complete": false
+      },
+      {
+        "src": "",
+        "width": 342,
+        "height": 257,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 4501.0625,
+        "complete": false
+      },
+      {
+        "src": "",
+        "width": 342,
+        "height": 257,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 4879.5625,
+        "complete": false
+      },
+      {
+        "src": "",
+        "width": 342,
+        "height": 257,
+        "naturalWidth": 0,
+        "loading": "lazy",
+        "top": 5258.0625,
+        "complete": false
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/fragrance-guide",
+    "metrics": {
+      "lcp": 2496,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1321.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 1054.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1161.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 785.2999999970198
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1068.699999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1680.699999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1540.8999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1182
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 593
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 233.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 832
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 358.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0ghricroc_ble.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 9818,
+        "duration": 922.8000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0pthkrs_j_knb.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11852,
+        "duration": 1002.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 1016.6999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 1203.300000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/056ynhgvrfea6.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 3551,
+        "duration": 511.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=750&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 20052,
+        "duration": 735.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 230.40000000223517
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1q078_p47uul1.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 6979,
+        "duration": 258.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3v14gnma_63sj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 29648,
+        "duration": 409.29999999701977
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1x-kd9l2-m82l.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 9342,
+        "duration": 295.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=8kLroy0MOjSJjFpW",
+        "type": "fetch",
+        "bytes": 958,
+        "duration": 182.39999999850988
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=raeMoWdhvVyHo7vI",
+        "type": "fetch",
+        "bytes": 1005,
+        "duration": 162.20000000298023
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=TuXEekEhDKibM1Ug",
+        "type": "fetch",
+        "bytes": 1277,
+        "duration": 175.09999999776483
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=7hFGiIiS8gcjLLDp",
+        "type": "fetch",
+        "bytes": 1319,
+        "duration": 170.30000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/?_rsc=2FanttcWsyCWRf2i",
+        "type": "fetch",
+        "bytes": 749,
+        "duration": 179.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3_x2vjdo8s470.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5610,
+        "duration": 230.80000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 259.6000000014901
+      }
+    ],
+    "images": [
+      {
+        "src": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=750&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "width": 340,
+        "height": 169,
+        "naturalWidth": 342,
+        "loading": "auto",
+        "top": 526.875,
+        "complete": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "/contact",
+    "metrics": {
+      "lcp": 2400,
+      "cls": 0
+    },
+    "resources": [
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 24876,
+        "duration": 1392
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/media/ec2f4458eb06f74e-s.p.0waiv1vizwwb5.woff2?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 14572,
+        "duration": 1060.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/02pff7vec6485.css?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 17356,
+        "duration": 1234.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3e38w27i4esgf.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 7838,
+        "duration": 840.1999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2ahvf3e2sy8r9.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 13354,
+        "duration": 1167.800000000745
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/01v9rrg8fyyh3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 65662,
+        "duration": 1781.5999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/1a4oquhhvtk5u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 38246,
+        "duration": 1642.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3qsj6lshezacj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 15686,
+        "duration": 1262.0999999977648
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/turbopack-15xo2yl54s-fv.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 4868,
+        "duration": 645.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0c7piw6bb8byg.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 583,
+        "duration": 253.19999999925494
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3owc1xlzrb-ou.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 8751,
+        "duration": 899.8000000007451
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3b1ynkelbtb3u.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 1928,
+        "duration": 395.80000000074506
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/3_x2vjdo8s470.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5610,
+        "duration": 676
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/03gg-evkqx_q3.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11826,
+        "duration": 1086.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0oc_v2c89cj24.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11625,
+        "duration": 1087.5
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/2bq7knw_79m-c.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 16354,
+        "duration": 1272.3999999985099
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0cjlunmv387rj.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 5663,
+        "duration": 689.6000000014901
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/0pthkrs_j_knb.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 11852,
+        "duration": 1101.199999999255
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/static/chunks/056ynhgvrfea6.js?dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "script",
+        "bytes": 3551,
+        "duration": 563.6999999992549
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/_next/image?url=%2Fimages%2Fhomepage-bespoke-diffuser-blurb.png&w=828&q=75&dpl=dpl_ErxoeGNpfGTJ1WBJwWiMK3UJeV6j",
+        "type": "link",
+        "bytes": 22976,
+        "duration": 926.7999999970198
+      },
+      {
+        "name": "https://infusion-diffusion.vercel.app/infusion-diffusion-logo.svg",
+        "type": "css",
+        "bytes": 9933,
+        "duration": 325
+      }
+    ],
+    "images": [],
+    "overflow": false
+  }
+]

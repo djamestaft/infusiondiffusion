@@ -49,6 +49,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Populated: Story = { args: { items } };
+export const AboutFirstImage: Story = {
+  args: { items, presentation: "about", prioritizeFirst: true },
+  play: async ({ canvasElement }) => {
+    const images = within(canvasElement).getAllByRole("img");
+    await expect(images[0]).toHaveAttribute("loading", "eager");
+    await expect(images[0]).toHaveAttribute("fetchpriority", "high");
+    for (const image of images.slice(1)) {
+      await expect(image).toHaveAttribute("loading", "lazy");
+      await expect(image).not.toHaveAttribute("fetchpriority", "high");
+    }
+  },
+};
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile1", isRotated: false } },
   args: { items },

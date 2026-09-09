@@ -1,0 +1,80 @@
+[
+  {
+    "eager": false,
+    "lcp": 4232,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 2688.7000000029802,
+        "end": 4140.20000000298,
+        "bytes": 42638
+      }
+    ]
+  },
+  {
+    "eager": true,
+    "lcp": 2232,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 55.19999999925494,
+        "end": 1615.300000000745,
+        "bytes": 42638
+      }
+    ]
+  },
+  {
+    "eager": false,
+    "lcp": 3568,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 1903.8999999985099,
+        "end": 3537.800000000745,
+        "bytes": 42638
+      }
+    ]
+  },
+  {
+    "eager": true,
+    "lcp": 2372,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 92.70000000298023,
+        "end": 1712.5,
+        "bytes": 42638
+      }
+    ]
+  },
+  {
+    "eager": false,
+    "lcp": 3964,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 2310.5,
+        "end": 3929.699999999255,
+        "bytes": 42638
+      }
+    ]
+  },
+  {
+    "eager": true,
+    "lcp": 2032,
+    "cls": 0.00044379445827638815,
+    "lcpSrc": "https://infusion-diffusion.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fa1646e5db1fad73d10da5a07428a3c8fe04a3e7a-1086x1448.png&w=750&q=75",
+    "image": [
+      {
+        "start": 85.60000000149012,
+        "end": 1629.199999999255,
+        "bytes": 42638
+      }
+    ]
+  }
+]

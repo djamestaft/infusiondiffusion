@@ -44,7 +44,19 @@ export const Desktop: Story = {
 export const Tablet: Story = {
   globals: { viewport: { value: "homepageTablet" } },
 };
-export const Mobile: Story = { globals: { viewport: { value: "contact390" } } };
+export const Mobile: Story = {
+  globals: { viewport: { value: "contact390" } },
+  play: async ({ canvasElement }) => {
+    const photographs = within(canvasElement)
+      .getAllByRole("button", { name: /^View / })
+      .map((button) => within(button).getByRole("img"));
+    await expect(photographs[0]).toHaveAttribute("loading", "eager");
+    await expect(photographs[0]).toHaveAttribute("fetchpriority", "high");
+    for (const photograph of photographs.slice(1)) {
+      await expect(photograph).toHaveAttribute("loading", "lazy");
+    }
+  },
+};
 export const Small: Story = { globals: { viewport: { value: "contact320" } } };
 export const GalleryKeyboard: Story = {
   play: async ({ canvasElement }) => {

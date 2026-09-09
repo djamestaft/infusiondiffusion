@@ -131,7 +131,7 @@ export function CombinedAboutTemplate({
           items={campaignItems}
           presentation="about"
           renderGallery={renderChapters}
-          prioritizeFirst={false}
+          prioritizeFirst
         />
         {gallery?.marketItems.length ? (
           <section

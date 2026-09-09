@@ -1,5 +1,21 @@
 # Infusion Diffusion Roadmap
 
+## Mobile performance preparation - 9 September 2026
+
+PR #77 is approved, merged and live at `8f5fd98`; production cart focus
+verification and post-merge main CI 34367492443 passed. This supersedes its
+pending verification and merge statements below.
+
+Devon authorized mobile performance work while checkout/content remain deferred.
+The [mobile performance record](../features/mobile-performance.md) defines the
+bounded acceptance and measured first-image scheduling improvement for About.
+One delivery branch is `agent/mobile-performance`, with the coordinator as sole
+writer. Preserve all approved image geometry and existing source content.
+
+This advances INF-36 performance preparation (owner Shawnee) without completing
+its blocked release scope. INF-35 stays In Progress; INF-28/31 deferrals remain.
+Preview acceptance and human merge remain gates for the mobile change.
+
 ## Storefront readiness review - 9 September 2026
 
 Devon merged Guide matching PR #76 at `dbe8296`; post-merge main CI passed
