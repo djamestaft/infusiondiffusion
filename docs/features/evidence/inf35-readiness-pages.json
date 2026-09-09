@@ -1,0 +1,194 @@
+[
+  {
+    "route": "/",
+    "width": 1440,
+    "status": 200,
+    "title": "Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/",
+    "width": 768,
+    "status": 200,
+    "title": "Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/",
+    "width": 390,
+    "status": 200,
+    "title": "Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/",
+    "width": 320,
+    "status": 200,
+    "title": "Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/shop",
+    "width": 1440,
+    "status": 200,
+    "title": "Shop home fragrance | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/shop",
+    "width": 768,
+    "status": 200,
+    "title": "Shop home fragrance | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/shop",
+    "width": 390,
+    "status": 200,
+    "title": "Shop home fragrance | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/shop",
+    "width": 320,
+    "status": 200,
+    "title": "Shop home fragrance | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/products/bois-de-santal-200ml",
+    "width": 1440,
+    "status": 200,
+    "title": "Bois De Santal - 200ml | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/products/bois-de-santal-200ml",
+    "width": 768,
+    "status": 200,
+    "title": "Bois De Santal - 200ml | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/products/bois-de-santal-200ml",
+    "width": 390,
+    "status": 200,
+    "title": "Bois De Santal - 200ml | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/products/bois-de-santal-200ml",
+    "width": 320,
+    "status": 200,
+    "title": "Bois De Santal - 200ml | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/about",
+    "width": 1440,
+    "status": 200,
+    "title": "About Infusion Diffusion | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/about",
+    "width": 768,
+    "status": 200,
+    "title": "About Infusion Diffusion | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/about",
+    "width": 390,
+    "status": 200,
+    "title": "About Infusion Diffusion | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/about",
+    "width": 320,
+    "status": 200,
+    "title": "About Infusion Diffusion | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/fragrance-guide",
+    "width": 1440,
+    "status": 200,
+    "title": "A practical home fragrance guide | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/fragrance-guide",
+    "width": 768,
+    "status": 200,
+    "title": "A practical home fragrance guide | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/fragrance-guide",
+    "width": 390,
+    "status": 200,
+    "title": "A practical home fragrance guide | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/fragrance-guide",
+    "width": 320,
+    "status": 200,
+    "title": "A practical home fragrance guide | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/contact",
+    "width": 1440,
+    "status": 200,
+    "title": "Contact | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/contact",
+    "width": 768,
+    "status": 200,
+    "title": "Contact | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/contact",
+    "width": 390,
+    "status": 200,
+    "title": "Contact | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "route": "/contact",
+    "width": 320,
+    "status": 200,
+    "title": "Contact | Infusion Diffusion",
+    "overflow": false,
+    "violations": []
+  }
+]

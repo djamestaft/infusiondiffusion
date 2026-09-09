@@ -1,0 +1,39 @@
+{
+  "commit": "dbe8296",
+  "capturedAt": "2026-09-09T14:18:04.293Z",
+  "cart": {
+    "add": true,
+    "increaseAndReload": true,
+    "checkoutButtons": [
+      {
+        "text": "Checkout unavailable",
+        "disabled": true
+      }
+    ],
+    "decrease": true,
+    "removeAndReload": true
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

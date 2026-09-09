@@ -17,18 +17,20 @@ export function CartDrawer({
   onOpenChange,
   cart,
   merchandiseId,
+  onCloseAutoFocus,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   cart: CartContract;
   merchandiseId: string;
+  onCloseAutoFocus?: (event: Event) => void;
 }) {
   const latest = cart.lines.find(
     (line) => line.merchandiseId === merchandiseId,
   );
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent>
+      <DrawerContent onCloseAutoFocus={onCloseAutoFocus}>
         <DrawerHeader>
           <DrawerTitle>Added to your bag</DrawerTitle>
           <DrawerDescription>

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
 
 import type { CartContract } from "@/lib/shopify/cart-contract";
@@ -6,6 +7,7 @@ import { CartDrawer } from "@/components/cart/cart-drawer";
 import { CartLine } from "@/components/cart/cart-line";
 import { CartPage } from "@/components/cart/cart-page";
 import { CartShell } from "@/components/cart/cart-shell";
+import { AddToCart } from "@/components/cart/add-to-cart";
 
 const cart: CartContract = {
   totalQuantity: 2,
@@ -41,6 +43,38 @@ export default {
 type Story = StoryObj;
 const quantityChanged = fn();
 const removed = fn();
+function SoldOutAfterAdding() {
+  const [disabled, setDisabled] = useState(false);
+  return (
+    <main className="mx-auto max-w-sm p-8">
+      <AddToCart
+        merchandiseId="variant-2"
+        disabled={disabled}
+        action={async () => {
+          setDisabled(true);
+          return cart;
+        }}
+      />
+    </main>
+  );
+}
+export const AddedLastAvailableItem: Story = {
+  parameters: { nextjs: { appDirectory: true } },
+  render: () => <SoldOutAfterAdding />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Add to cart" }));
+    const body = within(canvasElement.ownerDocument.body);
+    await body.findByRole("dialog");
+    await userEvent.click(body.getByRole("button", { name: "Close drawer" }));
+    await expect(
+      canvas.getByRole("button", { name: "Sold out" }),
+    ).toBeDisabled();
+    await expect(
+      canvas.getByRole("group", { name: "Add fragrance to bag" }),
+    ).toHaveFocus();
+  },
+};
 export const Line: Story = {
   render: () => (
     <div className="mx-auto max-w-3xl p-8">
@@ -193,4 +227,24 @@ export const AddedDrawer: Story = {
       merchandiseId="variant-2"
     />
   ),
+};
+
+export const AddAndReturnFocus: Story = {
+  parameters: { nextjs: { appDirectory: true } },
+  render: () => (
+    <main className="max-w-sm p-8">
+      <AddToCart merchandiseId="variant-2" action={async () => cart} />
+    </main>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const page = within(canvasElement.ownerDocument.body);
+    const add = canvas.getByRole("button", {
+      name: "Add to cart",
+    });
+    await userEvent.click(add);
+    await expect(await page.findByRole("dialog")).toBeVisible();
+    await userEvent.click(page.getByRole("button", { name: "Close drawer" }));
+    await expect(add).toHaveFocus();
+  },
 };
