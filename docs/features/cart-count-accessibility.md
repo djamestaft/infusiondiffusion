@@ -65,3 +65,18 @@ No upstream outage or real customer cart was induced. The designer reviewed
 [the unavailable state](evidence/cart-count-unavailable-390.png) and the mobile
 menu, approving the state and a small spacing correction beside its count.
 The final menu state is included in Storybook.
+
+## Post-merge resize race
+
+Devon approved the preview and merged PR #80 at `0a24c0c`. Production health
+and mobile/desktop smoke checks passed. Main CI 34382271092 succeeded with
+84 browser tests passing immediately and the resize-focus test passing on retry.
+A production reproduction failed 3 of 20 transitions: CSS hides the menu and
+blurs its focused link to body before the resize event is delivered.
+
+The follow-up preserves the last focusin target while the menu is open. Only
+when current focus has fallen to body does desktop cleanup use that target;
+explicit focus outside the menu remains untouched. Remove the focus listener
+alongside the existing keyboard/resize listeners. Acceptance: deterministic
+blur-before-resize regression, repeated browser transitions, normal Escape and
+outside-focus preservation. No visual or commerce changes.

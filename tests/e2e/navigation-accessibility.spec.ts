@@ -107,3 +107,28 @@ for (const route of [
     ).toEqual([]);
   });
 }
+
+test("preserves visible focus through repeated desktop menu transitions", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.goto("/shop");
+  const home = page
+    .getByRole("navigation", { name: "Primary", exact: true })
+    .getByRole("link", { name: "Infusion Diffusion home" });
+  for (let attempt = 0; attempt < 10; attempt++) {
+    await page.setViewportSize({ width: 844, height: 390 });
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await expect(
+      page
+        .getByRole("dialog")
+        .getByRole("link", { name: "Infusion Diffusion home" }),
+    ).toBeFocused();
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(home).toBeFocused();
+    expect(await page.evaluate(() => document.body.style.overflow)).not.toBe(
+      "hidden",
+    );
+  }
+});

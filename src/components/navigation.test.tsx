@@ -161,18 +161,39 @@ describe("cart availability", () => {
     ).toHaveFocus();
   });
 
-  it("preserves outside focus when the menu closes on desktop resize", async () => {
-    render(
-      <>
-        <Navigation />
-        <button>Outside</button>
-      </>,
-    );
-    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    const outside = screen.getByRole("button", { name: "Outside" });
-    outside.focus();
-    fireEvent.resize(window);
-    expect(screen.queryByRole("dialog")).toBeNull();
-    expect(outside).toHaveFocus();
-  });
+  it.each([false, true])(
+    "preserves outside focus when the menu closes on desktop resize (blurred: %s)",
+    async (blurred) => {
+      render(
+        <>
+          <Navigation />
+          <button>Outside</button>
+        </>,
+      );
+      await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+      const outside = screen.getByRole("button", { name: "Outside" });
+      outside.focus();
+      if (blurred) outside.blur();
+      fireEvent.resize(window);
+      expect(screen.queryByRole("dialog")).toBeNull();
+      if (blurred) expect(document.activeElement).toBe(document.body);
+      else expect(outside).toHaveFocus();
+    },
+  );
+});
+
+it("restores the last menu focus when CSS hides it before resize fires", async () => {
+  render(<Navigation />);
+  await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+  const menu = within(screen.getByRole("dialog"));
+  const cart = menu.getByRole("link", { name: "Cart" });
+  cart.focus();
+  cart.blur();
+  expect(document.activeElement).toBe(document.body);
+  fireEvent.resize(window);
+  expect(screen.queryByRole("dialog")).toBeNull();
+  expect(
+    screen.getByRole("link", { name: "Infusion Diffusion home" }),
+  ).toHaveFocus();
+  expect(document.body.style.overflow).toBe("");
 });

@@ -120,14 +120,22 @@ export function Navigation({
     if (!open) return;
     const opener = openerRef.current;
     const home = homeRef.current;
+    let lastFocused = document.activeElement;
+    const onFocusIn = () => {
+      lastFocused = document.activeElement;
+    };
     let desktopClose = false;
     let restoreHome = false;
     const onResize = () => {
       if (window.innerWidth < 1024) return;
       desktopClose = true;
+      // Hiding the mobile panel can blur its link before resize is dispatched.
+      const focused =
+        document.activeElement === document.body
+          ? lastFocused
+          : document.activeElement;
       restoreHome =
-        document.activeElement === opener ||
-        Boolean(drawerRef.current?.contains(document.activeElement));
+        focused === opener || Boolean(drawerRef.current?.contains(focused));
       setOpen(false);
     };
     const previousOverflow = document.body.style.overflow;
@@ -139,6 +147,7 @@ export function Navigation({
         ) ?? [],
       );
     focusable()[0]?.focus();
+    lastFocused = document.activeElement;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
@@ -158,9 +167,11 @@ export function Navigation({
       }
     };
     document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", onFocusIn);
     window.addEventListener("resize", onResize);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", onFocusIn);
       window.removeEventListener("resize", onResize);
       document.body.style.overflow = previousOverflow;
       if (desktopClose) {

@@ -61,6 +61,11 @@ export const MobileOpen: Story = {
     await userEvent.click(
       within(canvasElement).getByRole("button", { name: "Open menu" }),
     );
+    await expect(
+      within(within(canvasElement).getByRole("dialog")).getByRole("link", {
+        name: "Infusion Diffusion home",
+      }),
+    ).toHaveFocus();
   },
 };
 
