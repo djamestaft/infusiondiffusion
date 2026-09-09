@@ -1,10 +1,11 @@
 "use client";
 
-import { Menu, ShoppingCart, UserRound, X } from "lucide-react";
+import { ShoppingCart, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { LogoTextLockup } from "@/components/logo-text-lockup";
+import { storefrontDestinations } from "@/components/storefront-destinations";
 import { cn } from "@/lib/utils";
 
 export type NavigationDestination = {
@@ -22,13 +23,7 @@ export type NavigationProps = {
   className?: string;
 };
 
-const defaultDestinations: NavigationDestination[] = [
-  { label: "Shop", href: "/shop" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Fragrance Guide", href: "/fragrance-guide" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+const defaultDestinations: NavigationDestination[] = storefrontDestinations;
 
 function isSafeInternalHref(value: string): boolean {
   return (
@@ -86,7 +81,7 @@ function DestinationLink({
       aria-current={current ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "group focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-3 text-xs leading-4 font-semibold tracking-[0.08em] uppercase focus-visible:outline-[3px] focus-visible:outline-offset-2",
+        "group focus-visible:outline-navigation-focus relative inline-flex min-h-11 w-30 items-center justify-center px-2 text-[13px] leading-[1.45] font-medium focus-visible:outline-[3px] focus-visible:outline-offset-2",
         mobile &&
           "border-navigation-border font-display min-h-16 w-full justify-start border-b px-0 text-[1.75rem] leading-10 font-normal tracking-normal normal-case",
       )}
@@ -175,21 +170,16 @@ export function Navigation({
             ? `Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`
             : "Cart"
         }
-        className="lg:w-auto lg:px-3"
+        className="w-[54px] gap-1 text-[13px] font-semibold lg:w-auto lg:justify-start"
       >
         <span className="relative">
           <ShoppingCart
             aria-hidden="true"
             className="size-[1.375rem] stroke-[1.5] lg:hidden"
           />
-          {cartCount ? (
-            <span
-              aria-hidden="true"
-              className="bg-navigation-accent text-navigation-surface absolute -top-2.5 -right-2.5 inline-flex min-w-5 items-center justify-center rounded-full px-1 font-sans text-xs leading-5 font-semibold"
-            >
-              {cartCount > 99 ? "99+" : cartCount}
-            </span>
-          ) : null}
+        </span>
+        <span aria-hidden="true" className="text-xs lg:hidden">
+          {cartCount > 99 ? "99+" : cartCount}
         </span>
         <span className="hidden lg:inline">Cart ({cartCount})</span>
       </UtilityLink>
@@ -206,7 +196,7 @@ export function Navigation({
     >
       <nav
         aria-label="Primary"
-        className="mx-auto grid h-20 w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 lg:h-22 lg:grid-cols-[1fr_auto_1fr] lg:px-[88px]"
+        className="mx-auto grid h-[63px] w-full max-w-[1440px] grid-cols-[1fr_auto] items-center pr-3 pl-5 min-[375px]:pl-6 sm:pl-10 lg:h-[85px] lg:grid-cols-[220px_minmax(0,1fr)_127px] lg:px-8 xl:px-[88px]"
       >
         <Link
           href="/"
@@ -218,7 +208,7 @@ export function Navigation({
 
         {links.length ? (
           <div
-            className="hidden items-center justify-self-center lg:flex"
+            className="hidden items-center gap-3 justify-self-center lg:flex"
             aria-label="Primary destinations"
           >
             {links.map((destination) => (
@@ -233,14 +223,13 @@ export function Navigation({
           <span className="hidden lg:block" />
         )}
         <div
-          className="hidden items-center justify-self-end lg:flex"
+          className="hidden items-center justify-self-start lg:flex"
           aria-label="Commerce"
         >
           {utilities}
         </div>
 
         <div className="flex items-center justify-self-end lg:hidden">
-          {utilities}
           {links.length ? (
             <button
               ref={openerRef}
@@ -249,11 +238,12 @@ export function Navigation({
               aria-expanded={open}
               aria-controls={drawerId}
               onClick={() => setOpen(true)}
-              className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              className="focus-visible:outline-navigation-focus inline-flex h-11 w-[50px] items-center justify-center font-sans text-[11px] font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
-              <Menu aria-hidden="true" className="size-5 stroke-[1.5]" />
+              MENU
             </button>
           ) : null}
+          {utilities}
         </div>
       </nav>
 

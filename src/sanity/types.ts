@@ -73,7 +73,7 @@ export const fallbackSiteSettings: SiteSettings = {
     guidanceEyebrow: "Fragrance guidance",
     guidanceTitle: "Choose by the room, then by the feeling",
     guidanceIntroduction:
-      "Begin with how the space is used. Bright citrus and herbs lift active rooms; woods, amber and soft florals settle quieter ones.",
+      "Begin with how you want the room to feel—bright, grounded, soft or quietly opulent—then compare the notes that create it.",
     guidanceActionLabel: "Read the fragrance guide",
     guidanceSupportingText:
       "Every fragrance lists its notes plainly, so you can compare character and intensity before choosing a format.",
@@ -90,7 +90,7 @@ export const fallbackSiteSettings: SiteSettings = {
     longevityIntroduction:
       "Our 200ml reed diffusers are designed to fragrance a room for approximately 8–12 months under normal use.",
     longevityConditions:
-      "Room temperature, airflow and how often the reeds are turned will shape the pace of diffusion. A slower ritual lets the fragrance become part of the room rather than simply passing through it.",
+      "Room temperature, airflow, placement and how often the reeds are turned shape the pace of diffusion. A slower ritual lets the fragrance become part of the room rather than simply passing through it.",
     showCollectionInvitation: true,
     collectionInvitationTitle: "Six fragrances. A roomful of possibility.",
     collectionInvitationIntroduction:

@@ -229,6 +229,9 @@
   --color-content-accent: var(--content-accent);
   --color-content-surface: var(--content-surface);
   --color-content-surface-elevated: var(--content-surface-elevated);
+  --color-content-surface-quiet: var(--content-surface-quiet);
+  --color-collection-invitation-surface: var(--collection-invitation-surface);
+  --color-cart-checkout-disabled-surface: var(--cart-checkout-disabled-surface);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -417,6 +420,9 @@
   --content-accent: #735716;
   --content-surface: var(--sage-50);
   --content-surface-elevated: #e3e7da;
+  --content-surface-quiet: var(--sage-100);
+  --collection-invitation-surface: var(--gold-300);
+  --cart-checkout-disabled-surface: #e8e2d5;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);

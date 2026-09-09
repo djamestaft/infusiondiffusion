@@ -121,6 +121,9 @@ export const LongContent: Story = {
   },
 };
 export const Empty: Story = { args: { slides: [] } };
+export const PlainEmpty: Story = {
+  args: { slides: [], presentation: "plain" },
+};
 export const ImageFailure: Story = {
   args: {
     slides: [

@@ -230,8 +230,7 @@ describe("HeroCarousel", () => {
     ).not.toBeInTheDocument();
     expect(screen.getByTestId("hero-carousel-controls")).toBeVisible();
     expect(screen.getByTestId("hero-carousel-media")).toHaveClass(
-      "aspect-[342/470]",
-      "lg:aspect-[656/680]",
+      "aspect-[5/4]",
     );
   });
 
@@ -258,6 +257,17 @@ describe("HeroCarousel", () => {
       screen.getByRole("button", { name: "Show slide 2 of 3" }),
     ).toHaveAttribute("aria-current", "true");
     expect(screen.getByAltText("Second campaign")).toBeVisible();
+  });
+
+  it("preserves the plain five-to-four frame when every image fails", () => {
+    render(<HeroCarousel slides={slides.slice(0, 1)} presentation="plain" />);
+    fireEvent.error(screen.getByAltText("First campaign"));
+    expect(screen.getByTestId("hero-carousel-fallback")).toHaveClass(
+      "aspect-[5/4]",
+    );
+    expect(screen.getByTestId("hero-carousel-fallback")).not.toHaveClass(
+      "rounded-lg",
+    );
   });
 
   it("never autoplays onto a failed lazy slide", () => {

@@ -1,5 +1,18 @@
 # Infusion Diffusion design system
 
+## Home/shared shell/Cart implementation — 9 September 2026
+
+The [INF-34 contract](docs/features/inf-34-approved-home-shell-cart.md) maps the
+approved responsive Home, navigation/footer and Cart to runtime and Storybook.
+Home preserves all approved sections and uses Shop-format cards with independent
+3/4/3/3 selection. Plain hero imagery and failure frames use 5:4. Carousel
+controls remain as a functional addition to static proofs.
+Quiet surfaces use sage-100, the closing invitation gold-300, and gated checkout
+uses #E8E2D5. Footer navigation is centered to the desktop frame, with even
+visible gaps; mobile labels are left aligned below a centered logo.
+Implementation is ready for verification and human review; final content
+publication and About/Guide delivery remain pending.
+
 ## Shop/Product implementation — 9 September 2026
 
 The [INF-33 component contract](docs/features/inf-33-approved-shop-product.md)

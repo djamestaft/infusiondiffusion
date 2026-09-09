@@ -66,15 +66,17 @@ export function CartPage({
       </main>
     );
   return (
-    <main className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-16">
+    <main className="mx-auto w-full max-w-[1440px] px-6 pt-8 pb-16 sm:px-8 lg:px-16 lg:pt-16">
       <header>
-        <p className="text-content-accent font-sans text-xs font-semibold uppercase">
-          Your selection
-        </p>
-        <h1 className="font-display mt-3 text-5xl">Your bag</h1>
-        <p className="text-content-secondary mt-3 font-sans">
-          {cart.totalQuantity} items held for this visit. Prices and
-          availability refresh with every change.
+        <h1 className="font-display text-[40px] leading-[1.15] lg:text-[56px]">
+          Your cart
+        </h1>
+        <p
+          className="text-content-secondary mt-8 font-sans text-base leading-[1.45]"
+          aria-live="polite"
+        >
+          {cart.totalQuantity} {cart.totalQuantity === 1 ? "item" : "items"} in
+          your cart
         </p>
       </header>
       {cart.message ? (
@@ -87,8 +89,8 @@ export function CartPage({
           {operationError}
         </p>
       ) : null}
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_22.5rem] lg:gap-16">
-        <div>
+      <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_22.5rem] lg:gap-16">
+        <div className="flex min-w-0 flex-col gap-6">
           {cart.lines.map((line) => (
             <CartLine
               key={line.id}

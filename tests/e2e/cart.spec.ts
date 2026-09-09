@@ -25,11 +25,18 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
   await page.getByRole("link", { name: "Review your bag" }).click();
   await expect(page).toHaveTitle("Your bag | Infusion Diffusion");
   await expect(
-    page.getByRole("heading", { level: 1, name: "Your bag" }),
+    page.getByRole("heading", { level: 1, name: "Your cart" }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Checkout unavailable" }),
   ).toBeDisabled();
+  const summaryTitle = await page
+    .getByRole("heading", { name: "Order summary" })
+    .boundingBox();
+  const summaryPanel = await page
+    .getByTestId("cart-summary-panel")
+    .boundingBox();
+  expect(summaryPanel!.y - (summaryTitle!.y + summaryTitle!.height)).toBe(16);
   expect(
     (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze())
       .violations,
@@ -37,7 +44,7 @@ test("adds, persists, updates and removes a Shopify fixture cart", async ({
   await page.getByRole("button", { name: /Increase Bois De Santal/ }).click();
   await expect(page.getByLabel("Quantity 3")).toBeVisible();
   await expect(
-    page.getByText("3 items held for this visit.", { exact: false }),
+    page.getByText("3 items in your cart", { exact: false }),
   ).toBeVisible();
   await expect(
     page.locator('a[aria-label="Cart, 3 items"]').first(),

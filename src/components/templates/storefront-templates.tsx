@@ -1,10 +1,9 @@
 import Image from "next/image";
+import { Footer } from "@/components/footer";
+import { HomeContent } from "@/components/templates/home-content";
 import { ChevronDown } from "lucide-react";
 
-import {
-  HeroCarousel,
-  type HeroCarouselSlide,
-} from "@/components/hero-carousel";
+import { type HeroCarouselSlide } from "@/components/hero-carousel";
 import { Navigation, type NavigationProps } from "@/components/navigation";
 import { GalleryViewer } from "@/components/gallery-viewer";
 import type { GalleryItem } from "@/sanity/lib/editorial-pages";
@@ -28,8 +27,6 @@ import {
   ProductCard,
   type ProductCardProps,
 } from "@/components/ui/product-card";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { ScrollRevealController } from "@/components/ui/scroll-reveal-controller";
 import { cn } from "@/lib/utils";
 
 type TemplateNavigationProps = {
@@ -42,10 +39,6 @@ const sectionClass =
   "mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24";
 const shopSectionClass =
   "w-full px-5 pt-6 pb-10 min-[375px]:px-6 sm:px-16 lg:pb-16";
-const homeHeroSectionClass =
-  "dark grid w-full gap-10 bg-content-surface px-5 py-16 text-content-primary sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.093fr)] lg:justify-center lg:gap-14 lg:px-16 lg:py-16";
-const homeCollectionInnerClass =
-  "mx-auto w-full max-w-7xl px-5 pt-[52px] pb-16 sm:px-8 lg:px-12 lg:pt-[72px] lg:pb-24";
 
 function TemplateShell({
   navigationTheme = "ivory",
@@ -78,6 +71,7 @@ function TemplateShell({
         accountHref={accountHref}
       />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }
@@ -158,7 +152,7 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
   guidanceEyebrow: "Fragrance guidance",
   guidanceTitle: "Choose by the room, then by the feeling",
   guidanceIntroduction:
-    "Begin with how the space is used. Bright citrus and herbs lift active rooms; woods, amber and soft florals settle quieter ones.",
+    "Begin with how you want the room to feel—bright, grounded, soft or quietly opulent—then compare the notes that create it.",
   guidanceActionLabel: "Read the fragrance guide",
   guidanceSupportingText:
     "Every fragrance lists its notes plainly, so you can compare character and intensity before choosing a format.",
@@ -179,7 +173,7 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
   longevityIntroduction:
     "Our 200ml reed diffusers are designed to fragrance a room for approximately 8–12 months under normal use.",
   longevityConditions:
-    "Room temperature, airflow and how often the reeds are turned will shape the pace of diffusion. A slower ritual lets the fragrance become part of the room rather than simply passing through it.",
+    "Room temperature, airflow, placement and how often the reeds are turned shape the pace of diffusion. A slower ritual lets the fragrance become part of the room rather than simply passing through it.",
   showCollectionInvitation: true,
   collectionInvitationTitle: "Six fragrances. A roomful of possibility.",
   collectionInvitationIntroduction:
@@ -206,232 +200,14 @@ export function HomeTemplate({
   return (
     <TemplateShell
       navigationTheme={navigationTheme ?? "midnight"}
-      currentHref="/shop"
       cartCount={cartCount}
       accountHref={accountHref}
     >
-      <ScrollRevealController />
-      <section
-        data-testid="home-hero-section"
-        className={cn(
-          homeHeroSectionClass,
-          carouselSlides.length && "lg:items-center",
-        )}
-      >
-        <div className="flex max-w-[600px] flex-col gap-7 lg:py-[34px]">
-          <Heading
-            level={1}
-            treatment="display"
-            className="text-[clamp(3.25rem,5vw,4.5rem)] leading-[1.097]"
-          >
-            {content.heroTitle}
-          </Heading>
-          <Lead className="max-w-[520px] text-[1.1875rem] leading-[1.632]">
-            {content.heroIntroduction}
-          </Lead>
-          <Button
-            asChild
-            variant="primary"
-            className="min-h-12 w-[236px] rounded-full px-5 text-xs tracking-[0.08em]"
-          >
-            <a href="/shop">{content.heroActionLabel}</a>
-          </Button>
-        </div>
-        {carouselSlides.length ? (
-          <HeroCarousel
-            slides={carouselSlides}
-            presentation="plain"
-            className="w-full lg:h-[692px] lg:max-w-[656px]"
-          />
-        ) : null}
-      </section>
-
-      <ScrollReveal direction="left">
-        <section
-          className="bg-content-surface-elevated"
-          aria-labelledby="home-collection-title"
-          data-testid="home-cabinet-band"
-        >
-          <div
-            className={homeCollectionInnerClass}
-            data-testid="home-cabinet-inner"
-          >
-            <Heading
-              id="home-collection-title"
-              level={2}
-              treatment="title"
-              className="mb-8"
-            >
-              {content.collectionTitle}
-            </Heading>
-            {products.length ? (
-              <ProductGrid products={products.slice(0, 4)} />
-            ) : (
-              <p className="text-content-secondary max-w-prose font-sans">
-                The collection is being prepared. Please return soon to explore
-                the first fragrances.
-              </p>
-            )}
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <ScrollReveal direction="right">
-        <section className="bg-action-quiet-hover">
-          <div
-            className={cn(
-              sectionClass,
-              "grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end",
-            )}
-          >
-            <ContentHeader
-              context={{ type: "eyebrow", label: content.guidanceEyebrow }}
-              title={content.guidanceTitle}
-              headingLevel={2}
-              lead={content.guidanceIntroduction}
-              action={{
-                type: "link",
-                label: content.guidanceActionLabel,
-                href: "/fragrance-guide",
-              }}
-            />
-            <p className="text-content-secondary max-w-xl font-sans text-base leading-7">
-              {content.guidanceSupportingText}
-            </p>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <section
-        className="bg-content-primary relative isolate min-h-[30rem] overflow-hidden"
-        aria-label="Bespoke diffusers"
-      >
-        <Image
-          src="/images/homepage-bespoke-diffuser-blurb.png"
-          alt="A reed diffuser arranged in a serene living space"
-          fill
-          sizes="100vw"
-          className="-z-20 object-cover"
-        />
-        <div className="bg-overlay-scrim absolute inset-0 -z-10" />
-        <div className="flex min-h-[30rem] items-center justify-center px-5 py-16 sm:px-10">
-          <p className="font-display text-bone-50 max-w-4xl text-center text-[1.7rem] leading-[1.45] sm:text-[2rem] lg:text-[2.25rem]">
-            {content.bespokeBlurb}
-          </p>
-        </div>
-      </section>
-
-      {content.showLongevity ? (
-        <ScrollReveal direction="right">
-          <section className="bg-action-quiet-hover">
-            <div
-              className={cn(
-                sectionClass,
-                "grid gap-8 text-center sm:grid-cols-2 sm:text-left lg:gap-24",
-              )}
-            >
-              <div>
-                <p className="font-display text-5xl leading-none lg:text-7xl">
-                  200 ml
-                </p>
-                <p className="mt-3 font-sans text-sm font-semibold">
-                  approximately 8–12 months
-                </p>
-              </div>
-              <div>
-                <Heading level={2} treatment="headline">
-                  {content.longevityTitle}
-                </Heading>
-                <p className="text-content-secondary mt-5 font-sans text-base leading-7">
-                  {content.longevityConditions}
-                </p>
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
-      ) : null}
-
-      <ScrollReveal variant="unveil">
-        <section className="dark bg-content-surface text-content-primary grid md:grid-cols-2">
-          <div className="flex flex-col items-start justify-center px-5 py-16 sm:px-10 lg:px-16 lg:py-24">
-            <Heading level={2} treatment="headline">
-              {content.artistryTitle}
-            </Heading>
-            <p className="text-content-secondary mt-6 max-w-xl font-sans text-base leading-7 lg:text-lg">
-              {content.artistryIntroduction}
-            </p>
-            <Button asChild variant="primary" className="mx-auto mt-8 md:mx-0">
-              <a href="/about">{content.artistryActionLabel}</a>
-            </Button>
-          </div>
-          <div className="relative min-h-[23rem] md:min-h-[34rem]">
-            <Image
-              src="/images/homepage-artistry-in-fragrance.png"
-              alt="A dark glass reed diffuser styled on stone and linen"
-              fill
-              sizes="(max-width: 767px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {content.showServiceReassurance ? (
-        <ScrollReveal variant="unveil">
-          <section
-            className={sectionClass}
-            aria-labelledby="home-service-title"
-          >
-            <Heading
-              id="home-service-title"
-              level={2}
-              treatment="title"
-              className="text-center"
-            >
-              {content.serviceTitle}
-            </Heading>
-            <div className="mt-10 grid gap-8 text-center sm:grid-cols-3">
-              {[
-                ["Care guidance", "Clear use and placement advice"],
-                ["Delivery", "Transparent delivery expectations"],
-                ["Stock", "Dependable availability information"],
-              ].map(([title, body]) => (
-                <div key={title}>
-                  <h3 className="font-sans text-sm font-semibold tracking-[0.08em] uppercase">
-                    {title}
-                  </h3>
-                  <p className="text-content-secondary mt-2 font-sans text-base leading-7">
-                    {body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </ScrollReveal>
-      ) : null}
-
-      {content.showCollectionInvitation ? (
-        <ScrollReveal direction="left">
-          <section
-            className={sectionClass}
-            aria-labelledby="home-collection-invitation-title"
-          >
-            <Heading
-              id="home-collection-invitation-title"
-              level={2}
-              treatment="headline"
-            >
-              {content.collectionInvitationTitle}
-            </Heading>
-            <p className="text-content-secondary mt-6 max-w-2xl font-sans text-base leading-7 lg:text-lg">
-              {content.collectionInvitationIntroduction}
-            </p>
-            <Button asChild variant="primary" className="mt-8">
-              <a href="/shop">{content.collectionInvitationActionLabel}</a>
-            </Button>
-          </section>
-        </ScrollReveal>
-      ) : null}
+      <HomeContent
+        content={content}
+        products={products}
+        slides={carouselSlides}
+      />
     </TemplateShell>
   );
 }

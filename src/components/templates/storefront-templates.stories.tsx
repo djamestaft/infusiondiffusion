@@ -96,7 +96,7 @@ async function verifyHomeCabinetBand(
   const headingBounds = heading.getBoundingClientRect();
 
   await expect(getComputedStyle(band).backgroundColor).toBe(
-    "rgb(227, 231, 218)",
+    "rgb(238, 240, 231)",
   );
   await expect(getComputedStyle(firstCard).backgroundColor).toBe(
     "rgb(252, 250, 245)",
@@ -105,7 +105,7 @@ async function verifyHomeCabinetBand(
   await expect(getComputedStyle(firstCard).boxShadow).toBe("none");
   await expect(controls).toBeVisible();
   await expect(headingBounds.top - bandBounds.top).toBe(expectedGap);
-  await expect(innerBounds.width).toBeLessThanOrEqual(1280);
+  await expect(innerBounds.width).toBeLessThanOrEqual(1440);
   await expect(bandBounds.width).toBe(document.documentElement.clientWidth);
 }
 
@@ -275,7 +275,7 @@ export const HomeIvory: Story = {
       heroImage={featured.image}
     />
   ),
-  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 72),
+  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 64),
 };
 export const HomeMidnightNavigation: Story = {
   render: () => (
@@ -298,7 +298,7 @@ export const HomeTablet: Story = {
       heroImage={featured.image}
     />
   ),
-  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 52),
+  play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 40),
 };
 export const HomeMobile390: Story = {
   ...HomeTablet,
@@ -737,7 +737,7 @@ export const AboutWithPortraits: Story = {
       getComputedStyle(canvas.getByTestId("about-chapter-development"))
         .backgroundColor,
     ).toBe("rgb(238, 240, 231)");
-    await expect(canvasElement.querySelector(".dark")).toBeNull();
+    await expect(canvasElement.querySelector("main .dark")).toBeNull();
     await expect(canvas.queryByText(/ROLE [A-D]/)).toBeNull();
   },
 };

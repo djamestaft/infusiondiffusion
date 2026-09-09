@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { CartPage } from "@/components/cart/cart-page";
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 import type { CartContract } from "@/lib/shopify/cart-contract";
 
 export function CartShell({
@@ -23,7 +24,7 @@ export function CartShell({
 
   return (
     <div className="bg-content-surface text-content-primary min-h-dvh">
-      <Navigation cartCount={cartCount} cartHref="/cart" />
+      <Navigation theme="midnight" cartCount={cartCount} cartHref="/cart" />
       <CartPage
         initialCart={initialCart}
         checkoutEnabled={checkoutEnabled}
@@ -32,6 +33,7 @@ export function CartShell({
         checkoutAction={checkoutAction}
         onCartChange={(cart) => setCartCount(cart.totalQuantity)}
       />
+      <Footer />
     </div>
   );
 }
