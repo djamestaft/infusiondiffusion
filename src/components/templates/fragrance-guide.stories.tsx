@@ -31,7 +31,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Approved Figma layout 2172:2 and 2457:601/749/897. Storybook-only preparation: sample rankings and product links are design references, not a validated matching engine. The live Guide is unchanged pending INF-27 matching approval.",
+          "Approved Figma layout 2172:2 and 2457:601/749/897. The live route provides preference controls and a summary; recommendations remain unavailable. Sample rankings and product links in populated stories are design references only.",
       },
     },
   },
@@ -117,5 +117,14 @@ export const TwoNotesAndValidation: Story = {
       ["Any time"],
     ]);
     await expect(canvas.queryByRole("alert")).not.toBeInTheDocument();
+    await expect(
+      canvas.getByRole("heading", { name: "Your fragrance preferences" }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByText(/Personalised recommendations are not available yet/),
+    ).toBeVisible();
+    await expect(
+      canvas.queryByRole("heading", { name: "Your room, shortlisted" }),
+    ).not.toBeInTheDocument();
   },
 };

@@ -144,8 +144,9 @@ export function FragranceGuideTemplate({
             Find the atmosphere that belongs in your room
           </h1>
           <p className="max-w-[520px] text-[17px] leading-[1.5] opacity-85">
-            A guided fragrance shortlist built from room, feeling and scent-note
-            preferences. Every recommendation explains why it fits.
+            {shortlist
+              ? "A guided fragrance shortlist built from room, feeling and scent-note preferences. Every recommendation explains why it fits."
+              : "Explore the room, feeling and scent notes you enjoy. Start with your preferences, then discover the collection."}
           </p>
         </div>
         <div className="border-navigation-accent/55 relative aspect-2/1 w-full border">
@@ -260,9 +261,40 @@ export function FragranceGuideTemplate({
             CONTINUE
           </Button>
         </div>
-        <p role="status" className="sr-only">
+        <p
+          role="status"
+          className={reviewed && !shortlist ? "pb-8" : "sr-only"}
+        >
           {reviewed ? "Your preferences are ready to review." : ""}
         </p>
+        {reviewed && !shortlist ? (
+          <section
+            className="space-y-6 pb-12"
+            aria-labelledby="guide-preferences-heading"
+          >
+            <h2
+              id="guide-preferences-heading"
+              className="font-display text-3xl font-normal"
+            >
+              Your fragrance preferences
+            </h2>
+            <dl className="grid gap-6 sm:grid-cols-2">
+              {guideQuestions.map((question, index) => (
+                <div key={question.title}>
+                  <dt className="font-semibold">{question.title}</dt>
+                  <dd className="mt-2">{answers[index].join(", ")}</dd>
+                </div>
+              ))}
+            </dl>
+            <p>
+              Personalised recommendations are not available yet. Explore the
+              collection to learn about each fragrance.
+            </p>
+            <Button asChild>
+              <a href="/shop">EXPLORE THE COLLECTION</a>
+            </Button>
+          </section>
+        ) : null}
       </form>
       {shortlist ? (
         <section

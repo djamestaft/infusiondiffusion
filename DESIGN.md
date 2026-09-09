@@ -9,13 +9,14 @@ source-owned Born text. Campaign roles use stable IDs, 3:4 imagery and no
 visible captions. Market roles preserve their captions; the lead uses 16:9,
 the remaining four use 4:3, with the Market Table anchored at 58.81%.
 
-Guide remains Storybook-only pending matching approval; its sample shortlist
-does not power the live route. Approved answer surface `#F7F3EA`, border
+Devon approved About and authorized Guide route integration on 9 September.
+Guide now shows working preferences and a summary, with recommendations
+explicitly unavailable. Sample rankings remain Storybook-only. Approved answer surface `#F7F3EA`, border
 `rgb(132 101 35 / 55%)` and question-number ink `#846523` now have named
 semantic roles. Existing button material, focus, typography and shared shell
 are retained. Stories and the application share the same Marcellus/Manrope
 font definitions; native fallback fonts are not visual comparison evidence.
-Verification and human review are pending; source publication remains paused.
+Devon approved About; Guide visual review and independent review remain pending. Source publication remains paused.
 
 ## Home/shared shell/Cart implementation — 9 September 2026
 

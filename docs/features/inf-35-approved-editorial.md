@@ -33,9 +33,11 @@ ranking examples do not authorize a matching engine.
 Contact design, verified Guide matching, final photography/facts/care/SEO and
 source publication remain open or deferred. Sanity publication is paused.
 No new commerce integration or unverified recommendation mapping is permitted.
-Guide uses the stated default of Storybook-only preparation; the existing live
-Guide is retained until matching is approved. No arbitrary-answer rankings are
-implemented. About uses the existing source fetches without publishing content.
+Devon approved About and authorized Guide preview integration on 9 September.
+Guide now supplies preference controls, validation and a summary on its route.
+Recommendations are explicitly unavailable, with a collection link instead.
+This is an intentional user-approved divergence from Figma's sample shortlist.
+No arbitrary-answer rankings are implemented. About uses the existing source fetches without publishing content.
 Independent review, required GitHub quality, preview and human merge remain
 release gates. INF-35 is not complete from this bounded preparation alone.
 
@@ -64,7 +66,7 @@ authenticated preview route and health verification remain pending.
 | ---------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
 | CombinedAboutTemplate        | 2426:516/614/708/796; 2427:596                              | Templates/Combined About; /about                             | Approved chapter/market composition, missing-media and long-content states               |
 | GalleryViewer                | About campaign and market figures; existing viewer contract | Combined About/Gallery Keyboard and existing Gallery stories | Optional About presentation; scoped viewer and focus restoration reused                  |
-| FragranceGuideTemplate       | 2172:2; 2457:601/749/897; 2458:676                          | Templates/Fragrance Guide Variation 02; no route integration | Five questions, two-note validation, Back and callback; sample shortlist only in stories |
+| FragranceGuideTemplate       | 2172:2; 2457:601/749/897; 2458:676                          | Templates/Fragrance Guide Variation 02; /fragrance-guide     | Five questions, two-note validation, Back and callback; sample shortlist only in stories |
 | TemplateShell, Button, fonts | Shared approved foundation/header/footer                    | All new templates; existing stories                          | Shell reused; app font definitions also loaded by Storybook                              |
 
 Published Sanity has no About document and no authored Born story in its current
@@ -80,7 +82,7 @@ source can differ from the historical image frozen in Figma.
 | Figma                                            | Approved exact frames; no design mutation                  |
 | DESIGN.md                                        | Current bounded implementation recorded                    |
 | Semantic CSS                                     | Guide roles mapped to captured values; retained foundation |
-| Components                                       | About integrated; Guide prepared without ranking engine    |
+| Components                                       | About and Guide integrated; matching remains unavailable   |
 | Storybook                                        | Responsive/state stories and production build passed       |
 | Source publication / Guide release / human merge | Pending named gates                                        |
 
@@ -104,4 +106,12 @@ The live hero follows its current source, as noted above. Guide inputs and
 focus/progress now work locally; Back preserves answers and Continue validates
 all five preferences. No ranking is computed from those answers. The three
 ranked examples exist only in explicitly documented Storybook fixtures.
-Independent review and human visual acceptance remain pending.
+Devon approved About on 9 September. Independent review and Guide visual acceptance remain pending.
+
+## Guide route follow-up ? 9 September 2026
+
+User authorized integrating Variation 02 into the preview with working preferences
+and recommendations pending. Four Chromium viewport flows passed, including
+keyboard, two-note rejection, Back persistence, summary, no rankings, overflow
+and axe. Desktop/mobile route captures show all images loaded. Metadata remains
+Sanity-owned; no content publication or product matching was introduced.

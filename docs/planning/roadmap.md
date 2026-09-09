@@ -5,8 +5,9 @@
 Devon authorized continuing INF-35 after INF-34 merged in PR #73 at
 `33a826c`. The single delivery branch is `agent/inf35-approved-editorial`.
 Combined About integrates approved story chapters and source-owned gallery
-imagery; Guide Variation 02 is prepared in Storybook. The existing live Guide
-remains until recommendation matching is approved. Contact, final assets/facts,
+imagery. Devon approved About and authorized Guide Variation 02 on the preview.
+The Guide route now supports preferences and a summary; recommendations remain
+unavailable until matching is approved. Contact, final assets/facts,
 care, SEO and source publication retain their open/deferred status.
 See the [bounded delivery contract](../features/inf-35-approved-editorial.md).
 Local verification passed: 226 unit tests, 267 Storybook checks, four About
