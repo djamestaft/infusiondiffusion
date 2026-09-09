@@ -122,6 +122,8 @@ export function GalleryViewer({
           src={item.image.src}
           alt={item.image.alt}
           fill
+          loading={prioritizeFirst && index === 0 ? "eager" : "lazy"}
+          fetchPriority={prioritizeFirst && index === 0 ? "high" : undefined}
           sizes={
             layout === "market" && item.id === "market-indoor-stall"
               ? "(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) calc(100vw - 80px), calc(100vw - 128px)"
