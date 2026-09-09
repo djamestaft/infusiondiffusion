@@ -31,9 +31,12 @@ jobs:
         run: |
           # Playwright uses its own Chromium; the runner's Chrome APT index can
           # be temporarily inconsistent and is not needed for system libraries.
-          if [ -f /etc/apt/sources.list.d/google-chrome.list ]; then
-            sudo mv /etc/apt/sources.list.d/google-chrome.list /etc/apt/sources.list.d/google-chrome.list.disabled
-          fi
+          for source in /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            if [ -f "$source" ] && grep -Eq 'https?://dl[.]google[.]com/linux/chrome(-stable)?/deb' "$source"; then
+              printf 'Disabling runner Chrome APT source: %s\n' "$source"
+              sudo mv "$source" "$source.disabled"
+            fi
+          done
           pnpm exec playwright install --with-deps chromium
       - run: pnpm test:stories
       - run: pnpm build-storybook

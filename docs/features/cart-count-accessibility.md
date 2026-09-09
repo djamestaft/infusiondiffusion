@@ -83,8 +83,9 @@ outside-focus preservation. No visual or commerce changes.
 
 The focus follow-up also isolates CI browser setup from the runner's unrelated
 Google Chrome APT source. Two runs failed before browser tests with the same
-upstream package-index hash mismatch. Disable only google-chrome.list when
-present, retaining package verification and Playwright-managed Chromium.
+upstream package-index hash mismatch. Identify Chrome-specific .list/.sources files by repository URL and disable
+them, retaining package verification and Playwright-managed Chromium.
+A filename-only guard did not cover the runner's remaining enabled entry.
 GitHub's runner-image installer likewise removes this source after installing
 its bundled Chrome. This changes only the disposable CI runner.
 
