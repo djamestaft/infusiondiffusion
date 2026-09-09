@@ -119,6 +119,7 @@ export function Navigation({
   useEffect(() => {
     if (!open) return;
     const opener = openerRef.current;
+    const home = homeRef.current;
     let desktopClose = false;
     let restoreHome = false;
     const onResize = () => {
@@ -163,7 +164,7 @@ export function Navigation({
       window.removeEventListener("resize", onResize);
       document.body.style.overflow = previousOverflow;
       if (desktopClose) {
-        if (restoreHome) homeRef.current?.focus();
+        if (restoreHome) home?.focus();
       } else {
         opener?.focus();
       }
@@ -312,7 +313,7 @@ export function Navigation({
               aria-label={
                 cartCount === null ? "Cart, item count unavailable" : undefined
               }
-              className="text-navigation-accent focus-visible:outline-navigation-focus mt-8 inline-flex min-h-11 items-center font-sans text-sm font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              className="text-navigation-accent focus-visible:outline-navigation-focus mt-8 inline-flex min-h-11 items-center gap-1 font-sans text-sm font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >
               Cart
               {cartCount === null ? (

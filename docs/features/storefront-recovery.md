@@ -55,7 +55,7 @@ Never induce an upstream outage or alter real product availability.
 Exact-commit CI and preview results are recorded in the PR. Human merge remains
 the release gate; the prior merged commit is the rollback reference.
 
-The shared navigation still renders a zero count when a cart read is unavailable;
+At PR #79 delivery, navigation rendered a zero count for unavailable reads;
 this was outside PR #79 and is addressed by the subsequent
 [cart-count accessibility work](cart-count-accessibility.md).
 Independent read-only code review found no correctness/security blockers.

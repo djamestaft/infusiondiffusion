@@ -5,6 +5,8 @@
 PR #79 is merged and live at `3afc3e5`; post-merge main CI 34374822016 passed.
 This supersedes its pending merge/verification statements below. Devon approved
 continuing with [cart-count and navigation accessibility](../features/cart-count-accessibility.md).
+PR #80 implements that contract; targeted units and browser checks passed.
+Full exact-commit CI and preview evidence are tracked on the PR.
 One delivery branch, `agent/cart-count-accessibility`, coordinator as sole writer.
 INF-36 remains Backlog, owned by Shawnee, with full release dependencies blocked.
 INF-35 remains In Progress; checkout and INF-28/31 content deferrals remain.

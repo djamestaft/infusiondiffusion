@@ -56,3 +56,12 @@ now prevent recurrence. No remaining code-review blockers.
 
 Full CI, build and preview evidence is recorded on the delivery PR. Preview
 acceptance and human merge remain release gates.
+
+A production build with a synthetic cart cookie and no Shopify configuration
+passed unknown-count checks at 320/390/768/1440 with zero axe violations and
+page errors. The cookie remained intact; after clearing only the test cookie,
+the plain retry returned a confirmed empty cart and zero navigation count.
+No upstream outage or real customer cart was induced. The designer reviewed
+[the unavailable state](evidence/cart-count-unavailable-390.png) and the mobile
+menu, approving the state and a small spacing correction beside its count.
+The final menu state is included in Storybook.
