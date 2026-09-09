@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ProductDetailTemplate } from "@/components/templates/storefront-templates";
 import { ProductPurchase } from "@/components/product-purchase";
 import { addToCartAction } from "@/app/(website)/cart/actions";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getCachedProduct } from "@/lib/shopify/cached-catalog";
 import { toProductDetails } from "@/lib/shopify/presentation";
@@ -46,7 +47,7 @@ export default async function ProductPage({ params }: Props) {
       product={presentation.card}
       description={presentation.description}
       details={presentation.details}
-      cartCount={cart.totalQuantity}
+      cartCount={cartNavigationCount(cart)}
       showPurchaseAction={false}
       purchaseAction={
         <ProductPurchase

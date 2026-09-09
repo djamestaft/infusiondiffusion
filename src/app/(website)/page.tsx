@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { HomeTemplate } from "@/components/templates/storefront-templates";
 import { getCachedHomepageProducts } from "@/lib/shopify/cached-catalog";
 import { getAccountEntry } from "@/lib/shopify/account-entry";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { toProductCard } from "@/lib/shopify/presentation";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
@@ -49,7 +50,7 @@ async function HomeContent() {
       heroImage={heroImage}
       heroSlides={settings.homepage.heroSlides}
       founderImage={settings.homepage.founderImage}
-      cartCount={cart.totalQuantity}
+      cartCount={cartNavigationCount(cart)}
       accountHref={accountEntry.status === "available" ? "/account" : undefined}
       content={settings.homepage}
     />

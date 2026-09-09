@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { CombinedAboutTemplate } from "@/components/templates/combined-about";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import {
   getAboutPage,
@@ -40,7 +41,7 @@ async function AboutContent() {
       gallery={gallery}
       heroImage={settings.homepage.heroSlides[0]}
       bornStory={settings.homepage.founderStory}
-      cartCount={cart.totalQuantity}
+      cartCount={cartNavigationCount(cart)}
     />
   );
 }

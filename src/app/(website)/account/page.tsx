@@ -3,6 +3,7 @@ import { connection } from "next/server";
 import { Suspense } from "react";
 
 import { AccountEntry } from "@/components/account/account-entry";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getAccountEntry } from "@/lib/shopify/account-entry";
 import { absoluteStorefrontTitle } from "@/lib/metadata-title";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export async function getAccountPageData() {
   await connection();
   const [entry, cart] = await Promise.all([getAccountEntry(), readCart()]);
-  return { entry, cartCount: cart.totalQuantity };
+  return { entry, cartCount: cartNavigationCount(cart) };
 }
 
 export async function AccountContent() {

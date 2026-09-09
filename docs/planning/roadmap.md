@@ -1,5 +1,15 @@
 # Infusion Diffusion Roadmap
 
+## Cart count and accessibility preparation - 9 September 2026
+
+PR #79 is merged and live at `3afc3e5`; post-merge main CI 34374822016 passed.
+This supersedes its pending merge/verification statements below. Devon approved
+continuing with [cart-count and navigation accessibility](../features/cart-count-accessibility.md).
+One delivery branch, `agent/cart-count-accessibility`, coordinator as sole writer.
+INF-36 remains Backlog, owned by Shawnee, with full release dependencies blocked.
+INF-35 remains In Progress; checkout and INF-28/31 content deferrals remain.
+Current-change preview acceptance and human merge are still required.
+
 ## Storefront recovery preparation - 9 September 2026
 
 Devon merged mobile PR #78 at `c7b6016` and authorized continuing technical

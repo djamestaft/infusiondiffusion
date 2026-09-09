@@ -63,6 +63,13 @@ describe("Contact route safety", () => {
       email: "studio@example.co.za",
       cartCount: 3,
     });
+    vi.mocked(readCart).mockResolvedValue({
+      totalQuantity: 0,
+      unavailable: true,
+    } as never);
+    await expect(getContactPageData()).resolves.toMatchObject({
+      cartCount: null,
+    });
     expect(getContactPage).toHaveBeenCalledWith({
       perspective: "drafts",
       stega: true,

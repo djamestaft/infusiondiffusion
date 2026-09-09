@@ -5,6 +5,7 @@ import {
   GalleryLoadingTemplate,
   GalleryTemplate,
 } from "@/components/templates/storefront-templates";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import {
   getGalleryPage,
@@ -30,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 async function GalleryContent() {
   const options = await getDynamicFetchOptions();
   const [page, cart] = await Promise.all([getGalleryPage(options), readCart()]);
-  return <GalleryTemplate {...page} cartCount={cart.totalQuantity} />;
+  return <GalleryTemplate {...page} cartCount={cartNavigationCount(cart)} />;
 }
 
 export default function GalleryPage() {

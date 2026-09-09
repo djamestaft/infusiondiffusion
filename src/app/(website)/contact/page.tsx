@@ -5,6 +5,7 @@ import {
   ContactLoadingTemplate,
   ContactTemplate,
 } from "@/components/templates/storefront-templates";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import {
   getContactPage,
@@ -51,7 +52,7 @@ export async function getContactPageData() {
     introduction: page.introduction,
     sections: page.sections,
     email: safeContactEmail(settings.contactEmail),
-    cartCount: cart.totalQuantity,
+    cartCount: cartNavigationCount(cart),
   };
 }
 

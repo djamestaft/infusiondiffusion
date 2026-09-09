@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 
 import { FragranceGuideTemplate } from "@/components/templates/fragrance-guide";
+import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getGuideProducts } from "@/lib/fragrance-guide/catalog";
 import { absoluteStorefrontTitle, storefrontTitle } from "@/lib/metadata-title";
@@ -30,7 +31,7 @@ async function FragranceGuideContent() {
 
   return (
     <FragranceGuideTemplate
-      cartCount={cart.totalQuantity}
+      cartCount={cartNavigationCount(cart)}
       products={products}
     />
   );
