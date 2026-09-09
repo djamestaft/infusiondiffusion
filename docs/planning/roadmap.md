@@ -1,13 +1,89 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 7 September 2026
+Last updated: 8 September 2026
+
+## Current approval and next delivery — 8 September 2026
+
+Devon approved all 24 current main-Exploration customer layouts: Home, Shop,
+Product, Cart, combined About and Fragrance Guide Variation 02 at four widths.
+Promote these exact frames and their separate supporting contracts to Approved;
+the [dated handoff](../features/2026-09-08-design-approval.md) is the current
+page-level authority and supersedes the pending visual-approval statements
+in the earlier chronological notes below.
+
+INF-32's shopping-journey visual approval is complete. INF-27's combined About
+and Guide layouts are approved; Contact has no frame in this set and remains
+open. The separate card-by-card guide experiment is retained as exploration.
+The approved Guide is Variation 02, not an approval of a working matching
+engine or its unverified product mappings.
+
+Next delivery is INF-33/34 implementation against these approved frames,
+preserving existing commerce and editorial boundaries. Complete Contact and
+remaining Guide content/matching decisions under INF-27 before INF-35's full
+editorial release. Final photography, product/service facts, care guidance,
+Sanity SEO and source publication remain deferred through INF-28/31.
+Human merge and release verification gates remain unchanged.
+
+## Current user deferrals — 8 September 2026
+
+Devon deferred the Sanity SEO description update, final photography, and
+outstanding product/service facts until later. These items remain open in
+INF-28/31; they are not prerequisites for the next shopping-journey design
+milestone. This decision supersedes the final-content prerequisites below.
+
+INF-32 is now In Progress: shape and review Home, Shop, product,
+existing cart and shared footer using existing imagery and verified content.
+Omit unavailable facts and unsupported claims. Record provisional imagery and
+content omissions outside customer frames; do not invent replacement facts.
+Final photography and factual enrichment return through INF-28/31 later.
+The [shopping-journey brief](../features/inf-32-shopping-journey.md) records
+the reviewed implementation baseline, scope, observable acceptance criteria
+and required design/state evidence. Shawnee owns delivery; Devon approves
+the revised design. Repository and Figma exploration do not approve release.
+Devon has now authorized a card-by-card Fragrance Guide exploration under
+INF-27: one question per screen, answer selection and explicit Next.
+Use the existing separate Figma page `2153:3`
+(`eploration-fragrance guide system`) and preserve its earlier concepts.
+This exploration may proceed before whole-journey approval; INF-32 remains
+the dependency for final editorial approval and downstream implementation.
+Question copy and product matching remain provisional. See the
+[guide exploration brief](../features/inf-27-fragrance-guide-system.md).
+Sanity publication is paused, including the deferred SEO description.
+
+INF-32 no longer has a blocking dependency on completion of INF-31. Devon's
+approval of exact revised Figma frames still gates downstream implementation;
+merge and release verification gates remain. Final-asset acceptance remains
+open and must not be reported as complete from this interim design review.
+
+## INF-32 review correction — 8 September 2026
+
+Restore the existing Home Fragrance Guide, 200 ml / Made to linger, and
+Made meaningful by the details sections in their original order. Content
+deferrals do not authorize removing those sections. Correct Home hero image
+letterboxing so the existing imagery fills its frames at every width.
+
+Devon also directed combining Gallery and About. Remove Gallery from the
+responsive header and keep About; INF-27/35 must shape and implement the
+combined editorial destination. Gallery is also removed from the shared footer
+under Devon's follow-up correction. Preserve the existing Gallery route until
+that transition is defined. INF-37 now represents later
+refinement of the combined About/Gallery experience, not a separate Gallery
+redesign. Existing design, source publication and merge gates still apply.
+
+Devon selected the approved Shop product-card format for Home as well.
+Reuse its square FILL media, elevated content panel, typography, spacing
+and commerce states across both surfaces. This explicit choice supersedes
+the earlier flat Home-card restoration. Keep Home's 3/4/3/3 selection across
+1440/768/390/320 widths and all six Shop products; the card format is shared,
+while each page retains its own selection and grid.
 
 ## Goal and existing systems
 
 Evolve the recognizable Infusion Diffusion brand into a cohesive premium
 shopping experience. The first milestone covers Home, Shop, product detail,
 the existing cart and Shopify checkout handoff, plus essential brand and
-service pages. Gallery refinement follows.
+service pages, with Gallery and About planned as one editorial destination.
+Further refinement of that combined experience follows.
 
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
@@ -67,28 +143,28 @@ and production promotion retain their named human gates.
 Shawnee owns delivery preparation unless otherwise stated. Devon owns factual,
 design and merge decisions. Independent verification is required for release.
 
-| Item   | Outcome                                                                                | Depends on                  |
-| ------ | -------------------------------------------------------------------------------------- | --------------------------- |
-| INF-25 | Resolve or explicitly transfer each Home baseline finding with evidence                | INF-24                      |
-| INF-22 | Devon reviews Home baseline acceptance and outstanding deviations                      | INF-25                      |
-| INF-29 | Review and finish existing Shop/product delivery without overlapping rework            | INF-23, INF-26              |
-| INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit |
-| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Approved and merged         |
-| INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28              |
-| INF-32 | Approve real-content responsive Home/Shop/product/cart/footer journey                  | INF-31                      |
-| INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32              |
-| INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33              |
-| INF-27 | Approve essential Fragrance Guide, About and Contact templates                         | INF-32, INF-21, INF-23      |
-| INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34      |
-| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35              |
-| INF-37 | Refine Gallery after the shopping milestone; preserve working Gallery meanwhile        | INF-36                      |
+| Item   | Outcome                                                                                | Depends on                   |
+| ------ | -------------------------------------------------------------------------------------- | ---------------------------- |
+| INF-25 | Resolve or explicitly transfer each Home baseline finding with evidence                | INF-24                       |
+| INF-22 | Devon reviews Home baseline acceptance and outstanding deviations                      | INF-25                       |
+| INF-29 | Review and finish existing Shop/product delivery without overlapping rework            | INF-23, INF-26               |
+| INF-28 | Devon approves launch product/service facts, naming and metadata                       | Ready alongside asset audit  |
+| INF-30 | Audit launch assets, provenance, rights, image roles and missing shots                 | Approved and merged          |
+| INF-31 | Complete approved launch assets/content and source-specific previews                   | INF-30, INF-28               |
+| INF-32 | Approve responsive Home/Shop/product/cart/footer using available verified content      | INF-31 final assets deferred |
+| INF-33 | Correct remaining catalogue visibility and purchase hierarchy defects                  | INF-29, INF-32               |
+| INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33               |
+| INF-27 | Approve essential Fragrance Guide, combined About/Gallery and Contact templates        | INF-32, INF-21, INF-23       |
+| INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34       |
+| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35               |
+| INF-37 | Refine combined About/Gallery after the shopping milestone; preserve existing URLs     | INF-36                       |
 
 INF-30's audit and owner approval are merged through PRs #66/#67; the required
 quality check passed on `d79b673`, and its Plane status is reconciled to Done.
 Final asset acquisition, source manifests, expenditure and publication retain
 their downstream gates.
 
-The immediate action is Devon's outstanding INF-28 factual decisions. The
+The outstanding INF-28 factual decisions are deferred as recorded above. The
 [launch content decision sheet](../features/inf-28-launch-content-decisions.md)
 preserves the 2 September naming/claims/contact/metadata approvals, identifies
 unapplied source corrections, and records unresolved title convention, scent notes,

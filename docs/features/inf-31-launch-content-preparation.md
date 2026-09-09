@@ -1,7 +1,13 @@
 # INF-31 launch content preparation
 
-Status: In Progress — preparation only. Updated 7 September 2026.
+Status: In Progress — remaining content/assets deferred. Updated 8 September 2026.
 Owner: Shawnee. Factual/source acceptance: Devon.
+
+Devon's 8 September decision defers final photography, outstanding product/service
+facts and Sanity SEO publication until later. These are no longer prerequisites
+for INF-32 design using existing imagery and verified content. Pause the SEO
+publication attempt and credential remediation. The prepared material below is
+retained for later; it does not mark final content or photography complete.
 
 The user deferred Santuaire Serein's specific fragrance notes and instructed us
 to continue. Notes remain unlisted; its existing supplied description remains
@@ -96,7 +102,7 @@ approved capture brief into a 33-row intake sheet: 18 required product shots,
 Product rows use the existing six Shopify GIDs; new-source provenance and
 acceptance remain empty until evidence is supplied. No supplier is booked.
 
-The next concrete work is completing the per-file source records and obtaining
-approved final imagery, while the remaining factual decisions are gathered.
-Santuaire's missing notes alone no longer stop that work. This package does not
+The next active work is INF-32 shopping-journey design. Per-file source records,
+final imagery and remaining factual decisions return to this package later.
+This package does not
 claim source previews, new photography or launch acceptance are complete.

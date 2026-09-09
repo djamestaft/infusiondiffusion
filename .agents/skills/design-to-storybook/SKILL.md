@@ -40,4 +40,14 @@ The implementation agent consumes that gated capture and does not require duplic
 
 When a phase intentionally stops before implementation, record the pending layers plainly. Pending is acceptable; silent drift is not.
 
+## Preserve approved scope during refinement
+
+Content or photography deferrals do not authorize removing existing sections.
+Treat section removal and component restyling as explicit design decisions,
+not side effects of replacing content. When using new or existing image assets
+inside an approved product card, preserve the approved frame, image-fit mode,
+spacing, typography and commerce-state contract unless the user requests a
+change. Compare the result with the exact approved component and consuming
+page frames before presenting it for review.
+
 Never use screenshot pixels as inaccessible HTML, bake UI copy into raster assets, or change a stable component API solely to match one frame.

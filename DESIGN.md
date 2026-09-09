@@ -1,5 +1,26 @@
 # Infusion Diffusion design system
 
+## Current page approval — 8 September 2026
+
+Devon approved all current customer pages on the main Exploration page.
+The approved delivery set is Home, Shop, Product, Cart, combined About and
+Fragrance Guide Variation 02 at 1440, 768, 390 and 320 widths. These exact
+frames move intact to `30 — Redesign / Approved` (`2004:14`).
+The [approval and implementation handoff](docs/features/2026-09-08-design-approval.md)
+records all 24 frame IDs, current contracts and remaining work.
+
+This dated page approval supersedes earlier page composition references below
+where they differ. The existing foundation tokens and primitives remain valid.
+Contact has no frame in this delivery set. The separate card-by-card guide
+experiment is not the selected Variation 02 design.
+
+Figma and this authority record are synchronized for the approved design.
+Runtime CSS, components and Storybook synchronization remain pending
+implementation; no new foundation token values are introduced here.
+Final photography, deferred facts/care copy and Sanity SEO remain open.
+Visual approval does not validate fragrance matching or authorize publication,
+merge, checkout enablement or production deployment.
+
 ## 7 September Home wording correction
 
 Devon authorized reed-diffuser-only wording on Home and in metadata. Runtime
