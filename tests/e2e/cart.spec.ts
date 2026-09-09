@@ -1,6 +1,92 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+for (const closeWith of [
+  "Escape",
+  "Continue shopping",
+  "Close and move focus",
+]) {
+  test(`returns focus after closing the drawer with ${closeWith} during a delayed refresh`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({
+      width: closeWith === "Escape" ? 1440 : 390,
+      height: 900,
+    });
+    let releaseRefresh!: () => void;
+    const refreshGate = new Promise<void>((resolve) => {
+      releaseRefresh = resolve;
+    });
+    let refreshHeld = false;
+    await page.route("**/products/bois-de-santal-200ml*", async (route) => {
+      if (
+        route.request().method() === "GET" &&
+        route.request().headers().rsc === "1"
+      ) {
+        refreshHeld = true;
+        await refreshGate;
+      }
+      await route.continue();
+    });
+    try {
+      await page.goto("/products/bois-de-santal-200ml");
+      await page
+        .getByRole("button", { name: "Add to cart", exact: true })
+        .click();
+      await expect(page.getByRole("dialog")).toBeVisible();
+      await expect.poll(() => refreshHeld).toBe(true);
+      await expect(
+        page.getByRole("button", {
+          name: "Adding",
+          exact: true,
+          includeHidden: true,
+        }),
+      ).toBeDisabled();
+      if (closeWith !== "Continue shopping")
+        await page.keyboard.press("Escape");
+      else
+        await page
+          .getByRole("button", { name: closeWith, exact: true })
+          .click();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await expect(
+        page.getByRole("group", { name: "Add fragrance to bag" }),
+      ).toBeFocused();
+      if (closeWith === "Close and move focus") {
+        await page.keyboard.press("Tab");
+        await expect(
+          page.getByRole("group", { name: "Add fragrance to bag" }),
+        ).not.toBeFocused();
+      }
+      const focusBeforeRefresh = await page.evaluateHandle(
+        () => document.activeElement,
+      );
+      releaseRefresh();
+      await expect(
+        page.getByRole("button", { name: "Add to cart", exact: true }),
+      ).toBeEnabled();
+      if (closeWith === "Close and move focus") {
+        expect(
+          await page.evaluate(
+            (previous) => document.activeElement === previous,
+            focusBeforeRefresh,
+          ),
+        ).toBe(true);
+      } else {
+        await expect(
+          page.getByRole("button", { name: "Add to cart", exact: true }),
+        ).toBeFocused();
+      }
+      await page.keyboard.press("Tab");
+      await expect(
+        page.getByRole("button", { name: "Add to cart", exact: true }),
+      ).not.toBeFocused();
+    } finally {
+      releaseRefresh();
+    }
+  });
+}
+
 test("adds, persists, updates and removes a Shopify fixture cart", async ({
   page,
 }) => {

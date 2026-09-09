@@ -1,0 +1,46 @@
+[
+  {
+    "stage": "open",
+    "active": "<button data-slot=\"button\" class=\"relative inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full px-5 font-sans text-[13px] leading-[18px] font-semibold tracking-[0.08em] transition-colors focus-visible:outline-[3px] focus-visi",
+    "buttons": [
+      {
+        "text": "Adding",
+        "disabled": true
+      }
+    ],
+    "dialogs": 1
+  },
+  {
+    "stage": "after 50",
+    "active": "<body style=\"\"><!--&--><!--&--><!--&--><!--&--><!--$--><div hidden=\"\"></div><div class=\"text-content-primary min-h-dvh bg-content-surface\"><header class=\"border-navigation-divider bg-navigation-surface text-navigation-text sticky top-0 z-40 w-full bo",
+    "buttons": [
+      {
+        "text": "Add to cart",
+        "disabled": false
+      }
+    ],
+    "dialogs": 0
+  },
+  {
+    "stage": "after 300",
+    "active": "<body style=\"\"><!--&--><!--&--><!--&--><!--&--><!--$--><div hidden=\"\"></div><div class=\"text-content-primary min-h-dvh bg-content-surface\"><header class=\"border-navigation-divider bg-navigation-surface text-navigation-text sticky top-0 z-40 w-full bo",
+    "buttons": [
+      {
+        "text": "Add to cart",
+        "disabled": false
+      }
+    ],
+    "dialogs": 0
+  },
+  {
+    "stage": "after 1000",
+    "active": "<body style=\"\"><!--&--><!--&--><!--&--><!--&--><!--$--><div hidden=\"\"></div><div class=\"text-content-primary min-h-dvh bg-content-surface\"><header class=\"border-navigation-divider bg-navigation-surface text-navigation-text sticky top-0 z-40 w-full bo",
+    "buttons": [
+      {
+        "text": "Add to cart",
+        "disabled": false
+      }
+    ],
+    "dialogs": 0
+  }
+]

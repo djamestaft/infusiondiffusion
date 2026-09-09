@@ -1,6 +1,26 @@
 # Infusion Diffusion Roadmap
 
-## Fragrance matching preparation - 9 September 2026
+## Storefront readiness review - 9 September 2026
+
+Devon merged Guide matching PR #76 at `dbe8296`; post-merge main CI passed
+and production health reports that commit. Suggested fragrances appear above
+preferences as requested. This supersedes the pending matching delivery below.
+
+Continue INF-35 with a bounded storefront review, keeping existing photography,
+product/service facts, care, SEO and source-publication deferrals. The
+[readiness record](../features/inf-35-readiness-review.md) records responsive,
+accessibility, catalogue, Guide and cart evidence. It identifies and addresses
+cart focus restoration when a refresh outlasts the confirmation drawer.
+Checkout remains disabled and its external handoff is not verified.
+
+INF-35 remains In Progress, owned by Devon; INF-27 remains In Progress, owned
+by Shawnee, and INF-28/31 deferrals stay open. INF-36 remains downstream and
+is not completed by this bounded review. One delivery branch is
+`agent/inf35-readiness-review`; the coordinator is the sole repository writer
+and the content/commerce engineer provides read-only review. Current-change
+verification, preview review and human merge remain delivery gates.
+
+## Fragrance matching delivery - 9 September 2026
 
 Contact is complete and live: Devon merged PR #75 at `3e768c7`.
 Post-merge main CI and production Home/Contact/Shop/Cart/health checks passed.
@@ -13,7 +33,7 @@ criteria. The current proposal uses note/character choices only; using room,
 mood, comparative presence and time requires further owner-approved mappings.
 Devon approved this narrower first version and exact rules. INF-35 now implements
 source-explained matches, current Shopify product links, ties and recovery states.
-Figma and Storybook are synchronized; verification and preview delivery are in progress.
+Figma and Storybook are synchronized; PR #76 is merged and live with green main CI.
 Further dimensions and Sanity source publication retain their separate gates.
 
 INF-35 remains In Progress, owned by Devon. INF-27 remains In Progress, owned

@@ -247,7 +247,10 @@ navigation remains unchanged. Summary-heading scroll clearance was checked.
 - [Desktop runtime](evidence/inf35-matching-runtime-1440.png)
 - [Small-mobile runtime](evidence/inf35-matching-runtime-320.png)
 
-Preview acceptance and human merge remain gates.
+Devon merged PR #76 at `dbe8296` on 9 September 2026 after requesting
+suggestions above preferences. That order is live, and post-merge main CI
+run 34361271753 passed. Continue through the
+[readiness review](inf-35-readiness-review.md); content/source deferrals remain.
 
 | Layer                  | Status                                                         |
 | ---------------------- | -------------------------------------------------------------- |

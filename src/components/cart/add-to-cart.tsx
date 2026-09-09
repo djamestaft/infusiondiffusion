@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { CartContract } from "@/lib/shopify/cart-contract";
 import { CartDrawer } from "@/components/cart/cart-drawer";
@@ -21,16 +21,27 @@ export function AddToCart({
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string>();
   const opener = useRef<HTMLDivElement>(null);
-  const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen)
-      requestAnimationFrame(() =>
-        opener.current?.querySelector("button")?.focus(),
-      );
-  };
+  const restoreFocus = useRef(false);
+  useEffect(() => {
+    // A router refresh can keep the opener disabled after the drawer closes.
+    if (!pending && !open && restoreFocus.current) {
+      const container = opener.current;
+      const button = container?.querySelector("button");
+      if (document.activeElement === container && button && !button.disabled) {
+        button.focus();
+      }
+      restoreFocus.current = false;
+    }
+  }, [pending, open]);
   return (
     <>
-      <div ref={opener} className="w-full">
+      <div
+        ref={opener}
+        role="group"
+        aria-label="Add fragrance to bag"
+        tabIndex={-1}
+        className="focus-visible:outline-action-focus w-full rounded-full focus-visible:outline-[3px] focus-visible:outline-offset-2"
+      >
         <Button
           size="large"
           className="w-full text-[13px] leading-[18px]"
@@ -67,7 +78,20 @@ export function AddToCart({
       {cart ? (
         <CartDrawer
           open={open}
-          onOpenChange={handleOpenChange}
+          onOpenChange={setOpen}
+          onCloseAutoFocus={(event) => {
+            // Restore through the drawer lifecycle, not an animation-frame race
+            // against its default focus restoration and the pending refresh.
+            event.preventDefault();
+            restoreFocus.current = true;
+            const button = opener.current?.querySelector("button");
+            if (button && !button.disabled) {
+              button.focus();
+              restoreFocus.current = false;
+            } else {
+              opener.current?.focus();
+            }
+          }}
           cart={cart}
           merchandiseId={merchandiseId}
         />
