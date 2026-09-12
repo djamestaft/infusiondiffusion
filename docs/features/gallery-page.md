@@ -1,5 +1,10 @@
 # Gallery page
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 Approved source: [Feature / Gallery `357:2`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=357-2&p=f&m=dev). The approved desktop/mobile populated, viewer, empty, and loading captures are recorded in [gallery-figma-capture.md](./gallery-figma-capture.md): nodes `357:3`, `357:34`, `357:64`, `357:76`, `357:88`, `357:100`, `357:111`, and `357:131`.
 
 ## Runtime contract

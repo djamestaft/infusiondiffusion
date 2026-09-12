@@ -1,5 +1,10 @@
 # Homepage hero carousel
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 ## Outcome and scope
 
 The homepage keeps one stable server-rendered H1, introduction, and `/shop` action while editors may provide an ordered two- or three-image editorial campaign carousel. The audience is mobile-first South African shoppers on potentially constrained connections.

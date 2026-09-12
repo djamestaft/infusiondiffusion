@@ -44,3 +44,6 @@ publication remain deferred through INF-28/31. Full release verification remains
 INF-36; later combined About/Gallery refinement is INF-37. The separate card-by-card
 Guide trial remains exploratory. See `docs/planning/roadmap.md` for delivery
 status and approval gates.
+
+Implementation follows [the component delivery contract](docs/design-implementation.md).
+PR #83 consolidates the current carousel, interim Contact defaults and governance.

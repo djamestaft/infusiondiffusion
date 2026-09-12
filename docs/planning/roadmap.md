@@ -1,5 +1,19 @@
 # Infusion Diffusion Roadmap
 
+## Consolidated delivery — 12 September 2026
+
+Devon requested one delivery PR: #83 combines the approved carousel/navigation,
+interim Contact defaults from #82 and current design governance from #71.
+The August redesign #51 is superseded by the September approved deliveries;
+its retired automation, alternative styling and static product-image overrides
+are not restored. See [consolidation record](../features/pr-83-consolidation.md).
+INF-33/34 are Done; Contact and notes/character Guide matching are delivered.
+INF-35 remains In Progress (Devon), INF-36 Backlog (Shawnee), with INF-28/31
+facts, final assets, care/policies, SEO and source-publication deferrals intact.
+Use [the implementation contract](../design-implementation.md) for component
+mapping and Storybook-first verification. Preview review and human merge remain
+required; consolidation does not enable checkout or publish source content.
+
 ## Carousel/navigation refinement — 12 September 2026
 
 Devon authorized implementing the reviewed carousel and floating-navigation design

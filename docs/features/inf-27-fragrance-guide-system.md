@@ -9,6 +9,11 @@ The card-by-card experiment documented below remains on its separate
 exploration page; it is not the selected implementation target.
 Product matching remains a separate unresolved content/behavior decision.
 
+## Historical card-by-card experiment
+
+The following record describes the separate, unselected trial. Its pending
+review states do not reopen the approved Variation 02 visual design.
+
 Status: design exploration authorized and created on 8 September 2026;
 interaction verification and owner review remain pending.
 Owner: Shawnee. Design, question copy and product-matching approval: Devon.

@@ -1,5 +1,10 @@
 # Gallery content layout capture
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 - Status: Approved by the user in-session
 - Figma file: `GYiQd7QSAwCSaGtt0alKG2`
 - Figma node: `376:2`

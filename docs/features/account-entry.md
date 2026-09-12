@@ -1,5 +1,10 @@
 # Account entry
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 ## Approved scope and authority
 
 - **Approved source:** [Figma Account Review `337:321`](https://www.figma.com/design/GYiQd7QSAwCSaGtt0alKG2/Infusion-Diffusion-Designs-WEB?node-id=337-321), approved by the implementation request and validated plan.
