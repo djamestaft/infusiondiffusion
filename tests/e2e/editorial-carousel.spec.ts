@@ -34,6 +34,20 @@ for (const width of [1900, 1440, 1280, 1024, 768, 390, 320]) {
     }
     const hero = page.getByTestId("home-hero-section");
     await expect(hero).toBeVisible();
+    const media = page.getByTestId("hero-carousel-media").first();
+    await expect(media).toHaveCSS("border-top-width", "1px");
+    await expect(media).toHaveCSS("border-top-color", "rgb(197, 164, 71)");
+    const counter = page.locator("[data-carousel-rotation]");
+    await expect(counter.locator("svg")).toHaveCount(0);
+    await expect(counter).toHaveCSS("font-size", "11px");
+    await expect(counter).toHaveCSS("color", "rgb(197, 164, 71)");
+    const mediaBox = (await media.boundingBox())!;
+    const counterBox = (await counter.boundingBox())!;
+    expect(counterBox.x + counterBox.width / 2).toBeCloseTo(
+      mediaBox.x + mediaBox.width / 2,
+      0,
+    );
+
     const height = (await hero.boundingBox())!.height;
     const next = page.getByRole("button", { name: "Next slide" });
     await next.click();

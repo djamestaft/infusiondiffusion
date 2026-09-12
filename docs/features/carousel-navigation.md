@@ -207,3 +207,12 @@ Reviewed seven-width Storybook captures and the paused transition midpoint;
 Impeccable found no carousel issues. Fixed a hover-resume issue caused by replacing
 the Play/Pause icon under the pointer: native boundary listeners plus pointer
 movement reconcile hover when moving onto the separately hydrated header.
+
+### Counter and image framing — 12 September 2026
+
+The counter is centred under the image column, uses 11px semantic gold type,
+and retains its accessible pause/resume button without a separate icon. Media
+frames have a 1px solid navigation-divider gold border with unchanged geometry.
+Figma counters 2691:37/41 and 2674:36 match; the separate pause frames were removed.
+Nine focused Chromium tests passed, covering seven widths (320–1900px), border
+and counter styles/alignment, horizontal motion and autoplay controls.

@@ -602,7 +602,7 @@ function EditorialCarousel({
         </div>
         {slides.length > 1 ? (
           <div
-            className="mt-6 flex items-center justify-between lg:mt-7"
+            className="mt-6 flex items-center justify-between lg:mt-7 lg:grid lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:gap-16"
             data-testid="hero-carousel-controls"
           >
             <Button
@@ -614,36 +614,30 @@ function EditorialCarousel({
             >
               <ChevronLeft aria-hidden="true" className="size-5" />
             </Button>
-            <div className="mx-auto flex items-center gap-3">
-              <span
-                className="font-sans text-[13px] tabular-nums"
-                aria-hidden="true"
-              >
-                {String(active + 1).padStart(2, "0")} /{" "}
-                {String(slides.length).padStart(2, "0")}
-              </span>
-              <Button
-                data-carousel-rotation
-                variant="quiet"
-                size="icon"
-                className="size-11 rounded-full"
-                disabled={autoplayUnavailable}
-                aria-label={
-                  autoplayUnavailable
-                    ? "Autoplay unavailable"
-                    : userPaused
-                      ? "Play carousel"
-                      : "Pause carousel"
-                }
-                onClick={() => setUserPaused((paused) => !paused)}
-              >
-                {userPaused || autoplayUnavailable ? (
-                  <Play aria-hidden="true" className="size-4" />
-                ) : (
-                  <Pause aria-hidden="true" className="size-4" />
-                )}
-              </Button>
-            </div>
+            <Button
+              data-carousel-rotation
+              variant="quiet"
+              className="text-navigation-accent disabled:text-navigation-accent mx-auto min-w-11 px-2 font-sans text-[11px] tracking-normal tabular-nums disabled:bg-transparent lg:col-start-2 lg:justify-self-center"
+              disabled={autoplayUnavailable}
+              aria-label={
+                autoplayUnavailable
+                  ? "Autoplay unavailable"
+                  : userPaused
+                    ? "Play carousel"
+                    : "Pause carousel"
+              }
+              title={
+                autoplayUnavailable
+                  ? "Autoplay unavailable"
+                  : userPaused
+                    ? "Resume slideshow"
+                    : "Pause slideshow"
+              }
+              onClick={() => setUserPaused((paused) => !paused)}
+            >
+              {String(active + 1).padStart(2, "0")} /{" "}
+              {String(slides.length).padStart(2, "0")}
+            </Button>
             <Button
               variant="outline"
               size="icon"
@@ -676,7 +670,7 @@ function CampaignImage({
   const [failedSource, setFailedSource] = React.useState<string | null>(null);
   return (
     <div
-      className="bg-product-card-media-fallback relative aspect-[5/4] overflow-hidden"
+      className="bg-product-card-media-fallback border-navigation-divider relative aspect-[5/4] overflow-hidden border"
       data-testid="hero-carousel-media"
     >
       {slide.src && failedSource !== slide.src ? (

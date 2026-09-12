@@ -8,8 +8,9 @@ and 44px targets. Header, menu header and floating-hero offset share this token;
 solid borders remain inside the total height. Transparent and scrolled states
 have identical geometry. This supersedes the 64px contract below. The follow-up adds 3px per side.
 
-Editorial autoplay advances every 6 seconds, with a 44px Pause/Play control
-beside the count. Hover pauses temporarily; focus or manual navigation pauses
+Editorial autoplay advances every 6 seconds, with the 11px gold counter centred beneath the image.
+The counter retains a 44px pause/resume target; no separate icon is shown.
+Slide images use a 1px solid semantic gold border. Hover pauses temporarily; focus or manual navigation pauses
 until Play. Hidden/offscreen content pauses; reduced motion, save-data and loading
 disable autoplay. Automatic changes are not live-announced. At 1024–1535px,
 hero insets are 96px, leaving 42px between arrows and content; mobile and wide
