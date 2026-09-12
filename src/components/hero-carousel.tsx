@@ -681,7 +681,7 @@ function CampaignImage({
           priority={priority}
           loading={priority ? "eager" : "lazy"}
           sizes="(min-width: 1440px) 600px, (min-width: 1024px) 42vw, calc(100vw - 48px)"
-          className="object-cover"
+          className="object-contain"
           style={{
             objectPosition: slide.hotspot
               ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`

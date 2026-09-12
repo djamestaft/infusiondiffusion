@@ -42,6 +42,8 @@ for (const width of [1900, 1440, 1280, 1024, 768, 390, 320]) {
     await expect(counter).toHaveCSS("font-size", "11px");
     await expect(counter).toHaveCSS("color", "rgb(197, 164, 71)");
     const mediaBox = (await media.boundingBox())!;
+    expect(mediaBox.width / mediaBox.height).toBeCloseTo(5 / 4, 2);
+    await expect(media.locator("img")).toHaveCSS("object-fit", "contain");
     const counterBox = (await counter.boundingBox())!;
     expect(counterBox.x + counterBox.width / 2).toBeCloseTo(
       mediaBox.x + mediaBox.width / 2,
@@ -205,15 +207,23 @@ for (const [width, height] of [
   [390, 844],
   [320, 568],
 ]) {
-  test(`counter fits short viewport ${width}x${height}`, async ({ page }) => {
+  test(`campaign keeps its ratio on short viewport ${width}x${height}`, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/e2e-carousel?editorial=1");
     const counter = page.locator("[data-carousel-rotation]");
     await expect(counter).toBeVisible();
     await page.evaluate(() => document.fonts.ready);
-    const box = (await counter.boundingBox())!;
-    expect(box.y + box.height).toBeLessThanOrEqual(height);
-    await expect(page.getByTestId("hero-carousel-media").first()).toBeVisible();
+    const media = page.getByTestId("hero-carousel-media").first();
+    const box = (await media.boundingBox())!;
+    expect(box.width / box.height).toBeCloseTo(5 / 4, 2);
+    await expect(media.locator("img")).toHaveCSS("object-fit", "contain");
+    await counter.scrollIntoViewIfNeeded();
+    await expect(counter).toBeInViewport();
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBeLessThanOrEqual(width);
   });
 }

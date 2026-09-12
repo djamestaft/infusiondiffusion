@@ -75,6 +75,31 @@ export const Mobile: Story = {
 export const NarrowMobile: Story = {
   globals: { viewport: { value: "contact320", isRotated: false } },
 };
+export const UncroppedCampaigns: Story = {
+  args: { forceReducedMotion: true },
+  globals: { viewport: { value: "contact390", isRotated: false } },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Portrait and landscape campaign fixtures remain fully visible inside the stable 5:4 frame. Short screens scroll instead of compressing the photograph.",
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const c = within(canvasElement);
+    for (let index = 0; index < slides.length; index++) {
+      const panel = canvasElement.querySelector('[data-phase="idle"]')!;
+      const media = panel.querySelector('[data-testid="hero-carousel-media"]')!;
+      const box = media.getBoundingClientRect();
+      await expect(box.width / box.height).toBeCloseTo(5 / 4, 2);
+      await expect(
+        getComputedStyle(media.querySelector("img")!).objectFit,
+      ).toBe("contain");
+      await userEvent.click(c.getByRole("button", { name: "Next slide" }));
+    }
+  },
+};
 export const Tablet: Story = {
   globals: { viewport: { value: "homepageTablet", isRotated: false } },
 };
