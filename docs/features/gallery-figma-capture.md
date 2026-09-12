@@ -1,5 +1,10 @@
 # Gallery Figma implementation capture
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 ## Provenance
 
 - Captured on 2026-08-07 through the authenticated official Figma connector available to Codex.

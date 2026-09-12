@@ -1,3 +1,4 @@
+import { defaultContactEmail } from "@/lib/contact-content";
 import Image from "next/image";
 import { RecoverableImage } from "@/components/ui/recoverable-image";
 import { Footer } from "@/components/footer";
@@ -47,10 +48,12 @@ export function TemplateShell({
   cartCount,
   accountHref,
   currentHref,
+  floatingNavigation = false,
   surface = "base",
   children,
 }: TemplateNavigationProps & {
   currentHref?: string;
+  floatingNavigation?: boolean;
   surface?: "base" | "elevated";
   children: React.ReactNode;
 }) {
@@ -67,6 +70,7 @@ export function TemplateShell({
       }
     >
       <Navigation
+        floating={floatingNavigation}
         theme={navigationTheme}
         currentHref={currentHref}
         cartCount={cartCount}
@@ -201,6 +205,7 @@ export function HomeTemplate({
         : heroSlides.slice(0, 1);
   return (
     <TemplateShell
+      floatingNavigation
       navigationTheme={navigationTheme ?? "midnight"}
       cartCount={cartCount}
       accountHref={accountHref}
@@ -335,7 +340,7 @@ export function ContactLoadingTemplate() {
 }
 
 export function ContactErrorTemplate({ reset }: { reset: () => void }) {
-  const email = "hello@infusiondiffusion.co.za";
+  const email = defaultContactEmail;
   return (
     <TemplateShell currentHref="/contact" navigationTheme="midnight">
       <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">

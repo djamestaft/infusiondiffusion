@@ -26,14 +26,24 @@ async function assertDefaultContact(
   await expect(
     page.getByRole("heading", { level: 1, name: fallbackTitle }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2 })).toHaveCount(2);
+  await expect(page.getByRole("heading", { level: 2 })).toHaveCount(5);
+  for (const heading of [
+    "Before you write",
+    "Delivery enquiries",
+    "Returns or damaged items",
+    "Diffuser care",
+  ]) {
+    await expect(
+      page.getByRole("heading", { level: 2, name: heading }),
+    ).toBeVisible();
+  }
   const emailAction = page.getByRole("link", {
     name: "Email Infusion Diffusion",
   });
   const visibleEmail = page.locator("address a");
   await expect(emailAction).toHaveAttribute(
     "href",
-    /^mailto:[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    "mailto:dione.smith@infusiondiffusion.co.za",
   );
   const mailtoHref = await emailAction.getAttribute("href");
   expect(mailtoHref).not.toBeNull();
@@ -77,7 +87,7 @@ for (const viewport of [
     await assertDefaultContact(page, request, viewport);
     if (process.env.SAVE_CONTACT_EVIDENCE) {
       await page.screenshot({
-        path: `docs/features/evidence/contact-${viewport.width}.png`,
+        path: `docs/features/evidence/editorial-defaults-contact-${viewport.width}.png`,
         fullPage: true,
       });
     }

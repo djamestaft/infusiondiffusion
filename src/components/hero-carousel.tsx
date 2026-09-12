@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,13 +12,23 @@ export type HeroCarouselSlide = {
   src: string;
   alt: string;
   caption?: string;
+  title?: string;
+  subtitle?: string;
+  cta?: { label: string; href: string };
   hotspot?: { x: number; y: number };
 };
 
 export type HeroCarouselProps = {
   slides: HeroCarouselSlide[];
   className?: string;
-  presentation?: "framed" | "plain";
+  presentation?: "framed" | "plain" | "editorial";
+  backgroundSrc?: string | null;
+  fallbackCopy?: {
+    title: string;
+    subtitle: string;
+    cta: { label: string; href: string };
+  };
+  withNavigation?: boolean;
   initialPaused?: boolean;
   forceReducedMotion?: boolean;
   forceSaveData?: boolean;
@@ -27,7 +37,7 @@ export type HeroCarouselProps = {
 
 const AUTOPLAY_MS = 3_000;
 
-export function HeroCarousel({
+function ImageCarousel({
   slides: suppliedSlides,
   className,
   presentation = "framed",
@@ -340,5 +350,241 @@ export function HeroCarousel({
               : "Carousel waiting"}
       </span>
     </figure>
+  );
+}
+
+/** The editorial presentation keeps campaign copy and media in one slide. */
+export function HeroCarousel(props: HeroCarouselProps) {
+  return props.presentation === "editorial" ? (
+    <EditorialCarousel {...props} />
+  ) : (
+    <ImageCarousel {...props} />
+  );
+}
+
+function EditorialCarousel({
+  slides: suppliedSlides,
+  backgroundSrc = "/images/carousel/reed-shadows.webp",
+  fallbackCopy,
+  withNavigation = false,
+  loading = false,
+  className,
+}: HeroCarouselProps) {
+  const slides = suppliedSlides.slice(0, 3);
+  const [selected, setSelected] = React.useState(0);
+  const [previous, setPrevious] = React.useState<number | null>(null);
+  const [direction, setDirection] = React.useState(1);
+  const active = Math.min(selected, Math.max(0, slides.length - 1));
+  const [announcement, setAnnouncement] = React.useState("");
+  const touch = React.useRef<{ x: number; y: number } | null>(null);
+  const current = slides[active];
+  const move = (offset: number) => {
+    if (slides.length < 2) return;
+    const next = (active + offset + slides.length) % slides.length;
+    setPrevious(active);
+    setDirection(offset > 0 ? 1 : -1);
+    setSelected(next);
+    setAnnouncement(
+      `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
+    );
+  };
+  const campaigns = slides.length
+    ? slides
+    : [{ id: "empty", src: "", alt: "" }];
+  return (
+    <section
+      className={cn(
+        "dark bg-content-surface text-content-primary relative isolate flex min-h-svh flex-col justify-center",
+        withNavigation && "pt-16",
+        className,
+      )}
+      aria-label="Homepage campaigns"
+      aria-roledescription={slides.length > 1 ? "carousel" : undefined}
+      data-testid="home-hero-section"
+      onKeyDown={(event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          move(event.key === "ArrowRight" ? 1 : -1);
+        }
+      }}
+    >
+      {backgroundSrc ? (
+        <Image
+          src={backgroundSrc}
+          alt=""
+          fill
+          sizes="100vw"
+          priority
+          className="pointer-events-none -z-20 object-cover object-[20%_center] lg:object-center"
+        />
+      ) : null}
+      <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
+      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-16 lg:pt-20 lg:pb-10">
+        <div
+          className="-m-2 grid overflow-hidden p-2"
+          style={{ "--hero-slide-direction": direction } as React.CSSProperties}
+          data-testid="hero-carousel-viewport"
+          onTouchStart={(event) => {
+            const point = event.touches[0];
+            touch.current = { x: point.clientX, y: point.clientY };
+          }}
+          onTouchEnd={(event) => {
+            if (!touch.current) return;
+            const point = event.changedTouches[0];
+            const dx = point.clientX - touch.current.x;
+            const dy = point.clientY - touch.current.y;
+            touch.current = null;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5)
+              move(dx < 0 ? 1 : -1);
+          }}
+        >
+          {campaigns.map((slide, index) => {
+            const visible = index === active;
+            const outgoing = index === previous && !visible;
+            const cta = slide.cta ?? fallbackCopy?.cta;
+            return (
+              <div
+                key={slide.id}
+                className={cn(
+                  "hero-editorial-panel col-start-1 row-start-1 grid gap-10 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
+                  !visible && "pointer-events-none",
+                  !visible && !outgoing && "invisible",
+                )}
+                data-phase={
+                  visible
+                    ? previous === null
+                      ? "idle"
+                      : "enter"
+                    : outgoing
+                      ? "exit"
+                      : "inactive"
+                }
+                onAnimationEnd={(event) => {
+                  if (
+                    event.target === event.currentTarget &&
+                    visible &&
+                    event.animationName === "hero-editorial-enter"
+                  )
+                    setPrevious(null);
+                }}
+                inert={!visible}
+                aria-hidden={!visible}
+              >
+                <div className="flex min-w-0 flex-col items-start gap-6">
+                  {slide.title || fallbackCopy?.title ? (
+                    <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
+                      {slide.title ?? fallbackCopy?.title}
+                    </h1>
+                  ) : null}
+                  {slide.subtitle || fallbackCopy?.subtitle ? (
+                    <p className="max-w-[520px] font-sans text-base leading-[26px] lg:text-lg lg:leading-[29px]">
+                      {slide.subtitle ?? fallbackCopy?.subtitle}
+                    </p>
+                  ) : null}
+                  {cta &&
+                  cta.href.startsWith("/") &&
+                  !cta.href.startsWith("//") &&
+                  !cta.href.includes("\\") ? (
+                    <Button
+                      asChild
+                      className="min-h-12 w-[236px] max-w-full uppercase"
+                    >
+                      <a href={cta.href}>{cta.label}</a>
+                    </Button>
+                  ) : null}
+                </div>
+                <CampaignImage
+                  slide={slide}
+                  priority={index === 0}
+                  loading={loading}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {slides.length > 1 ? (
+          <div
+            className="mt-6 flex items-center justify-between lg:mt-7"
+            data-testid="hero-carousel-controls"
+          >
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:left-[max(10px,calc((100%-1440px)/4+10px))]"
+              aria-label="Previous slide"
+              onClick={() => move(-1)}
+            >
+              <ChevronLeft aria-hidden="true" className="size-5" />
+            </Button>
+            <span
+              className="mx-auto font-sans text-[13px] tabular-nums"
+              aria-hidden="true"
+            >
+              {String(active + 1).padStart(2, "0")} /{" "}
+              {String(slides.length).padStart(2, "0")}
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:right-[max(10px,calc((100%-1440px)/4+10px))]"
+              aria-label="Next slide"
+              onClick={() => move(1)}
+            >
+              <ChevronRight aria-hidden="true" className="size-5" />
+            </Button>
+          </div>
+        ) : null}
+      </div>
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {announcement}
+      </span>
+      <span className="sr-only">{current?.caption}</span>
+    </section>
+  );
+}
+
+function CampaignImage({
+  slide,
+  priority,
+  loading,
+}: {
+  slide: HeroCarouselSlide;
+  priority: boolean;
+  loading: boolean;
+}) {
+  const [failedSource, setFailedSource] = React.useState<string | null>(null);
+  return (
+    <div
+      className="bg-product-card-media-fallback relative aspect-[5/4] overflow-hidden"
+      data-testid="hero-carousel-media"
+    >
+      {slide.src && failedSource !== slide.src ? (
+        <Image
+          src={slide.src}
+          alt={slide.alt}
+          fill
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          sizes="(min-width: 1440px) 600px, (min-width: 1024px) 42vw, calc(100vw - 48px)"
+          className="object-cover"
+          style={{
+            objectPosition: slide.hotspot
+              ? `${slide.hotspot.x * 100}% ${slide.hotspot.y * 100}%`
+              : undefined,
+          }}
+          onError={() => setFailedSource(slide.src)}
+        />
+      ) : (
+        <span className="sr-only">Hero image unavailable</span>
+      )}
+      {loading ? (
+        <div
+          className="bg-product-card-media-fallback absolute inset-0 animate-pulse motion-reduce:animate-none"
+          role="status"
+          aria-label="Loading campaign image"
+        />
+      ) : null}
+    </div>
   );
 }

@@ -143,6 +143,52 @@ export const siteSettings = defineType({
                   validation: (rule) => rule.required().max(180),
                 }),
                 defineField({
+                  name: "title",
+                  title: "Slide title",
+                  type: "string",
+                  description:
+                    "Optional. Falls back to the homepage hero title.",
+                  validation: (rule) => rule.max(100),
+                }),
+                defineField({
+                  name: "subtitle",
+                  title: "Slide subtitle",
+                  type: "text",
+                  rows: 3,
+                  description:
+                    "Optional. Falls back to the homepage introduction.",
+                  validation: (rule) => rule.max(240),
+                }),
+                defineField({
+                  name: "cta",
+                  title: "Slide action",
+                  type: "object",
+                  description:
+                    "Leave empty to use the homepage Shop action. Supply both fields to override it.",
+                  fields: [
+                    defineField({
+                      name: "label",
+                      type: "string",
+                      validation: (rule) => rule.required().max(40),
+                    }),
+                    defineField({
+                      name: "href",
+                      title: "Internal destination",
+                      type: "string",
+                      validation: (rule) =>
+                        rule
+                          .required()
+                          .custom(
+                            (value) =>
+                              !value ||
+                              (/^\/(?!\/)/.test(value) &&
+                                !value.includes("\\")) ||
+                              "Use an internal path such as /shop.",
+                          ),
+                    }),
+                  ],
+                }),
+                defineField({
                   name: "caption",
                   title: "Caption",
                   type: "string",

@@ -21,7 +21,6 @@ describe("Navigation", () => {
     ).toBeInTheDocument();
     expect(container.querySelector("header")).toHaveClass(
       "bg-navigation-surface",
-      "border-navigation-divider",
       "sticky",
       "top-0",
     );
@@ -29,7 +28,7 @@ describe("Navigation", () => {
       '[data-logo-asset="/infusion-diffusion-logo.svg"]',
     );
     expect(logo).toHaveAttribute("aria-hidden", "true");
-    expect(logo).toHaveClass("w-31", "lg:w-55", "aspect-[220/64]");
+    expect(logo).toHaveClass("w-[112px]", "lg:w-[165px]", "aspect-[220/64]");
     expect(logo).toHaveClass("bg-navigation-accent");
     expect(screen.getAllByRole("link", { name: "Shop" })[0]).toHaveAttribute(
       "aria-current",
@@ -123,7 +122,7 @@ describe("Navigation", () => {
 describe("cart availability", () => {
   it("keeps unknown distinct from zero and recovers to confirmed counts", async () => {
     const { rerender } = render(<Navigation cartCount={null} />);
-    expect(screen.getAllByText("Cart (\u2014)")).toHaveLength(2);
+    expect(screen.getAllByText("\u2014")).toHaveLength(2);
     expect(
       screen.getAllByRole("link", { name: "Cart, item count unavailable" }),
     ).toHaveLength(2);
@@ -134,7 +133,7 @@ describe("cart availability", () => {
       }),
     ).toHaveAttribute("href", "/cart");
     expect(
-      within(screen.getByRole("dialog")).getByText("(\u2014)"),
+      within(screen.getByRole("dialog")).getByText("\u2014"),
     ).toHaveAttribute("aria-hidden", "true");
     fireEvent.keyDown(document, { key: "Escape" });
     rerender(<Navigation cartCount={0} />);

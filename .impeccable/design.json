@@ -36,6 +36,16 @@
         "name": "About and Guide contract",
         "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
         "section": "components"
+      },
+      {
+        "name": "Editorial carousel and floating navigation",
+        "body": "12 September approved Figma composition 2664:2 and mobile 2674:22: 64px header, uppercase Manrope, close underline, 44px account/bag/menu controls, transparent Home header until scrollY > 24 then midnight. Shared reed-shadow background; manual synchronized title/subtitle/CTA/image slides, 520/600 desktop columns, 5:4 media, mobile stack. Preserve existing tokens and conditional commerce links. See docs/features/carousel-navigation.md. Follow-up: share the site-wide max-1440 container, 20/24/40/64px gutters and minimum 100svh hero height; vertically center and grow for long content. Next translates right-to-left and Previous reverses, 600ms ease-in-out without fading; reduced motion is instant. Desktop arrows use outer-gutter midpoints. Scrolled header has a 1px navigation-divider rule without height change.",
+        "section": "components"
+      },
+      {
+        "name": "Consolidated delivery",
+        "body": "PR #83 includes current component governance and interim Contact enquiry defaults. Solid navigation retains its gold divider; floating Home navigation shows gold only after scroll. Mobile keyboard order follows visual order: home, account, cart, menu. Preserve INF-28/31 deferrals and human release gates. See docs/design-implementation.md.",
+        "section": "components"
       }
     ],
     "dos": [

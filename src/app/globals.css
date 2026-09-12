@@ -1,5 +1,35 @@
 @import "tailwindcss";
 
+/* Campaign copy and media travel together; the backdrop stays still. */
+@keyframes hero-editorial-enter {
+  from {
+    transform: translateX(calc(var(--hero-slide-direction, 1) * 100%));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes hero-editorial-exit {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--hero-slide-direction, 1) * -100%));
+  }
+}
+.hero-editorial-panel[data-phase="enter"] {
+  animation: hero-editorial-enter 600ms ease-in-out both;
+}
+.hero-editorial-panel[data-phase="exit"] {
+  transform: translateX(calc(var(--hero-slide-direction, 1) * -100%));
+  animation: hero-editorial-exit 600ms ease-in-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-editorial-panel[data-phase] {
+    animation: none;
+  }
+}
+
 @keyframes hero-carousel-progress {
   from {
     stroke-dashoffset: 1;

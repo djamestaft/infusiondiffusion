@@ -24,7 +24,19 @@ function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
     .filter((slide) =>
       Boolean(slide?.id && slide?.src?.trim() && slide?.alt?.trim()),
     )
-    .slice(0, 3);
+    .slice(0, 3)
+    .map((slide) => ({
+      ...slide,
+      title: slide.title?.trim() || undefined,
+      subtitle: slide.subtitle?.trim() || undefined,
+      cta:
+        slide.cta?.label?.trim() &&
+        slide.cta.href?.startsWith("/") &&
+        !slide.cta.href.startsWith("//") &&
+        !slide.cta.href.includes("\\")
+          ? { label: slide.cta.label.trim(), href: slide.cta.href }
+          : undefined,
+    }));
 
   return {
     ...fallbackSiteSettings,

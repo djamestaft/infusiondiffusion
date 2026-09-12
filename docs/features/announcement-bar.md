@@ -1,5 +1,10 @@
 # Announcement bar
 
+> Historical delivery record. Retired Figma links below are preserved as evidence,
+> not current implementation authority. Use [DESIGN.md](../../DESIGN.md), the
+> [approved frame handoff](2026-09-08-design-approval.md) and the
+> [atomic implementation contract](../design-implementation.md) for new work.
+
 ## Outcome
 
 Give every storefront visitor one concise, editor-controlled notice before they reach the page navigation. The first published use is message-only; the component retains an optional link for a future genuine destination.

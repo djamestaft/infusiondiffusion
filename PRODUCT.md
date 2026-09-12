@@ -31,12 +31,19 @@ Infusion Diffusion is a South African luxury home-fragrance brand. The current l
 
 ## Current milestone
 
-Devon approved the current 24 responsive Home, Shop, Product, Cart, combined
-About and Fragrance Guide Variation 02 layouts on 8 September 2026.
-The dated approval in `DESIGN.md` now governs downstream implementation.
-Contact and verified Guide matching remain open; the separate card-by-card
-trial remains exploratory. Final photography, missing facts/care copy and
-Sanity SEO remain deferred. The following paragraph records the workstream
-context leading to that approval.
+The approved responsive Home, Shop, Product, Cart, combined About and Fragrance
+Guide Variation 02 are implemented. Contact and the first notes/character-based
+Guide matcher are also merged. Devon confirmed on 12 September 2026 that these
+layouts stay and authorized replaceable default support content while actual
+policies and care instructions are gathered. The confirmed customer-support
+mailbox is dione.smith@infusiondiffusion.co.za.
 
-Evolve the existing brand into a cohesive premium shopping journey: Home, Shop, product detail, the existing cart and Shopify-hosted checkout handoff, plus essential brand and service pages. Shopify commerce and Sanity CMS integrations already exist and must be preserved. INF-32 is shaping the revised journey using existing imagery and verified content. Final photography, outstanding product/service facts and Sanity SEO are deferred by Devon's 8 September decision. Devon has now authorized a separate card-by-card Fragrance Guide exploration under INF-27; question copy and product matching remain provisional. Approve revised Figma compositions before implementation, then verify the integrated journey. Gallery refinement follows the shopping milestone. See `docs/planning/roadmap.md` for current approval status, Plane tickets and delivery order.
+INF-35 now adds interim Contact enquiry guidance within the existing layout.
+Final photography, product/service facts, care instructions, SEO and source
+publication remain deferred through INF-28/31. Full release verification remains
+INF-36; later combined About/Gallery refinement is INF-37. The separate card-by-card
+Guide trial remains exploratory. See `docs/planning/roadmap.md` for delivery
+status and approval gates.
+
+Implementation follows [the component delivery contract](docs/design-implementation.md).
+PR #83 consolidates the current carousel, interim Contact defaults and governance.

@@ -16,13 +16,12 @@ test("mobile menu remains reachable in landscape and releases focus on desktop",
   await opener.click();
   const dialog = page.getByRole("dialog", { name: "Navigation menu" });
   const first = dialog.getByRole("link", { name: "Infusion Diffusion home" });
-  const last = dialog.getByRole("link", { name: "Cart", exact: true });
+  const last = dialog.getByRole("link", { name: "Contact", exact: true });
   expect((await first.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   await expect(first).toBeFocused();
   await page.keyboard.press("Shift+Tab");
   await expect(last).toBeFocused();
   await expect(last).toBeInViewport();
-  expect(await dialog.evaluate((e) => e.scrollTop)).toBeGreaterThan(0);
   await page.keyboard.press("Tab");
   await expect(first).toBeFocused();
   await expect(first).toBeInViewport();

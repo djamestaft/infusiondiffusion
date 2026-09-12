@@ -5,6 +5,24 @@ description: Shape and implement approved Figma or brand direction through Impec
 
 # Design to Storybook
 
+## Current project delivery contract
+
+Read `docs/design-implementation.md` and the exact frame index in
+`docs/features/2026-09-08-design-approval.md`. The current authority is Figma
+file `jIMvwSBkilg7eplo3IiHPa`, Approved page `2004:14`, customer section
+`2484:736` and support section `2484:737`. Historical briefs never override
+this handoff. Devon owns implementation; Shawnee owns preparation and
+coordinates independent verification.
+
+Inventory each changed component's Figma node, consuming page, source path,
+Storybook states and reuse/change/add decision. Follow foundations → atoms →
+molecules → organisms → templates → live pages, reusing the existing structure.
+Verify changed components in Storybook before page integration. Compare
+component and page screenshots at 1440/768/390/320 where supplied; record
+observed differences and their disposition. Passing tests or capturing a
+screenshot alone is not visual approval. Do not reopen approved design
+exploration unless the user authorizes a visual change.
+
 ## Sources of truth
 
 - Approved visual intent and variables: the Figma file and exact approved frame recorded in `DESIGN.md`.

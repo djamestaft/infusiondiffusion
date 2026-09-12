@@ -1,5 +1,46 @@
 # Infusion Diffusion Roadmap
 
+## Consolidated delivery — 12 September 2026
+
+Devon requested one delivery PR: #83 combines the approved carousel/navigation,
+interim Contact defaults from #82 and current design governance from #71.
+The August redesign #51 is superseded by the September approved deliveries;
+its retired automation, alternative styling and static product-image overrides
+are not restored. See [consolidation record](../features/pr-83-consolidation.md).
+INF-33/34 are Done; Contact and notes/character Guide matching are delivered.
+INF-35 remains In Progress (Devon), INF-36 Backlog (Shawnee), with INF-28/31
+facts, final assets, care/policies, SEO and source-publication deferrals intact.
+Use [the implementation contract](../design-implementation.md) for component
+mapping and Storybook-first verification. Preview review and human merge remain
+required; consolidation does not enable checkout or publish source content.
+
+## Carousel/navigation refinement — 12 September 2026
+
+Devon authorized implementing the reviewed carousel and floating-navigation design
+in one Treehouse worktree, with generated background comparison assets and
+Storybook review. See [the bounded contract](../features/carousel-navigation.md).
+Branch `agent/carousel-navigation`; coordinator is sole writer. Extend existing
+components and additive Sanity fields, retaining shared-copy fallback, cart/account
+contracts and all Home sections. Local review is the immediate delivery; final
+source publication, release verification and human merge remain separate gates.
+Plane INF-35 was rechecked: In Progress, owner Devon; INF-36 stays downstream and
+INF-28/31 factual/content deferrals remain. This refinement does not mark those
+broader tickets complete.
+
+## Interim editorial support content — 12 September 2026
+
+Devon keeps the approved About, Contact and Guide layouts and authorizes
+replaceable default support copy while final policies/care instructions are
+being gathered. Dione’s address is confirmed. The [delivery brief](../features/inf-35-editorial-defaults.md)
+records Contact enquiry defaults, fallback/error mailbox alignment, source
+replacement and verification. One delivery branch, `agent/editorial-defaults`;
+coordinator sole writer. INF-27/35 remain In Progress; final policy/care facts
+remain INF-28/31 follow-up and INF-36 stays Backlog. Human preview/merge and
+source-publication gates remain. About, Contact and initial Guide matching
+were already merged through PRs #74–76; they are not pending implementation.
+PR #81 is also merged at `a163bb4`; Plane records green main CI and production
+smoke evidence, superseding the pending navigation-correction notes below.
+
 ## Post-merge navigation focus correction - 9 September 2026
 
 Devon approved and merged PR #80 at `0a24c0c`; production health and smoke checks

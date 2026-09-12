@@ -1,3 +1,5 @@
+import { defaultContactEmail } from "@/lib/contact-content";
+
 export type SiteSettings = {
   brandName: string;
   eyebrow: string;
@@ -22,6 +24,9 @@ export type SiteSettings = {
       src: string;
       alt: string;
       caption?: string;
+      title?: string;
+      subtitle?: string;
+      cta?: { label: string; href: string };
       hotspot?: { x: number; y: number };
     }>;
     collectionTitle: string;
@@ -58,7 +63,7 @@ export const fallbackSiteSettings: SiteSettings = {
   headline: "Scent for living.",
   introduction:
     "We are preparing a considered collection of reed diffusers for layered, lived-in rooms.",
-  contactEmail: "hello@infusiondiffusion.co.za",
+  contactEmail: defaultContactEmail,
   callToActionLabel: "Say hello",
   seoTitle: "Infusion Diffusion",
   seoDescription:

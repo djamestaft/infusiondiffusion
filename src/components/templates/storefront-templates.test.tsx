@@ -146,18 +146,18 @@ describe("storefront templates", () => {
     expect(screen.getByRole("navigation", { name: "Primary" })).toBeVisible();
     expect(
       screen.getByRole("navigation", { name: "Primary" }).closest("header"),
-    ).toHaveClass("border-navigation-divider", "border-b");
+    ).toHaveClass("fixed", "bg-transparent");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
     expect(screen.getByTestId("home-hero-section")).toHaveClass(
       "dark",
       "bg-content-surface",
-      "lg:grid-cols-[minmax(0,600fr)_minmax(0,656fr)]",
+      "pt-16",
     );
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" })[0],
-    ).toHaveClass("rounded-full", "w-[232px]");
+    ).toHaveClass("rounded-full", "w-[236px]");
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(4);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface",
@@ -212,7 +212,7 @@ describe("storefront templates", () => {
       <ContactTemplate
         title="Let’s talk fragrance."
         introduction="A direct email introduction."
-        email="hello@infusiondiffusion.co.za"
+        email="dione.smith@infusiondiffusion.co.za"
         cartCount={3}
         sections={[
           { heading: "Before you write", body: "Use the product name." },
@@ -230,7 +230,7 @@ describe("storefront templates", () => {
     ).toHaveLength(1);
     expect(
       screen.getByRole("link", { name: "Email Infusion Diffusion" }),
-    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
     expect(screen.queryByRole("form")).not.toBeInTheDocument();
     expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     expect(screen.getByText("Contact us by email.")).toBeVisible();
@@ -253,8 +253,8 @@ describe("storefront templates", () => {
     await userEvent.click(screen.getByRole("button", { name: "Try again" }));
     expect(reset).toHaveBeenCalledOnce();
     expect(
-      screen.getByRole("link", { name: "hello@infusiondiffusion.co.za" }),
-    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+      screen.getByRole("link", { name: "dione.smith@infusiondiffusion.co.za" }),
+    ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
   });
 
   it("gives an empty collection a useful route back", () => {

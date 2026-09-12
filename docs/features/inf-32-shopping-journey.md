@@ -125,7 +125,10 @@ Human merge and post-merge release verification remain separate gates.
 No production rollback is needed for this design-only work; retain approved
 frames and the current runtime as the unchanged baseline.
 
-## Synchronization at design start
+## Historical synchronization at design start
+
+This table predates approval. Current synchronization is recorded in
+[DESIGN.md](../../DESIGN.md); runtime revisions remain pending implementation.
 
 | Layer               | Status                                                          |
 | ------------------- | --------------------------------------------------------------- |
