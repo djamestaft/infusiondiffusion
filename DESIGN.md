@@ -24,12 +24,15 @@ Tablet and desktop typography is unchanged.
 Stacked mobile/tablet slides show image, copy and CTA, then controls. Desktop
 retains copy on the left and image on the right.
 
-Viewport fit: desktop media caps at `100svh - navigation height - 136px`;
-phone/tablet media uses `clamp(120px, 100svh - 500px, 380px)`. Narrow layouts
+Campaign media keeps a width-driven 5:4 frame at every viewport size, matching
+Figma mobile image 2674:31 (342 × 273.6). Use contain fitting to preserve each
+photo's proportions and show the complete bottles. Portrait images may have
+side space. Short screens scroll rather than compressing or cropping images.
+This 12 September user correction supersedes the viewport-height caps. Narrow layouts
 use 16px copy gaps, 24px copy/media gaps and 24px/16px outer vertical padding.
 Preserve text and touch targets; content extremes may scroll. Short Laptop and
-Short Phone stories demonstrate the responsive crop; static Figma frames retain
-their original geometry with this intentional responsive divergence annotated.
+Short Phone stories demonstrate the preserved frame; Figma retains its original
+5:4 geometry. Contain fitting is the user-authorized change for mixed source ratios.
 
 Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
 Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion

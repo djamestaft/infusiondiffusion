@@ -231,3 +231,36 @@ No roadmap scope or content publishing changes.
 Mobile image-first refinement: below 1024px, campaign images precede copy and
 CTA in the DOM and visual order. Controls stay last. Desktop uses the existing
 copy-left/image-right order. Figma mobile composition 2674:22 is synchronized.
+
+## Campaign aspect-ratio correction — 12 September 2026
+
+Devon reported cropped bottle caps and bases on mobile. The viewport-dependent
+height rule overrode the 5:4 frame and object-cover cropped the image. Remove
+phone/tablet height clamps and desktop height caps; keep width-driven 5:4 media
+aligned to Figma 2674:31 (342 × 273.6 in 2674:22). Contain fitting preserves
+complete portrait and landscape photos, with side space for portrait sources.
+This explicitly supersedes the earlier viewport-fit crop adaptation. Short
+screens may scroll to controls; preserve copy, 44px targets, stable carousel
+height across slides and existing keyboard/motion behavior.
+
+Acceptance: verify 5:4 geometry across 1440/768/390/320 and short screens, no
+image cropping or distortion, no horizontal overflow, reachable controls,
+image failure/loading behavior and carousel keyboard navigation. Reuse
+HeroCarousel/CampaignImage and add UncroppedCampaigns Storybook coverage.
+Figma geometry is unchanged; contain fitting intentionally follows this new
+user direction. DESIGN.md, Impeccable rules, CSS and stories are synchronized.
+No Sanity content changes or broader roadmap completion are required.
+
+Verification: `pnpm check` passed (279 unit tests, 312 Storybook tests, formatting,
+lint, types, Storybook build and Next build). All 14 targeted Chromium carousel
+journeys passed, including axe, keyboard, motion and short-screen coverage.
+Impeccable reported no deterministic issues. Visual review at 1440/768/390/320
+confirmed 5:4 frame geometry; the 390px image is 342 × 273.59px, matching Figma.
+Actual Ambre artwork was injected into the Storybook fixture for comparison:
+full caps, tassels and plinth remain visible at 390 and 1440px. Portrait fixture
+review confirms intentional side space. Captures are retained in the primary
+workspace under `output/carousel-ratio/`; no fixture product edits are shipped.
+Independent review, Vercel preview acceptance and human merge remain pending.
+INF-35 stays In Progress (Devon), INF-36 remains downstream; no strategic
+roadmap milestone changes. Plane's older PR83 merge notes are historical;
+PR83/84/85 are merged on the fetched base 196473f.
