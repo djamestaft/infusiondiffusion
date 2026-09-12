@@ -1,5 +1,19 @@
 # Infusion Diffusion Roadmap
 
+## Interim editorial support content — 12 September 2026
+
+Devon keeps the approved About, Contact and Guide layouts and authorizes
+replaceable default support copy while final policies/care instructions are
+being gathered. Dione’s address is confirmed. The [delivery brief](../features/inf-35-editorial-defaults.md)
+records Contact enquiry defaults, fallback/error mailbox alignment, source
+replacement and verification. One delivery branch, `agent/editorial-defaults`;
+coordinator sole writer. INF-27/35 remain In Progress; final policy/care facts
+remain INF-28/31 follow-up and INF-36 stays Backlog. Human preview/merge and
+source-publication gates remain. About, Contact and initial Guide matching
+were already merged through PRs #74–76; they are not pending implementation.
+PR #81 is also merged at `a163bb4`; Plane records green main CI and production
+smoke evidence, superseding the pending navigation-correction notes below.
+
 ## Post-merge navigation focus correction - 9 September 2026
 
 Devon approved and merged PR #80 at `0a24c0c`; production health and smoke checks

@@ -1,3 +1,5 @@
+import { defaultContactEmail } from "@/lib/contact-content";
+
 export type SiteSettings = {
   brandName: string;
   eyebrow: string;
@@ -58,7 +60,7 @@ export const fallbackSiteSettings: SiteSettings = {
   headline: "Scent for living.",
   introduction:
     "We are preparing a considered collection of reed diffusers for layered, lived-in rooms.",
-  contactEmail: "hello@infusiondiffusion.co.za",
+  contactEmail: defaultContactEmail,
   callToActionLabel: "Say hello",
   seoTitle: "Infusion Diffusion",
   seoDescription:

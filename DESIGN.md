@@ -1,5 +1,19 @@
 # Infusion Diffusion design system
 
+## Interim editorial defaults — 12 September 2026
+
+Devon retains the approved About, Contact and Guide layouts and authorizes
+replaceable support content. Contact keeps its hero, centered email section
+and gold content rail, adding Delivery enquiries, Returns or damaged items
+and Diffuser care beneath Before you write. Existing section styles, tokens
+and responsive behavior are retained. The confirmed Dione mailbox also serves
+missing-data and error states. [Delivery contract](docs/features/inf-35-editorial-defaults.md).
+
+Runtime and Storybook share these defaults. Historical Figma Contact frames
+2529:2/19/37/55 retain their earlier copy: this is an intentional user-authorized
+content divergence, not a new composition. Final policy/care content and source
+publication remain deferred.
+
 ## Guide matching implementation - 9 September 2026
 
 Devon's subsequent review puts Suggested fragrances above Your fragrance
