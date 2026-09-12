@@ -568,7 +568,12 @@ function EditorialCarousel({
                 inert={!visible}
                 aria-hidden={!visible}
               >
-                <div className="flex min-w-0 flex-col items-start gap-4 lg:gap-6">
+                <CampaignImage
+                  slide={slide}
+                  priority={index === 0}
+                  loading={loading}
+                />
+                <div className="flex min-w-0 flex-col items-start gap-4 lg:order-first lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
                     <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}
@@ -591,11 +596,6 @@ function EditorialCarousel({
                     </Button>
                   ) : null}
                 </div>
-                <CampaignImage
-                  slide={slide}
-                  priority={index === 0}
-                  loading={loading}
-                />
               </div>
             );
           })}

@@ -227,3 +227,7 @@ Fourteen focused Chromium checks pass. Added ShortLaptop and ShortPhone stories.
 Figma contract 2676:40 documents adaptive cropping; static composition geometry
 is intentionally retained rather than representing every available viewport height.
 No roadmap scope or content publishing changes.
+
+Mobile image-first refinement: below 1024px, campaign images precede copy and
+CTA in the DOM and visual order. Controls stay last. Desktop uses the existing
+copy-left/image-right order. Figma mobile composition 2674:22 is synchronized.
