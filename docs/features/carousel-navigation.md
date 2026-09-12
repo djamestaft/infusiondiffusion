@@ -216,3 +216,14 @@ frames have a 1px solid navigation-divider gold border with unchanged geometry.
 Figma counters 2691:37/41 and 2674:36 match; the separate pause frames were removed.
 Nine focused Chromium tests passed, covering seven widths (320–1900px), border
 and counter styles/alignment, horizontal motion and autoplay controls.
+
+### Short viewport fit
+
+Replaced width-only media sizing with viewport-aware height limits, reserving
+space for navigation and controls. Tightened vertical spacing without shrinking
+copy or touch targets. Verified real Home captures at 1440×700, 1280×650, 390×667,
+375×667, 390×844 and 320×568: every counter remains inside the initial viewport.
+Fourteen focused Chromium checks pass. Added ShortLaptop and ShortPhone stories.
+Figma contract 2676:40 documents adaptive cropping; static composition geometry
+is intentionally retained rather than representing every available viewport height.
+No roadmap scope or content publishing changes.

@@ -196,3 +196,33 @@ export const Laptop: Story = {
     },
   },
 };
+
+export const ShortLaptop: Story = {
+  ...Laptop,
+  parameters: {
+    viewport: {
+      options: {
+        laptop1280: {
+          name: "Short laptop 1280 × 650",
+          styles: { width: "1280px", height: "650px" },
+          type: "desktop",
+        },
+      },
+    },
+  },
+};
+export const ShortPhone: Story = {
+  ...CarouselWithNavigation,
+  globals: { viewport: { value: "shortPhone", isRotated: false } },
+  parameters: {
+    viewport: {
+      options: {
+        shortPhone: {
+          name: "Short phone 375 × 667",
+          styles: { width: "375px", height: "667px" },
+          type: "mobile",
+        },
+      },
+    },
+  },
+};

@@ -672,3 +672,19 @@
     mask-image: none;
   }
 }
+
+/* Reserve room for navigation, copy and controls on short viewports. */
+.hero-editorial-image {
+  height: clamp(120px, calc(100svh - 500px), 380px);
+  aspect-ratio: auto;
+}
+@media (min-width: 64rem) {
+  .hero-editorial-image {
+    height: auto;
+    aspect-ratio: 5 / 4;
+    max-height: max(
+      200px,
+      calc(100svh - var(--navigation-height, 0px) - 136px)
+    );
+  }
+}

@@ -516,7 +516,7 @@ function EditorialCarousel({
         />
       ) : null}
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
-      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-24 lg:pt-20 lg:pb-10 2xl:px-16">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pt-6 pb-4 min-[375px]:px-6 sm:px-10 lg:px-24 lg:pt-10 lg:pb-6 2xl:px-16">
         <div
           className="hero-editorial-viewport -m-2 grid overflow-hidden p-2"
           data-moving={previous !== null && !reducedMotion}
@@ -544,7 +544,7 @@ function EditorialCarousel({
               <div
                 key={slide.id}
                 className={cn(
-                  "hero-editorial-panel col-start-1 row-start-1 grid gap-10 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
+                  "hero-editorial-panel col-start-1 row-start-1 grid gap-6 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
                   !visible && "pointer-events-none",
                   !visible && !outgoing && "invisible",
                 )}
@@ -568,7 +568,7 @@ function EditorialCarousel({
                 inert={!visible}
                 aria-hidden={!visible}
               >
-                <div className="flex min-w-0 flex-col items-start gap-6">
+                <div className="flex min-w-0 flex-col items-start gap-4 lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
                     <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}
@@ -602,7 +602,7 @@ function EditorialCarousel({
         </div>
         {slides.length > 1 ? (
           <div
-            className="mt-6 flex items-center justify-between lg:mt-7 lg:grid lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:gap-16"
+            className="mt-4 flex items-center justify-between lg:mt-7 lg:grid lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:gap-16"
             data-testid="hero-carousel-controls"
           >
             <Button
@@ -670,7 +670,7 @@ function CampaignImage({
   const [failedSource, setFailedSource] = React.useState<string | null>(null);
   return (
     <div
-      className="bg-product-card-media-fallback border-navigation-divider relative aspect-[5/4] overflow-hidden border"
+      className="hero-editorial-image bg-product-card-media-fallback border-navigation-divider relative aspect-[5/4] w-full overflow-hidden border"
       data-testid="hero-carousel-media"
     >
       {slide.src && failedSource !== slide.src ? (

@@ -17,6 +17,13 @@ hero insets are 96px, leaving 42px between arrows and content; mobile and wide
 screen gutters stay. A 24px alpha mask softens the viewport edges only while
 slides move, leaving resting photography crisp.
 
+Viewport fit: desktop media caps at `100svh - navigation height - 136px`;
+phone/tablet media uses `clamp(120px, 100svh - 500px, 380px)`. Narrow layouts
+use 16px copy gaps, 24px copy/media gaps and 24px/16px outer vertical padding.
+Preserve text and touch targets; content extremes may scroll. Short Laptop and
+Short Phone stories demonstrate the responsive crop; static Figma frames retain
+their original geometry with this intentional responsive divergence annotated.
+
 Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
 Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion
 changes. Desktop arrows occupy the midpoint of the outer gutters. The scrolled

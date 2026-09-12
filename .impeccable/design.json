@@ -56,6 +56,11 @@
         "name": "Carousel autoplay and laptop clearance",
         "body": "86px desktop / 78px mobile navigation. Editorial slides rotate every 6s with pause/play, manual/focus pause and hover/visibility protections. Reduced-motion/save-data/loading disable autoplay. Laptop 1024\u20131535px hero insets 96px leave 42px arrow clearance; mobile/wide gutters unchanged. Moving stage edges use a 24px alpha fade; stationary media is crisp.",
         "section": "components"
+      },
+      {
+        "name": "Carousel viewport fit",
+        "body": "Reserve navigation and counter room using viewport-aware media heights; desktop cap is 100svh minus navigation minus 136px. Narrow media clamps between 120px and 380px using 100svh minus 500px. Keep text and 44px targets; allow content extremes to scroll. Counter is 11px gold below the image, with no separate icon. Image border is 1px semantic gold.",
+        "section": "components"
       }
     ],
     "dos": [

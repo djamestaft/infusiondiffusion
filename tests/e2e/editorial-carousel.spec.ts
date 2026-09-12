@@ -197,3 +197,23 @@ test("autoplay advances, offers a pause control and stops outside the viewport",
     "Campaign 3",
   );
 });
+
+for (const [width, height] of [
+  [1280, 650],
+  [1440, 700],
+  [375, 667],
+  [390, 844],
+  [320, 568],
+]) {
+  test(`counter fits short viewport ${width}x${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/e2e-carousel?editorial=1");
+    const counter = page.locator("[data-carousel-rotation]");
+    await expect(counter).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    const box = (await counter.boundingBox())!;
+    expect(box.y + box.height).toBeLessThanOrEqual(height);
+    await expect(page.getByTestId("hero-carousel-media").first()).toBeVisible();
+  });
+}
