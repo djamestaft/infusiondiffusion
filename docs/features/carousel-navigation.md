@@ -150,3 +150,80 @@ mid-transition, reverse, wraparound and rapid-click checks). Lint, types,
 formatting, Impeccable and both builds passed. Local screenshots confirm the
 mid-transition uses translation at full opacity and the scrolled gold rule is
 visible. No Sanity source changes or publication were made.
+
+## Post-merge navigation spacing — 12 September 2026
+
+PR #83 merged at `9df487d`. Devon requested more space around the existing
+logo. Header height is now 80px at 1024px+, 72px below, using the shared
+`--navigation-height` token for header, mobile menu header and hero offset.
+The solid border is included in that total. Logo widths, gutters, slide
+geometry, animation and 24px scroll threshold stay. This supersedes 64px
+references above. Reuse Navigation and Editorial Carousel stories; verify
+1440/768/390/320, keyboard access and equal top/scrolled heights.
+
+Spacing verification: local `pnpm check` passed (276 units, 305 Storybook tests,
+formatting/lint/types and both builds); 93 Chromium tests passed without retries.
+Reviewed Storybook captures at 1440/768/390/320 and transparent/scrolled headers.
+Impeccable navigation detection returned no findings. Figma variants 2664:17,
+2665:8, 2672:27/45, 2674:37, 2675:28/49 and their scrolled containers are updated;
+logo sizes remain. DESIGN.md, the semantic height token, components and stories
+are synchronized. The initial unit run exposed an obsolete `pt-16` assertion;
+it now checks the shared offset. Preview acceptance and human merge remain gates.
+
+## Autoplay and laptop follow-up — PR #84
+
+Devon requested 3px more above and below the nav: shared height is 86px desktop,
+78px mobile/tablet. This supersedes the intermediate 80/72px values. At CSS widths
+1024–1535px the carousel alone uses 96px insets, leaving 42px between the 44px
+arrows and content. Navigation and later sections retain the shared site gutters;
+this is the requested bounded divergence. At 1536px+ and below 1024px the existing
+carousel gutters stay. Use the Laptop Storybook story at 1280px for review.
+
+Editorial slides now auto-advance every six seconds using the existing horizontal
+600ms motion. A 44px Pause/Play control sits beside the counter. Hover pauses while
+the pointer is inside; native boundary events handle the separately hydrated
+floating navigation correctly. Focus or manual navigation pauses until explicit
+Play. Hidden tabs and offscreen carousels suspend the timer; reduced-motion,
+save-data and loading states disable autoplay. Zero/single-slide states have no
+rotation controls. Automatic changes are not live-announced; manual ones are.
+
+The moving viewport uses a 24px alpha edge mask to soften clipping against the
+shared photographic background. This is an alpha fade, not a surface-color
+approximation, and only exists during movement. Resting media is sharp; reduced
+motion suppresses animation and masking. Existing source fields and maximum three
+slides remain. No source publication or checkout enablement is included.
+
+Figma navigation variants and main compositions are synchronized, including
+pause controls 2691:38/42/45. The motion contract is appended to 2676:40. Runtime
+CSS, DESIGN.md, components and Storybook use the same behavior and spacing.
+
+Follow-up verification: local full gate passed with 279 units and 309 Storybook
+tests, formatting/lint/types and both builds. All 96 Chromium tests passed with
+no retries. Autoplay tests cover six-second cadence, Pause/Play, manual/focus/hover
+pause, reduced-motion/data-saving/loading and offscreen suspension. The motion
+test checks edge masking during translation and its removal at rest. Desktop
+clearance is verified at 1024/1280/1440 and the original wide gutter at 1900.
+Reviewed seven-width Storybook captures and the paused transition midpoint;
+Impeccable found no carousel issues. Fixed a hover-resume issue caused by replacing
+the Play/Pause icon under the pointer: native boundary listeners plus pointer
+movement reconcile hover when moving onto the separately hydrated header.
+
+### Counter and image framing — 12 September 2026
+
+The counter is centred under the image column, uses 11px semantic gold type,
+and retains its accessible pause/resume button without a separate icon. Media
+frames have a 1px solid navigation-divider gold border with unchanged geometry.
+Figma counters 2691:37/41 and 2674:36 match; the separate pause frames were removed.
+Nine focused Chromium tests passed, covering seven widths (320–1900px), border
+and counter styles/alignment, horizontal motion and autoplay controls.
+
+### Short viewport fit
+
+Replaced width-only media sizing with viewport-aware height limits, reserving
+space for navigation and controls. Tightened vertical spacing without shrinking
+copy or touch targets. Verified real Home captures at 1440×700, 1280×650, 390×667,
+375×667, 390×844 and 320×568: every counter remains inside the initial viewport.
+Fourteen focused Chromium checks pass. Added ShortLaptop and ShortPhone stories.
+Figma contract 2676:40 documents adaptive cropping; static composition geometry
+is intentionally retained rather than representing every available viewport height.
+No roadmap scope or content publishing changes.

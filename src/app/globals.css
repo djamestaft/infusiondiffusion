@@ -303,6 +303,7 @@
 }
 
 :root {
+  --navigation-height: 4.875rem;
   /* Approved INF-10 primitives. Semantic roles below are the public API. */
   --ink-900: #191916;
   --graphite-700: #3c3b35;
@@ -647,5 +648,43 @@
   }
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --navigation-height: 5.375rem;
+  }
+}
+
+/* Fade only the moving stage edges; keep stationary copy and images sharp. */
+.hero-editorial-viewport[data-moving="true"] {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 24px,
+    black calc(100% - 24px),
+    transparent
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-editorial-viewport[data-moving] {
+    mask-image: none;
+  }
+}
+
+/* Reserve room for navigation, copy and controls on short viewports. */
+.hero-editorial-image {
+  height: clamp(120px, calc(100svh - 500px), 380px);
+  aspect-ratio: auto;
+}
+@media (min-width: 64rem) {
+  .hero-editorial-image {
+    height: auto;
+    aspect-ratio: 5 / 4;
+    max-height: max(
+      200px,
+      calc(100svh - var(--navigation-height, 0px) - 136px)
+    );
   }
 }

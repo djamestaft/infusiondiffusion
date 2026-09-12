@@ -1,5 +1,29 @@
 # Infusion Diffusion design system
 
+## Navigation breathing room — 12 September 2026
+
+Devon requested more space around the header logo. Use the shared responsive
+`--navigation-height`: 86px from 1024px, 78px below. Keep existing logo widths
+and 44px targets. Header, menu header and floating-hero offset share this token;
+solid borders remain inside the total height. Transparent and scrolled states
+have identical geometry. This supersedes the 64px contract below. The follow-up adds 3px per side.
+
+Editorial autoplay advances every 6 seconds, with the 11px gold counter centred beneath the image.
+The counter retains a 44px pause/resume target; no separate icon is shown.
+Slide images use a 1px solid semantic gold border. Hover pauses temporarily; focus or manual navigation pauses
+until Play. Hidden/offscreen content pauses; reduced motion, save-data and loading
+disable autoplay. Automatic changes are not live-announced. At 1024–1535px,
+hero insets are 96px, leaving 42px between arrows and content; mobile and wide
+screen gutters stay. A 24px alpha mask softens the viewport edges only while
+slides move, leaving resting photography crisp.
+
+Viewport fit: desktop media caps at `100svh - navigation height - 136px`;
+phone/tablet media uses `clamp(120px, 100svh - 500px, 380px)`. Narrow layouts
+use 16px copy gaps, 24px copy/media gaps and 24px/16px outer vertical padding.
+Preserve text and touch targets; content extremes may scroll. Short Laptop and
+Short Phone stories demonstrate the responsive crop; static Figma frames retain
+their original geometry with this intentional responsive divergence annotated.
+
 Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
 Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion
 changes. Desktop arrows occupy the midpoint of the outer gutters. The scrolled

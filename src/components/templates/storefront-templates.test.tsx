@@ -153,7 +153,7 @@ describe("storefront templates", () => {
     expect(screen.getByTestId("home-hero-section")).toHaveClass(
       "dark",
       "bg-content-surface",
-      "pt-16",
+      "pt-[var(--navigation-height)]",
     );
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" })[0],

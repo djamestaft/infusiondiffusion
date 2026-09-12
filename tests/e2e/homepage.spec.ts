@@ -39,7 +39,11 @@ for (const viewport of approvedHomeViewports) {
       .getByRole("navigation", { name: "Primary" })
       .getByRole("link", { name: "Infusion Diffusion home" })
       .boundingBox();
-    expect(heroHeading!.x).toBeCloseTo(cabinetHeading!.x, 0);
+    if (viewport.width >= 1024 && viewport.width < 1536) {
+      expect(heroHeading!.x - cabinetHeading!.x).toBeCloseTo(32, 0);
+    } else {
+      expect(heroHeading!.x).toBeCloseTo(cabinetHeading!.x, 0);
+    }
     expect(brand!.x).toBeCloseTo(cabinetHeading!.x, 0);
 
     const orderedSections = [

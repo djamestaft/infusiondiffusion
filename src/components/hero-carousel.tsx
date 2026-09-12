@@ -368,9 +368,15 @@ function EditorialCarousel({
   fallbackCopy,
   withNavigation = false,
   loading = false,
+  initialPaused = false,
+  forceReducedMotion,
+  forceSaveData,
   className,
 }: HeroCarouselProps) {
-  const slides = suppliedSlides.slice(0, 3);
+  const slides = React.useMemo(
+    () => suppliedSlides.slice(0, 3),
+    [suppliedSlides],
+  );
   const [selected, setSelected] = React.useState(0);
   const [previous, setPrevious] = React.useState<number | null>(null);
   const [direction, setDirection] = React.useState(1);
@@ -378,24 +384,114 @@ function EditorialCarousel({
   const [announcement, setAnnouncement] = React.useState("");
   const touch = React.useRef<{ x: number; y: number } | null>(null);
   const current = slides[active];
-  const move = (offset: number) => {
-    if (slides.length < 2) return;
-    const next = (active + offset + slides.length) % slides.length;
-    setPrevious(active);
-    setDirection(offset > 0 ? 1 : -1);
-    setSelected(next);
-    setAnnouncement(
-      `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
-    );
-  };
+  const carouselRef = React.useRef<HTMLElement>(null);
+  const [userPaused, setUserPaused] = React.useState(initialPaused);
+  const [hovered, setHovered] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  const [offscreen, setOffscreen] = React.useState(false);
+  const [ready, setReady] = React.useState(false);
+  const [motionPreference, setMotionPreference] = React.useState(false);
+  const [dataPreference, setDataPreference] = React.useState(false);
+  const reducedMotion = forceReducedMotion ?? motionPreference;
+  const saveData = forceSaveData ?? dataPreference;
+  React.useEffect(() => {
+    // Native boundary events also cover the separately hydrated floating header.
+    const carousel = carouselRef.current;
+    const enter = () => setHovered(true);
+    const leave = () => setHovered(false);
+    carousel?.addEventListener("mouseenter", enter);
+    carousel?.addEventListener("mouseleave", leave);
+    // Changing the Play/Pause icon can remove the old hover target before
+    // mouseleave fires. Pointer movement reconciles hover across that swap.
+    const updateHover = (event: PointerEvent) => {
+      if (event.pointerType === "mouse")
+        setHovered(Boolean(carousel?.contains(event.target as Node)));
+    };
+    document.addEventListener("pointermove", updateHover, { passive: true });
+    const query = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const updateMotion = () => setMotionPreference(Boolean(query?.matches));
+    const updateVisibility = () => setHidden(document.hidden);
+    updateMotion();
+    updateVisibility();
+    const connection = (
+      navigator as Navigator & {
+        connection?: {
+          saveData?: boolean;
+          addEventListener?: (name: string, listener: () => void) => void;
+          removeEventListener?: (name: string, listener: () => void) => void;
+        };
+      }
+    ).connection;
+    const updateConnection = () => {
+      setDataPreference(Boolean(connection?.saveData));
+      setReady(true);
+    };
+    updateConnection();
+    connection?.addEventListener?.("change", updateConnection);
+    query?.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", updateVisibility);
+    const observer =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            ([entry]) => setOffscreen(!entry.isIntersecting),
+            { threshold: 0.01 },
+          );
+    if (carouselRef.current) observer?.observe(carouselRef.current);
+    return () => {
+      carousel?.removeEventListener("mouseenter", enter);
+      carousel?.removeEventListener("mouseleave", leave);
+      document.removeEventListener("pointermove", updateHover);
+      query?.removeEventListener("change", updateMotion);
+      connection?.removeEventListener?.("change", updateConnection);
+      document.removeEventListener("visibilitychange", updateVisibility);
+      observer?.disconnect();
+    };
+  }, []);
+  const autoplayUnavailable = reducedMotion || saveData || loading;
+  const canAutoplay =
+    ready &&
+    slides.length > 1 &&
+    !autoplayUnavailable &&
+    !userPaused &&
+    !hovered &&
+    !hidden &&
+    !offscreen;
+  const move = React.useCallback(
+    (offset: number, manual = true) => {
+      if (slides.length < 2) return;
+      const next = (active + offset + slides.length) % slides.length;
+      setPrevious(reducedMotion ? null : active);
+      setDirection(offset > 0 ? 1 : -1);
+      setSelected(next);
+      if (manual) {
+        setUserPaused(true);
+        setAnnouncement(
+          `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
+        );
+      }
+    },
+    [active, slides, fallbackCopy?.title, reducedMotion],
+  );
+  React.useEffect(() => {
+    if (!canAutoplay) return;
+    const timeout = window.setTimeout(() => move(1, false), 6_000);
+    return () => window.clearTimeout(timeout);
+  }, [canAutoplay, move]);
   const campaigns = slides.length
     ? slides
     : [{ id: "empty", src: "", alt: "" }];
   return (
     <section
+      ref={carouselRef}
+      data-autoplay={canAutoplay ? "running" : "paused"}
+      onFocusCapture={(event) => {
+        if (!(event.target as HTMLElement).closest("[data-carousel-rotation]"))
+          setUserPaused(true);
+      }}
       className={cn(
         "dark bg-content-surface text-content-primary relative isolate flex min-h-svh flex-col justify-center",
-        withNavigation && "pt-16",
+        withNavigation && "pt-[var(--navigation-height)]",
         className,
       )}
       aria-label="Homepage campaigns"
@@ -420,9 +516,10 @@ function EditorialCarousel({
         />
       ) : null}
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
-      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-16 lg:pt-20 lg:pb-10">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pt-6 pb-4 min-[375px]:px-6 sm:px-10 lg:px-24 lg:pt-10 lg:pb-6 2xl:px-16">
         <div
-          className="-m-2 grid overflow-hidden p-2"
+          className="hero-editorial-viewport -m-2 grid overflow-hidden p-2"
+          data-moving={previous !== null && !reducedMotion}
           style={{ "--hero-slide-direction": direction } as React.CSSProperties}
           data-testid="hero-carousel-viewport"
           onTouchStart={(event) => {
@@ -447,7 +544,7 @@ function EditorialCarousel({
               <div
                 key={slide.id}
                 className={cn(
-                  "hero-editorial-panel col-start-1 row-start-1 grid gap-10 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
+                  "hero-editorial-panel col-start-1 row-start-1 grid gap-6 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
                   !visible && "pointer-events-none",
                   !visible && !outgoing && "invisible",
                 )}
@@ -471,7 +568,7 @@ function EditorialCarousel({
                 inert={!visible}
                 aria-hidden={!visible}
               >
-                <div className="flex min-w-0 flex-col items-start gap-6">
+                <div className="flex min-w-0 flex-col items-start gap-4 lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
                     <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}
@@ -505,7 +602,7 @@ function EditorialCarousel({
         </div>
         {slides.length > 1 ? (
           <div
-            className="mt-6 flex items-center justify-between lg:mt-7"
+            className="mt-4 flex items-center justify-between lg:mt-7 lg:grid lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:gap-16"
             data-testid="hero-carousel-controls"
           >
             <Button
@@ -517,13 +614,30 @@ function EditorialCarousel({
             >
               <ChevronLeft aria-hidden="true" className="size-5" />
             </Button>
-            <span
-              className="mx-auto font-sans text-[13px] tabular-nums"
-              aria-hidden="true"
+            <Button
+              data-carousel-rotation
+              variant="quiet"
+              className="text-navigation-accent disabled:text-navigation-accent mx-auto min-w-11 px-2 font-sans text-[11px] tracking-normal tabular-nums disabled:bg-transparent lg:col-start-2 lg:justify-self-center"
+              disabled={autoplayUnavailable}
+              aria-label={
+                autoplayUnavailable
+                  ? "Autoplay unavailable"
+                  : userPaused
+                    ? "Play carousel"
+                    : "Pause carousel"
+              }
+              title={
+                autoplayUnavailable
+                  ? "Autoplay unavailable"
+                  : userPaused
+                    ? "Resume slideshow"
+                    : "Pause slideshow"
+              }
+              onClick={() => setUserPaused((paused) => !paused)}
             >
               {String(active + 1).padStart(2, "0")} /{" "}
               {String(slides.length).padStart(2, "0")}
-            </span>
+            </Button>
             <Button
               variant="outline"
               size="icon"
@@ -556,7 +670,7 @@ function CampaignImage({
   const [failedSource, setFailedSource] = React.useState<string | null>(null);
   return (
     <div
-      className="bg-product-card-media-fallback relative aspect-[5/4] overflow-hidden"
+      className="hero-editorial-image bg-product-card-media-fallback border-navigation-divider relative aspect-[5/4] w-full overflow-hidden border"
       data-testid="hero-carousel-media"
     >
       {slide.src && failedSource !== slide.src ? (
