@@ -1,3 +1,7 @@
+import {
+  defaultContactEmail,
+  defaultContactSections,
+} from "@/lib/contact-content";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 
@@ -355,13 +359,8 @@ const contactProps = {
   title: "Let’s talk fragrance.",
   introduction:
     "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
-  sections: [
-    {
-      heading: "Before you write",
-      body: "Include the product or fragrance name when it helps explain your question. Do not send payment details or other sensitive information by email.",
-    },
-  ],
-  email: "hello@infusiondiffusion.co.za",
+  sections: defaultContactSections,
+  email: defaultContactEmail,
 };
 
 export const Contact: Story = {
@@ -373,7 +372,7 @@ export const Contact: Story = {
     ).toBeVisible();
     await expect(
       canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
-    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
     await expect(canvas.queryByRole("form")).toBeNull();
     await expect(canvas.getByText("Contact us by email.")).toBeVisible();
   },
@@ -389,7 +388,7 @@ export const ContactPublished: Story = {
     docs: {
       description: {
         story:
-          "Approved Contact composition with the observed published mailbox. Fallback-mailbox states remain separate.",
+          "Approved Contact composition with the confirmed mailbox and replaceable support enquiry defaults.",
       },
     },
   },
@@ -401,7 +400,7 @@ export const ContactDefault390: Story = {
     const canvas = within(canvasElement);
     await expect(
       canvas.getByRole("link", { name: "Email Infusion Diffusion" }),
-    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+    ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
     await userEvent.click(canvas.getByRole("button", { name: "Open menu" }));
     await expect(
       canvas.getByRole("link", { name: "Contact", current: "page" }),
@@ -514,8 +513,8 @@ export const ContactUnexpectedError: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Try again" }));
     await expect(contactRetry).toHaveBeenCalledOnce();
     await expect(
-      canvas.getByRole("link", { name: "hello@infusiondiffusion.co.za" }),
-    ).toHaveAttribute("href", "mailto:hello@infusiondiffusion.co.za");
+      canvas.getByRole("link", { name: "dione.smith@infusiondiffusion.co.za" }),
+    ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
   },
 };
 

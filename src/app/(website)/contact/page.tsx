@@ -14,14 +14,14 @@ import {
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
 import { getSiteSettings } from "@/sanity/lib/settings";
 
-const fallbackEmail = "hello@infusiondiffusion.co.za";
+import { defaultContactEmail } from "@/lib/contact-content";
 
 export function safeContactEmail(value: string | null | undefined) {
   const email = value?.trim();
   return email &&
     /^[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9-]+(?:\.[A-Z0-9-]+)+$/i.test(email)
     ? email
-    : fallbackEmail;
+    : defaultContactEmail;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

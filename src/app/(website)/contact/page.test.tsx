@@ -26,10 +26,12 @@ import { getSiteSettings } from "@/sanity/lib/settings";
 
 describe("Contact route safety", () => {
   it("uses the approved mailbox for blank or unsafe global settings", () => {
-    expect(safeContactEmail(undefined)).toBe("hello@infusiondiffusion.co.za");
-    expect(safeContactEmail("   ")).toBe("hello@infusiondiffusion.co.za");
+    expect(safeContactEmail(undefined)).toBe(
+      "dione.smith@infusiondiffusion.co.za",
+    );
+    expect(safeContactEmail("   ")).toBe("dione.smith@infusiondiffusion.co.za");
     expect(safeContactEmail("mailto:unsafe@example.com")).toBe(
-      "hello@infusiondiffusion.co.za",
+      "dione.smith@infusiondiffusion.co.za",
     );
   });
 

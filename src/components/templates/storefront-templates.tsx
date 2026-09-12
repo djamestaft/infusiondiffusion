@@ -1,3 +1,4 @@
+import { defaultContactEmail } from "@/lib/contact-content";
 import Image from "next/image";
 import { RecoverableImage } from "@/components/ui/recoverable-image";
 import { Footer } from "@/components/footer";
@@ -339,7 +340,7 @@ export function ContactLoadingTemplate() {
 }
 
 export function ContactErrorTemplate({ reset }: { reset: () => void }) {
-  const email = "hello@infusiondiffusion.co.za";
+  const email = defaultContactEmail;
   return (
     <TemplateShell currentHref="/contact" navigationTheme="midnight">
       <section className="min-h-dvh px-5 py-16 sm:px-8 lg:px-12 lg:py-24">

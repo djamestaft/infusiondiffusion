@@ -1,3 +1,4 @@
+import { defaultContactSections } from "@/lib/contact-content";
 import { isSanityConfigured } from "@/env";
 import {
   sanityFetch,
@@ -34,12 +35,7 @@ export const fallbackContactPage: EditorialPage = {
   title: "Let’s talk fragrance.",
   introduction:
     "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
-  sections: [
-    {
-      heading: "Before you write",
-      body: "Include the product or fragrance name when it helps explain your question. Do not send payment details or other sensitive information by email.",
-    },
-  ],
+  sections: defaultContactSections,
   seoTitle: "Contact | Infusion Diffusion",
   seoDescription:
     "Questions about scent, care, delivery, or choosing a room fragrance? Email us directly and we’ll help you find the clearest next step.",
