@@ -372,6 +372,8 @@ function EditorialCarousel({
 }: HeroCarouselProps) {
   const slides = suppliedSlides.slice(0, 3);
   const [selected, setSelected] = React.useState(0);
+  const [previous, setPrevious] = React.useState<number | null>(null);
+  const [direction, setDirection] = React.useState(1);
   const active = Math.min(selected, Math.max(0, slides.length - 1));
   const [announcement, setAnnouncement] = React.useState("");
   const touch = React.useRef<{ x: number; y: number } | null>(null);
@@ -379,6 +381,8 @@ function EditorialCarousel({
   const move = (offset: number) => {
     if (slides.length < 2) return;
     const next = (active + offset + slides.length) % slides.length;
+    setPrevious(active);
+    setDirection(offset > 0 ? 1 : -1);
     setSelected(next);
     setAnnouncement(
       `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
@@ -418,7 +422,9 @@ function EditorialCarousel({
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
       <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-16 lg:pt-20 lg:pb-10">
         <div
-          className="grid"
+          className="-m-2 grid overflow-hidden p-2"
+          style={{ "--hero-slide-direction": direction } as React.CSSProperties}
+          data-testid="hero-carousel-viewport"
           onTouchStart={(event) => {
             const point = event.touches[0];
             touch.current = { x: point.clientX, y: point.clientY };
@@ -435,16 +441,33 @@ function EditorialCarousel({
         >
           {campaigns.map((slide, index) => {
             const visible = index === active;
+            const outgoing = index === previous && !visible;
             const cta = slide.cta ?? fallbackCopy?.cta;
             return (
               <div
                 key={slide.id}
                 className={cn(
-                  "col-start-1 row-start-1 grid gap-10 transition-opacity duration-300 motion-reduce:transition-none lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
-                  visible
-                    ? "opacity-100"
-                    : "pointer-events-none invisible opacity-0",
+                  "hero-editorial-panel col-start-1 row-start-1 grid gap-10 lg:grid-cols-[minmax(0,520fr)_minmax(0,600fr)] lg:items-center lg:gap-16",
+                  !visible && "pointer-events-none",
+                  !visible && !outgoing && "invisible",
                 )}
+                data-phase={
+                  visible
+                    ? previous === null
+                      ? "idle"
+                      : "enter"
+                    : outgoing
+                      ? "exit"
+                      : "inactive"
+                }
+                onAnimationEnd={(event) => {
+                  if (
+                    event.target === event.currentTarget &&
+                    visible &&
+                    event.animationName === "hero-editorial-enter"
+                  )
+                    setPrevious(null);
+                }}
                 inert={!visible}
                 aria-hidden={!visible}
               >
@@ -488,7 +511,7 @@ function EditorialCarousel({
             <Button
               variant="outline"
               size="icon"
-              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:left-[max(24px,calc((100%-1440px)/2+10px))]"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:left-[max(10px,calc((100%-1440px)/4+10px))]"
               aria-label="Previous slide"
               onClick={() => move(-1)}
             >
@@ -504,7 +527,7 @@ function EditorialCarousel({
             <Button
               variant="outline"
               size="icon"
-              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:right-[max(24px,calc((100%-1440px)/2+10px))]"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:right-[max(10px,calc((100%-1440px)/4+10px))]"
               aria-label="Next slide"
               onClick={() => move(1)}
             >

@@ -39,7 +39,7 @@
       },
       {
         "name": "Editorial carousel and floating navigation",
-        "body": "12 September approved Figma composition 2664:2 and mobile 2674:22: 64px header, uppercase Manrope, close underline, 44px account/bag/menu controls, transparent Home header until scrollY > 24 then midnight. Shared reed-shadow background; manual synchronized title/subtitle/CTA/image slides, 520/600 desktop columns, 5:4 media, mobile stack. Preserve existing tokens and conditional commerce links. See docs/features/carousel-navigation.md. Follow-up: share the site-wide max-1440 container, 20/24/40/64px gutters and minimum 100svh hero height; vertically center and grow for long content.",
+        "body": "12 September approved Figma composition 2664:2 and mobile 2674:22: 64px header, uppercase Manrope, close underline, 44px account/bag/menu controls, transparent Home header until scrollY > 24 then midnight. Shared reed-shadow background; manual synchronized title/subtitle/CTA/image slides, 520/600 desktop columns, 5:4 media, mobile stack. Preserve existing tokens and conditional commerce links. See docs/features/carousel-navigation.md. Follow-up: share the site-wide max-1440 container, 20/24/40/64px gutters and minimum 100svh hero height; vertically center and grow for long content. Next translates right-to-left and Previous reverses, 600ms ease-in-out without fading; reduced motion is instant. Desktop arrows use outer-gutter midpoints. Scrolled header has a 1px navigation-divider rule without height change.",
         "section": "components"
       }
     ],

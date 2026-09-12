@@ -40,7 +40,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Approved carousel composition. Sample editorial slides and generated background options are review fixtures; they do not publish content to Sanity.",
+          "Approved carousel composition with horizontal 600ms slide transitions, outer-gutter desktop controls and a gold rule on the scrolled navigation. Sample editorial slides and generated background options are review fixtures; they do not publish content to Sanity.",
       },
     },
   },

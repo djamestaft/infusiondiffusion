@@ -1,5 +1,10 @@
 # Infusion Diffusion design system
 
+Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
+Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion
+changes. Desktop arrows occupy the midpoint of the outer gutters. The scrolled
+navigation has a 1px semantic gold bottom rule inside its 64px height.
+
 ## Editorial carousel and floating navigation — 12 September 2026
 
 Devon authorized implementation of the reviewed Figma carousel/navigation on page

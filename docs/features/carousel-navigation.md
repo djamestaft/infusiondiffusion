@@ -125,3 +125,28 @@ The app on port 3000 was restarted with the existing primary checkout environmen
 loaded into process memory, plus the previously diagnosed Node connection timeout.
 All three production slide images now decode locally. No secrets were written
 into the worktree configuration. The local Studio reaches its normal login screen.
+
+### Follow-up review — horizontal movement and outer-gutter controls
+
+Devon requested horizontal slide movement like Finnkino, wider desktop arrow
+placement and a gold scrolled-header bottom rule. Copy and image now enter from
+the right while the previous slide exits left; backward navigation reverses.
+The 600ms ease-in-out timing is an implementation choice because Finnkino’s
+Cloudflare challenge prevented inspecting its precise easing/duration. There is
+no opacity animation. The shared backdrop stays fixed. Outgoing slides are inert
+and hidden from assistive technology immediately; reduced motion switches without
+animation. The overlapping grid retains height, including on wraparound and rapid
+input. An 8px clip inset preserves CTA focus-ring space.
+
+Desktop arrow centers sit midway through the outer gutters (left edge 10px at
+1440, 125px at 1900); mobile controls stay below the image. The scrolled header
+adds a 1px existing navigation-divider gold rule through an absolutely positioned
+pseudo-element, preserving the 64px height. Figma scrolled strips and motion notes
+are synchronized. Semantic colors are unchanged; new CSS keyframes own the motion.
+
+Motion follow-up verification: 15 targeted units, 33 affected Storybook tests and
+six Chromium tests passed (five viewport/control checks plus deterministic
+mid-transition, reverse, wraparound and rapid-click checks). Lint, types,
+formatting, Impeccable and both builds passed. Local screenshots confirm the
+mid-transition uses translation at full opacity and the scrolled gold rule is
+visible. No Sanity source changes or publication were made.

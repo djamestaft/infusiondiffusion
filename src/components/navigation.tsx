@@ -239,6 +239,9 @@ export function Navigation({
         floating && !scrolled && !open
           ? "bg-transparent"
           : "bg-navigation-surface",
+        floating &&
+          scrolled &&
+          "after:bg-navigation-divider after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px",
         linkFont === "display" ? "font-display" : "font-sans",
         (theme === "midnight" || floating) && "dark",
         className,
