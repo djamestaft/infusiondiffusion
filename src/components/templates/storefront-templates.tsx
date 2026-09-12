@@ -47,10 +47,12 @@ export function TemplateShell({
   cartCount,
   accountHref,
   currentHref,
+  floatingNavigation = false,
   surface = "base",
   children,
 }: TemplateNavigationProps & {
   currentHref?: string;
+  floatingNavigation?: boolean;
   surface?: "base" | "elevated";
   children: React.ReactNode;
 }) {
@@ -67,6 +69,7 @@ export function TemplateShell({
       }
     >
       <Navigation
+        floating={floatingNavigation}
         theme={navigationTheme}
         currentHref={currentHref}
         cartCount={cartCount}
@@ -201,6 +204,7 @@ export function HomeTemplate({
         : heroSlides.slice(0, 1);
   return (
     <TemplateShell
+      floatingNavigation
       navigationTheme={navigationTheme ?? "midnight"}
       cartCount={cartCount}
       accountHref={accountHref}

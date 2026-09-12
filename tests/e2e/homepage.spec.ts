@@ -9,7 +9,7 @@ const approvedHomeViewports = [
 ] as const;
 
 const homeStoryUrl = (story: string) =>
-  `http://127.0.0.1:6006/iframe.html?id=templates-storefront--${story}&viewMode=story`;
+  `${process.env.STORYBOOK_BASE_URL ?? "http://127.0.0.1:6006"}/iframe.html?id=templates-storefront--${story}&viewMode=story`;
 
 for (const viewport of approvedHomeViewports) {
   test(`preserves the approved Home composition at ${viewport.width}px`, async ({
@@ -108,10 +108,9 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
   const navigationHeader = page
     .getByRole("navigation", { name: "Primary" })
     .locator("..");
-  await expect(navigationHeader).toHaveCSS("border-bottom-style", "solid");
   await expect(navigationHeader).toHaveCSS(
-    "border-bottom-color",
-    "rgb(197, 164, 71)",
+    "background-color",
+    "rgba(0, 0, 0, 0)",
   );
   await expect(navigationHeader).toHaveCSS(
     "width",
@@ -183,7 +182,7 @@ test("reports a healthy deployment", async ({ request }) => {
   await expect(response.json()).resolves.toMatchObject({ status: "ok" });
 });
 
-test("keeps the hero, CTA, and navigation divider intact at 320px", async ({
+test("keeps the hero, CTA, and floating navigation intact at 320px", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 800 });
@@ -198,8 +197,8 @@ test("keeps the hero, CTA, and navigation divider intact at 320px", async ({
     .getByRole("navigation", { name: "Primary" })
     .locator("..");
   await expect(navigationHeader).toHaveCSS(
-    "border-bottom-color",
-    "rgb(197, 164, 71)",
+    "background-color",
+    "rgba(0, 0, 0, 0)",
   );
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),

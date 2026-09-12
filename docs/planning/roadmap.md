@@ -1,5 +1,18 @@
 # Infusion Diffusion Roadmap
 
+## Carousel/navigation refinement — 12 September 2026
+
+Devon authorized implementing the reviewed carousel and floating-navigation design
+in one Treehouse worktree, with generated background comparison assets and
+Storybook review. See [the bounded contract](../features/carousel-navigation.md).
+Branch `agent/carousel-navigation`; coordinator is sole writer. Extend existing
+components and additive Sanity fields, retaining shared-copy fallback, cart/account
+contracts and all Home sections. Local review is the immediate delivery; final
+source publication, release verification and human merge remain separate gates.
+Plane INF-35 was rechecked: In Progress, owner Devon; INF-36 stays downstream and
+INF-28/31 factual/content deferrals remain. This refinement does not mark those
+broader tickets complete.
+
 ## Post-merge navigation focus correction - 9 September 2026
 
 Devon approved and merged PR #80 at `0a24c0c`; production health and smoke checks

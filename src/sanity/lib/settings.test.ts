@@ -131,4 +131,38 @@ describe("site settings", () => {
       "three",
     ]);
   });
+  it("normalizes optional campaign copy and rejects external slide actions", async () => {
+    sanityFetchMock.mockResolvedValue({
+      data: {
+        homepage: {
+          heroSlides: [
+            {
+              id: "one",
+              src: "https://cdn.sanity.io/one.jpg",
+              alt: "One",
+              title: "  A ritual  ",
+              subtitle: "  ",
+              cta: { label: " Guide ", href: "/fragrance-guide" },
+            },
+            {
+              id: "two",
+              src: "https://cdn.sanity.io/two.jpg",
+              alt: "Two",
+              cta: { label: "Bad", href: "//outside.example" },
+            },
+          ],
+        },
+      },
+    });
+    const settings = await getSiteSettings({
+      perspective: "published",
+      stega: false,
+    });
+    expect(settings.homepage.heroSlides[0]).toMatchObject({
+      title: "A ritual",
+      subtitle: undefined,
+      cta: { label: "Guide", href: "/fragrance-guide" },
+    });
+    expect(settings.homepage.heroSlides[1].cta).toBeUndefined();
+  });
 });

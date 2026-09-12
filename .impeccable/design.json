@@ -36,6 +36,11 @@
         "name": "About and Guide contract",
         "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
         "section": "components"
+      },
+      {
+        "name": "Editorial carousel and floating navigation",
+        "body": "12 September approved Figma composition 2664:2 and mobile 2674:22: 64px header, uppercase Manrope, close underline, 44px account/bag/menu controls, transparent Home header until scrollY > 24 then midnight. Shared reed-shadow background; manual synchronized title/subtitle/CTA/image slides, 520/600 desktop columns, 5:4 media, mobile stack. Preserve existing tokens and conditional commerce links. See docs/features/carousel-navigation.md.",
+        "section": "components"
       }
     ],
     "dos": [

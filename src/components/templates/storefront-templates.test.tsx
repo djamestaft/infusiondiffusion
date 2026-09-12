@@ -146,18 +146,18 @@ describe("storefront templates", () => {
     expect(screen.getByRole("navigation", { name: "Primary" })).toBeVisible();
     expect(
       screen.getByRole("navigation", { name: "Primary" }).closest("header"),
-    ).toHaveClass("border-navigation-divider", "border-b");
+    ).toHaveClass("fixed", "bg-transparent");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Fragrance, composed",
     );
     expect(screen.getByTestId("home-hero-section")).toHaveClass(
       "dark",
       "bg-content-surface",
-      "lg:grid-cols-[minmax(0,600fr)_minmax(0,656fr)]",
+      "pt-16",
     );
     expect(
       screen.getAllByRole("link", { name: "Shop the collection" })[0],
-    ).toHaveClass("rounded-full", "w-[232px]");
+    ).toHaveClass("rounded-full", "w-[236px]");
     expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(4);
     expect(screen.getByTestId("home-cabinet-band")).toHaveClass(
       "bg-content-surface",

@@ -70,30 +70,16 @@ export function HomeContent({
 }) {
   return (
     <HomeRevealFlow>
-      <section
-        data-testid="home-hero-section"
-        className={`dark bg-content-surface text-content-primary grid gap-6 py-8 lg:grid-cols-[minmax(0,600fr)_minmax(0,656fr)] lg:items-center lg:gap-14 lg:py-16 ${gutters}`}
-      >
-        <div className="flex min-w-0 flex-col items-start gap-6 lg:gap-7">
-          <Heading
-            level={1}
-            treatment="display"
-            className="text-[38px] leading-[45px] tracking-normal min-[375px]:text-[42px] min-[375px]:leading-[49px] sm:text-[58px] sm:leading-[66px] lg:text-[72px] lg:leading-[79px]"
-          >
-            {content.heroTitle}
-          </Heading>
-          <p className="max-w-[520px] font-sans text-base leading-[27px] sm:text-lg sm:leading-[30px] lg:text-[19px] lg:leading-[31px]">
-            {content.heroIntroduction}
-          </p>
-          <Button
-            asChild
-            className="min-h-12 w-[232px] max-w-full uppercase lg:w-[238px]"
-          >
-            <a href="/shop">{content.heroActionLabel}</a>
-          </Button>
-        </div>
-        <HeroCarousel slides={slides} presentation="plain" className="w-full" />
-      </section>
+      <HeroCarousel
+        slides={slides}
+        presentation="editorial"
+        withNavigation
+        fallbackCopy={{
+          title: content.heroTitle,
+          subtitle: content.heroIntroduction,
+          cta: { label: content.heroActionLabel, href: "/shop" },
+        }}
+      />
 
       <section
         aria-labelledby="home-collection-title"

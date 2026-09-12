@@ -1,5 +1,19 @@
 # Infusion Diffusion design system
 
+## Editorial carousel and floating navigation — 12 September 2026
+
+Devon authorized implementation of the reviewed Figma carousel/navigation on page
+2004:8. See [the component contract](docs/features/carousel-navigation.md) for exact
+nodes, authoring, responsive adaptations and review evidence. Use uppercase
+Manrope navigation; Marcellus is a Storybook comparison. Header height is 64px,
+active underline is 3px below the text, and icon targets stay 44px. Home floats
+over the shared reed-shadow background until scrollY exceeds 24px, then fills
+with midnight. Other routes use a solid header. Editorial slides own title,
+subtitle, image and CTA with shared-content fallbacks and manual controls.
+Existing semantic tokens and Home sections remain. Actual licensed fonts are
+bundled locally and shared by the app and Storybook. This supersedes the earlier
+Home hero and navigation presentation rules only within this approved scope.
+
 ## Guide matching implementation - 9 September 2026
 
 Devon's subsequent review puts Suggested fragrances above Your fragrance

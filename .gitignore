@@ -82,3 +82,6 @@ adws/adw_data/sssf.db*
 .env
 __pycache__/
 *.pyc
+
+# Isolated browser-fixture server build
+/.next-e2e/

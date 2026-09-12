@@ -22,6 +22,9 @@ export type SiteSettings = {
       src: string;
       alt: string;
       caption?: string;
+      title?: string;
+      subtitle?: string;
+      cta?: { label: string; href: string };
       hotspot?: { x: number; y: number };
     }>;
     collectionTitle: string;
