@@ -273,13 +273,13 @@ applicable.
 
 ## Synchronization status
 
-| Layer                        | Current status                                                                                 |
-| ---------------------------- | ---------------------------------------------------------------------------------------------- |
-| Figma                        | Approved page `2004:14`; current layouts `2484:736`, support `2484:737`                        |
-| DESIGN.md and dated handoff  | Current design authority synchronized                                                          |
-| Foundation tokens            | Existing foundation retained; no visual token values changed by this consolidation             |
-| Runtime components/templates | INF-33/34, Contact and initial Guide matching delivered; PR #83 refinements under review        |
-| Storybook                    | Current component contracts implemented; consolidated PR #83 verification required |
+| Layer                        | Current status                                                                           |
+| ---------------------------- | ---------------------------------------------------------------------------------------- |
+| Figma                        | Approved page `2004:14`; current layouts `2484:736`, support `2484:737`                  |
+| DESIGN.md and dated handoff  | Current design authority synchronized                                                    |
+| Foundation tokens            | Existing foundation retained; no visual token values changed by this consolidation       |
+| Runtime components/templates | INF-33/34, Contact and initial Guide matching delivered; PR #83 refinements under review |
+| Storybook                    | Current component contracts implemented; consolidated PR #83 verification required       |
 
 A component is complete only when its Figma reference, semantic tokens,
 implementation and Storybook states agree, with comparison evidence at the

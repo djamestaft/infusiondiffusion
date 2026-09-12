@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { Navigation } from "@/components/navigation";
 
@@ -22,13 +23,22 @@ const fixtureSlides = [
   },
 ];
 
-export default async function CarouselE2EPage({
+export default function CarouselE2EPage(props: {
+  searchParams: Promise<{ editorial?: string }>;
+}) {
+  if (process.env.SHOPIFY_E2E_FIXTURES !== "1") notFound();
+  return (
+    <Suspense fallback={<p>Loading carousel fixture…</p>}>
+      <CarouselFixture {...props} />
+    </Suspense>
+  );
+}
+
+async function CarouselFixture({
   searchParams,
 }: {
   searchParams: Promise<{ editorial?: string }>;
 }) {
-  if (process.env.SHOPIFY_E2E_FIXTURES !== "1") notFound();
-
   if ((await searchParams).editorial === "1")
     return (
       <>

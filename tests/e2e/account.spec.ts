@@ -9,7 +9,7 @@ const viewports = [
 ];
 
 const storybookUrl = (story: string) =>
-  `http://127.0.0.1:6006/iframe.html?id=commerce-accountentry--${story}&viewMode=story`;
+  `${process.env.STORYBOOK_BASE_URL ?? "http://127.0.0.1:6006"}/iframe.html?id=commerce-accountentry--${story}&viewMode=story`;
 
 async function expectNoHorizontalOverflow(page: Page) {
   expect(
@@ -126,9 +126,9 @@ test("follows the mobile account Tab order and exposes visible focus", async ({
     page
       .getByRole("navigation", { name: "Primary", exact: true })
       .getByRole("link", { name: "Infusion Diffusion home" }),
-    page.getByRole("button", { name: "Open menu", exact: true }),
     page.getByRole("link", { name: "Account", exact: true }),
     page.getByRole("link", { name: "Cart", exact: true }),
+    page.getByRole("button", { name: "Open menu", exact: true }),
     page.getByRole("link", { name: "Continue to your account", exact: true }),
   ];
   for (const target of expectedOrder) {

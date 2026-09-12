@@ -235,7 +235,7 @@ export function Navigation({
     <header
       className={cn(
         "text-navigation-text top-0 z-40 w-full transition-colors duration-[180ms] motion-reduce:transition-none",
-        floating ? "fixed" : "sticky",
+        floating ? "fixed" : "border-navigation-divider sticky border-b",
         floating && !scrolled && !open
           ? "bg-transparent"
           : "bg-navigation-surface",
