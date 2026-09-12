@@ -6,7 +6,15 @@ import { Navigation } from "@/components/navigation";
 const meta = {
   title: "Components/Navigation",
   component: Navigation,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        component:
+          "Navigation uses an 80px desktop and 72px mobile/tablet header, retaining existing logo sizes and 44px controls. The solid border stays inside that height.",
+      },
+    },
+  },
   args: { currentHref: "/shop" },
 } satisfies Meta<typeof Navigation>;
 

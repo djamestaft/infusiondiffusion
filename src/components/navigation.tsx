@@ -234,7 +234,7 @@ export function Navigation({
   return (
     <header
       className={cn(
-        "text-navigation-text top-0 z-40 w-full transition-colors duration-[180ms] motion-reduce:transition-none",
+        "text-navigation-text top-0 z-40 h-[var(--navigation-height)] w-full transition-colors duration-[180ms] motion-reduce:transition-none",
         floating ? "fixed" : "border-navigation-divider sticky border-b",
         floating && !scrolled && !open
           ? "bg-transparent"
@@ -249,7 +249,7 @@ export function Navigation({
     >
       <nav
         aria-label="Primary"
-        className="relative mx-auto grid h-16 w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 sm:px-10 lg:grid-cols-[165px_minmax(0,1fr)_96px] lg:px-16"
+        className="relative mx-auto grid h-full w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 sm:px-10 lg:grid-cols-[165px_minmax(0,1fr)_96px] lg:px-16"
       >
         <Link
           ref={homeRef}
@@ -311,7 +311,7 @@ export function Navigation({
           aria-label="Navigation menu"
           className="bg-navigation-surface fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto lg:hidden"
         >
-          <div className="flex h-16 shrink-0 items-center justify-between px-5 min-[375px]:px-6">
+          <div className="flex h-[var(--navigation-height)] shrink-0 items-center justify-between px-5 min-[375px]:px-6">
             <Link
               href="/"
               aria-label="Infusion Diffusion home"

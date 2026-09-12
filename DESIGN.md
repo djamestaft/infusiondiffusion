@@ -1,5 +1,13 @@
 # Infusion Diffusion design system
 
+## Navigation breathing room — 12 September 2026
+
+Devon requested more space around the header logo. Use the shared responsive
+`--navigation-height`: 80px from 1024px, 72px below. Keep existing logo widths
+and 44px targets. Header, menu header and floating-hero offset share this token;
+solid borders remain inside the total height. Transparent and scrolled states
+have identical geometry. This supersedes the 64px contract below.
+
 Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
 Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion
 changes. Desktop arrows occupy the midpoint of the outer gutters. The scrolled

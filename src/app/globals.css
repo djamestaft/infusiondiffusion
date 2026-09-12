@@ -303,6 +303,7 @@
 }
 
 :root {
+  --navigation-height: 4.5rem;
   /* Approved INF-10 primitives. Semantic roles below are the public API. */
   --ink-900: #191916;
   --graphite-700: #3c3b35;
@@ -647,5 +648,11 @@
   }
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --navigation-height: 5rem;
   }
 }

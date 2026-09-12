@@ -395,7 +395,7 @@ function EditorialCarousel({
     <section
       className={cn(
         "dark bg-content-surface text-content-primary relative isolate flex min-h-svh flex-col justify-center",
-        withNavigation && "pt-16",
+        withNavigation && "pt-[var(--navigation-height)]",
         className,
       )}
       aria-label="Homepage campaigns"

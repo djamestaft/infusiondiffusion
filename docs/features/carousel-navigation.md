@@ -150,3 +150,22 @@ mid-transition, reverse, wraparound and rapid-click checks). Lint, types,
 formatting, Impeccable and both builds passed. Local screenshots confirm the
 mid-transition uses translation at full opacity and the scrolled gold rule is
 visible. No Sanity source changes or publication were made.
+
+## Post-merge navigation spacing — 12 September 2026
+
+PR #83 merged at `9df487d`. Devon requested more space around the existing
+logo. Header height is now 80px at 1024px+, 72px below, using the shared
+`--navigation-height` token for header, mobile menu header and hero offset.
+The solid border is included in that total. Logo widths, gutters, slide
+geometry, animation and 24px scroll threshold stay. This supersedes 64px
+references above. Reuse Navigation and Editorial Carousel stories; verify
+1440/768/390/320, keyboard access and equal top/scrolled heights.
+
+Spacing verification: local `pnpm check` passed (276 units, 305 Storybook tests,
+formatting/lint/types and both builds); 93 Chromium tests passed without retries.
+Reviewed Storybook captures at 1440/768/390/320 and transparent/scrolled headers.
+Impeccable navigation detection returned no findings. Figma variants 2664:17,
+2665:8, 2672:27/45, 2674:37, 2675:28/49 and their scrolled containers are updated;
+logo sizes remain. DESIGN.md, the semantic height token, components and stories
+are synchronized. The initial unit run exposed an obsolete `pt-16` assertion;
+it now checks the shared offset. Preview acceptance and human merge remain gates.
