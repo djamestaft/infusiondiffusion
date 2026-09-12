@@ -4,9 +4,11 @@
 
 PR #83 is human-merged at `9df487d`; its pending merge statements below are
 historical. Devon requested more header breathing room after reviewing the
-merged design. Bounded refinement on `agent/navigation-spacing`: 80px desktop,
-72px mobile/tablet, existing logo size, shared hero/menu offset, unchanged
-scroll behavior. Verify Storybook and integrated responsive keyboard/scroll
+merged design. Bounded refinement in PR #84 on `agent/navigation-spacing`: 86px desktop,
+78px mobile/tablet after another 3px per side, existing logo size, shared hero/menu
+offset and unchanged scroll threshold. Devon also requested six-second editorial
+autoplay with accessible pause controls, increased laptop arrow clearance and a
+soft moving-edge fade. Mobile and wide desktop gutters remain. Verify Storybook and integrated responsive keyboard/scroll
 states before preview and human merge. INF-35 remains In Progress (Devon),
 INF-36 Backlog (Shawnee); content, checkout and publication deferrals remain.
 

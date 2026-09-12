@@ -368,9 +368,15 @@ function EditorialCarousel({
   fallbackCopy,
   withNavigation = false,
   loading = false,
+  initialPaused = false,
+  forceReducedMotion,
+  forceSaveData,
   className,
 }: HeroCarouselProps) {
-  const slides = suppliedSlides.slice(0, 3);
+  const slides = React.useMemo(
+    () => suppliedSlides.slice(0, 3),
+    [suppliedSlides],
+  );
   const [selected, setSelected] = React.useState(0);
   const [previous, setPrevious] = React.useState<number | null>(null);
   const [direction, setDirection] = React.useState(1);
@@ -378,21 +384,111 @@ function EditorialCarousel({
   const [announcement, setAnnouncement] = React.useState("");
   const touch = React.useRef<{ x: number; y: number } | null>(null);
   const current = slides[active];
-  const move = (offset: number) => {
-    if (slides.length < 2) return;
-    const next = (active + offset + slides.length) % slides.length;
-    setPrevious(active);
-    setDirection(offset > 0 ? 1 : -1);
-    setSelected(next);
-    setAnnouncement(
-      `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
-    );
-  };
+  const carouselRef = React.useRef<HTMLElement>(null);
+  const [userPaused, setUserPaused] = React.useState(initialPaused);
+  const [hovered, setHovered] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  const [offscreen, setOffscreen] = React.useState(false);
+  const [ready, setReady] = React.useState(false);
+  const [motionPreference, setMotionPreference] = React.useState(false);
+  const [dataPreference, setDataPreference] = React.useState(false);
+  const reducedMotion = forceReducedMotion ?? motionPreference;
+  const saveData = forceSaveData ?? dataPreference;
+  React.useEffect(() => {
+    // Native boundary events also cover the separately hydrated floating header.
+    const carousel = carouselRef.current;
+    const enter = () => setHovered(true);
+    const leave = () => setHovered(false);
+    carousel?.addEventListener("mouseenter", enter);
+    carousel?.addEventListener("mouseleave", leave);
+    // Changing the Play/Pause icon can remove the old hover target before
+    // mouseleave fires. Pointer movement reconciles hover across that swap.
+    const updateHover = (event: PointerEvent) => {
+      if (event.pointerType === "mouse")
+        setHovered(Boolean(carousel?.contains(event.target as Node)));
+    };
+    document.addEventListener("pointermove", updateHover, { passive: true });
+    const query = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const updateMotion = () => setMotionPreference(Boolean(query?.matches));
+    const updateVisibility = () => setHidden(document.hidden);
+    updateMotion();
+    updateVisibility();
+    const connection = (
+      navigator as Navigator & {
+        connection?: {
+          saveData?: boolean;
+          addEventListener?: (name: string, listener: () => void) => void;
+          removeEventListener?: (name: string, listener: () => void) => void;
+        };
+      }
+    ).connection;
+    const updateConnection = () => {
+      setDataPreference(Boolean(connection?.saveData));
+      setReady(true);
+    };
+    updateConnection();
+    connection?.addEventListener?.("change", updateConnection);
+    query?.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", updateVisibility);
+    const observer =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            ([entry]) => setOffscreen(!entry.isIntersecting),
+            { threshold: 0.01 },
+          );
+    if (carouselRef.current) observer?.observe(carouselRef.current);
+    return () => {
+      carousel?.removeEventListener("mouseenter", enter);
+      carousel?.removeEventListener("mouseleave", leave);
+      document.removeEventListener("pointermove", updateHover);
+      query?.removeEventListener("change", updateMotion);
+      connection?.removeEventListener?.("change", updateConnection);
+      document.removeEventListener("visibilitychange", updateVisibility);
+      observer?.disconnect();
+    };
+  }, []);
+  const autoplayUnavailable = reducedMotion || saveData || loading;
+  const canAutoplay =
+    ready &&
+    slides.length > 1 &&
+    !autoplayUnavailable &&
+    !userPaused &&
+    !hovered &&
+    !hidden &&
+    !offscreen;
+  const move = React.useCallback(
+    (offset: number, manual = true) => {
+      if (slides.length < 2) return;
+      const next = (active + offset + slides.length) % slides.length;
+      setPrevious(reducedMotion ? null : active);
+      setDirection(offset > 0 ? 1 : -1);
+      setSelected(next);
+      if (manual) {
+        setUserPaused(true);
+        setAnnouncement(
+          `Slide ${next + 1} of ${slides.length}: ${slides[next].title ?? fallbackCopy?.title ?? ""}`,
+        );
+      }
+    },
+    [active, slides, fallbackCopy?.title, reducedMotion],
+  );
+  React.useEffect(() => {
+    if (!canAutoplay) return;
+    const timeout = window.setTimeout(() => move(1, false), 6_000);
+    return () => window.clearTimeout(timeout);
+  }, [canAutoplay, move]);
   const campaigns = slides.length
     ? slides
     : [{ id: "empty", src: "", alt: "" }];
   return (
     <section
+      ref={carouselRef}
+      data-autoplay={canAutoplay ? "running" : "paused"}
+      onFocusCapture={(event) => {
+        if (!(event.target as HTMLElement).closest("[data-carousel-rotation]"))
+          setUserPaused(true);
+      }}
       className={cn(
         "dark bg-content-surface text-content-primary relative isolate flex min-h-svh flex-col justify-center",
         withNavigation && "pt-[var(--navigation-height)]",
@@ -420,9 +516,10 @@ function EditorialCarousel({
         />
       ) : null}
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
-      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-16 lg:pt-20 lg:pb-10">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-24 lg:pt-20 lg:pb-10 2xl:px-16">
         <div
-          className="-m-2 grid overflow-hidden p-2"
+          className="hero-editorial-viewport -m-2 grid overflow-hidden p-2"
+          data-moving={previous !== null && !reducedMotion}
           style={{ "--hero-slide-direction": direction } as React.CSSProperties}
           data-testid="hero-carousel-viewport"
           onTouchStart={(event) => {
@@ -517,13 +614,36 @@ function EditorialCarousel({
             >
               <ChevronLeft aria-hidden="true" className="size-5" />
             </Button>
-            <span
-              className="mx-auto font-sans text-[13px] tabular-nums"
-              aria-hidden="true"
-            >
-              {String(active + 1).padStart(2, "0")} /{" "}
-              {String(slides.length).padStart(2, "0")}
-            </span>
+            <div className="mx-auto flex items-center gap-3">
+              <span
+                className="font-sans text-[13px] tabular-nums"
+                aria-hidden="true"
+              >
+                {String(active + 1).padStart(2, "0")} /{" "}
+                {String(slides.length).padStart(2, "0")}
+              </span>
+              <Button
+                data-carousel-rotation
+                variant="quiet"
+                size="icon"
+                className="size-11 rounded-full"
+                disabled={autoplayUnavailable}
+                aria-label={
+                  autoplayUnavailable
+                    ? "Autoplay unavailable"
+                    : userPaused
+                      ? "Play carousel"
+                      : "Pause carousel"
+                }
+                onClick={() => setUserPaused((paused) => !paused)}
+              >
+                {userPaused || autoplayUnavailable ? (
+                  <Play aria-hidden="true" className="size-4" />
+                ) : (
+                  <Pause aria-hidden="true" className="size-4" />
+                )}
+              </Button>
+            </div>
             <Button
               variant="outline"
               size="icon"

@@ -169,3 +169,41 @@ Impeccable navigation detection returned no findings. Figma variants 2664:17,
 logo sizes remain. DESIGN.md, the semantic height token, components and stories
 are synchronized. The initial unit run exposed an obsolete `pt-16` assertion;
 it now checks the shared offset. Preview acceptance and human merge remain gates.
+
+## Autoplay and laptop follow-up — PR #84
+
+Devon requested 3px more above and below the nav: shared height is 86px desktop,
+78px mobile/tablet. This supersedes the intermediate 80/72px values. At CSS widths
+1024–1535px the carousel alone uses 96px insets, leaving 42px between the 44px
+arrows and content. Navigation and later sections retain the shared site gutters;
+this is the requested bounded divergence. At 1536px+ and below 1024px the existing
+carousel gutters stay. Use the Laptop Storybook story at 1280px for review.
+
+Editorial slides now auto-advance every six seconds using the existing horizontal
+600ms motion. A 44px Pause/Play control sits beside the counter. Hover pauses while
+the pointer is inside; native boundary events handle the separately hydrated
+floating navigation correctly. Focus or manual navigation pauses until explicit
+Play. Hidden tabs and offscreen carousels suspend the timer; reduced-motion,
+save-data and loading states disable autoplay. Zero/single-slide states have no
+rotation controls. Automatic changes are not live-announced; manual ones are.
+
+The moving viewport uses a 24px alpha edge mask to soften clipping against the
+shared photographic background. This is an alpha fade, not a surface-color
+approximation, and only exists during movement. Resting media is sharp; reduced
+motion suppresses animation and masking. Existing source fields and maximum three
+slides remain. No source publication or checkout enablement is included.
+
+Figma navigation variants and main compositions are synchronized, including
+pause controls 2691:38/42/45. The motion contract is appended to 2676:40. Runtime
+CSS, DESIGN.md, components and Storybook use the same behavior and spacing.
+
+Follow-up verification: local full gate passed with 279 units and 309 Storybook
+tests, formatting/lint/types and both builds. All 96 Chromium tests passed with
+no retries. Autoplay tests cover six-second cadence, Pause/Play, manual/focus/hover
+pause, reduced-motion/data-saving/loading and offscreen suspension. The motion
+test checks edge masking during translation and its removal at rest. Desktop
+clearance is verified at 1024/1280/1440 and the original wide gutter at 1900.
+Reviewed seven-width Storybook captures and the paused transition midpoint;
+Impeccable found no carousel issues. Fixed a hover-resume issue caused by replacing
+the Play/Pause icon under the pointer: native boundary listeners plus pointer
+movement reconcile hover when moving onto the separately hydrated header.

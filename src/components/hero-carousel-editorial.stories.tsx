@@ -40,7 +40,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Approved carousel composition with horizontal 600ms slide transitions, outer-gutter desktop controls and a gold rule on the scrolled navigation. Header spacing is 80px on desktop and 72px on mobile/tablet, with a matching hero offset. Sample editorial slides and generated background options are review fixtures; they do not publish content to Sanity.",
+          "Approved carousel composition with horizontal 600ms slide transitions, outer-gutter desktop controls and a gold rule on the scrolled navigation. Header spacing is 86px on desktop and 78px on mobile/tablet, with a matching hero offset. Sample editorial slides and generated background options are review fixtures; they do not publish content to Sanity.",
       },
     },
   },
@@ -175,5 +175,24 @@ export const NavigationMobileOpen: Story = {
     const c = within(canvasElement);
     await userEvent.click(c.getByRole("button", { name: "Open menu" }));
     await expect(c.getByRole("dialog")).toBeVisible();
+  },
+};
+
+export const Paused: Story = { args: { initialPaused: true } };
+export const ReducedMotion: Story = { args: { forceReducedMotion: true } };
+export const SaveData: Story = { args: { forceSaveData: true } };
+export const Laptop: Story = {
+  ...CarouselWithNavigation,
+  globals: { viewport: { value: "laptop1280", isRotated: false } },
+  parameters: {
+    viewport: {
+      options: {
+        laptop1280: {
+          name: "Laptop 1280",
+          styles: { width: "1280px", height: "800px" },
+          type: "desktop",
+        },
+      },
+    },
   },
 };

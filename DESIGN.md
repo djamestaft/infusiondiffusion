@@ -3,10 +3,18 @@
 ## Navigation breathing room — 12 September 2026
 
 Devon requested more space around the header logo. Use the shared responsive
-`--navigation-height`: 80px from 1024px, 72px below. Keep existing logo widths
+`--navigation-height`: 86px from 1024px, 78px below. Keep existing logo widths
 and 44px targets. Header, menu header and floating-hero offset share this token;
 solid borders remain inside the total height. Transparent and scrolled states
-have identical geometry. This supersedes the 64px contract below.
+have identical geometry. This supersedes the 64px contract below. The follow-up adds 3px per side.
+
+Editorial autoplay advances every 6 seconds, with a 44px Pause/Play control
+beside the count. Hover pauses temporarily; focus or manual navigation pauses
+until Play. Hidden/offscreen content pauses; reduced motion, save-data and loading
+disable autoplay. Automatic changes are not live-announced. At 1024–1535px,
+hero insets are 96px, leaving 42px between arrows and content; mobile and wide
+screen gutters stay. A 24px alpha mask softens the viewport edges only while
+slides move, leaving resting photography crisp.
 
 Carousel motion refinement: Next moves copy/media right-to-left; Previous reverses.
 Use 600ms ease-in-out translation with no opacity pulse and instant reduced-motion

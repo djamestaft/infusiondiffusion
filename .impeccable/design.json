@@ -51,6 +51,11 @@
         "name": "Navigation breathing room",
         "body": "Shared --navigation-height is 80px desktop (1024px+) and 72px below. Existing logo sizes stay. Menu header and hero offset share the token; solid border is inside the height. Supersedes earlier 64px header.",
         "section": "components"
+      },
+      {
+        "name": "Carousel autoplay and laptop clearance",
+        "body": "86px desktop / 78px mobile navigation. Editorial slides rotate every 6s with pause/play, manual/focus pause and hover/visibility protections. Reduced-motion/save-data/loading disable autoplay. Laptop 1024\u20131535px hero insets 96px leave 42px arrow clearance; mobile/wide gutters unchanged. Moving stage edges use a 24px alpha fade; stationary media is crisp.",
+        "section": "components"
       }
     ],
     "dos": [

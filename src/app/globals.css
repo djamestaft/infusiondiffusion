@@ -303,7 +303,7 @@
 }
 
 :root {
-  --navigation-height: 4.5rem;
+  --navigation-height: 4.875rem;
   /* Approved INF-10 primitives. Semantic roles below are the public API. */
   --ink-900: #191916;
   --graphite-700: #3c3b35;
@@ -653,6 +653,22 @@
 
 @media (min-width: 1024px) {
   :root {
-    --navigation-height: 5rem;
+    --navigation-height: 5.375rem;
+  }
+}
+
+/* Fade only the moving stage edges; keep stationary copy and images sharp. */
+.hero-editorial-viewport[data-moving="true"] {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 24px,
+    black calc(100% - 24px),
+    transparent
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-editorial-viewport[data-moving] {
+    mask-image: none;
   }
 }

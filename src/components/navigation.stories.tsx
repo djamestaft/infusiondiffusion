@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Navigation uses an 80px desktop and 72px mobile/tablet header, retaining existing logo sizes and 44px controls. The solid border stays inside that height.",
+          "Navigation uses an 86px desktop and 78px mobile/tablet header, retaining existing logo sizes and 44px controls. The solid border stays inside that height.",
       },
     },
   },
