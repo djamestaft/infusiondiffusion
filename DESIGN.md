@@ -17,6 +17,13 @@ hero insets are 96px, leaving 42px between arrows and content; mobile and wide
 screen gutters stay. A 24px alpha mask softens the viewport edges only while
 slides move, leaving resting photography crisp.
 
+Phone carousel headlines use 30px type with 36px line height below 640px;
+descriptions use 15px/24px and CTA labels 12px, retaining 48px button height.
+Tablet and desktop typography is unchanged.
+
+Stacked mobile/tablet slides show image, copy and CTA, then controls. Desktop
+retains copy on the left and image on the right.
+
 Viewport fit: desktop media caps at `100svh - navigation height - 136px`;
 phone/tablet media uses `clamp(120px, 100svh - 500px, 380px)`. Narrow layouts
 use 16px copy gaps, 24px copy/media gaps and 24px/16px outer vertical padding.

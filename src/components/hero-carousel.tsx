@@ -568,14 +568,19 @@ function EditorialCarousel({
                 inert={!visible}
                 aria-hidden={!visible}
               >
-                <div className="flex min-w-0 flex-col items-start gap-4 lg:gap-6">
+                <CampaignImage
+                  slide={slide}
+                  priority={index === 0}
+                  loading={loading}
+                />
+                <div className="flex min-w-0 flex-col items-start gap-4 lg:order-first lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
-                    <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
+                    <h1 className="font-display max-w-[580px] text-[30px] leading-[36px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}
                     </h1>
                   ) : null}
                   {slide.subtitle || fallbackCopy?.subtitle ? (
-                    <p className="max-w-[520px] font-sans text-base leading-[26px] lg:text-lg lg:leading-[29px]">
+                    <p className="max-w-[520px] font-sans text-[15px] leading-6 sm:text-base sm:leading-[26px] lg:text-lg lg:leading-[29px]">
                       {slide.subtitle ?? fallbackCopy?.subtitle}
                     </p>
                   ) : null}
@@ -585,17 +590,12 @@ function EditorialCarousel({
                   !cta.href.includes("\\") ? (
                     <Button
                       asChild
-                      className="min-h-12 w-[236px] max-w-full uppercase"
+                      className="min-h-12 w-[236px] max-w-full text-xs uppercase sm:text-[13px]"
                     >
                       <a href={cta.href}>{cta.label}</a>
                     </Button>
                   ) : null}
                 </div>
-                <CampaignImage
-                  slide={slide}
-                  priority={index === 0}
-                  loading={loading}
-                />
               </div>
             );
           })}

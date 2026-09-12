@@ -59,7 +59,7 @@
       },
       {
         "name": "Carousel viewport fit",
-        "body": "Reserve navigation and counter room using viewport-aware media heights; desktop cap is 100svh minus navigation minus 136px. Narrow media clamps between 120px and 380px using 100svh minus 500px. Keep text and 44px targets; allow content extremes to scroll. Counter is 11px gold below the image, with no separate icon. Image border is 1px semantic gold.",
+        "body": "Reserve navigation and counter room using viewport-aware media heights; desktop cap is 100svh minus navigation minus 136px. Narrow media clamps between 120px and 380px using 100svh minus 500px. Keep text and 44px targets; allow content extremes to scroll. Counter is 11px gold below the image, with no separate icon. Image border is 1px semantic gold. Phone headlines below 640px use 30px type and 36px line height. Phone descriptions use 15px/24px; CTA labels use 12px with unchanged 48px button height.",
         "section": "components"
       }
     ],
