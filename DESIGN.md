@@ -18,7 +18,8 @@ screen gutters stay. A 24px alpha mask softens the viewport edges only while
 slides move, leaving resting photography crisp.
 
 Phone carousel headlines use 30px type with 36px line height below 640px;
-tablet and desktop typography is unchanged.
+descriptions use 15px/24px and CTA labels 12px, retaining 48px button height.
+Tablet and desktop typography is unchanged.
 
 Stacked mobile/tablet slides show image, copy and CTA, then controls. Desktop
 retains copy on the left and image on the right.
