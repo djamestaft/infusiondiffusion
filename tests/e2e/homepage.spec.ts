@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const approvedHomeViewports = [
+  { name: "wide", width: 1900, height: 1000 },
   { name: "desktop", width: 1440, height: 1000 },
   { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
@@ -19,6 +20,27 @@ for (const viewport of approvedHomeViewports) {
     await page.setViewportSize(viewport);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const hero = page.getByTestId("home-hero-section");
+    await expect(hero).toBeVisible();
+    expect((await hero.boundingBox())!.height).toBeGreaterThanOrEqual(
+      viewport.height,
+    );
+    const heroHeading = await page
+      .getByRole("heading", { level: 1 })
+      .boundingBox();
+    await expect(
+      page.getByRole("heading", { name: "A cabinet of atmosphere" }),
+    ).toBeVisible();
+    const cabinetHeading = await page
+      .getByRole("heading", { name: "A cabinet of atmosphere" })
+      .boundingBox();
+    const brand = await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: "Infusion Diffusion home" })
+      .boundingBox();
+    expect(heroHeading!.x).toBeCloseTo(cabinetHeading!.x, 0);
+    expect(brand!.x).toBeCloseTo(cabinetHeading!.x, 0);
 
     const orderedSections = [
       page.getByRole("heading", { level: 1 }),
@@ -98,6 +120,7 @@ test("reflows Home long content and preserves an empty-catalogue recovery", asyn
 });
 
 test("renders the live homepage journey accessibly", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   const consoleErrors: string[] = [];
   page.on("console", (message) => {
     if (message.type() === "error") consoleErrors.push(message.text());

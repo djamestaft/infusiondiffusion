@@ -23,7 +23,7 @@ reed-shadows is the implementation background; warm-limestone and botanical-shad
 are Storybook-only comparisons. No generated product identity or final catalogue
 asset acceptance is implied. Existing product images and Home sections are retained.
 
-Header is 64px, with a centered 1184px desktop rail, uppercase Manrope links and
+Header is 64px, with the site-wide 1440px outer container and 64px desktop gutters, uppercase Manrope links and
 a 3px gap between text and active underline. The optional display-font comparison
 uses Marcellus. Bag/account icons have 44px targets. Account remains conditional
 on the existing provisioned account destination; Storybook supplies it explicitly.
@@ -55,9 +55,10 @@ botanical-shadows 55 KB. UI remains accessible HTML, never baked into the image.
 
 ## Deliberate responsive adaptations
 
-Desktop copy/media uses the approved 520/600 ratio with a 64px gap and 5:4 image.
-Mobile stacks with 24px gutters. Content grows for long copy; overlapping grid
-slides reserve the largest slide's height. The integrated header reserves exactly
+Desktop copy/media keeps the 520/600 ratio with a 64px gap and 5:4 image.
+Gutters match the rest of the site: 20px below 375px, 24px mobile, 40px tablet and 64px desktop. Content grows for long copy; overlapping grid
+slides reserve the largest slide's height. Following Devon’s review, the hero has a 100svh minimum height and centers its content vertically, growing for longer content.
+The integrated header reserves exactly
 64px rather than the Figma extra composition's 72px spacer. Native cart badges and
 conditional account availability preserve working application contracts.
 
@@ -100,3 +101,27 @@ downstream. This bounded refinement does not complete their deferred release sco
 
 Authenticated Studio/draft Visual Editing and deployment review were not exercised.
 No production deployment or human merge is included in this local delivery.
+
+### Follow-up review — shared gutters and viewport height
+
+Devon requested matching navigation/hero gutters with the rest of the site and a
+viewport-filling hero to keep the following light section below the initial fold.
+Runtime, affected Figma navigation compositions and Storybook use that refinement.
+Local Studio’s missing-configuration screen was caused by an absent worktree
+`.env.local`. Public project/dataset configuration is now present in the ignored
+local file. Studio shows its normal sign-in screen, CLI project access succeeds,
+and a read-only production query finds three existing hero slides. No source
+mutation, publication, token rotation or copying of API tokens occurred.
+
+Follow-up verification: shared gutters and minimum viewport height checked at
+1900/1440/768/390/320; 33 affected Storybook tests and 20 relevant Chromium tests
+passed. Formatting, lint, types, Impeccable and both builds passed. The existing
+SEO metadata test was excluded from the follow-up layout run after reconnecting
+Sanity revealed the already-deferred production description still mentions room
+sprays and candles; no metadata publication was authorized. Axe checks run with
+reduced motion to avoid sampling a transient section-reveal opacity.
+
+The app on port 3000 was restarted with the existing primary checkout environment
+loaded into process memory, plus the previously diagnosed Node connection timeout.
+All three production slide images now decode locally. No secrets were written
+into the worktree configuration. The local Studio reaches its normal login screen.

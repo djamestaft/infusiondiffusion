@@ -246,7 +246,7 @@ export function Navigation({
     >
       <nav
         aria-label="Primary"
-        className="relative mx-auto grid h-16 w-full max-w-[1232px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 lg:grid-cols-[165px_minmax(0,1fr)_96px]"
+        className="relative mx-auto grid h-16 w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 sm:px-10 lg:grid-cols-[165px_minmax(0,1fr)_96px] lg:px-16"
       >
         <Link
           ref={homeRef}

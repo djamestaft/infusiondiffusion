@@ -390,7 +390,7 @@ function EditorialCarousel({
   return (
     <section
       className={cn(
-        "dark bg-content-surface text-content-primary relative isolate",
+        "dark bg-content-surface text-content-primary relative isolate flex min-h-svh flex-col justify-center",
         withNavigation && "pt-16",
         className,
       )}
@@ -416,7 +416,7 @@ function EditorialCarousel({
         />
       ) : null}
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
-      <div className="mx-auto max-w-[1440px] px-6 pt-10 pb-6 sm:px-10 lg:px-[min(8.89vw,128px)] lg:pt-20 lg:pb-10">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pt-10 pb-6 min-[375px]:px-6 sm:px-10 lg:px-16 lg:pt-20 lg:pb-10">
         <div
           className="grid"
           onTouchStart={(event) => {
@@ -450,7 +450,7 @@ function EditorialCarousel({
               >
                 <div className="flex min-w-0 flex-col items-start gap-6">
                   {slide.title || fallbackCopy?.title ? (
-                    <h1 className="font-display max-w-[520px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
+                    <h1 className="font-display max-w-[580px] text-[34px] leading-[41px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}
                     </h1>
                   ) : null}
@@ -488,7 +488,7 @@ function EditorialCarousel({
             <Button
               variant="outline"
               size="icon"
-              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:left-[max(24px,calc((100%-1440px)/2+40px))]"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:left-[max(24px,calc((100%-1440px)/2+10px))]"
               aria-label="Previous slide"
               onClick={() => move(-1)}
             >
@@ -504,7 +504,7 @@ function EditorialCarousel({
             <Button
               variant="outline"
               size="icon"
-              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:right-[max(24px,calc((100%-1440px)/2+40px))]"
+              className="size-11 rounded-full lg:absolute lg:top-1/2 lg:right-[max(24px,calc((100%-1440px)/2+10px))]"
               aria-label="Next slide"
               onClick={() => move(1)}
             >

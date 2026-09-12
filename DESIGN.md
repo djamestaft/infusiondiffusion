@@ -5,7 +5,7 @@
 Devon authorized implementation of the reviewed Figma carousel/navigation on page
 2004:8. See [the component contract](docs/features/carousel-navigation.md) for exact
 nodes, authoring, responsive adaptations and review evidence. Use uppercase
-Manrope navigation; Marcellus is a Storybook comparison. Header height is 64px,
+Manrope navigation; Marcellus is a Storybook comparison. Header/hero share the site’s 1440px outer container and 20/24/40/64px responsive gutters. The hero fills at least 100svh and grows with content. Header height is 64px,
 active underline is 3px below the text, and icon targets stay 44px. Home floats
 over the shared reed-shadow background until scrollY exceeds 24px, then fills
 with midnight. Other routes use a solid header. Editorial slides own title,
