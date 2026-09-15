@@ -1,5 +1,106 @@
 # Infusion Diffusion Roadmap
 
+Last updated: 15 September 2026
+
+## Launch completion — 15 September 2026
+
+Devon requested the remaining launch work: Peach Payments, restoration of the
+customer account icon and Shopify account functionality, complete end-to-end
+verification, then final SEO checks and domain switchover. This section governs
+the current sequence and supersedes older account exclusions and indefinite
+checkout/SEO deferrals below. This update plans the work; it does not claim
+payment activation, account provisioning or launch verification is complete.
+
+Protected `main` was safely fast-forwarded to `ffe19c1` before this refresh.
+Plane was checked: INF-33/34 are Done; INF-35 is In Progress (Devon), INF-36
+is Backlog (Shawnee), INF-28 is Todo (Devon), and INF-31 is In Progress
+(Shawnee). Preserve existing factual, asset and publication decisions; the
+remaining content is not automatically accepted by this launch plan.
+
+### Devon's delivery tasks
+
+All five new Plane tasks are assigned to Devon and start in Todo. Dependencies
+are recorded as actual Plane blocking relationships as well as in this roadmap.
+
+| Item | Deliverable | Completion depends on |
+| --- | --- | --- |
+| INF-38 | Integrate Peach Payments with Shopify-hosted checkout | Merchant/access and supported-integration discovery |
+| INF-39 | Restore the customer account icon and Shopify account functionality | Shopify account/domain and environment discovery |
+| INF-40 | Verify the complete storefront, payment and account journey | INF-38, INF-39 |
+| INF-41 | Complete final SEO and launch discoverability checks | INF-40, INF-31 (retains INF-28 approval dependency) |
+| INF-42 | Switch the production domain and verify launch | INF-40, INF-41, INF-36 |
+
+Payments and accounts can be prepared independently. Complete their combined
+E2E evidence before final SEO acceptance, then switch the domain after independent
+release review. SEO audit and DNS planning can start earlier; their completion
+gates remain in this order. No target dates are assumed.
+
+### Acceptance and evidence
+
+- **INF-38 — payments:** Confirm the existing store's supported Peach integration,
+  merchant readiness, methods, fees and test/live setup against current official
+  documentation. Preserve cart → Shopify `checkoutUrl`; Shopify owns orders,
+  totals and payment state. Prove success, decline, cancel, pending/retry and
+  applicable authentication flows, correct ZAR/shipping/tax/discount totals,
+  matching provider/order references and no duplicate charges/orders. Record
+  refund/cancellation checks, sanitized evidence and activation/rollback steps.
+- **INF-39 — accounts:** Reuse the existing Account utility icon, `/account`
+  route and server-side hosted handoff. `accountHref` controls icon visibility;
+  `.env.example` defaults `SHOPIFY_ACCOUNT_HANDOFF_ENABLED` to `false`. Actual
+  deployed flags and Shopify provisioning still need inspection. Verify new and
+  returning customer sign-in, sign-out, own-order history/detail, return to store,
+  guest checkout and unavailable/error recovery. Shape/review navigation states,
+  then update Storybook before integration; capture visual comparisons at
+  1440/768/390/320, keyboard/focus and 44px targets. Preserve Shopify customer
+  ownership and document any account-domain prerequisite for cutover.
+- **INF-40 — E2E:** Test all six launch products and primary/support routes,
+  product availability, cart mutations/persistence, guest and signed-in checkout,
+  Peach test payment, Shopify order confirmation and account order history.
+  Exercise stock/network/provider failures and retries on mobile and desktop.
+  Attach a named commit/preview, expected/actual matrix, sanitized transaction
+  references, traces and defect retests. Distinguish mocked automation from real
+  hosted-provider test evidence. Hand results to Shawnee for INF-36 review.
+- **INF-41 — SEO:** Check every public route's approved titles/descriptions,
+  headings, alt text, sharing previews, canonical URLs, robots/sitemap behavior,
+  accurate product structured data, private/preview indexing exclusions,
+  redirects, broken links and mobile performance. Confirm the apex/www choice,
+  remove preview/localhost references, and prepare Search Console verification
+  and sitemap submission. INF-28/31 retain factual/source approval and publication.
+  Final acceptance requires approved launch content; post-cutover checks pass to
+  INF-42.
+- **INF-42 — domain:** Confirm hostname and DNS ownership; record current records,
+  TTL, Vercel/Shopify/account configuration, mail dependencies and rollback target.
+  Prepare a concrete cutover plan before Devon authorizes execution. Preserve
+  mail/unrelated records; verify DNS, HTTPS, canonical redirects, configured
+  callbacks/return links, public-route health, cart/payment/account smoke tests,
+  indexing and sitemap submission. Record the observation window, errors,
+  deployed commit and post-cutover results.
+
+### Independent review and remaining gates
+
+INF-36 remains Shawnee's independent release review, now also blocked by INF-40;
+its INF-34/35 dependencies remain. It accepts the deployed release candidate,
+required checks, visual/accessibility evidence, residual risks, human merge and
+post-merge smoke results before custom-domain cutover. INF-42 owns the final
+domain and post-cutover evidence; do not add a reciprocal INF-42 blocker to
+INF-36. Devon's E2E execution does not replace independent acceptance.
+
+INF-35 stays open for remaining editorial/service work; Contact and the initial
+notes/character Guide matcher are delivered. INF-28/31 remain the factual,
+asset/content and source-publication gates. INF-37 About/Gallery refinement and
+INF-3/4 stockist work remain outside this launch sequence.
+
+Devon approves commercial terms, live payment/account enablement, real-money
+tests and the reviewed domain cutover. Required checks, independent review,
+human merge, production and editorial-publication gates remain. Use supported
+Shopify-hosted services; no custom checkout, identity backend or CMS migration.
+Credentials and customer data must not appear in public configuration or evidence.
+
+## Delivery history
+
+The dated entries below retain prior decisions and evidence. Where scope or
+sequence differs, the 15 September launch plan above takes precedence.
+
 ## Navigation spacing refinement — 12 September 2026
 
 PR #83 is human-merged at `9df487d`; its pending merge statements below are
@@ -187,8 +288,6 @@ header/footer, Home and Cart. See the
 Plane records successful post-merge Home, Cart and health smoke checks.
 Content/photography/care/SEO deferrals remain unchanged.
 
-Last updated: 8 September 2026
-
 ## Current approval and next delivery — 8 September 2026
 
 Devon approved all 24 current main-Exploration customer layouts: Home, Shop,
@@ -275,8 +374,9 @@ Further refinement of that combined experience follows.
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
 Preserve these integrations; improve presentation, content readiness and
-verification. No new commerce backend, CMS migration, customer account
-integration or custom checkout is in scope.
+verification. The 15 September launch plan adds Peach Payments and restoration
+of the existing Shopify account handoff. No new commerce backend, CMS migration,
+custom identity backend or custom checkout is in scope.
 
 The user approved brand evolution, an asset workstream and the complete
 shopping journey first. Retain the logo and Marcellus/Manrope by default;
@@ -343,7 +443,7 @@ design and merge decisions. Independent verification is required for release.
 | INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33               |
 | INF-27 | Approve essential Fragrance Guide, combined About/Gallery and Contact templates        | INF-32, INF-21, INF-23       |
 | INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34       |
-| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35               |
+| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35, INF-40       |
 | INF-37 | Refine combined About/Gallery after the shopping milestone; preserve existing URLs     | INF-36                       |
 
 INF-30's audit and owner approval are merged through PRs #66/#67; the required
