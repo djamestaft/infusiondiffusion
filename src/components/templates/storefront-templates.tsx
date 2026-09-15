@@ -118,6 +118,7 @@ export interface HomeTemplateProps extends TemplateNavigationProps {
 }
 
 export type HomeTemplateContent = {
+  heroBackgroundSrc?: string;
   heroTitle: string;
   heroIntroduction: string;
   heroActionLabel: string;

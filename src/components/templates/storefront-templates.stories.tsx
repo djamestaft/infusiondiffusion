@@ -281,6 +281,32 @@ export const HomeIvory: Story = {
   ),
   play: async ({ canvasElement }) => verifyHomeCabinetBand(canvasElement, 64),
 };
+export const HomeSanityBackground: Story = {
+  render: () => (
+    <HomeTemplate
+      products={productCardFixtures}
+      heroImage={featured.image}
+      content={{
+        heroBackgroundSrc:
+          "https://cdn.sanity.io/images/j222nd1i/production/56de03ec88ef55f67a266d1a958798e822fb37d9-2172x724.png",
+      }}
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const background = canvasElement.querySelector(
+      '[data-testid="home-hero-section"] > img',
+    );
+    await expect(background).toHaveAttribute("alt", "");
+    await expect(background?.getAttribute("src")).toContain(
+      "56de03ec88ef55f67a266d1a958798e822fb37d9",
+    );
+  },
+};
+export const HomeSanityBackgroundMobile: Story = {
+  ...HomeSanityBackground,
+  globals: { viewport: { value: "contact390", isRotated: false } },
+};
+
 export const HomeMidnightNavigation: Story = {
   render: () => (
     <HomeTemplate
