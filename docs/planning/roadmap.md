@@ -2,6 +2,17 @@
 
 Last updated: 15 September 2026
 
+## Peach Payments started — 15 September 2026
+
+Devon authorized INF-38 execution; it is now In Progress. The
+[readiness record](../features/inf-38-peach-payments.md) confirms the supported
+Shopify payment extension, current read-only ZAR/store-domain evidence, local
+checkout gate and 14 passing baseline cart tests. Merchant status and dashboard
+access remain unconfirmed; provider configuration and hosted payment tests are
+not complete. Continue with sandbox connection after that information is supplied.
+The initial Todo states in the launch-plan snapshot below are historical for
+INF-38; other task states and launch gates remain unchanged.
+
 ## Launch completion — 15 September 2026
 
 Devon requested the remaining launch work: Peach Payments, restoration of the
