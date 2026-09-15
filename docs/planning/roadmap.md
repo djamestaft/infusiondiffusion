@@ -2,6 +2,28 @@
 
 Last updated: 15 September 2026
 
+## Payment-provider blocker — 15 September 2026
+
+Peach declined the client's application because it has paused early-stage
+merchant onboarding while rebuilding its process. Devon supplied the response;
+it gives no committed reopening date beyond the coming months. The client has
+no Peach merchant account. INF-38 remains In Progress in Plane, with an external
+blocker; its sandbox setup cannot proceed. This supersedes the next-action wording
+in the earlier readiness notes below.
+
+Recommend evaluating Payfast Aggregation next: its official Shopify integration
+and company/sole-trader registration are available in the published documentation.
+Yoco also documents Shopify support. See the
+[provider decision record](../features/inf-38-peach-payments.md#external-blocker-and-replacement-decision).
+Devon/client selection, merchant approval, current fees and applicable test flows
+must be confirmed before adopting a replacement. No provider switch is approved
+by this blocker report alone.
+
+INF-40 still requires an operational, tested payment provider through INF-38.
+INF-39 and independent SEO/domain preparation can continue; final launch gates
+remain. After provider selection, reconcile provider-specific task wording across
+INF-38/40/42 and the launch sequence; preserve the Shopify-hosted checkout.
+
 ## Peach Payments started — 15 September 2026
 
 Devon authorized INF-38 execution; it is now In Progress. The

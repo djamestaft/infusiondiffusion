@@ -1,8 +1,43 @@
 # INF-38 — Peach Payments readiness
 
-Date: 15 September 2026. Owner: Devon. Status: In Progress; merchant setup and
-authenticated dashboard access are pending confirmation. No payment extension
-has been installed or activated by this work. No payment has been attempted.
+Date: 15 September 2026. Owner: Devon. Status: In Progress in Plane; Peach
+onboarding is externally blocked. No payment extension has been installed or
+activated by this work. No payment has been attempted.
+
+## External blocker and replacement decision
+
+Devon confirmed the client has no Peach merchant account and supplied Peach's
+application response: early-stage merchant onboarding is paused during a rebuild.
+The response offers only a possible return in the coming months, without a firm
+date. This supersedes the pending-account-status and sandbox-next-step notes below;
+those remain a historical technical preparation record, not an executable launch
+plan while onboarding is unavailable.
+
+Proposed next application: **Payfast Aggregation**, subject to Devon/client
+selection, merchant verification and acceptance of current commercial terms.
+
+- [Official Shopify integration](https://payfast.io/integration/plugins/shopify/)
+- [Registration](https://registration.payfast.io/)
+- [Sole-trader and company signup guidance](https://support.payfast.help/portal/en/kb/articles/sign-up-with-payfast-20-9-2022)
+- [Current published fees](https://payfast.io/fees/)
+- [Shopify support and testing guidance](https://support.payfast.help/portal/en/kb/integration/shopping-carts/shopify)
+
+The official registration flow lists Company and Sole Trader accounts; this is
+evidence of an application route, not approval or an onboarding-time guarantee
+for Infusion Diffusion. Check the client's eligibility and complete verification
+before relying on it for launch. Keep the account under the client's legal entity.
+Review provider fees together with the actual Shopify plan's third-party fees.
+
+[Yoco for Shopify](https://support.yoco.help/en/articles/164960-yoco-for-shopify)
+is an alternative, with documented cards, Apple Pay and Google Pay support. Its
+Shopify guide asks for a payment of at least R2 to check setup; do not assume
+Peach's sandbox procedure applies or run a paid verification without authorization.
+
+No replacement provider has been selected, installed or activated. On selection,
+revise INF-38's provider scope and INF-40/42's provider-specific acceptance wording
+together. Existing cart and Shopify hosted checkout remain the integration boundary.
+INF-40 remains blocked on payment delivery; independent INF-39 account work can
+continue. Do not treat the old Peach setup checklist as the current next action.
 
 ## Integration decision
 
