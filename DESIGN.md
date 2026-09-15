@@ -339,3 +339,9 @@ Button rendering correction: primary link labels must match the product Add to
 Cart foreground. Keep the decorative gold material behind all content within
 the isolated button stacking context, including plain-text anchor labels.
 Components/Button/Primary Link Parity records native/link visual parity.
+
+Shared carousel background — 15 September 2026: Devon selected Figma Exploration
+node `2727:44` (Reed / Monstera, palm and fern). The optional Sanity Homepage
+hero background selects the decorative shared image. Keep the existing responsive
+crop and readability scrim; clearing the selection restores original Reed Shadows.
+The comparison collection is `2727:37`. No token or layout changes.

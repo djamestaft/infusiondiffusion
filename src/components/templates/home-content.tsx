@@ -71,6 +71,7 @@ export function HomeContent({
   return (
     <HomeRevealFlow>
       <HeroCarousel
+        backgroundSrc={content.heroBackgroundSrc}
         slides={slides}
         presentation="editorial"
         withNavigation

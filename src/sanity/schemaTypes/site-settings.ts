@@ -115,6 +115,13 @@ export const siteSettings = defineType({
           validation: (rule) => rule.max(30),
         }),
         defineField({
+          name: "heroBackground",
+          title: "Hero carousel background",
+          type: "image",
+          description:
+            "Shared decorative backdrop behind every slide. Use a wide image with a quiet center. Clear this field to restore the original Reed Shadows background. Preview changes before publishing.",
+        }),
+        defineField({
           name: "heroSlides",
           title: "Hero carousel slides",
           type: "array",

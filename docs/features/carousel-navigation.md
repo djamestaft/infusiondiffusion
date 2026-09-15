@@ -284,3 +284,32 @@ image proportions, axe, keyboard and motion. Screenshots at 320/390/768/1440
 confirmed the change; primary-workspace evidence is `output/hero-center/`.
 Impeccable returned no deterministic findings. Independent review and preview
 acceptance remain pending before human merge.
+
+## Configurable shared background — 15 September 2026
+
+Devon selected Figma `2727:44` (Reed / Monstera, palm and fern) and requested
+Sanity configuration to demo alternatives. Collection `2727:37` contains three
+originals and seven foliage variants; all ten are uploaded to Sanity with titles
+prefixed `Carousel background /`.
+
+In Site settings → Homepage → Hero carousel background, select an existing asset
+or upload another wide image. Use Studio Presentation to preview the draft on
+Home. Publish to make the choice public after the application PR is merged.
+Remove the image and publish to restore the bundled Reed Shadows fallback.
+This background is decorative; it needs no alternative text. Slide photos and
+copy remain separate. Existing responsive crop, dark scrim, cache invalidation
+and live preview use the same Site settings query and document subscription.
+
+Acceptance: selected image reaches the Home carousel, blank/missing selection
+restores the default, draft/published perspectives stay separate, and asset
+selection does not change slides or commerce data. Schema and query types are
+regenerated; template stories cover the selected image on desktop and mobile.
+No roadmap milestones change for this editorial configuration enhancement.
+
+Verification: full `pnpm check` passed (284 unit/integration tests, 314 Storybook
+stories, lint, types, formatting, Storybook build and Next production build).
+Playwright inspected the selected Sanity asset at 390px and 1440px with no browser
+errors or hero axe violations. Screenshots: `evidence/carousel-background-390.png`
+and `evidence/carousel-background-1440.png`. Figma asset and documentation are
+synced; semantic tokens and responsive component geometry are unchanged.
+The chosen asset is saved in the Site settings draft; publication follows review.
