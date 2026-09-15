@@ -21,6 +21,11 @@ Phone carousel headlines use 30px type with 36px line height below 640px;
 descriptions use 15px/24px and CTA labels 12px, retaining 48px button height.
 Tablet and desktop typography is unchanged.
 
+Phone hero alignment — 15 September 2026: below 640px, center each editorial
+slide's heading, description and CTA within the content column. At 640px and
+above retain left alignment. Image proportions, gutters and controls stay unchanged.
+This user-approved refinement supersedes the left-aligned phone Figma copy.
+
 Stacked mobile/tablet slides show image, copy and CTA, then controls. Desktop
 retains copy on the left and image on the right.
 
