@@ -42,6 +42,20 @@ for (const width of [1900, 1440, 1280, 1024, 768, 390, 320]) {
     await expect(counter).toHaveCSS("font-size", "11px");
     await expect(counter).toHaveCSS("color", "rgb(197, 164, 71)");
     const mediaBox = (await media.boundingBox())!;
+    const heading = page.getByRole("heading", { level: 1 });
+    await expect(heading).toHaveCSS(
+      "text-align",
+      width < 640 ? "center" : "left",
+    );
+    if (width < 640) {
+      const action = (await page
+        .getByRole("link", { name: "Shop the collection", exact: true })
+        .boundingBox())!;
+      expect(action.x + action.width / 2).toBeCloseTo(
+        mediaBox.x + mediaBox.width / 2,
+        0,
+      );
+    }
     expect(mediaBox.width / mediaBox.height).toBeCloseTo(5 / 4, 2);
     await expect(media.locator("img")).toHaveCSS("object-fit", "contain");
     const counterBox = (await counter.boundingBox())!;

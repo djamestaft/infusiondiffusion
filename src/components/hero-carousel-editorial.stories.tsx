@@ -71,6 +71,14 @@ export const BotanicalShadows: Story = {
 };
 export const Mobile: Story = {
   globals: { viewport: { value: "contact390", isRotated: false } },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Phone slides center the heading, description and CTA below 640px. Tablet and desktop retain left-aligned copy.",
+      },
+    },
+  },
 };
 export const NarrowMobile: Story = {
   globals: { viewport: { value: "contact320", isRotated: false } },

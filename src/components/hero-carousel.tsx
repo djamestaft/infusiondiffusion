@@ -573,7 +573,7 @@ function EditorialCarousel({
                   priority={index === 0}
                   loading={loading}
                 />
-                <div className="flex min-w-0 flex-col items-start gap-4 lg:order-first lg:gap-6">
+                <div className="flex min-w-0 flex-col items-center gap-4 text-center sm:items-start sm:text-left lg:order-first lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
                     <h1 className="font-display max-w-[580px] text-[30px] leading-[36px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
                       {slide.title ?? fallbackCopy?.title}

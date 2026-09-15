@@ -264,3 +264,23 @@ Independent review, Vercel preview acceptance and human merge remain pending.
 INF-35 stays In Progress (Devon), INF-36 remains downstream; no strategic
 roadmap milestone changes. Plane's older PR83 merge notes are historical;
 PR83/84/85 are merged on the fetched base 196473f.
+
+## Phone copy alignment — 15 September 2026
+
+Devon requests centered mobile hero slides. Below 640px center the title,
+description and CTA within the existing column; tablet/desktop retain left
+alignment. Preserve image fitting, all spacing, controls and carousel behavior.
+Reuse HeroCarousel, Mobile Storybook and integrated responsive browser tests.
+Figma phone frames retain historical left alignment; this is an explicit
+user-authorized alignment divergence. DESIGN.md, Impeccable rules, runtime and
+Storybook reflect the current instruction. No new tokens or Sanity changes.
+INF-35 remains In Progress (Devon), INF-36 downstream; no roadmap milestone
+changes. Preview review and human merge remain required.
+
+Verification: `pnpm check` passed (279 units, 312 Storybook checks, formatting,
+lint, types and both builds). All 14 Chromium carousel checks passed, including
+phone center alignment, unchanged tablet/desktop left alignment, centered CTA,
+image proportions, axe, keyboard and motion. Screenshots at 320/390/768/1440
+confirmed the change; primary-workspace evidence is `output/hero-center/`.
+Impeccable returned no deterministic findings. Independent review and preview
+acceptance remain pending before human merge.

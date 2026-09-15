@@ -61,6 +61,11 @@
         "name": "Carousel viewport fit",
         "body": "12 September correction: preserve width-driven 5:4 campaign frames at every viewport, aligned to Figma 2674:31 (342 x 273.6). Use contain fitting to show complete source images without distortion or cropping; portrait images have side space. Let short screens scroll. Supersedes viewport-dependent media heights. Keep text and 44px targets. Counter is 11px gold below the image, with no separate icon. Image border is 1px semantic gold. Phone headlines below 640px use 30px type and 36px line height. Phone descriptions use 15px/24px; CTA labels use 12px with unchanged 48px button height.",
         "section": "components"
+      },
+      {
+        "name": "Phone hero alignment",
+        "body": "15 September user refinement: below 640px center editorial slide headings, descriptions and CTA buttons. At 640px and above retain left alignment. Preserve 5:4 contained imagery, gutters, controls and motion.",
+        "section": "components"
       }
     ],
     "dos": [
