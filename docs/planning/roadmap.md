@@ -1,5 +1,187 @@
 # Infusion Diffusion Roadmap
 
+Last updated: 16 September 2026
+
+## Payfast sandbox succeeds — 16 September 2026
+
+Payfast is installed and Active in Shopify with Test mode on. Devon confirms
+merchant verification and access to both dashboards. On protected-main `f1e2d88`,
+an isolated local headless storefront completed a real Payfast sandbox journey:
+product → cart → Shopify checkout → Payfast virtual wallet → Shopify confirmation
+8F06IMM5U / order #1002, R554.25. Devon's responding Admin screenshot shows
+Paid / Unfulfilled. The test order must remain unfulfilled.
+
+A second checkout's initial processing error recovered on retry; sandbox
+cancellation then returned to a usable checkout. A temporary cart error recovered
+on refresh. Both causes remain unresolved for E2E follow-up. Fourteen existing
+cart/action/session tests passed. See the detailed
+[Payfast evidence and remaining acceptance](../features/inf-38-payfast.md).
+
+INF-38 remains In Progress, owned by Devon. Transaction-reference reconciliation,
+test marker/duplicate checks, broader failure flows, business tax/shipping and
+commercial readiness remain open. INF-40 consumes this evidence; INF-42 must
+verify that checkout's Continue shopping link returns to the headless storefront.
+No source-code change or deployed checkout-flag change was needed for this test.
+Live activation and real-money testing retain the existing human gates.
+This entry supersedes earlier unconfirmed connection/testing statements below.
+
+Devon subsequently authorized moving this work onto `main` and enabling remote
+checkout **using Payfast's test system**. Prepare the reviewed release and set the
+deployed checkout environment flag, retaining Payfast Test mode. This limited
+sandbox authorization supersedes the earlier local-only test scope; live payments
+remain gated. All 284 unit/integration tests passed during release preparation.
+
+## Payfast selected; client account created — 16 September 2026
+
+Devon confirms the client has created a Payfast account. INF-38 now delivers
+Payfast through the existing Shopify-hosted checkout; it remains In Progress,
+owned by Devon. Merchant verification, dashboard access, Shopify app connection,
+commercial terms and test/live state are still unconfirmed. Account creation
+does not establish approval or payment readiness.
+
+The [Payfast delivery record](../features/inf-38-payfast.md) owns the next steps.
+INF-38/40/42 and the Plane project summary are reconciled to Payfast, with
+existing dependencies and human gates retained. Confirm verification and access,
+connect the supported app, then verify supported sandbox flows before proposing
+live enablement. No production checkout flag or provider setting has changed.
+
+This decision supersedes the Peach provider references and replacement-selection
+pending statements below. The earlier audit, tests and Peach rejection are
+historical evidence. Protected main was refreshed to `f1e2d88`; the local delivery
+branch retains the earlier roadmap work and includes that current main.
+
+## Payment-provider blocker — 15 September 2026
+
+Peach declined the client's application because it has paused early-stage
+merchant onboarding while rebuilding its process. Devon supplied the response;
+it gives no committed reopening date beyond the coming months. The client has
+no Peach merchant account. INF-38 remains In Progress in Plane, with an external
+blocker; its sandbox setup cannot proceed. This supersedes the next-action wording
+in the earlier readiness notes below.
+
+Recommend evaluating Payfast Aggregation next: its official Shopify integration
+and company/sole-trader registration are available in the published documentation.
+Yoco also documents Shopify support. See the
+[provider decision record](../features/inf-38-peach-payments.md#external-blocker-and-replacement-decision).
+Devon/client selection, merchant approval, current fees and applicable test flows
+must be confirmed before adopting a replacement. No provider switch is approved
+by this blocker report alone.
+
+INF-40 still requires an operational, tested payment provider through INF-38.
+INF-39 and independent SEO/domain preparation can continue; final launch gates
+remain. After provider selection, reconcile provider-specific task wording across
+INF-38/40/42 and the launch sequence; preserve the Shopify-hosted checkout.
+
+## Peach Payments started — 15 September 2026
+
+Devon authorized INF-38 execution; it is now In Progress. The
+[readiness record](../features/inf-38-peach-payments.md) confirms the supported
+Shopify payment extension, current read-only ZAR/store-domain evidence, local
+checkout gate and 14 passing baseline cart tests. Merchant status and dashboard
+access remain unconfirmed; provider configuration and hosted payment tests are
+not complete. Continue with sandbox connection after that information is supplied.
+The initial Todo states in the launch-plan snapshot below are historical for
+INF-38; other task states and launch gates remain unchanged.
+
+## Launch completion — 15 September 2026
+
+Devon requested the remaining launch work: Peach Payments, restoration of the
+customer account icon and Shopify account functionality, complete end-to-end
+verification, then final SEO checks and domain switchover. This section governs
+the current sequence and supersedes older account exclusions and indefinite
+checkout/SEO deferrals below. This update plans the work; it does not claim
+payment activation, account provisioning or launch verification is complete.
+
+Protected `main` was safely fast-forwarded to `ffe19c1` before this refresh.
+Plane was checked: INF-33/34 are Done; INF-35 is In Progress (Devon), INF-36
+is Backlog (Shawnee), INF-28 is Todo (Devon), and INF-31 is In Progress
+(Shawnee). Preserve existing factual, asset and publication decisions; the
+remaining content is not automatically accepted by this launch plan.
+
+### Devon's delivery tasks
+
+All five new Plane tasks are assigned to Devon and start in Todo. Dependencies
+are recorded as actual Plane blocking relationships as well as in this roadmap.
+
+| Item   | Deliverable                                                         | Completion depends on                               |
+| ------ | ------------------------------------------------------------------- | --------------------------------------------------- |
+| INF-38 | Integrate Payfast with Shopify-hosted checkout                      | Merchant verification, access and test connection   |
+| INF-39 | Restore the customer account icon and Shopify account functionality | Shopify account/domain and environment discovery    |
+| INF-40 | Verify the complete storefront, payment and account journey         | INF-38, INF-39                                      |
+| INF-41 | Complete final SEO and launch discoverability checks                | INF-40, INF-31 (retains INF-28 approval dependency) |
+| INF-42 | Switch the production domain and verify launch                      | INF-40, INF-41, INF-36                              |
+
+Payments and accounts can be prepared independently. Complete their combined
+E2E evidence before final SEO acceptance, then switch the domain after independent
+release review. SEO audit and DNS planning can start earlier; their completion
+gates remain in this order. No target dates are assumed.
+
+### Acceptance and evidence
+
+- **INF-38 — payments:** Confirm the existing store's supported Payfast integration,
+  merchant readiness, methods, fees and test/live setup against current official
+  documentation. Preserve cart → Shopify `checkoutUrl`; Shopify owns orders,
+  totals and payment state. Prove success, decline, cancel, pending/retry and
+  applicable authentication flows, correct ZAR/shipping/tax/discount totals,
+  matching provider/order references and no duplicate charges/orders. Record
+  refund/cancellation checks, sanitized evidence and activation/rollback steps.
+- **INF-39 — accounts:** Reuse the existing Account utility icon, `/account`
+  route and server-side hosted handoff. `accountHref` controls icon visibility;
+  `.env.example` defaults `SHOPIFY_ACCOUNT_HANDOFF_ENABLED` to `false`. Actual
+  deployed flags and Shopify provisioning still need inspection. Verify new and
+  returning customer sign-in, sign-out, own-order history/detail, return to store,
+  guest checkout and unavailable/error recovery. Shape/review navigation states,
+  then update Storybook before integration; capture visual comparisons at
+  1440/768/390/320, keyboard/focus and 44px targets. Preserve Shopify customer
+  ownership and document any account-domain prerequisite for cutover.
+- **INF-40 — E2E:** Test all six launch products and primary/support routes,
+  product availability, cart mutations/persistence, guest and signed-in checkout,
+  Payfast test payment, Shopify order confirmation and account order history.
+  Exercise stock/network/provider failures and retries on mobile and desktop.
+  Attach a named commit/preview, expected/actual matrix, sanitized transaction
+  references, traces and defect retests. Distinguish mocked automation from real
+  hosted-provider test evidence. Hand results to Shawnee for INF-36 review.
+- **INF-41 — SEO:** Check every public route's approved titles/descriptions,
+  headings, alt text, sharing previews, canonical URLs, robots/sitemap behavior,
+  accurate product structured data, private/preview indexing exclusions,
+  redirects, broken links and mobile performance. Confirm the apex/www choice,
+  remove preview/localhost references, and prepare Search Console verification
+  and sitemap submission. INF-28/31 retain factual/source approval and publication.
+  Final acceptance requires approved launch content; post-cutover checks pass to
+  INF-42.
+- **INF-42 — domain:** Confirm hostname and DNS ownership; record current records,
+  TTL, Vercel/Shopify/account configuration, mail dependencies and rollback target.
+  Prepare a concrete cutover plan before Devon authorizes execution. Preserve
+  mail/unrelated records; verify DNS, HTTPS, canonical redirects, configured
+  callbacks/return links, public-route health, cart/payment/account smoke tests,
+  indexing and sitemap submission. Record the observation window, errors,
+  deployed commit and post-cutover results.
+
+### Independent review and remaining gates
+
+INF-36 remains Shawnee's independent release review, now also blocked by INF-40;
+its INF-34/35 dependencies remain. It accepts the deployed release candidate,
+required checks, visual/accessibility evidence, residual risks, human merge and
+post-merge smoke results before custom-domain cutover. INF-42 owns the final
+domain and post-cutover evidence; do not add a reciprocal INF-42 blocker to
+INF-36. Devon's E2E execution does not replace independent acceptance.
+
+INF-35 stays open for remaining editorial/service work; Contact and the initial
+notes/character Guide matcher are delivered. INF-28/31 remain the factual,
+asset/content and source-publication gates. INF-37 About/Gallery refinement and
+INF-3/4 stockist work remain outside this launch sequence.
+
+Devon approves commercial terms, live payment/account enablement, real-money
+tests and the reviewed domain cutover. Required checks, independent review,
+human merge, production and editorial-publication gates remain. Use supported
+Shopify-hosted services; no custom checkout, identity backend or CMS migration.
+Credentials and customer data must not appear in public configuration or evidence.
+
+## Delivery history
+
+The dated entries below retain prior decisions and evidence. Where scope or
+sequence differs, the 15 September launch plan above takes precedence.
+
 ## Navigation spacing refinement — 12 September 2026
 
 PR #83 is human-merged at `9df487d`; its pending merge statements below are
@@ -187,8 +369,6 @@ header/footer, Home and Cart. See the
 Plane records successful post-merge Home, Cart and health smoke checks.
 Content/photography/care/SEO deferrals remain unchanged.
 
-Last updated: 8 September 2026
-
 ## Current approval and next delivery — 8 September 2026
 
 Devon approved all 24 current main-Exploration customer layouts: Home, Shop,
@@ -275,8 +455,9 @@ Further refinement of that combined experience follows.
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
 Preserve these integrations; improve presentation, content readiness and
-verification. No new commerce backend, CMS migration, customer account
-integration or custom checkout is in scope.
+verification. The 15 September launch plan adds Peach Payments and restoration
+of the existing Shopify account handoff. No new commerce backend, CMS migration,
+custom identity backend or custom checkout is in scope.
 
 The user approved brand evolution, an asset workstream and the complete
 shopping journey first. Retain the logo and Marcellus/Manrope by default;
@@ -343,7 +524,7 @@ design and merge decisions. Independent verification is required for release.
 | INF-34 | Implement revised Home, shared shell/footer, product presentation and existing cart UI | INF-32, INF-33               |
 | INF-27 | Approve essential Fragrance Guide, combined About/Gallery and Contact templates        | INF-32, INF-21, INF-23       |
 | INF-35 | Implement essential editorial/service pages and product-linked guidance                | INF-27, INF-31, INF-34       |
-| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35               |
+| INF-36 | Independently verify, obtain human merge and record post-merge smoke evidence          | INF-34, INF-35, INF-40       |
 | INF-37 | Refine combined About/Gallery after the shopping milestone; preserve existing URLs     | INF-36                       |
 
 INF-30's audit and owner approval are merged through PRs #66/#67; the required
