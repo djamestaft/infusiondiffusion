@@ -16,6 +16,7 @@ export type SiteSettings = {
   seoTitle: string;
   seoDescription: string;
   homepage: {
+    heroBackgroundSrc?: string;
     heroTitle: string;
     heroIntroduction: string;
     heroActionLabel: string;

@@ -38,6 +38,32 @@ describe("site settings", () => {
     });
   });
 
+  it.each(["published", "drafts"] as const)(
+    "preserves the shared background in %s mode",
+    async (perspective) => {
+      const src = "https://cdn.sanity.io/images/project/production/leaves.png";
+      sanityFetchMock.mockResolvedValue({
+        data: { homepage: { heroBackgroundSrc: src } },
+      });
+      const settings = await getSiteSettings({ perspective, stega: false });
+      expect(settings.homepage.heroBackgroundSrc).toBe(src);
+    },
+  );
+
+  it.each([null, undefined, "   "])(
+    "restores the default background when the selection is %s",
+    async (heroBackgroundSrc) => {
+      sanityFetchMock.mockResolvedValue({
+        data: { homepage: { heroBackgroundSrc } },
+      });
+      const settings = await getSiteSettings({
+        perspective: "published",
+        stega: false,
+      });
+      expect(settings.homepage.heroBackgroundSrc).toBeUndefined();
+    },
+  );
+
   it("uses a non-stega metadata fetch and preserves fallback fields", async () => {
     sanityFetchMetadataMock.mockResolvedValue({
       data: { seoTitle: "From Sanity" },
