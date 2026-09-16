@@ -57,6 +57,39 @@ export const Midnight: Story = {
 
 export const ProvisionedAccount: Story = {
   args: { accountHref: "/account" },
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole("link", { name: "Account" });
+    await expect(link).toHaveAttribute("href", "/account");
+    link.focus();
+    await expect(link).toHaveFocus();
+  },
+};
+
+export const AccountTablet: Story = {
+  ...ProvisionedAccount,
+  globals: { viewport: { value: "homepageTablet", isRotated: false } },
+};
+
+export const AccountMobile: Story = {
+  ...ProvisionedAccount,
+  globals: { viewport: { value: "contact390", isRotated: false } },
+};
+
+export const AccountNarrowMenu: Story = {
+  args: { accountHref: "/account" },
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const opener = canvas.getByRole("button", { name: "Open menu" });
+    await userEvent.click(opener);
+    const menu = within(canvas.getByRole("dialog"));
+    await expect(menu.getByRole("link", { name: "Account" })).toHaveAttribute(
+      "href",
+      "/account",
+    );
+    await userEvent.keyboard("{Escape}");
+    await expect(opener).toHaveFocus();
+  },
 };
 
 export const MobileClosed: Story = {

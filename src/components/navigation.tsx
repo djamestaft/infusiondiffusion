@@ -4,6 +4,7 @@ import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
+import { useAccountNavigationHref } from "@/components/account/account-navigation";
 import { LogoTextLockup } from "@/components/logo-text-lockup";
 import { storefrontDestinations } from "@/components/storefront-destinations";
 import { cn } from "@/lib/utils";
@@ -116,6 +117,9 @@ export function Navigation({
   linkFont = "sans",
   className,
 }: NavigationProps) {
+  const sharedAccountHref = useAccountNavigationHref();
+  const resolvedAccountHref =
+    accountHref === undefined ? sharedAccountHref : accountHref;
   const links = validDestinations(destinations ?? []);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -199,8 +203,8 @@ export function Navigation({
 
   const utilities = (
     <>
-      {accountHref ? (
-        <UtilityLink href={accountHref} label="Account">
+      {resolvedAccountHref ? (
+        <UtilityLink href={resolvedAccountHref} label="Account">
           <UserRound
             aria-hidden="true"
             className="size-[1.125rem] stroke-[1.5]"

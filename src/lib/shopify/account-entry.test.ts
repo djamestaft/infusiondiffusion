@@ -40,20 +40,45 @@ describe("account entry boundary", () => {
     expect(storefrontRequest).not.toHaveBeenCalled();
   });
 
-  it("queries only the account destination and preserves a validated provider value verbatim", async () => {
+  it("prefers the validated vanity destination and otherwise uses the store-owned default account", async () => {
     process.env.SHOPIFY_ACCOUNT_HANDOFF_ENABLED = "true";
     vi.mocked(storefrontRequest)
-      .mockResolvedValueOnce({ shop: { customerAccountUrl: validDestination } })
-      .mockResolvedValueOnce({ shop: { customerAccountUrl: null } });
+      .mockResolvedValueOnce({
+        shop: {
+          id: "gid://shopify/Shop/123456",
+          customerAccountUrl: validDestination,
+        },
+      })
+      .mockResolvedValueOnce({
+        shop: { id: "gid://shopify/Shop/123456", customerAccountUrl: null },
+      });
     await expect(getAccountEntry()).resolves.toEqual({
       status: "available",
       destination: validDestination,
     });
     await expect(getAccountEntry()).resolves.toEqual({
-      status: "not-provisioned",
+      status: "available",
+      destination: "https://shopify.com/123456/account",
     });
     expect(storefrontRequest).toHaveBeenCalledWith(CUSTOMER_ACCOUNT_QUERY);
     expect(validateCustomerAccountUrl(validDestination)).toBe(validDestination);
+  });
+
+  it("rejects malformed or wrong-resource shop IDs rather than inventing an account destination", async () => {
+    process.env.SHOPIFY_ACCOUNT_HANDOFF_ENABLED = "true";
+    for (const id of [
+      undefined,
+      "",
+      "gid://shopify/Product/123",
+      "gid://shopify/Shop/123/evil",
+      "gid://shopify/Shop/123?next=evil",
+      "gid://shopify/Shop/not-a-number",
+    ]) {
+      vi.mocked(storefrontRequest).mockResolvedValueOnce({
+        shop: { id, customerAccountUrl: null },
+      });
+      await expect(getAccountEntry()).rejects.toThrow("invalid response");
+    }
   });
 
   it("rejects empty, non-HTTPS, relative, credentialed, and malformed provider destinations", () => {

@@ -8,14 +8,17 @@ import {
 } from "@/lib/shopify/client";
 
 const accountResponseSchema = z.object({
-  shop: z.object({ customerAccountUrl: z.string().nullable() }),
+  shop: z.object({
+    id: z.string().regex(/^gid:\/\/shopify\/Shop\/[1-9][0-9]*$/),
+    customerAccountUrl: z.string().nullable(),
+  }),
 });
 
 export type AccountEntryResult =
   | { status: "available"; destination: string }
   | { status: "disabled" | "configuration-missing" | "not-provisioned" };
 
-export const CUSTOMER_ACCOUNT_QUERY = `query CustomerAccountUrl { shop { customerAccountUrl } }`;
+export const CUSTOMER_ACCOUNT_QUERY = `query CustomerAccountUrl { shop { id customerAccountUrl } }`;
 
 export function accountHandoffIsEnabled(
   value = process.env.SHOPIFY_ACCOUNT_HANDOFF_ENABLED,
@@ -69,12 +72,14 @@ export async function getAccountEntry(): Promise<AccountEntryResult> {
         "INVALID_RESPONSE",
       );
     }
-    if (parsed.data.shop.customerAccountUrl === null)
-      return { status: "not-provisioned" };
+    // Shopify exposes customerAccountUrl only for a vanity domain. Hosted
+    // accounts also work at the documented default URL without custom DNS.
+    const shopId = parsed.data.shop.id.split("/").at(-1);
     return {
       status: "available",
       destination: validateCustomerAccountUrl(
-        parsed.data.shop.customerAccountUrl,
+        parsed.data.shop.customerAccountUrl ??
+          `https://shopify.com/${shopId}/account`,
       ),
     };
   } catch (error) {

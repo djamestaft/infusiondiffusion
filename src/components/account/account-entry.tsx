@@ -91,7 +91,7 @@ export function AccountEntry({
                 lead={content?.lead}
               />
               {state === "available" && destination ? (
-                <Button asChild size="large" className="mt-8">
+                <Button asChild size="large" className="mt-8 text-center">
                   <a href={destination}>{messages.available.action!}</a>
                 </Button>
               ) : null}

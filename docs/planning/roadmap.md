@@ -1,5 +1,17 @@
 # Infusion Diffusion Roadmap
 
+## Customer account restoration — 16 September 2026
+
+Devon started INF-39, now In Progress with Devon as owner. Discovery found the
+Vercel account gate absent and the existing handoff incorrectly treating a null
+vanity-domain URL as unavailable. Shopify's default hosted sign-in is reachable.
+The [account delivery record](../features/inf-39-customer-accounts.md) covers the
+bounded fix, shared Account visibility on all customer pages, existing design
+reuse, tests and activation/rollback. Local implementation and visual/code reviews are verified; remote release
+evidence is tracked in the delivery PR and Plane. Authenticated purchase-history
+acceptance remains pending. INF-40 still requires this work; final SEO and domain
+switchover remain INF-41/42. Payment testing stays in Payfast Test mode.
+
 Last updated: 16 September 2026
 
 ## Payfast sandbox succeeds — 16 September 2026
