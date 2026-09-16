@@ -166,6 +166,14 @@ setup and preview acceptance; keep `SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true`.
 - Local credentials can be entered in ignored `.env.local`; never paste them into
   chat, commits, screenshots, commands or logs. Never reuse the Storefront token.
 
+Shopify confidential-client authentication uses Base64 of the literal
+`client_id:client_secret`, without form-escaping punctuation first. Keep the
+Shopify-specific `ClientAuth` adapter for code exchange and refresh; the generic
+OAuth `ClientSecretBasic` encoder escapes UUID hyphens and causes `invalid_client`
+on this provider. Both grant bodies must include `client_id`. See the
+[Shopify authentication contract](https://shopify.dev/docs/api/customer/latest#authorization-header-confidential-client-only).
+Regression tests must use punctuated synthetic credentials.
+
 Sessions last at most seven days. The opaque Secure/HttpOnly/SameSite=Lax cookie
 contains no profile/tokens. Redis holds AES-GCM encrypted token bundles with TTL,
 origin/client key namespaces, revocable login transactions and atomic refresh.

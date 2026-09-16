@@ -44,7 +44,19 @@ export async function discoverCustomerClient(settings: CustomerConfig) {
     server,
     settings.clientId,
     { id_token_signed_response_alg: "RS256" },
-    oidc.ClientSecretBasic(settings.clientSecret),
+    (_server, metadata, body, headers) => {
+      // Shopify requires Base64 of the literal ID:secret, without OAuth form
+      // escaping (which encodes UUID hyphens and causes invalid_client).
+      // https://shopify.dev/docs/api/customer/latest#authorization-header-confidential-client-only
+      body.set("client_id", metadata.client_id);
+      headers.set(
+        "Authorization",
+        "Basic " +
+          Buffer.from(
+            `${metadata.client_id}:${settings.clientSecret}`,
+          ).toString("base64"),
+      );
+    },
   );
   client.timeout = 8;
   client[oidc.customFetch] = (url, options) =>

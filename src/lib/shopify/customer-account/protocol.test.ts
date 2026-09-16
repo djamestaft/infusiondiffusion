@@ -2,6 +2,8 @@
 import { generateKeyPairSync, createSign } from "node:crypto";
 import { beforeEach, afterEach, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
+import * as oidc from "openid-client";
+import { discoverCustomerClient } from "./oauth";
 vi.mock("server-only", () => ({}));
 const store = vi.hoisted(() => ({
   claimLogin: vi.fn(),
@@ -16,10 +18,16 @@ vi.mock("./store", () => ({
   },
 }));
 import { accountCallback } from "./handlers";
-import { SESSION_COOKIE, TRANSACTION_COOKIE } from "./config";
+import {
+  SESSION_COOKIE,
+  TRANSACTION_COOKIE,
+  readCustomerConfig,
+} from "./config";
 const keys = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const badKeys = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const issuer = "https://shopify.com/authentication/123";
+const clientId = "client-id_with.punctuation";
+const clientSecret = "secret-with_punctuation";
 const server = {
   issuer,
   authorization_endpoint: issuer + "/oauth/authorize",
@@ -47,7 +55,7 @@ const jwt = (overrides: Record<string, unknown> = {}, badSignature = false) => {
     { alg: "RS256", kid: "test", typ: "JWT" },
     {
       iss: issuer,
-      aud: "client",
+      aud: clientId,
       sub: "customer-one",
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 300,
@@ -92,14 +100,20 @@ function network(
         });
       if (url === server.token_endpoint) {
         expect(new Headers(init?.headers).get("authorization")).toBe(
-          "Basic " + Buffer.from("client:secret").toString("base64"),
+          "Basic " +
+            Buffer.from(`${clientId}:${clientSecret}`).toString("base64"),
         );
         const body = new URLSearchParams(String(init?.body));
-        expect(body.get("client_id")).toBe("client");
-        expect(body.get("code_verifier")).toBe(transaction.verifier);
-        expect(body.get("redirect_uri")).toBe(
-          "https://store.example/account/callback",
-        );
+        expect(body.get("client_id")).toBe(clientId);
+        if (body.get("grant_type") === "refresh_token") {
+          expect(body.get("refresh_token")).toBe("private-refresh");
+        } else {
+          expect(body.get("code_verifier")).toBe(transaction.verifier);
+          expect(body.get("redirect_uri")).toBe(
+            "https://store.example/account/callback",
+          );
+        }
+        expect(body.has("client_secret")).toBe(false);
         return Response.json({
           token_type: "Bearer",
           access_token: "private-access",
@@ -120,8 +134,8 @@ beforeEach(() => {
     SHOPIFY_CUSTOMER_SESSION_ENABLED: "true",
     SHOPIFY_STORE_DOMAIN: "example.myshopify.com",
     SHOPIFY_CUSTOMER_ORIGIN: "https://store.example",
-    SHOPIFY_CUSTOMER_CLIENT_ID: "client",
-    SHOPIFY_CUSTOMER_CLIENT_SECRET: "secret",
+    SHOPIFY_CUSTOMER_CLIENT_ID: clientId,
+    SHOPIFY_CUSTOMER_CLIENT_SECRET: clientSecret,
     SHOPIFY_CUSTOMER_SESSION_KEY: "ab".repeat(32),
     UPSTASH_REDIS_REST_URL: "https://example.upstash.io",
     UPSTASH_REDIS_REST_TOKEN: "redis",
@@ -136,7 +150,7 @@ afterEach(() => {
   vi.clearAllMocks();
   vi.restoreAllMocks();
 });
-it("verifies a signed identity then rotates an opaque secure cookie", async () => {
+it("uses literal Shopify Basic credentials with punctuation, verifies identity and rotates the cookie", async () => {
   network();
   const r = await accountCallback(callback());
   expect(r.headers.get("location")).toBe("https://store.example/shop");
@@ -227,4 +241,11 @@ it("reports an allowlisted JWT failure code without logging its claims", async (
   );
   expect(JSON.stringify(log.mock.calls)).not.toContain("private-wrong-nonce");
   expect(JSON.stringify(log.mock.calls)).not.toContain("private-access");
+});
+
+it("sends literal Basic credentials and a body client ID when refreshing", async () => {
+  network();
+  const { client } = await discoverCustomerClient(readCustomerConfig()!);
+  const tokens = await oidc.refreshTokenGrant(client, "private-refresh");
+  expect(tokens.access_token).toBe("private-access");
 });

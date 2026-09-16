@@ -20,14 +20,19 @@ The free Upstash database is now provisioned and connected to Preview only;
 REST write/read-delete/Lua smoke passed. The client credentials and encrypted
 session configuration are now installed as server-only branch Preview variables.
 Preview callback registration now succeeds after Devon corrected and saved the
-URL; fresh browser sign-in reaches Shopify. Devon can still view hosted orders,
-but the stable Preview returns `notice=error` during account sign-in. Runtime
-requests show a Shopify callback; an existing Shopify login may skip the email
-prompt. Callback diagnostics now log only fixed stage/error classifications,
-never tokens, authorization codes, claims, customer details or full error objects,
-to identify this remaining failure. Real storefront persistence remains unverified.
-Required CI passed for `389dc32`; subsequent diagnostic head checks must pass
-before asking Devon to repeat the authenticated flow. Main remains unchanged.
+URL. Callback diagnostics then identified `invalid_client` during token exchange.
+A controlled live probe reproduced it with the OAuth library's form-escaped
+Basic credentials; literal Base64 `client_id:client_secret` reached the expected
+`invalid_grant` response for a deliberately invalid authorization code. The saved
+credentials are accepted. The Shopify-specific client-authentication adapter now
+preserves literal punctuation and includes `client_id` in both code and refresh
+grant bodies, matching Shopify's documented contract. Regression tests cover
+punctuated credentials on both grants while retaining signature/claim checks.
+Callback logs contain only fixed stage/error classifications, never credentials,
+authorization codes, claims or customer details. Real storefront persistence is
+still awaiting a fresh user sign-in after the corrected Preview passes CI.
+Required CI passed for the diagnostic head `25836f1`; the corrected head must
+pass its own checks. Main customer sessions remain unchanged.
 The editable [Figma account-state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
 is synchronized on Exploration. Human visual/release acceptance remains pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
 SEO/domain work remains INF-41/42. Payfast remains in Test mode.
