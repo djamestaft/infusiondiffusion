@@ -52,6 +52,27 @@ function failureReason(error: unknown): string | undefined {
       "message" in current && typeof current.message === "string"
         ? current.message
         : "";
+    if (message === 'JWT "sub" (subject) claim missing')
+      return "jwt.sub.missing";
+    if (message === 'unexpected JWT "sub" (subject) claim type') {
+      const cause = "cause" in current ? current.cause : undefined;
+      const claims =
+        cause && typeof cause === "object" && "claims" in cause
+          ? cause.claims
+          : undefined;
+      if (claims && typeof claims === "object" && "sub" in claims) {
+        // Only the primitive type reaches logs, never a claim value or payload.
+        const value = claims.sub;
+        const type =
+          value === null
+            ? "null"
+            : Array.isArray(value)
+              ? "array"
+              : typeof value;
+        return `jwt.sub.type.${type}`;
+      }
+      return "jwt.sub.type.unknown";
+    }
     for (const field of [
       "access_token",
       "token_type",

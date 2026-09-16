@@ -3,6 +3,43 @@ import { afterEach, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 import { reportCallbackFailure } from "./diagnostics";
 afterEach(() => vi.restoreAllMocks());
+it.each([
+  [undefined, "missing"],
+  [null, "type.null"],
+  [123456, "type.number"],
+  [false, "type.boolean"],
+  [["private-subject"], "type.array"],
+  [{ private: "private-subject" }, "type.object"],
+])(
+  "classifies subject validation without disclosing its value (%s)",
+  (sub, reason) => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    reportCallbackFailure("callback.exchange", {
+      code: "OAUTH_INVALID_RESPONSE",
+      cause: {
+        message:
+          sub === undefined
+            ? 'JWT "sub" (subject) claim missing'
+            : 'unexpected JWT "sub" (subject) claim type',
+        cause: {
+          claims: {
+            sub,
+            email: "private@example.test",
+            nonce: "private-nonce",
+          },
+        },
+      },
+    });
+    expect(log).toHaveBeenCalledWith(
+      "[customer-account] " +
+        JSON.stringify({
+          stage: "callback.exchange",
+          code: "OAUTH_INVALID_RESPONSE",
+          reason: `jwt.sub.${reason}`,
+        }),
+    );
+  },
+);
 it("logs only allowlisted classifications from provider failures", () => {
   const log = vi.spyOn(console, "error").mockImplementation(() => {});
   reportCallbackFailure("callback.exchange", {
