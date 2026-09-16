@@ -29,3 +29,28 @@ it("does not reflect unrecognised provider-controlled codes or error objects", (
     '[customer-account] {"stage":"callback.exchange","code":"unknown"}',
   );
 });
+it("classifies nested token response failures without logging response values", () => {
+  const log = vi.spyOn(console, "error").mockImplementation(() => {});
+  reportCallbackFailure("callback.exchange", {
+    code: "OAUTH_INVALID_RESPONSE",
+    cause: {
+      message: '\"response\" body \"token_type\" property must be a string',
+      cause: {
+        body: { access_token: "private-access", email: "private@example.test" },
+      },
+    },
+  });
+  expect(log).toHaveBeenCalledWith(
+    '[customer-account] {"stage":"callback.exchange","code":"OAUTH_INVALID_RESPONSE","reason":"response.token_type"}',
+  );
+});
+it("never forwards arbitrary nested error messages", () => {
+  const log = vi.spyOn(console, "error").mockImplementation(() => {});
+  reportCallbackFailure("callback.exchange", {
+    code: "OAUTH_INVALID_RESPONSE",
+    cause: { message: "private-code-or-token" },
+  });
+  expect(log).toHaveBeenCalledWith(
+    '[customer-account] {"stage":"callback.exchange","code":"OAUTH_INVALID_RESPONSE"}',
+  );
+});

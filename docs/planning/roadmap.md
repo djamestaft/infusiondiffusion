@@ -30,9 +30,12 @@ grant bodies, matching Shopify's documented contract. Regression tests cover
 punctuated credentials on both grants while retaining signature/claim checks.
 Callback logs contain only fixed stage/error classifications, never credentials,
 authorization codes, claims or customer details. Real storefront persistence is
-still awaiting a fresh user sign-in after the corrected Preview passes CI.
-Required CI passed for the diagnostic head `25836f1`; the corrected head must
-pass its own checks. Main customer sessions remain unchanged.
+still failing after the corrected Preview: fresh user callbacks now report
+`OAUTH_INVALID_RESPONSE`, replacing `invalid_client`. Expanded safe diagnostics
+classify the response field or JWT rule without logging values, to identify the
+remaining validation failure before changing any protocol checks. Required CI
+and independent review passed for the credential fix `2c15140`; subsequent
+diagnostic heads require their own gate. Main customer sessions remain unchanged.
 The editable [Figma account-state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
 is synchronized on Exploration. Human visual/release acceptance remains pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
 SEO/domain work remains INF-41/42. Payfast remains in Test mode.
