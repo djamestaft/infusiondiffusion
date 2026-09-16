@@ -127,4 +127,16 @@ prevents a live event from racing Vercel's tagged cache.
 
 ## Account-entry hosted handoff
 
-`SHOPIFY_ACCOUNT_HANDOFF_ENABLED=false` is an off-by-default, server-only gate for `/account`. Only the exact value `true` permits a Storefront API 2026-07 `shop.customerAccountUrl` lookup; it does not enable Shopify customer accounts. The Shopify owner must provision customer accounts and the required vanity domain. Preview verification must confirm `/api/health`, the disabled and (when provisioned) sanitized HTTPS handoff state without authentication. The first rollback action is a human-authorized environment change to `false`, redeploying to return the truthful unavailable state; no agent enables this flag in Production.
+`SHOPIFY_ACCOUNT_HANDOFF_ENABLED=false` is the default server-only gate for the
+shared Account navigation and `/account` handoff. Only exact `true` enables entry.
+Shopify owns sign-in and order history. Storefront API 2026-07 supplies the shop ID
+and optional vanity account URL; without a vanity domain, use Shopify's standard
+`https://shopify.com/<shop-id>/account` destination. A null vanity URL does not
+mean accounts are disabled. See [INF-39](features/inf-39-customer-accounts.md).
+
+Verify the hosted sign-in destination in Preview and have an inbox-controlled
+customer verify their own orders, logout and return-to-store behavior. Production
+account enablement retains Devon's approval after preview evidence. Roll back by
+setting the flag to `false` and rebuilding; this hides Account and restores the
+unavailable page without changing Shopify customer data. Account domains remain
+an optional branding step in the final domain switchover.

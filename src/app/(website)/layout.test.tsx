@@ -1,3 +1,5 @@
+import { cleanup, render, screen } from "@testing-library/react";
+import { Navigation } from "@/components/navigation";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 const { sanityLiveMock } = vi.hoisted(() => ({
@@ -16,7 +18,25 @@ vi.mock("@/sanity/lib/live", () => ({ SanityLive: sanityLiveMock }));
 import WebsiteLayout from "@/app/(website)/layout";
 
 describe("website layout", () => {
-  afterEach(() => vi.unstubAllEnvs());
+  afterEach(() => {
+    cleanup();
+    vi.unstubAllEnvs();
+  });
+
+  it.each(["true", "false", "TRUE", ""])(
+    "shares the exact account enablement flag (%s) with every page navigation",
+    async (value) => {
+      vi.stubEnv("SHOPIFY_ACCOUNT_HANDOFF_ENABLED", value);
+      render(await WebsiteLayout({ children: <Navigation /> }));
+      if (value === "true") {
+        expect(
+          screen.getAllByRole("link", { name: "Account" })[0],
+        ).toHaveAttribute("href", "/account");
+      } else {
+        expect(screen.queryByRole("link", { name: "Account" })).toBeNull();
+      }
+    },
+  );
 
   it("waits for the Sanity invalidation function before refreshing published content", async () => {
     vi.stubEnv("VERCEL_ENV", "production");

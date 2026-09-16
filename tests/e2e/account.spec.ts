@@ -4,6 +4,7 @@ import { expect, test } from "@playwright/test";
 
 const viewports = [
   { name: "desktop", width: 1440, height: 1000 },
+  { name: "tablet", width: 768, height: 1024 },
   { name: "mobile", width: 390, height: 844 },
   { name: "small", width: 320, height: 844 },
 ];
@@ -168,4 +169,42 @@ test("removes the Storybook loading pulse when reduced motion is requested", asy
     "animation-name",
     "none",
   );
+});
+
+// Verify the shared shell on pages that previously omitted accountHref.
+test("keeps Account available throughout browsing and the mobile menu", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const path of [
+    "/",
+    "/shop",
+    "/about",
+    "/contact",
+    "/fragrance-guide",
+    "/cart",
+  ]) {
+    await page.goto(path);
+    // Wait for the content header, not the replaceable Suspense shell.
+    await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
+    const account = page.getByRole("link", { name: "Account", exact: true });
+    await expect(account).toHaveAttribute("href", "/account");
+    const box = await account.boundingBox();
+    expect(box?.width).toBeGreaterThanOrEqual(44);
+    expect(box?.height).toBeGreaterThanOrEqual(44);
+    await expectNoHorizontalOverflow(page);
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await expect(
+      page
+        .getByRole("dialog")
+        .getByRole("link", { name: "Account", exact: true }),
+    ).toHaveAttribute("href", "/account");
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
+  }
+  await page.goto("/shop");
+  await page.locator('a[href^="/products/"]').first().click();
+  await expect(
+    page.getByRole("link", { name: "Account", exact: true }),
+  ).toHaveAttribute("href", "/account");
 });

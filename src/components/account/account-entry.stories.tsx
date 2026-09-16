@@ -38,6 +38,14 @@ export const HostedMobile390: Story = {
   globals: { viewport: { value: "contact390", isRotated: false } },
   play: ({ canvasElement }) => hostedContract(canvasElement),
 };
+export const HostedTablet768: Story = {
+  globals: { viewport: { value: "homepageTablet", isRotated: false } },
+  play: ({ canvasElement }) => hostedContract(canvasElement),
+};
+export const HostedSmall320: Story = {
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  play: ({ canvasElement }) => hostedContract(canvasElement),
+};
 export const Loading: Story = {
   args: { state: "loading" },
   play: async ({ canvasElement }) => {

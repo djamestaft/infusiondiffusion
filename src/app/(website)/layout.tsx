@@ -1,6 +1,8 @@
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 
+import { AccountNavigationProvider } from "@/components/account/account-navigation";
+
 import { isSanityConfigured } from "@/env";
 import { SanityLive } from "@/sanity/lib/live";
 
@@ -13,7 +15,11 @@ export default async function WebsiteLayout({
 
   return (
     <>
-      {children}
+      <AccountNavigationProvider
+        enabled={process.env.SHOPIFY_ACCOUNT_HANDOFF_ENABLED === "true"}
+      >
+        {children}
+      </AccountNavigationProvider>
       {isSanityConfigured ? (
         <SanityLive
           includeDrafts={isEnabled}
