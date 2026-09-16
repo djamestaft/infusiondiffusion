@@ -69,6 +69,8 @@ export async function discoverCustomerClient(settings: CustomerConfig) {
       cache: "no-store",
       redirect: "error",
     });
+  // Required: our pinned oauth4webapi patch normalizes Shopify numeric subjects
+  // in parsed claims only. Always verify the untouched original signed JWT.
   oidc.enableNonRepudiationChecks(client);
   return {
     client,

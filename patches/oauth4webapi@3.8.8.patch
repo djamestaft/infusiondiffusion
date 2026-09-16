@@ -1,0 +1,30 @@
+diff --git a/build/index.js b/build/index.js
+index 62e994e6d807dbc82ce4599df6eee5a86fe57056..fedb5cfd953ab0d0f66afce8821af07b18974940 100644
+--- a/build/index.js
++++ b/build/index.js
+@@ -1390,12 +1390,24 @@ function validateStringClaim(claim, result) {
+     }
+     return result;
+ }
++function validateIdTokenSubject(result) {
++    const subject = result.claims.sub;
++    // Shopify Customer Account API returns numeric customer IDs. Normalize only
++    // parsed claims after issuer/audience validation; never rewrite result.jwt.
++    // Application-level signature verification still verifies the original JWT.
++    if (typeof result.claims.iss === 'string' &&
++        /^https:\/\/shopify\.com\/authentication\/\d+$/.test(result.claims.iss) &&
++        typeof subject === 'number' && Number.isSafeInteger(subject) && subject > 0) {
++        result.claims.sub = String(subject);
++    }
++    return validateStringClaim('sub', result);
++}
+ function validateIdTokenClaims(as, client, idToken, requiredClaims, decryptFn) {
+     return validateJwt(idToken, checkSigningAlgorithm.bind(undefined, client.id_token_signed_response_alg, as.id_token_signing_alg_values_supported, 'RS256'), getClockSkew(client), getClockTolerance(client), decryptFn)
+         .then(validatePresence.bind(undefined, ['aud', 'exp', 'iat', 'iss', 'sub', ...requiredClaims]))
+         .then(validateIssuer.bind(undefined, as))
+         .then(validateAudience.bind(undefined, client.client_id))
+-        .then(validateStringClaim.bind(undefined, 'sub'));
++        .then(validateIdTokenSubject);
+ }
+ function resolveIdTokenMaxAge(client, maxAge) {
+     if (maxAge === skipAuthTimeCheck) {

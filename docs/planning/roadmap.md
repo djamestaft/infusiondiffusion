@@ -31,13 +31,17 @@ punctuated credentials on both grants while retaining signature/claim checks.
 Callback logs contain only fixed stage/error classifications, never credentials,
 authorization codes, claims or customer details. Real storefront persistence is
 still failing after the corrected Preview: fresh user callbacks now report
-`OAUTH_INVALID_RESPONSE`, replacing `invalid_client`. The latest real callback
-identifies `jwt.sub`: the ID token subject is missing or has an unexpected type.
-The follow-up diagnostic distinguishes those cases using only a fixed rule and
-type name, never claim values. No protocol validation has been relaxed. Required
-CI passed for diagnostic head `52b8422`; the follow-up requires its own gate and
-one real login to capture the subject classification. Main customer sessions
-remain unchanged.
+`OAUTH_INVALID_RESPONSE`, replacing `invalid_client`. The real callback on
+`8720e0f` identifies `jwt.sub.type.number`: Shopify sends a numeric subject while
+the library requires a string. A pinned, narrowly scoped oauth4webapi patch now
+normalizes positive safe-integer subjects only for validated Shopify issuers.
+It changes parsed claims, never the signed token; original signature, issuer,
+audience, nonce, state, PKCE, expiry and refresh identity checks remain enforced.
+Numeric login/refresh regression fixtures reproduce the old failure and pass
+with the patch, including forged tokens and invalid claims being rejected.
+Diagnostic head `8720e0f` passed full CI. The compatibility fix requires its own
+CI/review/Preview gate, followed by real login and persistence acceptance.
+Main customer sessions remain unchanged.
 The editable [Figma account-state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
 is synchronized on Exploration. Human visual/release acceptance remains pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
 SEO/domain work remains INF-41/42. Payfast remains in Test mode.

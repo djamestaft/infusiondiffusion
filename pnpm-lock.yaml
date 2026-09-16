@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  oauth4webapi@3.8.8:
+    hash: 0cb3e88ee8ef649a8741ec5e0f435d5517525d70e2606f270d7681b67af7bab9
+    path: patches/oauth4webapi@3.8.8.patch
+
 importers:
 
   .:
@@ -15153,7 +15158,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  oauth4webapi@3.8.8: {}
+  oauth4webapi@3.8.8(patch_hash=0cb3e88ee8ef649a8741ec5e0f435d5517525d70e2606f270d7681b67af7bab9): {}
 
   object-assign@4.1.1: {}
 
@@ -15236,7 +15241,7 @@ snapshots:
   openid-client@6.8.4:
     dependencies:
       jose: 6.2.8
-      oauth4webapi: 3.8.8
+      oauth4webapi: 3.8.8(patch_hash=0cb3e88ee8ef649a8741ec5e0f435d5517525d70e2606f270d7681b67af7bab9)
 
   optionator@0.9.4:
     dependencies:

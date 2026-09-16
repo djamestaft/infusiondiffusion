@@ -3,7 +3,7 @@ import { generateKeyPairSync, createSign } from "node:crypto";
 import { beforeEach, afterEach, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 import * as oidc from "openid-client";
-import { discoverCustomerClient } from "./oauth";
+import { discoverCustomerClient, sessionFromTokens } from "./oauth";
 vi.mock("server-only", () => ({}));
 const store = vi.hoisted(() => ({
   claimLogin: vi.fn(),
@@ -50,9 +50,13 @@ const callback = () =>
     "https://store.example/account/callback?code=test&state=state",
     { headers: { cookie: `${TRANSACTION_COOKIE}=${"x".repeat(43)}` } },
   );
-const jwt = (overrides: Record<string, unknown> = {}, badSignature = false) => {
+const jwt = (
+  overrides: Record<string, unknown> = {},
+  badSignature = false,
+  headerOverrides: Record<string, unknown> = {},
+) => {
   const parts = [
-    { alg: "RS256", kid: "test", typ: "JWT" },
+    { alg: "RS256", kid: "test", typ: "JWT", ...headerOverrides },
     {
       iss: issuer,
       aud: clientId,
@@ -166,6 +170,120 @@ it("uses literal Shopify Basic credentials with punctuation, verifies identity a
     expect.objectContaining({ subject: "customer-one" }),
     604800,
   );
+});
+it("accepts a signed numeric Shopify subject and retains the original signed token", async () => {
+  const original = jwt({ sub: 123456789 });
+  network({}, false, { id_token: original });
+  const r = await accountCallback(callback());
+  expect(r.headers.get("location")).toBe("https://store.example/shop");
+  const session = store.commitLogin.mock.calls[0][3];
+  expect(session.subject).toBe("123456789");
+  expect(session.idToken).toBe(original);
+  const payload = JSON.parse(
+    Buffer.from(session.idToken.split(".")[1], "base64url").toString(),
+  );
+  expect(payload.sub).toBe(123456789);
+});
+it.each([
+  undefined,
+  null,
+  false,
+  {},
+  [],
+  0,
+  -1,
+  1.5,
+  Number.MAX_SAFE_INTEGER + 1,
+])("rejects a malformed numeric subject %s", async (sub) => {
+  network({ sub });
+  await accountCallback(callback());
+  expect(store.commitLogin).not.toHaveBeenCalled();
+});
+it.each([
+  { nonce: "wrong" },
+  { iss: "https://evil.test" },
+  { aud: "another-client" },
+  { exp: 1 },
+  { nonce: undefined },
+  { iat: undefined },
+  { nbf: Math.floor(Date.now() / 1000) + 3600 },
+  { auth_time: "invalid" },
+  { aud: [clientId, "untrusted"] },
+  { aud: [clientId, "untrusted"], azp: "untrusted" },
+])("preserves claim validation for numeric subjects %s", async (overrides) => {
+  network({ sub: 123456789, ...overrides });
+  await accountCallback(callback());
+  expect(store.commitLogin).not.toHaveBeenCalled();
+});
+it("rejects a forged numeric-subject token", async () => {
+  network({ sub: 123456789 }, true);
+  await accountCallback(callback());
+  expect(store.commitLogin).not.toHaveBeenCalled();
+});
+it.each([{ alg: "HS256" }, { alg: "none" }, { kid: "unknown-key" }])(
+  "rejects numeric-subject tokens with invalid signing headers %s",
+  async (headers) => {
+    network({}, false, { id_token: jwt({ sub: 123456789 }, false, headers) });
+    await accountCallback(callback());
+    expect(store.commitLogin).not.toHaveBeenCalled();
+  },
+);
+it("normalizes numeric refresh identity and rejects customer changes", async () => {
+  const original = jwt({ sub: 123456789 });
+  network({}, false, { id_token: original });
+  const { client } = await discoverCustomerClient(readCustomerConfig()!);
+  const tokens = await oidc.refreshTokenGrant(client, "private-refresh");
+  expect(tokens.id_token).toBe(original);
+  const previous = {
+    accessToken: "old",
+    refreshToken: "private-refresh",
+    idToken: "old-id",
+    subject: "123456789",
+    tokenExpiresAt: 0,
+    expiresAt: Date.now() + 86400000,
+  };
+  expect(sessionFromTokens(tokens, previous.expiresAt, previous).subject).toBe(
+    "123456789",
+  );
+  expect(() =>
+    sessionFromTokens(tokens, previous.expiresAt, {
+      ...previous,
+      subject: "another-customer",
+    }),
+  ).toThrow("Customer identity mismatch");
+});
+it("preserves string subjects exactly, including leading zeros", async () => {
+  network({ sub: "00123456789" });
+  await accountCallback(callback());
+  expect(store.commitLogin.mock.calls[0][3].subject).toBe("00123456789");
+});
+it("does not accept numeric subjects from other identity providers", async () => {
+  network({ sub: 123456789, iss: "https://identity.example" });
+  const client = new oidc.Configuration(
+    { ...server, issuer: "https://identity.example" },
+    clientId,
+    {},
+    (_as, _client, body, headers) => {
+      body.set("client_id", clientId);
+      headers.set(
+        "Authorization",
+        "Basic " +
+          Buffer.from(`${clientId}:${clientSecret}`).toString("base64"),
+      );
+    },
+  );
+  client[oidc.customFetch] = (url, init) => fetch(url, init as RequestInit);
+  await expect(
+    oidc.refreshTokenGrant(client, "private-refresh"),
+  ).rejects.toMatchObject({
+    code: "OAUTH_INVALID_RESPONSE",
+    cause: { message: 'unexpected JWT "sub" (subject) claim type' },
+  });
+});
+it("still requires the original ID token on login", async () => {
+  network({}, false, { id_token: undefined });
+  await accountCallback(callback());
+  expect(store.commitLogin).not.toHaveBeenCalled();
 });
 it.each([
   { nonce: "wrong" },

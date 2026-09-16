@@ -174,6 +174,18 @@ on this provider. Both grant bodies must include `client_id`. See the
 [Shopify authentication contract](https://shopify.dev/docs/api/customer/latest#authorization-header-confidential-client-only).
 Regression tests must use punctuated synthetic credentials.
 
+The real Customer Account ID token returned a numeric `sub` on 16 September 2026.
+The pinned `oauth4webapi@3.8.8` pnpm patch accepts only positive safe integers from
+Shopify authentication issuers and normalizes the parsed subject to a decimal
+string after issuer/audience checks. Other providers retain strict string-only
+subjects. The signed JWT bytes are never changed; `enableNonRepudiationChecks`
+must remain enabled for code and refresh grants. Nonce, state, PKCE, expiry and
+refresh subject matching remain enforced. Keep the patch, workspace declaration
+and lock hash together. Before updating this dependency, re-evaluate whether the
+patch is still needed and rerun numeric/string subject, forged-signature, invalid
+claim, refresh-identity and original-token-preservation tests. Do not drop the
+patch or disable token checks to get an upgrade through CI.
+
 Sessions last at most seven days. The opaque Secure/HttpOnly/SameSite=Lax cookie
 contains no profile/tokens. Redis holds AES-GCM encrypted token bundles with TTL,
 origin/client key namespaces, revocable login transactions and atomic refresh.
