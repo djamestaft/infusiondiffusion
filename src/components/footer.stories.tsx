@@ -10,8 +10,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Desktop: Story = {
-  globals: { viewport: { value: "desktop", isRotated: false } },
+  globals: { viewport: { value: "foundationDesktop", isRotated: false } },
   play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(
+      canvas.getByRole("heading", { name: "Explore" }),
+    ).toBeVisible();
+    const email = canvas.getByRole("link", {
+      name: "dione.smith@infusiondiffusion.co.za",
+    });
+    await expect(email).toHaveAttribute(
+      "href",
+      "mailto:dione.smith@infusiondiffusion.co.za",
+    );
+    await expect(email.getBoundingClientRect().height).toBeGreaterThanOrEqual(
+      44,
+    );
     const links = within(
       within(canvasElement).getByRole("navigation", { name: "Footer" }),
     ).getAllByRole("link");
@@ -29,7 +43,7 @@ export const Desktop: Story = {
 };
 export const Tablet: Story = {
   ...Desktop,
-  globals: { viewport: { value: "tablet", isRotated: false } },
+  globals: { viewport: { value: "homepageTablet", isRotated: false } },
 };
 export const Mobile: Story = {
   ...Desktop,
