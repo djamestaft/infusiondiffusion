@@ -1,0 +1,294 @@
+[
+  {
+    "surface": "storybook",
+    "width": 1440,
+    "height": 399,
+    "overflow": false,
+    "fonts": ["font-0f02cf", "font-81c2cc, serif"],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "home",
+    "width": 1440,
+    "height": 399,
+    "overflow": false,
+    "fonts": [
+      "manrope, \"manrope Fallback\"",
+      "marcellus, \"marcellus Fallback\", serif"
+    ],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "storybook",
+    "width": 768,
+    "height": 503,
+    "overflow": false,
+    "fonts": ["font-0f02cf", "font-81c2cc, serif"],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "home",
+    "width": 768,
+    "height": 503,
+    "overflow": false,
+    "fonts": [
+      "manrope, \"manrope Fallback\"",
+      "marcellus, \"marcellus Fallback\", serif"
+    ],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "storybook",
+    "width": 390,
+    "height": 551.171875,
+    "overflow": false,
+    "fonts": ["font-0f02cf", "font-81c2cc, serif"],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "home",
+    "width": 390,
+    "height": 551.171875,
+    "overflow": false,
+    "fonts": [
+      "manrope, \"manrope Fallback\"",
+      "marcellus, \"marcellus Fallback\", serif"
+    ],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "storybook",
+    "width": 320,
+    "height": 555.171875,
+    "overflow": false,
+    "fonts": ["font-0f02cf", "font-81c2cc, serif"],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  },
+  {
+    "surface": "home",
+    "width": 320,
+    "height": 555.171875,
+    "overflow": false,
+    "fonts": [
+      "manrope, \"manrope Fallback\"",
+      "marcellus, \"marcellus Fallback\", serif"
+    ],
+    "violations": [],
+    "errors": [],
+    "keyboard": [
+      {
+        "label": "Infusion Diffusion home",
+        "outline": "solid"
+      },
+      {
+        "label": "Shop",
+        "outline": "solid"
+      },
+      {
+        "label": "Fragrance Guide",
+        "outline": "solid"
+      },
+      {
+        "label": "About",
+        "outline": "solid"
+      },
+      {
+        "label": "Contact",
+        "outline": "solid"
+      },
+      {
+        "label": "dione.smith@infusiondiffusion.co.za",
+        "outline": "solid"
+      }
+    ]
+  }
+]

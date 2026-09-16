@@ -30,7 +30,9 @@ for (const viewport of [
         name: "The story behind the atmosphere.",
       }),
     ).toBeVisible();
-    await expect(page.getByRole("heading", { level: 2 })).toHaveCount(5);
+    await expect(
+      page.getByRole("main").getByRole("heading", { level: 2 }),
+    ).toHaveCount(5);
     await expect(
       page.getByText(
         "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",

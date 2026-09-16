@@ -1,5 +1,19 @@
 # Infusion Diffusion design system
 
+## Footer refinement — 16 September 2026
+
+Devon approved the responsive footer and authorized implementation/push.
+The Approved section `2730:37`, component set `2733:61`, and variants
+`2730:45/75/106/139` (1440/768/390/320) supersede the footer in `2358:82`.
+Use Marcellus 18/26 headings, Manrope Regular 15/24 links and supporting copy,
+and 13/20 copyright. Keep the existing midnight surface and gold logo; crop
+only the logo asset’s horizontal whitespace to align its visible edge.
+Desktop has brand, Explore and Contact columns; tablet puts the brand above
+navigation/contact; mobile stacks groups with two navigation columns. Retain
+all four routes, the confirmed support mailbox and 44px targets. Separate the
+left-aligned copyright with the navigation border token. At compact widths,
+wrap the email after @. See [INF-43 delivery](docs/features/inf-43-footer.md).
+
 ## Navigation breathing room — 12 September 2026
 
 Devon requested more space around the header logo. Use the shared responsive

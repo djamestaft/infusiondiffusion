@@ -539,7 +539,9 @@ export const ContactUnexpectedError: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Try again" }));
     await expect(contactRetry).toHaveBeenCalledOnce();
     await expect(
-      canvas.getByRole("link", { name: "dione.smith@infusiondiffusion.co.za" }),
+      within(canvas.getByRole("main")).getByRole("link", {
+        name: "dione.smith@infusiondiffusion.co.za",
+      }),
     ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
   },
 };
