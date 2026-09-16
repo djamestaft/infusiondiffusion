@@ -88,3 +88,9 @@ describe("customer security boundaries", () => {
     ).toBeNull();
   });
 });
+
+it("keeps initials within two graphemes after case expansion", () => {
+  expect(normalizeProfile({ firstName: "ß", lastName: "Özil" }).initials).toBe(
+    "SÖ",
+  );
+});

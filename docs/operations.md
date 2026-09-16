@@ -156,9 +156,9 @@ setup and preview acceptance; keep `SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true`.
   a branch preview origin must also be registered before preview authentication.
 - Connect Upstash Redis via Vercel, using the **Free** plan with `autoUpgrade=false`
   and `prodPack=false`. Devon approved an available free plan. Do not select a paid
-  plan. Initial CLI provisioning requires the user's marketplace terms acceptance;
-  the attempted provisioning has not yet created a resource. Isolate Preview from
-  Production and use the returned REST URL/token as `UPSTASH_REDIS_REST_URL` and
+  plan. Devon accepted marketplace terms; `infusion-customer-sessions-test` is created
+  in iad1 and connected to Preview only. Its REST smoke passed. Keep Production
+  isolated and use the returned REST URL/token as `UPSTASH_REDIS_REST_URL` and
   `UPSTASH_REDIS_REST_TOKEN` (map the integration's variable names if different).
 - Generate a 32-byte random hex `SHOPIFY_CUSTOMER_SESSION_KEY` directly into secret
   storage, without printing it. Changing this key or origin/client configuration

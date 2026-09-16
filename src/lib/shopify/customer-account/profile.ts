@@ -17,9 +17,11 @@ export function normalizeProfile(customer: {
     email: text(customer.emailAddress?.emailAddress),
     initials:
       names
-        .map((n) => [...segmenter.segment(n)][0]?.segment ?? "")
-        .join("")
-        .toLocaleUpperCase("en") || null,
+        .map(
+          (n) =>
+            [...segmenter.segment(n.toLocaleUpperCase("en"))][0]?.segment ?? "",
+        )
+        .join("") || null,
   };
 }
 

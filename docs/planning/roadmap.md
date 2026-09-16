@@ -8,7 +8,7 @@ hosted orders and sign-out. The feature remains disabled by default; main keeps
 its working hosted handoff. Devon registered the main test-site callback/logout
 URIs and approved an available free Upstash plan with no paid auto-upgrade.
 
-Local evidence: 331 unit/integration tests, OIDC signature/claim validation,
+Local evidence: 332 unit/integration tests, OIDC signature/claim validation,
 real Redis atomicity/race checks, seven fixture-browser journeys, four-width
 axe/overflow checks, lint/types and Next/Storybook builds pass. Independent auth
 review has no remaining blocker. Visual review found no major issue; reserved
@@ -16,9 +16,10 @@ sign-out width and a Unicode/mononym story address its small follow-ups.
 Fixture journeys exercise refresh, return, cross-tab logout and customer changes;
 they do not prove real Shopify login or grant renewal.
 
-Remaining: secure client credential configuration, user's Upstash marketplace
-terms acceptance/provisioning, preview callback registration and real
-Shopify/Upstash acceptance. CI and preview checks must use the current PR head.
+The free Upstash database is now provisioned and connected to Preview only;
+REST write/read-delete/Lua smoke passed. Remaining: locate the saved client
+credentials, register preview callback/logout URIs, and complete real Shopify/
+Upstash acceptance. CI and preview checks must use the current PR head.
 Figma account-state synchronization and human design/release acceptance remain
 pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
 SEO/domain work remains INF-41/42. Payfast remains in Test mode.
