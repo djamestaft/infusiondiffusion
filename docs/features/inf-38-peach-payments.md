@@ -1,5 +1,9 @@
 # INF-38 — Peach Payments readiness
 
+Superseded for delivery on 16 September 2026: the client has created a Payfast
+account. Continue from [the Payfast record](inf-38-payfast.md). Retain this file
+as the historical Peach audit and onboarding-blocker evidence.
+
 Date: 15 September 2026. Owner: Devon. Status: In Progress in Plane; Peach
 onboarding is externally blocked. No payment extension has been installed or
 activated by this work. No payment has been attempted.

@@ -1,6 +1,25 @@
 # Infusion Diffusion Roadmap
 
-Last updated: 15 September 2026
+Last updated: 16 September 2026
+
+## Payfast selected; client account created — 16 September 2026
+
+Devon confirms the client has created a Payfast account. INF-38 now delivers
+Payfast through the existing Shopify-hosted checkout; it remains In Progress,
+owned by Devon. Merchant verification, dashboard access, Shopify app connection,
+commercial terms and test/live state are still unconfirmed. Account creation
+does not establish approval or payment readiness.
+
+The [Payfast delivery record](../features/inf-38-payfast.md) owns the next steps.
+INF-38/40/42 and the Plane project summary are reconciled to Payfast, with
+existing dependencies and human gates retained. Confirm verification and access,
+connect the supported app, then verify supported sandbox flows before proposing
+live enablement. No production checkout flag or provider setting has changed.
+
+This decision supersedes the Peach provider references and replacement-selection
+pending statements below. The earlier audit, tests and Peach rejection are
+historical evidence. Protected main was refreshed to `f1e2d88`; the local delivery
+branch retains the earlier roadmap work and includes that current main.
 
 ## Payment-provider blocker — 15 September 2026
 
@@ -57,7 +76,7 @@ are recorded as actual Plane blocking relationships as well as in this roadmap.
 
 | Item | Deliverable | Completion depends on |
 | --- | --- | --- |
-| INF-38 | Integrate Peach Payments with Shopify-hosted checkout | Merchant/access and supported-integration discovery |
+| INF-38 | Integrate Payfast with Shopify-hosted checkout | Merchant verification, access and test connection |
 | INF-39 | Restore the customer account icon and Shopify account functionality | Shopify account/domain and environment discovery |
 | INF-40 | Verify the complete storefront, payment and account journey | INF-38, INF-39 |
 | INF-41 | Complete final SEO and launch discoverability checks | INF-40, INF-31 (retains INF-28 approval dependency) |
@@ -70,7 +89,7 @@ gates remain in this order. No target dates are assumed.
 
 ### Acceptance and evidence
 
-- **INF-38 — payments:** Confirm the existing store's supported Peach integration,
+- **INF-38 — payments:** Confirm the existing store's supported Payfast integration,
   merchant readiness, methods, fees and test/live setup against current official
   documentation. Preserve cart → Shopify `checkoutUrl`; Shopify owns orders,
   totals and payment state. Prove success, decline, cancel, pending/retry and
@@ -88,7 +107,7 @@ gates remain in this order. No target dates are assumed.
   ownership and document any account-domain prerequisite for cutover.
 - **INF-40 — E2E:** Test all six launch products and primary/support routes,
   product availability, cart mutations/persistence, guest and signed-in checkout,
-  Peach test payment, Shopify order confirmation and account order history.
+  Payfast test payment, Shopify order confirmation and account order history.
   Exercise stock/network/provider failures and retries on mobile and desktop.
   Attach a named commit/preview, expected/actual matrix, sanitized transaction
   references, traces and defect retests. Distinguish mocked automation from real
