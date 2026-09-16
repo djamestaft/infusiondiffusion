@@ -16,6 +16,29 @@ Date: 16 September 2026. Owner: Devon. State: In Progress.
 
 ## Next steps
 
+### Hosted checkout inspection — 16 September 2026
+
+A fresh Storefront API cart with one available product reached Shopify checkout
+in Chromium with HTTP 200. The generated HTTPS destination was
+`infusiondiffusion.myshopify.com`, accepted by the existing handoff's host check.
+The checkout displayed **“This store can’t accept payments right now.”** No
+Payfast payment option was available in that inspected checkout state. Provider
+installation, activation and merchant verification require dashboard inspection;
+the message alone does not distinguish those causes.
+
+The inspected R395 product showed R59.25 estimated tax and R454.25 total before
+shipping. The owner must confirm the intended tax configuration; this observation
+does not resolve the historical tax-readiness question. No contact/address data
+was entered and no order/payment was submitted. The cart line was removed after
+inspection; Shopify confirmed zero remaining quantity and no cleanup errors.
+
+The local checkout flag remains unset/disabled. This inspection used the generated
+hosted URL directly and is not proof that the deployed storefront button is enabled
+or that a Payfast payment works. No runtime code change is indicated by the current
+hosted-checkout evidence.
+
+### Dashboard setup
+
 1. Confirm the client's Payfast verification status from its dashboard or
    verification email. If documents are pending, the client submits them through
    Account → Verification Documents. Use their legal entity and bank details;
