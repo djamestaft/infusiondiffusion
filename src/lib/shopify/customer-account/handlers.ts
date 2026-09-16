@@ -19,6 +19,7 @@ import {
 import { SessionStore } from "./store";
 import { currentSession } from "./session";
 import { normalizeProfile, customerResponseSchema } from "./profile";
+import { reportCallbackFailure, type CallbackStage } from "./diagnostics";
 
 const privateHeaders = {
   "Cache-Control": "private, no-store, max-age=0",
@@ -72,21 +73,30 @@ export async function accountLogin(request: NextRequest) {
 }
 export async function accountCallback(request: NextRequest) {
   let response: NextResponse;
+  let stage: CallbackStage = "callback.configuration";
   try {
     const settings = readCustomerConfig();
+    stage = "callback.origin";
     if (!settings || request.nextUrl.origin !== settings.origin)
       throw new Error();
     const store = new SessionStore(settings);
     // Claim once, while retaining an atomic revocation marker for concurrent logout.
     const loginId = request.cookies.get(TRANSACTION_COOKIE)?.value;
+    stage = "callback.cookie";
+    if (!loginId) throw new Error();
+    stage = "callback.claim-login";
     const record = await store.claimLogin(loginId);
+    stage = "callback.transaction";
     const transaction = transactionSchema.parse(record?.value);
+    stage = "callback.state";
     if (
       transaction.expiresAt <= Date.now() ||
       request.nextUrl.searchParams.get("state") !== transaction.state
     )
       throw new Error();
+    stage = "callback.discovery";
     const { client } = await discoverCustomerClient(settings);
+    stage = "callback.exchange";
     const tokens = await oidc.authorizationCodeGrant(
       client,
       new URL(request.url),
@@ -98,12 +108,15 @@ export async function accountCallback(request: NextRequest) {
       },
       { client_id: settings.clientId },
     );
+    stage = "callback.session";
     const session = sessionFromTokens(
       tokens,
       Date.now() + SESSION_SECONDS * 1000,
     );
     const id = newIdentifier();
+    stage = "callback.rotate";
     await store.remove(request.cookies.get(SESSION_COOKIE)?.value);
+    stage = "callback.commit";
     if (
       !(await store.commitLogin(
         loginId!,
@@ -121,7 +134,8 @@ export async function accountCallback(request: NextRequest) {
       ...cookieOptions,
       maxAge: SESSION_SECONDS,
     });
-  } catch {
+  } catch (error) {
+    reportCallbackFailure(stage, error);
     response = local(request, "/account?notice=error");
   }
   clear(response, TRANSACTION_COOKIE);

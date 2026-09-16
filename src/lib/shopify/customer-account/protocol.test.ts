@@ -134,6 +134,7 @@ afterEach(() => {
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
   vi.clearAllMocks();
+  vi.restoreAllMocks();
 });
 it("verifies a signed identity then rotates an opaque secure cookie", async () => {
   network();
@@ -196,4 +197,34 @@ it("requires refresh and expiry data for a persistent session", async () => {
   network({}, false, { refresh_token: undefined, expires_in: undefined });
   await accountCallback(callback());
   expect(store.commitLogin).not.toHaveBeenCalled();
+});
+
+it("reports the callback failure stage without logging transaction secrets", async () => {
+  const log = vi.spyOn(console, "error").mockImplementation(() => {});
+  store.claimLogin.mockRejectedValue(new Error("private-session-and-code"));
+  network();
+  const response = await accountCallback(callback());
+  expect(response.headers.get("location")).toBe(
+    "https://store.example/account?notice=error",
+  );
+  expect(log).toHaveBeenCalledWith(
+    "[customer-account] " +
+      JSON.stringify({ stage: "callback.claim-login", code: "unknown" }),
+  );
+  expect(JSON.stringify(log.mock.calls)).not.toContain(
+    "private-session-and-code",
+  );
+});
+it("reports an allowlisted JWT failure code without logging its claims", async () => {
+  const log = vi.spyOn(console, "error").mockImplementation(() => {});
+  network({ nonce: "private-wrong-nonce" });
+  await accountCallback(callback());
+  expect(log).toHaveBeenCalledWith(
+    expect.stringContaining('"stage":"callback.exchange"'),
+  );
+  expect(log).toHaveBeenCalledWith(
+    expect.stringContaining('"code":"OAUTH_JWT_CLAIM_COMPARISON_FAILED"'),
+  );
+  expect(JSON.stringify(log.mock.calls)).not.toContain("private-wrong-nonce");
+  expect(JSON.stringify(log.mock.calls)).not.toContain("private-access");
 });
