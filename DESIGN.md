@@ -1,5 +1,17 @@
 # Infusion Diffusion design system
 
+## Customer account identity — 16 September 2026
+
+Devon requested persistent signed-in identity, initials and basic information.
+Use the existing 44px Account target before the bag, with 12px semibold Manrope
+name initials; keep the icon when the verified customer has no name. Keep the
+86px/78px header geometry and existing tokens. Account adds Name/Email rows,
+View your orders, and a secondary Sign out with reserved pending-label width.
+Wrap long text and isolate bidirectional names. Actions stack below 640px.
+The Storybook account states implement the reviewed functional extension;
+Figma state synchronization and human acceptance are pending. Existing approved
+shell frames are preserved. No new colours, primitives or avatar treatment.
+
 ## Navigation breathing room — 12 September 2026
 
 Devon requested more space around the header logo. Use the shared responsive

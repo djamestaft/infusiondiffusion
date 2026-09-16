@@ -1,3 +1,4 @@
+import type { CustomerState } from "@/lib/shopify/customer-account/contract";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,10 @@ export type AccountEntryState =
 
 export type AccountEntryProps = {
   state: AccountEntryState;
+  customerState?: CustomerState;
+  notice?: string;
+  onSignOut?: () => void;
+  signingOut?: boolean;
   destination?: string;
   cartCount?: number | null;
   longContent?: boolean;
@@ -61,8 +66,14 @@ export function AccountEntry({
   cartCount = 0,
   longContent = false,
   onRetry,
+  customerState,
+  notice,
+  onSignOut,
+  signingOut = false,
 }: AccountEntryProps) {
-  const isLoading = state === "loading";
+  const isLoading = customerState
+    ? customerState.status === "loading"
+    : state === "loading";
   const content =
     state === "available"
       ? messages.available
@@ -73,6 +84,11 @@ export function AccountEntry({
     <div className="bg-content-surface text-content-primary min-h-dvh">
       <Navigation
         cartCount={cartCount}
+        accountProfile={
+          customerState?.status === "signed-in"
+            ? customerState.profile
+            : undefined
+        }
         accountHref={state === "available" ? "/account" : undefined}
       />
       <main
@@ -88,14 +104,28 @@ export function AccountEntry({
                 title="Your account"
                 headingLevel={1}
                 headingTreatment="headline"
-                lead={content?.lead}
+                lead={
+                  customerState
+                    ? "View your purchases and manage your account."
+                    : content?.lead
+                }
               />
-              {state === "available" && destination ? (
+              {customerState ? (
+                <CustomerAccountContent
+                  state={customerState}
+                  destination={destination}
+                  onRetry={onRetry}
+                  notice={notice}
+                  onSignOut={onSignOut}
+                  signingOut={signingOut}
+                />
+              ) : null}
+              {!customerState && state === "available" && destination ? (
                 <Button asChild size="large" className="mt-8 text-center">
                   <a href={destination}>{messages.available.action!}</a>
                 </Button>
               ) : null}
-              {state !== "available" ? (
+              {!customerState && state !== "available" ? (
                 <div className="mt-8 space-y-6">
                   <FeedbackAlert
                     tone={state === "error" ? "error" : "info"}
@@ -138,6 +168,102 @@ export function AccountLoadingContent() {
       <div className="bg-content-surface-elevated h-14 w-3/4" />
       <div className="bg-content-surface-elevated h-6 w-full max-w-xl" />
       <div className={cn("bg-content-surface-elevated h-12 w-56")} />
+    </div>
+  );
+}
+
+function CustomerAccountContent({
+  state,
+  destination,
+  onRetry,
+  notice,
+  onSignOut,
+  signingOut,
+}: {
+  state: CustomerState;
+  destination?: string;
+  onRetry?: () => void;
+  notice?: string;
+  onSignOut?: () => void;
+  signingOut: boolean;
+}) {
+  if (state.status === "signed-in")
+    return (
+      <div className="mt-8 space-y-8">
+        <dl className="space-y-5 font-sans">
+          {[
+            ["Name", state.profile.name],
+            ["Email", state.profile.email],
+          ].map(([label, value]) => (
+            <div key={label} className="space-y-1">
+              <dt className="text-content-secondary text-sm">{label}</dt>
+              <dd className="text-base leading-7 [overflow-wrap:anywhere]">
+                <bdi>{value || "Not provided"}</bdi>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+          {destination ? (
+            <Button asChild size="large" className="text-center">
+              <a href={destination}>View your orders</a>
+            </Button>
+          ) : null}
+          <form method="post" action="/account/logout" onSubmit={onSignOut}>
+            <Button
+              type="submit"
+              variant="ghost"
+              className="min-w-36"
+              disabled={signingOut}
+            >
+              {signingOut ? "Signing out…" : "Sign out"}
+            </Button>
+          </form>
+        </div>
+      </div>
+    );
+  const failed = state.status === "error" || notice === "error";
+  return (
+    <div className="mt-8 space-y-6">
+      {failed ? (
+        <FeedbackAlert
+          tone="error"
+          announcement="alert"
+          title="We could not reach your account"
+        >
+          Please try again. Your account details are temporarily unavailable.
+        </FeedbackAlert>
+      ) : null}
+      {state.status === "expired" ? (
+        <p className="text-content-secondary font-sans">
+          Your session has ended. Sign in again to see your account.
+        </p>
+      ) : null}
+      {notice === "signed-out" ? (
+        <p role="status" className="text-content-secondary font-sans">
+          You’re signed out.
+        </p>
+      ) : null}
+      {notice === "local-signout" ? (
+        <p role="status" className="text-content-secondary font-sans">
+          You’re signed out of this site. Shopify’s account session may still be
+          active.
+        </p>
+      ) : null}
+      {failed && onRetry ? (
+        <Button onClick={onRetry}>Try again</Button>
+      ) : (
+        <Button asChild size="large">
+          <a href="/account/login">Sign in</a>
+        </Button>
+      )}
+      {failed && destination ? (
+        <div>
+          <TextLink href={destination} variant="standalone">
+            Continue to your account
+          </TextLink>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -109,3 +109,76 @@ export const FocusVisible: Story = {
     await expect(link).toHaveFocus();
   },
 };
+
+const profile = {
+  name: "Amara Jacobs",
+  email: "amara@example.test",
+  initials: "AJ",
+};
+export const SignedIn: Story = {
+  args: { customerState: { status: "signed-in", profile } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("Amara Jacobs")).toBeVisible();
+    await expect(
+      canvas.getByRole("button", { name: "Sign out" }),
+    ).toBeVisible();
+    await expect(
+      canvas.getByRole("link", { name: "View your orders" }),
+    ).toHaveAttribute("href", destination);
+  },
+};
+export const SignedInMobile: Story = {
+  ...SignedIn,
+  globals: { viewport: { value: "contact390", isRotated: false } },
+};
+export const SignedInSmall: Story = {
+  ...SignedIn,
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};
+export const MissingCustomerName: Story = {
+  args: {
+    customerState: {
+      status: "signed-in",
+      profile: { name: null, email: null, initials: null },
+    },
+  },
+};
+export const LongCustomerDetails: Story = {
+  args: {
+    customerState: {
+      status: "signed-in",
+      profile: {
+        name: "Amara Alexandra Isabella Jacobs-Smith",
+        email: "averylongcustomeremailaddressfortesting@example.test",
+        initials: "AJ",
+      },
+    },
+  },
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};
+export const SessionExpired: Story = {
+  args: { customerState: { status: "expired" } },
+};
+export const SessionError: Story = {
+  args: { customerState: { status: "error" }, onRetry: () => {} },
+};
+export const SessionResolving: Story = {
+  args: { customerState: { status: "loading" } },
+};
+export const SigningOut: Story = {
+  args: { customerState: { status: "signed-in", profile }, signingOut: true },
+};
+export const SignedOut: Story = {
+  args: { customerState: { status: "signed-out" }, notice: "signed-out" },
+};
+
+export const UnicodeMononym: Story = {
+  args: {
+    customerState: {
+      status: "signed-in",
+      profile: { name: "Élodie", email: "elodie@example.test", initials: "É" },
+    },
+  },
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};

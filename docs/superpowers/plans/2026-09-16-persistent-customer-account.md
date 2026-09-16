@@ -14,8 +14,9 @@ cookie addresses a managed Redis session; profile/order truth stays in Shopify.
 managed Redis with atomic updates, Vitest, Storybook, Playwright.
 
 **Spec:** [Persistent customer identity](../specs/2026-09-16-persistent-customer-account.md).
-This is a prepared plan, not completed implementation. Confirm the configuration
-and service prerequisites before selecting exact packages or enabling runtime.
+Runtime implementation and local checks are now present in PR #91. Real Shopify/
+Upstash setup, remote acceptance and release remain pending. The checklist below
+is the original detailed acceptance plan; see the roadmap for current evidence.
 
 ## Global constraints
 

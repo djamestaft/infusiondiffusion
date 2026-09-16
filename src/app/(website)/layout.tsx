@@ -17,6 +17,7 @@ export default async function WebsiteLayout({
     <>
       <AccountNavigationProvider
         enabled={process.env.SHOPIFY_ACCOUNT_HANDOFF_ENABLED === "true"}
+        sessionEnabled={process.env.SHOPIFY_CUSTOMER_SESSION_ENABLED === "true"}
       >
         {children}
       </AccountNavigationProvider>
