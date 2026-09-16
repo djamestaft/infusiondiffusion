@@ -2,19 +2,74 @@
 
 Date: 16 September 2026. Owner: Devon. State: In Progress.
 
-## Current evidence
+## Current evidence — sandbox payment verified
 
-- Devon confirms the client has created a Payfast account.
-- Payfast is the selected replacement for Peach, whose onboarding was paused.
-- Merchant verification, account type, current fees, dashboard access and Shopify
-  app connection are not yet verified. Do not infer live readiness from signup.
-- Runtime integration remains the existing Next.js cart → Shopify `checkoutUrl`
-  handoff. The payment app is configured in Shopify and Payfast; no custom
-  payment form, order database or provider credentials in frontend code.
-- [Earlier readiness evidence](inf-38-peach-payments.md) remains historical.
-  No Payfast payment test has been run; no production configuration changed.
+Devon installed and activated Payfast in Shopify with **Test mode on**, confirmed
+by the supplied dashboard screenshots. Devon subsequently confirmed that the
+merchant is verified and that both dashboards are accessible; this is owner
+confirmation, not an independent merchant-account audit.
 
-## Next steps
+On 16 September 2026, Chromium exercised the real headless storefront at
+`http://localhost:3016`, isolated at protected-main commit `f1e2d88`, with
+`SHOPIFY_CHECKOUT_ENABLED=true` in that test process only and fixtures disabled.
+No runtime source change was needed. Persistent/deployed flags were not changed;
+the root local checkout flag remains disabled and deployed values are unverified.
+
+| Check                     | Observed result                                                                                                                                                                                                                                            |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product → cart → checkout | Blanc De Blanc added through the storefront; existing server action redirected to Shopify HTTPS checkout.                                                                                                                                                  |
+| Payment handoff           | Shopify reached `sandbox.payfast.co.za`; sandbox banner verified before completing payment using the virtual wallet.                                                                                                                                       |
+| Amount                    | R395 product + R59.25 tax + R100 Standard shipping = R554.25 ZAR, matching Shopify and Payfast. Correct business tax/shipping policy still requires owner confirmation.                                                                                    |
+| Successful payment        | Payfast reported success and returned to Shopify confirmation **8F06IMM5U**, customer **TEST DO NOT FULFIL**. Refresh opened order **#1002**, with the same amount and item.                                                                               |
+| Admin reconciliation      | In response to the #1002 check, Devon supplied a screenshot showing **Paid / Unfulfilled**. The crop does not show order identity, test label or provider transaction reference; those were not independently inspected. Leave the test order unfulfilled. |
+| Error and retry           | A second checkout initially returned “There was an issue processing your payment.” Retrying reached the sandbox. Cause is unresolved; no storefront fix is claimed.                                                                                        |
+| Cancellation              | Sandbox Cancel transaction → Cancel payment returned to Shopify checkout with the same R554.25 total and enabled Pay now button, without a success confirmation.                                                                                           |
+| Cart recovery             | The first return-to-cart attempt showed the temporary-unavailable state; refresh recovered a one-item cart. Cause is unresolved. After cancellation, the test cart line was removed and the storefront showed an empty bag.                                |
+| Continue shopping         | Confirmation link targeted `https://infusiondiffusion.myshopify.com`; verify the intended headless return destination with INF-42 domain configuration.                                                                                                    |
+| Regression baseline       | 14 existing cart/action/session tests passed across 3 files on the isolated main checkout.                                                                                                                                                                 |
+
+Only one sandbox payment was completed. No real money or card information was
+used. No live payment/provider setting was changed by the agent. Synthetic test
+contact/address data was used. Local screenshots are retained outside Git at
+`/tmp/inf38-payment-test-pjFlul`; they are temporary evidence, not a durable shared
+artifact. The initial success screenshot caught a visual transition; the text
+and refreshed order observations plus Devon's Admin screenshot provide the
+reported confirmation evidence. Checkout/session URLs and credentials are omitted.
+
+## Remote sandbox testing authorization
+
+After the local payment and cancellation checks, Devon explicitly requested this
+work on `main` so checkout can be tested remotely using the test system. This
+authorizes the reviewed main release and the deployed storefront checkout flag
+for sandbox testing while **Payfast Test mode stays on**. It does not authorize
+live payments. The checkout implementation already exists on protected main;
+merging this documentation alone does not enable its environment flag.
+
+All 284 unit/integration tests passed across 47 files before release preparation.
+The temporary browser/server were stopped, the verification worktree was returned
+clean to Treehouse, and the original local development server was preserved.
+Remote deployment/flag state and browser evidence must be recorded after release.
+
+## Remaining acceptance
+
+- Independently match Shopify/Payfast transaction references, confirm the test
+  marker and review cancellation/abandoned-checkout state and duplicate counts.
+- Resolve/retest the transient checkout and cart errors before full E2E sign-off.
+- Verify supported decline/pending/discount flows and notifications. Virtual-wallet
+  success does not test card authentication, 3-D Secure, settlement or real refunds.
+- Confirm current fees, enabled methods, tax/shipping/policies and merchant readiness
+  with the owner before live enablement. Devon's merchant-verification confirmation
+  supersedes the earlier pending status, but does not authorize live transactions.
+- INF-40 retains combined mobile/desktop and signed-in/guest journey testing;
+  INF-42 retains final-domain and checkout return-link checks. INF-38 stays
+  In Progress with Devon. Live enablement and real-money tests require the existing
+  explicit human decision.
+
+## Historical setup and inspection
+
+The following inspection preceded activation and is superseded by the successful
+sandbox evidence above. Peach's onboarding rejection remains historical in
+[the earlier provider record](inf-38-peach-payments.md).
 
 ### Hosted checkout inspection — 16 September 2026
 

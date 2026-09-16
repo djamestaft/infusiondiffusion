@@ -2,6 +2,35 @@
 
 Last updated: 16 September 2026
 
+## Payfast sandbox succeeds — 16 September 2026
+
+Payfast is installed and Active in Shopify with Test mode on. Devon confirms
+merchant verification and access to both dashboards. On protected-main `f1e2d88`,
+an isolated local headless storefront completed a real Payfast sandbox journey:
+product → cart → Shopify checkout → Payfast virtual wallet → Shopify confirmation
+8F06IMM5U / order #1002, R554.25. Devon's responding Admin screenshot shows
+Paid / Unfulfilled. The test order must remain unfulfilled.
+
+A second checkout's initial processing error recovered on retry; sandbox
+cancellation then returned to a usable checkout. A temporary cart error recovered
+on refresh. Both causes remain unresolved for E2E follow-up. Fourteen existing
+cart/action/session tests passed. See the detailed
+[Payfast evidence and remaining acceptance](../features/inf-38-payfast.md).
+
+INF-38 remains In Progress, owned by Devon. Transaction-reference reconciliation,
+test marker/duplicate checks, broader failure flows, business tax/shipping and
+commercial readiness remain open. INF-40 consumes this evidence; INF-42 must
+verify that checkout's Continue shopping link returns to the headless storefront.
+No source-code change or deployed checkout-flag change was needed for this test.
+Live activation and real-money testing retain the existing human gates.
+This entry supersedes earlier unconfirmed connection/testing statements below.
+
+Devon subsequently authorized moving this work onto `main` and enabling remote
+checkout **using Payfast's test system**. Prepare the reviewed release and set the
+deployed checkout environment flag, retaining Payfast Test mode. This limited
+sandbox authorization supersedes the earlier local-only test scope; live payments
+remain gated. All 284 unit/integration tests passed during release preparation.
+
 ## Payfast selected; client account created — 16 September 2026
 
 Devon confirms the client has created a Payfast account. INF-38 now delivers
@@ -74,13 +103,13 @@ remaining content is not automatically accepted by this launch plan.
 All five new Plane tasks are assigned to Devon and start in Todo. Dependencies
 are recorded as actual Plane blocking relationships as well as in this roadmap.
 
-| Item | Deliverable | Completion depends on |
-| --- | --- | --- |
-| INF-38 | Integrate Payfast with Shopify-hosted checkout | Merchant verification, access and test connection |
-| INF-39 | Restore the customer account icon and Shopify account functionality | Shopify account/domain and environment discovery |
-| INF-40 | Verify the complete storefront, payment and account journey | INF-38, INF-39 |
-| INF-41 | Complete final SEO and launch discoverability checks | INF-40, INF-31 (retains INF-28 approval dependency) |
-| INF-42 | Switch the production domain and verify launch | INF-40, INF-41, INF-36 |
+| Item   | Deliverable                                                         | Completion depends on                               |
+| ------ | ------------------------------------------------------------------- | --------------------------------------------------- |
+| INF-38 | Integrate Payfast with Shopify-hosted checkout                      | Merchant verification, access and test connection   |
+| INF-39 | Restore the customer account icon and Shopify account functionality | Shopify account/domain and environment discovery    |
+| INF-40 | Verify the complete storefront, payment and account journey         | INF-38, INF-39                                      |
+| INF-41 | Complete final SEO and launch discoverability checks                | INF-40, INF-31 (retains INF-28 approval dependency) |
+| INF-42 | Switch the production domain and verify launch                      | INF-40, INF-41, INF-36                              |
 
 Payments and accounts can be prepared independently. Complete their combined
 E2E evidence before final SEO acceptance, then switch the domain after independent
