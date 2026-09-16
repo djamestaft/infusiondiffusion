@@ -1,5 +1,23 @@
 # INF-39 — Restore Shopify customer accounts
 
+## Follow-up: persistent storefront identity
+
+Devon confirms that signing in displays his Shopify order. The hosted account
+restoration was merged as `ca41848` and enabled on the test site with green CI
+and public-browser smoke checks. Hosted order visibility is now user-confirmed.
+
+Devon requests initials and basic profile details to persist on returning to the
+Next.js site. This requires a Customer Account API authorization/session
+connection beyond the existing hosted link. See the
+[prepared design](../superpowers/specs/2026-09-16-persistent-customer-account.md)
+and [implementation plan](../superpowers/plans/2026-09-16-persistent-customer-account.md).
+Client credentials and managed session storage are not configured. This follow-up
+is preparation only; no new auth runtime or signed-in identity is deployed. Keep
+INF-39 In Progress until that implementation and authenticated acceptance pass.
+
+The earlier discovery and release-preparation record below is historical; exact
+merge/deployment evidence is retained in PR #90 and Plane INF-39.
+
 ## Outcome and scope
 
 Devon requested restoration of the existing Account icon and purchase history on

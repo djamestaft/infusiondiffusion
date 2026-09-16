@@ -1,5 +1,24 @@
 # Infusion Diffusion Roadmap
 
+## Persistent storefront identity requested — 16 September 2026
+
+Devon confirms that hosted Shopify login shows his own order. PR #90 is merged
+as `ca41848`; Account is enabled on the remote test site, with green main CI and
+public sign-in/return/guest-checkout smoke evidence recorded in Plane and the PR.
+The hosted order-history visibility check is now user-confirmed.
+
+Devon additionally requests persistent signed-in state, basic profile information
+and initials when returning to the storefront. The current link-only handoff
+cannot provide that identity. INF-39 remains In Progress with Devon; its next
+slice is a Customer Account API connection and secure first-party session, as
+specified in the [prepared design](../superpowers/specs/2026-09-16-persistent-customer-account.md)
+and [implementation plan](../superpowers/plans/2026-09-16-persistent-customer-account.md).
+Client configuration and a managed-session-storage provisioning path are still
+needed; no new authentication runtime or signed-in UI is enabled yet. Keep the
+working hosted path available. INF-40 covers combined acceptance; INF-41/42 remain
+final SEO and domain switchover. Earlier unconfirmed order-history notes below are
+historical for the now-confirmed visibility check only.
+
 ## Customer account restoration — 16 September 2026
 
 Devon started INF-39, now In Progress with Devon as owner. Discovery found the
