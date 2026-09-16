@@ -17,11 +17,12 @@ Fixture journeys exercise refresh, return, cross-tab logout and customer changes
 they do not prove real Shopify login or grant renewal.
 
 The free Upstash database is now provisioned and connected to Preview only;
-REST write/read-delete/Lua smoke passed. Remaining: locate the saved client
-credentials, register preview callback/logout URIs, and complete real Shopify/
+REST write/read-delete/Lua smoke passed. The client credentials and encrypted
+session configuration are now installed as server-only branch Preview variables.
+Remaining: register preview callback/logout URIs and complete real Shopify/
 Upstash acceptance. CI and preview checks must use the current PR head.
-Figma account-state synchronization and human design/release acceptance remain
-pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
+The editable [Figma account-state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
+is synchronized on Exploration. Human visual/release acceptance remains pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
 SEO/domain work remains INF-41/42. Payfast remains in Test mode.
 
 ## Persistent storefront identity requested — 16 September 2026

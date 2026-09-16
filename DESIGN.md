@@ -9,8 +9,9 @@ name initials; keep the icon when the verified customer has no name. Keep the
 View your orders, and a secondary Sign out with reserved pending-label width.
 Wrap long text and isolate bidirectional names. Actions stack below 640px.
 The Storybook account states implement the reviewed functional extension;
-Figma state synchronization and human acceptance are pending. Existing approved
-shell frames are preserved. No new colours, primitives or avatar treatment.
+The [editable Figma state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
+is synchronized on Exploration and awaits human review. Existing approved shell
+frames are preserved. No new colours, primitives or avatar treatment.
 
 ## Navigation breathing room — 12 September 2026
 
