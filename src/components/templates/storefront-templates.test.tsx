@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -253,7 +253,9 @@ describe("storefront templates", () => {
     await userEvent.click(screen.getByRole("button", { name: "Try again" }));
     expect(reset).toHaveBeenCalledOnce();
     expect(
-      screen.getByRole("link", { name: "dione.smith@infusiondiffusion.co.za" }),
+      within(screen.getByRole("main")).getByRole("link", {
+        name: "dione.smith@infusiondiffusion.co.za",
+      }),
     ).toHaveAttribute("href", "mailto:dione.smith@infusiondiffusion.co.za");
   });
 
@@ -495,7 +497,9 @@ describe("storefront templates", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "The story behind",
     );
-    expect(screen.getAllByRole("heading", { level: 2 })).toHaveLength(5);
+    expect(
+      within(screen.getByRole("main")).getAllByRole("heading", { level: 2 }),
+    ).toHaveLength(5);
     expect(
       screen.getByRole("link", { name: "About", current: "page" }),
     ).toBeVisible();

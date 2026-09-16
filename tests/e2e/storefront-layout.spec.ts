@@ -25,24 +25,27 @@ for (const width of [1440, 1024, 768, 390, 320]) {
     const logoBox = (await footer
       .getByRole("link", { name: "Infusion Diffusion home" })
       .boundingBox())!;
+    await expect(
+      footer.getByRole("heading", { name: "Explore" }),
+    ).toBeVisible();
+    const email = footer.getByRole("link", {
+      name: "dione.smith@infusiondiffusion.co.za",
+    });
+    await expect(email).toHaveAttribute(
+      "href",
+      "mailto:dione.smith@infusiondiffusion.co.za",
+    );
+    const emailBox = (await email.boundingBox())!;
+    expect(emailBox.x + emailBox.width).toBeLessThanOrEqual(width);
+    expect(emailBox.height).toBeGreaterThanOrEqual(44);
     if (width >= 1024) {
-      expect(Math.abs(navBox.x + navBox.width / 2 - width / 2)).toBeLessThan(1);
-      expect(navBox.x - (logoBox.x + logoBox.width)).toBeGreaterThanOrEqual(31);
-    } else if (width >= 640) {
-      expect(navBox.x - (logoBox.x + logoBox.width)).toBeGreaterThanOrEqual(31);
+      expect(navBox.x - (logoBox.x + logoBox.width)).toBeGreaterThanOrEqual(32);
     } else {
-      expect(Math.abs(logoBox.x + logoBox.width / 2 - width / 2)).toBeLessThan(
-        1,
-      );
+      expect(navBox.y).toBeGreaterThan(logoBox.y + logoBox.height);
+      expect(Math.abs(navBox.x - logoBox.x)).toBeLessThan(1);
     }
-    if (width >= 640) {
-      const boxes = await Promise.all(
-        (await links.getByRole("link").all()).map((link) => link.boundingBox()),
-      );
-      const gaps = boxes
-        .slice(1)
-        .map((box, index) => box!.x - (boxes[index]!.x + boxes[index]!.width));
-      expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(1);
+    for (const link of await links.getByRole("link").all()) {
+      expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
     }
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),

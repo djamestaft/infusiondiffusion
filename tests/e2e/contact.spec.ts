@@ -26,7 +26,9 @@ async function assertDefaultContact(
   await expect(
     page.getByRole("heading", { level: 1, name: fallbackTitle }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { level: 2 })).toHaveCount(5);
+  await expect(
+    page.getByRole("main").getByRole("heading", { level: 2 }),
+  ).toHaveCount(5);
   for (const heading of [
     "Before you write",
     "Delivery enquiries",
@@ -99,6 +101,10 @@ test("keeps the mobile drawer keyboard-operable and restores the unobscured page
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/contact");
+  // Wait for the resolved page: the loading shell has a separate menu instance.
+  await expect(
+    page.getByRole("heading", { level: 1, name: fallbackTitle }),
+  ).toBeVisible();
   const menu = page.getByRole("button", { name: "Open menu" });
   // A pointer activation first waits for the hydrated client control; the
   // subsequent Enter activation is the keyboard behavior under test.

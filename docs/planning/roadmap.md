@@ -51,6 +51,15 @@ working hosted path available. INF-40 covers combined acceptance; INF-41/42 rema
 final SEO and domain switchover. Earlier unconfirmed order-history notes below are
 historical for the now-confirmed visibility check only.
 
+## Approved footer refinement — 16 September 2026
+
+Devon approved the Figma footer refinement and authorized implementation/push.
+INF-43 is In Progress, owned by Devon, as a follow-up to completed INF-34.
+Approved section `2730:37` preserves the four responsive frame IDs. The
+[delivery record](../features/inf-43-footer.md) owns acceptance and visual evidence.
+This changes the shared footer only; launch dependencies remain unchanged.
+Implementation review, green current-head CI and human merge remain required.
+
 ## Customer account restoration — 16 September 2026
 
 Devon started INF-39, now In Progress with Devon as owner. Discovery found the

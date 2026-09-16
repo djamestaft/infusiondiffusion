@@ -2,37 +2,72 @@ import Link from "next/link";
 
 import { LogoTextLockup } from "@/components/logo-text-lockup";
 import { storefrontDestinations } from "@/components/storefront-destinations";
+import { TextLink, textLinkVariants } from "@/components/ui/text-link";
+import { defaultContactEmail } from "@/lib/contact-content";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
+  const [emailName, emailDomain] = defaultContactEmail.split("@");
+
   return (
-    <footer className="dark bg-navigation-surface text-navigation-text min-h-[282px] w-full sm:min-h-[210px] lg:min-h-[274px]">
-      <div className="mx-auto w-full max-w-[1440px] px-6 py-6 sm:px-8 sm:py-8 lg:px-16 lg:py-16">
-        <div className="flex flex-col items-center gap-6 sm:min-h-[104px] sm:flex-row sm:gap-8 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-0">
-          <Link
-            href="/"
-            aria-label="Infusion Diffusion home"
-            className="focus-visible:outline-navigation-focus inline-flex shrink-0 justify-self-start focus-visible:outline-2 focus-visible:outline-offset-4"
-          >
-            <LogoTextLockup className="w-55 sm:w-39 lg:w-55" />
-          </Link>
-          <nav
-            aria-label="Footer"
-            className="grid w-full grid-cols-2 gap-4 font-sans text-[13px] sm:flex sm:flex-1 sm:items-center sm:justify-between sm:gap-0 sm:text-sm lg:w-[min(516px,calc(100vw-632px))] lg:text-[15px]"
-          >
-            {storefrontDestinations.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                className="hover:text-navigation-accent focus-visible:outline-navigation-focus inline-flex min-h-11 items-center justify-start font-medium focus-visible:outline-2 focus-visible:outline-offset-2 sm:justify-center sm:px-2"
+    <footer className="dark bg-navigation-surface text-navigation-muted w-full font-sans text-[15px] leading-6 font-normal antialiased">
+      <div className="mx-auto w-full max-w-[1440px] px-6 pt-12 pb-6 sm:px-8 lg:px-16 lg:pt-16">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,488fr)_minmax(0,760fr)] lg:gap-16">
+          <div className="flex flex-col items-start gap-4">
+            <Link
+              href="/"
+              aria-label="Infusion Diffusion home"
+              className="focus-visible:outline-navigation-focus block focus-visible:outline-2 focus-visible:outline-offset-4"
+            >
+              {/* Crop only the logo asset's horizontal whitespace. */}
+              <span className="block w-[calc(200px*179/220)] overflow-hidden sm:w-[179px]">
+                <LogoTextLockup className="bg-link-inverse relative -left-[calc(200px*20.5/220)] w-50 sm:-left-[20.5px] sm:w-55" />
+              </span>
+            </Link>
+            <p>Artistry in fragrance.</p>
+          </div>
+          <div className="grid min-w-0 gap-8 sm:grid-cols-[minmax(0,17fr)_minmax(0,25fr)] lg:grid-cols-[minmax(0,35fr)_minmax(0,52fr)] lg:gap-16">
+            <nav aria-label="Footer">
+              <h2 className="text-navigation-text font-display mb-4 text-lg leading-[26px]">
+                Explore
+              </h2>
+              <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-x-4 sm:flex sm:flex-col">
+                {storefrontDestinations.map(({ label, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      textLinkVariants({ variant: "standalone" }),
+                      "text-navigation-muted hover:text-navigation-accent focus-visible:outline-navigation-focus font-normal no-underline hover:underline",
+                    )}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+            <div className="min-w-0">
+              <h2 className="text-navigation-text font-display mb-4 text-lg leading-[26px]">
+                Contact
+              </h2>
+              <p>For orders and enquiries</p>
+              <TextLink
+                href={`mailto:${defaultContactEmail}`}
+                aria-label={defaultContactEmail}
+                className="text-navigation-text hover:text-navigation-accent focus-visible:outline-navigation-focus flex min-h-11 items-center font-normal underline-offset-2"
               >
-                {label}
-              </Link>
-            ))}
-          </nav>
+                <span className="min-w-0 [overflow-wrap:anywhere]">
+                  {emailName}@<br className="min-[360px]:hidden" />
+                  <wbr />
+                  {emailDomain}
+                </span>
+              </TextLink>
+            </div>
+          </div>
         </div>
-        <p className="mt-6 text-right font-sans text-[13px] leading-[18px]">
-          © 2026 Infusion Diffusion
-        </p>
+        <div className="border-navigation-border mt-8 border-t pt-6 lg:mt-12">
+          <p className="text-[13px] leading-5">© 2026 Infusion Diffusion</p>
+        </div>
       </div>
     </footer>
   );
