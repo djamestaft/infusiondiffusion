@@ -24,30 +24,64 @@ are historical snapshots, including their superseded pending-merge statements.
 - **Evidence limits:** the account merges and persistence acceptance do not prove
   token renewal after expiry, browser restart, real provider logout/re-entry or
   two-customer isolation. Existing fixture tests cover several of these paths;
-  real-provider acceptance remains in INF-39 and feeds INF-40. No new live
+  real-provider acceptance is explicitly transferred to INF-40. No new live
   payment, final-domain cutover or editorial publication is authorized here.
 
-## Remaining work and owners
+## Status audit and next work — 17 September 2026
 
-| Item   | State       | Owner   | Next completion evidence                                                                                                                                                                         |
-| ------ | ----------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| INF-38 | In Progress | Devon   | Reconcile payment/order references and duplicates; finish failure/pending/retry, notifications, refund/cancellation, tax/shipping and commercial-readiness checks. Payfast remains in Test mode. |
-| INF-39 | In Progress | Devon   | Finish real-provider renewal, restart, logout/re-entry and two-customer isolation checks. Implementation, merge and main-site persistence are accepted.                                          |
-| INF-40 | Todo        | Devon   | Complete the named release-candidate matrix across six products, guest/signed-in checkout, payment, order history, mobile/desktop and recovery. Completion depends on INF-38/39.                 |
-| INF-28 | Todo        | Devon   | Resolve remaining factual, service and metadata decisions.                                                                                                                                       |
-| INF-31 | In Progress | Shawnee | Complete approved launch assets/content and source previews; retain INF-28 and publication gates.                                                                                                |
-| INF-35 | In Progress | Devon   | Finish remaining editorial/service scope; delivered Contact and Guide matching remain accepted.                                                                                                  |
-| INF-36 | Backlog     | Shawnee | Independently review the INF-40 evidence and remaining content/release gates; depends on INF-34/35/40.                                                                                           |
-| INF-41 | Todo        | Devon   | Final SEO, canonical/indexing, metadata and discoverability acceptance after INF-40 and INF-31. Preparation can start earlier.                                                                   |
-| INF-42 | Todo        | Devon   | Approved domain/DNS cutover after INF-40/41/36; update redirect-theme hostname, account origin and exact callback/logout URIs, then retest.                                                      |
-| INF-43 | Done        | Devon   | Approved footer delivered in human-merged PR #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                                            |
+All 43 existing Plane items were reviewed against their recorded acceptance and
+merged delivery. Four implementation/design tickets close with explicit scope
+transfers below; INF-44 preserves the unfinished service implementation. The
+result is **31 Done, 6 Todo, 4 Backlog, 3 Cancelled and 0 In Progress**. Todo means
+unstarted or waiting for input, not an assertion that launch acceptance passed.
+Owners remain unchanged; no active implementation task is being claimed.
 
-Next: close the outstanding payment/account acceptance under INF-38/39, then
-complete INF-40's combined journey. Finish approved content in parallel. Final
-SEO and independent release review precede the human-approved domain cutover.
-INF-33/34 remain Done; INF-37 About/Gallery refinement and INF-3/4 stockist work
-remain in their later/separate backlogs. Existing Plane dependency edges and
-owners are unchanged.
+| Item   | State   | Owner   | Disposition / next evidence                                                                                                                                         |
+| ------ | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| INF-27 | Done    | Shawnee | Approved About, Contact and Guide design/contracts delivered through #70/#74/#75/#76. Optional Guide trial remains exploration; final content is INF-28/31.         |
+| INF-35 | Done    | Devon   | Approved pages, matching and interim guidance merged through #74–#77/#83. Unfinished final policy/care destinations and purchase reassurance transferred to INF-44. |
+| INF-38 | Done    | Devon   | Payfast sandbox integration and headless return routing delivered. Remaining payment tests move to INF-40; commercial/live-readiness gates move to INF-42.          |
+| INF-39 | Done    | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                     |
+| INF-43 | Done    | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                  |
+| INF-28 | Todo    | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                      |
+| INF-31 | Todo    | Shawnee | Preparation merged; final assets/content deferred pending inputs and INF-28 approvals. Source previews/publication remain open.                                     |
+| INF-40 | Todo    | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.     |
+| INF-44 | Todo    | Devon   | Apply approved care/service policies, destinations and purchase reassurance after INF-31. Blocks INF-36 final release review.                                       |
+| INF-36 | Backlog | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                     |
+| INF-41 | Todo    | Devon   | Final SEO acceptance after INF-40 and INF-31; preparation may start earlier.                                                                                        |
+| INF-42 | Todo    | Devon   | Domain and commercial/live-payment readiness after INF-40/41/36, with explicit human activation/cutover approval.                                                   |
+
+### Unfinished acceptance transferred without being marked passed
+
+- **INF-38 → INF-40:** provider/order reference reconciliation, test markers,
+  duplicate orders/charges, decline/cancel/pending/retry, applicable authentication,
+  notifications, owner-operated refund/cancellation, correct ZAR/shipping/tax/
+  discount totals and retesting the earlier transient cart/payment failures.
+- **INF-39 → INF-40:** real token renewal after expiry, browser restart,
+  logout/re-entry, return from hosted orders, new/returning customer paths,
+  order detail, two-customer isolation, cache/back-forward behavior and recovery.
+- **INF-35 → INF-44:** approved care/safety and service-policy destinations,
+  final Contact replacements, footer links and product/cart purchase reassurance.
+  Interim enquiry instructions do not satisfy those final-policy requirements.
+- **INF-38 → INF-42:** client acceptance of methods, fees/commercial terms and
+  settlement setup, reconciled test evidence, and explicit live-mode approval.
+  Payfast stays in Test mode. Real-money tests/refunds require approval.
+
+INF-40 also covers all six launch products, guest/signed-in checkout, mobile and
+desktop, stock/network/provider failures and service links. INF-36 consumes that
+pack and INF-44 before release. INF-42 updates redirect-theme hostname, account
+origin and exact callback/logout URIs and retests returns at the final domain.
+
+The obsolete INF-31 → INF-35 blocker is replaced by INF-31 → INF-44 → INF-36;
+a non-blocking content relationship preserves the earlier connection. Existing
+INF-40 → INF-41/36/42 and INF-31 → INF-41 gates remain, so no final content or
+release gate is lost. INF-33/34 remain Done. INF-37 and INF-3/4 remain later or
+separate Backlog work. INF-1/2/5 remain Cancelled, not falsely completed.
+
+Next: start INF-40 verification while INF-28/31 content inputs are prepared;
+finish INF-44 when those inputs are approved, then final SEO, independent release
+review and the human-approved cutover. This planning audit performs no new
+provider tests, publication, paid transactions or production changes.
 
 Evidence: [account plan](../superpowers/plans/2026-09-16-persistent-customer-account.md),
 [account layout](../features/inf-39-account-layout.md),

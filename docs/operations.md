@@ -179,7 +179,8 @@ Customers must sign in once on the main domain; host-only Preview cookies are
 intentionally not shared across domains. On 17 September Devon confirmed real
 main-site sign-in and initials persisting after refresh and navigation. Provider
 renewal, restart, logout/re-entry and two-customer isolation acceptance remain
-INF-39/40 follow-up; this confirmation does not close those broader checks.
+INF-40 follow-up after closing INF-39 implementation; this confirmation does
+not close those broader checks.
 
 Shopify confidential-client authentication uses Base64 of the literal
 `client_id:client_secret`, without form-escaping punctuation first. Keep the

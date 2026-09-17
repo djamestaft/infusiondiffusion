@@ -27,8 +27,9 @@ navigation. Basic profile and own-order visibility were confirmed earlier.
 Checked items below reference the recorded implementation/verification evidence
 in PR #91 and the account delivery records, not a new test run in this planning
 update. Preserve the remaining real-provider checks: token renewal after expiry,
-browser restart, logout/re-entry and two-customer isolation. INF-39 remains In
-Progress for those checks; INF-40 owns combined journey acceptance. Final-domain
+browser restart, logout/re-entry and two-customer isolation. INF-39 is Done for
+delivered implementation; these unchecked acceptance steps now belong explicitly
+to INF-40 with the combined journey. Final-domain
 origin/callback/logout changes stay in INF-42. Payfast remains in Test mode.
 
 ## Global constraints

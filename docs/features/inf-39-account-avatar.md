@@ -83,6 +83,6 @@ Preview hostname. That correction did not change Production settings.
 
 Devon subsequently confirmed sign-in and persistent initials after refresh and
 navigation on the main test site. The visual/fixture checks alone do not prove
-real token renewal or customer isolation. INF-39 retains
-its real-provider renewal/logout/isolation acceptance; INF-40 retains combined
-journey verification. Payfast remains in Test mode.
+real token renewal or customer isolation. INF-39 is Done for delivery; its
+remaining provider/session acceptance is explicitly transferred to INF-40 with
+combined journey verification. Payfast remains in Test mode.

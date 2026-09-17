@@ -8,8 +8,9 @@ session settings and free Redis storage are configured. Devon confirms sign-in
 on the main site and initials remaining after refresh and navigation; profile
 and own-order visibility were confirmed earlier. Those checks are accepted.
 
-INF-39 remains In Progress for explicit real-provider token renewal, restart,
-logout/re-entry and two-customer isolation acceptance, feeding INF-40. The dated
+INF-39 is Done for the delivered implementation and user-confirmed persistence.
+Unfinished real-provider renewal, restart, logout/re-entry, hosted-order return
+and two-customer isolation acceptance are explicitly transferred to INF-40. The dated
 implementation notes below preserve diagnostic history; their pending setup,
 visual approval and merge statements are superseded by this release status.
 See the [updated implementation checklist](../superpowers/plans/2026-09-16-persistent-customer-account.md).
