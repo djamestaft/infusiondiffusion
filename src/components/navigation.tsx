@@ -91,10 +91,9 @@ function DestinationLink({
       aria-current={current ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "group focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-2 text-[13px] leading-[18px] font-medium tracking-[0.7px] uppercase focus-visible:outline-[3px] focus-visible:outline-offset-2",
+        "group text-navigation-muted focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-2 text-[13px] leading-[18px] font-normal tracking-normal normal-case antialiased focus-visible:outline-[3px] focus-visible:outline-offset-2",
         !mobile && font === "display" && "font-display text-sm font-normal",
-        mobile &&
-          "min-h-12 w-full justify-start px-0 text-base leading-6 font-medium tracking-[1px]",
+        mobile && "min-h-12 w-full justify-start px-0 text-base leading-6",
       )}
     >
       <span className="relative">

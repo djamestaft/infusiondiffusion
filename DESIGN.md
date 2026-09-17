@@ -13,6 +13,22 @@ The [editable Figma state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo
 is synchronized on Exploration and awaits human review. Existing approved shell
 frames are preserved. No new colours, primitives or avatar treatment.
 
+## Header label refinement — 17 September 2026
+
+Devon approved normal casing and tighter letter spacing for header navigation,
+matching the footer link treatment. Preserve source labels (Shop, Fragrance Guide,
+About, Contact), use normal letter spacing and the existing `navigation-muted`
+text token on desktop and in the mobile menu. Midnight links match the footer's
+soft ivory `#E8E2D5`. Match the footer's regular (400) weight and antialiased
+font smoothing after Devon's visual review exposed the heavier header rendering.
+Keep Manrope, current sizes, the gold active
+underline, focus states, header geometry and utility icons.
+
+This user-approved refinement supersedes uppercase navigation in the
+12 September Figma captures `2664:2`, `2665:7` and `2675:27`; those historical
+captures intentionally differ until a subsequent Figma synchronization.
+Runtime tokens are reused unchanged; Navigation stories render this contract.
+
 ## Footer refinement — 16 September 2026
 
 Devon approved the responsive footer and authorized implementation/push.
