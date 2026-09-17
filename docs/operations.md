@@ -176,8 +176,11 @@ and enabled session flag. The green main commit `d4b751f` was redeployed as
 `dpl_Hw8oTA3VwpzMWdbnA9jXy39jmr83`. The main account route shows Sign in,
 its guest profile is private, and the real Shopify email form is reachable.
 Customers must sign in once on the main domain; host-only Preview cookies are
-intentionally not shared across domains. Real main-domain persistence still
-requires customer sign-in acceptance.
+intentionally not shared across domains. On 17 September Devon confirmed real
+main-site sign-in and initials persisting after refresh and navigation. Provider
+renewal, restart, logout/re-entry and two-customer isolation acceptance remain
+INF-40 follow-up after closing INF-39 implementation; this confirmation does
+not close those broader checks.
 
 Shopify confidential-client authentication uses Base64 of the literal
 `client_id:client_secret`, without form-escaping punctuation first. Keep the

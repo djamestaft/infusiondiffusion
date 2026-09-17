@@ -15,7 +15,7 @@ Direction B remains comparison material; the recommended state system is selecte
 - Keep the generic icon for guests and unresolved/error sessions; a verified
   customer without initials receives the same circle around the existing icon.
 - Preserve accessible customer labels, bidirectional text isolation, sign-in,
-  orders, sign-out and privacy handling. No authentication, payment or env changes.
+  orders, sign-out and privacy handling. No authentication or payment code changes. Preview configuration correction is recorded below.
 
 ## Reuse and token mapping
 
@@ -73,7 +73,16 @@ existing 18px/1.5 stroke glyph. No visual defect remains in the inspected states
 | Navigation / AccountEntry      | Synced: circle states and current account marker                                                                 |
 | Storybook                      | Synced: theme, default/current, hover/focus, guest, missing initials, Unicode, mobile/drawer and floating states |
 
-Human preview acceptance and merge remain required. These are visual and
-fixture-backed checks, not a new real Shopify authentication test. INF-39 retains
-its real-provider renewal/logout/isolation acceptance; INF-40 retains combined
-journey verification. Payfast remains in Test mode.
+PR #96 was human-merged on 17 September 2026 as `dcbcdc9`. Required CI
+35191651331 and the PR gate passed for `67f4d5c`; independent review found no
+remaining findings. The first Preview lacked Account because settings were
+scoped to the previous branch. Eight branch-only Preview settings were corrected
+from saved local configuration, and deployment `dpl_HSaYSssnf6iMiGi2A2rHycujqcJo`
+passed guest sign-in and four-width fixture-avatar checks on the registered
+Preview hostname. That correction did not change Production settings.
+
+Devon subsequently confirmed sign-in and persistent initials after refresh and
+navigation on the main test site. The visual/fixture checks alone do not prove
+real token renewal or customer isolation. INF-39 is Done for delivery; its
+remaining provider/session acceptance is explicitly transferred to INF-40 with
+combined journey verification. Payfast remains in Test mode.

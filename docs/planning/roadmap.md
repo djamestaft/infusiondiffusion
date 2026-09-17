@@ -1,5 +1,100 @@
 # Infusion Diffusion Roadmap
 
+Last reconciled: 17 September 2026, after human merges through PR #96.
+Protected `main` was refreshed to `dcbcdc9`; GitHub confirms PRs #89–#96
+are merged. This summary governs current work; the dated delivery notes below
+are historical snapshots, including their superseded pending-merge statements.
+
+## Current delivery and acceptance
+
+- **Accounts delivered:** PR #90 restored account access; #91 added persistent
+  Shopify sessions and the account layout; #94 added the black account header;
+  #96 added the approved gold circle and interaction states. Devon confirms
+  sign-in at `https://infusion-diffusion.vercel.app/account/login` and initials
+  persisting after refresh and visiting another page. Profile and own-order
+  visibility were confirmed earlier. Main-site sign-in acceptance is complete.
+- **Shared presentation merged:** footer refinement #92, navigation typography
+  #93, and favicon #95 are merged. INF-43 is Done. Favicon work needs no further
+  action in this account workstream.
+- **Payments available for testing:** Payfast merchant verification is
+  user-confirmed, the integration is active in Test mode, and sandbox success
+  and cancellation evidence exists. Test order #1002 was Paid / Unfulfilled.
+  Checkout Continue shopping and the old-store logo return to the headless test
+  site through the published redirect theme. Keep test orders unfulfilled.
+- **Evidence limits:** the account merges and persistence acceptance do not prove
+  token renewal after expiry, browser restart, real provider logout/re-entry or
+  two-customer isolation. Existing fixture tests cover several of these paths;
+  real-provider acceptance is explicitly transferred to INF-40. No new live
+  payment, final-domain cutover or editorial publication is authorized here.
+
+## Status audit and next work — 17 September 2026
+
+All 43 existing Plane items were reviewed against their recorded acceptance and
+merged delivery. Four implementation/design tickets close with explicit scope
+transfers below; INF-44 preserves the unfinished service implementation. The
+result is **31 Done, 6 Todo, 4 Backlog, 3 Cancelled and 0 In Progress**. Todo means
+unstarted or waiting for input, not an assertion that launch acceptance passed.
+Owners remain unchanged; no active implementation task is being claimed.
+
+| Item   | State   | Owner   | Disposition / next evidence                                                                                                                                         |
+| ------ | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| INF-27 | Done    | Shawnee | Approved About, Contact and Guide design/contracts delivered through #70/#74/#75/#76. Optional Guide trial remains exploration; final content is INF-28/31.         |
+| INF-35 | Done    | Devon   | Approved pages, matching and interim guidance merged through #74–#77/#83. Unfinished final policy/care destinations and purchase reassurance transferred to INF-44. |
+| INF-38 | Done    | Devon   | Payfast sandbox integration and headless return routing delivered. Remaining payment tests move to INF-40; commercial/live-readiness gates move to INF-42.          |
+| INF-39 | Done    | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                     |
+| INF-43 | Done    | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                  |
+| INF-28 | Todo    | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                      |
+| INF-31 | Todo    | Shawnee | Preparation merged; final assets/content deferred pending inputs and INF-28 approvals. Source previews/publication remain open.                                     |
+| INF-40 | Todo    | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.     |
+| INF-44 | Todo    | Devon   | Apply approved care/service policies, destinations and purchase reassurance after INF-31. Blocks INF-36 final release review.                                       |
+| INF-36 | Backlog | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                     |
+| INF-41 | Todo    | Devon   | Final SEO acceptance after INF-40 and INF-31; preparation may start earlier.                                                                                        |
+| INF-42 | Todo    | Devon   | Domain and commercial/live-payment readiness after INF-40/41/36, with explicit human activation/cutover approval.                                                   |
+
+### Unfinished acceptance transferred without being marked passed
+
+- **INF-38 → INF-40:** provider/order reference reconciliation, test markers,
+  duplicate orders/charges, decline/cancel/pending/retry, applicable authentication,
+  notifications, owner-operated refund/cancellation, correct ZAR/shipping/tax/
+  discount totals and retesting the earlier transient cart/payment failures.
+- **INF-39 → INF-40:** real token renewal after expiry, browser restart,
+  logout/re-entry, return from hosted orders, new/returning customer paths,
+  order detail, two-customer isolation, cache/back-forward behavior and recovery.
+- **INF-35 → INF-44:** approved care/safety and service-policy destinations,
+  final Contact replacements, footer links and product/cart purchase reassurance.
+  Interim enquiry instructions do not satisfy those final-policy requirements.
+- **INF-38 → INF-42:** client acceptance of methods, fees/commercial terms and
+  settlement setup, reconciled test evidence, and explicit live-mode approval.
+  Payfast stays in Test mode. Real-money tests/refunds require approval.
+
+INF-40 also covers all six launch products, guest/signed-in checkout, mobile and
+desktop, stock/network/provider failures and service links. INF-36 consumes that
+pack and INF-44 before release. INF-42 updates redirect-theme hostname, account
+origin and exact callback/logout URIs and retests returns at the final domain.
+
+The obsolete INF-31 → INF-35 blocker is replaced by INF-31 → INF-44 → INF-36;
+a non-blocking content relationship preserves the earlier connection. Existing
+INF-40 → INF-41/36/42 and INF-31 → INF-41 gates remain, so no final content or
+release gate is lost. INF-33/34 remain Done. INF-37 and INF-3/4 remain later or
+separate Backlog work. INF-1/2/5 remain Cancelled, not falsely completed.
+
+Next: start INF-40 verification while INF-28/31 content inputs are prepared;
+finish INF-44 when those inputs are approved, then final SEO, independent release
+review and the human-approved cutover. This planning audit performs no new
+provider tests, publication, paid transactions or production changes.
+
+Evidence: [account plan](../superpowers/plans/2026-09-16-persistent-customer-account.md),
+[account layout](../features/inf-39-account-layout.md),
+[avatar](../features/inf-39-account-avatar.md),
+[footer](../features/inf-43-footer.md),
+[Payfast acceptance](../features/inf-38-payfast.md).
+
+## Historical delivery notes
+
+The dated notes below preserve decisions and diagnostic evidence. Use the current
+summary above for status and next actions; do not repeat completed provisioning,
+implementation or merge work from these older snapshots.
+
 ## Account avatar refinement — 17 September 2026
 
 PR #94 is merged and Devon confirms the account and persistent initials work.
@@ -123,7 +218,7 @@ evidence is tracked in the delivery PR and Plane. Authenticated purchase-history
 acceptance remains pending. INF-40 still requires this work; final SEO and domain
 switchover remain INF-41/42. Payment testing stays in Payfast Test mode.
 
-Last updated: 16 September 2026
+Snapshot date: 16 September 2026
 
 ## Payfast sandbox succeeds — 16 September 2026
 
@@ -578,9 +673,9 @@ Further refinement of that combined experience follows.
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
 Preserve these integrations; improve presentation, content readiness and
-verification. The 15 September launch plan adds Peach Payments and restoration
-of the existing Shopify account handoff. No new commerce backend, CMS migration,
-custom identity backend or custom checkout is in scope.
+verification. Payfast is the selected payment provider, and the Shopify Customer Account API
+now supplies persistent identity through encrypted server-side sessions. No new
+commerce backend, CMS migration, identity provider or custom checkout is in scope.
 
 The user approved brand evolution, an asset workstream and the complete
 shopping journey first. Retain the logo and Marcellus/Manrope by default;

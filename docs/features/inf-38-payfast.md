@@ -1,5 +1,17 @@
 # INF-38 — Payfast through Shopify checkout
 
+## Status disposition — 17 September 2026
+
+INF-38 is Done for the delivered Payfast sandbox integration, user-confirmed
+merchant verification and published headless return routing. This is not a
+live-payment readiness claim. Unfinished payment verification from the records
+below transfers explicitly to INF-40: references, duplicates/test markers,
+failure/pending/retry/authentication, notifications/refund-cancellation, totals
+and retesting transient failures. Commercial terms/methods/fees/settlement and
+live activation gates transfer to INF-42. Keep Payfast Test mode and test orders
+unfulfilled; real-money tests require approval. The dated records below retain
+the evidence and original criteria; their In Progress status is historical.
+
 Date: 16 September 2026. Owner: Devon. State: In Progress.
 
 ## Current evidence — sandbox payment verified

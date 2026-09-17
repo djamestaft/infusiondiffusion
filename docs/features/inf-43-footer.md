@@ -2,7 +2,7 @@
 
 Devon approved the Figma design and authorized implementation and push on
 16 September 2026. This is a bounded follow-up to completed INF-34; Devon owns
-implementation. Human review/merge and the existing production gates remain.
+implementation. PR #92 was human-merged on 16 September 2026 as `062674d`. INF-43 is Done; full launch review remains INF-36.
 
 ## Authority and acceptance
 
@@ -55,7 +55,7 @@ layout or typography divergence.
 axe violations or page errors across all eight captures. Keyboard order is
 home → Shop → Fragrance Guide → About → Contact → email, with visible outlines.
 Independent read-only review also checked 320/360/640/1024 widths and found no
-footer defects. Live preview and human merge remain separate release steps.
+footer defects. Human merge is recorded above. Full storefront release acceptance remains INF-36.
 
 ## Verification
 
@@ -84,5 +84,5 @@ footer defects. Live preview and human merge remain separate release steps.
 | Runtime component      | synced | Approved footer composition and contact link              |
 | Storybook              | synced | Four responsive states, real fonts and interaction checks |
 
-INF-43 stays In Progress until review/merge; the roadmap records this bounded
-follow-up. Payment/account, final content and launch dependencies are unchanged.
+INF-43 is Done following the approved delivery, recorded review and human merge.
+Payment/account, final content and launch dependencies are unchanged.

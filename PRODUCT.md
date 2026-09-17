@@ -38,12 +38,20 @@ layouts stay and authorized replaceable default support content while actual
 policies and care instructions are gathered. The confirmed customer-support
 mailbox is dione.smith@infusiondiffusion.co.za.
 
-INF-35 now adds interim Contact enquiry guidance within the existing layout.
+INF-35 delivered interim Contact enquiry guidance within the existing layout.
 Final photography, product/service facts, care instructions, SEO and source
 publication remain deferred through INF-28/31. Full release verification remains
 INF-36; later combined About/Gallery refinement is INF-37. The separate card-by-card
 Guide trial remains exploratory. See `docs/planning/roadmap.md` for delivery
-status and approval gates.
+status and approval gates. INF-27/35/38/39/43 delivery is Done. INF-40 owns the
+remaining payment/account verification; INF-44 owns final care/service policy
+integration after approved INF-31 content.
 
 Implementation follows [the component delivery contract](docs/design-implementation.md).
-PR #83 consolidates the current carousel, interim Contact defaults and governance.
+PR #83 delivered carousel, interim Contact defaults and governance. Subsequent
+PRs through #96 are merged, including persistent Shopify accounts, the refined
+account layout, black account header, gold avatar states and footer refinement.
+Devon confirmed persistent initials on the main test site on 17 September 2026.
+Payfast sandbox checkout works with Test mode retained. Remaining provider
+acceptance, combined E2E, approved launch content, SEO and domain cutover are
+tracked in the roadmap; these merges do not establish launch readiness.

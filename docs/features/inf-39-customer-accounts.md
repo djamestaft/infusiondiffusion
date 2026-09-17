@@ -1,5 +1,20 @@
 # INF-39 — Restore Shopify customer accounts
 
+## Current acceptance — 17 September 2026
+
+Account restoration #90, persistent sessions/account layout #91, black account
+header #94 and gold avatar #96 are human-merged. Main is `dcbcdc9`. Production
+session settings and free Redis storage are configured. Devon confirms sign-in
+on the main site and initials remaining after refresh and navigation; profile
+and own-order visibility were confirmed earlier. Those checks are accepted.
+
+INF-39 is Done for the delivered implementation and user-confirmed persistence.
+Unfinished real-provider renewal, restart, logout/re-entry, hosted-order return
+and two-customer isolation acceptance are explicitly transferred to INF-40. The dated
+implementation notes below preserve diagnostic history; their pending setup,
+visual approval and merge statements are superseded by this release status.
+See the [updated implementation checklist](../superpowers/plans/2026-09-16-persistent-customer-account.md).
+
 ## Persistent account implementation — 16 September 2026
 
 PR #91 now implements Shopify Customer Account API confidential-client sign-in,

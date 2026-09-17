@@ -1,6 +1,6 @@
 # INF-31 launch content preparation
 
-Status: In Progress — remaining content/assets deferred. Updated 8 September 2026.
+Status: Todo — preparation delivered; remaining content/assets deferred. Updated 17 September 2026.
 Owner: Shawnee. Factual/source acceptance: Devon.
 
 Devon's 8 September decision defers final photography, outstanding product/service
@@ -85,8 +85,9 @@ Product title suffix and Shopify product-type decisions remain open.
 | Editorial pages              | Existing fallback copy retained                                    | Source-specific Sanity draft previews after accepted content and schema mapping      |
 
 INF-28 remains a dependency for unresolved decisions; INF-30 is complete.
-INF-31 can be In Progress for this preparation without declaring the complete
-launch-content contract accepted. INF-32's final real-content approval and
+INF-31 returns to In Progress when remaining content work resumes; the merged
+preparation does not complete the launch-content contract. INF-44 consumes the
+approved care/service content for runtime integration. INF-32's final real-content approval and
 publication gates remain in force. No runtime UI or Figma change is made here.
 
 ## Verification and residual work

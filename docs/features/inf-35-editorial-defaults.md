@@ -48,10 +48,11 @@ No Sanity document has been written by this delivery.
 
 Final merchant delivery/returns policies and product care/safety instructions
 remain open under INF-28/31; their source-owned destinations and purchase
-reassurance remain INF-35 follow-up. Default enquiry copy does not complete those
-acceptance criteria. Photography, SEO, fuller Guide matching dimensions and
-source-publication deferrals remain. INF-27/35 stay In Progress pending closeout;
-INF-36 remains Backlog for full release.
+reassurance are explicitly transferred to INF-44 in the 17 September status
+audit. Default enquiry copy does not complete those acceptance criteria.
+Photography, SEO, fuller Guide matching dimensions and source-publication
+deferrals remain. INF-27/35 are Done for approved design/page delivery; INF-44
+waits for INF-31 and blocks INF-36 full release review.
 
 ## Design synchronization
 
