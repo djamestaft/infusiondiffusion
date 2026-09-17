@@ -196,3 +196,45 @@ it("restores the last menu focus when CSS hides it before resize fires", async (
   ).toHaveFocus();
   expect(document.body.style.overflow).toBe("");
 });
+
+it("marks the account destination current and preserves its accessible customer name", () => {
+  const profile = {
+    name: "Amara Jacobs",
+    email: "amara@example.test",
+    initials: "AJ",
+  };
+  const { rerender } = render(
+    <Navigation
+      accountHref="/account"
+      accountProfile={profile}
+      currentHref="/account"
+    />,
+  );
+  const account = () =>
+    screen.getAllByRole("link", {
+      name: "Account, signed in as Amara Jacobs",
+    })[0];
+  expect(account()).toHaveAttribute("aria-current", "page");
+  expect(account()).toHaveAttribute("href", "/account");
+  expect(account().querySelector("bdi")).toHaveTextContent("AJ");
+  rerender(
+    <Navigation
+      accountHref="/account"
+      accountProfile={profile}
+      currentHref="/shop"
+    />,
+  );
+  expect(account()).not.toHaveAttribute("aria-current");
+  rerender(
+    <Navigation
+      accountHref="/account"
+      accountProfile={null}
+      currentHref="/account"
+    />,
+  );
+  expect(screen.queryByText("AJ")).toBeNull();
+  expect(screen.getAllByRole("link", { name: "Account" })[0]).toHaveAttribute(
+    "href",
+    "/account",
+  );
+});

@@ -1,5 +1,16 @@
 # Infusion Diffusion Roadmap
 
+## Account avatar refinement — 17 September 2026
+
+PR #94 is merged and Devon confirms the account and persistent initials work.
+He approved the gold outlined avatar with a filled current-account state in
+Figma 2764:488, now promoted to Approved. This scoped Navigation refinement
+preserves session handling, header geometry, the bag/menu and account content.
+Implementation and release evidence: [INF-39 avatar](../features/inf-39-account-avatar.md).
+INF-39 remains In Progress for the outstanding real-provider renewal/logout/
+isolation checks; INF-40 owns the combined journey. Avatar preview review and
+human merge remain required. Payfast stays in Test mode.
+
 ## Account release follow-up — 17 September 2026
 
 Devon merged PR #91 as `d4b751f`; protected-main CI passed and the main test

@@ -1,5 +1,24 @@
 # Infusion Diffusion design system
 
+## Account avatar — 17 September 2026
+
+Devon approved the outlined default and filled current-page recommendation in
+[Figma 2764:488](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2764-488),
+with component set 2764:487, now on Approved. Use a 32px circle inside the existing
+44px Account target, 1.5px gold outline and 12px Manrope Semibold initials.
+Midnight uses navigation-accent gold-500 on ink-900 with porcelain initials.
+Hover uses the lighter navigation-focus ring and a 12% accent tint; focus adds
+a 2px circular ring inset within the target. Pressed and current /account states
+use gold-500 fill with action-primary-foreground ink (7.36:1 contrast).
+Focus remains visible alongside the filled state. No animation or layout shift.
+The ivory adaptation uses the darker navigation-accent outline and focus.
+
+Only a verified signed-in profile receives the ring. Missing initials retain
+the existing UserRound inside it; signed-out, unresolved and error states retain
+the neutral icon. Keep the accessible name, bdi isolation, destination and
+customer-session lifecycle. No changes to header size, logo, bag, menu, footer
+or account content. See [avatar delivery](docs/features/inf-39-account-avatar.md).
+
 ## Favicon monogram — 17 September 2026
 
 Devon selected a gold ID monogram on the site's midnight background for browser

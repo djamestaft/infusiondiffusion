@@ -83,6 +83,7 @@ export function AccountEntry({
   return (
     <div className="bg-content-surface text-content-primary min-h-dvh">
       <Navigation
+        currentHref="/account"
         theme="midnight"
         cartCount={cartCount}
         accountProfile={

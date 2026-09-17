@@ -52,9 +52,11 @@ function UtilityLink({
   label,
   children,
   className,
+  current = false,
 }: {
   href: string;
   label: string;
+  current?: boolean;
   children: React.ReactNode;
   className?: string;
 }) {
@@ -62,6 +64,7 @@ function UtilityLink({
     <a
       href={href}
       aria-label={label}
+      aria-current={current ? "page" : undefined}
       className={cn(
         "hover:text-navigation-accent focus-visible:outline-navigation-focus inline-flex size-11 shrink-0 items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none",
         className,
@@ -218,6 +221,8 @@ export function Navigation({
       {resolvedAccountHref ? (
         <UtilityLink
           href={resolvedAccountHref}
+          current={currentHref === "/account"}
+          className="account-avatar-link transition-none"
           label={
             profile
               ? profile.name
@@ -226,19 +231,19 @@ export function Navigation({
               : "Account"
           }
         >
-          {profile?.initials ? (
-            <span
-              aria-hidden="true"
-              className="font-sans text-xs font-semibold"
-            >
+          <span
+            aria-hidden="true"
+            className={cn(
+              "inline-flex size-8 items-center justify-center rounded-full font-sans text-xs leading-none font-semibold",
+              profile && "account-avatar",
+            )}
+          >
+            {profile?.initials ? (
               <bdi>{profile.initials}</bdi>
-            </span>
-          ) : (
-            <UserRound
-              aria-hidden="true"
-              className="size-[1.125rem] stroke-[1.5]"
-            />
-          )}
+            ) : (
+              <UserRound className="size-[1.125rem] stroke-[1.5]" />
+            )}
+          </span>
         </UtilityLink>
       ) : null}
       <UtilityLink
