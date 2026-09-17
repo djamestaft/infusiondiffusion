@@ -3,9 +3,14 @@
 ## Account release follow-up — 17 September 2026
 
 Devon merged PR #91 as `d4b751f`; protected-main CI passed and the main test
-site serves that version. The Production environment still had only the hosted
+site serves that version. The Production environment initially had only the hosted
 account handoff: Preview session variables did not transfer with the merge.
 Devon authorized fixing the environment and redeploying persistent sign-in.
+The seven missing server-only settings are now installed; Production has its own
+encryption key and origin-derived Redis namespace in the approved free database.
+Deployment `dpl_Hw8oTA3VwpzMWdbnA9jXy39jmr83` is Ready on the main test URL.
+The real Sign in route, guest profile and Shopify email form pass browser smoke;
+real main-domain persistence awaits customer acceptance.
 He also requested the existing black/midnight header on the account route;
 that scoped presentation follow-up leaves shared Navigation and Footer intact.
 INF-39 remains In Progress for deployment verification and real-provider

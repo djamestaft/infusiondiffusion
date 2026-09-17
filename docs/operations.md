@@ -157,14 +157,27 @@ setup and preview acceptance; keep `SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true`.
 - Connect Upstash Redis via Vercel, using the **Free** plan with `autoUpgrade=false`
   and `prodPack=false`. Devon approved an available free plan. Do not select a paid
   plan. Devon accepted marketplace terms; `infusion-customer-sessions-test` is created
-  in iad1 and connected to Preview only. Its REST smoke passed. Keep Production
-  isolated and use the returned REST URL/token as `UPSTASH_REDIS_REST_URL` and
-  `UPSTASH_REDIS_REST_TOKEN` (map the integration's variable names if different).
+  in iad1. After Devon's 17 September release-fix authorization, Production also
+  uses that free test database through server-only `UPSTASH_REDIS_REST_URL` and
+  `UPSTASH_REDIS_REST_TOKEN`. Production has a distinct encryption key and the
+  existing origin/domain/client-derived Redis namespace isolates its records
+  from Preview. No paid plan or auto-upgrade was enabled.
 - Generate a 32-byte random hex `SHOPIFY_CUSTOMER_SESSION_KEY` directly into secret
   storage, without printing it. Changing this key or origin/client configuration
   invalidates existing sessions. No `NEXT_PUBLIC_` credential variables.
 - Local credentials can be entered in ignored `.env.local`; never paste them into
   chat, commits, screenshots, commands or logs. Never reuse the Storefront token.
+
+After PR #91 merged, the main test site initially retained the hosted fallback
+because branch Preview variables do not transfer with a Git merge. On 17 September,
+Devon authorized correcting all account release settings. Production now has
+the required customer client, canonical origin, session key, Redis variables
+and enabled session flag. The green main commit `d4b751f` was redeployed as
+`dpl_Hw8oTA3VwpzMWdbnA9jXy39jmr83`. The main account route shows Sign in,
+its guest profile is private, and the real Shopify email form is reachable.
+Customers must sign in once on the main domain; host-only Preview cookies are
+intentionally not shared across domains. Real main-domain persistence still
+requires customer sign-in acceptance.
 
 Shopify confidential-client authentication uses Base64 of the literal
 `client_id:client_secret`, without form-escaping punctuation first. Keep the

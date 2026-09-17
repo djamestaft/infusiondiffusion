@@ -7,6 +7,13 @@ selects the existing midnight Navigation theme for every session/hosted state.
 This supersedes the original ivory-header exception below and matches the Figma
 frames. Shared Navigation, Footer, account content and authentication are unchanged.
 
+Full local check passes: 373 unit/integration tests, 332 Storybook tests,
+formatting, lint, types and both builds. Storybook browser checks at
+1440/768/390/320 confirm the midnight background, zero overflow/page errors
+and zero axe violations. Visual captures:
+[desktop](../evidence/inf-39-account-layout/midnight-1440.png) and
+[mobile](../evidence/inf-39-account-layout/midnight-320.png).
+
 ## Original content delivery
 
 Devon approved implementation on 17 September 2026 and chose delivery in PR #91.
