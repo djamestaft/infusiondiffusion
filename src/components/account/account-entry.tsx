@@ -2,7 +2,7 @@ import type { CustomerState } from "@/lib/shopify/customer-account/contract";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { ContentHeader } from "@/components/ui/content-primitives";
+import { ContentHeader, Heading } from "@/components/ui/content-primitives";
 import { FeedbackAlert } from "@/components/ui/feedback-alert";
 import { TextLink } from "@/components/ui/text-link";
 import { cn } from "@/lib/utils";
@@ -93,9 +93,14 @@ export function AccountEntry({
       />
       <main
         aria-busy={isLoading || undefined}
-        className="mx-auto flex min-h-[calc(100dvh-5rem)] w-full max-w-7xl items-center px-5 py-16 sm:px-8 lg:min-h-[calc(100dvh-6.5rem)] lg:px-12 lg:py-24"
+        className={cn(
+          "mx-auto w-full max-w-7xl px-5 pt-10 pb-14 md:px-12 lg:pt-16 lg:pb-20",
+          customerState?.status === "signed-in"
+            ? "lg:min-h-[35rem]"
+            : "min-h-[38.75rem] lg:min-h-[35rem]",
+        )}
       >
-        <section className="w-full max-w-2xl">
+        <section className="w-full">
           {isLoading ? (
             <AccountLoadingContent />
           ) : (
@@ -126,7 +131,7 @@ export function AccountEntry({
                 </Button>
               ) : null}
               {!customerState && state !== "available" ? (
-                <div className="mt-8 space-y-6">
+                <div className="mt-8 max-w-2xl space-y-6">
                   <FeedbackAlert
                     tone={state === "error" ? "error" : "info"}
                     announcement={state === "error" ? "alert" : "none"}
@@ -189,26 +194,27 @@ function CustomerAccountContent({
 }) {
   if (state.status === "signed-in")
     return (
-      <div className="mt-8 space-y-8">
-        <dl className="space-y-5 font-sans">
-          {[
-            ["Name", state.profile.name],
-            ["Email", state.profile.email],
-          ].map(([label, value]) => (
-            <div key={label} className="space-y-1">
-              <dt className="text-content-secondary text-sm">{label}</dt>
-              <dd className="text-base leading-7 [overflow-wrap:anywhere]">
-                <bdi>{value || "Not provided"}</bdi>
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-          {destination ? (
-            <Button asChild size="large" className="text-center">
-              <a href={destination}>View your orders</a>
-            </Button>
-          ) : null}
+      <div className="mt-8 grid gap-8 md:mt-10 md:grid-cols-2 md:gap-16">
+        <section
+          aria-labelledby="account-details-heading"
+          className="border-content-primary/25 min-w-0 space-y-5 border-t pt-6"
+        >
+          <Heading id="account-details-heading" level={2} treatment="title">
+            Your details
+          </Heading>
+          <dl className="space-y-5 font-sans">
+            {[
+              ["Name", state.profile.name],
+              ["Email", state.profile.email],
+            ].map(([label, value]) => (
+              <div key={label} className="space-y-1">
+                <dt className="text-content-secondary text-sm">{label}</dt>
+                <dd className="text-base leading-7 [overflow-wrap:anywhere]">
+                  <bdi>{value || "Not provided"}</bdi>
+                </dd>
+              </div>
+            ))}
+          </dl>
           <form method="post" action="/account/logout" onSubmit={onSignOut}>
             <Button
               type="submit"
@@ -219,12 +225,32 @@ function CustomerAccountContent({
               {signingOut ? "Signing out…" : "Sign out"}
             </Button>
           </form>
-        </div>
+        </section>
+        {destination ? (
+          <section
+            aria-labelledby="account-orders-heading"
+            className="border-content-primary/25 min-w-0 space-y-5 border-t pt-6"
+          >
+            <Heading id="account-orders-heading" level={2} treatment="title">
+              Your orders
+            </Heading>
+            <p className="font-sans text-base leading-[1.625]">
+              Revisit your purchases and check their delivery status.
+            </p>
+            <Button
+              asChild
+              size="large"
+              className="w-full text-center md:w-auto"
+            >
+              <a href={destination}>View your orders</a>
+            </Button>
+          </section>
+        ) : null}
       </div>
     );
   const failed = state.status === "error" || notice === "error";
   return (
-    <div className="mt-8 space-y-6">
+    <div className="mt-8 max-w-2xl space-y-6">
       {failed ? (
         <FeedbackAlert
           tone="error"

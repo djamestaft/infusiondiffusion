@@ -119,7 +119,14 @@ export const SignedIn: Story = {
   args: { customerState: { status: "signed-in", profile } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(canvas.getByText("Amara Jacobs")).toBeVisible();
+    const details = within(
+      canvas.getByRole("region", { name: "Your details" }),
+    );
+    const orders = within(canvas.getByRole("region", { name: "Your orders" }));
+    await expect(details.getByText("Amara Jacobs")).toBeVisible();
+    await expect(
+      orders.getByRole("link", { name: "View your orders" }),
+    ).toHaveAttribute("href", destination);
     await expect(
       canvas.getByRole("button", { name: "Sign out" }),
     ).toBeVisible();
@@ -127,6 +134,10 @@ export const SignedIn: Story = {
       canvas.getByRole("link", { name: "View your orders" }),
     ).toHaveAttribute("href", destination);
   },
+};
+export const SignedInTablet: Story = {
+  ...SignedIn,
+  globals: { viewport: { value: "homepageTablet", isRotated: false } },
 };
 export const SignedInMobile: Story = {
   ...SignedIn,

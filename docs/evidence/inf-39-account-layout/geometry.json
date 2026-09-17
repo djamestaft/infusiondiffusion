@@ -1,0 +1,93 @@
+{
+  "results": [
+    {
+      "surface": "storybook",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "surface": "storybook",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "surface": "storybook",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "surface": "storybook",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "surface": "page",
+      "width": 1440,
+      "details": {
+        "x": 128,
+        "y": 292.015625,
+        "width": 560,
+        "height": 269
+      },
+      "orders": {
+        "x": 752,
+        "y": 292.015625,
+        "width": 560,
+        "height": 269
+      },
+      "overflow": false
+    },
+    {
+      "surface": "page",
+      "width": 768,
+      "details": {
+        "x": 48,
+        "y": 246,
+        "width": 304,
+        "height": 269
+      },
+      "orders": {
+        "x": 416,
+        "y": 246,
+        "width": 304,
+        "height": 269
+      },
+      "overflow": false
+    },
+    {
+      "surface": "page",
+      "width": 390,
+      "details": {
+        "x": 20,
+        "y": 268,
+        "width": 350,
+        "height": 269
+      },
+      "orders": {
+        "x": 20,
+        "y": 569,
+        "width": 350,
+        "height": 201
+      },
+      "overflow": false
+    },
+    {
+      "surface": "page",
+      "width": 320,
+      "details": {
+        "x": 20,
+        "y": 268,
+        "width": 280,
+        "height": 269
+      },
+      "orders": {
+        "x": 20,
+        "y": 569,
+        "width": 280,
+        "height": 201
+      },
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

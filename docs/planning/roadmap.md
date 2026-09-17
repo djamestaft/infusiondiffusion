@@ -1,5 +1,15 @@
 # Infusion Diffusion Roadmap
 
+## Account content refinement — 17 September 2026
+
+Devon approved the account content design and requested delivery in PR #91.
+Latest main `ee838ff` is integrated. Only the account content layout changes;
+shared header/footer styling remains intact. Sign-in, identity, persistence and
+own-order visibility are user-confirmed on the earlier preview.
+See [account layout evidence](../features/inf-39-account-layout.md). INF-39 stays
+In Progress pending current-head CI/preview review and human merge; INF-40 retains
+broader E2E acceptance. No payment, domain or production flag changes.
+
 ## Persistent account implementation — 16 September 2026
 
 PR #91 now implements Shopify Customer Account API confidential-client sign-in,
