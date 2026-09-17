@@ -29,7 +29,7 @@ The policy reader uses the existing midnight navigation, base surface, headline/
 
 ## Remaining operational facts
 
-Verify dispatch/delivery estimates, legal entity status, return-handling address, Network Intelligence settings and information-officer registration. Do not invent these. INF-28/31 retain their broader approval gates; INF-44 stays in progress until evidence and external controls are complete.
+Verify packing/dispatch estimates (configured courier transit estimates were checked), legal entity status, return-handling address and information-officer registration. Do not invent these. INF-28/31 retain their broader approval gates; INF-44 stays in progress until evidence and external controls are complete.
 
 ## Legal sources
 
@@ -39,7 +39,7 @@ Drafting references: [ECTA sections 42–44 and 48](https://www.gov.za/sites/def
 
 Authenticated Admin against permanent domain `serxng-h1.myshopify.com`, verified shop ID `99237232926` and InfusionDiffusion identity. Published TERMS_OF_SERVICE, SHIPPING_POLICY, REFUND_POLICY, PRIVACY_POLICY and CONTACT_INFORMATION. Disabled privacy-policy automatic management through `privacyFeaturesDisable(PRIVACY_POLICY)` to permit the custom POPIA statement. No banner or Network Intelligence feature was disabled.
 
-Set ZA `consentRequired:true`, preserving `dataSaleOptOutRequired:false`. Cookie banner is still disabled; native Admin enablement is outstanding.
+Set ZA `consentRequired:true`, preserving `dataSaleOptOutRequired:false`. Native banner subsequently enabled by the merchant with manual region settings; fresh-session accept, decline and withdrawal checks passed, including reload persistence.
 
 Using Shopify's documented new shipping interface (unstable API), updated only Standard's free condition from R770 to R1,000 inclusive, and set the international delivery method inactive. Readback verified Standard R100, Express R150 and international method inactive. Six live product variants all have taxable:false. PayFast remains in Test mode; no payment was submitted.
 
@@ -48,13 +48,23 @@ Published cross-links use Shopify's policy URLs so they work before this fronten
 ## Verification evidence
 
 - Lint, typecheck and full formatting check passed.
-- Vitest: 58 files / 394 tests passed; targeted policy security/contract rerun: 9 passed.
+- Vitest: 58 files / 396 tests passed; targeted policy security/contract rerun: 11 passed.
 - Storybook: 31 files / 360 tests passed; production Storybook build passed.
 - Next production build passed. Policy Playwright suite: 12/12 passed on desktop and mobile, including axe and keyboard navigation, against the production server.
 - Product designer reviewed 320/390/768/1440 reader/footer captures: no visual blockers or token drift. Final production captures replace development captures to omit the dev indicator.
 - Impeccable detector: no findings on the changed reader, policy links or footer. Audit: readable measure, semantic hierarchy, zero automated axe violations, responsive wrapping, 44px standalone links, no new tracking or browser dependency for policy HTML sanitization.
 - A redundant route loading boundary reproduced React/Next PPR segment collisions in production. Keeping the page's single Suspense boundary resolved all new policy journey failures. Similar behavior was observed on the existing Contact route; a broader runtime investigation is outside this policy change.
 - Independent public Shopify readback: all five policy URLs returned 200, correct merchant contact/address, no placeholders. Fresh checkout showed all five links and Payfast; only infusion_cart and _shopify_essential cookies were observed before input. No order or payment was submitted.
-- Banner is still disabled. Accept/reject/change-preference behavior is unverified until native Admin controls are enabled. Network Intelligence setting confirmation remains pending; conditional disclosures are retained.
+- Banner is enabled and all native checkout consent checks passed: no optional cookies before choice or after Decline, optional cookies after Accept, and removal after Cookies → Decline all, with all choices persisting after reload. The merchant screenshot confirms Network Intelligence enabled; terms and privacy now disclose its use directly.
 
 Raw snapshots and browser artifacts are in the primary checkout's local `output/privacy-audit-2026-09-17` directory; no cookie values, account tokens or customer data are included in the evidence.
+
+## Policy publication and freshness
+
+Shopify Admin Settings → Policies is the operational source. Update the relevant published policy there; snapshot the previous body and verify the public Shopify policy URL and corresponding storefront reader after saving. The versioned HTML in `content/policies` records this delivery, and is not imported by the app. Subsequent approved revisions should update that record alongside publication.
+
+The reader fetches legal text at request time without `use cache`; it does not rely on the Sanity-only revalidation endpoint or an unconfigured Shopify webhook. A new page load reads the currently published Shopify body, subject to Shopify's own propagation. Already open pages need a reload. This deliberately trades a small Shopify read for avoiding stale legal text after an Admin edit.
+
+Vercel preview dpl_8Pr2LC3zR3Crn5PmE8VPowpNpTz7 at commit 28c6395 passed 12/12 desktop/mobile policy Playwright checks. Verification of subsequent commits is recorded on PR #105 and Plane INF-44.
+
+A cold local production run encountered transient transport failures on two Shopify reads and correctly displayed recovery. The policy query now retries one transport failure only, with a regression test covering recovery and persistent failure. It does not retry HTTP/GraphQL application errors or commerce mutations.

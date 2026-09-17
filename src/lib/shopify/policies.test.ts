@@ -1,11 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("./client", async (original) => ({
   ...(await original<typeof import("./client")>()),
   storefrontRequest: vi.fn(),
 }));
-import { storefrontRequest } from "./client";
+import { storefrontRequest, ShopifyStorefrontError } from "./client";
 import { getPolicy } from "./policies";
 const request = vi.mocked(storefrontRequest);
 beforeEach(() => {
@@ -46,9 +45,36 @@ describe("published policies", () => {
       );
     },
   );
+  it("reads updated published text on the next request", async () => {
+    request.mockResolvedValueOnce({
+      shop: { ...shop, privacyPolicy: { body: "<p>Version one</p>" } },
+    });
+    request.mockResolvedValueOnce({
+      shop: { ...shop, privacyPolicy: { body: "<p>Version two</p>" } },
+    });
+    expect((await getPolicy("privacy"))?.html).toBe("<p>Version one</p>");
+    expect((await getPolicy("privacy"))?.html).toBe("<p>Version two</p>");
+    expect(request).toHaveBeenCalledTimes(2);
+  });
   it("rejects an invalid API contract", async () => {
     request.mockResolvedValue({ shop: {} });
     await expect(getPolicy("privacy")).rejects.toThrow("Invalid policy");
+  });
+  it("retries one transport failure without swallowing a persistent failure", async () => {
+    const transportError = new ShopifyStorefrontError(
+      "Connection failed",
+      "HTTP",
+    );
+    request
+      .mockRejectedValueOnce(transportError)
+      .mockResolvedValueOnce({
+        shop: { ...shop, privacyPolicy: { body: "<p>Privacy</p>" } },
+      });
+    expect((await getPolicy("privacy"))?.html).toBe("<p>Privacy</p>");
+    expect(request).toHaveBeenCalledTimes(2);
+    request.mockReset().mockRejectedValue(transportError);
+    await expect(getPolicy("privacy")).rejects.toThrow("Connection failed");
+    expect(request).toHaveBeenCalledTimes(2);
   });
   it("propagates API outages to the recoverable error boundary", async () => {
     request.mockRejectedValue(new Error("offline"));

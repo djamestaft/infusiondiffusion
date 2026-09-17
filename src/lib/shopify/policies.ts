@@ -1,5 +1,4 @@
 import "server-only";
-import { cacheLife, cacheTag } from "next/cache";
 import { z } from "zod";
 import { findPolicy } from "@/lib/policy-links";
 import {
@@ -18,10 +17,9 @@ const responseSchema = z.object({
   }),
 });
 
+// Read published legal text at request time: a policy edit must not wait for
+// a storefront cache tag that Shopify Admin cannot currently invalidate.
 export async function getPolicy(slug: string) {
-  "use cache";
-  cacheLife({ stale: 60, revalidate: 300, expire: 900 });
-  cacheTag("shopify:policies");
   const definition = findPolicy(slug);
   if (!definition) return null;
   // Match the catalog fixture guard: never use test content in production.
@@ -36,7 +34,7 @@ export async function getPolicy(slug: string) {
     };
   }
   const response = responseSchema.safeParse(
-    await storefrontRequest<unknown>(`
+    await requestPolicyResponse(`
     query StorePolicies {
       shop {
         privacyPolicy { body }
@@ -68,4 +66,21 @@ function sanitizeHtmlText(html: string) {
     .replace(/<[^>]*>/g, "")
     .replace(/&nbsp;/g, " ")
     .trim();
+}
+
+// Retrying this read cannot duplicate carts, orders or payments. Only retry a
+// transport failure; HTTP and GraphQL errors retain their normal error path.
+async function requestPolicyResponse(query: string): Promise<unknown> {
+  try {
+    return await storefrontRequest<unknown>(query);
+  } catch (error) {
+    if (
+      error instanceof ShopifyStorefrontError &&
+      error.code === "HTTP" &&
+      error.status === undefined
+    ) {
+      return storefrontRequest<unknown>(query);
+    }
+    throw error;
+  }
 }
