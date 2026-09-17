@@ -65,11 +65,9 @@ describe("published policies", () => {
       "Connection failed",
       "HTTP",
     );
-    request
-      .mockRejectedValueOnce(transportError)
-      .mockResolvedValueOnce({
-        shop: { ...shop, privacyPolicy: { body: "<p>Privacy</p>" } },
-      });
+    request.mockRejectedValueOnce(transportError).mockResolvedValueOnce({
+      shop: { ...shop, privacyPolicy: { body: "<p>Privacy</p>" } },
+    });
     expect((await getPolicy("privacy"))?.html).toBe("<p>Privacy</p>");
     expect(request).toHaveBeenCalledTimes(2);
     request.mockReset().mockRejectedValue(transportError);
