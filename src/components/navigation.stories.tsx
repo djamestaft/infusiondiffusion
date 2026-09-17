@@ -260,3 +260,29 @@ export const AvatarLoadingMobileOpen: Story = {
   ...AvatarLoadingMobile,
   play: MobileOpen.play,
 };
+
+export const TouchThenKeyboard: Story = {
+  args: { theme: "midnight" },
+  globals: MobileOpen.globals,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const opener = canvas.getByRole("button", { name: "Open menu" });
+    await userEvent.click(opener);
+    const logo = within(canvas.getByRole("dialog")).getByRole("link", {
+      name: "Infusion Diffusion home",
+    });
+    await expect(logo).toHaveFocus();
+    await expect(getComputedStyle(logo).outlineStyle).toBe("none");
+    await userEvent.click(canvas.getByRole("button", { name: "Close menu" }));
+    await expect(opener).toHaveFocus();
+    await expect(getComputedStyle(opener).outlineStyle).toBe("none");
+    await userEvent.keyboard("{Enter}");
+    const keyboardLogo = within(canvas.getByRole("dialog")).getByRole("link", {
+      name: "Infusion Diffusion home",
+    });
+    await expect(keyboardLogo).toHaveFocus();
+    await expect(getComputedStyle(keyboardLogo).outlineStyle).toBe("solid");
+    await userEvent.keyboard("{Escape}");
+    await expect(opener).toHaveFocus();
+  },
+};

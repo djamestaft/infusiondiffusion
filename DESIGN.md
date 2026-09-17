@@ -471,3 +471,13 @@ node `2727:44` (Reed / Monstera, palm and fern). The optional Sanity Homepage
 hero background selects the decorative shared image. Keep the existing responsive
 crop and readability scrim; clearing the selection restores original Reed Shadows.
 The comparison collection is `2727:37`. No token or layout changes.
+
+## Navigation input-state correction — 17 September 2026
+
+Logo and menu controls retain the approved keyboard focus indicator, but suppress
+outlines after pointer/touch activation, including scripted menu entry and focus
+restoration. Keyboard input anywhere in the document restores focus-visible
+styling. Do not remove focus, the trap, or the account avatar's approved states.
+Existing Figma default/keyboard states and tokens remain unchanged; Storybook
+`Components/Navigation/TouchThenKeyboard` captures the transition.
+See [INF-46 evidence](docs/features/inf-46-navigation-focus.md).

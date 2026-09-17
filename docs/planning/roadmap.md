@@ -822,3 +822,11 @@ This advances only the requested media correction. INF-37's broader refinement
 remains deferred behind INF-36 with Shawnee's existing ownership; shared shell,
 market content and source publication are unchanged. The separate status
 reconciliation remains in PR #97.
+
+## Mobile navigation focus — 17 September 2026
+
+PR #99 is merged and INF-45 is Done. Devon's subsequent mobile focus-ring report
+is tracked separately as INF-46 under Devon: prevent pointer-induced logo/menu
+outlines while preserving keyboard focus and drawer behavior. Implementation
+and local verification are complete; preview acceptance and human merge remain
+pending. See [INF-46 evidence](../features/inf-46-navigation-focus.md).
