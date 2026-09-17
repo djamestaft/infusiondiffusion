@@ -1,0 +1,32 @@
+[
+  {
+    "rel": "icon",
+    "href": "http://localhost:3018/favicon.ico?favicon.1_du28pfo1il_.ico",
+    "type": "image/x-icon",
+    "sizes": "256x256",
+    "status": 200,
+    "contentType": "image/x-icon",
+    "bytes": 11536,
+    "sha256": "e09d2053fa736e4e260b2abdc29694b60bec7b14fa6077a2a863791c39f1df6b"
+  },
+  {
+    "rel": "icon",
+    "href": "http://localhost:3018/icon.svg?icon.2vo9k-j1am69h.svg",
+    "type": "image/svg+xml",
+    "sizes": "any",
+    "status": 200,
+    "contentType": "image/svg+xml",
+    "bytes": 1842,
+    "sha256": "70aafd82e1ebed9ad510fa3c83023970fa9133c0aaf2d5df9bcff69bc1420cf0"
+  },
+  {
+    "rel": "apple-touch-icon",
+    "href": "http://localhost:3018/apple-icon.png?apple-icon.1euasu7t0wv0o.png",
+    "type": "image/png",
+    "sizes": "180x180",
+    "status": 200,
+    "contentType": "image/png",
+    "bytes": 3873,
+    "sha256": "2b803c957f4d065d2a9d8e827d63ae116a45e51d1870b0b17a1d6d9276b0f219"
+  }
+]
