@@ -32,7 +32,7 @@ export function AnnouncementBar({ message, link }: AnnouncementBarProps) {
   return (
     <aside
       aria-label="Announcement"
-      className="bg-announcement text-announcement-foreground border-announcement-border flex min-h-11 w-full items-center justify-center border-b px-5 text-center"
+      className="dark bg-announcement text-navigation-muted flex min-h-11 w-full items-center justify-center px-5 text-center"
     >
       <div className="flex min-w-0 flex-col items-center justify-center gap-1 py-2 sm:flex-row sm:gap-3 sm:py-0">
         <p className="text-xs leading-4 font-semibold tracking-[0.08em] uppercase">
