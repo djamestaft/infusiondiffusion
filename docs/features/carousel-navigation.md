@@ -313,3 +313,53 @@ errors or hero axe violations. Screenshots: `evidence/carousel-background-390.pn
 and `evidence/carousel-background-1440.png`. Figma asset and documentation are
 synced; semantic tokens and responsive component geometry are unchanged.
 The chosen asset is saved in the Site settings draft; publication follows review.
+
+### Header label refinement — 17 September 2026
+
+Devon approved removing uppercase styling, tightening letter spacing and matching
+footer link color. Shared `DestinationLink` now preserves source casing, uses
+normal tracking and `navigation-muted` (midnight `#E8E2D5`) on desktop and mobile.
+The latest INF-43 footer uses this softer ivory for links; its headings retain
+`navigation-text`. Devon's follow-up screenshot exposed a perceived color
+difference: header links used weight 500 and automatic smoothing, while footer
+links used weight 400 and antialiased smoothing. Match both footer settings.
+Existing Manrope sizes, gold underline, focus behavior,
+header dimensions and utility controls are retained.
+
+Existing Navigation states and the added Midnight Mobile Open story exercise the
+real component. Visual inspection at 1440 and 390 shows quieter labels, a fitted
+active underline and unchanged header/menu geometry. Browser checks at
+1440/768/390/320 confirm casing, tracking, color, 44/48px link targets, no
+navigation axe violations or page errors, and Escape focus restoration.
+Reviewed captures and computed-style evidence are committed under
+[`docs/evidence/header-label-refinement`](../evidence/header-label-refinement/).
+
+Validation: 289 unit tests and 320 Storybook tests pass; formatting, typecheck,
+Impeccable type scan, Storybook build and Next production build pass. Two existing
+integrated navigation keyboard/reflow journeys pass on a fresh local server at
+port 3018. The existing port-3000 server returned an unrelated escaped-logo-path
+build error, so it was not used as verification evidence. Repository lint fails
+on 12 pre-existing unused-import warnings in untracked `output/` scripts; lint
+passes excluding that output and generated build files. The full unmodified
+local gate therefore remains blocked by those existing warnings.
+
+| Layer                               | Status                                                                                                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Figma `2664:2`, `2665:7`, `2675:27` | Intentional divergence: user-approved casing, tracking and link-color refinement; historical captures retain uppercase styling |
+| DESIGN.md / Impeccable              | Synced                                                                                                                         |
+| Semantic tokens                     | Synced; existing values reused                                                                                                 |
+| Navigation component                | Synced                                                                                                                         |
+| Navigation Storybook                | Synced                                                                                                                         |
+
+No roadmap milestone changes are required for this direct user-requested
+refinement. Delivery branch: `agent/header-label-refinement`; merge and
+production publication are not part of this verification.
+
+Follow-up weight/smoothing verification: 11 Navigation unit tests and 19
+Navigation stories pass, along with scoped lint, typecheck and diff checks.
+Browser inspection at 1440/768/390/320 confirms identical header/footer link
+color, Manrope family, 400 weight, antialiased smoothing, normal tracking and
+source casing. Desktop header/footer and mobile-menu captures are recorded as
+`weight-correction-*.png` with `weight-verification.json` in the evidence folder.
+Header text sizes remain the existing 13px desktop / 16px mobile roles; footer
+links remain 15px. Full builds above precede this weight-only correction.

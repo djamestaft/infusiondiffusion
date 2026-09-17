@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Navigation uses an 86px desktop and 78px mobile/tablet header, retaining existing logo sizes and 44px controls. The solid border stays inside that height.",
+          "Navigation uses source-label casing, normal letter spacing and the footer links' navigation-muted color, regular weight and antialiased font smoothing. Manrope, the gold active underline, an 86px desktop and 78px mobile/tablet header, existing logo sizes and 44px controls are retained. The solid border stays inside that height.",
       },
     },
   },
@@ -112,6 +112,12 @@ export const MobileOpen: Story = {
 
 export const MobileOpen320: Story = {
   globals: { viewport: { value: "contact320", isRotated: false } },
+  play: MobileOpen.play,
+};
+
+export const MidnightMobileOpen: Story = {
+  args: { theme: "midnight" },
+  globals: MobileOpen.globals,
   play: MobileOpen.play,
 };
 

@@ -1,0 +1,78 @@
+[
+  {
+    "width": 1440,
+    "header": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    },
+    "footer": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    }
+  },
+  {
+    "width": 768,
+    "header": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    },
+    "footer": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    }
+  },
+  {
+    "width": 390,
+    "header": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    },
+    "footer": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    }
+  },
+  {
+    "width": 320,
+    "header": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    },
+    "footer": {
+      "color": "rgb(232, 226, 213)",
+      "font": "manrope, \"manrope Fallback\"",
+      "weight": "400",
+      "smoothing": "antialiased",
+      "tracking": "normal",
+      "casing": "none"
+    }
+  }
+]
