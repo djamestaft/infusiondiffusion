@@ -9,6 +9,11 @@ import {
   useAccountNavigationHref,
   useCustomerAccount,
 } from "@/components/account/account-navigation";
+import { AnnouncementBar } from "@/components/announcement-bar";
+import {
+  useAnnouncement,
+  type StorefrontAnnouncement,
+} from "@/components/announcement-provider";
 import { LogoTextLockup } from "@/components/logo-text-lockup";
 import { storefrontDestinations } from "@/components/storefront-destinations";
 import { cn } from "@/lib/utils";
@@ -20,6 +25,7 @@ export type NavigationDestination = {
 
 export type NavigationProps = {
   destinations?: NavigationDestination[] | null;
+  announcement?: StorefrontAnnouncement | null;
   currentHref?: string;
   accountProfile?: CustomerProfile | null;
   accountLoading?: boolean;
@@ -124,6 +130,7 @@ function DestinationLink({
 
 export function Navigation({
   destinations = defaultDestinations,
+  announcement: suppliedAnnouncement,
   currentHref,
   accountHref,
   accountProfile,
@@ -135,6 +142,20 @@ export function Navigation({
   linkFont = "sans",
   className,
 }: NavigationProps) {
+  const sharedAnnouncement = useAnnouncement();
+  const announcement =
+    suppliedAnnouncement === undefined
+      ? sharedAnnouncement
+      : suppliedAnnouncement;
+  const showAnnouncement = Boolean(
+    announcement?.enabled && announcement.message?.trim(),
+  );
+  const notice = showAnnouncement ? (
+    <AnnouncementBar
+      message={announcement?.message}
+      link={{ label: announcement?.linkLabel, href: announcement?.linkUrl }}
+    />
+  ) : null;
   const sharedAccountHref = useAccountNavigationHref();
   const customer = useCustomerAccount();
   const profile =
@@ -310,8 +331,14 @@ export function Navigation({
     <header
       onPointerDownCapture={() => setPointerFocus(true)}
       className={cn(
-        "text-navigation-text top-0 z-40 h-[var(--navigation-height)] w-full transition-colors duration-[180ms] motion-reduce:transition-none",
-        floating ? "fixed" : "border-navigation-divider sticky border-b",
+        "text-navigation-text top-0 z-40 w-full transition-colors duration-[180ms] motion-reduce:transition-none",
+        // The notice stays in flow; only the preserved nav row overlaps Home's hero.
+        // Natural notice height handles wrapping without measurements or layout shifts.
+        floating
+          ? showAnnouncement
+            ? "sticky -mb-[var(--navigation-height)]"
+            : "fixed"
+          : "border-navigation-divider sticky border-b",
         floating && !scrolled && !open
           ? "bg-transparent"
           : "bg-navigation-surface",
@@ -323,9 +350,15 @@ export function Navigation({
         className,
       )}
     >
+      <div className={cn(open && "invisible")} aria-hidden={open || undefined}>
+        {notice}
+      </div>
       <nav
         aria-label="Primary"
-        className="relative mx-auto grid h-full w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 sm:px-10 lg:grid-cols-[165px_minmax(0,1fr)_96px] lg:px-16"
+        className={cn(
+          "relative mx-auto grid h-[var(--navigation-height)] w-full max-w-[1440px] grid-cols-[1fr_auto] items-center px-5 min-[375px]:px-6 sm:px-10 lg:grid-cols-[165px_minmax(0,1fr)_96px] lg:px-16",
+          !floating && "h-[calc(var(--navigation-height)-1px)]",
+        )}
       >
         <Link
           ref={homeRef}
@@ -393,6 +426,7 @@ export function Navigation({
           aria-label="Navigation menu"
           className="bg-navigation-surface fixed inset-0 z-50 flex min-h-dvh flex-col overflow-y-auto lg:hidden"
         >
+          <div className="shrink-0">{notice}</div>
           <div className="flex h-[var(--navigation-height)] shrink-0 items-center justify-between px-5 min-[375px]:px-6">
             <Link
               href="/"

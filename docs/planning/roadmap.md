@@ -5,6 +5,25 @@ Protected `main` was refreshed to `dcbcdc9`; GitHub confirms PRs #89–#96
 are merged. This summary governs current work; the dated delivery notes below
 are historical snapshots, including their superseded pending-merge statements.
 
+## INF-42 domain-only soft launch — 17 September 2026
+
+Devon authorized a domain-only cutover to `https://www.infusiondiffusion.co.za`,
+with apex redirecting to www and Payfast retained in Test mode. He supplied the
+xneelo DNS zone and confirms saving the www Shopify callback/logout URLs.
+INF-42 is In Progress with Devon for this bounded scope; the historical Todo
+snapshot below is superseded only for that preparation. Full commercial release
+and INF-40/41/36 acceptance remain open.
+
+Before cutover, Devon requested the existing announcement component above shared
+navigation, stating that payments are in test mode and launch is coming shortly.
+[Banner delivery](../features/inf-42-soft-launch-banner.md) records implementation,
+verification and pending human preview/merge. The cutover authorization is retained;
+execute only after this requested prerequisite is accepted and merged. Preserve
+mail/NS records and FTP’s current host when www changes. No live-payment activation.
+
+Current baseline is human-merged PR #100, `db174fd`, with successful main CI and
+matching healthy Vercel deployment `dpl_8UC8LBCW2Zn3GbEUDbhdXqPgJ6ri`.
+
 ## Current delivery and acceptance
 
 - **Accounts delivered:** PR #90 restored account access; #91 added persistent

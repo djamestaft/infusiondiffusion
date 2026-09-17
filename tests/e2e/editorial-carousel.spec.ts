@@ -13,7 +13,9 @@ for (const width of [1900, 1440, 1280, 1024, 768, 390, 320]) {
     await page.evaluate(() => document.fonts.ready);
     const header = page.locator("header");
     await expect(header).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-    await expect(header).toHaveCSS("height", width >= 1024 ? "86px" : "78px");
+    await expect(
+      page.getByRole("navigation", { name: "Primary", exact: true }),
+    ).toHaveCSS("height", width >= 1024 ? "86px" : "78px");
     expect(
       await header.evaluate((n) => getComputedStyle(n, "::after").content),
     ).toBe("none");
@@ -80,7 +82,9 @@ for (const width of [1900, 1440, 1280, 1024, 768, 390, 320]) {
     );
     await page.evaluate(() => scrollTo(0, 100));
     await expect(header).toHaveCSS("background-color", "rgb(25, 25, 22)");
-    await expect(header).toHaveCSS("height", width >= 1024 ? "86px" : "78px");
+    await expect(
+      page.getByRole("navigation", { name: "Primary", exact: true }),
+    ).toHaveCSS("height", width >= 1024 ? "86px" : "78px");
     expect(
       await header.evaluate(
         (n) => getComputedStyle(n, "::after").backgroundColor,

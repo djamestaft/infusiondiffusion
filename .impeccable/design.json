@@ -18,6 +18,11 @@
     ],
     "rules": [
       {
+        "name": "Soft-launch announcement — 17 September 2026",
+        "body": "User-requested reuse of AnnouncementBar above shared navigation. Exact copy: Payments are in test mode. We’re launching shortly. Existing tokens, natural height, non-dismissible; visible on scroll and inside mobile dialog. Sanity announcement fields own enablement/copy. Preserve 78/86px navigation row. Intentional user-authorized divergence from no-notice Figma 2764:488.",
+        "section": "components"
+      },
+      {
         "name": "Header loading and navigation — 17 September 2026",
         "body": "User requested Manrope Semibold (600) header labels and distinct loading. Neutral 20px LoaderCircle in existing 32px slot/44px Account target, aria-busy and checking-status accessible name, reduced-motion safe. Shared layout retains verified profile in memory across client navigation; concurrent checks deduplicated. Hidden pages, logout and invalid results clear identity. No browser-persisted profile/credentials. Historical Figma 2764:488 intentionally differs in unresolved state and label weight pending synchronization.",
         "section": "components"

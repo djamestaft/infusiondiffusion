@@ -286,3 +286,56 @@ export const TouchThenKeyboard: Story = {
     await expect(opener).toHaveFocus();
   },
 };
+
+const softLaunchAnnouncement = {
+  enabled: true,
+  message: "Payments are in test mode. We’re launching shortly.",
+};
+
+export const SoftLaunch: Story = {
+  args: { theme: "midnight", announcement: softLaunchAnnouncement },
+};
+
+export const SoftLaunchFloating: Story = {
+  args: { ...SoftLaunch.args, floating: true },
+  render: (args) => (
+    <div className="dark bg-content-surface text-content-primary min-h-[180vh]">
+      <Navigation {...args} />
+      <main className="pt-[var(--navigation-height)]">
+        <p className="p-8">
+          Home hero content remains below the complete header.
+        </p>
+      </main>
+    </div>
+  ),
+};
+
+export const SoftLaunchMobileMenu: Story = {
+  args: SoftLaunch.args,
+  globals: { viewport: { value: "contact320", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open menu" }));
+    await expect(
+      within(canvas.getByRole("dialog")).getByRole("complementary", {
+        name: "Announcement",
+      }),
+    ).toHaveTextContent(softLaunchAnnouncement.message);
+    await userEvent.keyboard("{Escape}");
+    await expect(
+      canvas.getByRole("button", { name: "Open menu" }),
+    ).toHaveFocus();
+  },
+};
+
+export const AnnouncementLongContent: Story = {
+  args: {
+    ...SoftLaunch.args,
+    announcement: {
+      enabled: true,
+      message:
+        "Payments are in test mode. We’re launching shortly. Thank you for exploring our fragrance collection.",
+    },
+  },
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};

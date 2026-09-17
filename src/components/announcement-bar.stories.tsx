@@ -31,3 +31,7 @@ export const LongContent: Story = {
 export const Hidden: Story = {
   args: { message: "   " },
 };
+
+export const SoftLaunch: Story = {
+  args: { message: "Payments are in test mode. We’re launching shortly." },
+};
