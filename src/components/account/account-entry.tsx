@@ -83,6 +83,7 @@ export function AccountEntry({
   return (
     <div className="bg-content-surface text-content-primary min-h-dvh">
       <Navigation
+        theme="midnight"
         cartCount={cartCount}
         accountProfile={
           customerState?.status === "signed-in"

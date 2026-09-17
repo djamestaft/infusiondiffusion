@@ -74,7 +74,7 @@
       },
       {
         "name": "Account content layout",
-        "body": "17 September approved account content only: Figma 2741:37, responsive frames 2742:39/91/137/179. Top-aligned profile and hosted-orders sections; two columns from 768px, stacked below. Keep current header and footer unchanged; ivory account navigation intentionally differs from the Figma dark header. See docs/features/inf-39-account-layout.md.",
+        "body": "17 September approved account content only: Figma 2741:37, responsive frames 2742:39/91/137/179. Top-aligned profile and hosted-orders sections; two columns from 768px, stacked below. Follow-up after PR #91: Devon requested a black account header. Select existing midnight Navigation theme for all account states, matching Figma. Keep shared Navigation implementation, other routes and footer unchanged. See docs/features/inf-39-account-layout.md.",
         "section": "components"
       }
     ],

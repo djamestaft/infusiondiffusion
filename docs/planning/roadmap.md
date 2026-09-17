@@ -1,5 +1,16 @@
 # Infusion Diffusion Roadmap
 
+## Account release follow-up — 17 September 2026
+
+Devon merged PR #91 as `d4b751f`; protected-main CI passed and the main test
+site serves that version. The Production environment still had only the hosted
+account handoff: Preview session variables did not transfer with the merge.
+Devon authorized fixing the environment and redeploying persistent sign-in.
+He also requested the existing black/midnight header on the account route;
+that scoped presentation follow-up leaves shared Navigation and Footer intact.
+INF-39 remains In Progress for deployment verification and real-provider
+logout/renewal/isolation acceptance. Payfast remains in Test mode.
+
 ## Account content refinement — 17 September 2026
 
 Devon approved the account content design and requested delivery in PR #91.

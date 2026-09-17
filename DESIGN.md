@@ -2,7 +2,12 @@
 
 ## Customer account area — 17 September 2026
 
-Devon approved implementing the account content in Figma handoff `2741:37`,
+Follow-up: Devon explicitly requested the black account header after merging
+PR #91. AccountEntry now selects the existing midnight Navigation theme in
+every account state, matching the Figma frames. Preserve shared Navigation
+implementation, other routes, account content and Footer.
+
+Original content approval: Devon approved implementing the account content in Figma handoff `2741:37`,
 frames `2742:39/91/137/179` (1440/768/390/320), within PR #91. This approval
 explicitly excludes the header and footer: preserve the current shared shell,
 including the account page's ivory Navigation default. The dark header shown

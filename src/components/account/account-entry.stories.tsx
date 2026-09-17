@@ -8,7 +8,15 @@ const meta = {
   title: "Commerce/AccountEntry",
   component: AccountEntry,
   args: { state: "available", destination },
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    docs: {
+      description: {
+        component:
+          "Account content uses the existing midnight navigation theme across hosted and persistent session states.",
+      },
+    },
+  },
 } satisfies Meta<typeof AccountEntry>;
 export default meta;
 type Story = StoryObj<typeof meta>;

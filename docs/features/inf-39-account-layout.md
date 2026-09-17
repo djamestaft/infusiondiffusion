@@ -1,5 +1,14 @@
 # INF-39 account content layout
 
+## Post-merge header follow-up
+
+Devon requested a black account header after PR #91 merged. AccountEntry now
+selects the existing midnight Navigation theme for every session/hosted state.
+This supersedes the original ivory-header exception below and matches the Figma
+frames. Shared Navigation, Footer, account content and authentication are unchanged.
+
+## Original content delivery
+
 Devon approved implementation on 17 September 2026 and chose delivery in PR #91.
 The scope is the account content only. Shared header/footer styling, commerce
 behavior, authentication handlers and environment flags are unchanged by this
