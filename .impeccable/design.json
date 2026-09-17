@@ -18,17 +18,17 @@
     ],
     "rules": [
       {
-        "name": "Header loading and navigation \u2014 17 September 2026",
+        "name": "Header loading and navigation — 17 September 2026",
         "body": "User requested Manrope Semibold (600) header labels and distinct loading. Neutral 20px LoaderCircle in existing 32px slot/44px Account target, aria-busy and checking-status accessible name, reduced-motion safe. Shared layout retains verified profile in memory across client navigation; concurrent checks deduplicated. Hidden pages, logout and invalid results clear identity. No browser-persisted profile/credentials. Historical Figma 2764:488 intentionally differs in unresolved state and label weight pending synchronization.",
         "section": "components"
       },
       {
-        "name": "Account avatar \u2014 17 September 2026",
+        "name": "Account avatar — 17 September 2026",
         "body": "Approved Figma 2764:488 / 2764:487: 32px gold outline inside existing 44px Account target; 12px Manrope Semibold initials. Midnight default gold-500/porcelain; hover pale-gold ring and 12% accent tint; inset circular 2px keyboard focus; pressed/current account gold-500 fill with ink text. Verified identity only; generic icon for guest/error; neutral LoaderCircle for unresolved, ring plus icon for signed-in missing initials. Preserve header geometry and session lifecycle. See docs/features/inf-39-account-avatar.md.",
         "section": "components"
       },
       {
-        "name": "Favicon monogram \u2014 17 September 2026",
+        "name": "Favicon monogram — 17 September 2026",
         "body": "User-selected gold ID monogram on midnight, outlined from bundled Marcellus. icon.svg is the vector source; favicon.ico includes 16/32/48/64/256px and apple-icon.png is opaque 180px. Match gold-500 #C5A447 and ink-900 #191916. Icon-only brand extension; preserve the full wordmark. No Figma favicon frame yet; user-approved asset addition. Runtime color tokens unchanged.",
         "section": "components"
       },
@@ -49,7 +49,7 @@
       },
       {
         "name": "About and Guide contract",
-        "body": "About uses stable source gallery IDs, image-only 3:4 campaign figures capped at available viewport height minus 128px for the header and breathing room with contain fitting per Devon's refinement and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
+        "body": "About uses stable source gallery IDs, image-only square campaign previews capped at min(400px,50svh), centered with cover fitting per Devon's 17 September refinement; a dedicated conceptual landscape hero (2160×720 WebP) with 40% scrim; full source photographs in the viewer and captioned 16:9/4:3 market figures. Guide answer surface #F7F3EA, border rgb(132 101 35 / 55%), number ink #846523 map to semantic roles. Verify actual loaded fonts before screenshots. Primary button material must stay behind all label content, including plain-text links. Guide sample rankings remain Storybook-only.",
         "section": "components"
       },
       {
@@ -69,7 +69,7 @@
       },
       {
         "name": "Carousel autoplay and laptop clearance",
-        "body": "86px desktop / 78px mobile navigation. Editorial slides rotate every 6s with pause/play, manual/focus pause and hover/visibility protections. Reduced-motion/save-data/loading disable autoplay. Laptop 1024\u20131535px hero insets 96px leave 42px arrow clearance; mobile/wide gutters unchanged. Moving stage edges use a 24px alpha fade; stationary media is crisp.",
+        "body": "86px desktop / 78px mobile navigation. Editorial slides rotate every 6s with pause/play, manual/focus pause and hover/visibility protections. Reduced-motion/save-data/loading disable autoplay. Laptop 1024–1535px hero insets 96px leave 42px arrow clearance; mobile/wide gutters unchanged. Moving stage edges use a 24px alpha fade; stationary media is crisp.",
         "section": "components"
       },
       {
@@ -83,7 +83,7 @@
         "section": "components"
       },
       {
-        "name": "Header label refinement \u2014 17 September 2026",
+        "name": "Header label refinement — 17 September 2026",
         "body": "Devon approved source-label casing, normal letter spacing and navigation-muted for desktop and mobile menu links, matching footer links (midnight #E8E2D5). Use header-only semibold (600) weight per Devon's follow-up, preserving antialiased font smoothing; footer weight stays regular (400). Keep Manrope, existing sizes, gold active underline, focus, geometry and utility icons. This supersedes uppercase styling in the historical Figma captures 2664:2, 2665:7 and 2675:27 as an intentional user-approved divergence. Runtime tokens are unchanged; Navigation stories share the updated component.",
         "section": "components"
       },

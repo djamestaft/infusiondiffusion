@@ -811,3 +811,14 @@ reopened merely to erase a previous direction.
 
 Historical handoff details remain in `docs/planning/redesign-context.md`;
 this roadmap governs current order and scope.
+
+## About media refinement — 17 September 2026
+
+Devon authorized a bounded follow-up to delivered INF-35: a generated landscape
+About hero and compact square story previews. INF-45 tracks this implementation
+under Devon; PR #99 is open with local verification complete and human preview
+acceptance/merge pending. See [the delivery record](../features/inf-45-about-media.md).
+This advances only the requested media correction. INF-37's broader refinement
+remains deferred behind INF-36 with Shawnee's existing ownership; shared shell,
+market content and source publication are unchanged. The separate status
+reconciliation remains in PR #97.

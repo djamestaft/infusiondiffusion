@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "INF-35: approved About 2426:516/614/708/796. Gallery snapshot from published, rights-confirmed Sanity media on 9 September 2026; editorial copy from approved Figma and existing fallbacks. Runtime uses live Sanity data. User-requested refinement: the first four images are centered, uncropped and capped at available viewport height minus 128px for the header and breathing room.",
+          "INF-35: approved About 2426:516/614/708/796. Gallery snapshot from published, rights-confirmed Sanity media on 9 September 2026; editorial copy from approved Figma and existing fallbacks. Runtime uses live Sanity data. User-requested refinement: a dedicated landscape hero and four centered square story previews, capped at 400px or half the viewport height. The full source photographs remain available in the viewer.",
       },
     },
   },
