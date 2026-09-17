@@ -830,3 +830,12 @@ is tracked separately as INF-46 under Devon: prevent pointer-induced logo/menu
 outlines while preserving keyboard focus and drawer behavior. Implementation
 and local verification are complete; preview acceptance and human merge remain
 pending. See [INF-46 evidence](../features/inf-46-navigation-focus.md).
+
+## Mobile footer gap — 17 September 2026
+
+PR #100 is merged and INF-46 is Done. Devon's persistent blank region below the
+footer on Chrome iOS is tracked as INF-47, In Progress under Devon. Phone
+measurements captured 657px of scrolling beyond the normal document boundary;
+a touch-device vertical overscroll CSS trial is in draft PR #101. Physical phone
+acceptance and removal of temporary diagnostics are required before merge.
+See [INF-47 evidence and acceptance](../features/inf-47-mobile-footer-gap.md).
