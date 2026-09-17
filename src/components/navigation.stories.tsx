@@ -298,6 +298,14 @@ export const SoftLaunch: Story = {
 
 export const SoftLaunchFloating: Story = {
   args: { ...SoftLaunch.args, floating: true },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "At the top, the transparent header has no visible announcement separator. Scroll beyond 24px to show the gold separator with the black header. The border keeps its space in both states.",
+      },
+    },
+  },
   render: (args) => (
     <div className="dark bg-content-surface text-content-primary min-h-[180vh]">
       <Navigation {...args} />

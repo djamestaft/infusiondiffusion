@@ -6,7 +6,9 @@ Devon requested reuse of AnnouncementBar above shared navigation before the
 www-domain soft launch: “Payments are in test mode. We’re launching shortly.”
 Use existing announcement tokens and Manrope styling, with natural wrapping,
 a minimum 44px strip and no dismissal, link or live-region announcement.
-Keep it visible when scrolling and inside the mobile menu. Preserve the
+Keep it visible when scrolling and inside the mobile menu. Hide the gold
+announcement separator while the floating header is transparent; show it with
+the solid header and mobile menu. Retain border space to avoid a height shift. Preserve the
 78/86px navigation row including its existing solid-route border. Sanity’s
 existing announcement fields remain the editorial source and disable control.
 This requested addition intentionally differs from Figma 2764:488, which has

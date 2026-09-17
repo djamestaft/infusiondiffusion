@@ -19,7 +19,7 @@
     "rules": [
       {
         "name": "Soft-launch announcement — 17 September 2026",
-        "body": "User-requested reuse of AnnouncementBar above shared navigation. Exact copy: Payments are in test mode. We’re launching shortly. Existing tokens, natural height, non-dismissible; visible on scroll and inside mobile dialog. Sanity announcement fields own enablement/copy. Preserve 78/86px navigation row. Intentional user-authorized divergence from no-notice Figma 2764:488.",
+        "body": "User-requested reuse of AnnouncementBar above shared navigation. Exact copy: Payments are in test mode. We’re launching shortly. Existing tokens, natural height, non-dismissible; visible on scroll and inside mobile dialog. Sanity announcement fields own enablement/copy. Hide the gold separator while the floating header is transparent; show it with the solid header and mobile menu, retaining border space. Preserve 78/86px navigation row. Intentional user-authorized divergence from no-notice Figma 2764:488.",
         "section": "components"
       },
       {

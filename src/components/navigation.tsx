@@ -350,7 +350,13 @@ export function Navigation({
         className,
       )}
     >
-      <div className={cn(open && "invisible")} aria-hidden={open || undefined}>
+      <div
+        className={cn(
+          open && "invisible",
+          floating && !scrolled && !open && "[&>aside]:border-transparent",
+        )}
+        aria-hidden={open || undefined}
+      >
         {notice}
       </div>
       <nav
