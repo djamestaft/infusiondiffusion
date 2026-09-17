@@ -1,5 +1,25 @@
 # Infusion Diffusion design system
 
+## Customer account area — 17 September 2026
+
+Devon approved implementing the account content in Figma handoff `2741:37`,
+frames `2742:39/91/137/179` (1440/768/390/320), within PR #91. This approval
+explicitly excludes the header and footer: preserve the current shared shell,
+including the account page's ivory Navigation default. The dark header shown
+in the Figma account frames is an intentional, user-directed divergence.
+
+Use compact top-aligned content, 64px desktop / 40px smaller-screen top padding,
+and separate Your details / Your orders sections. Use two equal columns with a
+64px gap from 768px; stack with 32px gap below it. Keep the existing Marcellus
+headings, Manrope copy, semantic surfaces, gold orders action and quiet Sign out.
+Name/email remain read-only Shopify data; orders keep the hosted destination.
+Preserve missing names, bidirectional isolation, wrapping and pending sign-out.
+
+Persistent header identity remains the previously reviewed functional work:
+44px Account target, 12px semibold initials, generic icon for missing names.
+This layout refinement adds no changes to Navigation or Footer.
+See [account layout evidence](docs/features/inf-39-account-layout.md).
+
 ## Header label refinement — 17 September 2026
 
 Devon approved normal casing and tighter letter spacing for header navigation,

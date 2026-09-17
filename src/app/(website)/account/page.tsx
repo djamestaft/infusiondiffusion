@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { Suspense } from "react";
 
+import { AccountSession } from "@/components/account/account-session";
 import { AccountEntry } from "@/components/account/account-entry";
 import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
@@ -22,6 +23,15 @@ export async function getAccountPageData() {
 
 export async function AccountContent() {
   const { entry, cartCount } = await getAccountPageData();
+  if (process.env.SHOPIFY_CUSTOMER_SESSION_ENABLED === "true")
+    return (
+      <AccountSession
+        destination={
+          entry.status === "available" ? entry.destination : undefined
+        }
+        cartCount={cartCount}
+      />
+    );
   return (
     <AccountEntry
       state={entry.status}

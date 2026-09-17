@@ -1,5 +1,80 @@
 # Infusion Diffusion Roadmap
 
+## Account content refinement — 17 September 2026
+
+Devon approved the account content design and requested delivery in PR #91.
+Latest main `ee838ff` is integrated. Only the account content layout changes;
+shared header/footer styling remains intact. Sign-in, identity, persistence and
+own-order visibility are user-confirmed on the earlier preview.
+See [account layout evidence](../features/inf-39-account-layout.md). INF-39 stays
+In Progress pending current-head CI/preview review and human merge; INF-40 retains
+broader E2E acceptance. No payment, domain or production flag changes.
+
+## Persistent account implementation — 16 September 2026
+
+PR #91 now implements Shopify Customer Account API confidential-client sign-in,
+server-side encrypted Redis sessions, verified initials, a name/email summary,
+hosted orders and sign-out. The feature remains disabled by default; main keeps
+its working hosted handoff. Devon registered the main test-site callback/logout
+URIs and approved an available free Upstash plan with no paid auto-upgrade.
+
+Local evidence: 332 unit/integration tests, OIDC signature/claim validation,
+real Redis atomicity/race checks, seven fixture-browser journeys, four-width
+axe/overflow checks, lint/types and Next/Storybook builds pass. Independent auth
+review has no remaining blocker. Visual review found no major issue; reserved
+sign-out width and a Unicode/mononym story address its small follow-ups.
+Fixture journeys exercise refresh, return, cross-tab logout and customer changes;
+they do not prove real Shopify login or grant renewal.
+
+The free Upstash database is now provisioned and connected to Preview only;
+REST write/read-delete/Lua smoke passed. The client credentials and encrypted
+session configuration are now installed as server-only branch Preview variables.
+Preview callback registration now succeeds after Devon corrected and saved the
+URL. Callback diagnostics then identified `invalid_client` during token exchange.
+A controlled live probe reproduced it with the OAuth library's form-escaped
+Basic credentials; literal Base64 `client_id:client_secret` reached the expected
+`invalid_grant` response for a deliberately invalid authorization code. The saved
+credentials are accepted. The Shopify-specific client-authentication adapter now
+preserves literal punctuation and includes `client_id` in both code and refresh
+grant bodies, matching Shopify's documented contract. Regression tests cover
+punctuated credentials on both grants while retaining signature/claim checks.
+Callback logs contain only fixed stage/error classifications, never credentials,
+authorization codes, claims or customer details. Real storefront persistence is
+still failing after the corrected Preview: fresh user callbacks now report
+`OAUTH_INVALID_RESPONSE`, replacing `invalid_client`. The real callback on
+`8720e0f` identifies `jwt.sub.type.number`: Shopify sends a numeric subject while
+the library requires a string. A pinned, narrowly scoped oauth4webapi patch now
+normalizes positive safe-integer subjects only for validated Shopify issuers.
+It changes parsed claims, never the signed token; original signature, issuer,
+audience, nonce, state, PKCE, expiry and refresh identity checks remain enforced.
+Numeric login/refresh regression fixtures reproduce the old failure and pass
+with the patch, including forged tokens and invalid claims being rejected.
+Diagnostic head `8720e0f` passed full CI. The compatibility fix requires its own
+CI/review/Preview gate, followed by real login and persistence acceptance.
+Main customer sessions remain unchanged.
+The editable [Figma account-state handoff](https://www.figma.com/design/jIMvwSBkilg7eplo3IiHPa?node-id=2741-37)
+is synchronized on Exploration. Human visual/release acceptance remains pending. INF-39 stays In Progress, owned by Devon; INF-40 remains downstream.
+SEO/domain work remains INF-41/42. Payfast remains in Test mode.
+
+## Persistent storefront identity requested — 16 September 2026
+
+Devon confirms that hosted Shopify login shows his own order. PR #90 is merged
+as `ca41848`; Account is enabled on the remote test site, with green main CI and
+public sign-in/return/guest-checkout smoke evidence recorded in Plane and the PR.
+The hosted order-history visibility check is now user-confirmed.
+
+Devon additionally requests persistent signed-in state, basic profile information
+and initials when returning to the storefront. The current link-only handoff
+cannot provide that identity. INF-39 remains In Progress with Devon; its next
+slice is a Customer Account API connection and secure first-party session, as
+specified in the [prepared design](../superpowers/specs/2026-09-16-persistent-customer-account.md)
+and [implementation plan](../superpowers/plans/2026-09-16-persistent-customer-account.md).
+Client configuration and a managed-session-storage provisioning path are still
+needed; no new authentication runtime or signed-in UI is enabled yet. Keep the
+working hosted path available. INF-40 covers combined acceptance; INF-41/42 remain
+final SEO and domain switchover. Earlier unconfirmed order-history notes below are
+historical for the now-confirmed visibility check only.
+
 ## Approved footer refinement — 16 September 2026
 
 Devon approved the Figma footer refinement and authorized implementation/push.

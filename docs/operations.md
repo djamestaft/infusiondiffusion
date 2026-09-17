@@ -140,3 +140,84 @@ account enablement retains Devon's approval after preview evidence. Roll back by
 setting the flag to `false` and rebuilding; this hides Account and restores the
 unavailable page without changing Shopify customer data. Account domains remain
 an optional branding step in the final domain switchover.
+
+## Persistent customer sessions (INF-39)
+
+The new runtime is disabled by default. The hosted `/account` link remains the
+fallback. Enable `SHOPIFY_CUSTOMER_SESSION_ENABLED=true` only after the following
+setup and preview acceptance; keep `SHOPIFY_ACCOUNT_HANDOFF_ENABLED=true`.
+
+- In Shopify Headless, use a **Confidential** Customer Account API client. Switching
+  client type replaces its credentials. Use the new client ID and secret, stored as
+  `SHOPIFY_CUSTOMER_CLIENT_ID` and `SHOPIFY_CUSTOMER_CLIENT_SECRET` server variables.
+- Set `SHOPIFY_CUSTOMER_ORIGIN` to the exact HTTPS origin. Register
+  `<origin>/account/callback` and `<origin>/account` as callback/logout URIs.
+  The user registered `https://infusion-diffusion.vercel.app` on 16 September;
+  a branch preview origin must also be registered before preview authentication.
+- Connect Upstash Redis via Vercel, using the **Free** plan with `autoUpgrade=false`
+  and `prodPack=false`. Devon approved an available free plan. Do not select a paid
+  plan. Devon accepted marketplace terms; `infusion-customer-sessions-test` is created
+  in iad1 and connected to Preview only. Its REST smoke passed. Keep Production
+  isolated and use the returned REST URL/token as `UPSTASH_REDIS_REST_URL` and
+  `UPSTASH_REDIS_REST_TOKEN` (map the integration's variable names if different).
+- Generate a 32-byte random hex `SHOPIFY_CUSTOMER_SESSION_KEY` directly into secret
+  storage, without printing it. Changing this key or origin/client configuration
+  invalidates existing sessions. No `NEXT_PUBLIC_` credential variables.
+- Local credentials can be entered in ignored `.env.local`; never paste them into
+  chat, commits, screenshots, commands or logs. Never reuse the Storefront token.
+
+Shopify confidential-client authentication uses Base64 of the literal
+`client_id:client_secret`, without form-escaping punctuation first. Keep the
+Shopify-specific `ClientAuth` adapter for code exchange and refresh; the generic
+OAuth `ClientSecretBasic` encoder escapes UUID hyphens and causes `invalid_client`
+on this provider. Both grant bodies must include `client_id`. See the
+[Shopify authentication contract](https://shopify.dev/docs/api/customer/latest#authorization-header-confidential-client-only).
+Regression tests must use punctuated synthetic credentials.
+
+The real Customer Account ID token returned a numeric `sub` on 16 September 2026.
+The pinned `oauth4webapi@3.8.8` pnpm patch accepts only positive safe integers from
+Shopify authentication issuers and normalizes the parsed subject to a decimal
+string after issuer/audience checks. Other providers retain strict string-only
+subjects. The signed JWT bytes are never changed; `enableNonRepudiationChecks`
+must remain enabled for code and refresh grants. Nonce, state, PKCE, expiry and
+refresh subject matching remain enforced. Keep the patch, workspace declaration
+and lock hash together. Before updating this dependency, re-evaluate whether the
+patch is still needed and rerun numeric/string subject, forged-signature, invalid
+claim, refresh-identity and original-token-preservation tests. Do not drop the
+patch or disable token checks to get an upgrade through CI.
+
+Sessions last at most seven days. The opaque Secure/HttpOnly/SameSite=Lax cookie
+contains no profile/tokens. Redis holds AES-GCM encrypted token bundles with TTL,
+origin/client key namespaces, revocable login transactions and atomic refresh.
+The browser requests only normalized name/email/initials through private,
+no-store `/api/account`; personal details are absent from shared page HTML.
+Focus/return revalidates identity, and logout notifies other tabs to clear it.
+Shopify is authoritative for identity and orders; no account/order database is
+created. There is no process-memory production fallback during an outage.
+
+Current discovery validation supports the store's default `shopify.com` account
+authentication endpoints. Before introducing an account vanity domain, update
+and review endpoint validation. INF-42 must register final-domain callback/logout
+URIs, update the configured origin, and repeat real authentication checks.
+Hosted-only sign-in still needs a storefront OAuth round trip. Independent logout
+on Shopify does not promise immediate revocation of our existing refresh grant;
+verify provider behaviour before making a global-logout claim.
+
+Validation: `corepack pnpm test src/lib/shopify/customer-account` runs actual OIDC
+signature/claim checks against a synthetic issuer response. For distributed Redis
+invariants, start the isolated container with
+`docker run --detach --rm --name inf39-session-test redis:7-alpine`, run
+`node scripts/check-account-redis.mjs`, then stop that owned container. This covers
+lease ownership, stale refresh, TTL and callback/logout races against real Redis.
+It does not replace a real Upstash/Shopify login, token refresh, logout and
+customer-isolation test before activation.
+
+Rollback: disable `SHOPIFY_CUSTOMER_SESSION_ENABLED` and redeploy the reviewed
+branch. The previous hosted handoff remains available; no customer data migration
+is needed. Redis session records expire automatically. Leave Payfast in Test mode.
+
+The provider logout redirect uses Shopify's standard `id_token_hint` query
+parameter only on the verified Shopify logout endpoint. Do not log redirect
+headers or full authentication URLs. Access/refresh tokens never enter URLs.
+Run `corepack pnpm test:customer` for isolated fixture-browser session journeys;
+CI runs that suite and real Redis invariants as well as the existing quality gate.

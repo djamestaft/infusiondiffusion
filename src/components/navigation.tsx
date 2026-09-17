@@ -4,7 +4,11 @@ import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
-import { useAccountNavigationHref } from "@/components/account/account-navigation";
+import type { CustomerProfile } from "@/lib/shopify/customer-account/contract";
+import {
+  useAccountNavigationHref,
+  useCustomerAccount,
+} from "@/components/account/account-navigation";
 import { LogoTextLockup } from "@/components/logo-text-lockup";
 import { storefrontDestinations } from "@/components/storefront-destinations";
 import { cn } from "@/lib/utils";
@@ -17,6 +21,7 @@ export type NavigationDestination = {
 export type NavigationProps = {
   destinations?: NavigationDestination[] | null;
   currentHref?: string;
+  accountProfile?: CustomerProfile | null;
   accountHref?: string | null;
   cartHref?: string;
   cartCount?: number | null;
@@ -109,6 +114,7 @@ export function Navigation({
   destinations = defaultDestinations,
   currentHref,
   accountHref,
+  accountProfile,
   cartHref = "/cart",
   cartCount = 0,
   theme = "ivory",
@@ -117,6 +123,13 @@ export function Navigation({
   className,
 }: NavigationProps) {
   const sharedAccountHref = useAccountNavigationHref();
+  const customer = useCustomerAccount();
+  const profile =
+    accountProfile === undefined
+      ? customer.state.status === "signed-in"
+        ? customer.state.profile
+        : null
+      : accountProfile;
   const resolvedAccountHref =
     accountHref === undefined ? sharedAccountHref : accountHref;
   const links = validDestinations(destinations ?? []);
@@ -203,11 +216,29 @@ export function Navigation({
   const utilities = (
     <>
       {resolvedAccountHref ? (
-        <UtilityLink href={resolvedAccountHref} label="Account">
-          <UserRound
-            aria-hidden="true"
-            className="size-[1.125rem] stroke-[1.5]"
-          />
+        <UtilityLink
+          href={resolvedAccountHref}
+          label={
+            profile
+              ? profile.name
+                ? `Account, signed in as ${profile.name}`
+                : "Account, signed in"
+              : "Account"
+          }
+        >
+          {profile?.initials ? (
+            <span
+              aria-hidden="true"
+              className="font-sans text-xs font-semibold"
+            >
+              <bdi>{profile.initials}</bdi>
+            </span>
+          ) : (
+            <UserRound
+              aria-hidden="true"
+              className="size-[1.125rem] stroke-[1.5]"
+            />
+          )}
         </UtilityLink>
       ) : null}
       <UtilityLink
