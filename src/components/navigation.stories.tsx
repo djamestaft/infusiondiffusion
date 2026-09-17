@@ -157,3 +157,81 @@ export const CartUnavailableMobileOpen: Story = {
     ).toHaveAttribute("href", "/cart");
   },
 };
+
+const signedInProfile = {
+  name: "Amara Jacobs",
+  email: "amara@example.test",
+  initials: "AJ",
+};
+export const AvatarDefault: Story = {
+  args: {
+    theme: "midnight",
+    accountHref: "/account",
+    accountProfile: signedInProfile,
+  },
+};
+export const AvatarCurrent: Story = {
+  ...AvatarDefault,
+  args: { ...AvatarDefault.args, currentHref: "/account" },
+};
+export const AvatarHover: Story = {
+  ...AvatarDefault,
+  play: async ({ canvasElement }) => {
+    await userEvent.hover(
+      within(canvasElement).getByRole("link", {
+        name: "Account, signed in as Amara Jacobs",
+      }),
+    );
+  },
+};
+export const AvatarFocus: Story = {
+  ...AvatarDefault,
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole("link", {
+      name: "Account, signed in as Amara Jacobs",
+    });
+    link.focus();
+    await expect(link).toHaveFocus();
+  },
+};
+export const AvatarNoInitials: Story = {
+  ...AvatarDefault,
+  args: {
+    ...AvatarDefault.args,
+    accountProfile: { name: null, email: null, initials: null },
+  },
+};
+export const AvatarSingleInitial: Story = {
+  ...AvatarDefault,
+  args: {
+    ...AvatarDefault.args,
+    accountProfile: { name: "Élodie", email: null, initials: "É" },
+  },
+};
+export const AvatarSignedOut: Story = {
+  ...AvatarDefault,
+  args: { ...AvatarDefault.args, accountProfile: null },
+};
+export const AvatarIvory: Story = {
+  ...AvatarDefault,
+  args: { ...AvatarDefault.args, theme: "ivory" },
+};
+export const AvatarMobile320: Story = {
+  ...AvatarDefault,
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};
+export const AvatarMobileOpen: Story = {
+  ...AvatarMobile320,
+  play: MobileOpen.play,
+};
+export const AvatarFloating: Story = {
+  ...AvatarDefault,
+  args: { ...AvatarDefault.args, floating: true },
+  decorators: [
+    (Story) => (
+      <div className="bg-navigation-surface dark min-h-[120vh]">
+        <Story />
+      </div>
+    ),
+  ],
+};

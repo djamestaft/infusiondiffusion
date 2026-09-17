@@ -679,3 +679,46 @@
   aspect-ratio: 5 / 4;
   align-self: start;
 }
+
+/* Account avatar: 32px visual within the existing 44px utility target. */
+.account-avatar-link {
+  --account-avatar-highlight: var(--navigation-accent);
+  border-radius: 50%;
+}
+.dark .account-avatar-link {
+  --account-avatar-highlight: var(--navigation-focus);
+}
+.account-avatar-link:focus-visible {
+  outline: 2px solid var(--account-avatar-highlight);
+  outline-offset: -2px;
+}
+.account-avatar {
+  border: 1.5px solid var(--navigation-accent);
+  color: var(--navigation-text);
+}
+@media (hover: hover) {
+  .account-avatar-link:hover .account-avatar {
+    border-color: var(--account-avatar-highlight);
+    background: color-mix(in srgb, var(--navigation-accent) 12%, transparent);
+  }
+}
+.account-avatar-link:focus-visible .account-avatar {
+  border-color: var(--account-avatar-highlight);
+}
+.account-avatar-link[aria-current="page"] .account-avatar,
+.account-avatar-link:active .account-avatar {
+  border-color: var(--navigation-divider);
+  background: var(--navigation-divider);
+  color: var(--action-primary-foreground);
+}
+.account-avatar-link[aria-current="page"] .account-avatar {
+  border-width: 2px;
+}
+@media (forced-colors: active) {
+  .account-avatar-link[aria-current="page"] .account-avatar,
+  .account-avatar-link:active .account-avatar {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

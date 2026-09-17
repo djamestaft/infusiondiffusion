@@ -18,7 +18,12 @@
     ],
     "rules": [
       {
-        "name": "Favicon monogram — 17 September 2026",
+        "name": "Account avatar \u2014 17 September 2026",
+        "body": "Approved Figma 2764:488 / 2764:487: 32px gold outline inside existing 44px Account target; 12px Manrope Semibold initials. Midnight default gold-500/porcelain; hover pale-gold ring and 12% accent tint; inset circular 2px keyboard focus; pressed/current account gold-500 fill with ink text. Verified identity only; generic icon for guest/unresolved, ring plus icon for signed-in missing initials. Preserve header geometry and session lifecycle. See docs/features/inf-39-account-avatar.md.",
+        "section": "components"
+      },
+      {
+        "name": "Favicon monogram \u2014 17 September 2026",
         "body": "User-selected gold ID monogram on midnight, outlined from bundled Marcellus. icon.svg is the vector source; favicon.ico includes 16/32/48/64/256px and apple-icon.png is opaque 180px. Match gold-500 #C5A447 and ink-900 #191916. Icon-only brand extension; preserve the full wordmark. No Figma favicon frame yet; user-approved asset addition. Runtime color tokens unchanged.",
         "section": "components"
       },
