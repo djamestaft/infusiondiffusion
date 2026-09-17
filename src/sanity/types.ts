@@ -59,7 +59,7 @@ export const fallbackSiteSettings: SiteSettings = {
   eyebrow: "Home fragrance · Coming soon",
   announcement: {
     enabled: true,
-    message: "The first collection is taking shape.",
+    message: "Payments are in test mode. We’re launching shortly.",
   },
   headline: "Scent for living.",
   introduction:

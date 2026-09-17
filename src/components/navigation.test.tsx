@@ -13,6 +13,47 @@ import { Navigation } from "@/components/navigation";
 afterEach(cleanup);
 
 describe("Navigation", () => {
+  it("keeps the announcement before navigation and inside the open mobile menu", async () => {
+    const user = userEvent.setup();
+    render(
+      <Navigation
+        announcement={{
+          enabled: true,
+          message: "Payments are in test mode. We’re launching shortly.",
+        }}
+      />,
+    );
+    const notice = screen.getByRole("complementary", { name: "Announcement" });
+    const navigation = screen.getByRole("navigation", { name: "Primary" });
+    expect(
+      notice.compareDocumentPosition(navigation) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(notice).toHaveTextContent("Payments are in test mode.");
+    const opener = screen.getByRole("button", { name: "Open menu" });
+    await user.click(opener);
+    expect(
+      within(screen.getByRole("dialog")).getByRole("complementary", {
+        name: "Announcement",
+      }),
+    ).toHaveTextContent("We’re launching shortly.");
+    await user.keyboard("{Escape}");
+    expect(opener).toHaveFocus();
+    expect(
+      screen.getAllByRole("complementary", { name: "Announcement" }),
+    ).toHaveLength(1);
+  });
+
+  it.each([
+    { enabled: false, message: "Hidden" },
+    { enabled: true, message: "   " },
+  ])("omits disabled or blank announcements", (announcement) => {
+    render(<Navigation announcement={announcement} />);
+    expect(
+      screen.queryByRole("complementary", { name: "Announcement" }),
+    ).toBeNull();
+  });
+
   it("renders the approved destinations and commerce utilities", () => {
     const { container } = render(<Navigation currentHref="/shop" />);
 

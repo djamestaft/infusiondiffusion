@@ -13,11 +13,31 @@ vi.mock("next-sanity/visual-editing", () => ({
   VisualEditing: vi.fn(() => null),
 }));
 vi.mock("@/env", () => ({ isSanityConfigured: true }));
-vi.mock("@/sanity/lib/live", () => ({ SanityLive: sanityLiveMock }));
+vi.mock("@/sanity/lib/live", () => ({
+  SanityLive: sanityLiveMock,
+  getDynamicFetchOptions: vi
+    .fn()
+    .mockResolvedValue({ perspective: "published", stega: false }),
+}));
+vi.mock("@/sanity/lib/settings", () => ({
+  getSiteSettings: vi.fn().mockResolvedValue({
+    announcement: {
+      enabled: true,
+      message: "Payments are in test mode. We’re launching shortly.",
+    },
+  }),
+}));
 
 import WebsiteLayout from "@/app/(website)/layout";
 
 describe("website layout", () => {
+  it("shares the source-owned notice with page navigation", async () => {
+    render(await WebsiteLayout({ children: <Navigation /> }));
+    expect(
+      screen.getByRole("complementary", { name: "Announcement" }),
+    ).toHaveTextContent("Payments are in test mode.");
+  });
+
   afterEach(() => {
     cleanup();
     vi.unstubAllEnvs();
