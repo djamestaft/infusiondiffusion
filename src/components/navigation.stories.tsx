@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Navigation uses source-label casing, normal letter spacing and the footer links' navigation-muted color, regular weight and antialiased font smoothing. Manrope, the gold active underline, an 86px desktop and 78px mobile/tablet header, existing logo sizes and 44px controls are retained. The solid border stays inside that height.",
+          "Navigation uses source-label casing, normal letter spacing and the footer links' navigation-muted color, semibold (600) weight and antialiased font smoothing. Manrope, the gold active underline, an 86px desktop and 78px mobile/tablet header, existing logo sizes and 44px controls are retained. The solid border stays inside that height.",
       },
     },
   },
@@ -234,4 +234,29 @@ export const AvatarFloating: Story = {
       </div>
     ),
   ],
+};
+
+export const AvatarLoading: Story = {
+  args: { theme: "midnight", accountHref: "/account", accountLoading: true },
+  play: async ({ canvasElement }) => {
+    const link = within(canvasElement).getByRole("link", {
+      name: "Account, checking sign-in status",
+    });
+    await expect(link).toHaveAttribute("aria-busy", "true");
+    await expect(link).toHaveAttribute("href", "/account");
+    link.focus();
+    await expect(link).toHaveFocus();
+  },
+};
+export const AvatarLoadingIvory: Story = {
+  ...AvatarLoading,
+  args: { ...AvatarLoading.args, theme: "ivory" },
+};
+export const AvatarLoadingMobile: Story = {
+  ...AvatarLoading,
+  globals: AvatarMobile320.globals,
+};
+export const AvatarLoadingMobileOpen: Story = {
+  ...AvatarLoadingMobile,
+  play: MobileOpen.play,
 };

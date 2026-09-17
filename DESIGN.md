@@ -1,5 +1,31 @@
 # Infusion Diffusion design system
 
+## Header loading and navigation — 17 September 2026
+
+Devon requests semibold (600) header labels and a distinct account loading state.
+Use Manrope Semibold for desktop and mobile navigation labels, preserving the
+navigation-muted color, casing, spacing and existing sizes. The historical
+Marcellus comparison story retains its available regular font.
+
+While identity is unknown, show a 20px neutral LoaderCircle centered in the same
+32px avatar slot and 44px Account link. Its accessible name is “Account, checking
+sign-in status”, with aria-busy. Rotate only when reduced motion is not requested.
+A verified identity retains the approved outlined/filled gold avatar. Do not
+show the signed-out UserRound while checking; confirmed guests/errors retain it.
+
+Header destinations and commerce links use client navigation so the shared
+provider retains the verified profile in memory between pages. Concurrent checks
+share one request. A focus check preserves the current visible profile until it
+resolves; errors/expiry clear it. Hidden pages, pagehide and cross-tab sign-out
+clear identity and invalidate outstanding responses. Full reloads verify afresh.
+No profile or credentials are persisted in browser storage or public caches.
+
+This explicitly requested refinement supersedes the regular header labels and
+unresolved UserRound shown in Figma 2764:488 / 2764:487. Those approved historical
+frames remain an intentional divergence pending design synchronization; the
+signed-in avatar geometry, color and interactions are unchanged. Navigation
+loading stories, runtime and this contract cover the new state.
+
 ## Account avatar — 17 September 2026
 
 Devon approved the outlined default and filled current-page recommendation in
@@ -14,8 +40,8 @@ Focus remains visible alongside the filled state. No animation or layout shift.
 The ivory adaptation uses the darker navigation-accent outline and focus.
 
 Only a verified signed-in profile receives the ring. Missing initials retain
-the existing UserRound inside it; signed-out, unresolved and error states retain
-the neutral icon. Keep the accessible name, bdi isolation, destination and
+the existing UserRound inside it; signed-out and error states retain the neutral icon. Unresolved identity now
+uses the loading treatment above. Keep the accessible name, bdi isolation, destination and
 customer-session lifecycle. No changes to header size, logo, bag, menu, footer
 or account content. See [avatar delivery](docs/features/inf-39-account-avatar.md).
 
@@ -70,8 +96,8 @@ Devon approved normal casing and tighter letter spacing for header navigation,
 matching the footer link treatment. Preserve source labels (Shop, Fragrance Guide,
 About, Contact), use normal letter spacing and the existing `navigation-muted`
 text token on desktop and in the mobile menu. Midnight links match the footer's
-soft ivory `#E8E2D5`. Match the footer's regular (400) weight and antialiased
-font smoothing after Devon's visual review exposed the heavier header rendering.
+soft ivory `#E8E2D5`. Preserve antialiased font smoothing. Devon’s later 17 September request
+supersedes the original footer-matching 400 weight with header-only 600 weight.
 Keep Manrope, current sizes, the gold active
 underline, focus states, header geometry and utility icons.
 
