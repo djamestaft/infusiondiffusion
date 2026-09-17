@@ -11,9 +11,14 @@ export function ViewportDiagnostics() {
     )
       return;
     let frame = 0;
+    let measuredPath = window.location.pathname;
     let furthestScroll = -Infinity;
     let furthestMeasurement = "";
     const read = () => {
+      if (measuredPath !== window.location.pathname) {
+        measuredPath = window.location.pathname;
+        furthestScroll = -Infinity;
+      }
       const root = document.documentElement;
       const footer = Array.from(document.querySelectorAll("footer")).find(
         (node) => node.getBoundingClientRect().height > 0,
