@@ -150,6 +150,22 @@ export function Navigation({
     accountHref === undefined ? sharedAccountHref : accountHref;
   const links = validDestinations(destinations ?? []);
   const [open, setOpen] = useState(false);
+  const [pointerFocus, setPointerFocus] = useState(false);
+  // Script focus on drawer entry/exit can inherit a stale focus-visible heuristic.
+  // Only the logo/menu controls suppress that ring after pointer interaction.
+  const controlFocus = pointerFocus
+    ? "outline-none"
+    : "focus-visible:outline-navigation-focus focus-visible:outline-[3px] focus-visible:outline-offset-2";
+  useEffect(() => {
+    const onKeyboardInput = (event: KeyboardEvent) => {
+      if (!event.metaKey && !event.ctrlKey && !event.altKey) {
+        setPointerFocus(false);
+      }
+    };
+    // Listen outside the header too: Tab can enter from another part of the page.
+    document.addEventListener("keydown", onKeyboardInput, true);
+    return () => document.removeEventListener("keydown", onKeyboardInput, true);
+  }, []);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     if (!floating) return;
@@ -292,6 +308,7 @@ export function Navigation({
 
   return (
     <header
+      onPointerDownCapture={() => setPointerFocus(true)}
       className={cn(
         "text-navigation-text top-0 z-40 h-[var(--navigation-height)] w-full transition-colors duration-[180ms] motion-reduce:transition-none",
         floating ? "fixed" : "border-navigation-divider sticky border-b",
@@ -314,7 +331,10 @@ export function Navigation({
           ref={homeRef}
           href="/"
           aria-label="Infusion Diffusion home"
-          className="focus-visible:outline-navigation-focus inline-flex min-h-11 items-center justify-self-start focus-visible:outline-[3px] focus-visible:outline-offset-2"
+          className={cn(
+            "inline-flex min-h-11 items-center justify-self-start",
+            controlFocus,
+          )}
         >
           <LogoTextLockup className="w-[112px] min-[375px]:w-[132px] lg:w-[165px]" />
         </Link>
@@ -353,7 +373,10 @@ export function Navigation({
               aria-expanded={open}
               aria-controls={drawerId}
               onClick={() => setOpen(true)}
-              className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center font-sans text-[11px] font-semibold focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              className={cn(
+                "inline-flex size-11 items-center justify-center font-sans text-[11px] font-semibold",
+                controlFocus,
+              )}
             >
               <Menu aria-hidden="true" className="size-6 stroke-[1.5]" />
             </button>
@@ -375,7 +398,7 @@ export function Navigation({
               href="/"
               onClick={() => setOpen(false)}
               aria-label="Infusion Diffusion home"
-              className="focus-visible:outline-navigation-focus inline-flex min-h-11 items-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
+              className={cn("inline-flex min-h-11 items-center", controlFocus)}
             >
               <LogoTextLockup className="w-[112px] min-[375px]:w-[132px]" />
             </Link>
@@ -385,7 +408,10 @@ export function Navigation({
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="focus-visible:outline-navigation-focus inline-flex size-11 items-center justify-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
+                className={cn(
+                  "inline-flex size-11 items-center justify-center",
+                  controlFocus,
+                )}
               >
                 <X aria-hidden="true" className="size-5 stroke-[1.5]" />
               </button>
