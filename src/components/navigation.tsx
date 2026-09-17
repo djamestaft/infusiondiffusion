@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
+import { LoaderCircle, Menu, ShoppingBag, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 
@@ -22,6 +22,7 @@ export type NavigationProps = {
   destinations?: NavigationDestination[] | null;
   currentHref?: string;
   accountProfile?: CustomerProfile | null;
+  accountLoading?: boolean;
   accountHref?: string | null;
   cartHref?: string;
   cartCount?: number | null;
@@ -53,17 +54,24 @@ function UtilityLink({
   children,
   className,
   current = false,
+  busy = false,
+  onClick,
 }: {
   href: string;
   label: string;
   current?: boolean;
+  busy?: boolean;
+  onClick?: () => void;
   children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <a
+    <Link
       href={href}
       aria-label={label}
+      aria-busy={busy || undefined}
+      prefetch={false}
+      onClick={onClick}
       aria-current={current ? "page" : undefined}
       className={cn(
         "hover:text-navigation-accent focus-visible:outline-navigation-focus inline-flex size-11 shrink-0 items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none",
@@ -71,7 +79,7 @@ function UtilityLink({
       )}
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -89,12 +97,13 @@ function DestinationLink({
   onClick?: () => void;
 }) {
   return (
-    <a
+    <Link
       href={destination.href}
+      prefetch={false}
       aria-current={current ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "group text-navigation-muted focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-2 text-[13px] leading-[18px] font-normal tracking-normal normal-case antialiased focus-visible:outline-[3px] focus-visible:outline-offset-2",
+        "group text-navigation-muted focus-visible:outline-navigation-focus relative inline-flex min-h-11 items-center justify-center px-2 text-[13px] leading-[18px] font-semibold tracking-normal normal-case antialiased focus-visible:outline-[3px] focus-visible:outline-offset-2",
         !mobile && font === "display" && "font-display text-sm font-normal",
         mobile && "min-h-12 w-full justify-start px-0 text-base leading-6",
       )}
@@ -109,7 +118,7 @@ function DestinationLink({
           )}
         />
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -118,6 +127,7 @@ export function Navigation({
   currentHref,
   accountHref,
   accountProfile,
+  accountLoading,
   cartHref = "/cart",
   cartCount = 0,
   theme = "ivory",
@@ -133,6 +143,9 @@ export function Navigation({
         ? customer.state.profile
         : null
       : accountProfile;
+  const loading =
+    accountLoading ??
+    (accountProfile === undefined && customer.state.status === "loading");
   const resolvedAccountHref =
     accountHref === undefined ? sharedAccountHref : accountHref;
   const links = validDestinations(destinations ?? []);
@@ -222,23 +235,29 @@ export function Navigation({
         <UtilityLink
           href={resolvedAccountHref}
           current={currentHref === "/account"}
+          busy={loading}
+          onClick={() => setOpen(false)}
           className="account-avatar-link transition-none"
           label={
-            profile
-              ? profile.name
-                ? `Account, signed in as ${profile.name}`
-                : "Account, signed in"
-              : "Account"
+            loading
+              ? "Account, checking sign-in status"
+              : profile
+                ? profile.name
+                  ? `Account, signed in as ${profile.name}`
+                  : "Account, signed in"
+                : "Account"
           }
         >
           <span
             aria-hidden="true"
             className={cn(
               "inline-flex size-8 items-center justify-center rounded-full font-sans text-xs leading-none font-semibold",
-              profile && "account-avatar",
+              !loading && profile && "account-avatar",
             )}
           >
-            {profile?.initials ? (
+            {loading ? (
+              <LoaderCircle className="text-navigation-muted size-5 motion-safe:animate-spin" />
+            ) : profile?.initials ? (
               <bdi>{profile.initials}</bdi>
             ) : (
               <UserRound className="size-[1.125rem] stroke-[1.5]" />
@@ -248,6 +267,7 @@ export function Navigation({
       ) : null}
       <UtilityLink
         href={cartHref}
+        onClick={() => setOpen(false)}
         label={
           cartCount === null
             ? "Cart, item count unavailable"
@@ -353,6 +373,7 @@ export function Navigation({
           <div className="flex h-[var(--navigation-height)] shrink-0 items-center justify-between px-5 min-[375px]:px-6">
             <Link
               href="/"
+              onClick={() => setOpen(false)}
               aria-label="Infusion Diffusion home"
               className="focus-visible:outline-navigation-focus inline-flex min-h-11 items-center focus-visible:outline-[3px] focus-visible:outline-offset-2"
             >

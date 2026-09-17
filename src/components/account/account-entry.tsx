@@ -86,6 +86,7 @@ export function AccountEntry({
         currentHref="/account"
         theme="midnight"
         cartCount={cartCount}
+        accountLoading={isLoading || signingOut || undefined}
         accountProfile={
           customerState?.status === "signed-in"
             ? customerState.profile

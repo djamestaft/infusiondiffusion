@@ -18,8 +18,13 @@
     ],
     "rules": [
       {
+        "name": "Header loading and navigation \u2014 17 September 2026",
+        "body": "User requested Manrope Semibold (600) header labels and distinct loading. Neutral 20px LoaderCircle in existing 32px slot/44px Account target, aria-busy and checking-status accessible name, reduced-motion safe. Shared layout retains verified profile in memory across client navigation; concurrent checks deduplicated. Hidden pages, logout and invalid results clear identity. No browser-persisted profile/credentials. Historical Figma 2764:488 intentionally differs in unresolved state and label weight pending synchronization.",
+        "section": "components"
+      },
+      {
         "name": "Account avatar \u2014 17 September 2026",
-        "body": "Approved Figma 2764:488 / 2764:487: 32px gold outline inside existing 44px Account target; 12px Manrope Semibold initials. Midnight default gold-500/porcelain; hover pale-gold ring and 12% accent tint; inset circular 2px keyboard focus; pressed/current account gold-500 fill with ink text. Verified identity only; generic icon for guest/unresolved, ring plus icon for signed-in missing initials. Preserve header geometry and session lifecycle. See docs/features/inf-39-account-avatar.md.",
+        "body": "Approved Figma 2764:488 / 2764:487: 32px gold outline inside existing 44px Account target; 12px Manrope Semibold initials. Midnight default gold-500/porcelain; hover pale-gold ring and 12% accent tint; inset circular 2px keyboard focus; pressed/current account gold-500 fill with ink text. Verified identity only; generic icon for guest/error; neutral LoaderCircle for unresolved, ring plus icon for signed-in missing initials. Preserve header geometry and session lifecycle. See docs/features/inf-39-account-avatar.md.",
         "section": "components"
       },
       {
@@ -79,7 +84,7 @@
       },
       {
         "name": "Header label refinement \u2014 17 September 2026",
-        "body": "Devon approved source-label casing, normal letter spacing and navigation-muted for desktop and mobile menu links, matching footer links (midnight #E8E2D5). Match the footer's regular (400) weight and antialiased font smoothing following Devon's visual review. Keep Manrope, existing sizes, gold active underline, focus, geometry and utility icons. This supersedes uppercase styling in the historical Figma captures 2664:2, 2665:7 and 2675:27 as an intentional user-approved divergence. Runtime tokens are unchanged; Navigation stories share the updated component.",
+        "body": "Devon approved source-label casing, normal letter spacing and navigation-muted for desktop and mobile menu links, matching footer links (midnight #E8E2D5). Use header-only semibold (600) weight per Devon's follow-up, preserving antialiased font smoothing; footer weight stays regular (400). Keep Manrope, existing sizes, gold active underline, focus, geometry and utility icons. This supersedes uppercase styling in the historical Figma captures 2664:2, 2665:7 and 2675:27 as an intentional user-approved divergence. Runtime tokens are unchanged; Navigation stories share the updated component.",
         "section": "components"
       },
       {

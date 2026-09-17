@@ -116,3 +116,91 @@ test("rendered HTML and unauthenticated profile contain no customer identity", a
   expect(r.headers()["cache-control"]).toContain("no-store");
   expect(await r.json()).not.toHaveProperty("profile");
 });
+
+test("header navigation preserves verified identity without another profile fetch", async ({
+  page,
+}) => {
+  let requests = 0;
+  await page.route("**/api/account", async (route) => {
+    requests++;
+    await route.fulfill({ json: signedIn });
+  });
+  await page.goto("/account");
+  const account = () =>
+    page
+      .getByRole("link", { name: "Account, signed in as Amara Jacobs" })
+      .filter({ visible: true });
+  await expect(account()).toHaveText("AJ");
+  const before = requests;
+  await page.evaluate(() => {
+    (window as Window & { navigationMarker?: string }).navigationMarker =
+      "same-document";
+  });
+  await page
+    .getByRole("navigation", { name: "Primary", exact: true })
+    .getByRole("link", { name: "Shop", exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/shop$/);
+  await expect(account()).toHaveText("AJ");
+  expect(
+    await page.evaluate(
+      () => (window as Window & { navigationMarker?: string }).navigationMarker,
+    ),
+  ).toBe("same-document");
+  expect(requests).toBe(before);
+  await account().click();
+  await expect(page).toHaveURL(/\/account$/);
+  await expect(page.getByText("amara@example.test")).toBeVisible();
+  expect(requests).toBe(before);
+});
+
+for (const width of [1440, 320])
+  test(`slow initial and hard reload show a stable account loader at ${width}`, async ({
+    page,
+  }) => {
+    let release: () => void = () => {};
+    await page.route("**/api/account", async (route) => {
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      await route.fulfill({ json: signedIn });
+    });
+    await page.setViewportSize({ width, height: 900 });
+    for (const reload of [false, true]) {
+      const request = page.waitForRequest("**/api/account");
+      if (reload) await page.reload();
+      else await page.goto("/account");
+      await request;
+      const loader = page
+        .getByRole("link", { name: "Account, checking sign-in status" })
+        .filter({ visible: true });
+      await expect(loader).toHaveAttribute("aria-busy", "true");
+      await expect(
+        page
+          .getByRole("link", { name: "Account", exact: true })
+          .filter({ visible: true }),
+      ).toHaveCount(0);
+      const before = await loader.boundingBox();
+      release();
+      const avatar = page
+        .getByRole("link", { name: "Account, signed in as Amara Jacobs" })
+        .filter({ visible: true });
+      await expect(avatar).toHaveText("AJ");
+      expect(await avatar.boundingBox()).toEqual(before);
+    }
+    if (width === 320) {
+      await page.getByRole("button", { name: "Open menu" }).click();
+      const shop = page
+        .getByRole("dialog")
+        .getByRole("link", { name: "Shop", exact: true });
+      await expect(shop).toHaveCSS("font-weight", "600");
+      await shop.click();
+      await expect(page).toHaveURL(/\/shop$/);
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await expect(
+        page
+          .getByRole("link", { name: "Account, signed in as Amara Jacobs" })
+          .filter({ visible: true }),
+      ).toHaveText("AJ");
+    }
+  });
