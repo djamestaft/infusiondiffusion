@@ -1,6 +1,8 @@
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 
+import { ViewportDiagnostics } from "@/components/viewport-diagnostics";
+
 import { AccountNavigationProvider } from "@/components/account/account-navigation";
 
 import { isSanityConfigured } from "@/env";
@@ -30,6 +32,7 @@ export default async function WebsiteLayout({
         />
       ) : null}
       {isEnabled ? <VisualEditing /> : null}
+      {process.env.VERCEL_ENV !== "production" ? <ViewportDiagnostics /> : null}
     </>
   );
 }
