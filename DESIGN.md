@@ -1,5 +1,25 @@
 # Infusion Diffusion design system
 
+## Favicon monogram — 17 September 2026
+
+Devon selected a gold ID monogram on the site's midnight background for browser
+and saved-site icons. Use outlined glyphs from the bundled Marcellus font, with
+gold-500 (`#C5A447`) on ink-900 (`#191916`). This is an icon-specific extension;
+the approved full wordmark remains unchanged.
+
+`src/app/icon.svg` is the vector source. `favicon.ico` includes 16, 32, 48, 64
+and 256px raster sizes; `apple-icon.png` is 180px with an opaque background and
+square corners so the platform can apply its own mask. All share the same centered
+mark and colors. The SVG uses paths and has no font or network dependency.
+Next's file conventions supply the icon links without duplicate layout metadata.
+Figma has no favicon frame yet; this user-approved addition is documented here
+and in the Impeccable sidecar. Existing runtime color tokens remain unchanged.
+Devon approved the rendered monogram and authorized release on 17 September.
+[Size and tab preview](docs/evidence/favicon/preview.png) covers 16/32/48/64px
+and light/dark tab contexts. Local browser checks confirm all three generated
+icon links return the exact source files with successful responses; image
+inspection confirms every ICO size and an opaque 180px Apple icon.
+
 ## Customer account area — 17 September 2026
 
 Devon approved implementing the account content in Figma handoff `2741:37`,
