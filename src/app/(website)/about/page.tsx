@@ -39,7 +39,10 @@ async function AboutContent() {
     <CombinedAboutTemplate
       page={page}
       gallery={gallery}
-      heroImage={settings.homepage.heroSlides[0]}
+      heroImage={{
+        src: "/images/about/fragrance-still-life.webp",
+        alt: "Conceptual fragrance still life with amber glass, reeds, linen and warm stone.",
+      }}
       bornStory={settings.homepage.founderStory}
       cartCount={cartNavigationCount(cart)}
     />

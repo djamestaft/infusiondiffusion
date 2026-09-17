@@ -118,13 +118,12 @@ Sanity-owned; no content publication or product matching was introduced.
 
 ## About image sizing refinement
 
-Devon requested slightly smaller first-four images so each fits on screen.
-The campaign figures now center within their columns, retain the 3:4 frame,
-and cap width at calc(75svh - 96px), limiting height to the viewport minus 128px.
-Devon found the initial 70% height cap too small and requested near-full-height
-images while scrolling; that intermediate cap and the 480px width cap are superseded. Contain fitting
-preserves the full image. This user-directed refinement supersedes the initial
-Figma full-column sizing; Figma frame synchronization remains pending.
+Superseded on 17 September 2026 by Devon's request for compact square previews
+and a purpose-made landscape hero. The four story images now use cover fitting,
+centered square frames capped at min(400px,50svh), while the accessible viewer
+retains full source images. Market imagery and captions remain unchanged.
+See [INF-45 refinement and evidence](inf-45-about-media.md). The prior 3:4 contain
+and viewport-minus-128px contract is historical.
 
 Button rendering correction: primary link labels must match the product Add to
 Cart foreground. Keep the decorative gold material behind all content within

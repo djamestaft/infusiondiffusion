@@ -119,7 +119,7 @@ export function CombinedAboutTemplate({
               onError={() => setHeroFailed(true)}
             />
           ) : null}
-          <div className="bg-content-surface absolute inset-0 -z-10 opacity-65" />
+          <div className="bg-content-surface absolute inset-0 -z-10 opacity-40" />
           <h1 className="font-display w-full text-[38px] leading-[1.45] font-normal [overflow-wrap:anywhere] sm:text-5xl lg:text-[64px]">
             {page.title}
           </h1>
