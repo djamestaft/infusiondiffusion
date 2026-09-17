@@ -2,8 +2,8 @@
 
 Devon requested header navigation weight 600 and an account loading state on
 17 September 2026. Scope: Navigation, AccountNavigationProvider and account
-pending-state presentation. INF-39 remains In Progress with Devon; existing
-real-provider acceptance and INF-40 dependencies remain. No roadmap sequence,
+pending-state presentation. This follows the completed INF-39 account work;
+remaining real-provider acceptance belongs to INF-40, owned by Devon. No roadmap sequence,
 production configuration, domain or payment change is included.
 
 ## Behavior
