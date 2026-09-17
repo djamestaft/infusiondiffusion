@@ -14,9 +14,22 @@ cookie addresses a managed Redis session; profile/order truth stays in Shopify.
 managed Redis with atomic updates, Vitest, Storybook, Playwright.
 
 **Spec:** [Persistent customer identity](../specs/2026-09-16-persistent-customer-account.md).
-Runtime implementation and local checks are now present in PR #91. Real Shopify/
-Upstash setup, remote acceptance and release remain pending. The checklist below
-is the original detailed acceptance plan; see the roadmap for current evidence.
+
+## Delivery status — 17 September 2026
+
+PR #91 is merged (`d4b751f`), followed by the black account header in #94 and
+gold account avatar in #96 (`dcbcdc9` on main). Shopify client configuration and
+free Upstash provisioning are complete. Preview and Production are configured
+separately; main has its own encryption key and origin-derived namespace.
+Devon confirms real main-site sign-in and persistent initials after refresh and
+navigation. Basic profile and own-order visibility were confirmed earlier.
+
+Checked items below reference the recorded implementation/verification evidence
+in PR #91 and the account delivery records, not a new test run in this planning
+update. Preserve the remaining real-provider checks: token renewal after expiry,
+browser restart, logout/re-entry and two-customer isolation. INF-39 remains In
+Progress for those checks; INF-40 owns combined journey acceptance. Final-domain
+origin/callback/logout changes stay in INF-42. Payfast remains in Test mode.
 
 ## Global constraints
 
@@ -34,36 +47,36 @@ is the original detailed acceptance plan; see the roadmap for current evidence.
 **Files:** `src/lib/shopify/customer-account/config.ts`, `discovery.ts`,
 `session.ts` and their tests; `.env.example`; `docs/operations.md`.
 
-- [ ] Confirm Headless client settings and a server-only secret-management path.
-- [ ] Confirm the managed Redis integration, plan/cost, environment isolation and
+- [x] Confirm Headless client settings and a server-only secret-management path.
+- [x] Confirm the managed Redis integration, plan/cost, environment isolation and
       stable HTTPS preview hostname before provisioning or changing external state.
-- [ ] Retrieve current official OIDC/Redis package APIs with Context7, then pin
+- [x] Retrieve current official OIDC/Redis package APIs with Context7, then pin
       suitable dependencies. Do not implement JWT verification by hand.
-- [ ] Test missing/invalid configuration, trusted discovery URL validation and API
+- [x] Test missing/invalid configuration, trusted discovery URL validation and API
       version pinning before implementation; retain disabled hosted fallback.
-- [ ] Test session cookie attributes, identifier rotation, TTL/absolute lifetime,
+- [x] Test session cookie attributes, identifier rotation, TTL/absolute lifetime,
       encrypted token storage, expired/missing sessions and safe deletion.
-- [ ] Test atomic refresh coordination, version mismatch and logout racing refresh.
+- [x] Test atomic refresh coordination, version mismatch and logout racing refresh.
       A production store failure must not fall back to process memory.
-- [ ] Implement the server-only boundary and run targeted Vitest/security review.
+- [x] Implement the server-only boundary and run targeted Vitest/security review.
 
 ## 2. Shopify authorization and profile
 
 **Files:** `src/lib/shopify/customer-account/oauth.ts`, `client.ts`, `profile.ts`;
 `src/app/(website)/account/{login,callback,logout}/route.ts` and tests.
 
-- [ ] Write failing cases for one-use state, nonce, PKCE, callback expiry/replay,
+- [x] Write failing cases for one-use state, nonce, PKCE, callback expiry/replay,
       issuer/audience/signature/expiry and safe same-origin return paths.
-- [ ] Implement login and callback with the provider library, explicit client
+- [x] Implement login and callback with the provider library, explicit client
       authentication and validated discovery metadata. Replace session on login.
-- [ ] Test profile normalization for nullable names/email and provider failures.
+- [x] Test profile normalization for nullable names/email and provider failures.
       Query only id, firstName, lastName, emailAddress.emailAddress.
-- [ ] Implement no-store profile reads; never return tokens or raw provider data.
-- [ ] Test refresh success/revocation/outage separately; implement bounded refresh
+- [x] Implement no-store profile reads; never return tokens or raw provider data.
+- [x] Test refresh success/revocation/outage separately; implement bounded refresh
       with the session store's atomic guard. Keep service error distinct from expiry.
-- [ ] Implement same-origin/CSRF-protected POST logout, delete the local session,
+- [x] Implement same-origin/CSRF-protected POST logout, delete the local session,
       and continue through Shopify logout with the registered destination.
-- [ ] Run meaningful unit/integration coverage, including two distinct customer
+- [x] Run meaningful unit/integration coverage, including two distinct customer
       identities and cross-instance refresh/logout races.
 
 ## 3. Signed-in presentation in Storybook
@@ -72,14 +85,14 @@ is the original detailed acceptance plan; see the roadmap for current evidence.
 `src/components/navigation.tsx`, relevant stories/tests and a shared normalized
 profile/Unicode-initials contract.
 
-- [ ] Build the verified initials state and summary in Storybook before route use.
-- [ ] Test grapheme-safe names, mononyms, absent names and long/bidirectional text;
+- [x] Build the verified initials state and summary in Storybook before route use.
+- [x] Test grapheme-safe names, mononyms, absent names and long/bidirectional text;
       absent name retains the icon. Do not derive initials from email.
-- [ ] Cover signed-out, resolving, signed-in, expired, provider error/retry,
+- [x] Cover signed-out, resolving, signed-in, expired, provider error/retry,
       signing-out and signed-out confirmation states using synthetic fixtures.
-- [ ] Add labelled Name/Email rows, hosted View your orders and Sign out, preserving
-      the existing Account page composition. No profile editing or order cards.
-- [ ] Compare 1440/768/390/320 floating/scrolled/menu/account states with current
+- [x] Add labelled Name/Email rows, hosted View your orders and Sign out, using
+      the subsequently approved two-column/stacked account layout. No profile editing or order cards.
+- [x] Compare 1440/768/390/320 floating/scrolled/menu/account states with current
       approved references. Synchronize the new functional states with Figma and
       the brief; get independent visual review before live integration.
 
@@ -88,27 +101,32 @@ profile/Unicode-initials contract.
 **Files:** `src/app/(website)/layout.tsx`, account page/error/loading routes,
 account navigation provider and a private profile refresh handler if needed.
 
-- [ ] Connect only normalized session/profile state; do not make public browsing
+- [x] Connect only normalized session/profile state; do not make public browsing
       depend on a working account provider. Preserve layout caching boundaries.
-- [ ] Refresh identity on return/focus and login/logout; invalidate it across tabs
+- [x] Refresh identity on return/focus and login/logout; invalidate it across tabs
       without broadcasting credentials or retaining an old customer's PII.
-- [ ] Ensure sign-in returns to the intended safe local page and orders remain
+- [x] Ensure sign-in returns to the intended safe local page and orders remain
       Shopify-hosted. Do not redirect every anonymous page load to Shopify.
-- [ ] Test HTML/RSC/CDN isolation, back/forward cache, expired grants, provider
-      outages, logout, a shared browser switching users and guest checkout.
+- [x] Verify private/no-store profile responses, absence of personal data in shared
+      HTML, fixture logout/customer-switch/outage paths and preserved guest checkout.
+- [ ] Complete explicit back/forward-cache and deployed cache-isolation acceptance
+      as part of the combined browser matrix; do not infer it from fixture tests.
 
 ## 5. Controlled activation and acceptance
 
-- [ ] Register the exact preview/test callback and logout URLs in the same client.
+- [x] Register the exact preview/test callback and logout URLs in the same client.
       Configure server-only credentials/session store; never copy secrets to chat.
-- [ ] Run formatting, lint, types, unit/integration, Storybook/build and browser
+- [x] Run formatting, lint, types, unit/integration, Storybook/build and browser
       gates. Get independent review, open the delivery PR and pass exact-head CI.
-- [ ] Verify real login/Shopify SSO, refresh after token expiry, browser restart,
-      returning from orders, logout/re-entry, and two-customer isolation in preview.
-- [ ] Have Devon verify actual basic profile and existing order with his own inbox.
-- [ ] Record any hosted-account logout limitation; do not promise global logout
+- [x] Verify real sign-in, profile, existing order visibility and persistence after
+      page refresh/navigation; main-site acceptance supplied by Devon on 17 September.
+- [ ] Verify real token renewal after expiry, browser restart, logout/re-entry,
+      return from hosted orders and two-customer isolation. A page refresh alone
+      does not establish OAuth token renewal.
+- [x] Have Devon verify actual basic profile and existing order with his own inbox.
+- [x] Record any hosted-account logout limitation; do not promise global logout
       synchronization without provider evidence.
-- [ ] After human release approval, enable the prepared integration and smoke-test
+- [x] After human release approval, enable the prepared integration and smoke-test
       main. Rollback returns to hosted account handoff and stops local identity use.
-- [ ] Reconcile INF-39/40 and roadmap evidence; add final-domain callback/logout
+- [x] Reconcile INF-39/40 and roadmap evidence; add final-domain callback/logout
       changes to INF-42 before cutover. Keep Payfast in Test mode.

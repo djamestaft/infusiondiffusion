@@ -1,5 +1,13 @@
 # INF-39 account content layout
 
+## Release status — 17 September 2026
+
+PR #91 (layout/session), #94 (black header) and #96 (gold avatar) are merged.
+Devon confirms main-site sign-in and initials persisting across refresh and
+navigation, plus earlier profile/own-order visibility. The delivery notes below
+record earlier verification stages; pending merge/activation wording there is
+historical. Real-provider renewal/logout/isolation acceptance remains INF-39/40.
+
 ## Post-merge header follow-up
 
 Devon requested a black account header after PR #91 merged. AccountEntry now

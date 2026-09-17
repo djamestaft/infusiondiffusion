@@ -46,4 +46,10 @@ Guide trial remains exploratory. See `docs/planning/roadmap.md` for delivery
 status and approval gates.
 
 Implementation follows [the component delivery contract](docs/design-implementation.md).
-PR #83 consolidates the current carousel, interim Contact defaults and governance.
+PR #83 delivered carousel, interim Contact defaults and governance. Subsequent
+PRs through #96 are merged, including persistent Shopify accounts, the refined
+account layout, black account header, gold avatar states and footer refinement.
+Devon confirmed persistent initials on the main test site on 17 September 2026.
+Payfast sandbox checkout works with Test mode retained. Remaining provider
+acceptance, combined E2E, approved launch content, SEO and domain cutover are
+tracked in the roadmap; these merges do not establish launch readiness.

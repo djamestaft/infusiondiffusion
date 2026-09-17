@@ -1,5 +1,66 @@
 # Infusion Diffusion Roadmap
 
+Last reconciled: 17 September 2026, after human merges through PR #96.
+Protected `main` was refreshed to `dcbcdc9`; GitHub confirms PRs #89–#96
+are merged. This summary governs current work; the dated delivery notes below
+are historical snapshots, including their superseded pending-merge statements.
+
+## Current delivery and acceptance
+
+- **Accounts delivered:** PR #90 restored account access; #91 added persistent
+  Shopify sessions and the account layout; #94 added the black account header;
+  #96 added the approved gold circle and interaction states. Devon confirms
+  sign-in at `https://infusion-diffusion.vercel.app/account/login` and initials
+  persisting after refresh and visiting another page. Profile and own-order
+  visibility were confirmed earlier. Main-site sign-in acceptance is complete.
+- **Shared presentation merged:** footer refinement #92, navigation typography
+  #93, and favicon #95 are merged. INF-43 is Done. Favicon work needs no further
+  action in this account workstream.
+- **Payments available for testing:** Payfast merchant verification is
+  user-confirmed, the integration is active in Test mode, and sandbox success
+  and cancellation evidence exists. Test order #1002 was Paid / Unfulfilled.
+  Checkout Continue shopping and the old-store logo return to the headless test
+  site through the published redirect theme. Keep test orders unfulfilled.
+- **Evidence limits:** the account merges and persistence acceptance do not prove
+  token renewal after expiry, browser restart, real provider logout/re-entry or
+  two-customer isolation. Existing fixture tests cover several of these paths;
+  real-provider acceptance remains in INF-39 and feeds INF-40. No new live
+  payment, final-domain cutover or editorial publication is authorized here.
+
+## Remaining work and owners
+
+| Item   | State       | Owner   | Next completion evidence                                                                                                                                                                         |
+| ------ | ----------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| INF-38 | In Progress | Devon   | Reconcile payment/order references and duplicates; finish failure/pending/retry, notifications, refund/cancellation, tax/shipping and commercial-readiness checks. Payfast remains in Test mode. |
+| INF-39 | In Progress | Devon   | Finish real-provider renewal, restart, logout/re-entry and two-customer isolation checks. Implementation, merge and main-site persistence are accepted.                                          |
+| INF-40 | Todo        | Devon   | Complete the named release-candidate matrix across six products, guest/signed-in checkout, payment, order history, mobile/desktop and recovery. Completion depends on INF-38/39.                 |
+| INF-28 | Todo        | Devon   | Resolve remaining factual, service and metadata decisions.                                                                                                                                       |
+| INF-31 | In Progress | Shawnee | Complete approved launch assets/content and source previews; retain INF-28 and publication gates.                                                                                                |
+| INF-35 | In Progress | Devon   | Finish remaining editorial/service scope; delivered Contact and Guide matching remain accepted.                                                                                                  |
+| INF-36 | Backlog     | Shawnee | Independently review the INF-40 evidence and remaining content/release gates; depends on INF-34/35/40.                                                                                           |
+| INF-41 | Todo        | Devon   | Final SEO, canonical/indexing, metadata and discoverability acceptance after INF-40 and INF-31. Preparation can start earlier.                                                                   |
+| INF-42 | Todo        | Devon   | Approved domain/DNS cutover after INF-40/41/36; update redirect-theme hostname, account origin and exact callback/logout URIs, then retest.                                                      |
+| INF-43 | Done        | Devon   | Approved footer delivered in human-merged PR #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                                            |
+
+Next: close the outstanding payment/account acceptance under INF-38/39, then
+complete INF-40's combined journey. Finish approved content in parallel. Final
+SEO and independent release review precede the human-approved domain cutover.
+INF-33/34 remain Done; INF-37 About/Gallery refinement and INF-3/4 stockist work
+remain in their later/separate backlogs. Existing Plane dependency edges and
+owners are unchanged.
+
+Evidence: [account plan](../superpowers/plans/2026-09-16-persistent-customer-account.md),
+[account layout](../features/inf-39-account-layout.md),
+[avatar](../features/inf-39-account-avatar.md),
+[footer](../features/inf-43-footer.md),
+[Payfast acceptance](../features/inf-38-payfast.md).
+
+## Historical delivery notes
+
+The dated notes below preserve decisions and diagnostic evidence. Use the current
+summary above for status and next actions; do not repeat completed provisioning,
+implementation or merge work from these older snapshots.
+
 ## Account avatar refinement — 17 September 2026
 
 PR #94 is merged and Devon confirms the account and persistent initials work.
@@ -123,7 +184,7 @@ evidence is tracked in the delivery PR and Plane. Authenticated purchase-history
 acceptance remains pending. INF-40 still requires this work; final SEO and domain
 switchover remain INF-41/42. Payment testing stays in Payfast Test mode.
 
-Last updated: 16 September 2026
+Snapshot date: 16 September 2026
 
 ## Payfast sandbox succeeds — 16 September 2026
 
@@ -578,9 +639,9 @@ Further refinement of that combined experience follows.
 Shopify ecommerce, catalogue, variants, prices, inventory, cart and hosted
 checkout are already integrated. Sanity already owns CMS/editorial content.
 Preserve these integrations; improve presentation, content readiness and
-verification. The 15 September launch plan adds Peach Payments and restoration
-of the existing Shopify account handoff. No new commerce backend, CMS migration,
-custom identity backend or custom checkout is in scope.
+verification. Payfast is the selected payment provider, and the Shopify Customer Account API
+now supplies persistent identity through encrypted server-side sessions. No new
+commerce backend, CMS migration, identity provider or custom checkout is in scope.
 
 The user approved brand evolution, an asset workstream and the complete
 shopping journey first. Retain the logo and Marcellus/Manrope by default;
