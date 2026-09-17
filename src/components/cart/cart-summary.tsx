@@ -1,3 +1,4 @@
+import { ServicePolicyLinks } from "@/components/service-policy-links";
 import type { CartContract } from "@/lib/shopify/cart-contract";
 import { Button } from "@/components/ui/button";
 import { PriceDisplay } from "@/components/ui/price-display";
@@ -39,8 +40,10 @@ export function CartSummary({
           </div>
         ))}
         <p className="text-content-secondary font-sans text-sm leading-[1.5]">
-          Shipping and final taxes are confirmed at checkout.
+          Free standard delivery on orders of R1,000 or more. Delivery charges
+          for smaller orders are shown at checkout.
         </p>
+        <ServicePolicyLinks />
         {!checkoutEnabled ? (
           <p className="text-content-secondary font-sans text-sm leading-[1.5]">
             Checkout is being prepared. Your cart is saved.

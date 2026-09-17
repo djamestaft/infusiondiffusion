@@ -1,3 +1,4 @@
+import { ServicePolicyLinks } from "@/components/service-policy-links";
 import { defaultContactEmail } from "@/lib/contact-content";
 import Image from "next/image";
 import { RecoverableImage } from "@/components/ui/recoverable-image";
@@ -579,6 +580,7 @@ export function ProductDetailTemplate({
                     : "Add to cart"}
               </Button>
             ) : null)}
+          <ServicePolicyLinks />
           <p className="text-content-secondary w-full font-sans text-base leading-[1.65]">
             {description}
           </p>

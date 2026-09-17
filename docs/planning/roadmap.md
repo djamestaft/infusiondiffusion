@@ -55,20 +55,20 @@ result is **31 Done, 6 Todo, 4 Backlog, 3 Cancelled and 0 In Progress**. Todo me
 unstarted or waiting for input, not an assertion that launch acceptance passed.
 Owners remain unchanged; no active implementation task is being claimed.
 
-| Item   | State   | Owner   | Disposition / next evidence                                                                                                                                         |
-| ------ | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| INF-27 | Done    | Shawnee | Approved About, Contact and Guide design/contracts delivered through #70/#74/#75/#76. Optional Guide trial remains exploration; final content is INF-28/31.         |
-| INF-35 | Done    | Devon   | Approved pages, matching and interim guidance merged through #74–#77/#83. Unfinished final policy/care destinations and purchase reassurance transferred to INF-44. |
-| INF-38 | Done    | Devon   | Payfast sandbox integration and headless return routing delivered. Remaining payment tests move to INF-40; commercial/live-readiness gates move to INF-42.          |
-| INF-39 | Done    | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                     |
-| INF-43 | Done    | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                  |
-| INF-28 | Todo    | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                      |
-| INF-31 | Todo    | Shawnee | Preparation merged; final assets/content deferred pending inputs and INF-28 approvals. Source previews/publication remain open.                                     |
-| INF-40 | Todo    | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.     |
-| INF-44 | Todo    | Devon   | Apply approved care/service policies, destinations and purchase reassurance after INF-31. Blocks INF-36 final release review.                                       |
-| INF-36 | Backlog | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                     |
-| INF-41 | Todo    | Devon   | Final SEO acceptance after INF-40 and INF-31; preparation may start earlier.                                                                                        |
-| INF-42 | Todo    | Devon   | Domain and commercial/live-payment readiness after INF-40/41/36, with explicit human activation/cutover approval.                                                   |
+| Item   | State       | Owner   | Disposition / next evidence                                                                                                                                                                                                          |
+| ------ | ----------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| INF-27 | Done        | Shawnee | Approved About, Contact and Guide design/contracts delivered through #70/#74/#75/#76. Optional Guide trial remains exploration; final content is INF-28/31.                                                                          |
+| INF-35 | Done        | Devon   | Approved pages, matching and interim guidance merged through #74–#77/#83. Unfinished final policy/care destinations and purchase reassurance transferred to INF-44.                                                                  |
+| INF-38 | Done        | Devon   | Payfast sandbox integration and headless return routing delivered. Remaining payment tests move to INF-40; commercial/live-readiness gates move to INF-42.                                                                           |
+| INF-39 | Done        | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                                                                                      |
+| INF-43 | Done        | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                                                                                   |
+| INF-28 | Todo        | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                                                                                       |
+| INF-31 | Todo        | Shawnee | Preparation merged; final assets/content deferred pending inputs and INF-28 approvals. Source previews/publication remain open.                                                                                                      |
+| INF-40 | Todo        | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.                                                                      |
+| INF-44 | In Progress | Devon   | Merchant-approved policies published in Shopify; storefront reader/footer/purchase links in review. Native checkout consent and final release evidence pending; broader INF-31 approvals remain. Blocks INF-36 final release review. |
+| INF-36 | Backlog     | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                                                                                      |
+| INF-41 | Todo        | Devon   | Final SEO acceptance after INF-40 and INF-31; preparation may start earlier.                                                                                                                                                         |
+| INF-42 | Todo        | Devon   | Domain and commercial/live-payment readiness after INF-40/41/36, with explicit human activation/cutover approval.                                                                                                                    |
 
 ### Unfinished acceptance transferred without being marked passed
 

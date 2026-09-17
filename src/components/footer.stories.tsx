@@ -35,7 +35,16 @@ export const Desktop: Story = {
       "About",
       "Contact",
     ]);
-    for (const link of links)
+    const policyLinks = within(
+      canvas.getByRole("navigation", { name: "Policies" }),
+    ).getAllByRole("link");
+    await expect(policyLinks.map((link) => link.getAttribute("href"))).toEqual([
+      "/policies/terms-and-conditions",
+      "/policies/shipping",
+      "/policies/returns",
+      "/policies/privacy",
+    ]);
+    for (const link of [...links, ...policyLinks])
       await expect(link.getBoundingClientRect().height).toBeGreaterThanOrEqual(
         44,
       );
