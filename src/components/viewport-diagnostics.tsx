@@ -11,6 +11,8 @@ export function ViewportDiagnostics() {
     )
       return;
     let frame = 0;
+    let furthestScroll = -Infinity;
+    let furthestMeasurement = "";
     const read = () => {
       const root = document.documentElement;
       const footer = Array.from(document.querySelectorAll("footer")).find(
@@ -20,6 +22,17 @@ export function ViewportDiagnostics() {
       const viewport = window.visualViewport;
       const rounded = (value: number | undefined) =>
         value === undefined ? "—" : Math.round(value);
+      // Keep the bottom-of-page evidence even if iOS moves fixed elements
+      // out of view. Scrolling back up must not replace this snapshot.
+      if (scrollY >= furthestScroll) {
+        furthestScroll = scrollY;
+        furthestMeasurement = [
+          `Furthest Y: ${rounded(scrollY)}`,
+          `At furthest — doc: ${rounded(root.scrollHeight)}`,
+          `Footer: ${rounded(box?.bottom)} / view: ${rounded(viewport?.height)}`,
+          `Beyond end: ${rounded(scrollY + (viewport?.offsetTop ?? 0) + (viewport?.height ?? innerHeight) - root.scrollHeight)}`,
+        ].join("\n");
+      }
       setMeasurement(
         [
           `Page: ${window.location.pathname}`,
@@ -31,6 +44,8 @@ export function ViewportDiagnostics() {
           `Visible height: ${rounded(viewport?.height)}`,
           `Visible top: ${rounded(viewport?.offsetTop)} / page ${rounded(viewport?.pageTop)}`,
           `Scale: ${viewport?.scale ?? "—"}`,
+          "— Retained bottom reading —",
+          furthestMeasurement,
         ].join("\n"),
       );
     };
@@ -39,6 +54,8 @@ export function ViewportDiagnostics() {
       frame = requestAnimationFrame(read);
     };
     read();
+    // Native browser scrolling may not deliver DOM scroll/resize events.
+    const interval = window.setInterval(schedule, 500);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     window.visualViewport?.addEventListener("scroll", schedule);
@@ -47,6 +64,7 @@ export function ViewportDiagnostics() {
     observer.observe(document.body);
     return () => {
       cancelAnimationFrame(frame);
+      clearInterval(interval);
       observer.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
@@ -56,7 +74,7 @@ export function ViewportDiagnostics() {
   }, []);
   if (!measurement) return null;
   return (
-    <details className="dark bg-content-surface text-content-primary border-navigation-border fixed top-24 right-2 z-[100] max-w-[calc(100vw-16px)] rounded border p-3 text-xs">
+    <details className="dark bg-content-surface text-content-primary border-navigation-border fixed top-24 right-2 z-[100] max-h-[calc(100dvh-8rem)] max-w-[calc(100vw-16px)] overflow-y-auto rounded border p-3 text-xs">
       <summary className="min-h-11 cursor-pointer content-center">
         Viewport check
       </summary>
