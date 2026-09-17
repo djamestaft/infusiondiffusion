@@ -66,6 +66,11 @@
         "name": "Phone hero alignment",
         "body": "15 September user refinement: below 640px center editorial slide headings, descriptions and CTA buttons. At 640px and above retain left alignment. Preserve 5:4 contained imagery, gutters, controls and motion.",
         "section": "components"
+      },
+      {
+        "name": "Header label refinement — 17 September 2026",
+        "body": "Devon approved source-label casing, normal letter spacing and navigation-muted for desktop and mobile menu links, matching footer links (midnight #E8E2D5). Match the footer's regular (400) weight and antialiased font smoothing following Devon's visual review. Keep Manrope, existing sizes, gold active underline, focus, geometry and utility icons. This supersedes uppercase styling in the historical Figma captures 2664:2, 2665:7 and 2675:27 as an intentional user-approved divergence. Runtime tokens are unchanged; Navigation stories share the updated component.",
+        "section": "components"
       }
     ],
     "dos": [
