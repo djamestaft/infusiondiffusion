@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { policyLinks } from "@/lib/policy-links";
 
 import { LogoTextLockup } from "@/components/logo-text-lockup";
 import { storefrontDestinations } from "@/components/storefront-destinations";
@@ -66,6 +67,18 @@ export function Footer() {
           </div>
         </div>
         <div className="border-navigation-border mt-8 border-t pt-6 lg:mt-12">
+          <nav aria-label="Policies" className="mb-4 flex flex-wrap gap-x-6">
+            {policyLinks.map(({ slug, label }) => (
+              <TextLink
+                key={slug}
+                href={`/policies/${slug}`}
+                variant="inverse"
+                className="inline-flex min-h-11 items-center font-normal"
+              >
+                {label}
+              </TextLink>
+            ))}
+          </nav>
           <p className="text-[13px] leading-5">© 2026 Infusion Diffusion</p>
         </div>
       </div>
