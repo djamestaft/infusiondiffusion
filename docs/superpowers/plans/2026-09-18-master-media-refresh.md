@@ -32,5 +32,17 @@
 
 - [x] Run targeted then all unit tests, lint, typecheck, Storybook tests/build and Next build. Inspect Storybook first, then real draft homepage at 1440/768/390/320; cycle 4→5→6→1, inspect full images, keyboard, console, axe and short screens.
 - [x] Verify six product masters in cards/PDP and variant/cart, and Storefront Open Graph after actual Shopify update. Catalog cache revalidates after 300s/expires after 900s; Sanity endpoint cannot clear Shopify tags. Do not add a new webhook for this task.
-- [ ] Commit, push and open draft PR with preview evidence and residual limitations. Reconcile INF-31 roadmap wording without closing unrelated factual/provenance requirements.
-- [ ] Provide concrete review links before requesting the remaining named human publication/merge decisions.
+- [x] Commit, push and open draft PR with preview evidence and residual limitations. Reconcile INF-31 roadmap wording without closing unrelated factual/provenance requirements.
+- [x] Provide concrete review links before requesting the remaining named human publication/merge decisions.
+
+## Delivery evidence
+
+- PR: https://github.com/djamestaft/infusiondiffusion/pull/106
+- Local read-only draft: http://localhost:3021
+- Local production build: http://localhost:3020
+- Local verification: 399 unit/integration tests, 364 Storybook tests, lint/typecheck, formatting, Storybook build and Next build passed.
+- Draft homepage: 1440/768/390/320, all six campaigns and wraparound, no overflow or axe violations; black scrolled header verified.
+- All six shop cards, PDP images and Open Graph URLs verified against final Storefront data; PDP axe checks returned no violations.
+- One real cart drawer/page and Shopify checkout thumbnail verified against the Ambre master; no customer details, payment or order submitted.
+- Independent read-only visual and content/commerce reviews found no blockers. Original media and commerce fields retained; published Sanity settings unchanged.
+- Hosted preview/CI status is recorded on the PR. Named human visual/merge/publication gates remain open.

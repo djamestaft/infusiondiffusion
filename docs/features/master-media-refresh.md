@@ -88,7 +88,13 @@ newer document blindly.
 | Components / Storybook         | Synced; six-slide and portrait-master states added                   |
 
 Independent read-only design and content/commerce reviews found no code or
-composition blockers. Automated and browser evidence is recorded in the PR.
+composition blockers. Local verification passed: 399 unit/integration and 364 Storybook tests, lint,
+typecheck, formatting, Storybook build and Next build. The draft homepage was
+inspected at 1440/768/390/320 with zero axe violations or overflow. All six
+shop/PDP/Open Graph images match the final Storefront data. The new Ambre
+image appears in a real cart and Shopify checkout; no personal details or
+order were submitted. Further hosted evidence is recorded in
+[PR106](https://github.com/djamestaft/infusiondiffusion/pull/106).
 Human visual acceptance, editorial publication and protected-branch merge
 remain the final gates. INF-31's imagery scope is resumed; its remaining
 factual/provenance requirements and INF-28 are not closed by this delivery.
