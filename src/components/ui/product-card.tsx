@@ -86,7 +86,7 @@ export function ProductCard({
             priority={imagePriority}
             loading={imagePriority ? "eager" : "lazy"}
             sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) 50vw, 33vw"
-            className="object-contain"
+            className="object-cover"
             onError={() => setImageFailed(true)}
           />
         ) : (

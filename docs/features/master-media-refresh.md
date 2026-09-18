@@ -1,6 +1,11 @@
 # Website master imagery — 18 September 2026
 
-The six existing Shopify diffusers now use the approved portrait masters with
+Historical first-pass evidence. The subsequent gutter correction and expanded
+responsive editorial imagery supersede the portrait-contain contract below.
+See [current delivery](website-imagery-refresh.md). Square Shopify masters are
+now active; portrait media remain attached for recovery and comparison.
+
+The initial delivery used approved portrait masters with
 black reeds and long gold tassels. The homepage draft adds a reading-corner
 setting and Noir/Blanc diffuser–room-mist family portraits after the three
 existing campaigns. No new products, bundle offers or availability claims

@@ -1,3 +1,5 @@
+import { getShopPage } from "@/sanity/lib/editorial-pages";
+import { getDynamicFetchOptions } from "@/sanity/lib/live";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 
@@ -16,14 +18,17 @@ export const metadata: Metadata = {
 
 export default async function ShopPage() {
   await connection();
-  const [catalogue, cart] = await Promise.all([
+  const options = await getDynamicFetchOptions();
+  const [catalogue, cart, page] = await Promise.all([
     getCachedProducts(),
     readCart(),
+    getShopPage(options),
   ]);
   const products = catalogue.map(toProductCard);
   return (
     <CollectionTemplate
       products={products}
+      heroImage={page.image}
       title="Shop"
       description="Six fragrances. 200 ml reed diffusers."
       cartCount={cartNavigationCount(cart)}

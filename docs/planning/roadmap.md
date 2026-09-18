@@ -63,7 +63,7 @@ Owners remain unchanged; no active implementation task is being claimed.
 | INF-39 | Done        | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                                                                                                                        |
 | INF-43 | Done        | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                                                                                                                     |
 | INF-28 | Todo        | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                                                                                                                         |
-| INF-31 | In Progress | Shawnee | New website masters applied in Shopify; six-slide homepage draft and framing change in review. Remaining facts, INF-28 approvals and publication stay open.                                                                                                            |
+| INF-31 | In Progress | Shawnee | Square website masters applied in Shopify; six-slide homepage and responsive editorial imagery drafts in review. Remaining facts, INF-28 approvals and publication stay open.                                                                                          |
 | INF-40 | Todo        | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.                                                                                                        |
 | INF-44 | In Progress | Devon   | Merchant-approved policies published in Shopify; storefront reader/footer/purchase links in review. Native checkout consent verified; human UI approval/merge and final release evidence pending; broader INF-31 approvals remain. Blocks INF-36 final release review. |
 | INF-36 | Backlog     | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                                                                                                                        |
@@ -857,7 +857,10 @@ All six existing Shopify diffusers have additive new featured media; old
 assets and commerce facts are preserved and Admin/Storefront readbacks agree.
 A six-slide Sanity homepage draft retains the original three campaigns and
 adds lifestyle plus two grouped portraits. The supporting six-slide limit
-and full-portrait product-card fit are prepared on `agent/master-media-refresh`.
+and full-bleed square product cards are prepared on `agent/master-media-refresh`.
+The follow-up adds responsive Shop/Home/About/Guide/Contact imagery and four
+About campaign photographs; new editorial drafts and Figma candidates await
+human design/publication review. See [expanded delivery](../features/website-imagery-refresh.md).
 See [delivery and recovery notes](../features/master-media-refresh.md).
 
 This supersedes the blanket photography-input deferral for these approved

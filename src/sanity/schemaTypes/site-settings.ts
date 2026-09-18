@@ -1,3 +1,4 @@
+import { editorialImageField } from "./editorial-image-field";
 import { defineField, defineType } from "sanity";
 
 export const siteSettings = defineType({
@@ -95,6 +96,8 @@ export const siteSettings = defineType({
         "Editorial copy for the public homepage. Shopify continues to own products, prices, and availability.",
       options: { collapsible: true, collapsed: true },
       fields: [
+        editorialImageField("statementImage", "Statement banner artwork"),
+        editorialImageField("artistryImage", "Artistry artwork"),
         defineField({
           name: "heroTitle",
           title: "Hero title",

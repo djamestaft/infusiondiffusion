@@ -1,3 +1,7 @@
+import {
+  normalizeEditorialImage,
+  type EditorialImageSource,
+} from "@/lib/editorial-image";
 import { defaultContactSections } from "@/lib/contact-content";
 import { isSanityConfigured } from "@/env";
 import {
@@ -12,7 +16,7 @@ export type EditorialPage = {
   eyebrow: string;
   title: string;
   introduction: string;
-  image?: { src: string; alt: string };
+  image?: EditorialImageSource;
   sections: Array<{ heading: string; body: string }>;
   seoTitle: string;
   seoDescription: string;
@@ -21,7 +25,11 @@ type EditorialPageInput = {
   eyebrow?: string | null;
   title?: string | null;
   introduction?: string | null;
-  image?: { src?: string | null; alt?: string | null } | null;
+  image?: {
+    src?: string | null;
+    alt?: string | null;
+    mobileSrc?: string | null;
+  } | null;
   sections?: Array<{
     heading?: string | null;
     body?: string | null;
@@ -83,10 +91,7 @@ export function withEditorialFallback(
       heading: section.heading.trim(),
       body: section.body.trim(),
     }));
-  const image =
-    page?.image?.src && page.image.alt?.trim()
-      ? { src: page.image.src, alt: page.image.alt.trim() }
-      : fallback.image;
+  const image = normalizeEditorialImage(page?.image) ?? fallback.image;
   return {
     eyebrow: text(page?.eyebrow, fallback.eyebrow),
     title: text(page?.title, fallback.title),
@@ -303,6 +308,7 @@ export type AboutPortrait = {
   hotspot?: { x?: number; y?: number };
 };
 export type AboutPage = {
+  image?: EditorialImageSource;
   title: string;
   introduction: string;
   chapters: Array<{
@@ -351,6 +357,7 @@ export const fallbackAboutPage: AboutPage = {
     "Discover the Infusion Diffusion story, from more than 130 fragrance oils to six fragrances composed for lived-in rooms.",
 };
 type AboutInput = {
+  image?: EditorialPageInput["image"];
   title?: string | null;
   introduction?: string | null;
   seoTitle?: string | null;
@@ -437,6 +444,7 @@ function normalizeHotspot(
 export function withAboutFallback(page: AboutInput | null): AboutPage {
   const sections = page?.sections ?? [];
   return {
+    image: normalizeEditorialImage(page?.image),
     title: text(page?.title, fallbackAboutPage.title),
     introduction: text(page?.introduction, fallbackAboutPage.introduction),
     chapters: aboutRoles.map((role) => {
@@ -469,6 +477,7 @@ export function withAboutFallback(page: AboutInput | null): AboutPage {
   };
 }
 export async function getAboutPage(options: DynamicFetchOptions) {
+  "use cache";
   if (!isSanityConfigured) return fallbackAboutPage;
   try {
     const { data } = await sanityFetch({
@@ -497,4 +506,15 @@ export async function getAboutPageMetadata(
     console.error("Unable to load Sanity About metadata");
     return fallbackAboutPage;
   }
+}
+
+export function getShopPage(options: DynamicFetchOptions) {
+  return fetchEditorialPage("shop", options, {
+    eyebrow: "",
+    title: "Shop",
+    introduction: "Six fragrances. 200 ml reed diffusers.",
+    sections: [],
+    seoTitle: "Shop",
+    seoDescription: "Shop Infusion Diffusion reed diffusers.",
+  });
 }

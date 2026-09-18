@@ -7,7 +7,10 @@ import { cartNavigationCount } from "@/lib/shopify/cart-contract";
 import { readCart } from "@/lib/shopify/cart-session";
 import { getGuideProducts } from "@/lib/fragrance-guide/catalog";
 import { absoluteStorefrontTitle, storefrontTitle } from "@/lib/metadata-title";
-import { getFragranceGuideMetadata } from "@/sanity/lib/editorial-pages";
+import {
+  getFragranceGuide,
+  getFragranceGuideMetadata,
+} from "@/sanity/lib/editorial-pages";
 import { getDynamicFetchOptions } from "@/sanity/lib/live";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,12 +30,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function FragranceGuideContent() {
   await connection();
-  const [cart, products] = await Promise.all([readCart(), getGuideProducts()]);
+  const options = await getDynamicFetchOptions();
+  const [cart, products, page] = await Promise.all([
+    readCart(),
+    getGuideProducts(),
+    getFragranceGuide(options),
+  ]);
 
   return (
     <FragranceGuideTemplate
       cartCount={cartNavigationCount(cart)}
       products={products}
+      heroImage={page.image}
     />
   );
 }

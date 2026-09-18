@@ -47,6 +47,11 @@ describe("Contact route safety", () => {
       stega: true,
     });
     vi.mocked(getContactPage).mockResolvedValue({
+      image: {
+        src: "/contact-desktop.png",
+        mobileSrc: "/contact-phone.png",
+        alt: "A welcoming console",
+      },
       eyebrow: "Editorial contact",
       title: "A Contact title",
       introduction: "An editorial introduction.",
@@ -62,6 +67,11 @@ describe("Contact route safety", () => {
     await expect(getContactPageData()).resolves.toMatchObject({
       eyebrow: "Editorial contact",
       title: "A Contact title",
+      heroImage: {
+        src: "/contact-desktop.png",
+        mobileSrc: "/contact-phone.png",
+        alt: "A welcoming console",
+      },
       email: "studio@example.co.za",
       cartCount: 3,
     });

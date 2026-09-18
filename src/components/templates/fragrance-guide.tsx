@@ -1,6 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import { EditorialImage } from "@/components/ui/editorial-image";
+import type { EditorialImageSource } from "@/lib/editorial-image";
+
 import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { TemplateShell } from "@/components/templates/storefront-templates";
@@ -63,6 +65,7 @@ export type FragranceGuideProps = {
   initialReviewed?: boolean;
   onContinue?: (answers: GuideAnswers) => void;
   cartCount?: number | null;
+  heroImage?: EditorialImageSource;
 };
 
 const gutters = "px-5 min-[375px]:px-6 sm:px-10 lg:px-16";
@@ -73,6 +76,7 @@ export function FragranceGuideTemplate({
   initialReviewed = false,
   onContinue,
   cartCount,
+  heroImage,
 }: FragranceGuideProps) {
   const [answers, setAnswers] = useState<GuideAnswers>(() =>
     guideQuestions.map((q, i) =>
@@ -162,10 +166,14 @@ export function FragranceGuideTemplate({
           </p>
         </div>
         <div className="border-navigation-accent/55 relative aspect-2/1 w-full border">
-          <Image
-            src="/images/homepage-bespoke-diffuser-blurb.png"
-            alt="Reed diffuser in a softly lit room"
-            fill
+          <EditorialImage
+            image={
+              heroImage ?? {
+                src: "/images/homepage-bespoke-diffuser-blurb.png",
+                alt: "Reed diffuser in a softly lit room",
+              }
+            }
+            mobileBreakpoint={1024}
             sizes="(max-width: 1023px) calc(100vw - 48px), calc(50vw - 64px)"
             className="object-cover"
             priority

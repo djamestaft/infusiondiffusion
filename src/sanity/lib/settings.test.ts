@@ -200,3 +200,42 @@ describe("site settings", () => {
     expect(settings.homepage.heroSlides[1].cta).toBeUndefined();
   });
 });
+
+describe("homepage responsive artwork", () => {
+  it.each(["published", "drafts"] as const)(
+    "preserves both compositions in %s mode",
+    async (perspective) => {
+      const image = {
+        src: "https://cdn.sanity.io/desktop.png",
+        mobileSrc: "https://cdn.sanity.io/phone.png",
+        alt: "Diffuser and gift bag",
+      };
+      sanityFetchMock.mockResolvedValue({
+        data: { homepage: { statementImage: image, artistryImage: image } },
+      });
+      const settings = await getSiteSettings({ perspective, stega: false });
+      expect(settings.homepage.statementImage).toEqual(image);
+      expect(settings.homepage.artistryImage).toEqual(image);
+    },
+  );
+  it("ignores incomplete desktop artwork rather than exposing a mobile-only source", async () => {
+    sanityFetchMock.mockResolvedValue({
+      data: {
+        homepage: {
+          statementImage: {
+            src: " ",
+            mobileSrc: "/phone.png",
+            alt: "A bottle",
+          },
+          artistryImage: { src: "/desktop.png", alt: " " },
+        },
+      },
+    });
+    const settings = await getSiteSettings({
+      perspective: "drafts",
+      stega: false,
+    });
+    expect(settings.homepage.statementImage).toBeUndefined();
+    expect(settings.homepage.artistryImage).toBeUndefined();
+  });
+});

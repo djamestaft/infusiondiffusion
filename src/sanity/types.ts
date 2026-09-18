@@ -1,3 +1,4 @@
+import type { EditorialImageSource } from "@/lib/editorial-image";
 import { defaultContactEmail } from "@/lib/contact-content";
 
 export type SiteSettings = {
@@ -16,6 +17,8 @@ export type SiteSettings = {
   seoTitle: string;
   seoDescription: string;
   homepage: {
+    statementImage?: EditorialImageSource;
+    artistryImage?: EditorialImageSource;
     heroBackgroundSrc?: string;
     heroTitle: string;
     heroIntroduction: string;

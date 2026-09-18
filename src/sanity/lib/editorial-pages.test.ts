@@ -421,3 +421,34 @@ it("normalizes an invalid portrait focal point to the centered FIT position", ()
   });
   expect(page.chapters[0].image?.hotspot).toEqual({ x: 0.5, y: 0.5 });
 });
+
+describe("responsive editorial artwork", () => {
+  const image = {
+    src: "https://cdn.sanity.io/desktop.png",
+    mobileSrc: "https://cdn.sanity.io/phone.png",
+    alt: "A diffuser in a room",
+  };
+  it("preserves the phone source for standard editorial pages and About", () => {
+    expect(withEditorialFallback({ image }, fallbackContactPage).image).toEqual(
+      image,
+    );
+    expect(withAboutFallback({ image }).image).toEqual(image);
+  });
+  it("uses the valid desktop when the optional phone source is blank", () => {
+    expect(
+      withEditorialFallback(
+        { image: { ...image, mobileSrc: " " } },
+        fallbackContactPage,
+      ).image,
+    ).toEqual({ src: image.src, alt: image.alt });
+  });
+  it.each([
+    { ...image, src: " " },
+    { ...image, alt: " " },
+  ])("rejects incomplete image data", (invalid) => {
+    expect(
+      withEditorialFallback({ image: invalid }, fallbackContactPage).image,
+    ).toBeUndefined();
+    expect(withAboutFallback({ image: invalid }).image).toBeUndefined();
+  });
+});

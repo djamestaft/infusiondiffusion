@@ -160,17 +160,17 @@ export const DesktopCollection: Story = {
   ),
 };
 
-export const PortraitMaster: Story = {
+export const SquareMaster: Story = {
   args: {
     name: "Blanc De Blanc",
     image: {
-      src: "https://cdn.shopify.com/s/files/1/0992/3723/2926/files/blanc-de-blanc-diffuser-master-20260918.png?v=1789740350",
+      src: "https://cdn.shopify.com/s/files/1/0992/3723/2926/files/blanc-de-blanc-diffuser-square-20260918.png",
       alt: "Blanc De Blanc reed diffuser with full black reeds and long gold tassel",
     },
   },
   play: async ({ canvasElement }) => {
     const image = within(canvasElement).getByRole("img");
-    await expect(getComputedStyle(image).objectFit).toBe("contain");
+    await expect(getComputedStyle(image).objectFit).toBe("cover");
     const frame = image.parentElement!.getBoundingClientRect();
     await expect(frame.width / frame.height).toBeCloseTo(1, 2);
   },

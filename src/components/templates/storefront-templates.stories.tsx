@@ -1,3 +1,4 @@
+import artwork from "./website-imagery.fixture.json";
 import {
   defaultContactEmail,
   defaultContactSections,
@@ -1035,4 +1036,38 @@ export const ProductDetailMobileMidnightNavigation: Story = {
       navigationTheme="midnight"
     />
   ),
+};
+
+export const CollectionMasterArtwork: Story = {
+  render: () => (
+    <CollectionTemplate
+      products={productCardFixtures}
+      heroImage={artwork.shop}
+    />
+  ),
+};
+export const ContactMasterArtwork: Story = {
+  render: () => (
+    <ContactTemplate {...contactProps} heroImage={artwork.contact} />
+  ),
+};
+export const ContactMasterArtworkPhone: Story = {
+  ...ContactMasterArtwork,
+  globals: { viewport: { value: "contact390" } },
+};
+export const HomeMasterArtwork: Story = {
+  render: () => (
+    <HomeTemplate
+      products={productCardFixtures}
+      heroImage={featured.image}
+      content={{
+        statementImage: artwork["home-statement"],
+        artistryImage: artwork.artistry,
+      }}
+    />
+  ),
+};
+export const HomeMasterArtworkPhone: Story = {
+  ...HomeMasterArtwork,
+  globals: { viewport: { value: "contact390" } },
 };
