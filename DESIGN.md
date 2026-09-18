@@ -496,3 +496,19 @@ styling. Do not remove focus, the trap, or the account avatar's approved states.
 Existing Figma default/keyboard states and tokens remain unchanged; Storybook
 `Components/Navigation/TouchThenKeyboard` captures the transition.
 See [INF-46 evidence](docs/features/inf-46-navigation-focus.md).
+
+## Master photography framing — 18 September 2026
+
+Devon requested the new website master imagery from Figma pages 2813:2,
+2806:2 and 2809:2. The homepage accepts two to six campaigns, keeping the
+existing 5:4 contain frame, composition, motion and tokens. Additional
+reading-corner, Noir family and Blanc family photographs are editorial;
+they do not establish room-mist or bundle availability.
+
+Product-card source images are now portrait 1122×1402 masters with full
+black reeds. Preserve the approved square card media frame, typography,
+spacing and commerce states. The scoped photographic refinement uses
+`object-contain` to retain reed tips and bottle bases. Side space is deliberate.
+This image-fit change is an intentional divergence from the historical cover-fit
+card capture, pending visual sign-off on the new master story and storefront.
+No Figma foundation or runtime color token changes are required.

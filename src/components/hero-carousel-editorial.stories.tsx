@@ -259,3 +259,60 @@ export const ShortPhone: Story = {
     },
   },
 };
+
+const approvedAdditions: HeroCarouselSlide[] = [
+  {
+    id: "reading-corner-20260918",
+    src: "https://cdn.sanity.io/images/j222nd1i/production/57ea5090e6c43a0a146ad28c70d0c282ef823c65-1254x1254.png",
+    alt: "Santuaire Serein reed diffuser beside its box and branded bag in a softly lit reading corner.",
+    title: "A little room to unwind",
+    subtitle: "Discover reed diffusers for the spaces you love.",
+    cta: {
+      label: "Shop reed diffusers",
+      href: "/shop",
+    },
+  },
+  {
+    id: "noir-family-20260918",
+    src: "https://cdn.sanity.io/images/j222nd1i/production/c51cae65a96ef94d7b62383c295cbbf014f2c0e5-1402x1122.png",
+    alt: "Noir De La Nuit reed diffuser and room mist on dark stone.",
+    title: "Noir De La Nuit",
+    subtitle: "Explore our collection of 200 ml reed diffusers.",
+    cta: {
+      label: "Shop reed diffusers",
+      href: "/shop",
+    },
+  },
+  {
+    id: "blanc-family-20260918",
+    src: "https://cdn.sanity.io/images/j222nd1i/production/97e72858f917de61de420698b6a6e182986162ab-1402x1122.png",
+    alt: "Blanc De Blanc reed diffuser and room mist against a pale stone background.",
+    title: "Blanc De Blanc",
+    subtitle: "Find a fragrance for the rooms you love.",
+    cta: {
+      label: "Explore the fragrance guide",
+      href: "/fragrance-guide",
+    },
+  },
+];
+
+export const SixCampaigns: Story = {
+  args: { slides: [...slides, ...approvedAdditions], forceReducedMotion: true },
+  play: async ({ canvasElement }) => {
+    const c = within(canvasElement);
+    for (const title of [
+      ...slides.slice(1),
+      ...approvedAdditions,
+      slides[0],
+    ].map((slide) => slide.title!)) {
+      await userEvent.click(c.getByRole("button", { name: "Next slide" }));
+      await expect(c.getByRole("heading", { level: 1 })).toHaveTextContent(
+        title.replaceAll("\n", " "),
+      );
+    }
+  },
+};
+export const SixCampaignsMobile: Story = {
+  ...SixCampaigns,
+  globals: { viewport: { value: "contact390", isRotated: false } },
+};

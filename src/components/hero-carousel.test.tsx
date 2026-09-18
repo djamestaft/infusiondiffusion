@@ -302,3 +302,26 @@ describe("HeroCarousel", () => {
     ).toBeDisabled();
   });
 });
+
+it("exposes six campaigns and wraps from the last to the first", () => {
+  vi.useFakeTimers();
+  const six = Array.from({ length: 6 }, (_, index) => ({
+    id: String(index),
+    src: `/campaign-${index}.jpg`,
+    alt: `Campaign ${index + 1}`,
+  }));
+  render(<HeroCarousel slides={six} presentation="plain" />);
+  for (let index = 0; index < 5; index++)
+    act(() => vi.advanceTimersByTime(3_000));
+  expect(
+    screen.getByRole("button", { name: "Show slide 6 of 6" }),
+  ).toHaveAttribute("aria-current", "true");
+  act(() => vi.advanceTimersByTime(3_000));
+  expect(
+    screen.getByRole("button", { name: "Show slide 1 of 6" }),
+  ).toHaveAttribute("aria-current", "true");
+  fireEvent.click(screen.getByRole("button", { name: "Show slide 6 of 6" }));
+  expect(
+    screen.getByRole("button", { name: "Show slide 6 of 6" }),
+  ).toHaveAttribute("aria-current", "true");
+});

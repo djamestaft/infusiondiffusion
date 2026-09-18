@@ -5,7 +5,25 @@
 > [approved frame handoff](2026-09-08-design-approval.md) and the
 > [atomic implementation contract](../design-implementation.md) for new work.
 
-## Outcome and scope
+## Current extension — 18 September 2026
+
+The current editorial carousel supports two to six ordered visible campaigns.
+Site settings normalization, both carousel presentations and the homepage
+retain the same maximum as Studio. Single/empty fallbacks remain unchanged.
+The homepage uses per-slide headings, descriptions and internal CTAs, a 5:4
+contain image frame, 600ms horizontal translation and six-second autoplay,
+with accessible pause behavior documented in DESIGN.md. The framed/plain
+legacy presentations retain their own timing; the August record below is
+historical and does not override the current editorial contract.
+
+The new Sanity draft appends reading-corner, Noir family and Blanc family
+photography to the three existing campaigns. Originals and unrelated settings
+are preserved; the published document remains unchanged until editor review.
+Family pictures are editorial, with diffuser-range actions and no room-mist
+availability or bundle claims. Storybook adds six-campaign desktop/mobile
+states. See [media refresh plan](../superpowers/plans/2026-09-18-master-media-refresh.md).
+
+## Historical outcome and scope
 
 The homepage keeps one stable server-rendered H1, introduction, and `/shop` action while editors may provide an ordered two- or three-image editorial campaign carousel. The audience is mobile-first South African shoppers on potentially constrained connections.
 

@@ -153,3 +153,20 @@ it("protects focused content and respects reduced motion, data saving and loadin
     );
   }
 });
+
+it("reaches all six editorial campaigns before wrapping", () => {
+  const six = Array.from({ length: 6 }, (_, index) => ({
+    ...slides[0],
+    id: String(index),
+    title: `Campaign ${index + 1}`,
+  }));
+  render(
+    <HeroCarousel slides={six} presentation="editorial" forceReducedMotion />,
+  );
+  for (const index of [2, 3, 4, 5, 6, 1]) {
+    fireEvent.click(screen.getByRole("button", { name: "Next slide" }));
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      `Campaign ${index}`,
+    );
+  }
+});

@@ -201,7 +201,7 @@ export function HomeTemplate({
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
   const carouselSlides =
     heroSlides.length >= 2
-      ? heroSlides.slice(0, 3)
+      ? heroSlides.slice(0, 6)
       : heroImage
         ? [{ id: "catalogue-fallback", ...heroImage }]
         : heroSlides.slice(0, 1);

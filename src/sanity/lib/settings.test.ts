@@ -127,7 +127,7 @@ describe("site settings", () => {
     expect(settings.homepage.founderImage).toBeUndefined();
   });
 
-  it("keeps only the first three complete visible hero slide projections", async () => {
+  it("keeps only the first six complete visible hero slide projections", async () => {
     sanityFetchMock.mockResolvedValue({
       data: {
         homepage: {
@@ -141,6 +141,11 @@ describe("site settings", () => {
               alt: "Three",
             },
             { id: "four", src: "https://cdn.sanity.io/four.jpg", alt: "Four" },
+            ...["five", "six", "seven"].map((id) => ({
+              id,
+              src: `https://cdn.sanity.io/${id}.jpg`,
+              alt: id,
+            })),
           ],
         },
       },
@@ -155,6 +160,9 @@ describe("site settings", () => {
       "one",
       "two",
       "three",
+      "four",
+      "five",
+      "six",
     ]);
   });
   it("normalizes optional campaign copy and rejects external slide actions", async () => {

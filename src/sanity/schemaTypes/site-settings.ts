@@ -126,8 +126,8 @@ export const siteSettings = defineType({
           title: "Hero carousel slides",
           type: "array",
           description:
-            "Add two or three ordered editorial campaign images to enable the carousel. With fewer valid slides, the storefront keeps its existing static hero image.",
-          validation: (rule) => rule.max(3),
+            "Add two to six ordered editorial campaign images to enable the carousel. With fewer valid slides, the storefront keeps its existing static hero image.",
+          validation: (rule) => rule.max(6),
           of: [
             {
               type: "object",

@@ -24,7 +24,7 @@ function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
     .filter((slide) =>
       Boolean(slide?.id && slide?.src?.trim() && slide?.alt?.trim()),
     )
-    .slice(0, 3)
+    .slice(0, 6)
     .map((slide) => ({
       ...slide,
       title: slide.title?.trim() || undefined,
