@@ -87,7 +87,7 @@ Final commands and exact-head hosted evidence are recorded in PR106.
 INF-31 remains In Progress: imagery does not close outstanding source facts,
 INF-28 approvals, or launch publication gates.
 
-Local verification passed: 409 unit/integration tests, 377 Storybook tests,
+Local verification passed: 410 unit/integration tests, 377 Storybook tests,
 formatting, lint, typecheck, Storybook build and Next production build. Existing
 About/Contact/Guide browser regression checks pass (32 across both projects).
 The About test now asserts the five required named story headings instead of
@@ -103,3 +103,12 @@ Nonblocking composition limits: at tablet widths and in the narrow Shop banner,
 some readable copy overlays imagery; the statement gift bag intentionally extends
 past the right edge at 320px. Full diffuser silhouettes remain visible. These
 candidates still require the human design/publication review described above.
+
+Hosted visual review additionally exposed stega-encoded `galleryGroup` enum values
+in Sanity draft responses: equality checks filtered out all campaign and market
+figures. The normalizer now calls `stegaClean` on this logic-only field while
+preserving visual-editing metadata on visible copy. A synthetic encoded-string
+regression failed before the fix and passes afterward; unknown categories and
+rights-unconfirmed images remain rejected. Hosted acceptance explicitly checks
+all four campaign images and the five preserved market photographs, not just the
+hero or zero accessibility violations.

@@ -1,3 +1,4 @@
+import { stegaClean } from "next-sanity";
 import {
   normalizeEditorialImage,
   type EditorialImageSource,
@@ -218,7 +219,8 @@ export function withGalleryFallback(
       const title = section.heading?.trim();
       const src = section.image?.src?.trim();
       const alt = section.image?.alt?.trim();
-      const authoredGroup = section.galleryGroup;
+      // Preview metadata must not change enum equality; keep it on visible copy.
+      const authoredGroup = stegaClean(section.galleryGroup);
       const group: GalleryGroup | undefined =
         authoredGroup == null
           ? "campaign"
