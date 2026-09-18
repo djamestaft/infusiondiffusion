@@ -45,4 +45,4 @@
 - All six shop cards, PDP images and Open Graph URLs verified against final Storefront data; PDP axe checks returned no violations.
 - One real cart drawer/page and Shopify checkout thumbnail verified against the Ambre master; no customer details, payment or order submitted.
 - Independent read-only visual and content/commerce reviews found no blockers. Original media and commerce fields retained; published Sanity settings unchanged.
-- Hosted preview/CI status is recorded on the PR. Named human visual/merge/publication gates remain open.
+- Hosted preview/CI status is recorded on the PR. Devon approved slides and card framing on 18 September 2026; publication is authorized after human merge of PR106.

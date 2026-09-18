@@ -863,4 +863,6 @@ See [delivery and recovery notes](../features/master-media-refresh.md).
 This supersedes the blanket photography-input deferral for these approved
 assets only. INF-31 remains open with Shawnee as preparation owner and Devon
 as implementation/editorial decision owner; INF-28 factual approvals remain.
-Code merge and Sanity publication await their named human decisions.
+Devon approved the six-slide draft and full-image product-card framing on
+18 September 2026. Sanity publication is authorized after human merge of
+PR106; the protected-branch merge decision remains human.

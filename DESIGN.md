@@ -510,5 +510,6 @@ black reeds. Preserve the approved square card media frame, typography,
 spacing and commerce states. The scoped photographic refinement uses
 `object-contain` to retain reed tips and bottle bases. Side space is deliberate.
 This image-fit change is an intentional divergence from the historical cover-fit
-card capture, pending visual sign-off on the new master story and storefront.
+card capture. Devon approved the new slides and full-image card framing on
+18 September 2026 after reviewing the draft and shop previews.
 No Figma foundation or runtime color token changes are required.

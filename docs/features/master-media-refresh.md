@@ -79,13 +79,13 @@ newer document blindly.
 
 ## Design synchronization
 
-| Layer                          | State                                                                |
-| ------------------------------ | -------------------------------------------------------------------- |
-| Figma source assets            | Synced; masters and family/lifestyle frames unchanged                |
-| Figma historical card capture  | Intentional divergence: portrait contain fit pending visual sign-off |
-| DESIGN.md / Impeccable context | Synced with six-slide and full-portrait contracts                    |
-| Runtime semantic tokens        | Unchanged                                                            |
-| Components / Storybook         | Synced; six-slide and portrait-master states added                   |
+| Layer                          | State                                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| Figma source assets            | Synced; masters and family/lifestyle frames unchanged                          |
+| Figma historical card capture  | Intentional divergence: portrait contain fit approved by Devon on 18 September |
+| DESIGN.md / Impeccable context | Synced with six-slide and full-portrait contracts                              |
+| Runtime semantic tokens        | Unchanged                                                                      |
+| Components / Storybook         | Synced; six-slide and portrait-master states added                             |
 
 Independent read-only design and content/commerce reviews found no code or
 composition blockers. Local verification passed: 399 unit/integration and 364 Storybook tests, lint,
@@ -95,6 +95,7 @@ shop/PDP/Open Graph images match the final Storefront data. The new Ambre
 image appears in a real cart and Shopify checkout; no personal details or
 order were submitted. Further hosted evidence is recorded in
 [PR106](https://github.com/djamestaft/infusiondiffusion/pull/106).
-Human visual acceptance, editorial publication and protected-branch merge
-remain the final gates. INF-31's imagery scope is resumed; its remaining
+Devon approved the six-slide draft and full-image product-card framing on
+18 September 2026. Editorial publication is authorized after human merge of
+PR106; do not publish before that merge. Protected-branch merge remains human. INF-31's imagery scope is resumed; its remaining
 factual/provenance requirements and INF-28 are not closed by this delivery.
