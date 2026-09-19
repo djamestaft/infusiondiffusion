@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The title settles at 1.25s; after a 50ms pause, description and CTA fade in place over 100ms, with the CTA starting 80ms after the description. The full sequence lasts 1.48s and restores normal tracking without changing line breaks. First render stays immediately visible. Enabled on desktop, tablet and touch/mobile; reduced motion and save-data remain static. The backdrop is owned separately.",
+          "Devon's approved transition: outgoing letters drift left with a 60ms head start, incoming letters spread apart and settle from the right, then an image pulse follows 40ms later. The title settles at 580ms; the CTA appears immediately and the entire description fades smoothly from 0 to 1 over 320ms with sine.out easing, no extra pause, splitting, stagger or movement. The full sequence lasts 900ms and restores normal tracking without changing line breaks. First render stays immediately visible. Enabled on desktop, tablet and touch/mobile; reduced motion and save-data remain static. The backdrop is owned separately.",
       },
     },
   },
@@ -109,4 +109,30 @@ export const LongHeadline: Story = {
 };
 export const MissingImage: Story = {
   args: { slides: published.slides.map((slide) => ({ ...slide, src: "" })) },
+};
+
+export const DescriptionReveal: Story = {
+  args: {
+    slides: [
+      published.slides[0],
+      {
+        ...published.slides[1],
+        subtitle:
+          "Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.",
+      },
+    ],
+  },
+  play: async (context) => {
+    await LetterArrival.play!(context);
+    await expect(
+      context.canvasElement.querySelectorAll(
+        ".hero-carousel-description-letter",
+      ),
+    ).toHaveLength(0);
+    const description = context.canvasElement.querySelector(
+      '[aria-hidden="false"] p[data-carousel-support]',
+    );
+    await expect(description).toBeVisible();
+    await expect(description).not.toHaveAttribute("aria-label");
+  },
 };

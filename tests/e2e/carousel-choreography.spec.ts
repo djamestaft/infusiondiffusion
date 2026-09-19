@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
@@ -101,6 +102,10 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
       outgoingOpacity: number;
       titleComplete: boolean;
       support: { opacity: number; transform: string }[];
+      description: number;
+      descriptionX: number;
+      descriptionY: number;
+      descriptionNodes: number;
     }[] = [];
     const started = performance.now();
     document
@@ -141,8 +146,24 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
             titleComplete: Array.from(letters).every(
               (letter) => Number(getComputedStyle(letter).opacity) === 1,
             ),
+            description: Number(
+              getComputedStyle(
+                panel.querySelector("[data-carousel-description]")!,
+              ).opacity,
+            ),
+            descriptionX: panel
+              .querySelector("[data-carousel-description]")!
+              .getBoundingClientRect().x,
+            descriptionY: panel
+              .querySelector("[data-carousel-description]")!
+              .getBoundingClientRect().y,
+            descriptionNodes: panel.querySelector(
+              "[data-carousel-description]",
+            )!.childElementCount,
             support: Array.from(
-              panel.querySelectorAll("[data-carousel-support]"),
+              panel.querySelectorAll(
+                "[data-carousel-support]:not([data-carousel-description])",
+              ),
             ).map((element) => ({
               opacity: Number(getComputedStyle(element).opacity),
               transform: getComputedStyle(element).transform,
@@ -164,14 +185,11 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
   expect(samples.every((s) => s.y === 0)).toBe(true);
   expect(samples.some((s) => s.last > 36)).toBe(true);
   expect(
-    samples.some(
-      (s) =>
-        s.titleComplete && s.support.every((element) => element.opacity === 0),
-    ),
-  ).toBe(true);
-  expect(
-    samples.some(
-      (s) => s.support[0]?.opacity > 0 && s.support[1]?.opacity === 0,
+    samples.every((s) =>
+      s.support.every(
+        (element) =>
+          element.opacity === 0 || (s.titleComplete && element.opacity === 1),
+      ),
     ),
   ).toBe(true);
   expect(
@@ -187,14 +205,49 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
   expect(
     samples.some((s) => s.outgoingOpacity > 0 && s.incomingOpacity > 0),
   ).toBe(true);
+  const descriptionFrames = samples.filter(
+    (s) => s.titleComplete && s.description > 0,
+  );
+  expect(
+    descriptionFrames.filter((s) => s.description > 0.1 && s.description < 0.9)
+      .length,
+  ).toBeGreaterThan(2);
+  descriptionFrames.forEach((frame, index) => {
+    expect(frame.descriptionNodes).toBe(0);
+    if (index)
+      expect(frame.description).toBeGreaterThanOrEqual(
+        descriptionFrames[index - 1].description,
+      );
+  });
+  const settledDescription = await page
+    .locator(active)
+    .locator("[data-carousel-description]")
+    .boundingBox();
+  for (const frame of descriptionFrames) {
+    expect(Math.abs(frame.descriptionX - settledDescription!.x)).toBeLessThan(
+      0.1,
+    );
+    expect(Math.abs(frame.descriptionY - settledDescription!.y)).toBeLessThan(
+      0.1,
+    );
+  }
   expect(samples.some((s) => s.scale > 1)).toBe(true);
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+  await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
+    0,
+  );
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Campaign 2",
   );
   await expect(
     page.locator(active).locator("[data-carousel-picture]"),
   ).toHaveCSS("transform", "none");
+  for (const support of await page
+    .locator(active)
+    .locator("[data-carousel-support]")
+    .all()) {
+    await expect(support).toHaveCSS("opacity", "1");
+  }
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 });
 
@@ -221,6 +274,9 @@ test("rapid forward/reverse navigation and resize leave one complete usable camp
   );
   await expect(page.locator('[data-phase="enter"]')).toHaveCount(0);
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+  await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
+    0,
+  );
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Campaign 2",
   );
@@ -260,6 +316,9 @@ test("keyboard focus reveals the incoming CTA without waiting for its fade", asy
   await expect(cta).toBeFocused();
   await expect(cta).toHaveCSS("opacity", "1", { timeout: 300 });
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+  await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
+    0,
+  );
 });
 
 test("a live reduced-motion change cancels the split and keeps the selected slide readable", async ({
@@ -277,6 +336,9 @@ test("a live reduced-motion change cancels the split and keeps the selected slid
   await page.getByRole("button", { name: "Next slide" }).click();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+  await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
+    0,
+  );
   await expect(page.locator('[data-phase="enter"]')).toHaveCount(0);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Campaign 2",
@@ -304,6 +366,9 @@ test("reduced motion and small screens retain unsplit copy, controls and image g
       "Campaign 2",
     );
     await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+    await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
+      0,
+    );
     const image = page.locator(active).getByTestId("hero-carousel-media");
     const bounds = (await image.boundingBox())!;
     expect(bounds.width / bounds.height).toBeCloseTo(1.25, 2);
@@ -314,4 +379,42 @@ test("reduced motion and small screens retain unsplit copy, controls and image g
       ),
     ).toBe(true);
   }
+});
+
+test("description remains readable to assistive technology during its visual reveal", async ({
+  page,
+}) => {
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await expect(page.getByTestId("home-hero-section")).toHaveAttribute(
+    "data-carousel-choreography",
+    "ready",
+  );
+  const require = createRequire(import.meta.url);
+  await page.addScriptTag({
+    path: require.resolve("axe-core/axe.min.js", {
+      paths: [require.resolve("@axe-core/playwright")],
+    }),
+  });
+  await page.getByRole("button", { name: "Next slide" }).click();
+  await expect(page.locator(".hero-carousel-letter").first()).toBeAttached();
+  const description = page.locator(active).locator("p[data-carousel-support]");
+  await expect(description).not.toHaveAttribute("aria-label");
+  await expect(description).toHaveText("Introduction for campaign 2.");
+  await expect(description).not.toHaveAttribute("aria-hidden");
+  await expect(description.locator("*")).toHaveCount(0);
+  const violations = await page.evaluate(async () => {
+    const axe = (
+      window as unknown as {
+        axe: {
+          run: (
+            context: Document,
+            options: object,
+          ) => Promise<{ violations: unknown[] }>;
+        };
+      }
+    ).axe;
+    return (await axe.run(document, { runOnly: ["aria-prohibited-attr"] }))
+      .violations;
+  });
+  expect(violations).toEqual([]);
 });

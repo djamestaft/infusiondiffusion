@@ -50,12 +50,14 @@ Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
 
 ## Storefront motion workstream — 19 September 2026
 
-Follow-up: the approved carousel letter sequence is implemented and locally
-verified for delivery through the same PR109 branch: outgoing letters move left,
+PR109 delivered the approved carousel letter sequence. Devon requested a new PR
+for the subsequent timing and description-reveal refinement after merging it: outgoing letters move left,
 incoming letters overlap from the right, then the image pulses. Devon’s review
-refinement gives departure a220ms lead, adds transient letter spacing and
-lets the title settle at1.25s. Description and CTA then fade slowly in place
-after a50ms pause; the complete sequence ends at1.48s. This carousel sequence
+refinement gives departure a 60ms lead, preserves transient letter spacing and
+settles the title at 580ms. The CTA appears immediately and the intact description
+fades smoothly over 320ms, with no extra pause. Devon rejected row-by-row
+revealing and split-text snapping; preserve native paragraph typography.
+The full sequence ends at 900ms. This sequence
 also runs on mobile/touch under Devon’s explicit review request. It extends
 INF-54; the existing INF-49/57 human/device/production gates remain open.
 See [the carousel contract](../features/hero-carousel-letter-arrival.md).

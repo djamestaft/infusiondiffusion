@@ -162,3 +162,37 @@ test("Guide keyboard, reduced-motion and editing recovery at a narrow zoomed vie
     .press("Enter");
   await expect(page.locator("form").getByRole("alert")).toBeVisible();
 });
+
+for (const width of [390, 320]) {
+  test(`Guide entrance stays within the page at every animation frame at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/fragrance-guide", { waitUntil: "domcontentloaded" });
+    await expect(page.locator("[data-guide-light-motion]")).toBeAttached();
+    const worstWidth = await page.evaluate(async () => {
+      const scope = document.querySelector(".guide-consultation")!;
+      const animations = scope.getAnimations({ subtree: true });
+      if (!animations.length)
+        throw new Error("Expected the guide entrance to be animating");
+      animations.forEach((animation) => {
+        animation.pause();
+        animation.currentTime = 0;
+      });
+      let maximum = document.documentElement.scrollWidth;
+      animations.forEach((animation) => animation.play());
+      const started = performance.now();
+      await new Promise<void>((resolve) => {
+        const sample = () => {
+          maximum = Math.max(maximum, document.documentElement.scrollWidth);
+          if (performance.now() - started < 600) requestAnimationFrame(sample);
+          else resolve();
+        };
+        requestAnimationFrame(sample);
+      });
+      return maximum;
+    });
+    expect(worstWidth).toBeLessThanOrEqual(width);
+  });
+}

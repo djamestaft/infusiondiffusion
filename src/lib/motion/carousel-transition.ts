@@ -1,22 +1,20 @@
 /** The approved carousel sequence; seconds and CSS pixels, independent of pointer motion. */
 export const carouselMotion = {
   letterTravel: 36,
-  letterDuration: 0.75,
-  staggerBudget: 0.28,
+  letterDuration: 0.4,
+  staggerBudget: 0.12,
   letterSpacing: 2.5,
   maxLineSpread: 48,
-  enterDelay: 0.22,
-  imageDelay: 0.12,
+  enterDelay: 0.06,
+  imageDelay: 0.04,
   imageStartScale: 0.98,
   imagePeakScale: 1.01,
-  imageRiseDuration: 0.42,
-  imageSettleDuration: 0.44,
-  supportDelay: 0.05,
-  supportDuration: 0.1,
-  supportStagger: 0.08,
+  imageRiseDuration: 0.22,
+  imageSettleDuration: 0.18,
+  descriptionRevealDuration: 0.32,
   exitTravel: -24,
-  exitDuration: 0.28,
-  exitStaggerBudget: 0.08,
+  exitDuration: 0.18,
+  exitStaggerBudget: 0.04,
 } as const;
 
 /** Expand the visual tracking without reflowing words or changing line breaks. */
@@ -52,7 +50,10 @@ export function createCarouselTransition(
   outgoingChars: Element[] = [],
 ) {
   const image = incoming.querySelector("[data-carousel-picture]");
-  const support = incoming.querySelectorAll("[data-carousel-support]");
+  const description = incoming.querySelector("[data-carousel-description]");
+  const support = incoming.querySelectorAll(
+    "[data-carousel-support]:not([data-carousel-description])",
+  );
   const arrivalSpread = lineSpread(chars);
   const departureSpread = lineSpread(outgoingChars, true);
   const timeline = gsap.timeline();
@@ -76,8 +77,8 @@ export function createCarouselTransition(
         outgoing.querySelectorAll(
           "[data-carousel-picture], [data-carousel-support]",
         ),
-        { opacity: 0, duration: 0.16, ease: "power2.inOut" },
-        0.08,
+        { opacity: 0, duration: 0.14, ease: "power2.inOut" },
+        0.04,
       );
       timeline.set(
         outgoing,
@@ -134,20 +135,36 @@ export function createCarouselTransition(
         carouselMotion.imageRiseDuration,
     );
   }
+  const titleEnd =
+    carouselMotion.enterDelay +
+    carouselMotion.letterDuration +
+    carouselMotion.staggerBudget;
   if (support.length) {
+    // A discrete reveal, with no fade. Keeping the hidden/revealed states in one
+    // tween also gives context.revert one owner for the original opacity.
     timeline.fromTo(
       support,
       { opacity: 0 },
       {
         opacity: 1,
-        duration: carouselMotion.supportDuration,
-        stagger: carouselMotion.supportStagger,
-        ease: "power1.inOut",
+        duration: titleEnd,
+        ease: (progress: number) => (progress === 1 ? 1 : 0),
       },
-      carouselMotion.enterDelay +
-        carouselMotion.letterDuration +
-        carouselMotion.staggerBudget +
-        carouselMotion.supportDelay,
+      0,
+    );
+  }
+  if (description) {
+    // Keep native text shaping and line breaks throughout the fade: splitting
+    // paragraph glyphs changes kerning and can snap on completion.
+    timeline.fromTo(
+      description,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: carouselMotion.descriptionRevealDuration,
+        ease: "sine.out",
+      },
+      titleEnd,
     );
   }
   return timeline;

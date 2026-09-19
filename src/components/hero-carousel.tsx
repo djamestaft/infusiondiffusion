@@ -628,7 +628,9 @@ function EditorialCarousel({
                   ) : null}
                   {slide.subtitle || fallbackCopy?.subtitle ? (
                     <p
+                      key={slide.subtitle ?? fallbackCopy?.subtitle}
                       data-carousel-support
+                      data-carousel-description
                       className="max-w-[520px] font-sans text-[15px] leading-6 sm:text-base sm:leading-[26px] lg:text-lg lg:leading-[29px]"
                     >
                       {slide.subtitle ?? fallbackCopy?.subtitle}

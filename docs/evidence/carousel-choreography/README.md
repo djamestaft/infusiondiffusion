@@ -1,5 +1,52 @@
 # Carousel choreography evidence
 
+## Smooth description fade — PR110 correction
+
+Devon rejected the initial row-by-row reveal as abrupt and reported a slight
+left snap. A character-range browser probe reproduced the shift: temporary
+SplitText glyph wrappers changed native spacing and wrapping; cleanup moved the
+first mobile glyph about 15px. The earlier settled-layout checks missed this.
+
+The description now stays one native accessible paragraph. One opacity tween
+fades it from 0 to 1 over 320ms with sine.out easing, immediately after the title
+settles at 580ms. No character/line stagger, added pause, colour change or text
+movement. The CTA appears at 580ms; the full sequence finishes at 900ms.
+Headline letter motion and the image pulse retain their approved faster timing.
+
+Current `smooth/` recordings and frame JSON cover long copy at 1440, 390 and
+320px. Opacity increases continuously; the text rectangles remain identical
+through the fade and cleanup, with zero measured glyph movement in the desktop
+and mobile reproduction. There are no description child elements or temporary
+ARIA attributes. Screenshots have no horizontal overflow or page errors.
+The earlier `reveal/` artifacts show the rejected candidate, not this correction.
+
+Local verification: lint and TypeScript, 444 unit tests, 418 Storybook checks,
+Storybook/Next production builds, and all 33 applicable carousel browser checks
+across Chromium, Firefox, WebKit, Pixel 7 and iPhone 13 emulation. The two
+keyboard-only cases remain intentionally skipped in touch projects. Tests cover
+continuous intermediate opacity, fixed description position, reversal, resize,
+reduced motion, Save-Data and valid paragraph accessibility during animation.
+Independent review confirmed Firefox interruption cleanup without residual
+styles or browser errors. Exact deployment evidence is in PR110.
+
+The single discrete CTA tween still avoids Firefox reversion ordering between
+competing zero-duration sets. The paragraph needs no split-text accessibility
+workaround because its text and semantics are never replaced.
+
+## Merge-gate correction: Guide entrance overflow
+
+At carousel head `5208b60`, CI passed 144 browser checks but the shared-shell
+Account journey failed while visiting the fragrance guide at 390px. Its existing
+32px mobile entrance moved text beyond the document edge. The containment fix
+adds horizontal clipping to the consultation boundary. New 390/320px tests
+measure the start pose and every frame, reproducing 398/332px before the fix
+and passing at the viewport width afterward. The original Account journey also
+passes. This correction leaves the visually approved carousel unchanged.
+Devon approved the smooth carousel visually; merge remains gated on exact-head
+CI and the PR gate.
+
+## Historical PR109 evidence
+
 User-approved follow-up to the motion candidate in PR #109. See
 [the feature contract](../../features/hero-carousel-letter-arrival.md).
 
