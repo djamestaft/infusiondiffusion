@@ -318,7 +318,10 @@ export function Navigation({
         {cartCount !== 0 ? (
           <span
             aria-hidden="true"
-            className="bg-navigation-surface absolute top-0 right-0 rounded-full px-1 text-[10px] leading-4"
+            className={cn(
+              "bg-action-primary text-action-primary-foreground absolute top-0 right-0 inline-flex size-5 items-center justify-center rounded-full text-[10px] leading-none font-semibold tabular-nums",
+              cartCount !== null && cartCount > 99 && "size-6",
+            )}
           >
             {cartCount === null ? "—" : cartCount > 99 ? "99+" : cartCount}
           </span>

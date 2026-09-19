@@ -87,6 +87,7 @@ export function HomeContent({
           backgroundSrc={content.heroBackgroundSrc}
           slides={slides}
           presentation="editorial"
+          animateContent={motionEnabled}
           withNavigation
           fallbackCopy={{
             title: content.heroTitle,

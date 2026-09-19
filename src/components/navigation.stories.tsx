@@ -55,6 +55,23 @@ export const Midnight: Story = {
   args: { theme: "midnight" },
 };
 
+export const GoldCartCount: Story = {
+  args: { theme: "midnight", cartCount: 4 },
+};
+
+export const GoldCartCountIvory: Story = {
+  args: { cartCount: 4 },
+};
+
+export const GoldCartCountOverflow: Story = {
+  args: { theme: "midnight", cartCount: 123 },
+};
+
+export const GoldCartCountMobile: Story = {
+  ...GoldCartCount,
+  globals: { viewport: { value: "contact320", isRotated: false } },
+};
+
 export const ProvisionedAccount: Story = {
   args: { accountHref: "/account" },
   play: async ({ canvasElement }) => {

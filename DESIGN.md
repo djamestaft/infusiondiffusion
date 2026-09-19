@@ -567,3 +567,39 @@ This corrects confirmed hover-boundary and transformed-overflow rebuild resets;
 19 September 2026 — INF-58 fragrance consultation (delegated preview approval). Figma exploration page 2876:963, introduction 2878:2, question 2880:9, compact 2883:50, mobile 2881:55, narrow 2883:118, results 2885:136 / 2886:143, refinement 2889:195. Intentionally supersedes simultaneous Guide Variation 02; Approved page remains untouched. One native question at a time; ruled answer rows, completed-step navigation, photographic introduction, fixed desktop photograph and decorative topic word. Results show existing Shopify photographs, source reasons and editable preferences. Reset guide returns to the introduction and clears every answer/result/error. Reset occupies its own utility row. Programmatically focused headings have no outline; interactive controls retain visible keyboard focus. Heading/topic transition ±32px over500ms power2.out; answer text y10px over420ms with35ms stagger, hit areas stationary. Text opacity .8→1 preserves contrast throughout. Results y20px over500ms, opacity .85→1. Decorative LERP bounded±8px/±4px, damping160ms; focus anywhere in guide resets it. Reduced motion is immediate. Mobile uses prepaint CSS eligibility, no desktop GSAP import; no late entrance flash. Semantic colors and shared shell unchanged. Source matcher remains notes/character only; other answers are transparently summary-only.
 
 See `docs/features/fragrance-guide-motion-brief.md` and `docs/evidence/fragrance-guide/`.
+
+## Gold basket quantity — 19 September 2026
+
+Basket badge follow-up: Devon requested a gold circle behind the navigation cart
+quantity in PR109. Reuse action-primary gold and action-primary-foreground ink,
+with a20px circle and centered semibold digits;99+ uses24px to retain a circular
+shape. Preserve the44px cart target, full accessible count, hidden zero and
+unavailable dash. Navigation GoldCartCount stories cover midnight, ivory, mobile
+and overflow. This explicitly approved badge treatment supersedes the surface
+colored badge in existing static Figma frames; other navigation geometry stays
+unchanged.
+
+## Hero carousel letter arrival — 19 September 2026
+
+Devon approved letters entering straight from the right, then a soft image pulse
+120ms after the first letters, and authorized pushing the implementation to
+PR #109. This supersedes the 600ms whole-panel slide on eligible Home motion
+transitions only. Preserve the initial visible campaign, all source copy,
+5:4 contain imagery, controls and six-second autoplay. Use one GSAP timeline:
+outgoing letters travel24px left over280ms with80ms total stagger and fade.
+Incoming letters begin220ms later:36px horizontal travel over750ms,
+stagger capped at280ms, power2.out. Image0.98→1.01→1 over420ms+440ms;
+supporting copy/CTA wait for the title to settle, then pause50ms. Description
+fades in place at1300ms and CTA at1380ms, each over100ms with power1.inOut.
+No supporting-content translation or scaling.
+Visual tracking expands by up to2.5px per character, capped at48px per line,
+using transforms to preserve line breaks and return to normal spacing.
+No vertical letter movement. Title settles at1250ms; total sequence1480ms; restore both unsplit accessible headings
+after completion or interruption. Devon also approved this carousel sequence on
+mobile/touch; its independent eligibility leaves scroll/pointer scenes unchanged.
+Reduced-motion,
+save-data, hidden/offscreen and motion-pause protections remain authoritative.
+Pointer smoothing owns a separate backdrop transform. Runtime carouselMotion
+values and Motion/Hero carousel stories define this explicit user-approved
+divergence from the static Figma frames; no layout or token redesign.
+See [the contract](docs/features/hero-carousel-letter-arrival.md).
