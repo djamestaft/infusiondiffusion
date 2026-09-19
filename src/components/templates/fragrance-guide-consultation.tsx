@@ -142,7 +142,7 @@ export function FragranceGuideConsultation({
       cartCount={cartCount}
     >
       <MotionBoundary>
-        <div ref={scope} className="guide-consultation">
+        <div ref={scope} className="guide-consultation overflow-x-clip">
           {!started ? (
             <GuideTransition>
               <section className="dark bg-content-surface text-content-primary">

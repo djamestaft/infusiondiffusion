@@ -33,6 +33,18 @@ The single discrete CTA tween still avoids Firefox reversion ordering between
 competing zero-duration sets. The paragraph needs no split-text accessibility
 workaround because its text and semantics are never replaced.
 
+## Merge-gate correction: Guide entrance overflow
+
+At carousel head `5208b60`, CI passed 144 browser checks but the shared-shell
+Account journey failed while visiting the fragrance guide at 390px. Its existing
+32px mobile entrance moved text beyond the document edge. The containment fix
+adds horizontal clipping to the consultation boundary. New 390/320px tests
+measure the start pose and every frame, reproducing 398/332px before the fix
+and passing at the viewport width afterward. The original Account journey also
+passes. This correction leaves the visually approved carousel unchanged.
+Devon approved the smooth carousel visually; merge remains gated on exact-head
+CI and the PR gate.
+
 ## Historical PR109 evidence
 
 User-approved follow-up to the motion candidate in PR #109. See
