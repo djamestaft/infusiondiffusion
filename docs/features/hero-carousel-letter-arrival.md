@@ -17,7 +17,7 @@ physical-device and remaining INF-57 acceptance gates remain unchanged.
 
 - The first server-rendered campaign stays visible. Do not delay its image load,
   split its heading on initial render, or add an entrance that postpones LCP.
-- Eligible desktop slide changes use a single GSAP timeline. Outgoing letters
+- Desktop, tablet and mobile slide changes use a single GSAP timeline. Outgoing letters
   travel 24px left over 280ms with an 80ms total stagger and fade. Incoming letters
   start 220ms later, overlapping the departure rather than waiting for a blank frame.
   Incoming letters
@@ -31,23 +31,29 @@ physical-device and remaining INF-57 acceptance gates remain unchanged.
 - The campaign image starts 120ms after the first letters: opacity 0 to 1 and
   scale 0.98 to 1.01 over 420ms, then scale 1 over 440ms. The containing layout
   stays stable and retains the full image in its existing 5:4 contain frame.
-- Description and CTA arrive as whole elements from a 12px offset, starting at
-  200ms after the incoming letters; both finish before the final headline letters.
-  Total sequence: 1250ms.
+- Description and CTA wait until every title letter has settled at1250ms, then
+  allow a100ms pause. The description starts fading at1350ms and the CTA at1500ms;
+  each fades over600ms with power1.inOut easing. No translation or scaling.
+  Total sequence:2100ms. This replaces their earlier overlapping lateral arrival
+  following Devon’s visual review.
 - The outgoing image and supporting content fade over 160ms, starting at 80ms.
   Only the selected campaign is available
   to assistive technology and keyboard navigation.
 - GSAP and SplitText are deferred until initial preferences are known and the
-  existing desktop eligibility query matches. No extra animation library is
+  user has not requested reduced motion or data saving. No extra animation library is
   added. Pointer smoothing remains owned by HeroAtmosphere on another element.
 - SplitText supplies the full heading accessible name during the stagger and is
   reverted on completion, interruption, resize, preference changes and unmount.
+  Focus entering the incoming content completes the sequence immediately so
+  keyboard users never land on an invisible CTA.
   Heading changes use keyed nodes so cleanup cannot overwrite replacement copy.
 - Preserve six-second autoplay, manual/focus pause, hover, hidden/offscreen
   handling, controls, announcements, swipe, fallback copy and media failure.
   MotionBoundary's pause also disables the enhanced carousel sequence.
-- Reduced motion and save-data use immediate readable content. Touch and other
-  ineligible layouts retain the previous carousel behavior without new GSAP
+- Devon explicitly extended this carousel choreography to mobile and touch.
+  Its own eligibility query is independent of the desktop-only scroll/pointer
+  scenes. Preserve swipe and manual controls at every width.
+- Reduced motion and save-data use immediate readable content without new GSAP
   imports. Import failure retains the existing CSS transition. Empty/single
   slide behavior is unchanged.
 

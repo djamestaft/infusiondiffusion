@@ -7,10 +7,12 @@ The component was implemented and inspected in Storybook before opting Home in.
 Frame sampling confirmed outgoing letters moving left while incoming letters
 remain invisible; the incoming letters start at220ms and the image at340ms.
 The review refinement spreads letters by up to2.5px per character within each
-line, with48px maximum extra spread and no text reflow. At230ms the outgoing
-first letter was at-67.30px while the incoming first letter was at34.30px,
-both visible; the last incoming letter was still at63.5px. The longer image
-pulse reaches1.01 and returns to1; the full sequence lasts1.25s.
+line, with48px maximum extra spread and no text reflow. The title settles at1.25s.
+Description and CTA then fade in place after a100ms pause, starting at1.35s and
+1.50s, each over600ms. The full sequence ends at2.1s. The recording shows the
+complete title with both supporting elements still invisible; the description
+begins appearing at1364ms and CTA at1514ms, with transform:none throughout.
+Image scale reaches1.01 and returns to1 before supporting content arrives.
 The final heading is unsplit, visible and accessible. Screenshots at
 1440/768/390/320 showed complete imagery and copy, preserved desktop alignment
 and mobile centering, with no horizontal overflow. The intended visual change
@@ -24,22 +26,28 @@ hover-continuity fix is owned by pane 1 and retained as the integration base.
 ## Final local verification
 
 - Lint and TypeScript: pass.
-- Vitest:432 tests across64 files pass, including real GSAP timeline assertions
+- Vitest:433 tests across64 files pass, including real GSAP timeline assertions
   for outgoing precedence/overlap, horizontal entry, image timing, bounded
   long-text duration, per-line tracking reset/cap and reversible cleanup of both
   headings.
 - Storybook:401 tests across34 files pass after the gold basket badge addition;
   production Storybook build passes.
 - Next production build passes using the isolated .next-e2e output directory.
-- Playwright: all5 choreography tests pass in each of Chromium, WebKit and
-  Firefox (15 passes). Covers frame samples, rapid reversal, resize, reduced
-  motion interruption, real Save-Data import prevention and responsive geometry.
+- Playwright: all6 choreography tests pass in each of Chromium, WebKit and
+  Firefox (18 passes). Covers frame samples, rapid reversal, resize, reduced
+  motion interruption, visible keyboard-focus interruption, real Save-Data import prevention and responsive geometry.
+- Mobile emulation: five relevant tests each pass in Pixel7/Chromium and
+  iPhone13/WebKit (10 more passes). The desktop keyboard traversal test is
+  intentionally omitted from touch projects and verified in all three desktop
+  engines. Mobile Storybook stories now exercise the same arrival sequence.
 - Existing editorial carousel suite:14/14 Chromium checks passed before this
   isolated timeline refinement, including
   1900/1440/1280/1024/768/390/320, short screens, keyboard, autoplay and axe.
 - Independent read-only review: no remaining findings. The reviewer independently
   checked outgoing precedence, rapid navigation/reversal, resize, reduced-motion
   interruption, plain-text/ARIA restoration and the Save-Data readiness guard.
+  Touch swipes and immediate reverse swipes at320px and390px also preserve long
+  headline wrapping/height and restore split text correctly without overflow.
 - Integration base: pane1's cdc47e9, including its hover-continuity correction.
   No hover or fragrance-guide implementation was edited by this follow-up.
 
@@ -59,6 +67,17 @@ This is not a claim of deployed Home image delivery or physical-device sign-off.
 Human visual acceptance, physical Safari/iPhone and the existing full-route
 no-JavaScript limitation remain under INF-49/57; no merge or production deploy.
 
+Devon explicitly extended this carousel sequence to touch/mobile. Its preference
+query is now independent of the desktop scroll/pointer scenes. The mobile
+recording and settled screenshot show actual published campaign imagery; reduced
+motion and Save-Data continue to prevent the optional import and animation.
+
+The later support fade exposed an invisible keyboard-focus state. A new real
+Previous → backward-tab browser regression failed before the correction: focusing
+incoming content now completes the sequence immediately and restores the visible
+CTA and its focus indicator. WebKit's default macOS policy uses Option+Shift+Tab
+to include links. Pointer-driven transitions retain the slower fade.
+
 ## Gold basket badge follow-up
 
 Devon also requested a gold circle behind the header cart quantity in this PR.
@@ -69,6 +88,6 @@ quantity and44px link target are unchanged.
 Four new Navigation stories cover midnight, ivory,99+ and320px mobile. Browser
 inspection confirmed circular geometry, legible dark digits, no horizontal
 overflow and zero axe violations in all four. The screenshots and measured
-results are included here. Lint, typecheck,432 unit tests,401 Storybook tests
+results are included here. Lint, typecheck,433 unit tests,401 Storybook tests
 and both production builds pass. No cart data or commerce logic changed.
 This small visual follow-up does not change roadmap milestones or release gates.

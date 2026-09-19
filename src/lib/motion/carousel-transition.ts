@@ -11,8 +11,9 @@ export const carouselMotion = {
   imagePeakScale: 1.01,
   imageRiseDuration: 0.42,
   imageSettleDuration: 0.44,
-  supportDelay: 0.2,
-  supportDuration: 0.35,
+  supportDelay: 0.1,
+  supportDuration: 0.6,
+  supportStagger: 0.15,
   exitTravel: -24,
   exitDuration: 0.28,
   exitStaggerBudget: 0.08,
@@ -136,15 +137,17 @@ export function createCarouselTransition(
   if (support.length) {
     timeline.fromTo(
       support,
-      { x: 12, opacity: 0 },
+      { opacity: 0 },
       {
-        x: 0,
         opacity: 1,
         duration: carouselMotion.supportDuration,
-        stagger: 0.04,
-        ease: "power3.out",
+        stagger: carouselMotion.supportStagger,
+        ease: "power1.inOut",
       },
-      carouselMotion.enterDelay + carouselMotion.supportDelay,
+      carouselMotion.enterDelay +
+        carouselMotion.letterDuration +
+        carouselMotion.staggerBudget +
+        carouselMotion.supportDelay,
     );
   }
   return timeline;

@@ -17,8 +17,9 @@ test("initial Save-Data prevents fetching the optional animation runtime", async
   browser,
   isMobile,
 }) => {
-  test.skip(isMobile, "Desktop import eligibility.");
-  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.setViewportSize(
+    isMobile ? { width: 390, height: 844 } : { width: 1440, height: 800 },
+  );
   const eligibleRequests: string[] = [];
   page.on("request", (request) => {
     if (
@@ -35,7 +36,11 @@ test("initial Save-Data prevents fetching the optional animation runtime", async
   // Positive control: identify dynamic entry modules, not Turbopack's eagerly emitted async-loader stub.
   expect(eligibleRequests.length).toBeGreaterThan(0);
   const context = await browser.newContext({
-    viewport: { width: 1440, height: 800 },
+    viewport: isMobile
+      ? { width: 390, height: 844 }
+      : { width: 1440, height: 800 },
+    isMobile,
+    hasTouch: isMobile,
     baseURL: test.info().project.use.baseURL,
   });
   await context.addInitScript(() => {
@@ -76,8 +81,9 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
   page,
   isMobile,
 }) => {
-  test.skip(isMobile, "Letter choreography is a desktop enhancement.");
-  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.setViewportSize(
+    isMobile ? { width: 390, height: 844 } : { width: 1440, height: 800 },
+  );
   await page.goto(url, { waitUntil: "domcontentloaded" });
   const hero = page.getByTestId("home-hero-section");
   await expect(hero).toHaveAttribute("data-carousel-choreography", "ready");
@@ -93,6 +99,8 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
       outgoingX: number | null;
       incomingOpacity: number;
       outgoingOpacity: number;
+      titleComplete: boolean;
+      support: { opacity: number; transform: string }[];
     }[] = [];
     const started = performance.now();
     document
@@ -122,12 +130,26 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
               ? new DOMMatrix(getComputedStyle(outgoingLetter).transform).m41
               : null,
             incomingOpacity: Number(getComputedStyle(letters[0]).opacity),
-            outgoingOpacity: outgoingLetter
-              ? Number(getComputedStyle(outgoingLetter).opacity)
-              : 0,
+            outgoingOpacity: Math.max(
+              0,
+              ...Array.from(
+                document.querySelectorAll(
+                  '[data-phase="exit"] .hero-carousel-letter',
+                ),
+              ).map((letter) => Number(getComputedStyle(letter).opacity)),
+            ),
+            titleComplete: Array.from(letters).every(
+              (letter) => Number(getComputedStyle(letter).opacity) === 1,
+            ),
+            support: Array.from(
+              panel.querySelectorAll("[data-carousel-support]"),
+            ).map((element) => ({
+              opacity: Number(getComputedStyle(element).opacity),
+              transform: getComputedStyle(element).transform,
+            })),
           });
         }
-        if (performance.now() - started < 1400) requestAnimationFrame(sample);
+        if (performance.now() - started < 2300) requestAnimationFrame(sample);
         else resolve();
       };
       requestAnimationFrame(sample);
@@ -141,6 +163,22 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
   ).toBe(true);
   expect(samples.every((s) => s.y === 0)).toBe(true);
   expect(samples.some((s) => s.last > 36)).toBe(true);
+  expect(
+    samples.some(
+      (s) =>
+        s.titleComplete && s.support.every((element) => element.opacity === 0),
+    ),
+  ).toBe(true);
+  expect(
+    samples.some(
+      (s) => s.support[0]?.opacity > 0 && s.support[1]?.opacity === 0,
+    ),
+  ).toBe(true);
+  expect(
+    samples.every((s) =>
+      s.support.every((element) => element.transform === "none"),
+    ),
+  ).toBe(true);
   expect(
     samples.some(
       (s) => s.outgoingX !== null && s.outgoingX < 0 && s.incomingOpacity === 0,
@@ -164,8 +202,9 @@ test("rapid forward/reverse navigation and resize leave one complete usable camp
   page,
   isMobile,
 }) => {
-  test.skip(isMobile, "Letter choreography is a desktop enhancement.");
-  await page.setViewportSize({ width: 1366, height: 768 });
+  await page.setViewportSize(
+    isMobile ? { width: 390, height: 844 } : { width: 1366, height: 768 },
+  );
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(url, { waitUntil: "domcontentloaded" });
@@ -177,7 +216,9 @@ test("rapid forward/reverse navigation and resize leave one complete usable camp
   await expect(page.locator(".hero-carousel-letter").first()).toBeAttached();
   await page.getByRole("button", { name: "Next slide" }).click();
   await page.getByRole("button", { name: "Previous slide" }).click();
-  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.setViewportSize(
+    isMobile ? { width: 320, height: 740 } : { width: 1280, height: 720 },
+  );
   await expect(page.locator('[data-phase="enter"]')).toHaveCount(0);
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
@@ -195,12 +236,39 @@ test("rapid forward/reverse navigation and resize leave one complete usable camp
   expect(errors).toEqual([]);
 });
 
+test("keyboard focus reveals the incoming CTA without waiting for its fade", async ({
+  page,
+  isMobile,
+  browserName,
+}) => {
+  test.skip(isMobile, "Desktop choreography keyboard interruption.");
+  await page.setViewportSize(
+    isMobile ? { width: 390, height: 844 } : { width: 1440, height: 800 },
+  );
+  await page.goto(url, { waitUntil: "domcontentloaded" });
+  await expect(page.getByTestId("home-hero-section")).toHaveAttribute(
+    "data-carousel-choreography",
+    "ready",
+  );
+  await page.getByRole("button", { name: "Previous slide" }).focus();
+  await page.keyboard.press("Enter");
+  // WebKit's default macOS keyboard policy uses Option+Tab to include links.
+  await page.keyboard.press(
+    browserName === "webkit" ? "Alt+Shift+Tab" : "Shift+Tab",
+  );
+  const cta = page.locator(active).locator("a");
+  await expect(cta).toBeFocused();
+  await expect(cta).toHaveCSS("opacity", "1", { timeout: 300 });
+  await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
+});
+
 test("a live reduced-motion change cancels the split and keeps the selected slide readable", async ({
   page,
   isMobile,
 }) => {
-  test.skip(isMobile, "Desktop preference interruption.");
-  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.setViewportSize(
+    isMobile ? { width: 390, height: 844 } : { width: 1440, height: 800 },
+  );
   await page.goto(url, { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("home-hero-section")).toHaveAttribute(
     "data-carousel-choreography",

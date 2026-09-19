@@ -54,7 +54,9 @@ Follow-up: the approved carousel letter sequence is implemented and locally
 verified for delivery through the same PR109 branch: outgoing letters move left,
 incoming letters overlap from the right, then the image pulses. Devon’s review
 refinement gives departure a220ms lead, adds transient letter spacing and
-extends the complete sequence to1.25s. It extends
+lets the title settle at1.25s. Description and CTA then fade slowly in place
+after a100ms pause; the complete sequence ends at2.1s. This carousel sequence
+also runs on mobile/touch under Devon’s explicit review request. It extends
 INF-54; the existing INF-49/57 human/device/production gates remain open.
 See [the carousel contract](../features/hero-carousel-letter-arrival.md).
 

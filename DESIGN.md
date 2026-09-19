@@ -583,11 +583,15 @@ transitions only. Preserve the initial visible campaign, all source copy,
 outgoing letters travel24px left over280ms with80ms total stagger and fade.
 Incoming letters begin220ms later:36px horizontal travel over750ms,
 stagger capped at280ms, power2.out. Image0.98→1.01→1 over420ms+440ms;
-supporting copy/CTA follow200ms after incoming letters.
+supporting copy/CTA wait for the title to settle, then pause100ms. Description
+fades in place at1350ms and CTA at1500ms, each over600ms with power1.inOut.
+No supporting-content translation or scaling.
 Visual tracking expands by up to2.5px per character, capped at48px per line,
 using transforms to preserve line breaks and return to normal spacing.
-No vertical letter movement. Total1250ms; restore both unsplit accessible headings
-after completion or interruption. Desktop eligibility and reduced-motion,
+No vertical letter movement. Title settles at1250ms; total sequence2100ms; restore both unsplit accessible headings
+after completion or interruption. Devon also approved this carousel sequence on
+mobile/touch; its independent eligibility leaves scroll/pointer scenes unchanged.
+Reduced-motion,
 save-data, hidden/offscreen and motion-pause protections remain authoritative.
 Pointer smoothing owns a separate backdrop transform. Runtime carouselMotion
 values and Motion/Hero carousel stories define this explicit user-approved

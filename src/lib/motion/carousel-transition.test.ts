@@ -121,7 +121,32 @@ it("restarts expanded tracking on each wrapped line and leaves line geometry unt
   );
 });
 
-it("caps the stagger for long headlines so the CTA does not wait for every letter", () => {
+it("waits for the complete title, then gently fades stationary supporting content", () => {
+  const { incoming, outgoing, chars } = fixture();
+  const timeline = createCarouselTransition(gsap, incoming, outgoing, chars);
+  const description = incoming.querySelector("p")!;
+  const cta = incoming.querySelector("a")!;
+  timeline.pause().seek(1.25);
+  expect(
+    chars.every((char) => Number(gsap.getProperty(char, "opacity")) === 1),
+  ).toBe(true);
+  expect(Number(gsap.getProperty(description, "opacity"))).toBe(0);
+  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
+  timeline.seek(1.45);
+  expect(Number(gsap.getProperty(description, "opacity"))).toBeGreaterThan(0);
+  expect(Number(gsap.getProperty(description, "opacity"))).toBeLessThan(0.5);
+  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
+  timeline.seek(1.65);
+  expect(Number(gsap.getProperty(cta, "opacity"))).toBeGreaterThan(0);
+  for (const element of [description, cta]) {
+    expect(Number(gsap.getProperty(element, "x"))).toBe(0);
+    expect(Number(gsap.getProperty(element, "y"))).toBe(0);
+  }
+  timeline.progress(1);
+  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(1);
+});
+
+it("caps the full sequence for long headlines", () => {
   const { incoming, outgoing, chars } = fixture();
   const manyChars = Array.from({ length: 180 }, () => {
     const char = chars[0].cloneNode(true) as HTMLElement;
@@ -135,12 +160,12 @@ it("caps the stagger for long headlines so the CTA does not wait for every lette
     manyChars,
   );
   expect(timeline.duration()).toBeGreaterThan(1);
-  expect(timeline.duration()).toBeLessThanOrEqual(1.3);
+  expect(timeline.duration()).toBeLessThanOrEqual(2.2);
   timeline.pause().seek(0.05);
   expect(Number(gsap.getProperty(manyChars.at(-1)!, "x"))).toBeLessThanOrEqual(
     84,
   );
-  timeline.pause().seek(0.85);
+  timeline.pause().seek(2.1);
   expect(
     Number(gsap.getProperty(incoming.querySelector("a")!, "opacity")),
   ).toBe(1);

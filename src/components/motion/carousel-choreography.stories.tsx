@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The 1.25-second sequence restores normal tracking without changing line breaks. First render stays immediately visible. Desktop only; reduced motion, save-data and touch retain their existing accessible behavior. The backdrop is owned separately.",
+          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The title settles at 1.25s; after a 100ms pause, description and CTA fade in place over 600ms, with the CTA starting 150ms after the description. The full sequence lasts 2.1s and restores normal tracking without changing line breaks. First render stays immediately visible. Enabled on desktop, tablet and touch/mobile; reduced motion and save-data remain static. The backdrop is owned separately.",
       },
     },
   },
@@ -41,7 +41,7 @@ export const LetterArrival: Story = {
     await waitFor(
       () =>
         expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
-      { timeout: 2000 },
+      { timeout: 3000 },
     );
     await expect(c.getByRole("heading", { level: 1 })).toBeVisible();
   },
@@ -61,7 +61,7 @@ export const RapidNavigation: Story = {
     await waitFor(
       () =>
         expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
-      { timeout: 2000 },
+      { timeout: 3000 },
     );
     await expect(c.getByRole("heading", { level: 1 })).toHaveAccessibleName(
       published.slides[1].title,
@@ -89,9 +89,11 @@ export const ReducedMotion: Story = {
 export const SaveData: Story = { args: { forceSaveData: true } };
 export const Mobile: Story = {
   globals: { viewport: { value: "contact390" } },
+  play: LetterArrival.play,
 };
 export const NarrowMobile: Story = {
   globals: { viewport: { value: "contact320" } },
+  play: LetterArrival.play,
 };
 export const LongHeadline: Story = {
   args: {

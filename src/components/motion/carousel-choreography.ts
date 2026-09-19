@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState, type RefObject } from "react";
-import { motionQuery } from "@/lib/motion/runtime";
 import { createCarouselTransition } from "@/lib/motion/carousel-transition";
+
+// Carousel text is approved on touch/mobile too; scroll and pointer scenes
+// retain their independent desktop-only eligibility in motion/runtime.
+const carouselMotionQuery = "(prefers-reduced-motion: no-preference)";
 
 async function loadCarouselMotion() {
   const [{ gsap }, { SplitText }] = await Promise.all([
@@ -14,7 +17,7 @@ async function loadCarouselMotion() {
 }
 type Runtime = Awaited<ReturnType<typeof loadCarouselMotion>>;
 
-/** Prepare only on eligible desktops; the original carousel remains the failure fallback. */
+/** Prepare after preferences on every screen; the original carousel remains the failure fallback. */
 export function useCarouselChoreography(
   ref: RefObject<HTMLElement | null>,
   {
@@ -36,7 +39,7 @@ export function useCarouselChoreography(
   const [runtime, setRuntime] = useState<Runtime | null>(null);
   useEffect(() => {
     if (!enabled || suppressed || !window.matchMedia) return;
-    const query = window.matchMedia(motionQuery);
+    const query = window.matchMedia(carouselMotionQuery);
     let generation = 0;
     const update = () => {
       const current = ++generation;
@@ -110,8 +113,11 @@ export function useCarouselChoreography(
     }
     // Finish on layout changes instead of leaving split words stranded across new line breaks.
     window.addEventListener("resize", onComplete);
+    // A keyboard user must never wait for an invisible CTA's fade to see focus.
+    incoming.addEventListener("focusin", onComplete);
     return () => {
       window.removeEventListener("resize", onComplete);
+      incoming.removeEventListener("focusin", onComplete);
       context.revert();
       split?.revert();
       outgoingSplit?.revert();
