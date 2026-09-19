@@ -1,3 +1,4 @@
+import { normalizeEditorialImage } from "@/lib/editorial-image";
 import { isSanityConfigured } from "@/env";
 import {
   sanityFetch,
@@ -20,11 +21,18 @@ function withFallback(settings: Partial<SiteSettings> | null): SiteSettings {
     }),
   ) as Partial<SiteSettings["homepage"]>;
 
+  homepage.statementImage = normalizeEditorialImage(
+    settings?.homepage?.statementImage,
+  );
+  homepage.artistryImage = normalizeEditorialImage(
+    settings?.homepage?.artistryImage,
+  );
+
   homepage.heroSlides = (settings?.homepage?.heroSlides ?? [])
     .filter((slide) =>
       Boolean(slide?.id && slide?.src?.trim() && slide?.alt?.trim()),
     )
-    .slice(0, 3)
+    .slice(0, 6)
     .map((slide) => ({
       ...slide,
       title: slide.title?.trim() || undefined,

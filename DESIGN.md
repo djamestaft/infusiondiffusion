@@ -496,3 +496,31 @@ styling. Do not remove focus, the trap, or the account avatar's approved states.
 Existing Figma default/keyboard states and tokens remain unchanged; Storybook
 `Components/Navigation/TouchThenKeyboard` captures the transition.
 See [INF-46 evidence](docs/features/inf-46-navigation-focus.md).
+
+## Master photography framing — 18 September 2026
+
+Devon requested the new website master imagery from Figma pages 2813:2,
+2806:2 and 2809:2. The homepage accepts two to six campaigns, keeping the
+existing 5:4 contain frame, composition, motion and tokens. Additional
+reading-corner, Noir family and Blanc family photographs are editorial;
+they do not establish room-mist or bundle availability.
+
+Product cards use true square 1254×1254 outpainted masters and `object-cover`.
+The background extends edge to edge; preserve full reeds, bottle bases, labels
+and tassels without stretching the product or introducing side gutters.
+This supersedes the earlier portrait-contain approval after Devon's explicit
+feedback that the gutters must go. Card geometry and semantic tokens stay fixed.
+Square masters are on Figma section `2832:2`.
+
+Responsive editorial candidates are on website page `2835:2`, with refined
+Contact/About/statement rows `2842:2`, `2842:5`, `2842:8`. These are review
+candidates, not yet promoted to Approved. Sanity provides optional desktop and
+phone sources through a single picture; missing phone artwork uses desktop.
+Below 640px, authored Shop / Contact / About / Home statement compositions use
+220 / 520 / 600 / 600px minimum heights respectively, with copy above the
+products. About and Home statement align copy to the top on phones. Guide
+switches to its phone composition below 1024px. Tablet About aligns the wide
+photo left and the statement aligns right to keep a complete product visible.
+Inspect actual text wrapping at 320px; asset-only inspection is insufficient.
+Desktop layout, typography, navigation, announcement and tokens remain unchanged.
+See [website imagery evidence](docs/features/website-imagery-refresh.md).

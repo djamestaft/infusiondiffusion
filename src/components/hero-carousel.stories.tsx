@@ -147,3 +147,12 @@ export const PartialImageFailure: Story = {
     ],
   },
 };
+
+export const SixSlides: Story = {
+  args: {
+    slides: [
+      ...slides,
+      ...slides.map((slide) => ({ ...slide, id: `${slide.id}-additional` })),
+    ],
+  },
+};

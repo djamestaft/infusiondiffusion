@@ -7,7 +7,7 @@ for (const viewport of [
   { name: "mobile", width: 390, height: 844 },
   { name: "small", width: 320, height: 844 },
 ]) {
-  test(`renders the text-first About fallback accessibly at ${viewport.name}`, async ({
+  test(`renders the About story accessibly at ${viewport.name}`, async ({
     page,
     request,
   }) => {
@@ -30,9 +30,21 @@ for (const viewport of [
         name: "The story behind the atmosphere.",
       }),
     ).toBeVisible();
-    await expect(
-      page.getByRole("main").getByRole("heading", { level: 2 }),
-    ).toHaveCount(5);
+    // The CMS may also supply an optional market gallery. Assert the required
+    // story structure without assuming that editorial section is absent.
+    for (const name of [
+      "Born from fragrance",
+      "From more than 130 oils to six fragrances",
+      "Composed for lived-in rooms",
+      "Find your fragrance with confidence.",
+      "Find the fragrance for your room.",
+    ]) {
+      await expect(
+        page
+          .getByRole("main")
+          .getByRole("heading", { level: 2, name, exact: true }),
+      ).toBeVisible();
+    }
     await expect(
       page.getByText(
         "Infusion Diffusion began with a lifelong affair with fragrance, luxury and scent’s power to turn a space into a feeling.",

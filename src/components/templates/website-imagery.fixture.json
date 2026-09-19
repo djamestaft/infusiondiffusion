@@ -1,0 +1,31 @@
+{
+  "shop": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/cce4597126b7f12fb15bd6fd8e5c397f516c45cb-2172x724.png",
+    "mobileSrc": "https://cdn.sanity.io/images/j222nd1i/production/f250c4e25480acda7fe2d61e87745fde0e370fa9-1774x887.png",
+    "alt": "Infusion Diffusion reed diffusers and gift packaging."
+  },
+  "about": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/fcc775d22494963ed1f95660cccc782502a6a411-2172x724.png",
+    "mobileSrc": "https://cdn.sanity.io/images/j222nd1i/production/0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png",
+    "alt": "Infusion Diffusion reed diffusers and gift packaging."
+  },
+  "contact": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/f03ada6f2c77170936ed2356cced942babb770c4-2172x724.png",
+    "mobileSrc": "https://cdn.sanity.io/images/j222nd1i/production/e5c19a5e9ae175b29a905e15a80f9b7bd587b5c3-1024x1536.png",
+    "alt": "Infusion Diffusion reed diffusers and gift packaging."
+  },
+  "guide": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/39f21bb05c280050403354390f675683aea14a31-1774x887.png",
+    "mobileSrc": "https://cdn.sanity.io/images/j222nd1i/production/06c2434e14dce131524fc0193522bd684a9b1b2d-1774x887.png",
+    "alt": "Infusion Diffusion reed diffusers and gift packaging."
+  },
+  "home-statement": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/46698389c1c2983a45012129b2da852c6af65be3-2157x729.png",
+    "mobileSrc": "https://cdn.sanity.io/images/j222nd1i/production/cc2b567134ab7ed7b57f6f32191afecc264d64d2-1024x1536.png",
+    "alt": "Infusion Diffusion reed diffusers and gift packaging."
+  },
+  "artistry": {
+    "src": "https://cdn.sanity.io/images/j222nd1i/production/72a6a98c2662da5da0f37c6418d9e3f3d2b0a845-1254x1254.png",
+    "alt": "Noir De La Nuit diffuser on dark stone beside linen."
+  }
+}

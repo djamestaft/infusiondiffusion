@@ -1,7 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useState, type ReactNode } from "react";
+import { EditorialImage } from "@/components/ui/editorial-image";
+import type { EditorialImageSource } from "@/lib/editorial-image";
+
+import { type ReactNode } from "react";
 import { GalleryViewer } from "@/components/gallery-viewer";
 import { TemplateShell } from "@/components/templates/storefront-templates";
 import { Button } from "@/components/ui/button";
@@ -12,7 +14,7 @@ import { cn } from "@/lib/utils";
 export type CombinedAboutProps = {
   page: AboutPage;
   gallery?: GalleryPage;
-  heroImage?: { src: string; alt: string };
+  heroImage?: EditorialImageSource;
   bornStory?: string;
   cartCount?: number | null;
 };
@@ -30,7 +32,6 @@ export function CombinedAboutTemplate({
   bornStory = fallbackSiteSettings.homepage.founderStory,
   cartCount,
 }: CombinedAboutProps) {
-  const [heroFailed, setHeroFailed] = useState(false);
   const campaignRoles = [
     "campaign-blanc-travertine",
     "campaign-bois-emerald",
@@ -106,17 +107,17 @@ export function CombinedAboutTemplate({
           className={cn(
             gutters,
             "dark bg-content-surface text-content-primary relative isolate flex flex-col items-center justify-center gap-6 py-10 text-center sm:py-16 lg:gap-12",
+            heroImage?.mobileSrc &&
+              "min-h-[600px] justify-start pt-8 sm:min-h-0 sm:justify-center sm:pt-16",
           )}
         >
-          {heroImage && !heroFailed ? (
-            <Image
-              src={heroImage.src}
-              alt=""
-              fill
+          {heroImage ? (
+            <EditorialImage
+              image={heroImage}
+              decorative
               priority
               sizes="100vw"
-              className="-z-20 object-cover"
-              onError={() => setHeroFailed(true)}
+              className="-z-20 object-cover sm:object-left lg:object-center"
             />
           ) : null}
           <div className="bg-content-surface absolute inset-0 -z-10 opacity-40" />

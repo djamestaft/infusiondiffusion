@@ -47,7 +47,7 @@ function ImageCarousel({
   loading = false,
 }: HeroCarouselProps) {
   const slides = React.useMemo(
-    () => suppliedSlides.slice(0, 3),
+    () => suppliedSlides.slice(0, 6),
     [suppliedSlides],
   );
   const [active, setActive] = React.useState(0);
@@ -374,7 +374,7 @@ function EditorialCarousel({
   className,
 }: HeroCarouselProps) {
   const slides = React.useMemo(
-    () => suppliedSlides.slice(0, 3),
+    () => suppliedSlides.slice(0, 6),
     [suppliedSlides],
   );
   const [selected, setSelected] = React.useState(0);

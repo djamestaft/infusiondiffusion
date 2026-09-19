@@ -1,3 +1,5 @@
+import { EditorialImage } from "@/components/ui/editorial-image";
+import type { EditorialImageSource } from "@/lib/editorial-image";
 import { ServicePolicyLinks } from "@/components/service-policy-links";
 import { defaultContactEmail } from "@/lib/contact-content";
 import Image from "next/image";
@@ -119,6 +121,8 @@ export interface HomeTemplateProps extends TemplateNavigationProps {
 }
 
 export type HomeTemplateContent = {
+  statementImage?: EditorialImageSource;
+  artistryImage?: EditorialImageSource;
   heroBackgroundSrc?: string;
   heroTitle: string;
   heroIntroduction: string;
@@ -201,7 +205,7 @@ export function HomeTemplate({
   const content = { ...fallbackHomeTemplateContent, ...suppliedContent };
   const carouselSlides =
     heroSlides.length >= 2
-      ? heroSlides.slice(0, 3)
+      ? heroSlides.slice(0, 6)
       : heroImage
         ? [{ id: "catalogue-fallback", ...heroImage }]
         : heroSlides.slice(0, 1);
@@ -223,6 +227,7 @@ export function HomeTemplate({
 
 export type ContactTemplateProps = TemplateNavigationProps & {
   heroImageSrc?: string | null;
+  heroImage?: EditorialImageSource;
   eyebrow?: string;
   title: string;
   introduction: string;
@@ -242,6 +247,7 @@ export function ContactTemplate({
   email,
   cartCount,
   heroImageSrc = "/images/homepage-bespoke-diffuser-blurb.png",
+  heroImage,
 }: ContactTemplateProps) {
   const mailto = "mailto:" + email;
   return (
@@ -255,9 +261,12 @@ export function ContactTemplate({
           className={cn(
             contactGutters,
             "dark bg-content-surface text-bone-50 relative overflow-hidden pt-12 pb-10 text-center lg:pt-[72px] lg:pb-14",
+            heroImage && "min-h-[520px] pt-8 sm:min-h-0 sm:pt-12",
           )}
         >
-          {heroImageSrc ? (
+          {heroImage ? (
+            <EditorialImage image={heroImage} decorative priority />
+          ) : heroImageSrc ? (
             <ContactHeroMedia key={heroImageSrc} src={heroImageSrc} />
           ) : null}
           <div className="bg-collection-hero-scrim absolute inset-0" />
@@ -378,6 +387,7 @@ export function ContactErrorTemplate({ reset }: { reset: () => void }) {
 }
 
 export interface CollectionTemplateProps extends TemplateNavigationProps {
+  heroImage?: EditorialImageSource;
   products: ProductCardProps[];
   title?: string;
   description?: string;
@@ -387,6 +397,7 @@ export function CollectionTemplate({
   products,
   title = "Shop",
   description = "Six fragrances. 200 ml reed diffusers.",
+  heroImage,
   navigationTheme,
   cartCount,
 }: CollectionTemplateProps) {
@@ -397,14 +408,22 @@ export function CollectionTemplate({
       cartCount={cartCount}
       surface="base"
     >
-      <header className="relative flex w-full items-center justify-center overflow-hidden px-5 py-7 text-center sm:px-16 lg:py-9">
-        <Image
-          src="/images/homepage-bespoke-diffuser-blurb.png"
-          alt=""
-          fill
+      <header
+        className={cn(
+          "relative flex w-full items-center justify-center overflow-hidden px-5 py-7 text-center sm:px-16 lg:py-9",
+          heroImage && "min-h-[220px] sm:min-h-0",
+        )}
+      >
+        <EditorialImage
+          image={
+            heroImage ?? {
+              src: "/images/homepage-bespoke-diffuser-blurb.png",
+              alt: "",
+            }
+          }
+          decorative
           priority
-          sizes="100vw"
-          className="object-cover"
+          className="sm:object-[center_65%]"
         />
         <div className="bg-collection-hero-scrim absolute inset-0" />
         <div className="text-bone-50 relative z-10 max-w-4xl">

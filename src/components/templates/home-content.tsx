@@ -1,5 +1,6 @@
-import Image from "next/image";
+import { EditorialImage } from "@/components/ui/editorial-image";
 import { Children } from "react";
+import { cn } from "@/lib/utils";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ScrollRevealController } from "@/components/ui/scroll-reveal-controller";
 import {
@@ -172,15 +173,23 @@ export function HomeContent({
       </section>
 
       <section
-        className="bg-content-primary relative isolate flex min-h-[500px] items-center justify-center overflow-hidden px-5 py-16 min-[375px]:min-h-[480px] sm:min-h-[460px] lg:min-h-[520px]"
+        className={cn(
+          "bg-content-primary relative isolate flex min-h-[500px] items-center justify-center overflow-hidden px-5 py-16 min-[375px]:min-h-[480px] sm:min-h-[460px] lg:min-h-[520px]",
+          content.statementImage?.mobileSrc &&
+            "min-h-[600px] items-start pt-8 min-[375px]:min-h-[600px] sm:items-center sm:pt-16",
+        )}
         aria-label="Bespoke diffusers"
       >
-        <Image
-          src="/images/homepage-bespoke-diffuser-blurb.png"
-          alt=""
-          fill
+        <EditorialImage
+          image={
+            content.statementImage ?? {
+              src: "/images/homepage-bespoke-diffuser-blurb.png",
+              alt: "",
+            }
+          }
+          decorative
           sizes="100vw"
-          className="-z-20 object-cover"
+          className="-z-20 object-cover sm:object-right lg:object-center"
         />
         <div className="bg-collection-hero-scrim absolute inset-0 -z-10" />
         <p className="font-display text-bone-50 max-w-[980px] text-center text-[25px] leading-[37px] min-[375px]:text-[27px] min-[375px]:leading-[39px] sm:max-w-[620px] sm:text-[31px] sm:leading-[44px] lg:max-w-[980px] lg:text-4xl lg:leading-[50px]">
@@ -238,10 +247,13 @@ export function HomeContent({
           </Button>
         </div>
         <div className="relative h-[370px] sm:h-auto">
-          <Image
-            src="/images/homepage-artistry-in-fragrance.png"
-            alt="A dark glass reed diffuser styled on stone and linen"
-            fill
+          <EditorialImage
+            image={
+              content.artistryImage ?? {
+                src: "/images/homepage-artistry-in-fragrance.png",
+                alt: "A dark glass reed diffuser styled on stone and linen",
+              }
+            }
             sizes="(max-width: 639px) 100vw, 50vw"
             className="object-cover"
           />

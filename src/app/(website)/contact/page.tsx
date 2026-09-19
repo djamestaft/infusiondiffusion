@@ -47,6 +47,7 @@ export async function getContactPageData() {
     readCart(),
   ]);
   return {
+    heroImage: page.image,
     eyebrow: page.eyebrow,
     title: page.title,
     introduction: page.introduction,

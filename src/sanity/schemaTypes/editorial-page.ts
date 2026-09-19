@@ -1,3 +1,4 @@
+import { editorialImageField } from "./editorial-image-field";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 const aboutRoles = ["origin", "development", "collaborator", "principles"];
@@ -88,17 +89,7 @@ export const editorialPage = defineType({
       rows: 4,
       validation: (rule) => rule.required().max(320),
     }),
-    defineField({
-      name: "heroImage",
-      title: "Hero image",
-      type: "image",
-      description:
-        "Optional. Use a wide editorial image; the page remains meaningful without one.",
-      options: { hotspot: true },
-      fields: [
-        defineField({ name: "alt", title: "Alternative text", type: "string" }),
-      ],
-    }),
+    editorialImageField("heroImage", "Hero artwork"),
     defineField({
       name: "sections",
       title: "Sections",

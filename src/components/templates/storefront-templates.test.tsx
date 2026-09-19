@@ -1,4 +1,10 @@
-import { cleanup, render, screen, within } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -590,4 +596,20 @@ describe("storefront templates", () => {
       2,
     );
   });
+});
+
+it("passes all six campaigns through the homepage template", () => {
+  const six = Array.from({ length: 6 }, (_, index) => ({
+    id: String(index),
+    src: `/campaign-${index}.jpg`,
+    alt: `Campaign ${index + 1}`,
+    title: `Campaign ${index + 1}`,
+  }));
+  render(<HomeTemplate products={[]} heroImage={undefined} heroSlides={six} />);
+  for (const index of [2, 3, 4, 5, 6, 1]) {
+    fireEvent.click(screen.getByRole("button", { name: "Next slide" }));
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      `Campaign ${index}`,
+    );
+  }
 });

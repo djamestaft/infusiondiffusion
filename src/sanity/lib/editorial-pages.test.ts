@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import type { GALLERY_PAGE_QUERY_RESULT } from "@/sanity/generated";
+import previewGroups from "./fixtures/gallery-preview-groups.json";
 
 vi.mock("@/env", () => ({ isSanityConfigured: false }));
 vi.mock("@/sanity/lib/live", () => ({
@@ -114,6 +115,27 @@ const galleryInput = (sections: unknown) =>
   ({ sections }) as GALLERY_PAGE_QUERY_RESULT;
 
 describe("gallery page normalization", () => {
+  it("preserves rights-confirmed gallery groups with visual-editing metadata", () => {
+    // Synthetic strings encoded by @vercel/stega 1.1.0, as Sanity previews do.
+    const page = withGalleryFallback(
+      galleryInput(
+        Object.entries(previewGroups).map(([id, galleryGroup]) => ({
+          _key: id,
+          galleryGroup,
+          heading: "Gift photography",
+          body: "A considered gift.",
+          image: {
+            src: "https://cdn.sanity.io/gift.jpg",
+            alt: "A diffuser and gift bag",
+            storefrontRightsConfirmed: true,
+          },
+        })),
+      ),
+    );
+    expect(page.campaignItems.map((item) => item.id)).toEqual(["campaign"]);
+    expect(page.marketItems.map((item) => item.id)).toEqual(["market"]);
+  });
+
   it("keeps only rights-confirmed complete items in authored order and trims captions", () => {
     const page = withGalleryFallback(
       galleryInput([
@@ -420,4 +442,35 @@ it("normalizes an invalid portrait focal point to the centered FIT position", ()
     ],
   });
   expect(page.chapters[0].image?.hotspot).toEqual({ x: 0.5, y: 0.5 });
+});
+
+describe("responsive editorial artwork", () => {
+  const image = {
+    src: "https://cdn.sanity.io/desktop.png",
+    mobileSrc: "https://cdn.sanity.io/phone.png",
+    alt: "A diffuser in a room",
+  };
+  it("preserves the phone source for standard editorial pages and About", () => {
+    expect(withEditorialFallback({ image }, fallbackContactPage).image).toEqual(
+      image,
+    );
+    expect(withAboutFallback({ image }).image).toEqual(image);
+  });
+  it("uses the valid desktop when the optional phone source is blank", () => {
+    expect(
+      withEditorialFallback(
+        { image: { ...image, mobileSrc: " " } },
+        fallbackContactPage,
+      ).image,
+    ).toEqual({ src: image.src, alt: image.alt });
+  });
+  it.each([
+    { ...image, src: " " },
+    { ...image, alt: " " },
+  ])("rejects incomplete image data", (invalid) => {
+    expect(
+      withEditorialFallback({ image: invalid }, fallbackContactPage).image,
+    ).toBeUndefined();
+    expect(withAboutFallback({ image: invalid }).image).toBeUndefined();
+  });
 });

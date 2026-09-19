@@ -63,7 +63,7 @@ Owners remain unchanged; no active implementation task is being claimed.
 | INF-39 | Done        | Devon   | Account implementation and main-site persistence accepted. Remaining provider/session checks move to INF-40; final-domain settings stay INF-42.                                                                                                                        |
 | INF-43 | Done        | Devon   | Approved footer delivered in human-merged #92 (`062674d`), with recorded local/CI and independent visual evidence.                                                                                                                                                     |
 | INF-28 | Todo        | Devon   | Remaining factual, service and metadata decisions; preserve earlier approvals.                                                                                                                                                                                         |
-| INF-31 | Todo        | Shawnee | Preparation merged; final assets/content deferred pending inputs and INF-28 approvals. Source previews/publication remain open.                                                                                                                                        |
+| INF-31 | In Progress | Shawnee | Square website masters applied in Shopify; six-slide homepage and responsive editorial imagery drafts in review. Remaining facts, INF-28 approvals and publication stay open.                                                                                          |
 | INF-40 | Todo        | Devon   | Next verification task: combined product/payment/account/browser matrix plus the explicit acceptance transfers below. Its INF-38/39 prerequisites are now Done.                                                                                                        |
 | INF-44 | In Progress | Devon   | Merchant-approved policies published in Shopify; storefront reader/footer/purchase links in review. Native checkout consent verified; human UI approval/merge and final release evidence pending; broader INF-31 approvals remain. Blocks INF-36 final release review. |
 | INF-36 | Backlog     | Shawnee | Independent release review after INF-34/35/40/44, including content gates and residual defects.                                                                                                                                                                        |
@@ -849,3 +849,23 @@ is tracked separately as INF-46 under Devon: prevent pointer-induced logo/menu
 outlines while preserving keyboard focus and drawer behavior. Implementation
 and local verification are complete; preview acceptance and human merge remain
 pending. See [INF-46 evidence](../features/inf-46-navigation-focus.md).
+
+### 18 September 2026 — new website imagery
+
+Devon resumed the INF-31 website-imagery subset using the new Figma masters.
+All six existing Shopify diffusers have additive new featured media; old
+assets and commerce facts are preserved and Admin/Storefront readbacks agree.
+A six-slide Sanity homepage draft retains the original three campaigns and
+adds lifestyle plus two grouped portraits. The supporting six-slide limit
+and full-bleed square product cards are prepared on `agent/master-media-refresh`.
+The follow-up adds responsive Shop/Home/About/Guide/Contact imagery and four
+About campaign photographs; new editorial drafts and Figma candidates await
+human design/publication review. See [expanded delivery](../features/website-imagery-refresh.md).
+See [delivery and recovery notes](../features/master-media-refresh.md).
+
+This supersedes the blanket photography-input deferral for these approved
+assets only. INF-31 remains open with Shawnee as preparation owner and Devon
+as implementation/editorial decision owner; INF-28 factual approvals remain.
+Devon approved the six-slide draft and full-image product-card framing on
+18 September 2026. Sanity publication is authorized after human merge of
+PR106; the protected-branch merge decision remains human.

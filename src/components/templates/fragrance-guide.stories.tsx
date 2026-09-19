@@ -1,3 +1,4 @@
+import artwork from "./website-imagery.fixture.json";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { FragranceGuideTemplate } from "./fragrance-guide";
@@ -240,4 +241,10 @@ export const TwoNotesAndValidation: Story = {
       canvas.queryByRole("heading", { name: "Suggested fragrances" }),
     ).not.toBeInTheDocument();
   },
+};
+
+export const MasterArtwork: Story = { args: { heroImage: artwork.guide } };
+export const MasterArtworkPhone: Story = {
+  ...MasterArtwork,
+  globals: { viewport: { value: "contact390" } },
 };

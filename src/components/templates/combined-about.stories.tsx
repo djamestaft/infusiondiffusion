@@ -1,3 +1,4 @@
+import artwork from "./website-imagery.fixture.json";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, userEvent, within } from "storybook/test";
 import {
@@ -101,4 +102,10 @@ export const LongContent: Story = {
       introduction: Array(3).fill(fixture.page.introduction).join(" "),
     },
   },
+};
+
+export const MasterArtwork: Story = { args: { heroImage: artwork.about } };
+export const MasterArtworkPhone: Story = {
+  ...MasterArtwork,
+  globals: { viewport: { value: "contact390" } },
 };
