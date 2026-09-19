@@ -1,5 +1,12 @@
 # Website imagery refinement — 18 September 2026
 
+> **Released 19 September 2026:** PR106 is human-merged at `5f489a8`, main CI
+> passed, and the approved Shopify/Sanity imagery is published and verified.
+> The final carousel has three slides: six-family mosaic, gifting and Noir.
+> Earlier six-slide and pending-publication notes below describe preparation.
+> See [release closeout](website-imagery-release-2026-09-19.md) for final evidence
+> and the remaining parent INF-31 scope.
+
 Devon's follow-up replaces placeholder photography across Shop, Home, About,
 Fragrance Guide and Contact using the new website asset library. It supersedes
 the earlier approval of portrait contain fitting on square product cards.
