@@ -18,6 +18,11 @@
     ],
     "rules": [
       {
+        "name": "Hero carousel letter arrival — 19 September 2026",
+        "section": "motion",
+        "body": "Devon approved outgoing letters departing24px left over220ms with80ms total stagger and fade; incoming letters start100ms later from36px right over550ms,200ms total stagger,power3.out. A soft image pulse starts120ms after incoming letters:0.98→1.01→1 over300+280ms; copy/CTA follow200ms after incoming letters. One GSAP timeline, total850ms. Initial campaign visible and unsplit; both split headings revert after completion/interruption. Retain 5:4 contain, controls, six-second autoplay and preference/lifecycle guards. Separate transforms from pointer backdrop. Intentional approved timing divergence from static Figma; see docs/features/hero-carousel-letter-arrival.md."
+      },
+      {
         "name": "Home/About motion preview — 19 September 2026",
         "section": "motion",
         "body": "Devon delegated G1–G3 for preview. Intentional divergence from static Approved frames: measured desktop collection pin with all products,80px tall/48px compact decorative-name band at8%semantic ink, measured250–440px cards; fine-pointer1024x680 minimum, single control row below900px with36/44px title and12px padding; native scrolling. Shared motionTokens:700ms visible16px entrance, backdrop-only18x12px160ms damping with1.04scale64ms cap0.1px cutoff,32px name drift and12px chapter travel. About square photos locally sticky with centered complete copy. Touch/reduced/saveData/short and long-content layouts static. Final preview review and physical-iPhone/production gates remain open. See docs/evidence/storefront-motion/README.md. Hero continuity correction: eligible1.04crop exists before first input; hover leave/hidden/offscreen freeze pose and RAF; re-entry uses a fresh clock; focus centers without changing crop. Policy disable restores static crop. Rebuild measurements exclude transformed scope overflow."

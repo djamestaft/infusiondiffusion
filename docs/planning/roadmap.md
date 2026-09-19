@@ -50,6 +50,12 @@ Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
 
 ## Storefront motion workstream — 19 September 2026
 
+Follow-up: the approved carousel letter sequence is implemented and locally
+verified for delivery through the same PR109 branch: outgoing letters move left,
+incoming letters overlap from the right, then the image pulses. It extends
+INF-54; the existing INF-49/57 human/device/production gates remain open.
+See [the carousel contract](../features/hero-carousel-letter-arrival.md).
+
 Devon requested systematic planning and Plane tasks for Mlab-inspired pinned
 scroll sections, drifting background typography and richer Home/About motion.
 He explicitly owns **every new task**, including design preparation and

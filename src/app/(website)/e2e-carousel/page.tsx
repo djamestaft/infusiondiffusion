@@ -24,7 +24,7 @@ const fixtureSlides = [
 ];
 
 export default function CarouselE2EPage(props: {
-  searchParams: Promise<{ editorial?: string }>;
+  searchParams: Promise<{ editorial?: string; choreography?: string }>;
 }) {
   if (process.env.SHOPIFY_E2E_FIXTURES !== "1") notFound();
   return (
@@ -37,15 +37,17 @@ export default function CarouselE2EPage(props: {
 async function CarouselFixture({
   searchParams,
 }: {
-  searchParams: Promise<{ editorial?: string }>;
+  searchParams: Promise<{ editorial?: string; choreography?: string }>;
 }) {
-  if ((await searchParams).editorial === "1")
+  const params = await searchParams;
+  if (params.editorial === "1")
     return (
       <>
         <Navigation floating accountHref="/account" cartCount={2} />
         <main>
           <HeroCarousel
             presentation="editorial"
+            animateContent={params.choreography === "1"}
             withNavigation
             slides={fixtureSlides.map((slide, index) => ({
               ...slide,

@@ -1,0 +1,468 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "samples": [
+    {
+      "ms": 14,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -0.0092,
+      "outgoingOpacity": "0.9996",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 31,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -0.081,
+      "outgoingOpacity": "0.9966",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 47,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -0.2652,
+      "outgoingOpacity": "0.989",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 64,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -0.648,
+      "outgoingOpacity": "0.973",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 81,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -1.2888,
+      "outgoingOpacity": "0.9463",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 98,
+      "incomingX": 36,
+      "incomingOpacity": "0",
+      "outgoingX": -2.2539,
+      "outgoingOpacity": "0.9061",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 115,
+      "incomingX": 31.9902,
+      "incomingOpacity": "0.1114",
+      "outgoingX": -3.5182,
+      "outgoingOpacity": "0.8534",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 132,
+      "incomingX": 28.107,
+      "incomingOpacity": "0.2193",
+      "outgoingX": -5.3027,
+      "outgoingOpacity": "0.7791",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 148,
+      "incomingX": 24.5885,
+      "incomingOpacity": "0.317",
+      "outgoingX": -7.6071,
+      "outgoingOpacity": "0.683",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 164,
+      "incomingX": 21.768,
+      "incomingOpacity": "0.3953",
+      "outgoingX": -10.125,
+      "outgoingOpacity": "0.5781",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 181,
+      "incomingX": 18.712,
+      "incomingOpacity": "0.4802",
+      "outgoingX": -13.8133,
+      "outgoingOpacity": "0.4244",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 197,
+      "incomingX": 16.2764,
+      "incomingOpacity": "0.5479",
+      "outgoingX": -17.7624,
+      "outgoingOpacity": "0.2599",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 215,
+      "incomingX": 13.9576,
+      "incomingOpacity": "0.6123",
+      "outgoingX": -22.7146,
+      "outgoingOpacity": "0.0536",
+      "imageOpacity": "0",
+      "imageScale": 0.98
+    },
+    {
+      "ms": 231,
+      "incomingX": 12.0104,
+      "incomingOpacity": "0.6664",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.1153",
+      "imageScale": 0.9835
+    },
+    {
+      "ms": 247,
+      "incomingX": 10.1725,
+      "incomingOpacity": "0.7174",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.2629",
+      "imageScale": 0.9879
+    },
+    {
+      "ms": 264,
+      "incomingX": 8.5541,
+      "incomingOpacity": "0.7624",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.3931",
+      "imageScale": 0.9918
+    },
+    {
+      "ms": 280,
+      "incomingX": 7.2151,
+      "incomingOpacity": "0.7996",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.5007",
+      "imageScale": 0.995
+    },
+    {
+      "ms": 298,
+      "incomingX": 5.9037,
+      "incomingOpacity": "0.836",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.6056",
+      "imageScale": 0.9982
+    },
+    {
+      "ms": 314,
+      "incomingX": 4.896,
+      "incomingOpacity": "0.864",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.6856",
+      "imageScale": 1.0006
+    },
+    {
+      "ms": 331,
+      "incomingX": 3.9727,
+      "incomingOpacity": "0.8896",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.7578",
+      "imageScale": 1.0027
+    },
+    {
+      "ms": 348,
+      "incomingX": 3.1867,
+      "incomingOpacity": "0.9115",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.818",
+      "imageScale": 1.0045
+    },
+    {
+      "ms": 364,
+      "incomingX": 2.5593,
+      "incomingOpacity": "0.9289",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.8647",
+      "imageScale": 1.0059
+    },
+    {
+      "ms": 381,
+      "incomingX": 1.9994,
+      "incomingOpacity": "0.9445",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9048",
+      "imageScale": 1.0071
+    },
+    {
+      "ms": 397,
+      "incomingX": 1.5615,
+      "incomingOpacity": "0.9566",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9344",
+      "imageScale": 1.008
+    },
+    {
+      "ms": 413,
+      "incomingX": 1.1998,
+      "incomingOpacity": "0.9667",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9571",
+      "imageScale": 1.0087
+    },
+    {
+      "ms": 431,
+      "incomingX": 0.8723,
+      "incomingOpacity": "0.9758",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9756",
+      "imageScale": 1.0093
+    },
+    {
+      "ms": 448,
+      "incomingX": 0.6295,
+      "incomingOpacity": "0.9825",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9873",
+      "imageScale": 1.0096
+    },
+    {
+      "ms": 464,
+      "incomingX": 0.4509,
+      "incomingOpacity": "0.9875",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9942",
+      "imageScale": 1.0098
+    },
+    {
+      "ms": 480,
+      "incomingX": 0.3134,
+      "incomingOpacity": "0.9913",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.998",
+      "imageScale": 1.0099
+    },
+    {
+      "ms": 497,
+      "incomingX": 0.2045,
+      "incomingOpacity": "0.9943",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "0.9997",
+      "imageScale": 1.01
+    },
+    {
+      "ms": 514,
+      "incomingX": 0.1268,
+      "incomingOpacity": "0.9965",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.01
+    },
+    {
+      "ms": 531,
+      "incomingX": 0.0737,
+      "incomingOpacity": "0.998",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.01
+    },
+    {
+      "ms": 548,
+      "incomingX": 0.0393,
+      "incomingOpacity": "0.9989",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.01
+    },
+    {
+      "ms": 564,
+      "incomingX": 0.0196,
+      "incomingOpacity": "0.9995",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0098
+    },
+    {
+      "ms": 580,
+      "incomingX": 0.0084,
+      "incomingOpacity": "0.9998",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0096
+    },
+    {
+      "ms": 597,
+      "incomingX": 0.0027,
+      "incomingOpacity": "0.9999",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0091
+    },
+    {
+      "ms": 613,
+      "incomingX": 0.0006,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0084
+    },
+    {
+      "ms": 630,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0074
+    },
+    {
+      "ms": 647,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0061
+    },
+    {
+      "ms": 664,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0044
+    },
+    {
+      "ms": 680,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.003
+    },
+    {
+      "ms": 697,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0019
+    },
+    {
+      "ms": 714,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0011
+    },
+    {
+      "ms": 730,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0006
+    },
+    {
+      "ms": 747,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0002
+    },
+    {
+      "ms": 764,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1.0001
+    },
+    {
+      "ms": 780,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1
+    },
+    {
+      "ms": 797,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1
+    },
+    {
+      "ms": 814,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1
+    },
+    {
+      "ms": 831,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1
+    },
+    {
+      "ms": 848,
+      "incomingX": 0,
+      "incomingOpacity": "1",
+      "outgoingX": -24,
+      "outgoingOpacity": "0",
+      "imageOpacity": "1",
+      "imageScale": 1
+    }
+  ],
+  "errors": []
+}

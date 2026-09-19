@@ -561,3 +561,22 @@ backdrop at the same overscan. Explicit pause, reduced motion and ineligible
 viewports restore the unenhanced crop; teardown removes owned inline transforms.
 This corrects confirmed hover-boundary and transformed-overflow rebuild resets;
 18×12px travel,160ms damping, collection sizing and gallery behavior are unchanged.
+
+## Hero carousel letter arrival — 19 September 2026
+
+Devon approved letters entering straight from the right, then a soft image pulse
+120ms after the first letters, and authorized pushing the implementation to
+PR #109. This supersedes the 600ms whole-panel slide on eligible Home motion
+transitions only. Preserve the initial visible campaign, all source copy,
+5:4 contain imagery, controls and six-second autoplay. Use one GSAP timeline:
+outgoing letters travel24px left over220ms with80ms total stagger and fade.
+Incoming letters begin100ms later:36px horizontal travel over550ms,
+stagger capped at200ms, power3.out. Image0.98→1.01→1 over300ms+280ms;
+supporting copy/CTA follow200ms after incoming letters.
+No vertical letter movement. Total850ms; restore both unsplit accessible headings
+after completion or interruption. Desktop eligibility and reduced-motion,
+save-data, hidden/offscreen and motion-pause protections remain authoritative.
+Pointer smoothing owns a separate backdrop transform. Runtime carouselMotion
+values and Motion/Hero carousel stories define this explicit user-approved
+divergence from the static Figma frames; no layout or token redesign.
+See [the contract](docs/features/hero-carousel-letter-arrival.md).
