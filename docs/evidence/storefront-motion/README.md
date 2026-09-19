@@ -142,3 +142,38 @@ pointer-input polling (26total across final run+targeted rerun,including2explici
 baseline no-JS expected failures).12fine-pointer desktop cases are inapplicable
 to the mobile project. Independent original-gallery reproduction now holds1727px
 before opening,after600msopen and after600msclosed,with focus restored.
+
+## Consolidated review package
+
+Implementation commit: `915e300` (following `3ba4c8e` and `1a66bf4`).
+Delivery branch: `agent/storefront-motion-delivery`.
+[PR109 and its exact-head checks](https://github.com/djamestaft/infusiondiffusion/pull/109)
+are the final deployment/CI evidence ledger. The coordinator records the immutable
+Vercel URL, health SHA, final browser matrix and performance comparison there after
+publication. The stable branch preview is
+https://infusion-diffusion-git-agent-8b0d72-devon-james-tafts-projects.vercel.app.
+Vercel account access may be required; deployment protection stays enabled.
+
+- [Independent review and all three resolved findings](independent-review.md).
+- [Initial five-run performance and toolbar isolation](performance-initial.md),
+  with [machine-readable measurements](performance-initial.json). The first
+  untouched-preview Home median exceeded the budget; toolbar isolation was within
+  budget. Both results are retained. These measurements are not the final build.
+- [Initial deployed cross-browser results](preview-initial-browsers.json):
+  Chromium/WebKit/Firefox, desktop and mobile; four Chromium widths;
+  zero page errors/overflow and zero Chromium axe violations. This precedes the
+  independently reviewed gallery and normal-laptop corrections.
+- [Independent normal-zoom geometry](laptop-design-metrics.json),
+  [1440×800](home-1440x800.png), [1280×720](home-1280x720.png),
+  [mobile collection](home-mobile.png), [mobile About](about-mobile.png).
+  All four laptop compositions were visually accepted after the user's feedback.
+
+Rollback for this preview is the previous static composition: set the Home and
+About route opt-ins to `motionEnabled={false}` or revert the delivery branch.
+Production remains on protected `main` at `67de810`; no production rollback or
+publication has been performed. All source products and purchase paths remain.
+
+INF-50–56 cover the completed storyboard, studies, foundations, collection, hero,
+chapters and preview integration, in that dependency order. INF-49/57 retain final
+user acceptance, physical-device evidence, the known no-JS limitation and human
+release/post-merge checks. No green automated check substitutes for those gates.

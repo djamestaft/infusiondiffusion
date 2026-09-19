@@ -1,7 +1,7 @@
 # Infusion Diffusion Roadmap
 
-Last reconciled: 19 September 2026 against fresh protected `main` (`e7242ad`),
-human-merged PR107 and the current Plane ledger. INF-49–57 add the motion
+Last reconciled: 19 September 2026 against fresh protected `main` (`67de810`),
+human-merged PR108 and the current Plane ledger. INF-49–57 add the motion
 workstream to the 48-item imagery reconciliation. This summary governs current status; dated
 notes below retain their original evidence and superseded status wording.
 
@@ -28,7 +28,8 @@ invent or approve those facts.
 
 ## Current Plane disposition
 
-**57 items: 34 Done, 6 Todo, 3 In Progress, 11 Backlog, 3 Cancelled.**
+The motion ledger is reconciled separately below; the following table preserves
+the remaining launch work from the pre-motion snapshot.
 Ownership and dependency edges are preserved. Completed design, storefront,
 account, payment integration, footer, About media and mobile focus work remain
 Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
@@ -57,7 +58,9 @@ default preparation owner; existing task assignments remain unchanged.
 
 **19 September preview update:** Devon delegated G1–G3 self-approval and requested
 complete delivery on one preview branch. INF-50/51 design/studies and INF-52–56
-implementation are now in preview verification on `agent/storefront-motion-delivery`.
+implementation are delivered on `agent/storefront-motion-delivery` in PR109.
+The normal-laptop correction at `915e300` supports 720–800px-tall viewports
+without zooming out and has independent design/runtime acceptance.
 INF-57 covers independent checks before the final review; production and physical
 iPhone acceptance remain open. See `docs/evidence/storefront-motion/README.md`.
 The original dependency order remains:

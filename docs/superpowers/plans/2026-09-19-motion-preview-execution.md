@@ -68,8 +68,8 @@ template stories and tests/e2e/storefront-motion.spec.ts.
 
 - [ ] Run formatting, lint, typecheck, unit, Storybook tests/build, Next build and
       relevant Playwright suites. Complete exact-head CI/pr:gate after push.
-- [ ] Independent reviewer checks whole branch; fix material findings and verify.
-- [ ] Push agent/storefront-motion-delivery and create one reviewable PR.
+- [x] Independent reviewer checks whole branch; fix material findings and verify.
+- [x] Push agent/storefront-motion-delivery and create one reviewable PR (109).
 - [ ] Verify Vercel preview commit/health, Home/About screenshots and interactions.
 - [ ] Compare baseline/candidate performance; record limitations and fallback.
 - [ ] Update DESIGN.md, .impeccable/design.json, brief, roadmap and Plane with
@@ -84,3 +84,6 @@ template stories and tests/e2e/storefront-motion.spec.ts.
 - Static Figma frames remain authoritative for brand/layout. New motion is a
   documented candidate divergence for the final review, not a silently edited approval.
 - Main PR108 is merged at 67de810; earlier awaiting-merge wording is superseded.
+
+Final exact-head remote results are retained in PR109; physical-device, no-JS,
+final user review and production acceptance remain explicitly open in INF-57.
