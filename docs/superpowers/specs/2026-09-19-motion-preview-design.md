@@ -40,7 +40,7 @@ delegation; final user acceptance remains the preview review.
   animation import failure. Data comes through existing component props; no new
   Shopify/Sanity fetching or mutable commerce data inside motion modules.
 - Desktop motion requires fine pointer, hover, width >=1024 and sufficient height
-  (>=760px plus actual content fitting below the measured fixed header). Touch,
+  (>=800px plus actual content fitting below the measured fixed header). Touch,
   reduced motion, short layouts and content extremes use a static grid/chapters.
 - Collection uses existing ProductCard, source-owned names and prices; all supplied
   products remain accessible. Pin travel is measured from track scrollWidth minus
@@ -51,7 +51,7 @@ delegation; final user acceptance remains the preview review.
   color/type tokens. They never replace accessible headings or product names.
 - Hero uses a separate wrapper for entrance/depth so carousel transforms and
   controls retain ownership. Entrance <=700ms, no opacity-zero LCP/CTA. Optional
-  pointer depth <=8px, time-based exponential damping with delta clamp and settle
+  pointer depth <=6px X / 4px Y, 120ms exponential damping with delta clamp and settle
   cutoff. No cursor replacement, perpetual loop, or pointer work on touch.
 - About keeps four chapters, full Born text, alternating image/copy composition,
   current square previews and GalleryViewer API. CSS sticky suffices for the
@@ -64,6 +64,20 @@ delegation; final user acceptance remains the preview review.
   template stories exercise the new composition. Live Home/About opt into motion.
 
 ## Verification and evidence
+
+Selected exact timing: hero 16px to zero over 700ms power3.out, visible throughout;
+skip entrance on restored-scroll entry. Collection cards clamp(300px,36vw,440px),
+direct linear scrub, scroll distance measured travel capped at 2.5 viewport heights.
+Decorative names clamp(96px,11vw,180px), semantic secondary ink at 8% opacity,
+drift +32px to -32px. About desktop chapters min-height 72svh with natural text
+growth, local sticky square photographs and +12px to -12px travel. No masks.
+Pointer effect targets only a decorative background layer, settles at 0.1px,
+stops on leave/focus/offscreen/hidden/static; no permanent ambient loop.
+Keyboard focus on an offscreen collection product switches the collection to
+static before focus can be obscured. All motion variants retain all received
+products (up to six); baseline motionEnabled=false retains 3/4/3/3 layout.
+Skip collection focuses the following meaningful section without smooth scroll.
+Motion controls use existing primitives and visible action names.
 
 Implement and verify component stories before wiring live routes. Meaningful
 states: cinematic/restrained, static/reduced-motion, touch, short viewport,
