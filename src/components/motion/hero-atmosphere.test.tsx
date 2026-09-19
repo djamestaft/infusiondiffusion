@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type RefObject } from "react";
 import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { MotionRuntime } from "@/lib/motion/runtime";
@@ -64,12 +64,20 @@ afterEach(() => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
-function study() {
+function study(
+  props: {
+    pointerX?: number;
+    pointerY?: number;
+    animateEntrance?: boolean;
+    focusScope?: RefObject<HTMLElement | null>;
+  } = {},
+) {
   const view = render(
-    <HeroAtmosphere>
+    <HeroAtmosphere {...props}>
       <div data-motion-backdrop />
       <a href="/shop">Shop</a>
     </HeroAtmosphere>,
+    { container: props.focusScope?.current ?? undefined },
   );
   const hero = view.getByTestId("hero-atmosphere");
   const layer = hero.querySelector<HTMLElement>("[data-motion-backdrop]")!;
@@ -91,6 +99,30 @@ function study() {
   return { ...view, hero, layer, move, tick };
 }
 describe("hero pointer lifecycle", () => {
+  it("stops decorative motion when a sibling control in an explicit focus scope receives focus", () => {
+    const root = document.createElement("div");
+    document.body.append(root);
+    const s = study({ focusScope: { current: root } });
+    const input = document.createElement("input");
+    root.append(input);
+    s.move();
+    s.tick(16);
+    expect(s.layer.style.transform).not.toBe("");
+    act(() => input.focus());
+    expect(s.layer.style.transform).toBe("");
+    expect(frames.size).toBe(0);
+    s.move();
+    expect(frames.size).toBe(0);
+  });
+  it("supports bounded decorative guide travel without changing default hero travel", () => {
+    const s = study({ pointerX: 8, pointerY: 4, animateEntrance: false });
+    s.move(1440, 800);
+    for (let time = 16; time < 4000 && frames.size; time += 16) s.tick(time);
+    expect(s.layer.style.transform).toBe(
+      "translate3d(8px, 4px, 0) scale(1.04)",
+    );
+    expect(frames.size).toBe(0);
+  });
   it("freezes the rendered pose on leave and resumes from it with a fresh clock", () => {
     const s = study();
     s.move();

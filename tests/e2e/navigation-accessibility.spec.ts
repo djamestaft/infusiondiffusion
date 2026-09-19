@@ -87,6 +87,7 @@ for (const route of [
       );
     expect(targets).toEqual([]);
     if (route === "/fragrance-guide") {
+      await page.getByRole("button", { name: "Begin the guide" }).click();
       const choice = page.getByRole("radio").first();
       await choice.focus();
       await page.keyboard.press("Space");

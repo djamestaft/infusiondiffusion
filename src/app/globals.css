@@ -861,3 +861,132 @@
     transform: scale(var(--motion-hero-scale));
   }
 }
+
+/* Consultation keeps every answer reachable at normal laptop heights. */
+@keyframes guide-step-enter {
+  from {
+    transform: translateX(var(--guide-enter-x));
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes guide-result-enter {
+  from {
+    transform: translateY(20px);
+    opacity: 0.85;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-guide-light-motion] [data-guide-reveal] {
+    animation: guide-step-enter 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  [data-guide-light-motion][data-guide-transition="result"]
+    [data-guide-reveal] {
+    animation-name: guide-result-enter;
+  }
+}
+@media (min-width: 1024px) and (max-height: 800px) {
+  .guide-question-panel {
+    padding-block: 24px;
+    padding-inline: 40px;
+  }
+  .guide-stage {
+    grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
+  }
+  .guide-question-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .guide-choices > label {
+    min-height: 52px;
+    padding-block: 8px;
+  }
+  .guide-atmosphere {
+    gap: 20px;
+    padding-block: 24px;
+  }
+  .guide-atmosphere > p:first-child {
+    font-size: 40px;
+    line-height: 46px;
+  }
+  .guide-introduction {
+    padding-block: 32px;
+  }
+  .guide-introduction h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  .guide-atmosphere [data-guide-reveal] {
+    font-size: 72px;
+    line-height: 84px;
+  }
+}
+
+@media (max-width: 374px) {
+  .guide-question-title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .guide-choices label > span:first-of-type {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .guide-introduction h1 {
+    font-size: 34px;
+    line-height: 42px;
+  }
+}
+
+@keyframes guide-answer-enter {
+  from {
+    transform: translateY(10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-guide-light-motion] [data-guide-answer-text] {
+    animation: guide-answer-enter 420ms cubic-bezier(0.215, 0.61, 0.355, 1)
+      backwards;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(2)
+    [data-guide-answer-text] {
+    animation-delay: 35ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(3)
+    [data-guide-answer-text] {
+    animation-delay: 70ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(4)
+    [data-guide-answer-text] {
+    animation-delay: 105ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(5)
+    [data-guide-answer-text] {
+    animation-delay: 140ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(6)
+    [data-guide-answer-text] {
+    animation-delay: 175ms;
+  }
+}

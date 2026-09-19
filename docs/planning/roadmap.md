@@ -61,8 +61,10 @@ complete delivery on one preview branch. INF-50/51 design/studies and INF-52–5
 implementation are delivered on `agent/storefront-motion-delivery` in PR109.
 The normal-laptop correction at `915e300` supports 720–800px-tall viewports
 without zooming out and has independent design/runtime acceptance.
-INF-54 was reopened for the confirmed hero-hover continuity correction after
-Devon reviewed d64622c; its correction/evidence remains in the same PR109.
+INF-54's confirmed hero-hover continuity correction is complete at cdc47e9
+after Devon reviewed d64622c. The deployed nine-case Chromium/WebKit/Firefox
+matrix, 36 navigation crossings and visual recordings pass, as do exact-head
+CI and the PR gate. Evidence remains in PR109, comment5740259005.
 INF-57 covers independent checks before the final review; production and physical
 iPhone acceptance remain open. See `docs/evidence/storefront-motion/README.md`.
 The original dependency order remains:
@@ -100,6 +102,17 @@ See the [motion brief](../features/storefront-motion-brief.md) and
 [delivery plan](../superpowers/plans/2026-09-19-storefront-motion.md).
 The planning PR108 is merged at67de810. The selected motion design is self-approved
 for preview under Devon’s19September delegation; final user acceptance is pending.
+
+## Fragrance Guide consultation — INF-58
+
+After the hover correction, Devon authorized a complete design/layout rethink
+of the Fragrance Guide, preserving five questions and using GSAP/LERP motion.
+INF-58 is In Progress under Devon, with a new Figma concept, Storybook-first
+implementation and final preview verification on the same delivery branch.
+Intermediate decisions are delegated; final human review, merge and production
+remain separate. This supersedes the earlier instruction to retain Guide
+Variation 02 for this route only. Matching remains notes/character based.
+See [the guide brief](../features/fragrance-guide-motion-brief.md).
 
 ## Completed cutover and remaining launch gates
 
