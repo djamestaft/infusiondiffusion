@@ -28,7 +28,8 @@ hover-continuity fix is owned by pane 1 and retained as the integration base.
   for outgoing precedence/overlap, horizontal entry, image timing, bounded
   long-text duration, per-line tracking reset/cap and reversible cleanup of both
   headings.
-- Storybook:397 tests across34 files pass; production Storybook build passes.
+- Storybook:401 tests across34 files pass after the gold basket badge addition;
+  production Storybook build passes.
 - Next production build passes using the isolated .next-e2e output directory.
 - Playwright: all5 choreography tests pass in each of Chromium, WebKit and
   Firefox (15 passes). Covers frame samples, rapid reversal, resize, reduced
@@ -57,3 +58,17 @@ recorded visual evidence uses Storybook with the published campaign imagery.
 This is not a claim of deployed Home image delivery or physical-device sign-off.
 Human visual acceptance, physical Safari/iPhone and the existing full-route
 no-JavaScript limitation remain under INF-49/57; no merge or production deploy.
+
+## Gold basket badge follow-up
+
+Devon also requested a gold circle behind the header cart quantity in this PR.
+The existing count span now uses action-primary and action-primary-foreground,
+with a20px circle (24px for99+). Zero/unavailable behavior, full accessible
+quantity and44px link target are unchanged.
+
+Four new Navigation stories cover midnight, ivory,99+ and320px mobile. Browser
+inspection confirmed circular geometry, legible dark digits, no horizontal
+overflow and zero axe violations in all four. The screenshots and measured
+results are included here. Lint, typecheck,432 unit tests,401 Storybook tests
+and both production builds pass. No cart data or commerce logic changed.
+This small visual follow-up does not change roadmap milestones or release gates.

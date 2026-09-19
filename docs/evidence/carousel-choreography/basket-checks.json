@@ -1,0 +1,54 @@
+[
+  {
+    "story": "gold-cart-count",
+    "style": {
+      "background": "rgb(221, 199, 127)",
+      "color": "rgb(25, 25, 22)",
+      "width": 20,
+      "height": 20,
+      "radius": "3.35544e+07px",
+      "text": "4"
+    },
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "story": "gold-cart-count-ivory",
+    "style": {
+      "background": "rgb(197, 164, 71)",
+      "color": "rgb(25, 25, 22)",
+      "width": 20,
+      "height": 20,
+      "radius": "3.35544e+07px",
+      "text": "4"
+    },
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "story": "gold-cart-count-overflow",
+    "style": {
+      "background": "rgb(221, 199, 127)",
+      "color": "rgb(25, 25, 22)",
+      "width": 24,
+      "height": 24,
+      "radius": "3.35544e+07px",
+      "text": "99+"
+    },
+    "overflow": false,
+    "violations": []
+  },
+  {
+    "story": "gold-cart-count-mobile",
+    "style": {
+      "background": "rgb(221, 199, 127)",
+      "color": "rgb(25, 25, 22)",
+      "width": 20,
+      "height": 20,
+      "radius": "3.35544e+07px",
+      "text": "4"
+    },
+    "overflow": false,
+    "violations": []
+  }
+]

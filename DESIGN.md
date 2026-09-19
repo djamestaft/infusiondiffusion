@@ -562,6 +562,17 @@ viewports restore the unenhanced crop; teardown removes owned inline transforms.
 This corrects confirmed hover-boundary and transformed-overflow rebuild resets;
 18×12px travel,160ms damping, collection sizing and gallery behavior are unchanged.
 
+## Gold basket quantity — 19 September 2026
+
+Basket badge follow-up: Devon requested a gold circle behind the navigation cart
+quantity in PR109. Reuse action-primary gold and action-primary-foreground ink,
+with a20px circle and centered semibold digits;99+ uses24px to retain a circular
+shape. Preserve the44px cart target, full accessible count, hidden zero and
+unavailable dash. Navigation GoldCartCount stories cover midnight, ivory, mobile
+and overflow. This explicitly approved badge treatment supersedes the surface
+colored badge in existing static Figma frames; other navigation geometry stays
+unchanged.
+
 ## Hero carousel letter arrival — 19 September 2026
 
 Devon approved letters entering straight from the right, then a soft image pulse
