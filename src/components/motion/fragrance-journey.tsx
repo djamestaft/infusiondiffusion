@@ -26,46 +26,57 @@ export function FragranceJourney({
 }) {
   const ref = useRef<HTMLElement>(null);
   const { setPaused } = useMotionPreference();
-  const setup = useCallback(({ gsap }: MotionRuntime, section: HTMLElement) => {
-    const track = section.querySelector<HTMLElement>("[data-motion-track]")!;
-    const viewport = section.querySelector<HTMLElement>(
-      "[data-motion-viewport]",
-    )!;
-    section.dataset.motionActive = "true";
-    const top = headerOffset() + motionTokens.collection.headerGap;
-    const travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
-    if (
-      !travel ||
-      section.offsetHeight >
-        window.innerHeight - top - motionTokens.collection.bottomGap
-    ) {
-      delete section.dataset.motionActive;
-      return;
-    }
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: () =>
-          `top top+=${headerOffset() + motionTokens.collection.headerGap}`,
-        end: () =>
-          `+=${Math.min(travel, window.innerHeight * motionTokens.collection.maxViewportTravel)}`,
-        pin: true,
-        scrub: true,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
-    });
-    timeline.to(track, { x: -travel, ease: "none", duration: 1 }, 0);
-    timeline.fromTo(
-      section.querySelector("[data-motion-names]"),
-      { x: motionTokens.collection.nameTravel },
-      { x: -motionTokens.collection.nameTravel, ease: "none", duration: 1 },
-      0,
-    );
-    return () => {
-      delete section.dataset.motionActive;
-    };
-  }, []);
+  const setup = useCallback(
+    (
+      { gsap }: MotionRuntime,
+      section: HTMLElement,
+      onCleanup: (cleanup: () => void) => void,
+    ) => {
+      if (products.length < 2) return;
+      onCleanup(() => {
+        delete section.dataset.motionActive;
+      });
+      const track = section.querySelector<HTMLElement>("[data-motion-track]")!;
+      const viewport = section.querySelector<HTMLElement>(
+        "[data-motion-viewport]",
+      )!;
+      section.dataset.motionActive = "true";
+      const top = headerOffset() + motionTokens.collection.headerGap;
+      const travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
+      if (
+        !travel ||
+        section.offsetHeight >
+          window.innerHeight - top - motionTokens.collection.bottomGap
+      ) {
+        delete section.dataset.motionActive;
+        return;
+      }
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: () =>
+            `top top+=${headerOffset() + motionTokens.collection.headerGap}`,
+          end: () =>
+            `+=${Math.min(travel, window.innerHeight * motionTokens.collection.maxViewportTravel)}`,
+          pin: true,
+          scrub: true,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+      timeline.to(track, { x: -travel, ease: "none", duration: 1 }, 0);
+      timeline.fromTo(
+        section.querySelector("[data-motion-names]"),
+        { x: motionTokens.collection.nameTravel },
+        { x: -motionTokens.collection.nameTravel, ease: "none", duration: 1 },
+        0,
+      );
+      return () => {
+        delete section.dataset.motionActive;
+      };
+    },
+    [products],
+  );
   useMotionEffect(ref, cinematic && products.length > 1, setup);
   const stopForFocus = (target: EventTarget) => {
     if (
@@ -75,7 +86,10 @@ export function FragranceJourney({
     )
       return;
     const rect = target.getBoundingClientRect();
-    if (rect.left < 0 || rect.right > window.innerWidth) {
+    const viewport = ref.current
+      .querySelector("[data-motion-viewport]")!
+      .getBoundingClientRect();
+    if (rect.left < viewport.left + 4 || rect.right > viewport.right - 4) {
       flushSync(() => setPaused(true));
       target.scrollIntoView({ block: "center", behavior: "instant" });
     }

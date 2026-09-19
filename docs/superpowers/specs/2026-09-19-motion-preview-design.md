@@ -104,3 +104,10 @@ Independent critique amendment: About copy centers vertically next to the sticky
 photographs. The hero pointer targets the existing decorative backdrop; an added
 radial wash was rejected as visually ineffective. Height-aware card sizing and
 80px name space preserve readable lettering and measured stage fit.
+
+Preview scope exception after verification: full-route no-JS is a pre-existing
+Next Cache Components/Suspense streaming limitation confirmed on production67de810
+and candidate Home/About. Removing route Suspense fails the production build.
+Preserve caching/cart/draft architecture; expose this unmet acceptance item in
+final review. Component SSR and actual GSAP import-failure static behavior remain
+required and tested. This is not a full-route no-JS pass.

@@ -54,7 +54,11 @@ export function MotionControl() {
 export function useMotionEffect(
   ref: RefObject<HTMLElement | null>,
   enabled: boolean,
-  setup: (runtime: MotionRuntime, element: HTMLElement) => (() => void) | void,
+  setup: (
+    runtime: MotionRuntime,
+    element: HTMLElement,
+    onCleanup: (cleanup: () => void) => void,
+  ) => (() => void) | void,
 ) {
   const { paused } = useMotionPreference();
   useEffect(() => {
@@ -76,10 +80,20 @@ export function useMotionEffect(
         return;
       stop = mountDeferredMotion(loadMotion, (runtime) => {
         const media = runtime.gsap.matchMedia(element);
+        let manualCleanup: (() => void) | undefined;
         try {
-          media.add(motionQuery, () => setup(runtime, element));
+          media.add(motionQuery, () => {
+            const cleanup = setup(runtime, element, (registered) => {
+              manualCleanup = registered;
+            });
+            return () => {
+              cleanup?.();
+              manualCleanup?.();
+            };
+          });
         } catch {
           media.revert();
+          manualCleanup?.();
           return;
         }
         return () => media.revert();

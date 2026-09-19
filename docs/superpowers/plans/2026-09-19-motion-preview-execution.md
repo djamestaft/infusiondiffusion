@@ -31,10 +31,10 @@ import failure must retain full usable content. One branch/PR. Preserve output/.
 
 ## Task 1 — Storyboard and isolated studies (INF-50/51)
 
-- [ ] Record exact Figma capture, design critique and selected contract in evidence.
-- [ ] Add real-imagery Storybook studies for restrained/cinematic collection,
+- [x] Record exact Figma capture, design critique and selected contract in evidence.
+- [x] Add real-imagery Storybook studies for restrained/cinematic collection,
       hero and About; static/touch/reduced-motion and content extremes.
-- [ ] Review stories with fonts ready before live integration. Document timing,
+- [x] Review stories with fonts ready before live integration. Document timing,
       measured pin distance, eligibility, damping and performance budget decisions.
 
 ## Task 2 — Foundations and composed components (INF-52–55)
@@ -43,25 +43,26 @@ Files: src/lib/motion/{damp,runtime}.ts as needed;
 src/components/motion/{motion-boundary,fragrance-journey,hero-atmosphere,story-chapters}.tsx
 and matching stories/tests; package.json/pnpm-lock.yaml; src/app/globals.css.
 
-- [ ] Write behavior tests first for damping equivalence/clamp, static output,
+- [x] Write behavior tests first for damping equivalence/clamp, static output,
       preference changes and late import cleanup. Observe expected failure.
-- [ ] Implement small scoped lifecycle API and semantic motion tokens.
-- [ ] Compose ProductCard collection with measured travel, visible skip/static
+- [x] Implement small scoped lifecycle API and semantic motion tokens.
+- [x] Compose ProductCard collection with measured travel, visible skip/static
       controls and keyboard-focus handling. Add 0/1/6 item/missing/long-content tests.
-- [ ] Add hero wrapper preserving the carousel's own transforms and controls.
-- [ ] Add About chapter wrapper preserving source figures and GalleryViewer API.
-- [ ] Run targeted unit and Storybook checks; record real results and self-review.
+- [x] Add hero wrapper preserving the carousel's own transforms and controls.
+- [x] Add About chapter wrapper preserving source figures and GalleryViewer API.
+- [x] Run targeted unit and Storybook checks; record real results and self-review.
 
 ## Task 3 — Integrated preview (INF-56)
 
 Files: HomeContent/HomeTemplate, CombinedAboutTemplate, live Home/About routes,
 template stories and tests/e2e/storefront-motion.spec.ts.
 
-- [ ] Wire an explicit motion opt-in, preserving default static template stories.
-- [ ] Test forward/reverse pinning, skip/focus, responsive eligibility, paused,
-      no-JS/import failure, route/remount and gallery interruption cases in browser.
-- [ ] Capture all four widths and fix observed visual defects as one batch.
-- [ ] Keep Shopify/Sanity inputs and existing carousel/gallery behavior intact.
+- [x] Wire an explicit motion opt-in, preserving default static template stories.
+- [x] Test forward/reverse pinning, skip/focus, responsive eligibility, paused,
+      import failure, route/remount and gallery interruption cases in browser.
+      Full-route no-JS remains an explicitly documented pre-existing exception.
+- [x] Capture all four widths and fix observed visual defects as one batch.
+- [x] Keep Shopify/Sanity inputs and existing carousel/gallery behavior intact.
 
 ## Task 4 — Evidence and delivery (INF-57 preview scope)
 

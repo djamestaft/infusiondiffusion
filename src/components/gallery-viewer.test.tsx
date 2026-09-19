@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
   galleryMarketAspectRatio,
@@ -123,9 +123,11 @@ describe("GalleryViewer", () => {
     const trigger = screen.getByRole("button", { name: "View Quiet ritual" });
     await user.click(trigger);
     const close = screen.getByRole("button", { name: "Close gallery viewer" });
+    const focus = vi.spyOn(trigger, "focus");
     expect(close).toHaveFocus();
     await user.keyboard("{Escape}");
     expect(trigger).toHaveFocus();
+    expect(focus).toHaveBeenCalledWith({ preventScroll: true });
   });
 
   it("retains an understandable failed image slot and viewer exit path", async () => {

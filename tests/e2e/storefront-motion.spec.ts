@@ -101,7 +101,10 @@ test.describe("Home and About motion enhancement", () => {
   test("About gallery interruption restores focus and all four chapters", async ({
     page,
   }) => {
+    await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto("/about");
+    if (!(await page.evaluate(() => matchMedia("(pointer: coarse)").matches)))
+      await expect(page.locator("[data-motion-chapter]")).toHaveCount(4);
     await expect(page.locator("[data-testid^='about-chapter-']")).toHaveCount(
       4,
     );
@@ -109,14 +112,18 @@ test.describe("Home and About motion enhancement", () => {
       .getByTestId("about-chapter-principles")
       .getByRole("button", { name: /^View / });
     await photograph.scrollIntoViewIfNeeded();
+    const before = await page.evaluate(() => scrollY);
     await photograph.click();
     await expect(page.getByRole("dialog")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(photograph).toBeFocused();
     await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect
+      .poll(() => page.evaluate(() => scrollY))
+      .toBeCloseTo(before, 0);
   });
 
-  test("static HTML works with JavaScript disabled", async ({
+  test("known baseline: full-route no-JS streaming remains unsupported", async ({
     browser,
     baseURL,
   }) => {
@@ -144,4 +151,120 @@ test.describe("Home and About motion enhancement", () => {
     }
     await context.close();
   });
+});
+
+test("a failed GSAP module leaves all source products usable", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "Only eligible desktop attempts GSAP imports");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  let blocked = 0;
+  await page.route("**/_next/static/chunks/*.js", async (route) => {
+    const response = await route.fetch();
+    const body = await response.text();
+    if (body.includes("Invalid property") && body.includes("gsap")) {
+      blocked++;
+      await route.abort("failed");
+    } else await route.fulfill({ response });
+  });
+  await page.goto("/");
+  await expect.poll(() => blocked).toBeGreaterThan(0);
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  const collection = page.getByTestId("home-cabinet-band");
+  await expect(
+    collection.getByRole("link", { name: /^View / }).last(),
+  ).toBeVisible();
+  await expect(
+    collection.getByRole("link", { name: "Shop all fragrances" }),
+  ).toHaveAttribute("href", "/shop");
+  await page.unrouteAll({ behavior: "wait" });
+});
+
+test("reduced motion and data saving do not fetch GSAP", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "Desktop eligibility is the variable under test");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const imports: Promise<string | null>[] = [];
+  page.on("response", (response) => {
+    if (response.request().resourceType() === "script")
+      imports.push(
+        response
+          .text()
+          .then((body) =>
+            body.includes("Invalid property") && body.includes("gsap")
+              ? response.url()
+              : null,
+          )
+          .catch(() => null),
+      );
+  });
+  await page.goto("/");
+  await expect(page.getByTestId("home-cabinet-band")).toBeVisible();
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  expect((await Promise.all(imports)).filter(Boolean)).toEqual([]);
+  await page.goto("about:blank");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "connection", {
+      configurable: true,
+      value: { saveData: true },
+    }),
+  );
+  imports.length = 0;
+  await page.goto("/");
+  await expect(page.getByTestId("home-cabinet-band")).toBeVisible();
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  expect((await Promise.all(imports)).filter(Boolean)).toEqual([]);
+});
+
+test("pointer depth is bounded, settles, and stops on focus", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "Fine pointer effect");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  await expect(page.getByTestId("home-cabinet-band")).toHaveAttribute(
+    "data-motion-active",
+    "true",
+  );
+  const backdrop = page.locator("[data-motion-backdrop]");
+  await page.mouse.move(1200, 400);
+  await expect
+    .poll(() => backdrop.evaluate((element) => element.style.transform))
+    .toContain("translate3d");
+  const position = await backdrop.evaluate((element) => {
+    const matrix = new DOMMatrix(getComputedStyle(element).transform);
+    return { x: matrix.m41, y: matrix.m42 };
+  });
+  expect(Math.abs(position.x)).toBeLessThanOrEqual(6);
+  expect(Math.abs(position.y)).toBeLessThanOrEqual(4);
+  await page.getByTestId("home-hero-section").getByRole("link").first().focus();
+  await expect(backdrop).toHaveCSS("transform", "none");
+});
+
+test("a partially clipped first product switches to static on keyboard focus", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "Fine-pointer desktop pin");
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  const collection = page.getByTestId("home-cabinet-band");
+  await expect(collection).toHaveAttribute("data-motion-active", "true");
+  const top = await collection.evaluate(
+    (e) => e.getBoundingClientRect().top + scrollY,
+  );
+  await page.evaluate((y) => scrollTo(0, y), top - 146 + 35);
+  const first = collection.getByRole("link", { name: /^View / }).first();
+  await expect
+    .poll(() => first.evaluate((e) => e.getBoundingClientRect().left))
+    .toBeLessThan(64);
+  await first.focus();
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  await expect(first).toBeFocused();
 });

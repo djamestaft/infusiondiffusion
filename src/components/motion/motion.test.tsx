@@ -1,3 +1,6 @@
+import { useRef } from "react";
+import { loadMotion, type MotionRuntime } from "@/lib/motion/runtime";
+import { renderToString } from "react-dom/server";
 import {
   act,
   cleanup,
@@ -6,7 +9,7 @@ import {
   screen,
 } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { MotionBoundary } from "./motion-boundary";
+import { useMotionEffect, MotionBoundary } from "./motion-boundary";
 import { FragranceJourney } from "./fragrance-journey";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
 vi.mock("@/lib/motion/runtime", async (importOriginal) => ({
@@ -37,6 +40,14 @@ function Journey({ products = productCardFixtures } = {}) {
   );
 }
 describe("progressively enhanced collection", () => {
+  it("server-renders every supplied card with no motion-only hiding", () => {
+    const html = renderToString(<Journey />);
+    const root = document.createElement("div");
+    root.innerHTML = html;
+    expect(root.querySelectorAll("a[aria-label^='View ']")).toHaveLength(6);
+    expect(root.querySelector("[data-motion-active]")).toBeNull();
+    expect(root.querySelector("[data-motion-track] [hidden]")).toBeNull();
+  });
   it("keeps every received product visible and linked without eligible motion", () => {
     media();
     render(<Journey />);
@@ -75,4 +86,39 @@ describe("progressively enhanced collection", () => {
     unmount();
     expect(listeners.size).toBe(0);
   });
+});
+
+function ThrowingStudy() {
+  const ref = useRef<HTMLDivElement>(null);
+  useMotionEffect(ref, true, (_runtime, element, onCleanup) => {
+    onCleanup(() => element.removeAttribute("data-motion-active"));
+    element.setAttribute("data-motion-active", "true");
+    throw new Error("setup failed after acquiring layout");
+  });
+  return (
+    <div ref={ref} data-testid="throwing-study">
+      Visible static content
+    </div>
+  );
+}
+it("reverts acquired manual layout if setup throws before returning", async () => {
+  media(true);
+  const revert = vi.fn();
+  vi.mocked(loadMotion).mockResolvedValueOnce({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert,
+      }),
+    },
+  } as unknown as MotionRuntime);
+  render(<ThrowingStudy />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  expect(revert).toHaveBeenCalledOnce();
+  expect(screen.getByTestId("throwing-study")).not.toHaveAttribute(
+    "data-motion-active",
+  );
+  expect(screen.getByText("Visible static content")).toBeVisible();
 });

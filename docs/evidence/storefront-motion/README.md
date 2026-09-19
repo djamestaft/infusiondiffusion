@@ -60,8 +60,30 @@ motion-induced CLS, <=10% median LCP regression and p95 frame interval<=50ms.
   -21 targeted motion/About browser Storybook tests pass after independent critique.
 - Integrated desktop pin/reversal, keyboard product/skip focus, live reduced
   preference/short resize,10route remounts and gallery focus restoration pass.
-- Full source gate, fixture-browser regression, candidate performance, exact-head
-  CI and deployed preview checks remain in progress at this implementation snapshot.
+- Full source gate passed on the initial snapshot:418units/389stories, formatting,
+  lint, types, Storybook build and Next build. Review fixes add two unit cases;
+  the final420unit/389story source gate also passed after the fixes, including
+  Storybook and production builds.
+- Independent review found and corrected three runtime defects: focus clipping
+  against the inner viewport, gallery scroll jumping on focus return, and manual
+  layout state surviving failed setup. Regressions exercise partial first-card
+  clipping, active1440×1000chapter interruption with exact scroll restoration,
+  and fault injection after manual layout acquisition.
+- Real browser GSAP-core request abortion preserves all products. Reduced-motion
+  and save-data do not fetch the GSAP runtime; development includes a small
+  Turbopack async-loader reference stub, which is not the animation library.
+- Empty/single/long-name stories were browser-inspected at1440×900: static,
+  all supplied cards retained, no overflow. Missing-image six-card study pins
+  successfully without overflow.
+- Source fixture commerce/cart/carousel and Home regressions:74checks passed,
+  then the2static-cabinet checks passed after selecting the active carousel media.
+  Four pre-existing touch-only autoplay applicability skips remain. Source-CMS
+  title/description assertions are excluded from this fixture run because local
+  Sanity uses published content whereas those tests expect old fallback strings;
+  they are not motion regressions. All original full-run failures are recorded
+  in `/tmp/motion-fixture-tests.log`.
+- Candidate performance, exact-head CI and deployed preview evidence are owned
+  by the coordinator and appended after implementation handoff.
 - Full gate excludes unrelated untracked generated `output/` in formatting/lint;
   the directory and its contents are preserved without edits.
 
@@ -76,6 +98,19 @@ motion-induced CLS, <=10% median LCP regression and p95 frame interval<=50ms.
 | Live Home/About                     | Preview opt-in, existing content/commerce boundaries retained    |
 
 Physical iPhone acceptance (INF-47), final user preview review, human merge and
-production smoke remain open. No source content was published. Existing route
-streaming behavior without JavaScript is under investigation; do not claim that
-full route no-JS acceptance has passed until the final browser record confirms it.
+production smoke remain open. No source content was published. Full-route no-JavaScript acceptance is explicitly NOT met: baseline67de810 and
+this candidate both stream complete content into hidden React Suspense containers.
+Removing the boundary makes no-JS content visible but fails the Next16Cache
+Components production build with uncached-data-outside-Suspense. The coordinator
+self-approved preserving the existing caching/cart/draft architecture for this
+preview instead of broadening into a personalization refactor. The browser suite
+records this as an expected baseline failure; it is not a passing no-JS test.
+Component server rendering retains all cards with no motion-only hiding, and
+real animation-module failure is independently passing. Both Home/About baseline
+no-JS failures were separately confirmed by the coordinator.
+
+Independent final visual disposition: accepted after one correction batch. Current
+source Home1440×1000 fits the complete card stage beneath the130px shell;
+About copy is balanced and390px remains a natural stack. Evidence:
+`/tmp/inf-motion-design-confirm/`; original critique:
+`/tmp/inf-motion-design-review/`. No further design corrections requested.
