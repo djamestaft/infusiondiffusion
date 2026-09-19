@@ -6,7 +6,7 @@ one soft pulse. In a follow-up Devon requested that the outgoing letters start
 left just before the next slide enters, giving the sequence continuity.
 Supporting copy and the CTA settle afterward. PR109 delivered the initial
 choreography. After merging it, Devon requested a separate PR for the faster
-sequence and one-way description reveal documented below. This remains a scoped
+sequence and smooth description fade documented below. This remains a scoped
 refinement of the approved Home motion; physical-device and remaining INF-57
 acceptance gates are unchanged.
 
@@ -28,21 +28,21 @@ acceptance gates are unchanged.
 - The campaign image starts 40ms after the first letters: opacity 0 to 1 and
   scale 0.98 to 1.01 over 220ms, then scale 1 over 180ms. The containing layout
   stays stable and retains the full image in its existing 5:4 contain frame.
-- The CTA appears immediately when the title settles at 580ms. The description
-  starts a single top-to-bottom opacity reveal at that same moment, with no
-  extra pause or translation. Letters on each measured row fade from 0 to 1
-  over 140ms, with at most 100ms between the first and last row starts. They stay
-  visible once revealed: no pulse, reverse or blink. Total sequence: at most
-  820ms, including long descriptions on mobile. This supersedes the earlier
-  100ms whole-paragraph fade and longer title wait following Devon's review.
+- The CTA appears immediately when the title settles at 580ms. The entire
+  description fades from opacity 0 to 1 over 320ms with sine.out easing, starting
+  at that same moment with no extra pause. Preserve native text shaping and
+  line breaks: never split or stagger description letters or lines. No movement,
+  colour change or blink. Total sequence: 900ms at every description length.
+  Devon rejected the earlier row-by-row reveal as abrupt and reported a left
+  snap when split glyphs returned to native typography; the intact fade fixes both.
 - The outgoing image and supporting content fade over 140ms, starting at 40ms.
   Only the selected campaign is available
   to assistive technology and keyboard navigation.
 - GSAP and SplitText are deferred until initial preferences are known and the
   user has not requested reduced motion or data saving. No extra animation library is
   added. Pointer smoothing remains owned by HeroAtmosphere on another element.
-- The description keeps an unsplit screen-reader copy; only its aria-hidden visual
-  span is split, avoiding invalid paragraph labeling during the reveal.
+- The description remains one native, accessible paragraph throughout. Do not
+  add a duplicate screen-reader copy or temporary paragraph ARIA label.
 - SplitText supplies the full heading accessible name during the stagger and is
   reverted on completion, interruption, resize, preference changes and unmount.
   Focus entering the incoming content completes the sequence immediately so

@@ -589,14 +589,14 @@ autoplay. Use one GSAP timeline: outgoing letters travel 24px left over 180ms
 with 40ms total stagger and fade. Incoming letters begin 60ms later: 36px
 horizontal travel over 400ms, stagger capped at 120ms, power2.out. Image starts
 40ms after incoming letters, scaling 0.98→1.01→1 over 220ms+180ms. Description
-starts a single top-to-bottom opacity reveal when the title settles at 580ms;
-the CTA appears immediately. Each description row fades from 0 to 1 over 140ms,
-with 100ms maximum spread between row starts, no extra pause, no translation,
-and no reverse/blink. This faster sequence follows Devon's
-latest review that the previous title wait left content blank too long.
+fades as one intact paragraph from opacity 0 to 1 over 320ms with sine.out easing
+when the title settles at 580ms; the CTA appears immediately. No additional
+pause, character/line stagger, translation, colour change or blink. Devon rejected
+the previous row reveal as abrupt and reported a sideways snap during split
+cleanup; preserve native paragraph text shaping and wrapping throughout.
 Visual tracking expands by up to 2.5px per character, capped at 48px per line,
 using transforms to preserve line breaks and return to normal spacing.
-No vertical letter movement. Total sequence at most 820ms; restore unsplit headings and description
+No vertical letter movement. Total sequence 900ms; restore unsplit headings
 after completion or interruption. Devon also approved this carousel sequence on
 mobile/touch; its independent eligibility leaves scroll/pointer scenes unchanged.
 Reduced-motion,
@@ -604,6 +604,6 @@ save-data, hidden/offscreen and motion-pause protections remain authoritative.
 Pointer smoothing owns a separate backdrop transform. Runtime carouselMotion
 values and Motion/Hero carousel stories define this explicit user-approved
 divergence from the static Figma frames; no layout or token redesign.
-The description keeps an unsplit screen-reader copy and splits only its
-aria-hidden visual span; never add an aria-label to the paragraph itself.
+The description remains a single native accessible paragraph; do not split it,
+add a duplicate screen-reader copy or apply an aria-label to the paragraph.
 See [the contract](docs/features/hero-carousel-letter-arrival.md).

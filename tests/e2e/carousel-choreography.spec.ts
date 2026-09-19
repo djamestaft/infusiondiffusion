@@ -102,7 +102,10 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
       outgoingOpacity: number;
       titleComplete: boolean;
       support: { opacity: number; transform: string }[];
-      description: number[];
+      description: number;
+      descriptionX: number;
+      descriptionY: number;
+      descriptionNodes: number;
     }[] = [];
     const started = performance.now();
     document
@@ -143,12 +146,24 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
             titleComplete: Array.from(letters).every(
               (letter) => Number(getComputedStyle(letter).opacity) === 1,
             ),
-            description: Array.from(
-              panel.querySelectorAll(".hero-carousel-description-letter"),
-              (letter) => Number(getComputedStyle(letter).opacity),
+            description: Number(
+              getComputedStyle(
+                panel.querySelector("[data-carousel-description]")!,
+              ).opacity,
             ),
+            descriptionX: panel
+              .querySelector("[data-carousel-description]")!
+              .getBoundingClientRect().x,
+            descriptionY: panel
+              .querySelector("[data-carousel-description]")!
+              .getBoundingClientRect().y,
+            descriptionNodes: panel.querySelector(
+              "[data-carousel-description]",
+            )!.childElementCount,
             support: Array.from(
-              panel.querySelectorAll("[data-carousel-support]"),
+              panel.querySelectorAll(
+                "[data-carousel-support]:not([data-carousel-description])",
+              ),
             ).map((element) => ({
               opacity: Number(getComputedStyle(element).opacity),
               transform: getComputedStyle(element).transform,
@@ -178,9 +193,6 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
     ),
   ).toBe(true);
   expect(
-    samples.every((s) => s.support[0]?.opacity === s.support[1]?.opacity),
-  ).toBe(true);
-  expect(
     samples.every((s) =>
       s.support.every((element) => element.transform === "none"),
     ),
@@ -194,21 +206,31 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
     samples.some((s) => s.outgoingOpacity > 0 && s.incomingOpacity > 0),
   ).toBe(true);
   const descriptionFrames = samples.filter(
-    (s) => s.titleComplete && s.description.length,
+    (s) => s.titleComplete && s.description > 0,
   );
   expect(
-    descriptionFrames.some((s) =>
-      s.description.some((opacity) => opacity > 0 && opacity < 1),
-    ),
-  ).toBe(true);
+    descriptionFrames.filter((s) => s.description > 0.1 && s.description < 0.9)
+      .length,
+  ).toBeGreaterThan(2);
   descriptionFrames.forEach((frame, index) => {
-    if (!index) return;
-    frame.description.forEach((opacity, char) =>
-      expect(opacity).toBeGreaterThanOrEqual(
-        descriptionFrames[index - 1].description[char],
-      ),
-    );
+    expect(frame.descriptionNodes).toBe(0);
+    if (index)
+      expect(frame.description).toBeGreaterThanOrEqual(
+        descriptionFrames[index - 1].description,
+      );
   });
+  const settledDescription = await page
+    .locator(active)
+    .locator("[data-carousel-description]")
+    .boundingBox();
+  for (const frame of descriptionFrames) {
+    expect(Math.abs(frame.descriptionX - settledDescription!.x)).toBeLessThan(
+      0.1,
+    );
+    expect(Math.abs(frame.descriptionY - settledDescription!.y)).toBeLessThan(
+      0.1,
+    );
+  }
   expect(samples.some((s) => s.scale > 1)).toBe(true);
   await expect(page.locator(".hero-carousel-letter")).toHaveCount(0);
   await expect(page.locator(".hero-carousel-description-letter")).toHaveCount(
@@ -374,17 +396,12 @@ test("description remains readable to assistive technology during its visual rev
     }),
   });
   await page.getByRole("button", { name: "Next slide" }).click();
-  await expect(
-    page.locator(".hero-carousel-description-letter").first(),
-  ).toBeAttached();
+  await expect(page.locator(".hero-carousel-letter").first()).toBeAttached();
   const description = page.locator(active).locator("p[data-carousel-support]");
   await expect(description).not.toHaveAttribute("aria-label");
-  await expect(description.locator(".sr-only")).toHaveText(
-    "Introduction for campaign 2.",
-  );
-  await expect(
-    description.locator("[data-carousel-description]"),
-  ).toHaveAttribute("aria-hidden", "true");
+  await expect(description).toHaveText("Introduction for campaign 2.");
+  await expect(description).not.toHaveAttribute("aria-hidden");
+  await expect(description.locator("*")).toHaveCount(0);
   const violations = await page.evaluate(async () => {
     const axe = (
       window as unknown as {

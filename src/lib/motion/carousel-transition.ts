@@ -11,8 +11,7 @@ export const carouselMotion = {
   imagePeakScale: 1.01,
   imageRiseDuration: 0.22,
   imageSettleDuration: 0.18,
-  descriptionRevealDuration: 0.14,
-  descriptionRevealSpread: 0.1,
+  descriptionRevealDuration: 0.32,
   exitTravel: -24,
   exitDuration: 0.18,
   exitStaggerBudget: 0.04,
@@ -49,10 +48,12 @@ export function createCarouselTransition(
   outgoing: HTMLElement | null,
   chars: Element[],
   outgoingChars: Element[] = [],
-  descriptionChars: Element[] = [],
 ) {
   const image = incoming.querySelector("[data-carousel-picture]");
-  const support = incoming.querySelectorAll("[data-carousel-support]");
+  const description = incoming.querySelector("[data-carousel-description]");
+  const support = incoming.querySelectorAll(
+    "[data-carousel-support]:not([data-carousel-description])",
+  );
   const arrivalSpread = lineSpread(chars);
   const departureSpread = lineSpread(outgoingChars, true);
   const timeline = gsap.timeline();
@@ -152,27 +153,19 @@ export function createCarouselTransition(
       0,
     );
   }
-  if (descriptionChars.length) {
-    // Use measured rows, not DOM character order: the reveal goes down the copy
-    // and stays bounded even when it wraps onto many lines on a phone.
-    const tops = descriptionChars.map((char) =>
-      Math.round(char.getBoundingClientRect().top),
+  if (description) {
+    // Keep native text shaping and line breaks throughout the fade: splitting
+    // paragraph glyphs changes kerning and can snap on completion.
+    timeline.fromTo(
+      description,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: carouselMotion.descriptionRevealDuration,
+        ease: "sine.out",
+      },
+      titleEnd,
     );
-    const rows = [...new Set(tops)].sort((a, b) => a - b);
-    rows.forEach((top, rowIndex) => {
-      timeline.fromTo(
-        descriptionChars.filter((_, index) => tops[index] === top),
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: carouselMotion.descriptionRevealDuration,
-          ease: "power2.out",
-        },
-        titleEnd +
-          (rowIndex / Math.max(1, rows.length - 1)) *
-            carouselMotion.descriptionRevealSpread,
-      );
-    });
   }
   return timeline;
 }

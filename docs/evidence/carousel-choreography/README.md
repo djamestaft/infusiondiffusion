@@ -1,41 +1,37 @@
 # Carousel choreography evidence
 
-## Faster one-way description reveal — follow-up to merged PR109
+## Smooth description fade — PR110 correction
 
-The new delivery branch is based on merged main `0d74f90`. Devon requested a
-shorter blank interval and clarified that the description should reveal once
-from invisible to visible, top-to-bottom, rather than pulse or blink.
+Devon rejected the initial row-by-row reveal as abrupt and reported a slight
+left snap. A character-range browser probe reproduced the shift: temporary
+SplitText glyph wrappers changed native spacing and wrapping; cleanup moved the
+first mobile glyph about 15px. The earlier settled-layout checks missed this.
 
-Incoming letters start at 60ms; the title settles at 580ms. The CTA appears
-immediately at title completion. Description letters fade in by measured row
-over 140ms, with at most 100ms between the first and last row starts. The whole
-sequence is bounded at 820ms. There is no additional pause or lateral copy
-movement. The image retains its pulse with faster 220ms + 180ms timing.
+The description now stays one native accessible paragraph. One opacity tween
+fades it from 0 to 1 over 320ms with sine.out easing, immediately after the title
+settles at 580ms. No character/line stagger, added pause, colour change or text
+movement. The CTA appears at 580ms; the full sequence finishes at 900ms.
+Headline letter motion and the image pulse retain their approved faster timing.
 
-The new `reveal/` recordings and frame JSON capture this sequence with long
-copy at 1440, 390 and 320px. Desktop and 320px recordings/screenshots are checked
-in; all three frame traces are included. Actual browser cleanup occurs around
-846–850ms including render scheduling. Each row opacity only increases, the CTA
-stays visible, no horizontal overflow or page errors occurred, and all temporary
-text splits are removed. The settled composition is unchanged.
+Current `smooth/` recordings and frame JSON cover long copy at 1440, 390 and
+320px. Opacity increases continuously; the text rectangles remain identical
+through the fade and cleanup, with zero measured glyph movement in the desktop
+and mobile reproduction. There are no description child elements or temporary
+ARIA attributes. Screenshots have no horizontal overflow or page errors.
+The earlier `reveal/` artifacts show the rejected candidate, not this correction.
 
-Current verification: lint and TypeScript pass; 444 unit tests and 418 Storybook
-checks pass. The seven carousel browser contracts pass across Chromium, WebKit,
-Firefox, Pixel 7 and iPhone 13 emulation (33 applicable checks; the two desktop
-keyboard-only cases are intentionally skipped on touch projects). This includes
-frame-by-frame monotonic opacity, rapid reversal, resize, reduced-motion changes,
-Save-Data, keyboard interruption, final axe and mid-animation ARIA checks.
-Independent read-only review confirmed the accessibility correction and cleanup.
-Build and deployment evidence are recorded in the new PR. The older counts and
-recordings below belong to PR109 and are retained as historical evidence.
+Local verification: lint and TypeScript, 444 unit tests, 418 Storybook checks,
+Storybook/Next production builds, and all 33 applicable carousel browser checks
+across Chromium, Firefox, WebKit, Pixel 7 and iPhone 13 emulation. The two
+keyboard-only cases remain intentionally skipped in touch projects. Tests cover
+continuous intermediate opacity, fixed description position, reversal, resize,
+reduced motion, Save-Data and valid paragraph accessibility during animation.
+Independent review confirmed Firefox interruption cleanup without residual
+styles or browser errors. Exact deployment evidence is in PR110.
 
-Two regression corrections are included: a single discrete opacity tween avoids
-Firefox reversion ordering between competing zero-duration sets; and the
-animated description is an aria-hidden visual span with a separate unsplit
-screen-reader copy. This prevents SplitText from placing a prohibited aria-label
-on a paragraph. The browser regression checks accessibility during the reveal,
-not only after cleanup. Reduced-motion, Save-Data, keyboard interruption and
-mobile eligibility remain unchanged.
+The single discrete CTA tween still avoids Firefox reversion ordering between
+competing zero-duration sets. The paragraph needs no split-text accessibility
+workaround because its text and semantics are never replaced.
 
 ## Historical PR109 evidence
 
