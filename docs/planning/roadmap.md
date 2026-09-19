@@ -1,8 +1,8 @@
 # Infusion Diffusion Roadmap
 
-Last reconciled: 19 September 2026 against fresh protected `main` (`5f489a8`),
-GitHub merge records and all 47 existing Plane items. INF-48 was added as the
-completed imagery child of INF-31. This summary governs current status; dated
+Last reconciled: 19 September 2026 against fresh protected `main` (`e7242ad`),
+human-merged PR107 and the current Plane ledger. INF-49–57 add the motion
+workstream to the 48-item imagery reconciliation. This summary governs current status; dated
 notes below retain their original evidence and superseded status wording.
 
 ## Website imagery release — complete
@@ -28,7 +28,7 @@ invent or approve those facts.
 
 ## Current Plane disposition
 
-**48 items: 34 Done, 4 Todo, 3 In Progress, 4 Backlog, 3 Cancelled.**
+**57 items: 34 Done, 6 Todo, 3 In Progress, 11 Backlog, 3 Cancelled.**
 Ownership and dependency edges are preserved. Completed design, storefront,
 account, payment integration, footer, About media and mobile focus work remain
 Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
@@ -47,6 +47,50 @@ Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
 | INF-37  | Backlog     | Shawnee    | Separate approved About/Gallery viewer/refinement scope; imagery replacement does not complete the interactive-viewer criteria.                                             |
 | INF-3/4 | Backlog     | Unassigned | Separate stockist work; not closed by website imagery or marketing asset creation.                                                                                          |
 
+## Storefront motion workstream — 19 September 2026
+
+Devon requested systematic planning and Plane tasks for Mlab-inspired pinned
+scroll sections, drifting background typography and richer Home/About motion.
+He explicitly owns **every new task**, including design preparation and
+coordination of independent verification. This scoped ownership overrides the
+default preparation owner; existing task assignments remain unchanged.
+
+Parent **INF-49** is Todo. **INF-50** (section map/storyboard) is Todo and is the
+first motion task to start. **INF-51–57** are Backlog:
+
+| Task   | Scope                                                                        | Prerequisites           |
+| ------ | ---------------------------------------------------------------------------- | ----------------------- |
+| INF-50 | Map actual Home/About sections; approve responsive storyboard                | None                    |
+| INF-51 | Isolated Storybook studies; approve visual/timing/input/performance contract | INF-50                  |
+| INF-52 | Scoped GSAP lifecycle, preferences and motion primitives                     | INF-51                  |
+| INF-53 | Pinned fragrance collection and drifting typography                          | INF-52                  |
+| INF-54 | Approved hero entrance and optional pointer atmosphere                       | INF-52                  |
+| INF-55 | Sticky About chapters and photographic transitions                           | INF-52                  |
+| INF-56 | Integrate accepted components/templates into preview                         | INF-53/54/55 and INF-36 |
+| INF-57 | Independent visual/device/performance review, human release and smoke        | INF-56 and INF-47       |
+
+All eight children are assigned to Devon. Plane has real parent and blocked-by
+links; the workspace plan does not support Epic types. INF-49 relates to INF-37
+and completed INF-48; INF-55 relates to INF-37 without duplicating its viewer
+redesign. A dependency graph is not permission for concurrent writing agents:
+use one delivery branch/PR and sequential implementation by default.
+
+Design/studies may proceed before launch gates close. Live integration follows
+INF-36's shopping-release review, preserving the existing after-shopping
+refinement sequence; INF-47 physical-iPhone scroll acceptance blocks final motion
+release. Existing commercial/content/SEO tickets do not depend on this enhancement.
+No scope is marked delivered and no source publication or runtime change is made.
+
+Gates: responsive storyboard → animated-study selection and exact Figma/Storybook
+contract → component/template acceptance → independent review, green exact-head
+checks, human preview/merge and post-merge smoke. Static, touch, keyboard,
+reduced-motion and JS-failure alternatives are first-class deliverables.
+
+See the [motion brief](../features/storefront-motion-brief.md) and
+[delivery plan](../superpowers/plans/2026-09-19-storefront-motion.md).
+This planning addition is prepared on agent/storefront-motion-plan and requires
+human merge; it does not approve the eventual animation designs.
+
 ## Completed cutover and remaining launch gates
 
 The 17 September domain-only soft launch is already implemented at
@@ -64,9 +108,10 @@ Payfast remains in Test mode. INF-40 retains real-provider tests transferred fro
 INF-38/39, including references/duplicates/failure/retry/totals and customer
 renewal/restart/logout/isolation. INF-36 retains independent review. INF-41/42
 retain final SEO, domain journey and explicit live-payment/commercial approval.
-No paid transaction, new purchasable product format or further implementation
-is authorized by this closeout. Next work requires choosing one of those
-remaining tasks; the completed imagery delivery is not active work.
+No paid transaction or new purchasable product format is authorized by this
+closeout. The later motion request authorizes its planning and execution ledger;
+start INF-50 for that workstream while retaining the launch gates above.
+The completed imagery delivery is not active work.
 
 ## Historical planning snapshots
 
