@@ -52,7 +52,10 @@ delegation; final user acceptance remains the preview review.
 - Hero uses a separate wrapper for entrance/depth so carousel transforms and
   controls retain ownership. Entrance <=700ms, no opacity-zero LCP/CTA. Optional
   pointer depth <=18px X / 12px Y, 160ms exponential damping with delta clamp and settle
-  cutoff. No cursor replacement, perpetual loop, or pointer work on touch.
+  cutoff. Eligible1.04overscan is present in first-paint CSS; ordinary leave freezes
+  the pose and re-entry resumes with a fresh clock. Focus centers without a scale
+  change; hidden/offscreen suspend work; policy disable and teardown restore static
+  ownership. No cursor replacement, perpetual loop, or pointer work on touch.
 - About keeps four chapters, full Born text, alternating image/copy composition,
   current square previews and GalleryViewer API. CSS sticky suffices for the
   photographs, with reversible bounded photographic travel; preserve viewer focus

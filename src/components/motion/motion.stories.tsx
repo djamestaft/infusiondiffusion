@@ -2,7 +2,7 @@ import published from "./published-imagery.fixture.json";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, within } from "storybook/test";
 import { FragranceJourney } from "./fragrance-journey";
-import { MotionBoundary } from "./motion-boundary";
+import { MotionBoundary, MotionControl } from "./motion-boundary";
 import { HeroAtmosphere } from "./hero-atmosphere";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { productCardFixtures } from "@/components/ui/product-card.fixtures";
@@ -67,9 +67,36 @@ export const MissingImages: Story = {
   },
 };
 export const HeroStudy: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Eligible desktop starts at its stable overscan crop. Move across the hero boundary repeatedly: the pose freezes on leave and resumes smoothly on re-entry. The control restores the unenhanced crop; keyboard focus centers without changing scale.",
+      },
+    },
+  },
   render: () => (
-    <HeroAtmosphere>
-      <HeroCarousel presentation="editorial" slides={published.slides} />
-    </HeroAtmosphere>
+    <>
+      <div className="bg-content-surface flex justify-end p-4">
+        <MotionControl />
+      </div>
+      <HeroAtmosphere>
+        <HeroCarousel presentation="editorial" slides={published.slides} />
+      </HeroAtmosphere>
+    </>
   ),
+  play: async ({ canvasElement }) => {
+    const backdrop = canvasElement.querySelector<HTMLElement>(
+      "[data-motion-backdrop]",
+    )!;
+    await expect(backdrop).toBeVisible();
+    if (
+      matchMedia(
+        "(min-width: 1024px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
+      ).matches
+    ) {
+      const matrix = new DOMMatrix(getComputedStyle(backdrop).transform);
+      await expect(matrix.m11).toBeCloseTo(1.04, 4);
+    }
+  },
 };

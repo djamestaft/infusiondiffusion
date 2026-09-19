@@ -61,6 +61,8 @@ complete delivery on one preview branch. INF-50/51 design/studies and INF-52–5
 implementation are delivered on `agent/storefront-motion-delivery` in PR109.
 The normal-laptop correction at `915e300` supports 720–800px-tall viewports
 without zooming out and has independent design/runtime acceptance.
+INF-54 was reopened for the confirmed hero-hover continuity correction after
+Devon reviewed d64622c; its correction/evidence remains in the same PR109.
 INF-57 covers independent checks before the final review; production and physical
 iPhone acceptance remain open. See `docs/evidence/storefront-motion/README.md`.
 The original dependency order remains:

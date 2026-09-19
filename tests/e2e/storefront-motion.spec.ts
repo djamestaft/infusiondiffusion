@@ -266,7 +266,10 @@ test("pointer depth is bounded, settles, and stops on focus", async ({
   expect(Math.abs(position.x)).toBeLessThanOrEqual(18);
   expect(Math.abs(position.y)).toBeLessThanOrEqual(12);
   await page.getByTestId("home-hero-section").getByRole("link").first().focus();
-  await expect(backdrop).toHaveCSS("transform", "none");
+  await expect(backdrop).toHaveCSS(
+    "transform",
+    "matrix(1.04, 0, 0, 1.04, 0, 0)",
+  );
 });
 
 test("a partially clipped first product switches to static on keyboard focus", async ({

@@ -76,8 +76,10 @@ export function useMotionEffect(
         ),
       ]
         .map(
+          // Transformed descendants can grow scope/photo scrollWidth without
+          // changing layout. Only the collection track owns intrinsic overflow.
           (node) =>
-            `${node.offsetWidth},${node.offsetHeight},${node.scrollWidth}`,
+            `${node.offsetWidth},${node.offsetHeight},${node.matches("[data-motion-track]") ? node.scrollWidth : 0}`,
         )
         .join(";");
     let lastLayout = layoutSignature();

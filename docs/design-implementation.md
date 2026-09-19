@@ -94,3 +94,14 @@ or runtime audit. Existing primitives, template composition, Storybook viewport
 configuration and CI were inspected. This paragraph is historical evidence. INF-33/34 and Contact/initial Guide
 matching were subsequently delivered. Current refinements are tracked in
 PR #83 and its component contracts.
+
+## Motion lifecycle review
+
+For pointer effects, inspect the first input, repeated crossings of overlaid
+navigation, re-entry, and continuous movement while images load. Hover pause and
+full teardown have different ownership: ordinary boundaries must not discard the
+visible pose or introduce a new scale. Establish overscan before first input.
+Use layout dimensions for rebuild decisions; a surface's animated scroll overflow
+is not evidence of a layout change. Measure track overflow only when the track's
+intrinsic content determines scroll travel. Capture frame-level poses and visual
+recordings; green CI or an error-free console alone cannot establish continuity.

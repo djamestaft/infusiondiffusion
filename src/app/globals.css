@@ -852,3 +852,12 @@
     display: inline;
   }
 }
+
+/* Establish the eligible crop in the first paint, before JS or pointer input.
+   Inline motion adds translation with the same scale. Focus returns to this
+   centered crop; reduced motion, explicit pause and ineligibility remove it. */
+@media (min-width: 1024px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion-hero:not([data-motion-paused]) [data-motion-backdrop] {
+    transform: scale(var(--motion-hero-scale));
+  }
+}

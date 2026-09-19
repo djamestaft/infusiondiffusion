@@ -123,7 +123,7 @@ it("reverts acquired manual layout if setup throws before returning", async () =
   expect(screen.getByText("Visible static content")).toBeVisible();
 });
 
-function LoadedStudy() {
+function LoadedStudy({ track = false }: { track?: boolean } = {}) {
   const ref = useRef<HTMLDivElement>(null);
   useMotionEffect(ref, true, () => undefined);
   return (
@@ -132,6 +132,7 @@ function LoadedStudy() {
         role="img"
         aria-label="Decorative study"
         data-testid="study-image"
+        data-motion-track={track || undefined}
       />
     </div>
   );
@@ -157,5 +158,77 @@ it("does not rebuild stable geometry when cached photographs emit another load",
     await vi.advanceTimersByTimeAsync(500);
   });
   expect(loadMotion).toHaveBeenCalledTimes(1);
+  vi.useRealTimers();
+});
+
+it("ignores transformed scope overflow but rebuilds actual layout changes", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  const revert = vi.fn();
+  vi.mocked(loadMotion).mockResolvedValue({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert,
+      }),
+    },
+  } as unknown as MotionRuntime);
+  const view = render(<LoadedStudy />);
+  const image = screen.getByTestId("study-image");
+  const scope = image.parentElement!;
+  await act(async () => {
+    await Promise.resolve();
+  });
+  Object.defineProperty(scope, "scrollWidth", {
+    configurable: true,
+    value: 1475,
+  });
+  fireEvent.load(image);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(1);
+  expect(revert).not.toHaveBeenCalled();
+  Object.defineProperty(scope, "offsetHeight", {
+    configurable: true,
+    value: 810,
+  });
+  fireEvent.load(image);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(2);
+  view.unmount();
+  vi.useRealTimers();
+});
+
+it("still rebuilds when intrinsic collection-track overflow changes", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  vi.mocked(loadMotion).mockResolvedValue({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert: vi.fn(),
+      }),
+    },
+  } as unknown as MotionRuntime);
+  const view = render(<LoadedStudy track />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  const track = screen.getByTestId("study-image");
+  Object.defineProperty(track, "scrollWidth", {
+    configurable: true,
+    value: 2200,
+  });
+  fireEvent.load(track);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(2);
+  view.unmount();
   vi.useRealTimers();
 });

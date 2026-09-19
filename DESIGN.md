@@ -550,3 +550,14 @@ behavior. Copy is vertically centered beside local sticky photographs; motion
 never masks prose. Static controls revert owned effects and keyboard focus on
 clipped products restores natural flow. Mobile/touch, reduced motion and
 save-data use complete natural layouts. Do not replace native scrolling.
+
+### Hero hover continuity — 19 September 2026
+
+The eligible desktop backdrop has1.04overscan in its first CSS paint, before the
+first pointer event. Crossing into overlaid navigation freezes the rendered pose
+and stops RAF; re-entry damps from that pose with a fresh clock. Hidden/offscreen
+states also suspend work without discarding the crop. Keyboard focus centers the
+backdrop at the same overscan. Explicit pause, reduced motion and ineligible
+viewports restore the unenhanced crop; teardown removes owned inline transforms.
+This corrects confirmed hover-boundary and transformed-overflow rebuild resets;
+18×12px travel,160ms damping, collection sizing and gallery behavior are unchanged.

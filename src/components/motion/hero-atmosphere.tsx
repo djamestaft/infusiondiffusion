@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useRef, type ReactNode } from "react";
+import { useCallback, useRef, type CSSProperties, type ReactNode } from "react";
 import { motionTokens } from "@/lib/motion/tokens";
 import { damp } from "@/lib/motion/damp";
 import type { MotionRuntime } from "@/lib/motion/runtime";
-import { useMotionEffect } from "./motion-boundary";
+import { useMotionEffect, useMotionPreference } from "./motion-boundary";
 
 export function HeroAtmosphere({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const entered = useRef(false);
+  const { paused } = useMotionPreference();
   const setup = useCallback(({ gsap }: MotionRuntime, element: HTMLElement) => {
     const entrance = element.querySelector("[data-motion-entrance]");
     const layer = element.querySelector<HTMLElement>("[data-motion-backdrop]")!;
@@ -31,10 +32,14 @@ export function HeroAtmosphere({ children }: { children: ReactNode }) {
       targetX = 0,
       targetY = 0;
     let visible = true;
-    const stop = () => {
+    // Hover boundaries suspend work without changing the visible pose.
+    const pause = () => {
       cancelAnimationFrame(frame);
       frame = 0;
       previous = 0;
+    };
+    const reset = () => {
+      pause();
       x = y = targetX = targetY = 0;
       layer.style.removeProperty("transform");
     };
@@ -80,27 +85,33 @@ export function HeroAtmosphere({ children }: { children: ReactNode }) {
     };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (!visible) stop();
+      if (!visible) pause();
     });
     observer.observe(element);
     element.addEventListener("pointermove", move);
-    element.addEventListener("pointerleave", stop);
-    element.addEventListener("focusin", stop);
-    document.addEventListener("visibilitychange", stop);
+    element.addEventListener("pointerleave", pause);
+    element.addEventListener("focusin", reset);
+    document.addEventListener("visibilitychange", pause);
     return () => {
-      stop();
+      reset();
       observer.disconnect();
       element.removeEventListener("pointermove", move);
-      element.removeEventListener("pointerleave", stop);
-      element.removeEventListener("focusin", stop);
-      document.removeEventListener("visibilitychange", stop);
+      element.removeEventListener("pointerleave", pause);
+      element.removeEventListener("focusin", reset);
+      document.removeEventListener("visibilitychange", pause);
     };
   }, []);
   useMotionEffect(ref, true, setup);
   return (
     <div
       ref={ref}
-      className="relative isolate overflow-hidden"
+      className="motion-hero relative isolate overflow-hidden"
+      data-motion-paused={paused || undefined}
+      style={
+        {
+          "--motion-hero-scale": motionTokens.hero.backdropScale,
+        } as CSSProperties
+      }
       data-testid="hero-atmosphere"
     >
       <div data-motion-entrance>{children}</div>

@@ -177,3 +177,10 @@ INF-50–56 cover the completed storyboard, studies, foundations, collection, he
 chapters and preview integration, in that dependency order. INF-49/57 retain final
 user acceptance, physical-device evidence, the known no-JS limitation and human
 release/post-merge checks. No green automated check substitutes for those gates.
+
+## Follow-up: hero hover continuity
+
+Devon reproduced a hover reset at d64622c. The correction and new independent
+continuous-hover investigation are recorded in [the hover evidence](hero-hover/README.md).
+This supersedes the earlier preview acceptance for the hero interaction; laptop
+height and gallery corrections are preserved. Final deployed evidence is in PR109.
