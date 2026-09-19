@@ -50,7 +50,7 @@ test.describe("Home and About motion enhancement", () => {
     expect(bounds!.x).toBeGreaterThanOrEqual(0);
     expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(1440);
     await collection
-      .getByRole("link", { name: "Skip fragrance collection" })
+      .getByRole("link", { name: /Skip (fragrance )?collection/ })
       .click();
     await expect(page.locator("#home-guidance-title")).toBeFocused();
   });
@@ -102,7 +102,15 @@ test.describe("Home and About motion enhancement", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
+    // Keep the live route contract, then exercise interruption with deterministic
+    // photographs: CI intentionally has no published Sanity dataset.
     await page.goto("/about");
+    await expect(page.locator("[data-testid^='about-chapter-']")).toHaveCount(
+      4,
+    );
+    await page.goto(
+      `${process.env.STORYBOOK_BASE_URL ?? "http://127.0.0.1:6006"}/iframe.html?id=templates-combined-about--motion-chapters&viewMode=story`,
+    );
     if (!(await page.evaluate(() => matchMedia("(pointer: coarse)").matches)))
       await expect(page.locator("[data-motion-chapter]")).toHaveCount(4);
     await expect(page.locator("[data-testid^='about-chapter-']")).toHaveCount(
@@ -112,12 +120,21 @@ test.describe("Home and About motion enhancement", () => {
       .getByTestId("about-chapter-principles")
       .getByRole("button", { name: /^View / });
     await photograph.scrollIntoViewIfNeeded();
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(300);
     const before = await page.evaluate(() => scrollY);
-    await photograph.click();
+    const bounds = (await photograph.boundingBox())!;
+    await page.mouse.click(
+      bounds.x + bounds.width / 2,
+      bounds.y + bounds.height / 2,
+    );
     await expect(page.getByRole("dialog")).toBeVisible();
+    await page.waitForTimeout(500);
+    expect(await page.evaluate(() => scrollY)).toBeCloseTo(before, 0);
     await page.keyboard.press("Escape");
     await expect(photograph).toBeFocused();
     await expect(page.getByRole("dialog")).toHaveCount(0);
+    await page.waitForTimeout(500);
     await expect
       .poll(() => page.evaluate(() => scrollY))
       .toBeCloseTo(before, 0);
@@ -233,16 +250,21 @@ test("pointer depth is bounded, settles, and stops on focus", async ({
     "true",
   );
   const backdrop = page.locator("[data-motion-backdrop]");
-  await page.mouse.move(1200, 400);
+  await page.evaluate(() => document.fonts.ready);
   await expect
-    .poll(() => backdrop.evaluate((element) => element.style.transform))
+    .poll(async () => {
+      // Keep real pointer input active while late font/image measurements settle.
+      await page.mouse.move(1100, 350);
+      await page.mouse.move(1200, 400);
+      return backdrop.evaluate((element) => element.style.transform);
+    })
     .toContain("translate3d");
   const position = await backdrop.evaluate((element) => {
     const matrix = new DOMMatrix(getComputedStyle(element).transform);
     return { x: matrix.m41, y: matrix.m42 };
   });
-  expect(Math.abs(position.x)).toBeLessThanOrEqual(6);
-  expect(Math.abs(position.y)).toBeLessThanOrEqual(4);
+  expect(Math.abs(position.x)).toBeLessThanOrEqual(18);
+  expect(Math.abs(position.y)).toBeLessThanOrEqual(12);
   await page.getByTestId("home-hero-section").getByRole("link").first().focus();
   await expect(backdrop).toHaveCSS("transform", "none");
 });
@@ -259,7 +281,7 @@ test("a partially clipped first product switches to static on keyboard focus", a
   const top = await collection.evaluate(
     (e) => e.getBoundingClientRect().top + scrollY,
   );
-  await page.evaluate((y) => scrollTo(0, y), top - 146 + 35);
+  await page.evaluate((y) => scrollTo(0, y), top - 142 + 35);
   const first = collection.getByRole("link", { name: /^View / }).first();
   await expect
     .poll(() => first.evaluate((e) => e.getBoundingClientRect().left))
@@ -268,3 +290,33 @@ test("a partially clipped first product switches to static on keyboard focus", a
   await expect(page.locator(".pin-spacer")).toHaveCount(0);
   await expect(first).toBeFocused();
 });
+
+for (const viewport of [
+  { width: 1440, height: 800 },
+  { width: 1366, height: 768 },
+  { width: 1280, height: 720 },
+  { width: 1024, height: 768 },
+]) {
+  test(`normal laptop ${viewport.width}x${viewport.height} has a complete usable pin`, async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, "Fine-pointer laptop composition");
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    const collection = page.getByTestId("home-cabinet-band");
+    await expect(collection).toHaveAttribute("data-motion-active", "true");
+    const box = (await collection.boundingBox())!;
+    const top = await page
+      .locator('nav[aria-label="Primary"]')
+      .evaluate((e) => e.closest("header")!.getBoundingClientRect().bottom);
+    expect(box.height).toBeLessThanOrEqual(viewport.height - top - 28);
+    const card = collection.getByRole("link", { name: /^View / }).first();
+    expect((await card.boundingBox())!.width).toBeGreaterThanOrEqual(250);
+    const skip = collection.getByRole("link", {
+      name: /Skip (fragrance )?collection/,
+    });
+    await skip.click();
+    await expect(page.locator("#home-guidance-title")).toBeFocused();
+  });
+}

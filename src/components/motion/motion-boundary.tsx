@@ -68,6 +68,19 @@ export function useMotionEffect(
     let stop: (() => void) | undefined;
     let timer: ReturnType<typeof setTimeout> | undefined;
     let disposed = false;
+    const layoutSignature = () =>
+      [
+        element,
+        ...element.querySelectorAll<HTMLElement>(
+          "[data-motion-track], [data-motion-photograph]",
+        ),
+      ]
+        .map(
+          (node) =>
+            `${node.offsetWidth},${node.offsetHeight},${node.scrollWidth}`,
+        )
+        .join(";");
+    let lastLayout = layoutSignature();
     const rebuild = () => {
       stop?.();
       stop = undefined;
@@ -96,6 +109,7 @@ export function useMotionEffect(
           manualCleanup?.();
           return;
         }
+        lastLayout = layoutSignature();
         return () => media.revert();
       });
     };
@@ -103,11 +117,14 @@ export function useMotionEffect(
       clearTimeout(timer);
       timer = setTimeout(rebuild, 120);
     };
+    const measuredRefresh = () => {
+      if (layoutSignature() !== lastLayout) schedule();
+    };
     query.addEventListener("change", rebuild);
     window.addEventListener("resize", schedule);
-    element.addEventListener("load", schedule, true);
+    element.addEventListener("load", measuredRefresh, true);
     document.fonts?.ready.then(() => {
-      if (!disposed) schedule();
+      if (!disposed) measuredRefresh();
     });
     rebuild();
     return () => {
@@ -116,7 +133,7 @@ export function useMotionEffect(
       stop?.();
       query.removeEventListener("change", rebuild);
       window.removeEventListener("resize", schedule);
-      element.removeEventListener("load", schedule, true);
+      element.removeEventListener("load", measuredRefresh, true);
     };
   }, [enabled, paused, ref, setup]);
 }

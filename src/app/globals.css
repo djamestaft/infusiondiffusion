@@ -786,7 +786,7 @@
   gap: 24px;
 }
 .motion-collection[data-motion-active] .motion-collection-track > * {
-  flex: 0 0 clamp(300px, min(36vw, calc(100svh - 612px)), 440px);
+  flex: 0 0 var(--motion-card-size, 300px);
 }
 .motion-collection[data-motion-active] .motion-fragrance-names {
   display: block;
@@ -815,4 +815,40 @@
 /* Repeated names are decorative CSS content; accessible names stay on cards. */
 .motion-fragrance-names::before {
   content: attr(data-fragrance-names);
+}
+
+/* Compact laptop composition preserves type and tap targets, measuring the
+   remaining square image space instead of requiring browser zoom. */
+@media (min-width: 1024px) and (max-height: 899px) {
+  .motion-collection[data-motion-active] .motion-collection-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    align-items: center;
+    gap: 12px;
+    padding-block: 12px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-heading,
+  .motion-collection[data-motion-active] .motion-collection-actions {
+    display: contents;
+  }
+  .motion-collection[data-motion-active] h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-viewport {
+    grid-column: 1 / -1;
+    padding-top: 48px;
+  }
+  .motion-collection[data-motion-active] .motion-fragrance-names {
+    font-size: 96px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-track {
+    gap: 20px;
+  }
+  .motion-collection[data-motion-active] .motion-skip-long {
+    display: none;
+  }
+  .motion-collection[data-motion-active] .motion-skip-short {
+    display: inline;
+  }
 }

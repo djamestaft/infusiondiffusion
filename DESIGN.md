@@ -533,15 +533,18 @@ motion candidate is an intentional divergence, not a Figma approval rewrite.
 See `docs/evidence/storefront-motion/README.md` and the dated preview spec.
 
 Use native scroll and complete visible content. On fine-pointer, hover-capable
-screens at least1024×800, with no reduced-motion/save-data request, the collection
+screens at least1024×680, with no reduced-motion/save-data request, the collection
 may pin only if measured cards and controls fit below the actual header. Retain
 all supplied products. Names use semantic secondary ink at8%opacity, displayed
-as decorative CSS text above and behind cards. Reserve80px above card media;
-card width is height-aware, capped440px, with static fallback for content extremes.
+as decorative CSS text above and behind cards. Reserve80px above card media on tall screens. Below900px height, use a single
+control row,36px/44px heading,48px name band and12px vertical padding. Measure
+header/control wrapping and unchanged160px card copy to allocate a250–440px square
+image. Normal1440×800,1366×768,1280×720and1024×768 laptops must work at100%zoom.
+Static fallback remains for truly short or extreme-content layouts.
 Use `src/lib/motion/tokens.ts` for shared entrance, drift and damping values.
 
 Hero entrance remains visible,16px over700ms; decorative backdrop alone receives
-bounded pointer motion. Carousel controls and600ms transitions remain unchanged.
+18×12px pointer motion with160ms damping and1.04backdrop overscan. Carousel controls and600ms transitions remain unchanged.
 About retains all four chapters, complete Born copy, square figures and viewer
 behavior. Copy is vertically centered beside local sticky photographs; motion
 never masks prose. Static controls revert owned effects and keyboard focus on

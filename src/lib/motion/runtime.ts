@@ -1,5 +1,5 @@
 export const motionQuery =
-  "(min-width: 1024px) and (min-height: 800px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)";
+  "(min-width: 1024px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)";
 
 /** The import owns no DOM. A cancelled generation can never acquire effects. */
 export function mountDeferredMotion<T>(

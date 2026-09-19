@@ -40,7 +40,7 @@ delegation; final user acceptance remains the preview review.
   animation import failure. Data comes through existing component props; no new
   Shopify/Sanity fetching or mutable commerce data inside motion modules.
 - Desktop motion requires fine pointer, hover, width >=1024 and sufficient height
-  (>=800px plus actual content fitting below the measured fixed header). Touch,
+  (>=680px plus actual content fitting below the measured fixed header). Touch,
   reduced motion, short layouts and content extremes use a static grid/chapters.
 - Collection uses existing ProductCard, source-owned names and prices; all supplied
   products remain accessible. Pin travel is measured from track scrollWidth minus
@@ -51,7 +51,7 @@ delegation; final user acceptance remains the preview review.
   color/type tokens. They never replace accessible headings or product names.
 - Hero uses a separate wrapper for entrance/depth so carousel transforms and
   controls retain ownership. Entrance <=700ms, no opacity-zero LCP/CTA. Optional
-  pointer depth <=6px X / 4px Y, 120ms exponential damping with delta clamp and settle
+  pointer depth <=18px X / 12px Y, 160ms exponential damping with delta clamp and settle
   cutoff. No cursor replacement, perpetual loop, or pointer work on touch.
 - About keeps four chapters, full Born text, alternating image/copy composition,
   current square previews and GalleryViewer API. CSS sticky suffices for the
@@ -66,10 +66,10 @@ delegation; final user acceptance remains the preview review.
 ## Verification and evidence
 
 Selected exact timing: hero 16px to zero over 700ms power3.out, visible throughout;
-skip entrance on restored-scroll entry. Collection cards clamp(300px,min(36vw,100svh - 612px),440px),
+skip entrance on restored-scroll entry. Collection cards use measured remaining vertical room for250–440px square imagery,
 direct linear scrub, scroll distance measured travel capped at 2.5 viewport heights.
 Decorative names clamp(96px,11vw,180px), semantic secondary ink at 8% opacity,
-drift +32px to -32px with an80px visible name band. About desktop chapters min-height 72svh with natural text
+drift +32px to -32px with an80px visible name band (48px in compact laptop mode). About desktop chapters min-height 72svh with natural text
 growth, local sticky square photographs and +12px to -12px travel. No masks.
 Pointer effect targets only a decorative background layer, settles at 0.1px,
 stops on leave/focus/offscreen/hidden/static; no permanent ambient loop.
@@ -111,3 +111,10 @@ and candidate Home/About. Removing route Suspense fails the production build.
 Preserve caching/cart/draft architecture; expose this unmet acceptance item in
 final review. Component SSR and actual GSAP import-failure static behavior remain
 required and tested. This is not a full-route no-JS pass.
+
+User review amendment: motion must work at normal laptop zoom, including1440×800,
+1366×768,1280×720and1024×768. Below900px height use one control row,36px/44px title,
+12px outer padding and48px name band. Preserve44px controls and160px card text;
+measure header/title wrapping to derive image size (minimum250px). Lower media
+query to680px only with this measured fit. Pointer response increases to18×12px
+with160ms damping and1.04overscan, foreground carousel unchanged.

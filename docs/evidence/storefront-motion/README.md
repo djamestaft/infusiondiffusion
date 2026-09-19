@@ -22,7 +22,7 @@ Sanity/Shopify fetching and commerce truth.
 Selected: native scroll, desktop measured collection pin, direct linear scrub,
 80px decorative name region above opaque product cards, ±32px name drift,
 700ms visible 16px hero entrance and decorative-backdrop-only pointer damping
-(maximum 6×4px, 120ms time constant, 64ms delta cap, 0.1px cutoff). The existing
+(maximum 18×12px, 160ms time constant, 64ms delta cap, 0.1px cutoff). The existing
 three-slide carousel owns its own transforms and 600ms transitions. About uses
 local sticky square photographs, ±12px travel, vertically centered copy and
 natural text growth. Shared values live in `src/lib/motion/tokens.ts`.
@@ -30,7 +30,7 @@ natural text growth. Shared values live in `src/lib/motion/tokens.ts`.
 Independent critique corrected illegible name fragments by reserving 80px above
 cards, corrected top-aligned About copy, and replaced an ineffective added radial
 wash with motion of the existing decorative backdrop. Collection cards now use
-`clamp(300px, min(36vw, 100svh - 612px), 440px)` so the complete stage fits below
+a measured250–440px image-side budget so the complete stage fits below
 the measured navigation/announcement. A final content-fit check rejects pinning
 for genuinely short or extreme-copy layouts. Mobile/touch/reduced-motion/save-data
 never acquire GSAP. Keyboard focus on a later clipped card switches to static.
@@ -114,3 +114,31 @@ source Home1440×1000 fits the complete card stage beneath the130px shell;
 About copy is balanced and390px remains a natural stack. Evidence:
 `/tmp/inf-motion-design-confirm/`; original critique:
 `/tmp/inf-motion-design-review/`. No further design corrections requested.
+
+## Normal laptop and asynchronous gallery correction
+
+User preview feedback rejected the original800px eligibility gate. The revised
+composition supports1440×800,1366×768,1280×720and1024×768 at100%zoom: single control
+row,36px/44px title,48px decorative region,12px padding, unchanged160px card copy.
+Image side is derived from actual remaining height and header/control wrapping;
+all four sizes pass active pin,complete stage fit,>=250px imagery and skip focus.
+Query minimum is680px with actual content-fit still mandatory. Hero backdrop
+response is now18×12px/160ms with1.04overscan; carousel stays unchanged.
+
+The initial gallery fix prevented focus scroll but missed a delayed image-load
+rebuild: opening/closing rerendered cached thumbnails,whose unchanged-size load
+events repeatedly removed/reacquired sticky layout and caused scroll anchoring.
+Measured layout signatures now suppress unchanged-size image/font rebuilds. A
+native-center-click test with500ms dwell while open and after closing checks both
+focus and stable reading position against a deterministic motion Storybook fixture.
+Live About separately asserts all four chapters,even when CI has no Sanity gallery.
+The shared-shell test now selects the semantic collection band and checks all six
+products at every width. Original static3/4/3/3contract remains in static stories.
+
+Revised local gate: `pnpm check` passes421unit tests,389Storybook tests,
+formatting/lint/types and both builds. Motion/shared-shell browser run passes25
+reported cases; its single startup-pointer harness race passes after continuous
+pointer-input polling (26total across final run+targeted rerun,including2explicit
+baseline no-JS expected failures).12fine-pointer desktop cases are inapplicable
+to the mobile project. Independent original-gallery reproduction now holds1727px
+before opening,after600msopen and after600msclosed,with focus restored.

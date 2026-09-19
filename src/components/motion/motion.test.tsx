@@ -122,3 +122,40 @@ it("reverts acquired manual layout if setup throws before returning", async () =
   );
   expect(screen.getByText("Visible static content")).toBeVisible();
 });
+
+function LoadedStudy() {
+  const ref = useRef<HTMLDivElement>(null);
+  useMotionEffect(ref, true, () => undefined);
+  return (
+    <div ref={ref}>
+      <span
+        role="img"
+        aria-label="Decorative study"
+        data-testid="study-image"
+      />
+    </div>
+  );
+}
+it("does not rebuild stable geometry when cached photographs emit another load", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  vi.mocked(loadMotion).mockResolvedValueOnce({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert: vi.fn(),
+      }),
+    },
+  } as unknown as MotionRuntime);
+  render(<LoadedStudy />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  fireEvent.load(screen.getByTestId("study-image"));
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(1);
+  vi.useRealTimers();
+});

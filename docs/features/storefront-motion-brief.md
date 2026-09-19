@@ -168,3 +168,8 @@ The selected contract is `../superpowers/specs/2026-09-19-motion-preview-design.
 implementation and evidence are indexed in `../evidence/storefront-motion/README.md`.
 This supersedes the G1–G3 human stops above for this preview only, and authorizes
 preview integration before INF-36. INF-47 and production merge/smoke remain open.
+
+User preview refinement: normal laptop heights720/768/800must show motion without
+zooming. Selected compact composition and measured250–440px media sizing are in
+the dated preview spec; eligibility is now1024×680with measured fit. Decorative
+backdrop pointer response is18×12px/160ms; mobile remains a natural static stack.

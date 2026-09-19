@@ -35,6 +35,7 @@ export function FragranceJourney({
       if (products.length < 2) return;
       onCleanup(() => {
         delete section.dataset.motionActive;
+        section.style.removeProperty("--motion-card-size");
       });
       const track = section.querySelector<HTMLElement>("[data-motion-track]")!;
       const viewport = section.querySelector<HTMLElement>(
@@ -42,6 +43,22 @@ export function FragranceJourney({
       )!;
       section.dataset.motionActive = "true";
       const top = headerOffset() + motionTokens.collection.headerGap;
+      // Measure real title/control wrapping and unchanged card text before sizing
+      // the square media. Normal laptop heights should fit without zooming out.
+      section.style.setProperty("--motion-card-size", "250px");
+      const image = track.querySelector<HTMLElement>("a > div");
+      const available =
+        window.innerHeight - top - motionTokens.collection.bottomGap;
+      const overhead = section.offsetHeight - (image?.offsetHeight ?? 250);
+      const side = Math.floor(
+        Math.min(440, window.innerWidth * 0.36, available - overhead),
+      );
+      if (side < 250) {
+        delete section.dataset.motionActive;
+        section.style.removeProperty("--motion-card-size");
+        return;
+      }
+      section.style.setProperty("--motion-card-size", `${side}px`);
       const travel = Math.max(0, track.scrollWidth - viewport.clientWidth);
       if (
         !travel ||
@@ -49,6 +66,7 @@ export function FragranceJourney({
           window.innerHeight - top - motionTokens.collection.bottomGap
       ) {
         delete section.dataset.motionActive;
+        section.style.removeProperty("--motion-card-size");
         return;
       }
       const timeline = gsap.timeline({
@@ -73,6 +91,7 @@ export function FragranceJourney({
       );
       return () => {
         delete section.dataset.motionActive;
+        section.style.removeProperty("--motion-card-size");
       };
     },
     [products],
@@ -103,7 +122,7 @@ export function FragranceJourney({
       onFocusCapture={(event) => stopForFocus(event.target)}
     >
       <div className="motion-collection-inner mx-auto w-full max-w-[1440px] px-5 py-10 min-[375px]:px-6 sm:px-10 lg:px-16 lg:py-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="motion-collection-heading flex flex-wrap items-center justify-between gap-4">
           <Heading
             id="home-collection-title"
             level={2}
@@ -121,7 +140,7 @@ export function FragranceJourney({
             </span>
           </a>
         </div>
-        <div className="my-4 flex flex-wrap items-center justify-between gap-2">
+        <div className="motion-collection-actions my-4 flex flex-wrap items-center justify-between gap-2">
           <a
             href="#home-guidance-title"
             className="focus-visible:outline-action-focus inline-flex min-h-11 items-center text-sm underline underline-offset-4 focus-visible:outline-2"
@@ -134,7 +153,8 @@ export function FragranceJourney({
               target.scrollIntoView({ block: "start", behavior: "instant" });
             }}
           >
-            Skip fragrance collection
+            <span className="motion-skip-long">Skip fragrance collection</span>
+            <span className="motion-skip-short hidden">Skip collection</span>
           </a>
           <MotionControl />
         </div>
