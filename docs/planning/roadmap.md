@@ -1,9 +1,78 @@
 # Infusion Diffusion Roadmap
 
-Last reconciled: 17 September 2026, after human merges through PR #96.
-Protected `main` was refreshed to `dcbcdc9`; GitHub confirms PRs #89–#96
-are merged. This summary governs current work; the dated delivery notes below
-are historical snapshots, including their superseded pending-merge statements.
+Last reconciled: 19 September 2026 against fresh protected `main` (`5f489a8`),
+GitHub merge records and all 47 existing Plane items. INF-48 was added as the
+completed imagery child of INF-31. This summary governs current status; dated
+notes below retain their original evidence and superseded status wording.
+
+## Website imagery release — complete
+
+Devon approved the final artwork and three-slide carousel, merged
+[PR #106](https://github.com/djamestaft/infusiondiffusion/pull/106), authorized
+publication and accepted the live result. Six square Shopify diffuser masters
+are active. Six Sanity documents are published: Home settings, Gallery, Shop,
+About, Fragrance Guide and Contact. The carousel contains the six-family mosaic,
+gifting and Noir De La Nuit, with matching copy and links.
+
+Production deployment `dpl_7LPDtrMKRr12ydZrjXs9KUtXK9b1` serves `5f489a8`.
+Main CI passed. Published browser checks covered ten route/viewport combinations,
+all three carousel slides at desktop/phone sizes, and all six square product
+cards, with no browser errors, axe violations or horizontal overflow. Public
+www health also reports `ok` / `5f489a8`. The imagery workstream is complete;
+do not repeat its source publication, design approval or implementation.
+
+See [release closeout](../features/website-imagery-release-2026-09-19.md).
+INF-48 is Done under Devon. Parent INF-31 returns to Todo under Shawnee for its
+remaining deferred factual/care/metadata inputs; completing imagery does not
+invent or approve those facts.
+
+## Current Plane disposition
+
+**48 items: 34 Done, 4 Todo, 3 In Progress, 4 Backlog, 3 Cancelled.**
+Ownership and dependency edges are preserved. Completed design, storefront,
+account, payment integration, footer, About media and mobile focus work remain
+Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
+
+| Item    | State       | Owner      | Remaining scope / disposition                                                                                                                                               |
+| ------- | ----------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| INF-48  | Done        | Devon      | Product masters, responsive website photography and final carousel published and verified through PR106. Child of INF-31.                                                   |
+| INF-28  | Todo        | Devon      | Remaining naming/source conventions, scent/care/supported claims and metadata decisions. Preserve the imagery and merchant-policy approvals already supplied.               |
+| INF-31  | Todo        | Shawnee    | Imagery complete in INF-48; remaining factual/care/metadata preparation waits for INF-28. No outstanding imagery publication.                                               |
+| INF-40  | Todo        | Devon      | Combined real Shopify/Payfast/account acceptance, renewal/restart/logout/isolation, totals and recovery. Visual smoke does not complete this matrix.                        |
+| INF-41  | Todo        | Devon      | Final canonical/indexing/structured-data/social/metadata and SEO acceptance after applicable INF-40/31 gates. New imagery is available.                                     |
+| INF-42  | In Progress | Devon      | DNS/TLS/apex-to-www and Shopify return-hostname cutover completed on 17 September. Final-domain account/payment acceptance, observation and commercial-launch gates remain. |
+| INF-44  | In Progress | Devon      | PR105 policy implementation is merged and included in production. Remaining care/safety, service acceptance and policy-specific post-merge evidence retain their gates.     |
+| INF-47  | In Progress | Devon      | PR101 remains open; physical-iPhone footer/overscroll verification and human merge are still required.                                                                      |
+| INF-36  | Backlog     | Shawnee    | Independent full release review after remaining content, provider and service gates. Consume the completed imagery evidence.                                                |
+| INF-37  | Backlog     | Shawnee    | Separate approved About/Gallery viewer/refinement scope; imagery replacement does not complete the interactive-viewer criteria.                                             |
+| INF-3/4 | Backlog     | Unassigned | Separate stockist work; not closed by website imagery or marketing asset creation.                                                                                          |
+
+## Completed cutover and remaining launch gates
+
+The 17 September domain-only soft launch is already implemented at
+`https://www.infusiondiffusion.co.za`, with apex redirecting to www. Plane INF-42
+records DNS/TLS verification, preserved mail/FTP records, merged announcement
+PR102 and Shopify return-hostname readback. Banner refinements PR103/104 are
+merged. Do not repeat the old pending-cutover instructions in historical notes.
+
+PR105's policy implementation was human-merged on 17 September. INF-44 no longer
+awaits that merge, but its remaining care/service acceptance must not disappear.
+INF-31's approved imagery is no longer a blocker; its remaining factual scope
+still feeds INF-44/41. Existing dependency edges stay in place.
+
+Payfast remains in Test mode. INF-40 retains real-provider tests transferred from
+INF-38/39, including references/duplicates/failure/retry/totals and customer
+renewal/restart/logout/isolation. INF-36 retains independent review. INF-41/42
+retain final SEO, domain journey and explicit live-payment/commercial approval.
+No paid transaction, new purchasable product format or further implementation
+is authorized by this closeout. Next work requires choosing one of those
+remaining tasks; the completed imagery delivery is not active work.
+
+## Historical planning snapshots
+
+The dated sections below are preserved for provenance. Their old counts,
+waiting-for-merge statements and deferred-photography wording are superseded
+by the current reconciliation above wherever completion is explicitly recorded.
 
 ## INF-42 domain-only soft launch — 17 September 2026
 

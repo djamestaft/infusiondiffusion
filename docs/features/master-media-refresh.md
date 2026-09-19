@@ -1,5 +1,12 @@
 # Website master imagery — 18 September 2026
 
+> **Released 19 September 2026:** PR106 is human-merged at `5f489a8`, main CI
+> passed, and the approved Shopify/Sanity imagery is published and verified.
+> The final carousel has three slides: six-family mosaic, gifting and Noir.
+> Earlier six-slide and pending-publication notes below describe preparation.
+> See [release closeout](website-imagery-release-2026-09-19.md) for final evidence
+> and the remaining parent INF-31 scope.
+
 Historical first-pass evidence. The subsequent gutter correction and expanded
 responsive editorial imagery supersede the portrait-contain contract below.
 See [current delivery](website-imagery-refresh.md). Square Shopify masters are
