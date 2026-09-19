@@ -268,7 +268,9 @@ export function GalleryViewer({
             onCloseAutoFocus={(event) => {
               event.preventDefault();
               if (openerIndex.current !== null) {
-                triggers.current[openerIndex.current]?.focus();
+                triggers.current[openerIndex.current]?.focus({
+                  preventScroll: true,
+                });
               }
             }}
             className="dark bg-content-surface text-content-primary fixed inset-0 h-dvh max-h-none w-screen max-w-none translate-x-0 translate-y-0 overflow-y-auto rounded-none p-5 shadow-none lg:p-20 [&>span]:hidden"

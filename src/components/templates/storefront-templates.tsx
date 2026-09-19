@@ -113,6 +113,7 @@ function ProductGrid({
 }
 
 export interface HomeTemplateProps extends TemplateNavigationProps {
+  motionEnabled?: boolean;
   products: ProductCardProps[];
   heroImage: ProductCardProps["image"];
   heroSlides?: HeroCarouselSlide[];
@@ -194,6 +195,7 @@ export const fallbackHomeTemplateContent: HomeTemplateContent = {
 };
 
 export function HomeTemplate({
+  motionEnabled = false,
   products,
   heroImage,
   heroSlides = [],
@@ -217,6 +219,7 @@ export function HomeTemplate({
       accountHref={accountHref}
     >
       <HomeContent
+        motionEnabled={motionEnabled}
         content={content}
         products={products}
         slides={carouselSlides}

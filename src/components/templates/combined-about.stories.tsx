@@ -1,3 +1,4 @@
+import published from "../motion/published-imagery.fixture.json";
 import artwork from "./website-imagery.fixture.json";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, userEvent, within } from "storybook/test";
@@ -108,4 +109,21 @@ export const MasterArtwork: Story = { args: { heroImage: artwork.about } };
 export const MasterArtworkPhone: Story = {
   ...MasterArtwork,
   globals: { viewport: { value: "contact390" } },
+};
+
+export const MotionChapters: Story = {
+  args: {
+    motionEnabled: true,
+    heroImage: artwork.about,
+    gallery: {
+      ...fixture.gallery,
+      campaignItems: fixture.gallery.campaignItems.map((item, index) => ({
+        ...item,
+        image: published.chapterImages[index] ?? item.image,
+      })),
+    },
+  },
+};
+export const MotionMissingMedia: Story = {
+  args: { motionEnabled: true, gallery: undefined },
 };

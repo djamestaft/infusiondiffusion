@@ -6,6 +6,9 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useMotionPreference } from "@/components/motion/motion-boundary";
+import { useCarouselChoreography } from "@/components/motion/carousel-choreography";
+import choreographyStyles from "@/components/motion/carousel-choreography.module.css";
 
 export type HeroCarouselSlide = {
   id: string;
@@ -33,6 +36,8 @@ export type HeroCarouselProps = {
   forceReducedMotion?: boolean;
   forceSaveData?: boolean;
   loading?: boolean;
+  /** Approved Home motion candidate; legacy presentations retain their existing transitions. */
+  animateContent?: boolean;
 };
 
 const AUTOPLAY_MS = 3_000;
@@ -371,6 +376,7 @@ function EditorialCarousel({
   initialPaused = false,
   forceReducedMotion,
   forceSaveData,
+  animateContent = false,
   className,
 }: HeroCarouselProps) {
   const slides = React.useMemo(
@@ -394,6 +400,23 @@ function EditorialCarousel({
   const [dataPreference, setDataPreference] = React.useState(false);
   const reducedMotion = forceReducedMotion ?? motionPreference;
   const saveData = forceSaveData ?? dataPreference;
+  const { paused: motionPaused } = useMotionPreference();
+  const [choreographed, setChoreographed] = React.useState(false);
+  const completeTransition = React.useCallback(() => setPrevious(null), []);
+  const choreographyAvailable = useCarouselChoreography(carouselRef, {
+    enabled: animateContent && ready,
+    suppressed:
+      reducedMotion ||
+      saveData ||
+      loading ||
+      hidden ||
+      offscreen ||
+      motionPaused,
+    active,
+    previous,
+    choreographed,
+    onComplete: completeTransition,
+  });
   React.useEffect(() => {
     // Native boundary events also cover the separately hydrated floating header.
     const carousel = carouselRef.current;
@@ -448,7 +471,8 @@ function EditorialCarousel({
       observer?.disconnect();
     };
   }, []);
-  const autoplayUnavailable = reducedMotion || saveData || loading;
+  const autoplayUnavailable =
+    reducedMotion || saveData || loading || (animateContent && motionPaused);
   const canAutoplay =
     ready &&
     slides.length > 1 &&
@@ -461,7 +485,12 @@ function EditorialCarousel({
     (offset: number, manual = true) => {
       if (slides.length < 2) return;
       const next = (active + offset + slides.length) % slides.length;
-      setPrevious(reducedMotion ? null : active);
+      setChoreographed(choreographyAvailable);
+      setPrevious(
+        reducedMotion || (animateContent && (saveData || motionPaused))
+          ? null
+          : active,
+      );
       setDirection(offset > 0 ? 1 : -1);
       setSelected(next);
       if (manual) {
@@ -471,7 +500,16 @@ function EditorialCarousel({
         );
       }
     },
-    [active, slides, fallbackCopy?.title, reducedMotion],
+    [
+      active,
+      slides,
+      fallbackCopy?.title,
+      reducedMotion,
+      animateContent,
+      saveData,
+      motionPaused,
+      choreographyAvailable,
+    ],
   );
   React.useEffect(() => {
     if (!canAutoplay) return;
@@ -485,6 +523,7 @@ function EditorialCarousel({
     <section
       ref={carouselRef}
       data-autoplay={canAutoplay ? "running" : "paused"}
+      data-carousel-choreography={choreographyAvailable ? "ready" : "static"}
       onFocusCapture={(event) => {
         if (!(event.target as HTMLElement).closest("[data-carousel-rotation]"))
           setUserPaused(true);
@@ -507,6 +546,7 @@ function EditorialCarousel({
     >
       {backgroundSrc ? (
         <Image
+          data-motion-backdrop
           src={backgroundSrc}
           alt=""
           fill
@@ -518,7 +558,10 @@ function EditorialCarousel({
       <div className="bg-content-surface pointer-events-none absolute inset-0 -z-10 opacity-50 lg:opacity-40" />
       <div className="mx-auto w-full max-w-[1440px] px-5 pt-6 pb-4 min-[375px]:px-6 sm:px-10 lg:px-24 lg:pt-10 lg:pb-6 2xl:px-16">
         <div
-          className="hero-editorial-viewport -m-2 grid overflow-hidden p-2"
+          className={cn(
+            "hero-editorial-viewport -m-2 grid overflow-hidden p-2",
+            choreographed && choreographyStyles.stage,
+          )}
           data-moving={previous !== null && !reducedMotion}
           style={{ "--hero-slide-direction": direction } as React.CSSProperties}
           data-testid="hero-carousel-viewport"
@@ -561,7 +604,8 @@ function EditorialCarousel({
                   if (
                     event.target === event.currentTarget &&
                     visible &&
-                    event.animationName === "hero-editorial-enter"
+                    event.animationName === "hero-editorial-enter" &&
+                    !choreographed
                   )
                     setPrevious(null);
                 }}
@@ -575,12 +619,18 @@ function EditorialCarousel({
                 />
                 <div className="flex min-w-0 flex-col items-center gap-4 text-center sm:items-start sm:text-left lg:order-first lg:gap-6">
                   {slide.title || fallbackCopy?.title ? (
-                    <h1 className="font-display max-w-[580px] text-[30px] leading-[36px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]">
+                    <h1
+                      key={slide.title ?? fallbackCopy?.title}
+                      className="font-display max-w-[580px] text-[30px] leading-[36px] whitespace-pre-line sm:text-[42px] sm:leading-[50px] lg:text-5xl lg:leading-[56px]"
+                    >
                       {slide.title ?? fallbackCopy?.title}
                     </h1>
                   ) : null}
                   {slide.subtitle || fallbackCopy?.subtitle ? (
-                    <p className="max-w-[520px] font-sans text-[15px] leading-6 sm:text-base sm:leading-[26px] lg:text-lg lg:leading-[29px]">
+                    <p
+                      data-carousel-support
+                      className="max-w-[520px] font-sans text-[15px] leading-6 sm:text-base sm:leading-[26px] lg:text-lg lg:leading-[29px]"
+                    >
                       {slide.subtitle ?? fallbackCopy?.subtitle}
                     </p>
                   ) : null}
@@ -590,6 +640,7 @@ function EditorialCarousel({
                   !cta.href.includes("\\") ? (
                     <Button
                       asChild
+                      data-carousel-support
                       className="min-h-12 w-[236px] max-w-full text-xs uppercase sm:text-[13px]"
                     >
                       <a href={cta.href}>{cta.label}</a>
@@ -672,6 +723,7 @@ function CampaignImage({
     <div
       className="hero-editorial-image bg-product-card-media-fallback border-navigation-divider relative aspect-[5/4] w-full overflow-hidden border"
       data-testid="hero-carousel-media"
+      data-carousel-picture
     >
       {slide.src && failedSource !== slide.src ? (
         <Image

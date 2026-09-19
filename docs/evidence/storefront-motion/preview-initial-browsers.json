@@ -1,0 +1,556 @@
+{
+  "base": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app",
+  "started": "2026-09-19T06:39:16.515Z",
+  "checks": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 635,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 1,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 996.390625,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "chromium",
+      "width": 768,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 541.890625,
+        "width": 768,
+        "height": 563
+      },
+      "overflow": {
+        "document": 768,
+        "viewport": 768
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "chromium",
+      "width": 768,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 485.3125,
+        "width": 768,
+        "height": 563
+      },
+      "overflow": {
+        "document": 768,
+        "viewport": 768
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 663,
+        "width": 390,
+        "height": 655.171875
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 399.375,
+        "width": 390,
+        "height": 655.171875
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 362,
+        "width": 320,
+        "height": 747.171875
+      },
+      "overflow": {
+        "document": 320,
+        "viewport": 320
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "chromium",
+      "width": 320,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 100.5,
+        "width": 320,
+        "height": 747.171875
+      },
+      "overflow": {
+        "document": 320,
+        "viewport": 320
+      },
+      "pinSpacers": 0,
+      "axe": [],
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 635,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 1,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 996.390625,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 662.984375,
+        "width": 390,
+        "height": 655.171875
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 399.375,
+        "width": 390,
+        "height": 655.171875
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "firefox",
+      "width": 1440,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 635,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 1,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "firefox",
+      "width": 1440,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 996.4000244140625,
+        "width": 1440,
+        "height": 459
+      },
+      "overflow": {
+        "document": 1440,
+        "viewport": 1440
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "firefox",
+      "width": 390,
+      "route": "/",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "Six fragrances.\nFind your favourite.",
+        "A gift with atmosphere.",
+        "Set the mood with\nNoir De La Nuit",
+        "A cabinet of atmosphere",
+        "Choose by the room, then by the feeling",
+        "Made to linger",
+        "Artistry in Fragrance",
+        "Made meaningful by the details",
+        "Six fragrances. A roomful of possibility.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 663,
+        "width": 390,
+        "height": 655.183349609375
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false
+    },
+    {
+      "engine": "firefox",
+      "width": 390,
+      "route": "/about",
+      "errors": [],
+      "status": 200,
+      "headings": [
+        "The story behind the atmosphere.",
+        "Born from fragrance",
+        "From more than 130 oils to six fragrances",
+        "Composed for lived-in rooms",
+        "Find your fragrance with confidence.",
+        "In the Market",
+        "Find the fragrance for your room.",
+        "Explore",
+        "Contact"
+      ],
+      "footer": {
+        "x": 0,
+        "y": 399.3833312988281,
+        "width": 390,
+        "height": 655.1833190917969
+      },
+      "overflow": {
+        "document": 390,
+        "viewport": 390
+      },
+      "pinSpacers": 0,
+      "reducedPinSpacers": 0,
+      "reducedOverflow": false,
+      "viewerFocusReturned": true
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "route": "/",
+      "noJS": true,
+      "titleVisible": false,
+      "productLinks": 0,
+      "overflow": false
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "route": "/about",
+      "noJS": true,
+      "titleVisible": false,
+      "productLinks": 0,
+      "overflow": false
+    }
+  ],
+  "limitations": [
+    "Desktop engine and emulated device tests; no physical iPhone or Android hardware."
+  ],
+  "finished": "2026-09-19T06:40:49.690Z"
+}

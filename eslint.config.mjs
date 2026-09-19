@@ -11,6 +11,7 @@ const eslintConfig = defineConfig([
     ".next/**",
     ".next-e2e/**",
     "out/**",
+    "output/**",
     "build/**",
     "coverage/**",
     "storybook-static/**",

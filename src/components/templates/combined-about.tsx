@@ -1,5 +1,8 @@
 "use client";
 
+import { MotionBoundary } from "@/components/motion/motion-boundary";
+import { StoryChapters } from "@/components/motion/story-chapters";
+import { Fragment } from "react";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import type { EditorialImageSource } from "@/lib/editorial-image";
 
@@ -12,6 +15,7 @@ import { fallbackSiteSettings } from "@/sanity/types";
 import { cn } from "@/lib/utils";
 
 export type CombinedAboutProps = {
+  motionEnabled?: boolean;
   page: AboutPage;
   gallery?: GalleryPage;
   heroImage?: EditorialImageSource;
@@ -26,12 +30,15 @@ const confidence = {
 };
 
 export function CombinedAboutTemplate({
+  motionEnabled = false,
   page,
   gallery,
   heroImage,
   bornStory = fallbackSiteSettings.homepage.founderStory,
   cartCount,
 }: CombinedAboutProps) {
+  const Boundary = motionEnabled ? MotionBoundary : Fragment;
+  const Chapters = motionEnabled ? StoryChapters : Fragment;
   const campaignRoles = [
     "campaign-blanc-travertine",
     "campaign-bois-emerald",
@@ -74,8 +81,15 @@ export function CombinedAboutTemplate({
               "dark bg-content-surface lg:grid-cols-[minmax(0,560fr)_minmax(0,704fr)]",
           )}
         >
-          {index === 0 ? figure : null}
+          {index === 0 ? (
+            motionEnabled && figure ? (
+              <div data-motion-photograph>{figure}</div>
+            ) : (
+              figure
+            )
+          ) : null}
           <div
+            data-motion-copy
             className={cn(
               "text-content-secondary min-w-0 space-y-6",
               index === 0 && "text-content-primary",
@@ -91,7 +105,13 @@ export function CombinedAboutTemplate({
               ))}
             </div>
           </div>
-          {index !== 0 ? figure : null}
+          {index !== 0 ? (
+            motionEnabled && figure ? (
+              <div data-motion-photograph>{figure}</div>
+            ) : (
+              figure
+            )
+          ) : null}
         </section>
       );
     });
@@ -102,94 +122,98 @@ export function CombinedAboutTemplate({
       navigationTheme="midnight"
       cartCount={cartCount}
     >
-      <article data-testid="about-page">
-        <header
-          className={cn(
-            gutters,
-            "dark bg-content-surface text-content-primary relative isolate flex flex-col items-center justify-center gap-6 py-10 text-center sm:py-16 lg:gap-12",
-            heroImage?.mobileSrc &&
-              "min-h-[600px] justify-start pt-8 sm:min-h-0 sm:justify-center sm:pt-16",
-          )}
-        >
-          {heroImage ? (
-            <EditorialImage
-              image={heroImage}
-              decorative
-              priority
-              sizes="100vw"
-              className="-z-20 object-cover sm:object-left lg:object-center"
+      <Boundary>
+        <article data-testid="about-page">
+          <header
+            className={cn(
+              gutters,
+              "dark bg-content-surface text-content-primary relative isolate flex flex-col items-center justify-center gap-6 py-10 text-center sm:py-16 lg:gap-12",
+              heroImage?.mobileSrc &&
+                "min-h-[600px] justify-start pt-8 sm:min-h-0 sm:justify-center sm:pt-16",
+            )}
+          >
+            {heroImage ? (
+              <EditorialImage
+                image={heroImage}
+                decorative
+                priority
+                sizes="100vw"
+                className="-z-20 object-cover sm:object-left lg:object-center"
+              />
+            ) : null}
+            <div className="bg-content-surface absolute inset-0 -z-10 opacity-40" />
+            <h1 className="font-display w-full text-[38px] leading-[1.45] font-normal [overflow-wrap:anywhere] sm:text-5xl lg:text-[64px]">
+              {page.title}
+            </h1>
+            <p className="max-w-[760px] text-lg leading-[26px]">
+              {page.introduction}
+            </p>
+          </header>
+          <Chapters>
+            <GalleryViewer
+              items={campaignItems}
+              presentation="about"
+              renderGallery={renderChapters}
+              prioritizeFirst
             />
-          ) : null}
-          <div className="bg-content-surface absolute inset-0 -z-10 opacity-40" />
-          <h1 className="font-display w-full text-[38px] leading-[1.45] font-normal [overflow-wrap:anywhere] sm:text-5xl lg:text-[64px]">
-            {page.title}
-          </h1>
-          <p className="max-w-[760px] text-lg leading-[26px]">
-            {page.introduction}
-          </p>
-        </header>
-        <GalleryViewer
-          items={campaignItems}
-          presentation="about"
-          renderGallery={renderChapters}
-          prioritizeFirst
-        />
-        {gallery?.marketItems.length ? (
+          </Chapters>
+          {gallery?.marketItems.length ? (
+            <section
+              className={cn(
+                gutters,
+                "bg-product-card-surface pt-5 pb-10 sm:pt-8 sm:pb-16",
+              )}
+              aria-labelledby="about-market-heading"
+            >
+              <h2
+                id="about-market-heading"
+                className="font-display text-content-secondary mb-6 text-[30px] leading-[1.45] font-normal sm:mb-12 sm:text-4xl lg:text-[44px]"
+              >
+                In the Market
+              </h2>
+              <GalleryViewer
+                items={gallery.marketItems}
+                layout="market"
+                presentation="about"
+                headingLevel={3}
+                prioritizeFirst={false}
+              />
+            </section>
+          ) : (
+            <section
+              className={cn(gutters, "py-10")}
+              aria-label="Market photographs"
+            >
+              <p className="text-content-secondary">
+                {gallery?.unavailable
+                  ? "The photographs are temporarily unavailable. Please try again later."
+                  : "Market photographs will appear here when available."}
+              </p>
+            </section>
+          )}
           <section
             className={cn(
               gutters,
-              "bg-product-card-surface pt-5 pb-10 sm:pt-8 sm:pb-16",
+              "flex flex-col items-start gap-6 py-10 sm:gap-12 sm:py-16",
             )}
-            aria-labelledby="about-market-heading"
+            aria-labelledby="about-cta-heading"
           >
             <h2
-              id="about-market-heading"
-              className="font-display text-content-secondary mb-6 text-[30px] leading-[1.45] font-normal sm:mb-12 sm:text-4xl lg:text-[44px]"
+              id="about-cta-heading"
+              className="font-display text-content-secondary text-[30px] leading-[1.45] font-normal sm:text-4xl lg:text-[44px]"
             >
-              In the Market
+              Find the fragrance for your room.
             </h2>
-            <GalleryViewer
-              items={gallery.marketItems}
-              layout="market"
-              presentation="about"
-              headingLevel={3}
-              prioritizeFirst={false}
-            />
-          </section>
-        ) : (
-          <section
-            className={cn(gutters, "py-10")}
-            aria-label="Market photographs"
-          >
-            <p className="text-content-secondary">
-              {gallery?.unavailable
-                ? "The photographs are temporarily unavailable. Please try again later."
-                : "Market photographs will appear here when available."}
+            <p className="text-content-secondary max-w-[760px] text-lg leading-[26px]">
+              Explore the Fragrance Guide for scent notes, room context and a
+              clear path through the collection.
             </p>
+            <Button asChild className="min-h-12 w-[320px] max-w-full">
+              <a href="/fragrance-guide">Explore the Fragrance Guide</a>
+            </Button>
           </section>
-        )}
-        <section
-          className={cn(
-            gutters,
-            "flex flex-col items-start gap-6 py-10 sm:gap-12 sm:py-16",
-          )}
-          aria-labelledby="about-cta-heading"
-        >
-          <h2
-            id="about-cta-heading"
-            className="font-display text-content-secondary text-[30px] leading-[1.45] font-normal sm:text-4xl lg:text-[44px]"
-          >
-            Find the fragrance for your room.
-          </h2>
-          <p className="text-content-secondary max-w-[760px] text-lg leading-[26px]">
-            Explore the Fragrance Guide for scent notes, room context and a
-            clear path through the collection.
-          </p>
-          <Button asChild className="min-h-12 w-[320px] max-w-full">
-            <a href="/fragrance-guide">Explore the Fragrance Guide</a>
-          </Button>
-        </section>
-      </article>
+        </article>
+      </Boundary>
     </TemplateShell>
   );
 }

@@ -763,3 +763,230 @@
   outline: 2px solid var(--action-focus);
   outline-offset: 2px;
 }
+
+/* Motion is an enhancement: these rules are only acquired after a successful
+   scoped runtime mount and a measured content-fit check. */
+:root {
+  --motion-fragrance-ink: var(--content-secondary);
+  --motion-fragrance-opacity: 0.08;
+}
+.motion-fragrance-names {
+  color: var(--motion-fragrance-ink);
+  opacity: var(--motion-fragrance-opacity);
+  font-size: clamp(96px, 11vw, 180px);
+  line-height: 1;
+}
+
+.motion-collection[data-motion-active] .motion-collection-viewport {
+  overflow: clip;
+  padding: 80px 4px 4px;
+}
+.motion-collection[data-motion-active] .motion-collection-track {
+  display: flex;
+  gap: 24px;
+}
+.motion-collection[data-motion-active] .motion-collection-track > * {
+  flex: 0 0 var(--motion-card-size, 300px);
+}
+.motion-collection[data-motion-active] .motion-fragrance-names {
+  display: block;
+}
+[data-motion-chapter] {
+  min-height: 72svh;
+  align-items: start;
+}
+[data-motion-chapter] [data-motion-photograph] {
+  position: sticky;
+  top: var(--motion-chapter-top, 104px);
+  align-self: start;
+}
+#home-guidance-title {
+  scroll-margin-top: 110px;
+}
+
+.motion-collection[data-motion-active] .motion-collection-inner {
+  padding-block: 24px;
+}
+
+[data-motion-chapter] [data-motion-copy] {
+  align-self: center;
+}
+
+/* Repeated names are decorative CSS content; accessible names stay on cards. */
+.motion-fragrance-names::before {
+  content: attr(data-fragrance-names);
+}
+
+/* Compact laptop composition preserves type and tap targets, measuring the
+   remaining square image space instead of requiring browser zoom. */
+@media (min-width: 1024px) and (max-height: 899px) {
+  .motion-collection[data-motion-active] .motion-collection-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    align-items: center;
+    gap: 12px;
+    padding-block: 12px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-heading,
+  .motion-collection[data-motion-active] .motion-collection-actions {
+    display: contents;
+  }
+  .motion-collection[data-motion-active] h2 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-viewport {
+    grid-column: 1 / -1;
+    padding-top: 48px;
+  }
+  .motion-collection[data-motion-active] .motion-fragrance-names {
+    font-size: 96px;
+  }
+  .motion-collection[data-motion-active] .motion-collection-track {
+    gap: 20px;
+  }
+  .motion-collection[data-motion-active] .motion-skip-long {
+    display: none;
+  }
+  .motion-collection[data-motion-active] .motion-skip-short {
+    display: inline;
+  }
+}
+
+/* Establish the eligible crop in the first paint, before JS or pointer input.
+   Inline motion adds translation with the same scale. Focus returns to this
+   centered crop; reduced motion, explicit pause and ineligibility remove it. */
+@media (min-width: 1024px) and (min-height: 680px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion-hero:not([data-motion-paused]) [data-motion-backdrop] {
+    transform: scale(var(--motion-hero-scale));
+  }
+}
+
+/* Consultation keeps every answer reachable at normal laptop heights. */
+@keyframes guide-step-enter {
+  from {
+    transform: translateX(var(--guide-enter-x));
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes guide-result-enter {
+  from {
+    transform: translateY(20px);
+    opacity: 0.85;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-guide-light-motion] [data-guide-reveal] {
+    animation: guide-step-enter 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  [data-guide-light-motion][data-guide-transition="result"]
+    [data-guide-reveal] {
+    animation-name: guide-result-enter;
+  }
+}
+@media (min-width: 1024px) and (max-height: 800px) {
+  .guide-question-panel {
+    padding-block: 24px;
+    padding-inline: 40px;
+  }
+  .guide-stage {
+    grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
+  }
+  .guide-question-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  .guide-choices > label {
+    min-height: 52px;
+    padding-block: 8px;
+  }
+  .guide-atmosphere {
+    gap: 20px;
+    padding-block: 24px;
+  }
+  .guide-atmosphere > p:first-child {
+    font-size: 40px;
+    line-height: 46px;
+  }
+  .guide-introduction {
+    padding-block: 32px;
+  }
+  .guide-introduction h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  .guide-atmosphere [data-guide-reveal] {
+    font-size: 72px;
+    line-height: 84px;
+  }
+}
+
+@media (max-width: 374px) {
+  .guide-question-title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .guide-choices label > span:first-of-type {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .guide-introduction h1 {
+    font-size: 34px;
+    line-height: 42px;
+  }
+}
+
+@keyframes guide-answer-enter {
+  from {
+    transform: translateY(10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-guide-light-motion] [data-guide-answer-text] {
+    animation: guide-answer-enter 420ms cubic-bezier(0.215, 0.61, 0.355, 1)
+      backwards;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(2)
+    [data-guide-answer-text] {
+    animation-delay: 35ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(3)
+    [data-guide-answer-text] {
+    animation-delay: 70ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(4)
+    [data-guide-answer-text] {
+    animation-delay: 105ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(5)
+    [data-guide-answer-text] {
+    animation-delay: 140ms;
+  }
+  [data-guide-light-motion]
+    .guide-choices
+    > label:nth-child(6)
+    [data-guide-answer-text] {
+    animation-delay: 175ms;
+  }
+}

@@ -1,0 +1,760 @@
+{
+  "generatedAt": "2026-09-19T06:46:57.600Z",
+  "baseline": {
+    "origin": "https://www.infusiondiffusion.co.za",
+    "health": {
+      "status": 200,
+      "body": "{\"status\":\"ok\",\"service\":\"infusion-diffusion\",\"version\":\"67de810\",\"timestamp\":\"2026-09-19T06:19:02.756Z\"}"
+    },
+    "started": "2026-09-19T06:19:02.661Z",
+    "finished": "2026-09-19T06:22:28.676Z"
+  },
+  "candidate": {
+    "origin": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app",
+    "health": {
+      "status": 200,
+      "body": "{\"status\":\"ok\",\"service\":\"infusion-diffusion\",\"version\":\"3ba4c8e\",\"timestamp\":\"2026-09-19T06:41:46.278Z\"}"
+    },
+    "started": "2026-09-19T06:41:46.229Z",
+    "finished": "2026-09-19T06:44:50.069Z",
+    "commit": "3ba4c8e"
+  },
+  "profile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true,
+    "cpuSlowdown": 4,
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "uploadBytesPerSecond": 93750,
+    "cacheDisabled": true,
+    "waitAfterLoadMs": 10000
+  },
+  "browser": "151.0.7922.34",
+  "originalComparisons": [
+    {
+      "route": "/",
+      "baseline": {
+        "count": 5,
+        "lcpMs": {
+          "median": 1604,
+          "min": 1584,
+          "max": 1676,
+          "runs": [1604, 1640, 1676, 1584, 1604]
+        },
+        "cls": {
+          "median": 0.000853142391317494,
+          "min": 0.000853142391317494,
+          "max": 0.000853142391317494,
+          "runs": [
+            0.000853142391317494, 0.000853142391317494, 0.000853142391317494,
+            0.000853142391317494, 0.000853142391317494
+          ]
+        },
+        "jsTransferBytes": {
+          "median": 253551,
+          "min": 253551,
+          "max": 253551,
+          "runs": [253551, 253551, 253551, 253551, 253551]
+        },
+        "scrollP95Ms": {
+          "median": 17.599999999998545,
+          "min": 17.5,
+          "max": 17.600000000000364,
+          "runs": [
+            17.600000000000364, 17.599999999998545, 17.5, 17.5,
+            17.599999999998545
+          ]
+        },
+        "documentTtfbMs": {
+          "median": 58.79999999701977,
+          "min": 23.799999997019768,
+          "max": 76.79999999701977,
+          "runs": [
+            76.79999999701977, 58.79999999701977, 23.799999997019768,
+            27.300000000745058, 67
+          ]
+        },
+        "documentResponseEndMs": {
+          "median": 1400,
+          "min": 1391.5,
+          "max": 1495.8999999985099,
+          "runs": [
+            1400, 1422.0999999977648, 1495.8999999985099, 1391.5,
+            1399.699999999255
+          ]
+        },
+        "longTaskTotalMs": {
+          "median": 145,
+          "min": 140,
+          "max": 169,
+          "runs": [169, 154, 144, 140, 145]
+        },
+        "lcpElements": [
+          {
+            "startTime": 1604,
+            "size": 128567,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1640,
+            "size": 128567,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1676,
+            "size": 128567,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1584,
+            "size": 128567,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1604,
+            "size": 128567,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          }
+        ],
+        "browserErrors": [],
+        "networkFailures": [],
+        "httpErrors": []
+      },
+      "candidate": {
+        "count": 5,
+        "lcpMs": {
+          "median": 1984,
+          "min": 1696,
+          "max": 2100,
+          "runs": [2100, 1924, 1984, 1696, 2020]
+        },
+        "cls": {
+          "median": 0.000853142391317494,
+          "min": 0.000853142391317494,
+          "max": 0.000853142391317494,
+          "runs": [
+            0.000853142391317494, 0.000853142391317494, 0.000853142391317494,
+            0.000853142391317494, 0.000853142391317494
+          ]
+        },
+        "jsTransferBytes": {
+          "median": 257031,
+          "min": 257031,
+          "max": 257031,
+          "runs": [257031, 257031, 257031, 257031, 257031]
+        },
+        "scrollP95Ms": {
+          "median": 17.600000000000364,
+          "min": 17.599999999998545,
+          "max": 17.600000000000364,
+          "runs": [
+            17.599999999998545, 17.599999999998545, 17.600000000000364,
+            17.600000000000364, 17.600000000000364
+          ]
+        },
+        "documentTtfbMs": {
+          "median": 55.400000002235174,
+          "min": 31.400000002235174,
+          "max": 66.30000000074506,
+          "runs": [
+            66.30000000074506, 31.400000002235174, 56.099999997764826,
+            33.30000000074506, 55.400000002235174
+          ]
+        },
+        "documentResponseEndMs": {
+          "median": 1391.300000000745,
+          "min": 1300.7000000029802,
+          "max": 1510.699999999255,
+          "runs": [
+            1429.800000000745, 1510.699999999255, 1341.300000000745,
+            1391.300000000745, 1300.7000000029802
+          ]
+        },
+        "longTaskTotalMs": {
+          "median": 120,
+          "min": 104,
+          "max": 186,
+          "runs": [119, 120, 104, 186, 126]
+        },
+        "lcpElements": [
+          {
+            "startTime": 2100,
+            "size": 128567,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1924,
+            "size": 128567,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1984,
+            "size": 128567,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 1696,
+            "size": 128567,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2020,
+            "size": 128567,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+            "element": "IMG"
+          }
+        ],
+        "browserErrors": [],
+        "networkFailures": [],
+        "httpErrors": []
+      },
+      "lcpDeltaMs": 380,
+      "lcpDeltaPct": 23.690773067331673,
+      "lcpGuardrailPct": 10,
+      "lcpGuardrailExceeded": true,
+      "clsDelta": 0,
+      "jsTransferDeltaBytes": 3480,
+      "jsTransferDeltaPct": 1.3725049398345894,
+      "frameGuardrailExceeded": false
+    },
+    {
+      "route": "/about",
+      "baseline": {
+        "count": 5,
+        "lcpMs": {
+          "median": 2520,
+          "min": 2332,
+          "max": 2572,
+          "runs": [2520, 2572, 2332, 2548, 2500]
+        },
+        "cls": {
+          "median": 0.001173985472283607,
+          "min": 0.001173985472283607,
+          "max": 0.001173985472283607,
+          "runs": [
+            0.001173985472283607, 0.001173985472283607, 0.001173985472283607,
+            0.001173985472283607, 0.001173985472283607
+          ]
+        },
+        "jsTransferBytes": {
+          "median": 298190,
+          "min": 298190,
+          "max": 298190,
+          "runs": [298190, 298190, 298190, 298190, 298190]
+        },
+        "scrollP95Ms": {
+          "median": 18.5,
+          "min": 18.200000000000728,
+          "max": 18.5,
+          "runs": [18.5, 18.30000000000291, 18.200000000000728, 18.5, 18.5]
+        },
+        "documentTtfbMs": {
+          "median": 36.5,
+          "min": 27.399999998509884,
+          "max": 79.5,
+          "runs": [79.5, 29.300000000745058, 57, 36.5, 27.399999998509884]
+        },
+        "documentResponseEndMs": {
+          "median": 1300.5,
+          "min": 1206.3999999985099,
+          "max": 1383,
+          "runs": [1227.5, 1367.5, 1383, 1300.5, 1206.3999999985099]
+        },
+        "longTaskTotalMs": {
+          "median": 83,
+          "min": 79,
+          "max": 91,
+          "runs": [83, 79, 91, 83, 82]
+        },
+        "lcpElements": [
+          {
+            "startTime": 2520,
+            "size": 234000,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2572,
+            "size": 234000,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2332,
+            "size": 234000,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2548,
+            "size": 234000,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2500,
+            "size": 234000,
+            "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          }
+        ],
+        "browserErrors": [],
+        "networkFailures": [],
+        "httpErrors": []
+      },
+      "candidate": {
+        "count": 5,
+        "lcpMs": {
+          "median": 2244,
+          "min": 2184,
+          "max": 2648,
+          "runs": [2184, 2204, 2244, 2648, 2616]
+        },
+        "cls": {
+          "median": 0.001173985472283607,
+          "min": 0.001173985472283607,
+          "max": 0.001173985472283607,
+          "runs": [
+            0.001173985472283607, 0.001173985472283607, 0.001173985472283607,
+            0.001173985472283607, 0.001173985472283607
+          ]
+        },
+        "jsTransferBytes": {
+          "median": 316914,
+          "min": 316914,
+          "max": 316914,
+          "runs": [316914, 316914, 316914, 316914, 316914]
+        },
+        "scrollP95Ms": {
+          "median": 17.5,
+          "min": 17.5,
+          "max": 17.600000000000364,
+          "runs": [17.5, 17.600000000000364, 17.5, 17.5, 17.5]
+        },
+        "documentTtfbMs": {
+          "median": 33.600000001490116,
+          "min": 30.199999999254942,
+          "max": 148.10000000149012,
+          "runs": [
+            31.700000002980232, 30.199999999254942, 39.400000002235174,
+            148.10000000149012, 33.600000001490116
+          ]
+        },
+        "documentResponseEndMs": {
+          "median": 1237.800000000745,
+          "min": 1211.4000000022352,
+          "max": 1449,
+          "runs": [
+            1227, 1211.4000000022352, 1237.800000000745, 1449,
+            1397.1000000014901
+          ]
+        },
+        "longTaskTotalMs": {
+          "median": 103,
+          "min": 86,
+          "max": 151,
+          "runs": [103, 100, 108, 151, 86]
+        },
+        "lcpElements": [
+          {
+            "startTime": 2184,
+            "size": 234000,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2204,
+            "size": 234000,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2244,
+            "size": 234000,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2648,
+            "size": 234000,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          },
+          {
+            "startTime": 2616,
+            "size": 234000,
+            "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2F0cc3df2ddecae1d7a64b1d55495757bdc1efe6bf-1024x1536.png&w=640&q=75",
+            "element": "IMG"
+          }
+        ],
+        "browserErrors": [],
+        "networkFailures": [],
+        "httpErrors": []
+      },
+      "lcpDeltaMs": -276,
+      "lcpDeltaPct": -10.952380952380953,
+      "lcpGuardrailPct": 10,
+      "lcpGuardrailExceeded": false,
+      "clsDelta": 0,
+      "jsTransferDeltaBytes": 18724,
+      "jsTransferDeltaPct": 6.279217948288005,
+      "frameGuardrailExceeded": false
+    }
+  ],
+  "controlledHomeComparison": {
+    "route": "/",
+    "baselineOrigin": "https://www.infusiondiffusion.co.za",
+    "baselineHealth": {
+      "status": 200,
+      "body": "{\"status\":\"ok\",\"service\":\"infusion-diffusion\",\"version\":\"67de810\",\"timestamp\":\"2026-09-19T06:45:11.531Z\"}"
+    },
+    "baselineStarted": "2026-09-19T06:45:11.439Z",
+    "baselineFinished": "2026-09-19T06:46:41.502Z",
+    "requestInterception": true,
+    "baseline": {
+      "count": 5,
+      "lcpMs": {
+        "median": 1700,
+        "min": 1656,
+        "max": 1868,
+        "runs": [1716, 1700, 1868, 1656, 1664]
+      },
+      "cls": {
+        "median": 0.000853142391317494,
+        "min": 0.000853142391317494,
+        "max": 0.000853142391317494,
+        "runs": [
+          0.000853142391317494, 0.000853142391317494, 0.000853142391317494,
+          0.000853142391317494, 0.000853142391317494
+        ]
+      },
+      "jsTransferBytes": {
+        "median": 253551,
+        "min": 253551,
+        "max": 253551,
+        "runs": [253551, 253551, 253551, 253551, 253551]
+      },
+      "scrollP95Ms": {
+        "median": 17.5,
+        "min": 17.5,
+        "max": 17.599999999998545,
+        "runs": [17.599999999998545, 17.599999999998545, 17.5, 17.5, 17.5]
+      },
+      "documentTtfbMs": {
+        "median": 41.600000001490116,
+        "min": 23.099999997764826,
+        "max": 162.79999999701977,
+        "runs": [
+          162.79999999701977, 23.099999997764826, 44.69999999925494,
+          25.199999999254942, 41.600000001490116
+        ]
+      },
+      "documentResponseEndMs": {
+        "median": 1414.5,
+        "min": 1324.0999999977648,
+        "max": 1497.2999999970198,
+        "runs": [1496.5, 1497.2999999970198, 1324.0999999977648, 1407.5, 1414.5]
+      },
+      "longTaskTotalMs": {
+        "median": 142,
+        "min": 83,
+        "max": 150,
+        "runs": [139, 150, 83, 142, 149]
+      },
+      "lcpElements": [
+        {
+          "startTime": 1716,
+          "size": 128567,
+          "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1700,
+          "size": 128567,
+          "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1868,
+          "size": 128567,
+          "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1656,
+          "size": 128567,
+          "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1664,
+          "size": 128567,
+          "url": "https://www.infusiondiffusion.co.za/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        }
+      ],
+      "browserErrors": [],
+      "networkFailures": [],
+      "httpErrors": []
+    },
+    "candidate": {
+      "count": 5,
+      "lcpMs": {
+        "median": 1984,
+        "min": 1696,
+        "max": 2100,
+        "runs": [2100, 1924, 1984, 1696, 2020]
+      },
+      "cls": {
+        "median": 0.000853142391317494,
+        "min": 0.000853142391317494,
+        "max": 0.000853142391317494,
+        "runs": [
+          0.000853142391317494, 0.000853142391317494, 0.000853142391317494,
+          0.000853142391317494, 0.000853142391317494
+        ]
+      },
+      "jsTransferBytes": {
+        "median": 257031,
+        "min": 257031,
+        "max": 257031,
+        "runs": [257031, 257031, 257031, 257031, 257031]
+      },
+      "scrollP95Ms": {
+        "median": 17.600000000000364,
+        "min": 17.599999999998545,
+        "max": 17.600000000000364,
+        "runs": [
+          17.599999999998545, 17.599999999998545, 17.600000000000364,
+          17.600000000000364, 17.600000000000364
+        ]
+      },
+      "documentTtfbMs": {
+        "median": 55.400000002235174,
+        "min": 31.400000002235174,
+        "max": 66.30000000074506,
+        "runs": [
+          66.30000000074506, 31.400000002235174, 56.099999997764826,
+          33.30000000074506, 55.400000002235174
+        ]
+      },
+      "documentResponseEndMs": {
+        "median": 1391.300000000745,
+        "min": 1300.7000000029802,
+        "max": 1510.699999999255,
+        "runs": [
+          1429.800000000745, 1510.699999999255, 1341.300000000745,
+          1391.300000000745, 1300.7000000029802
+        ]
+      },
+      "longTaskTotalMs": {
+        "median": 120,
+        "min": 104,
+        "max": 186,
+        "runs": [119, 120, 104, 186, 126]
+      },
+      "lcpElements": [
+        {
+          "startTime": 2100,
+          "size": 128567,
+          "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1924,
+          "size": 128567,
+          "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1984,
+          "size": 128567,
+          "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 1696,
+          "size": 128567,
+          "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        },
+        {
+          "startTime": 2020,
+          "size": 128567,
+          "url": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fj222nd1i%2Fproduction%2Fbe4ca6ec22e691595bde5053342406c1f89ebdc1-1920x640.png&w=640&q=75",
+          "element": "IMG"
+        }
+      ],
+      "browserErrors": [],
+      "networkFailures": [],
+      "httpErrors": []
+    },
+    "lcpDeltaMs": 284,
+    "lcpDeltaPct": 16.705882352941178,
+    "lcpGuardrailPct": 10,
+    "lcpGuardrailExceeded": true,
+    "clsDelta": 0,
+    "jsTransferDeltaBytes": 3480,
+    "jsTransferDeltaPct": 1.3725049398345894,
+    "frameGuardrailExceeded": false
+  },
+  "limitations": [
+    "Synthetic Chromium lab run, not physical iPhone or field data.",
+    "Five fresh-context runs per route, serial on one machine; origin cache and real network remain variable.",
+    "LCP/CLS reflect initial navigation through 10 seconds after load; scroll measured separately.",
+    "Transferred JS bytes use Resource Timing transferSize; CDP encodedDataLength also captured, including blocked/cancelled request outcomes.",
+    "Scroll frame durations from requestAnimationFrame are a proxy, not physical-device FPS acceptance.",
+    "Candidate uses exact-origin preview access request interception. Original production baseline used no interception; controlled Home baseline uses the same interception with no access headers.",
+    "Candidate measures commit 3ba4c8e only. Later focus/scroll-restoration or failed-setup cleanup fixes are not represented.",
+    "Different origins can have different asset/cache behavior despite identical device, network and CPU profiles.",
+    "Original candidate capture lacks per-resource timing detail; main-document timing and LCP observations do not isolate image download from render delay."
+  ],
+  "diagnosticFindings": [
+    "Same hero asset/variant and identical encoded payload on baseline and candidate.",
+    "Candidate diagnostic run LCP1744ms; hero responseEnd1735.5ms, render-delay8.5ms. This one run does not replace the failed five-run median.",
+    "Production control requests three collection image assets; candidate requests six, introducing image competition near hero completion. This is an observed loading difference, not proven causality for original LCP regression.",
+    "Candidate also loads Vercel preview feedback.js; production does not. Cross-origin Resource Timing transferSize is zero, so reported JS transfer does not include its unknown transferred size.",
+    "Main-document median responseEnd does not explain the original difference. Long-task total is not higher on candidate Home.",
+    "Original five-run candidate did not retain resource timing detail; cannot retroactively isolate its image download versus rendering contribution."
+  ],
+  "toolbarIsolationDiagnostic": {
+    "candidateCommit": "3ba4c8e",
+    "candidateOrigin": "https://infusion-diffusion-g5sfrriz4-devon-james-tafts-projects.vercel.app",
+    "health": {
+      "status": 200,
+      "body": "{\"status\":\"ok\",\"service\":\"infusion-diffusion\",\"version\":\"3ba4c8e\",\"timestamp\":\"2026-09-19T06:48:41.182Z\"}"
+    },
+    "started": "2026-09-19T06:48:40.939Z",
+    "finished": "2026-09-19T06:50:11.807Z",
+    "intervention": "Abort vercel.live request; same five-run profile and exact-origin access interception otherwise.",
+    "medianLcpMs": 1736,
+    "rangeLcpMs": [1648, 1956],
+    "controlledBaselineMedianLcpMs": 1700,
+    "controlledDeltaPct": 2.1176470588235294,
+    "originalBaselineMedianLcpMs": 1604,
+    "originalDeltaPct": 8.229426433915211,
+    "originalUnmodifiedCandidateMedianLcpMs": 1984,
+    "rows": [
+      {
+        "run": 1,
+        "lcpMs": 1956,
+        "cls": 0.000853142391317494,
+        "jsTransferBytes": 257031,
+        "scrollP95Ms": 17.599999999998545,
+        "heroStartMs": 768.6999999992549,
+        "heroResponseEndMs": 1600.1000000014901,
+        "heroEncodedBodyBytes": 10798,
+        "heroRenderDelayMs": 355.8999999985099,
+        "expectedBlockedRequests": [
+          {
+            "url": "https://vercel.live/_next-live/feedback/feedback.js",
+            "error": {
+              "errorText": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+            }
+          }
+        ],
+        "unexpectedFailures": [],
+        "httpErrors": []
+      },
+      {
+        "run": 2,
+        "lcpMs": 1648,
+        "cls": 0.000853142391317494,
+        "jsTransferBytes": 257031,
+        "scrollP95Ms": 17.599999999998545,
+        "heroStartMs": 823.8000000007451,
+        "heroResponseEndMs": 1624.0999999977648,
+        "heroEncodedBodyBytes": 10798,
+        "heroRenderDelayMs": 23.900000002235174,
+        "expectedBlockedRequests": [
+          {
+            "url": "https://vercel.live/_next-live/feedback/feedback.js",
+            "error": {
+              "errorText": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+            }
+          }
+        ],
+        "unexpectedFailures": [],
+        "httpErrors": []
+      },
+      {
+        "run": 3,
+        "lcpMs": 1700,
+        "cls": 0.000853142391317494,
+        "jsTransferBytes": 257031,
+        "scrollP95Ms": 17.599999999998545,
+        "heroStartMs": 1017.5999999977648,
+        "heroResponseEndMs": 1691.199999999255,
+        "heroEncodedBodyBytes": 10798,
+        "heroRenderDelayMs": 8.800000000745058,
+        "expectedBlockedRequests": [
+          {
+            "url": "https://vercel.live/_next-live/feedback/feedback.js",
+            "error": {
+              "errorText": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+            }
+          }
+        ],
+        "unexpectedFailures": [],
+        "httpErrors": []
+      },
+      {
+        "run": 4,
+        "lcpMs": 1912,
+        "cls": 0.000853142391317494,
+        "jsTransferBytes": 257031,
+        "scrollP95Ms": 17.599999999998545,
+        "heroStartMs": 657.8999999985099,
+        "heroResponseEndMs": 1565.300000000745,
+        "heroEncodedBodyBytes": 10798,
+        "heroRenderDelayMs": 346.69999999925494,
+        "expectedBlockedRequests": [
+          {
+            "url": "https://vercel.live/_next-live/feedback/feedback.js",
+            "error": {
+              "errorText": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+            }
+          }
+        ],
+        "unexpectedFailures": [],
+        "httpErrors": []
+      },
+      {
+        "run": 5,
+        "lcpMs": 1736,
+        "cls": 0.000853142391317494,
+        "jsTransferBytes": 257031,
+        "scrollP95Ms": 17.599999999998545,
+        "heroStartMs": 1129.4000000022352,
+        "heroResponseEndMs": 1728.9000000022352,
+        "heroEncodedBodyBytes": 10798,
+        "heroRenderDelayMs": 7.099999997764826,
+        "expectedBlockedRequests": [
+          {
+            "url": "https://vercel.live/_next-live/feedback/feedback.js",
+            "error": {
+              "errorText": "net::ERR_BLOCKED_BY_CLIENT.Inspector"
+            }
+          }
+        ],
+        "unexpectedFailures": [],
+        "httpErrors": []
+      }
+    ],
+    "interpretation": "Within +10% for this separate diagnostic; original unmodified-preview five-run result remains failed. Supports preview instrumentation as a contributor but does not establish exclusive causality because runs were serial and variable."
+  }
+}

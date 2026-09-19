@@ -41,8 +41,14 @@ for (const viewport of approvedHomeViewports) {
       .boundingBox();
     if (viewport.width >= 1024 && viewport.width < 1536) {
       expect(heroHeading!.x - cabinetHeading!.x).toBeCloseTo(32, 0);
-    } else {
+    } else if (viewport.width >= 640) {
       expect(heroHeading!.x).toBeCloseTo(cabinetHeading!.x, 0);
+    } else {
+      // Published campaigns center mobile copy; the collection retains page gutters.
+      expect(heroHeading!.x + heroHeading!.width / 2).toBeCloseTo(
+        viewport.width / 2,
+        0,
+      );
     }
     expect(brand!.x).toBeCloseTo(cabinetHeading!.x, 0);
 
@@ -181,26 +187,17 @@ test("renders the live homepage journey accessibly", async ({ page }) => {
   expect(consoleErrors).toEqual([]);
 });
 
-test("reveals each following section at the viewport edge", async ({
+test("motion-enabled Home keeps supporting sections visible without reveal gates", async ({
   page,
 }) => {
   await page.goto("/");
-
-  const waitingReveals = page.locator(
-    '[data-scroll-reveal][data-reveal-state="waiting"]',
-  );
-  await expect.poll(() => waitingReveals.count()).toBeGreaterThan(0);
-  await waitingReveals
-    .first()
-    .evaluate((element) => element.setAttribute("data-e2e-target", ""));
-  const nextSection = page.locator("[data-e2e-target]");
-
-  await nextSection.scrollIntoViewIfNeeded();
-  await expect(nextSection).toHaveAttribute("data-reveal-state", "visible");
-
+  await expect(page.locator("[data-scroll-reveal]")).toHaveCount(0);
+  const guidance = page.locator("#home-guidance-title");
+  await guidance.scrollIntoViewIfNeeded();
+  await expect(guidance).toBeVisible();
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(nextSection).toHaveCSS("opacity", "1");
-  await expect(nextSection).toHaveCSS("transform", "none");
+  await expect(page.locator(".pin-spacer")).toHaveCount(0);
+  await expect(guidance).toBeVisible();
 });
 
 test("reports a healthy deployment", async ({ request }) => {
@@ -235,7 +232,7 @@ test("keeps the hero, CTA, and floating navigation intact at 320px", async ({
 test("renders the full-width elevated cabinet band with exact spacing", async ({
   page,
 }, testInfo) => {
-  await page.goto("/");
+  await page.goto(homeStoryUrl("home-ivory"));
   const expectedGap = testInfo.project.name === "mobile" ? 40 : 64;
   const band = page.getByTestId("home-cabinet-band");
   const inner = page.getByTestId("home-cabinet-inner");
@@ -269,6 +266,7 @@ test("renders the full-width elevated cabinet band with exact spacing", async ({
     ).toHaveCount(0);
     const mediaBox = await page
       .getByTestId("hero-carousel-media")
+      .first()
       .boundingBox();
     expect(mediaBox).not.toBeNull();
     if (testInfo.project.name === "chromium") {

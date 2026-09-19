@@ -1,0 +1,1094 @@
+[
+  {
+    "width": 390,
+    "frames": [
+      {
+        "t": 0,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 15.733999999999924,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 33.134000000000015,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 49.03399999999988,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 32, 0)",
+        "opacity": "0.8",
+        "answerOpacity": "0.8"
+      },
+      {
+        "t": 65.73399999999992,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 32, 0)",
+        "opacity": "0.8",
+        "answerOpacity": "0.8"
+      },
+      {
+        "t": 82.43399999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 28.9785, 0)",
+        "opacity": "0.818884",
+        "answerOpacity": "0.822452"
+      },
+      {
+        "t": 99.83400000000006,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 25.8914, 0)",
+        "opacity": "0.838179",
+        "answerOpacity": "0.8452"
+      },
+      {
+        "t": 116.73399999999992,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 23.0125, 0)",
+        "opacity": "0.856172",
+        "answerOpacity": "0.866049"
+      },
+      {
+        "t": 132.83400000000006,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 20.4279, 0)",
+        "opacity": "0.872326",
+        "answerOpacity": "0.884316"
+      },
+      {
+        "t": 149.03399999999988,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 18.0178, 0)",
+        "opacity": "0.887389",
+        "answerOpacity": "0.900866"
+      },
+      {
+        "t": 166.63400000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 15.6383, 0)",
+        "opacity": "0.902261",
+        "answerOpacity": "0.916688"
+      },
+      {
+        "t": 183.33400000000006,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 13.6155, 0)",
+        "opacity": "0.914903",
+        "answerOpacity": "0.929703"
+      },
+      {
+        "t": 200.03399999999988,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 11.8141, 0)",
+        "opacity": "0.926162",
+        "answerOpacity": "0.940946"
+      },
+      {
+        "t": 216.03399999999988,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 10.282, 0)",
+        "opacity": "0.935737",
+        "answerOpacity": "0.950242"
+      },
+      {
+        "t": 232.53399999999988,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 8.88317, 0)",
+        "opacity": "0.94448",
+        "answerOpacity": "0.958506"
+      },
+      {
+        "t": 249.73399999999992,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 7.60053, 0)",
+        "opacity": "0.952497",
+        "answerOpacity": "0.965882"
+      },
+      {
+        "t": 266.634,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 6.4952, 0)",
+        "opacity": "0.959405",
+        "answerOpacity": "0.97207"
+      },
+      {
+        "t": 283.33400000000006,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 5.53619, 0)",
+        "opacity": "0.965399",
+        "answerOpacity": "0.977293"
+      },
+      {
+        "t": 300.0339999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 4.69415, 0)",
+        "opacity": "0.970662",
+        "answerOpacity": "0.981749"
+      },
+      {
+        "t": 316.7339999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 3.95558, 0)",
+        "opacity": "0.975278",
+        "answerOpacity": "0.985536"
+      },
+      {
+        "t": 332.634,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 3.33775, 0)",
+        "opacity": "0.979139",
+        "answerOpacity": "0.988597"
+      },
+      {
+        "t": 349.93399999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.74964, 0)",
+        "opacity": "0.982815",
+        "answerOpacity": "0.991396"
+      },
+      {
+        "t": 365.83400000000006,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.27821, 0)",
+        "opacity": "0.985761",
+        "answerOpacity": "0.993536"
+      },
+      {
+        "t": 382.43399999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.84926, 0)",
+        "opacity": "0.988442",
+        "answerOpacity": "0.995376"
+      },
+      {
+        "t": 399.23400000000015,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.47431, 0)",
+        "opacity": "0.990786",
+        "answerOpacity": "0.996872"
+      },
+      {
+        "t": 415.73400000000015,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.15827, 0)",
+        "opacity": "0.992761",
+        "answerOpacity": "0.99802"
+      },
+      {
+        "t": 432.6339999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.883105, 0)",
+        "opacity": "0.994481",
+        "answerOpacity": "0.998898"
+      },
+      {
+        "t": 449.1339999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.65746, 0)",
+        "opacity": "0.995891",
+        "answerOpacity": "0.999493"
+      },
+      {
+        "t": 466.1339999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.465428, 0)",
+        "opacity": "0.997091",
+        "answerOpacity": "0.999859"
+      },
+      {
+        "t": 483.1339999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.310871, 0)",
+        "opacity": "0.998057",
+        "answerOpacity": "0.999998"
+      },
+      {
+        "t": 499.93399999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.191823, 0)",
+        "opacity": "0.998801",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 515.7340000000002,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.107964, 0)",
+        "opacity": "0.999325",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 532.7340000000002,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.04579, 0)",
+        "opacity": "0.999714",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 549.434,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.0108919, 0)",
+        "opacity": "0.999932",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 565.8340000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 583.3340000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 599.934,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 615.7340000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 633.3340000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 649.0339999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 665.6339999999998,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 682.5339999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 699.934,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 716.0339999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 732.3340000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 749.5339999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 766.6339999999998,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      }
+    ],
+    "actions": [
+      {
+        "text": "EXPLORE THE COLLECTION ",
+        "rect": {
+          "x": 48,
+          "y": 2105,
+          "width": 202.359375,
+          "height": 44,
+          "top": 2105,
+          "right": 250.359375,
+          "bottom": 2149,
+          "left": 48
+        },
+        "display": "flex"
+      },
+      {
+        "text": "Reset guide",
+        "rect": {
+          "x": 48,
+          "y": 2165,
+          "width": 79.71875,
+          "height": 44,
+          "top": 2165,
+          "right": 127.71875,
+          "bottom": 2209,
+          "left": 48
+        },
+        "display": "flex"
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "frames": [
+      {
+        "t": 0,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 15.800000000000182,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 33.40000000000009,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 32, 0)",
+        "opacity": "0.8",
+        "answerOpacity": "0.8"
+      },
+      {
+        "t": 49.20000000000027,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 32, 0)",
+        "opacity": "0.8",
+        "answerOpacity": "0.8"
+      },
+      {
+        "t": 65.70000000000027,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 29.019, 0)",
+        "opacity": "0.818631",
+        "answerOpacity": "0.822152"
+      },
+      {
+        "t": 83.30000000000018,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 25.8958, 0)",
+        "opacity": "0.838151",
+        "answerOpacity": "0.845168"
+      },
+      {
+        "t": 99.90000000000009,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 23.0664, 0)",
+        "opacity": "0.855835",
+        "answerOpacity": "0.865663"
+      },
+      {
+        "t": 116,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 20.4783, 0)",
+        "opacity": "0.872011",
+        "answerOpacity": "0.883965"
+      },
+      {
+        "t": 133.20000000000027,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 17.9219, 0)",
+        "opacity": "0.887988",
+        "answerOpacity": "0.901515"
+      },
+      {
+        "t": 150.0999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 15.6415, 0)",
+        "opacity": "0.902241",
+        "answerOpacity": "0.916667"
+      },
+      {
+        "t": 166.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 13.6527, 0)",
+        "opacity": "0.914671",
+        "answerOpacity": "0.929468"
+      },
+      {
+        "t": 183.30000000000018,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 11.837, 0)",
+        "opacity": "0.926019",
+        "answerOpacity": "0.940806"
+      },
+      {
+        "t": 199.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 10.2843, 0)",
+        "opacity": "0.935723",
+        "answerOpacity": "0.950228"
+      },
+      {
+        "t": 216,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 8.88516, 0)",
+        "opacity": "0.944468",
+        "answerOpacity": "0.958494"
+      },
+      {
+        "t": 233.30000000000018,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 7.5953, 0)",
+        "opacity": "0.952529",
+        "answerOpacity": "0.965912"
+      },
+      {
+        "t": 250,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 6.50286, 0)",
+        "opacity": "0.959357",
+        "answerOpacity": "0.972028"
+      },
+      {
+        "t": 266.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 5.55369, 0)",
+        "opacity": "0.965289",
+        "answerOpacity": "0.977199"
+      },
+      {
+        "t": 282.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 4.74273, 0)",
+        "opacity": "0.970358",
+        "answerOpacity": "0.981496"
+      },
+      {
+        "t": 299.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 3.98982, 0)",
+        "opacity": "0.975064",
+        "answerOpacity": "0.985364"
+      },
+      {
+        "t": 316.7000000000003,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 3.31685, 0)",
+        "opacity": "0.97927",
+        "answerOpacity": "0.988699"
+      },
+      {
+        "t": 333.3000000000002,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.7536, 0)",
+        "opacity": "0.98279",
+        "answerOpacity": "0.991378"
+      },
+      {
+        "t": 349,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.28724, 0)",
+        "opacity": "0.985705",
+        "answerOpacity": "0.993496"
+      },
+      {
+        "t": 366,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.84746, 0)",
+        "opacity": "0.988453",
+        "answerOpacity": "0.995383"
+      },
+      {
+        "t": 382.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.47896, 0)",
+        "opacity": "0.990757",
+        "answerOpacity": "0.996854"
+      },
+      {
+        "t": 399.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.15342, 0)",
+        "opacity": "0.992791",
+        "answerOpacity": "0.998037"
+      },
+      {
+        "t": 416.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.879008, 0)",
+        "opacity": "0.994506",
+        "answerOpacity": "0.99891"
+      },
+      {
+        "t": 433.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.647841, 0)",
+        "opacity": "0.995951",
+        "answerOpacity": "0.999515"
+      },
+      {
+        "t": 450,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.461627, 0)",
+        "opacity": "0.997115",
+        "answerOpacity": "0.999864"
+      },
+      {
+        "t": 466.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.311072, 0)",
+        "opacity": "0.998056",
+        "answerOpacity": "0.999998"
+      },
+      {
+        "t": 483.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.191976, 0)",
+        "opacity": "0.9988",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 499.7000000000003,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.105842, 0)",
+        "opacity": "0.999339",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 515.8000000000002,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.0470079, 0)",
+        "opacity": "0.999706",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 532.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.0114746, 0)",
+        "opacity": "0.999928",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 549.5,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 566.7000000000003,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 582.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 599.8000000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 616.3000000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 633.3000000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 650,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 665.8000000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 683.3000000000002,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 700,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 716.7000000000003,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 732.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 749.5,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 766.7000000000003,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      }
+    ],
+    "actions": [
+      {
+        "text": "EXPLORE THE COLLECTION ",
+        "rect": {
+          "x": 44,
+          "y": 2205,
+          "width": 202.359375,
+          "height": 44,
+          "top": 2205,
+          "right": 246.359375,
+          "bottom": 2249,
+          "left": 44
+        },
+        "display": "flex"
+      },
+      {
+        "text": "Reset guide",
+        "rect": {
+          "x": 44,
+          "y": 2265,
+          "width": 79.71875,
+          "height": 44,
+          "top": 2265,
+          "right": 123.71875,
+          "bottom": 2309,
+          "left": 44
+        },
+        "display": "flex"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "frames": [
+      {
+        "t": 0,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 17.09999999999991,
+        "text": "Which room are you choosing for?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 33.899999999999864,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 28.8457, 0)",
+        "opacity": "0.8197",
+        "answerOpacity": "0.8233"
+      },
+      {
+        "t": 50.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 25.9058, 0)",
+        "opacity": "0.8381",
+        "answerOpacity": "0.8447"
+      },
+      {
+        "t": 66.39999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 23.4839, 0)",
+        "opacity": "0.8532",
+        "answerOpacity": "0.8622"
+      },
+      {
+        "t": 83.19999999999982,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 20.9271, 0)",
+        "opacity": "0.8692",
+        "answerOpacity": "0.8802"
+      },
+      {
+        "t": 99.89999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 18.563, 0)",
+        "opacity": "0.884",
+        "answerOpacity": "0.8967"
+      },
+      {
+        "t": 117.29999999999995,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 16.384, 0)",
+        "opacity": "0.8976",
+        "answerOpacity": "0.9115"
+      },
+      {
+        "t": 133.19999999999982,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 14.4955, 0)",
+        "opacity": "0.9094",
+        "answerOpacity": "0.9242"
+      },
+      {
+        "t": 149.89999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 12.6543, 0)",
+        "opacity": "0.9209",
+        "answerOpacity": "0.9362"
+      },
+      {
+        "t": 166.39999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 11.0703, 0)",
+        "opacity": "0.9308",
+        "answerOpacity": "0.9463"
+      },
+      {
+        "t": 183.89999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 9.4531, 0)",
+        "opacity": "0.9409",
+        "answerOpacity": "0.9563"
+      },
+      {
+        "t": 200.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 8.078, 0)",
+        "opacity": "0.9495",
+        "answerOpacity": "0.9645"
+      },
+      {
+        "t": 216.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 6.912, 0)",
+        "opacity": "0.9568",
+        "answerOpacity": "0.9713"
+      },
+      {
+        "t": 233.89999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 5.8023, 0)",
+        "opacity": "0.9637",
+        "answerOpacity": "0.9774"
+      },
+      {
+        "t": 249.89999999999986,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 4.8727, 0)",
+        "opacity": "0.9695",
+        "answerOpacity": "0.9823"
+      },
+      {
+        "t": 267.29999999999995,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 4, 0)",
+        "opacity": "0.975",
+        "answerOpacity": "0.9867"
+      },
+      {
+        "t": 283.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 3.2801, 0)",
+        "opacity": "0.9795",
+        "answerOpacity": "0.9901"
+      },
+      {
+        "t": 300.6999999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.5799, 0)",
+        "opacity": "0.9839",
+        "answerOpacity": "0.9932"
+      },
+      {
+        "t": 317.29999999999995,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 2.048, 0)",
+        "opacity": "0.9872",
+        "answerOpacity": "0.9953"
+      },
+      {
+        "t": 333.0999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.5948, 0)",
+        "opacity": "0.99",
+        "answerOpacity": "0.997"
+      },
+      {
+        "t": 350.1999999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 1.1923, 0)",
+        "opacity": "0.9925",
+        "answerOpacity": "0.9982"
+      },
+      {
+        "t": 366.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.8814, 0)",
+        "opacity": "0.9945",
+        "answerOpacity": "0.999"
+      },
+      {
+        "t": 383.5,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.616, 0)",
+        "opacity": "0.9962",
+        "answerOpacity": "0.9996"
+      },
+      {
+        "t": 400.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.3996, 0)",
+        "opacity": "0.9975",
+        "answerOpacity": "0.9999"
+      },
+      {
+        "t": 417.2999999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.256, 0)",
+        "opacity": "0.9984",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 433,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.1517, 0)",
+        "opacity": "0.9991",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 449.7999999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.077, 0)",
+        "opacity": "0.9995",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 466.4000000000001,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.034, 0)",
+        "opacity": "0.9998",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 483.1999999999998,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.0101, 0)",
+        "opacity": "0.9999",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 499.7999999999997,
+        "text": "How should the room feel?",
+        "transform": "matrix(1, 0, 0, 1, 0.0013, 0)",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 516.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 533.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 549.7999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 566.2999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 583.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 600.5999999999999,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 616.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 633.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 649.7999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 667.2999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 683.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 700,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 716.7999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 733.9000000000001,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 749.6999999999998,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      },
+      {
+        "t": 766.2999999999997,
+        "text": "How should the room feel?",
+        "transform": "none",
+        "opacity": "1",
+        "answerOpacity": "1"
+      }
+    ],
+    "actions": [
+      {
+        "text": "EXPLORE THE COLLECTION ",
+        "rect": {
+          "x": 1016,
+          "y": 890,
+          "width": 202.359375,
+          "height": 44,
+          "top": 890,
+          "right": 1218.359375,
+          "bottom": 934,
+          "left": 1016
+        },
+        "display": "flex"
+      },
+      {
+        "text": "Reset guide",
+        "rect": {
+          "x": 1016,
+          "y": 950,
+          "width": 79.71875,
+          "height": 44,
+          "top": 950,
+          "right": 1095.71875,
+          "bottom": 994,
+          "left": 1016
+        },
+        "display": "flex"
+      }
+    ]
+  }
+]

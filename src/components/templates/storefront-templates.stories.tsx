@@ -1071,3 +1071,13 @@ export const HomeMasterArtworkPhone: Story = {
   ...HomeMasterArtwork,
   globals: { viewport: { value: "contact390" } },
 };
+
+export const HomeMotion: Story = {
+  render: () => (
+    <HomeTemplate
+      motionEnabled
+      products={productCardFixtures}
+      heroImage={productCardFixtures[0].image}
+    />
+  ),
+};

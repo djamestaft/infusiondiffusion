@@ -9,11 +9,19 @@ export async function getGuideProducts(): Promise<GuideProduct[] | null> {
       .filter((product) =>
         fragranceProfiles.some((profile) => profile.id === product.id),
       )
-      .map(({ id, title, handle, availableForSale }) => ({
+      .map(({ id, title, handle, availableForSale, featuredImage }) => ({
         id,
         title,
         handle,
         availableForSale,
+        ...(featuredImage
+          ? {
+              image: {
+                src: featuredImage.url,
+                alt: featuredImage.altText || `${title} product image`,
+              },
+            }
+          : {}),
       }));
   } catch {
     console.error("Unable to load fragrance guide products.");

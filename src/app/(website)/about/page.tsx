@@ -37,6 +37,7 @@ async function AboutContent() {
   ]);
   return (
     <CombinedAboutTemplate
+      motionEnabled
       page={page}
       gallery={gallery}
       heroImage={

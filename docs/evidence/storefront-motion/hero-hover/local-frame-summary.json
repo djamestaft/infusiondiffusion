@@ -1,0 +1,279 @@
+{
+  "environment": "http://127.0.0.1:3100",
+  "scaleTolerance": 0.0001,
+  "source": "Local frame-level browser trace, prior to preview deployment",
+  "cases": [
+    {
+      "name": "chromium-1440x800",
+      "viewport": {
+        "width": 1440,
+        "height": 800
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.3156788187566901,
+      "activeFrames": 748,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": []
+    },
+    {
+      "name": "chromium-1366x768",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.271173134116671,
+      "activeFrames": 740,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": []
+    },
+    {
+      "name": "chromium-1280x720",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.2650171217086352,
+      "activeFrames": 739,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": []
+    },
+    {
+      "name": "webkit-1440x800",
+      "viewport": {
+        "width": 1440,
+        "height": 800
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.296606153161784,
+      "activeFrames": 727,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": [
+        "EventSource cannot load https: /j222nd1i.api.sanity.io/v2026-07-01/data/live/events/production?tag=next-loader.live.cache-components due to access control checks."
+      ]
+    },
+    {
+      "name": "webkit-1366x768",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.949509653008161,
+      "activeFrames": 734,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": [
+        "EventSource cannot load https: /j222nd1i.api.sanity.io/v2026-07-01/data/live/events/production?tag=next-loader.live.cache-components due to access control checks."
+      ]
+    },
+    {
+      "name": "webkit-1280x720",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.04
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.3403695365868327,
+      "activeFrames": 729,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.04
+      },
+      "reduced": "none",
+      "errors": [
+        "EventSource cannot load https: /j222nd1i.api.sanity.io/v2026-07-01/data/live/events/production?tag=next-loader.live.cache-components due to access control checks."
+      ]
+    },
+    {
+      "name": "firefox-1440x800",
+      "viewport": {
+        "width": 1440,
+        "height": 800
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.0399999618530273
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.023384959444129,
+      "activeFrames": 753,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.0399999618530273
+      },
+      "reduced": "none",
+      "errors": []
+    },
+    {
+      "name": "firefox-1366x768",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.0399999618530273
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.6926842846740375,
+      "activeFrames": 686,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.0399999618530273
+      },
+      "reduced": "none",
+      "errors": []
+    },
+    {
+      "name": "firefox-1280x720",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "status": 200,
+      "initial": {
+        "pose": {
+          "x": 0,
+          "y": 0,
+          "scale": 1.0399999618530273
+        },
+        "headerBottom": 130
+      },
+      "scaleChanges": 0,
+      "boundaryResets": 0,
+      "hoverClears": 0,
+      "maxStep": 1.212500449061614,
+      "activeFrames": 730,
+      "offscreenStable": true,
+      "focus": {
+        "x": 0,
+        "y": 0,
+        "scale": 1.0399999618530273
+      },
+      "reduced": "none",
+      "errors": []
+    }
+  ],
+  "notes": [
+    "Firefox DOMMatrix exposes float32 scale1.0399999618530273 for CSS1.04; the final runner uses0.0001tolerance.",
+    "Local WebKit records the existing localhost Sanity live-subscription CORS error; deployed verification must record its own errors.",
+    "No transformed-overflow rebuilds, hover transform clearing or boundary pose resets occurred in any of the nine cases."
+  ]
+}

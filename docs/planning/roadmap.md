@@ -1,7 +1,7 @@
 # Infusion Diffusion Roadmap
 
-Last reconciled: 19 September 2026 against fresh protected `main` (`e7242ad`),
-human-merged PR107 and the current Plane ledger. INF-49–57 add the motion
+Last reconciled: 19 September 2026 against fresh protected `main` (`67de810`),
+human-merged PR108 and the current Plane ledger. INF-49–57 add the motion
 workstream to the 48-item imagery reconciliation. This summary governs current status; dated
 notes below retain their original evidence and superseded status wording.
 
@@ -28,7 +28,8 @@ invent or approve those facts.
 
 ## Current Plane disposition
 
-**57 items: 34 Done, 6 Todo, 3 In Progress, 11 Backlog, 3 Cancelled.**
+The motion ledger is reconciled separately below; the following table preserves
+the remaining launch work from the pre-motion snapshot.
 Ownership and dependency edges are preserved. Completed design, storefront,
 account, payment integration, footer, About media and mobile focus work remain
 Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
@@ -49,14 +50,34 @@ Done. This is a scoped reconciliation, not a fresh full launch acceptance test.
 
 ## Storefront motion workstream — 19 September 2026
 
+Follow-up: the approved carousel letter sequence is implemented and locally
+verified for delivery through the same PR109 branch: outgoing letters move left,
+incoming letters overlap from the right, then the image pulses. Devon’s review
+refinement gives departure a220ms lead, adds transient letter spacing and
+lets the title settle at1.25s. Description and CTA then fade slowly in place
+after a50ms pause; the complete sequence ends at1.48s. This carousel sequence
+also runs on mobile/touch under Devon’s explicit review request. It extends
+INF-54; the existing INF-49/57 human/device/production gates remain open.
+See [the carousel contract](../features/hero-carousel-letter-arrival.md).
+
 Devon requested systematic planning and Plane tasks for Mlab-inspired pinned
 scroll sections, drifting background typography and richer Home/About motion.
 He explicitly owns **every new task**, including design preparation and
 coordination of independent verification. This scoped ownership overrides the
 default preparation owner; existing task assignments remain unchanged.
 
-Parent **INF-49** is Todo. **INF-50** (section map/storyboard) is Todo and is the
-first motion task to start. **INF-51–57** are Backlog:
+**19 September preview update:** Devon delegated G1–G3 self-approval and requested
+complete delivery on one preview branch. INF-50/51 design/studies and INF-52–56
+implementation are delivered on `agent/storefront-motion-delivery` in PR109.
+The normal-laptop correction at `915e300` supports 720–800px-tall viewports
+without zooming out and has independent design/runtime acceptance.
+INF-54's confirmed hero-hover continuity correction is complete at cdc47e9
+after Devon reviewed d64622c. The deployed nine-case Chromium/WebKit/Firefox
+matrix, 36 navigation crossings and visual recordings pass, as do exact-head
+CI and the PR gate. Evidence remains in PR109, comment5740259005.
+INF-57 covers independent checks before the final review; production and physical
+iPhone acceptance remain open. See `docs/evidence/storefront-motion/README.md`.
+The original dependency order remains:
 
 | Task   | Scope                                                                        | Prerequisites           |
 | ------ | ---------------------------------------------------------------------------- | ----------------------- |
@@ -79,7 +100,8 @@ Design/studies may proceed before launch gates close. Live integration follows
 INF-36's shopping-release review, preserving the existing after-shopping
 refinement sequence; INF-47 physical-iPhone scroll acceptance blocks final motion
 release. Existing commercial/content/SEO tickets do not depend on this enhancement.
-No scope is marked delivered and no source publication or runtime change is made.
+The later user instruction authorizes preview integration before INF-36. No source
+publication or production deployment is included; production dependencies remain.
 
 Gates: responsive storyboard → animated-study selection and exact Figma/Storybook
 contract → component/template acceptance → independent review, green exact-head
@@ -88,8 +110,19 @@ reduced-motion and JS-failure alternatives are first-class deliverables.
 
 See the [motion brief](../features/storefront-motion-brief.md) and
 [delivery plan](../superpowers/plans/2026-09-19-storefront-motion.md).
-This planning addition is prepared on agent/storefront-motion-plan and requires
-human merge; it does not approve the eventual animation designs.
+The planning PR108 is merged at67de810. The selected motion design is self-approved
+for preview under Devon’s19September delegation; final user acceptance is pending.
+
+## Fragrance Guide consultation — INF-58
+
+After the hover correction, Devon authorized a complete design/layout rethink
+of the Fragrance Guide, preserving five questions and using GSAP/LERP motion.
+INF-58 is In Progress under Devon, with a new Figma concept, Storybook-first
+implementation and final preview verification on the same delivery branch.
+Intermediate decisions are delegated; final human review, merge and production
+remain separate. This supersedes the earlier instruction to retain Guide
+Variation 02 for this route only. Matching remains notes/character based.
+See [the guide brief](../features/fragrance-guide-motion-brief.md).
 
 ## Completed cutover and remaining launch gates
 
@@ -110,7 +143,7 @@ renewal/restart/logout/isolation. INF-36 retains independent review. INF-41/42
 retain final SEO, domain journey and explicit live-payment/commercial approval.
 No paid transaction or new purchasable product format is authorized by this
 closeout. The later motion request authorizes its planning and execution ledger;
-start INF-50 for that workstream while retaining the launch gates above.
+complete motion preview verification while retaining the launch gates above.
 The completed imagery delivery is not active work.
 
 ## Historical planning snapshots

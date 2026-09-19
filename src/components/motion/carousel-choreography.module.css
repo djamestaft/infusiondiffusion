@@ -1,0 +1,10 @@
+/* This sequence owns child transforms; never combine it with the legacy panel slide. */
+.stage :global(.hero-editorial-panel)[data-phase="enter"],
+.stage :global(.hero-editorial-panel)[data-phase="exit"] {
+  animation: none;
+  transform: none;
+}
+
+.stage:global(.hero-editorial-viewport)[data-moving="true"] {
+  mask-image: none;
+}

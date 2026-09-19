@@ -1,0 +1,234 @@
+import { useRef } from "react";
+import { loadMotion, type MotionRuntime } from "@/lib/motion/runtime";
+import { renderToString } from "react-dom/server";
+import {
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+} from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { useMotionEffect, MotionBoundary } from "./motion-boundary";
+import { FragranceJourney } from "./fragrance-journey";
+import { productCardFixtures } from "@/components/ui/product-card.fixtures";
+vi.mock("@/lib/motion/runtime", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/lib/motion/runtime")>()),
+  loadMotion: vi.fn(() => Promise.reject(new Error("offline"))),
+}));
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
+function media(matches = false) {
+  const listeners = new Set<() => void>();
+  const query = {
+    matches,
+    addEventListener: (_event: string, listener: () => void) =>
+      listeners.add(listener),
+    removeEventListener: (_event: string, listener: () => void) =>
+      listeners.delete(listener),
+  };
+  vi.stubGlobal("matchMedia", () => query);
+  return { query, listeners };
+}
+function Journey({ products = productCardFixtures } = {}) {
+  return (
+    <MotionBoundary>
+      <FragranceJourney products={products} title="Our collection" />
+    </MotionBoundary>
+  );
+}
+describe("progressively enhanced collection", () => {
+  it("server-renders every supplied card with no motion-only hiding", () => {
+    const html = renderToString(<Journey />);
+    const root = document.createElement("div");
+    root.innerHTML = html;
+    expect(root.querySelectorAll("a[aria-label^='View ']")).toHaveLength(6);
+    expect(root.querySelector("[data-motion-active]")).toBeNull();
+    expect(root.querySelector("[data-motion-track] [hidden]")).toBeNull();
+  });
+  it("keeps every received product visible and linked without eligible motion", () => {
+    media();
+    render(<Journey />);
+    expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(6);
+    expect(
+      screen.queryByRole("button", { name: "View without motion" }),
+    ).not.toBeInTheDocument();
+  });
+  it("supports empty and single collections", () => {
+    media();
+    const { rerender } = render(<Journey products={[]} />);
+    expect(screen.getByText(/collection is being prepared/)).toBeVisible();
+    rerender(<Journey products={productCardFixtures.slice(0, 1)} />);
+    expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(1);
+  });
+  it("retains content on import failure and responds to live preferences", async () => {
+    const { query, listeners } = media(true);
+    const { unmount } = render(<Journey />);
+    await act(async () => {
+      await Promise.resolve();
+    });
+    fireEvent.click(
+      screen.getByRole("button", { name: "View without motion" }),
+    );
+    expect(
+      screen.getByRole("button", { name: "Enable motion" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getAllByRole("link", { name: /^View / })).toHaveLength(6);
+    act(() => {
+      query.matches = false;
+      listeners.forEach((listener) => listener());
+    });
+    expect(
+      screen.queryByRole("button", { name: "Enable motion" }),
+    ).not.toBeInTheDocument();
+    unmount();
+    expect(listeners.size).toBe(0);
+  });
+});
+
+function ThrowingStudy() {
+  const ref = useRef<HTMLDivElement>(null);
+  useMotionEffect(ref, true, (_runtime, element, onCleanup) => {
+    onCleanup(() => element.removeAttribute("data-motion-active"));
+    element.setAttribute("data-motion-active", "true");
+    throw new Error("setup failed after acquiring layout");
+  });
+  return (
+    <div ref={ref} data-testid="throwing-study">
+      Visible static content
+    </div>
+  );
+}
+it("reverts acquired manual layout if setup throws before returning", async () => {
+  media(true);
+  const revert = vi.fn();
+  vi.mocked(loadMotion).mockResolvedValueOnce({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert,
+      }),
+    },
+  } as unknown as MotionRuntime);
+  render(<ThrowingStudy />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  expect(revert).toHaveBeenCalledOnce();
+  expect(screen.getByTestId("throwing-study")).not.toHaveAttribute(
+    "data-motion-active",
+  );
+  expect(screen.getByText("Visible static content")).toBeVisible();
+});
+
+function LoadedStudy({ track = false }: { track?: boolean } = {}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useMotionEffect(ref, true, () => undefined);
+  return (
+    <div ref={ref}>
+      <span
+        role="img"
+        aria-label="Decorative study"
+        data-testid="study-image"
+        data-motion-track={track || undefined}
+      />
+    </div>
+  );
+}
+it("does not rebuild stable geometry when cached photographs emit another load", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  vi.mocked(loadMotion).mockResolvedValueOnce({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert: vi.fn(),
+      }),
+    },
+  } as unknown as MotionRuntime);
+  render(<LoadedStudy />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  fireEvent.load(screen.getByTestId("study-image"));
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(1);
+  vi.useRealTimers();
+});
+
+it("ignores transformed scope overflow but rebuilds actual layout changes", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  const revert = vi.fn();
+  vi.mocked(loadMotion).mockResolvedValue({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert,
+      }),
+    },
+  } as unknown as MotionRuntime);
+  const view = render(<LoadedStudy />);
+  const image = screen.getByTestId("study-image");
+  const scope = image.parentElement!;
+  await act(async () => {
+    await Promise.resolve();
+  });
+  Object.defineProperty(scope, "scrollWidth", {
+    configurable: true,
+    value: 1475,
+  });
+  fireEvent.load(image);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(1);
+  expect(revert).not.toHaveBeenCalled();
+  Object.defineProperty(scope, "offsetHeight", {
+    configurable: true,
+    value: 810,
+  });
+  fireEvent.load(image);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(2);
+  view.unmount();
+  vi.useRealTimers();
+});
+
+it("still rebuilds when intrinsic collection-track overflow changes", async () => {
+  media(true);
+  vi.useFakeTimers();
+  vi.mocked(loadMotion).mockClear();
+  vi.mocked(loadMotion).mockResolvedValue({
+    gsap: {
+      matchMedia: () => ({
+        add: (_query: string, setup: () => void) => setup(),
+        revert: vi.fn(),
+      }),
+    },
+  } as unknown as MotionRuntime);
+  const view = render(<LoadedStudy track />);
+  await act(async () => {
+    await Promise.resolve();
+  });
+  const track = screen.getByTestId("study-image");
+  Object.defineProperty(track, "scrollWidth", {
+    configurable: true,
+    value: 2200,
+  });
+  fireEvent.load(track);
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500);
+  });
+  expect(loadMotion).toHaveBeenCalledTimes(2);
+  view.unmount();
+  vi.useRealTimers();
+});

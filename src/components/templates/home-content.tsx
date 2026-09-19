@@ -1,3 +1,6 @@
+import { MotionBoundary } from "@/components/motion/motion-boundary";
+import { HeroAtmosphere } from "@/components/motion/hero-atmosphere";
+import { FragranceJourney } from "@/components/motion/fragrance-journey";
 import { EditorialImage } from "@/components/ui/editorial-image";
 import { Children } from "react";
 import { cn } from "@/lib/utils";
@@ -60,76 +63,91 @@ function HomeRevealFlow({ children }: { children: React.ReactNode }) {
   );
 }
 
+function PlainHero({ children }: { children: React.ReactNode }) {
+  return children;
+}
+
 export function HomeContent({
   content,
   products,
   slides,
+  motionEnabled = false,
 }: {
   content: HomeTemplateContent;
   products: ProductCardProps[];
   slides: HeroCarouselSlide[];
+  motionEnabled?: boolean;
 }) {
+  const Flow = motionEnabled ? MotionBoundary : HomeRevealFlow;
+  const Hero = motionEnabled ? HeroAtmosphere : PlainHero;
   return (
-    <HomeRevealFlow>
-      <HeroCarousel
-        backgroundSrc={content.heroBackgroundSrc}
-        slides={slides}
-        presentation="editorial"
-        withNavigation
-        fallbackCopy={{
-          title: content.heroTitle,
-          subtitle: content.heroIntroduction,
-          cta: { label: content.heroActionLabel, href: "/shop" },
-        }}
-      />
+    <Flow>
+      <Hero>
+        <HeroCarousel
+          backgroundSrc={content.heroBackgroundSrc}
+          slides={slides}
+          presentation="editorial"
+          animateContent={motionEnabled}
+          withNavigation
+          fallbackCopy={{
+            title: content.heroTitle,
+            subtitle: content.heroIntroduction,
+            cta: { label: content.heroActionLabel, href: "/shop" },
+          }}
+        />
+      </Hero>
 
-      <section
-        aria-labelledby="home-collection-title"
-        data-testid="home-cabinet-band"
-        className="bg-content-surface"
-      >
-        <div
-          data-testid="home-cabinet-inner"
-          className={`mx-auto w-full max-w-[1440px] py-10 lg:py-16 ${gutters}`}
+      {motionEnabled ? (
+        <FragranceJourney products={products} title={content.collectionTitle} />
+      ) : (
+        <section
+          aria-labelledby="home-collection-title"
+          data-testid="home-cabinet-band"
+          className="bg-content-surface"
         >
-          <div className="flex flex-col items-start gap-[26px] sm:gap-[34px] lg:flex-row lg:items-center lg:justify-between">
-            <Heading
-              id="home-collection-title"
-              level={2}
-              className="text-[33px] leading-[41px] tracking-normal min-[375px]:text-4xl min-[375px]:leading-[44px] sm:text-[42px] sm:leading-[52px] lg:text-[46px] lg:leading-[56px]"
-            >
-              {content.collectionTitle}
-            </Heading>
-            <a
-              href="/shop"
-              className="focus-visible:outline-action-focus inline-flex min-h-11 items-center font-sans text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-2 sm:text-base"
-            >
-              Shop all fragrances{" "}
-              <span aria-hidden="true" className="ml-3">
-                →
-              </span>
-            </a>
+          <div
+            data-testid="home-cabinet-inner"
+            className={`mx-auto w-full max-w-[1440px] py-10 lg:py-16 ${gutters}`}
+          >
+            <div className="flex flex-col items-start gap-[26px] sm:gap-[34px] lg:flex-row lg:items-center lg:justify-between">
+              <Heading
+                id="home-collection-title"
+                level={2}
+                className="text-[33px] leading-[41px] tracking-normal min-[375px]:text-4xl min-[375px]:leading-[44px] sm:text-[42px] sm:leading-[52px] lg:text-[46px] lg:leading-[56px]"
+              >
+                {content.collectionTitle}
+              </Heading>
+              <a
+                href="/shop"
+                className="focus-visible:outline-action-focus inline-flex min-h-11 items-center font-sans text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-2 sm:text-base"
+              >
+                Shop all fragrances{" "}
+                <span aria-hidden="true" className="ml-3">
+                  →
+                </span>
+              </a>
+            </div>
+            <div className="border-navigation-border mt-[26px] sm:mt-[34px] lg:mt-11 lg:border-t lg:pt-11">
+              {products.length ? (
+                <div className="grid grid-cols-1 gap-[26px] sm:grid-cols-2 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-3 lg:gap-6">
+                  {products.slice(0, 4).map((product, index) => (
+                    <ProductCard
+                      key={product.href}
+                      {...product}
+                      className={`max-w-none ${index === 3 ? "hidden sm:grid lg:hidden" : ""}`}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-content-secondary font-sans">
+                  The collection is being prepared. Please return soon to
+                  explore the first fragrances.
+                </p>
+              )}
+            </div>
           </div>
-          <div className="border-navigation-border mt-[26px] sm:mt-[34px] lg:mt-11 lg:border-t lg:pt-11">
-            {products.length ? (
-              <div className="grid grid-cols-1 gap-[26px] sm:grid-cols-2 sm:gap-x-5 sm:gap-y-8 lg:grid-cols-3 lg:gap-6">
-                {products.slice(0, 4).map((product, index) => (
-                  <ProductCard
-                    key={product.href}
-                    {...product}
-                    className={`max-w-none ${index === 3 ? "hidden sm:grid lg:hidden" : ""}`}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-content-secondary font-sans">
-                The collection is being prepared. Please return soon to explore
-                the first fragrances.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section
         className={`bg-content-surface-quiet py-16 sm:py-[76px] lg:py-[94px] ${gutters}`}
@@ -139,6 +157,7 @@ export function HomeContent({
           <div className="text-center lg:text-left">
             <Heading
               id="home-guidance-title"
+              tabIndex={-1}
               level={2}
               className="text-[28.8px] leading-9 tracking-normal min-[375px]:text-[35.1px] min-[375px]:leading-[43px] sm:text-[44px] sm:leading-[54px] lg:text-5xl lg:leading-[58px]"
             >
@@ -317,6 +336,6 @@ export function HomeContent({
           </Button>
         </section>
       ) : null}
-    </HomeRevealFlow>
+    </Flow>
   );
 }

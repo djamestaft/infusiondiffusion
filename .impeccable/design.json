@@ -18,6 +18,21 @@
     ],
     "rules": [
       {
+        "name": "Gold basket quantity — 19 September 2026",
+        "section": "navigation",
+        "body": "Devon requested a gold circle behind the cart quantity in PR109. Use action-primary gold and action-primary-foreground ink,20px circular badge with centered semibold digits;99+ uses24px. Preserve44px cart target, full accessible count, hidden zero and unavailable dash. Navigation GoldCartCount stories cover midnight, ivory, mobile and overflow. Intentional user-approved divergence from existing static Figma badge styling; no other navigation changes."
+      },
+      {
+        "name": "Hero carousel letter arrival — 19 September 2026",
+        "section": "motion",
+        "body": "Devon approved outgoing letters departing24px left over280ms with80ms total stagger and fade; incoming letters start220ms later from36px right over750ms,280ms total stagger,power2.out. A soft image pulse starts120ms after incoming letters:0.98→1.01→1 over420+440ms; copy/CTA wait for title completion and50ms pause: description fades in place at1300ms, CTA at1380ms, each over100ms with power1.inOut, no translation/scale. Visual tracking adds up to2.5px per character, capped at48px per line, via transforms without reflow. One GSAP timeline; title settles at1250ms, full sequence1480ms. Devon extended carousel choreography to mobile/touch; independent eligibility preserves desktop-only scroll/pointer scenes. Reduced-motion/save-data remain static. Initial campaign visible and unsplit; both split headings revert after completion/interruption. Retain 5:4 contain, controls, six-second autoplay and preference/lifecycle guards. Separate transforms from pointer backdrop. Intentional approved timing divergence from static Figma; see docs/features/hero-carousel-letter-arrival.md."
+      },
+      {
+        "name": "Home/About motion preview — 19 September 2026",
+        "section": "motion",
+        "body": "Devon delegated G1–G3 for preview. Intentional divergence from static Approved frames: measured desktop collection pin with all products,80px tall/48px compact decorative-name band at8%semantic ink, measured250–440px cards; fine-pointer1024x680 minimum, single control row below900px with36/44px title and12px padding; native scrolling. Shared motionTokens:700ms visible16px entrance, backdrop-only18x12px160ms damping with1.04scale64ms cap0.1px cutoff,32px name drift and12px chapter travel. About square photos locally sticky with centered complete copy. Touch/reduced/saveData/short and long-content layouts static. Final preview review and physical-iPhone/production gates remain open. See docs/evidence/storefront-motion/README.md. Hero continuity correction: eligible1.04crop exists before first input; hover leave/hidden/offscreen freeze pose and RAF; re-entry uses a fresh clock; focus centers without changing crop. Policy disable restores static crop. Rebuild measurements exclude transformed scope overflow."
+      },
+      {
         "name": "Soft-launch announcement — 17 September 2026",
         "body": "User-requested reuse of AnnouncementBar above shared navigation. Exact copy: Payments are in test mode. We’re launching shortly. Existing tokens, natural height, non-dismissible; visible on scroll and inside mobile dialog. Sanity announcement fields own enablement/copy. Hide the gold separator while the floating header is transparent; show it with the solid header and mobile menu, retaining border space. Preserve 78/86px navigation row. Intentional user-authorized divergence from no-notice Figma 2764:488.",
         "section": "components"
@@ -95,6 +110,11 @@
       {
         "name": "Account content layout",
         "body": "17 September approved account content only: Figma 2741:37, responsive frames 2742:39/91/137/179. Top-aligned profile and hosted-orders sections; two columns from 768px, stacked below. Follow-up after PR #91: Devon requested a black account header. Select existing midnight Navigation theme for all account states, matching Figma. Keep shared Navigation implementation, other routes and footer unchanged. See docs/features/inf-39-account-layout.md.",
+        "section": "components"
+      },
+      {
+        "name": "Fragrance consultation — 19 September 2026",
+        "body": "19 September 2026 — INF-58 fragrance consultation (delegated preview approval). Figma exploration page 2876:963, introduction 2878:2, question 2880:9, compact 2883:50, mobile 2881:55, narrow 2883:118, results 2885:136 / 2886:143, refinement 2889:195. Intentionally supersedes simultaneous Guide Variation 02; Approved page remains untouched. One native question at a time; ruled answer rows, completed-step navigation, photographic introduction, fixed desktop photograph and decorative topic word. Results show existing Shopify photographs, source reasons and editable preferences. Reset guide returns to the introduction and clears every answer/result/error. Reset occupies its own utility row. Programmatically focused headings have no outline; interactive controls retain visible keyboard focus. Heading/topic transition ±32px over500ms power2.out; answer text y10px over420ms with35ms stagger, hit areas stationary. Text opacity .8→1 preserves contrast throughout. Results y20px over500ms, opacity .85→1. Decorative LERP bounded±8px/±4px, damping160ms; focus anywhere in guide resets it. Reduced motion is immediate. Mobile uses prepaint CSS eligibility, no desktop GSAP import; no late entrance flash. Semantic colors and shared shell unchanged. Source matcher remains notes/character only; other answers are transparently summary-only.",
         "section": "components"
       }
     ],

@@ -18,6 +18,24 @@ const products: GuideProduct[] = Object.entries(ids).map(([name, id]) => ({
 const names = (notes: string[]) =>
   matchFragrances(notes, products).map((p) => [p.title, p.score]);
 describe("approved notes/character matching", () => {
+  it("carries optional photos without changing ranking, reasons, ties or availability", () => {
+    const illustrated = products.map((product) => ({
+      ...product,
+      image: {
+        src: `https://cdn.shopify.com/${product.handle}.jpg`,
+        alt: product.title,
+      },
+    }));
+    const result = matchFragrances(["amber", "floral"], illustrated);
+    expect(
+      result.map(({ image, ...match }) => {
+        expect(image).toEqual(
+          illustrated.find((p) => p.id === match.id)!.image,
+        );
+        return match;
+      }),
+    ).toEqual(matchFragrances(["amber", "floral"], products));
+  });
   it("matches the owner-reviewed golden examples", () => {
     expect(names(["amber"])).toEqual([
       ["ambre", 2],

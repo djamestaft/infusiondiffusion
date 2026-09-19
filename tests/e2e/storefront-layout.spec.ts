@@ -18,9 +18,10 @@ for (const width of [1440, 1024, 768, 390, 320]) {
     await expect(header.getByRole("link", { name: "Gallery" })).toHaveCount(0);
     await expect(header.locator('a[aria-current="page"]')).toHaveCount(0);
     const cards = page
-      .getByTestId("home-cabinet-inner")
+      .getByTestId("home-cabinet-band")
       .locator('a[aria-label^="View "]:visible');
-    await expect(cards).toHaveCount(width >= 640 && width < 1024 ? 4 : 3);
+    // Motion and its static fallback preserve the complete six-product selection.
+    await expect(cards).toHaveCount(6);
     const navBox = (await links.boundingBox())!;
     const logoBox = (await footer
       .getByRole("link", { name: "Infusion Diffusion home" })

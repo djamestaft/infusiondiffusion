@@ -35,3 +35,48 @@ it("keeps missing products distinct from a source failure", async () => {
   );
   log.mockRestore();
 });
+
+it("normalizes optional Shopify photography without copying other commerce fields", async () => {
+  getCachedProducts.mockResolvedValue([
+    {
+      id: "gid://shopify/Product/10067255558430",
+      title: "Ambre",
+      handle: "ambre",
+      availableForSale: false,
+      featuredImage: { url: "https://cdn.shopify.com/ambre.jpg", altText: "" },
+      variants: [{ private: "not part of the guide" }],
+    },
+    {
+      id: "gid://shopify/Product/10067255394590",
+      title: "Poivre",
+      handle: "poivre",
+      availableForSale: true,
+      featuredImage: {
+        url: "https://cdn.shopify.com/poivre.jpg",
+        altText: "Poivre diffuser bottle",
+      },
+    },
+  ]);
+  expect(await getGuideProducts()).toEqual([
+    {
+      id: "gid://shopify/Product/10067255558430",
+      title: "Ambre",
+      handle: "ambre",
+      availableForSale: false,
+      image: {
+        src: "https://cdn.shopify.com/ambre.jpg",
+        alt: "Ambre product image",
+      },
+    },
+    {
+      id: "gid://shopify/Product/10067255394590",
+      title: "Poivre",
+      handle: "poivre",
+      availableForSale: true,
+      image: {
+        src: "https://cdn.shopify.com/poivre.jpg",
+        alt: "Poivre diffuser bottle",
+      },
+    },
+  ]);
+});
