@@ -37,22 +37,22 @@ for (const viewport of [
       expect((await pose(page)).scale).toBeCloseTo(1.04, 4);
       // Capture the pose at the actual leave event, before the component handler.
       await page.getByTestId("hero-atmosphere").evaluate((hero) => {
-        hero.addEventListener(
-          "pointerleave",
-          () => {
-            const element = hero.querySelector<HTMLElement>(
-              "[data-motion-backdrop]",
-            )!;
-            const before = getComputedStyle(element).transform;
-            queueMicrotask(() => {
-              hero.dataset.hoverBoundary = JSON.stringify({
-                before,
-                after: getComputedStyle(element).transform,
-              });
+        delete hero.dataset.hoverBoundary;
+        const onLeave = (event: Event) => {
+          if (event.target !== hero) return;
+          hero.removeEventListener("pointerleave", onLeave, true);
+          const element = hero.querySelector<HTMLElement>(
+            "[data-motion-backdrop]",
+          )!;
+          const before = getComputedStyle(element).transform;
+          queueMicrotask(() => {
+            hero.dataset.hoverBoundary = JSON.stringify({
+              before,
+              after: getComputedStyle(element).transform,
             });
-          },
-          { once: true, capture: true },
-        );
+          });
+        };
+        hero.addEventListener("pointerleave", onLeave, { capture: true });
       });
       await page.mouse.move(viewport.width * 0.7, header - 20);
       const boundary = JSON.parse(

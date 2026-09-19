@@ -82,6 +82,7 @@ for (const [engineName, engine] of Object.entries({
       hero.addEventListener(
         "pointerleave",
         (event) => {
+          if (event.target !== hero) return;
           const before = pose();
           queueMicrotask(() =>
             state.boundaries.push({
