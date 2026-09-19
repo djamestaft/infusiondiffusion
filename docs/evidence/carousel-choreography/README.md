@@ -1,5 +1,44 @@
 # Carousel choreography evidence
 
+## Faster one-way description reveal — follow-up to merged PR109
+
+The new delivery branch is based on merged main `0d74f90`. Devon requested a
+shorter blank interval and clarified that the description should reveal once
+from invisible to visible, top-to-bottom, rather than pulse or blink.
+
+Incoming letters start at 60ms; the title settles at 580ms. The CTA appears
+immediately at title completion. Description letters fade in by measured row
+over 140ms, with at most 100ms between the first and last row starts. The whole
+sequence is bounded at 820ms. There is no additional pause or lateral copy
+movement. The image retains its pulse with faster 220ms + 180ms timing.
+
+The new `reveal/` recordings and frame JSON capture this sequence with long
+copy at 1440, 390 and 320px. Desktop and 320px recordings/screenshots are checked
+in; all three frame traces are included. Actual browser cleanup occurs around
+846–850ms including render scheduling. Each row opacity only increases, the CTA
+stays visible, no horizontal overflow or page errors occurred, and all temporary
+text splits are removed. The settled composition is unchanged.
+
+Current verification: lint and TypeScript pass; 444 unit tests and 418 Storybook
+checks pass. The seven carousel browser contracts pass across Chromium, WebKit,
+Firefox, Pixel 7 and iPhone 13 emulation (33 applicable checks; the two desktop
+keyboard-only cases are intentionally skipped on touch projects). This includes
+frame-by-frame monotonic opacity, rapid reversal, resize, reduced-motion changes,
+Save-Data, keyboard interruption, final axe and mid-animation ARIA checks.
+Independent read-only review confirmed the accessibility correction and cleanup.
+Build and deployment evidence are recorded in the new PR. The older counts and
+recordings below belong to PR109 and are retained as historical evidence.
+
+Two regression corrections are included: a single discrete opacity tween avoids
+Firefox reversion ordering between competing zero-duration sets; and the
+animated description is an aria-hidden visual span with a separate unsplit
+screen-reader copy. This prevents SplitText from placing a prohibited aria-label
+on a paragraph. The browser regression checks accessibility during the reveal,
+not only after cleanup. Reduced-motion, Save-Data, keyboard interruption and
+mobile eligibility remain unchanged.
+
+## Historical PR109 evidence
+
 User-approved follow-up to the motion candidate in PR #109. See
 [the feature contract](../../features/hero-carousel-letter-arrival.md).
 

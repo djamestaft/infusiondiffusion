@@ -74,6 +74,7 @@ export function useCarouselChoreography(
     const outgoing =
       root?.querySelector<HTMLElement>('[data-phase="exit"]') ?? null;
     let split: InstanceType<Runtime["SplitText"]> | undefined;
+    let descriptionSplit: InstanceType<Runtime["SplitText"]> | undefined;
     let outgoingSplit: InstanceType<Runtime["SplitText"]> | undefined;
     const context = runtime.gsap.context(() => {}, root!);
     try {
@@ -96,18 +97,31 @@ export function useCarouselChoreography(
             reduceWhiteSpace: false,
           });
         }
+        const description = incoming.querySelector(
+          "[data-carousel-description]",
+        );
+        if (description) {
+          descriptionSplit = runtime.SplitText.create(description, {
+            type: "words,chars",
+            aria: "none",
+            charsClass: "hero-carousel-description-letter",
+            reduceWhiteSpace: false,
+          });
+        }
         createCarouselTransition(
           runtime.gsap,
           incoming,
           outgoing,
           split?.chars ?? [],
           outgoingSplit?.chars ?? [],
+          descriptionSplit?.chars ?? [],
         ).eventCallback("onComplete", onComplete);
       });
     } catch {
       context.revert();
       split?.revert();
       outgoingSplit?.revert();
+      descriptionSplit?.revert();
       onComplete();
       return;
     }
@@ -121,6 +135,7 @@ export function useCarouselChoreography(
       context.revert();
       split?.revert();
       outgoingSplit?.revert();
+      descriptionSplit?.revert();
     };
   }, [active, available, choreographed, onComplete, previous, ref, runtime]);
   return available;

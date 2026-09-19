@@ -1,0 +1,1256 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 800
+    },
+    "geometry": {
+      "overflow": false,
+      "description": "Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.",
+      "split": 0
+    },
+    "errors": [],
+    "samples": [
+      {
+        "ms": 15,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 29,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 46,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 64,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 79,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 96,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 114,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 129,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 147,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 163,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 180,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 196,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 213,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 230,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 245,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 263,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 280,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 295,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 313,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 329,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 346,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 363,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 380,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 396,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 413,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 429,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 445,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 463,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 480,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 496,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 513,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 529,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 546,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 563,
+        "rows": [0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 580,
+        "rows": [0.0833, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 596,
+        "rows": [0.3859, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 612,
+        "rows": [0.6018, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 631,
+        "rows": [0.7682, 0.0833, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 646,
+        "rows": [0.875, 0.3703, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 662,
+        "rows": [0.9457, 0.6018, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 681,
+        "rows": [0.983, 0.7682, 0.0833],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 696,
+        "rows": [0.9975, 0.8803, 0.3859],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 713,
+        "rows": [1, 0.9488, 0.6133],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 729,
+        "rows": [1, 0.9815, 0.76],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 746,
+        "rows": [1, 0.9975, 0.8803],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 762,
+        "rows": [1, 1, 0.9457],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 779,
+        "rows": [1, 1, 0.983],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 795,
+        "rows": [1, 1, 0.9971],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 813,
+        "rows": [1, 1, 1],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 830,
+        "rows": [1, 1, 1],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 846,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 863,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 879,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 896,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 913,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 929,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 946,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 963,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 979,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 996,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1013,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1030,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1046,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1063,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1079,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1096,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1113,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "geometry": {
+      "overflow": false,
+      "description": "Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.",
+      "split": 0
+    },
+    "errors": [],
+    "samples": [
+      {
+        "ms": 10,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 17,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 33,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 50,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 67,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 83,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 100,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 117,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 133,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 150,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 167,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 183,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 200,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 217,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 233,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 250,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 267,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 283,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 299,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 316,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 333,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 350,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 366,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 383,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 400,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 416,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 434,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 450,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 467,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 483,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 499,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 516,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 534,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 550,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 566,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 584,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 599,
+        "rows": [0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 616,
+        "rows": [0.2882, 0, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 634,
+        "rows": [0.5281, 0, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 651,
+        "rows": [0.7254, 0.2995, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 666,
+        "rows": [0.8523, 0.5494, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 684,
+        "rows": [0.9252, 0.7131, 0.2768, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 700,
+        "rows": [0.9749, 0.8503, 0.5452, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 716,
+        "rows": [0.9943, 0.9277, 0.7193, 0.2882],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 733,
+        "rows": [0.9998, 0.9743, 0.8483, 0.5409],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 750,
+        "rows": [1, 0.9941, 0.9264, 0.7162],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 766,
+        "rows": [1, 0.9999, 0.9755, 0.8523],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 783,
+        "rows": [1, 1, 0.9938, 0.9252],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 799,
+        "rows": [1, 1, 0.9998, 0.973],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 816,
+        "rows": [1, 1, 1, 0.9943],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 833,
+        "rows": [1, 1, 1, 0.9997],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 850,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 867,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 884,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 900,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 918,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 933,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 950,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 967,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 984,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 999,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1017,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1035,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1049,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1066,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1083,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1100,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "width": 320,
+      "height": 740
+    },
+    "geometry": {
+      "overflow": false,
+      "description": "Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.Six distinctive fragrances. Explore the scents that bring character to the spaces you love, and find a favourite for the everyday rituals that make your home feel like yours.",
+      "split": 0
+    },
+    "errors": [],
+    "samples": [
+      {
+        "ms": 10,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 15,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 33,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 48,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 66,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 83,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 99,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 116,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 133,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 149,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 166,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 183,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 199,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 215,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 232,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 249,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 265,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 282,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 299,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 315,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 333,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 349,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 366,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 383,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 399,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 416,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 433,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 449,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 465,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 483,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 499,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 515,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 532,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 549,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 566,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 583,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 599,
+        "rows": [0, 0, 0, 0, 0],
+        "cta": 0,
+        "split": 146
+      },
+      {
+        "ms": 616,
+        "rows": [0.2882, 0, 0, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 632,
+        "rows": [0.5281, 0.1231, 0, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 648,
+        "rows": [0.7069, 0.4012, 0, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 666,
+        "rows": [0.84, 0.6245, 0.271, 0, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 682,
+        "rows": [0.9252, 0.784, 0.5281, 0.1231, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 699,
+        "rows": [0.971, 0.8854, 0.7069, 0.4012, 0],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 715,
+        "rows": [0.9943, 0.9544, 0.8463, 0.6356, 0.2882],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 733,
+        "rows": [0.9997, 0.9857, 0.9252, 0.784, 0.5281],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 749,
+        "rows": [1, 0.9982, 0.973, 0.8904, 0.7162],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 766,
+        "rows": [1, 1, 0.9943, 0.9544, 0.8463],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 783,
+        "rows": [1, 1, 0.9997, 0.9857, 0.9252],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 799,
+        "rows": [1, 1, 1, 0.9982, 0.973],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 816,
+        "rows": [1, 1, 1, 1, 0.9943],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 832,
+        "rows": [1, 1, 1, 1, 0.9997],
+        "cta": 1,
+        "split": 146
+      },
+      {
+        "ms": 849,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 866,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 883,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 899,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 916,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 932,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 950,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 965,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 982,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 999,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1016,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1032,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1048,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1065,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1082,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1098,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      },
+      {
+        "ms": 1116,
+        "rows": [],
+        "cta": 1,
+        "split": 0
+      }
+    ]
+  }
+]

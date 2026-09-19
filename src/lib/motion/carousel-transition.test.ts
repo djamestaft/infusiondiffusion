@@ -33,17 +33,15 @@ it("starts the outgoing letters left before overlapping the right-side arrival",
     chars,
     outgoingChars,
   );
-  timeline.pause().seek(0.05);
+  timeline.pause().seek(0.02);
   expect(Number(gsap.getProperty(outgoingChars[0], "x"))).toBeLessThan(0);
   expect(Number(gsap.getProperty(outgoingChars[0], "y"))).toBe(0);
   expect(Number(gsap.getProperty(chars[0], "opacity"))).toBe(0);
   expect(Number(gsap.getProperty(image, "opacity"))).toBe(0);
-  timeline.seek(0.2);
+  timeline.seek(0.04);
   expect(Number(gsap.getProperty(chars[0], "opacity"))).toBe(0);
-  expect(Number(gsap.getProperty(outgoingChars[0], "opacity"))).toBeLessThan(
-    0.5,
-  );
-  timeline.seek(0.26);
+  expect(Number(gsap.getProperty(outgoingChars[0], "opacity"))).toBeLessThan(1);
+  timeline.seek(0.1);
   expect(Number(gsap.getProperty(outgoingChars[0], "opacity"))).toBeGreaterThan(
     0,
   );
@@ -58,7 +56,7 @@ it("starts the outgoing letters left before overlapping the right-side arrival",
 it("leads with staggered letters from the right before the photograph pulses", () => {
   const { incoming, outgoing, chars, image } = fixture();
   const timeline = createCarouselTransition(gsap, incoming, outgoing, chars);
-  timeline.pause().seek(0.3);
+  timeline.pause().seek(0.08);
   const first = Number(gsap.getProperty(chars[0], "x"));
   const last = Number(gsap.getProperty(chars.at(-1)!, "x"));
   expect(last).toBeGreaterThan(36);
@@ -66,7 +64,7 @@ it("leads with staggered letters from the right before the photograph pulses", (
   expect(first).toBeLessThan(last);
   expect(Number(gsap.getProperty(chars[0], "y"))).toBe(0);
   expect(Number(gsap.getProperty(image, "opacity"))).toBe(0);
-  timeline.seek(0.45);
+  timeline.seek(0.25);
   expect(Number(gsap.getProperty(image, "opacity"))).toBeGreaterThan(0);
   expect(Number(gsap.getProperty(image, "scaleX"))).toBeGreaterThan(0.98);
   timeline.progress(1);
@@ -107,7 +105,7 @@ it("restarts expanded tracking on each wrapped line and leaves line geometry unt
     char.getBoundingClientRect = () => ({ top: index < 2 ? 0 : 56 }) as DOMRect;
   });
   const timeline = createCarouselTransition(gsap, incoming, outgoing, chars);
-  timeline.pause().seek(0.05);
+  timeline.pause().seek(0.02);
   expect(chars.map((char) => Number(gsap.getProperty(char, "x")))).toEqual([
     36, 38.5, 36, 38.5,
   ]);
@@ -121,29 +119,22 @@ it("restarts expanded tracking on each wrapped line and leaves line geometry unt
   );
 });
 
-it("waits for the complete title, then gently fades stationary supporting content", () => {
+it("shows stationary supporting content together instantly when the faster title settles", () => {
   const { incoming, outgoing, chars } = fixture();
   const timeline = createCarouselTransition(gsap, incoming, outgoing, chars);
-  const description = incoming.querySelector("p")!;
-  const cta = incoming.querySelector("a")!;
-  timeline.pause().seek(1.25);
-  expect(
-    chars.every((char) => Number(gsap.getProperty(char, "opacity")) === 1),
-  ).toBe(true);
-  expect(Number(gsap.getProperty(description, "opacity"))).toBe(0);
-  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
-  timeline.seek(1.34);
-  expect(Number(gsap.getProperty(description, "opacity"))).toBeGreaterThan(0);
-  expect(Number(gsap.getProperty(description, "opacity"))).toBeLessThan(0.5);
-  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
-  timeline.seek(1.55);
-  expect(Number(gsap.getProperty(cta, "opacity"))).toBeGreaterThan(0);
-  for (const element of [description, cta]) {
+  const support = [incoming.querySelector("p")!, incoming.querySelector("a")!];
+  timeline.pause().seek(0.57);
+  for (const element of support)
+    expect(Number(gsap.getProperty(element, "opacity"))).toBe(0);
+  timeline.seek(0.58);
+  expect(chars.every((char) => Number(gsap.getProperty(char, "x")) === 0)).toBe(
+    true,
+  );
+  for (const element of support) {
+    expect(Number(gsap.getProperty(element, "opacity"))).toBe(1);
     expect(Number(gsap.getProperty(element, "x"))).toBe(0);
     expect(Number(gsap.getProperty(element, "y"))).toBe(0);
   }
-  timeline.progress(1);
-  expect(Number(gsap.getProperty(cta, "opacity"))).toBe(1);
 });
 
 it("caps the full sequence for long headlines", () => {
@@ -159,14 +150,73 @@ it("caps the full sequence for long headlines", () => {
     outgoing,
     manyChars,
   );
-  expect(timeline.duration()).toBeGreaterThan(1);
-  expect(timeline.duration()).toBeLessThanOrEqual(1.5);
-  timeline.pause().seek(0.05);
+  expect(timeline.duration()).toBeGreaterThan(0);
+  expect(timeline.duration()).toBeLessThanOrEqual(0.6);
+  timeline.pause().seek(0.02);
   expect(Number(gsap.getProperty(manyChars.at(-1)!, "x"))).toBeLessThanOrEqual(
     84,
   );
-  timeline.pause().seek(1.5);
+  timeline.pause().seek(0.6);
   expect(
     Number(gsap.getProperty(incoming.querySelector("a")!, "opacity")),
   ).toBe(1);
+});
+
+it("reveals description letters once from top to bottom while keeping the CTA visible", () => {
+  const { incoming, outgoing, chars } = fixture();
+  const description = incoming.querySelector("p")!;
+  description.innerHTML = "<span>Top</span><span>Bottom</span>";
+  const descriptionChars = [...description.querySelectorAll("span")];
+  descriptionChars.forEach((char, index) => {
+    char.getBoundingClientRect = () => ({ top: index * 26 }) as DOMRect;
+  });
+  let timeline!: ReturnType<typeof createCarouselTransition>;
+  const context = gsap.context(() => {
+    timeline = createCarouselTransition(
+      gsap,
+      incoming,
+      outgoing,
+      chars,
+      [],
+      descriptionChars,
+    );
+    timeline.pause().seek(0.59);
+  });
+  expect(Number(gsap.getProperty(description, "opacity"))).toBe(1);
+  expect(
+    Number(gsap.getProperty(incoming.querySelector("a")!, "opacity")),
+  ).toBe(1);
+  expect(
+    Number(gsap.getProperty(descriptionChars[0], "opacity")),
+  ).toBeGreaterThan(0);
+  expect(Number(gsap.getProperty(descriptionChars[0], "opacity"))).toBeLessThan(
+    1,
+  );
+  expect(Number(gsap.getProperty(descriptionChars[1], "opacity"))).toBe(0);
+  let previous = [0, 0];
+  for (const time of [0.6, 0.65, 0.7, 0.75, 0.8, 0.82]) {
+    timeline.seek(time);
+    const opacities = descriptionChars.map((char) =>
+      Number(gsap.getProperty(char, "opacity")),
+    );
+    opacities.forEach((opacity, index) =>
+      expect(opacity).toBeGreaterThanOrEqual(previous[index]),
+    );
+    expect(opacities[0]).toBeGreaterThanOrEqual(opacities[1]);
+    previous = opacities;
+  }
+  timeline.seek(0.82);
+  for (const char of descriptionChars) {
+    expect(Number(gsap.getProperty(char, "opacity"))).toBe(1);
+    expect(Number(gsap.getProperty(char, "x"))).toBe(0);
+    expect(Number(gsap.getProperty(char, "y"))).toBe(0);
+  }
+  expect(timeline.duration()).toBeLessThanOrEqual(0.82);
+  context.revert();
+  for (const element of [
+    description,
+    ...descriptionChars,
+    incoming.querySelector("a")!,
+  ])
+    expect((element as HTMLElement).style.opacity).toBe("");
 });

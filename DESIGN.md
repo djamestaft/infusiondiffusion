@@ -581,20 +581,22 @@ unchanged.
 
 ## Hero carousel letter arrival — 19 September 2026
 
-Devon approved letters entering straight from the right, then a soft image pulse
-120ms after the first letters, and authorized pushing the implementation to
-PR #109. This supersedes the 600ms whole-panel slide on eligible Home motion
-transitions only. Preserve the initial visible campaign, all source copy,
-5:4 contain imagery, controls and six-second autoplay. Use one GSAP timeline:
-outgoing letters travel24px left over280ms with80ms total stagger and fade.
-Incoming letters begin220ms later:36px horizontal travel over750ms,
-stagger capped at280ms, power2.out. Image0.98→1.01→1 over420ms+440ms;
-supporting copy/CTA wait for the title to settle, then pause50ms. Description
-fades in place at1300ms and CTA at1380ms, each over100ms with power1.inOut.
-No supporting-content translation or scaling.
-Visual tracking expands by up to2.5px per character, capped at48px per line,
+Devon approved letters entering straight from the right, then a soft image pulse,
+and authorized pushing the implementation to PR #109. This supersedes the 600ms
+whole-panel slide on eligible Home motion transitions only. Preserve the initial
+visible campaign, all source copy, 5:4 contain imagery, controls and six-second
+autoplay. Use one GSAP timeline: outgoing letters travel 24px left over 180ms
+with 40ms total stagger and fade. Incoming letters begin 60ms later: 36px
+horizontal travel over 400ms, stagger capped at 120ms, power2.out. Image starts
+40ms after incoming letters, scaling 0.98→1.01→1 over 220ms+180ms. Description
+starts a single top-to-bottom opacity reveal when the title settles at 580ms;
+the CTA appears immediately. Each description row fades from 0 to 1 over 140ms,
+with 100ms maximum spread between row starts, no extra pause, no translation,
+and no reverse/blink. This faster sequence follows Devon's
+latest review that the previous title wait left content blank too long.
+Visual tracking expands by up to 2.5px per character, capped at 48px per line,
 using transforms to preserve line breaks and return to normal spacing.
-No vertical letter movement. Title settles at1250ms; total sequence1480ms; restore both unsplit accessible headings
+No vertical letter movement. Total sequence at most 820ms; restore unsplit headings and description
 after completion or interruption. Devon also approved this carousel sequence on
 mobile/touch; its independent eligibility leaves scroll/pointer scenes unchanged.
 Reduced-motion,
@@ -602,4 +604,6 @@ save-data, hidden/offscreen and motion-pause protections remain authoritative.
 Pointer smoothing owns a separate backdrop transform. Runtime carouselMotion
 values and Motion/Hero carousel stories define this explicit user-approved
 divergence from the static Figma frames; no layout or token redesign.
+The description keeps an unsplit screen-reader copy and splits only its
+aria-hidden visual span; never add an aria-label to the paragraph itself.
 See [the contract](docs/features/hero-carousel-letter-arrival.md).
