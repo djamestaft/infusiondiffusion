@@ -33,8 +33,8 @@ physical-device and remaining INF-57 acceptance gates remain unchanged.
   stays stable and retains the full image in its existing 5:4 contain frame.
 - Description and CTA wait until every title letter has settled at1250ms, then
   allow a50ms pause. The description starts fading at1300ms and the CTA at1380ms;
-  each fades over400ms with power1.inOut easing. No translation or scaling.
-  Total sequence:1780ms. This replaces their earlier overlapping lateral arrival
+  each fades over100ms with power1.inOut easing. No translation or scaling.
+  Total sequence:1480ms. This replaces their earlier overlapping lateral arrival
   following Devon’s visual review.
 - The outgoing image and supporting content fade over 160ms, starting at 80ms.
   Only the selected campaign is available

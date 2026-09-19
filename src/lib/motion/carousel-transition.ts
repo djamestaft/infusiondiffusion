@@ -12,7 +12,7 @@ export const carouselMotion = {
   imageRiseDuration: 0.42,
   imageSettleDuration: 0.44,
   supportDelay: 0.05,
-  supportDuration: 0.4,
+  supportDuration: 0.1,
   supportStagger: 0.08,
   exitTravel: -24,
   exitDuration: 0.28,

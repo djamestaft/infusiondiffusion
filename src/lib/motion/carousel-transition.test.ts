@@ -160,12 +160,12 @@ it("caps the full sequence for long headlines", () => {
     manyChars,
   );
   expect(timeline.duration()).toBeGreaterThan(1);
-  expect(timeline.duration()).toBeLessThanOrEqual(1.8);
+  expect(timeline.duration()).toBeLessThanOrEqual(1.5);
   timeline.pause().seek(0.05);
   expect(Number(gsap.getProperty(manyChars.at(-1)!, "x"))).toBeLessThanOrEqual(
     84,
   );
-  timeline.pause().seek(1.8);
+  timeline.pause().seek(1.5);
   expect(
     Number(gsap.getProperty(incoming.querySelector("a")!, "opacity")),
   ).toBe(1);

@@ -9,8 +9,8 @@ remain invisible; the incoming letters start at220ms and the image at340ms.
 The review refinement spreads letters by up to2.5px per character within each
 line, with48px maximum extra spread and no text reflow. The title settles at1.25s.
 Devon’s final pacing adjustment brings description and CTA in after a50ms pause,
-starting at1.30s and1.38s, each fading in place over400ms. The full sequence ends
-at1.78s. The included recordings/frame JSON capture the preceding600ms support
+starting at1.30s and1.38s, each fading in place over100ms. The full sequence ends
+at1.48s. The included recordings/frame JSON capture the preceding600ms support
 fade (2.1s total); composition, title motion and stationary support remain the
 same. Current timeline and desktop/mobile browser checks verify the faster pace.
 Image scale reaches1.01 and returns to1 before supporting content arrives.
@@ -25,6 +25,12 @@ The images and recording here show the reviewed component sequence; the separate
 hover-continuity fix is owned by pane 1 and retained as the integration base.
 
 ## Final local verification
+
+The full regression results below were refreshed for9b0dd0f. Devon then set the
+support fade to exactly100ms. That constant-only tuning re-runs29 relevant unit
+tests,35 carousel Storybook tests and the live sequence/axe check in five browser
+contexts (Chromium, Firefox, WebKit, Pixel7 and iPhone13 emulation), all passing.
+Lint, typecheck and both builds also pass for the100ms candidate.
 
 - Lint and TypeScript: pass.
 - Vitest:433 tests across64 files pass, including real GSAP timeline assertions

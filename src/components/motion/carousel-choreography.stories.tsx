@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The title settles at 1.25s; after a 50ms pause, description and CTA fade in place over 400ms, with the CTA starting 80ms after the description. The full sequence lasts 1.78s and restores normal tracking without changing line breaks. First render stays immediately visible. Enabled on desktop, tablet and touch/mobile; reduced motion and save-data remain static. The backdrop is owned separately.",
+          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The title settles at 1.25s; after a 50ms pause, description and CTA fade in place over 100ms, with the CTA starting 80ms after the description. The full sequence lasts 1.48s and restores normal tracking without changing line breaks. First render stays immediately visible. Enabled on desktop, tablet and touch/mobile; reduced motion and save-data remain static. The backdrop is owned separately.",
       },
     },
   },

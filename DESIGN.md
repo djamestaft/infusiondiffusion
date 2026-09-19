@@ -584,11 +584,11 @@ outgoing letters travel24px left over280ms with80ms total stagger and fade.
 Incoming letters begin220ms later:36px horizontal travel over750ms,
 stagger capped at280ms, power2.out. Image0.98→1.01→1 over420ms+440ms;
 supporting copy/CTA wait for the title to settle, then pause50ms. Description
-fades in place at1300ms and CTA at1380ms, each over400ms with power1.inOut.
+fades in place at1300ms and CTA at1380ms, each over100ms with power1.inOut.
 No supporting-content translation or scaling.
 Visual tracking expands by up to2.5px per character, capped at48px per line,
 using transforms to preserve line breaks and return to normal spacing.
-No vertical letter movement. Title settles at1250ms; total sequence1780ms; restore both unsplit accessible headings
+No vertical letter movement. Title settles at1250ms; total sequence1480ms; restore both unsplit accessible headings
 after completion or interruption. Devon also approved this carousel sequence on
 mobile/touch; its independent eligibility leaves scroll/pointer scenes unchanged.
 Reduced-motion,
