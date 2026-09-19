@@ -79,6 +79,7 @@ export type GuideProduct = {
   title: string;
   handle: string;
   availableForSale: boolean;
+  image?: { src: string; alt: string };
 };
 export type GuideMatch = GuideProduct & {
   score: number;
