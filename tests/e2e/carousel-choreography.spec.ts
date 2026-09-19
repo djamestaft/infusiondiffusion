@@ -127,7 +127,7 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
               : 0,
           });
         }
-        if (performance.now() - started < 1000) requestAnimationFrame(sample);
+        if (performance.now() - started < 1400) requestAnimationFrame(sample);
         else resolve();
       };
       requestAnimationFrame(sample);
@@ -140,6 +140,7 @@ test("letters lead horizontally, the image pulses afterwards, then the unsplit h
     ),
   ).toBe(true);
   expect(samples.every((s) => s.y === 0)).toBe(true);
+  expect(samples.some((s) => s.last > 36)).toBe(true);
   expect(
     samples.some(
       (s) => s.outgoingX !== null && s.outgoingX < 0 && s.incomingOpacity === 0,

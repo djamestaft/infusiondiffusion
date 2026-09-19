@@ -17,7 +17,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Devon's approved transition: outgoing letters drift left with a 100ms head start, incoming letters stagger from the right, then one image pulse follows 120ms later. First render stays immediately visible. Desktop only; reduced motion, save-data and touch retain their existing accessible behavior. The backdrop is owned separately.",
+          "Devon's approved transition: outgoing letters drift left with a 220ms head start, incoming letters spread apart and settle from the right, then a longer image pulse follows 120ms later. The 1.25-second sequence restores normal tracking without changing line breaks. First render stays immediately visible. Desktop only; reduced motion, save-data and touch retain their existing accessible behavior. The backdrop is owned separately.",
       },
     },
   },
@@ -38,8 +38,10 @@ export const LetterArrival: Story = {
     await expect(c.getByRole("heading", { level: 1 })).toHaveAccessibleName(
       published.slides[1].title,
     );
-    await waitFor(() =>
-      expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
+    await waitFor(
+      () =>
+        expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
+      { timeout: 2000 },
     );
     await expect(c.getByRole("heading", { level: 1 })).toBeVisible();
   },
@@ -56,8 +58,10 @@ export const RapidNavigation: Story = {
     await userEvent.click(c.getByRole("button", { name: "Next slide" }));
     await userEvent.click(c.getByRole("button", { name: "Next slide" }));
     await userEvent.click(c.getByRole("button", { name: "Previous slide" }));
-    await waitFor(() =>
-      expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
+    await waitFor(
+      () =>
+        expect(canvasElement.querySelector('[data-phase="enter"]')).toBeNull(),
+      { timeout: 2000 },
     );
     await expect(c.getByRole("heading", { level: 1 })).toHaveAccessibleName(
       published.slides[1].title,

@@ -1,20 +1,46 @@
 /** The approved carousel sequence; seconds and CSS pixels, independent of pointer motion. */
 export const carouselMotion = {
   letterTravel: 36,
-  letterDuration: 0.55,
-  staggerBudget: 0.2,
-  enterDelay: 0.1,
+  letterDuration: 0.75,
+  staggerBudget: 0.28,
+  letterSpacing: 2.5,
+  maxLineSpread: 48,
+  enterDelay: 0.22,
   imageDelay: 0.12,
   imageStartScale: 0.98,
   imagePeakScale: 1.01,
-  imageRiseDuration: 0.3,
-  imageSettleDuration: 0.28,
+  imageRiseDuration: 0.42,
+  imageSettleDuration: 0.44,
   supportDelay: 0.2,
   supportDuration: 0.35,
   exitTravel: -24,
-  exitDuration: 0.22,
+  exitDuration: 0.28,
   exitStaggerBudget: 0.08,
 } as const;
+
+/** Expand the visual tracking without reflowing words or changing line breaks. */
+function lineSpread(chars: Element[], departing = false) {
+  const lines = new Map<number, number[]>();
+  const offsets = chars.map(() => 0);
+  chars.forEach((char, index) => {
+    const top = Math.round(char.getBoundingClientRect().top);
+    const line = lines.get(top) ?? [];
+    line.push(index);
+    lines.set(top, line);
+  });
+  for (const line of lines.values()) {
+    const spacing = Math.min(
+      carouselMotion.letterSpacing,
+      carouselMotion.maxLineSpread / Math.max(1, line.length - 1),
+    );
+    line.forEach((index, position) => {
+      offsets[index] = departing
+        ? -(line.length - 1 - position) * spacing
+        : position * spacing;
+    });
+  }
+  return offsets;
+}
 
 /** Caller owns a GSAP context, the temporary text split and interruption cleanup. */
 export function createCarouselTransition(
@@ -26,6 +52,8 @@ export function createCarouselTransition(
 ) {
   const image = incoming.querySelector("[data-carousel-picture]");
   const support = incoming.querySelectorAll("[data-carousel-support]");
+  const arrivalSpread = lineSpread(chars);
+  const departureSpread = lineSpread(outgoingChars, true);
   const timeline = gsap.timeline();
   gsap.set(incoming, { zIndex: 1 });
   if (outgoing) {
@@ -34,11 +62,12 @@ export function createCarouselTransition(
       timeline.to(
         outgoingChars,
         {
-          x: carouselMotion.exitTravel,
+          x: (index: number) =>
+            carouselMotion.exitTravel + departureSpread[index],
           opacity: 0,
           duration: carouselMotion.exitDuration,
           stagger: { amount: carouselMotion.exitStaggerBudget },
-          ease: "power2.in",
+          ease: "power1.inOut",
         },
         0,
       );
@@ -65,13 +94,17 @@ export function createCarouselTransition(
   if (chars.length) {
     timeline.fromTo(
       chars,
-      { x: carouselMotion.letterTravel, opacity: 0 },
+      {
+        x: (index: number) =>
+          carouselMotion.letterTravel + arrivalSpread[index],
+        opacity: 0,
+      },
       {
         x: 0,
         opacity: 1,
         duration: carouselMotion.letterDuration,
         stagger: { amount: carouselMotion.staggerBudget },
-        ease: "power3.out",
+        ease: "power2.out",
       },
       carouselMotion.enterDelay,
     );

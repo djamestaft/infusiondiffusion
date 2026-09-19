@@ -5,9 +5,12 @@ User-approved follow-up to the motion candidate in PR #109. See
 
 The component was implemented and inspected in Storybook before opting Home in.
 Frame sampling confirmed outgoing letters moving left while incoming letters
-remain invisible; the incoming letters start at100ms and the image at220ms.
-At115ms the outgoing first letter was at-3.52px while the incoming first letter
-was at31.99px, both visible. Image scale then reaches1.01 and returns to1.
+remain invisible; the incoming letters start at220ms and the image at340ms.
+The review refinement spreads letters by up to2.5px per character within each
+line, with48px maximum extra spread and no text reflow. At230ms the outgoing
+first letter was at-67.30px while the incoming first letter was at34.30px,
+both visible; the last incoming letter was still at63.5px. The longer image
+pulse reaches1.01 and returns to1; the full sequence lasts1.25s.
 The final heading is unsplit, visible and accessible. Screenshots at
 1440/768/390/320 showed complete imagery and copy, preserved desktop alignment
 and mobile centering, with no horizontal overflow. The intended visual change
@@ -21,15 +24,17 @@ hover-continuity fix is owned by pane 1 and retained as the integration base.
 ## Final local verification
 
 - Lint and TypeScript: pass.
-- Vitest:431 tests across64 files pass, including real GSAP timeline assertions
+- Vitest:432 tests across64 files pass, including real GSAP timeline assertions
   for outgoing precedence/overlap, horizontal entry, image timing, bounded
-  long-text duration and reversible cleanup of both headings.
+  long-text duration, per-line tracking reset/cap and reversible cleanup of both
+  headings.
 - Storybook:397 tests across34 files pass; production Storybook build passes.
 - Next production build passes using the isolated .next-e2e output directory.
 - Playwright: all5 choreography tests pass in each of Chromium, WebKit and
   Firefox (15 passes). Covers frame samples, rapid reversal, resize, reduced
   motion interruption, real Save-Data import prevention and responsive geometry.
-- Existing editorial carousel suite:14/14 Chromium checks pass, including
+- Existing editorial carousel suite:14/14 Chromium checks passed before this
+  isolated timeline refinement, including
   1900/1440/1280/1024/768/390/320, short screens, keyboard, autoplay and axe.
 - Independent read-only review: no remaining findings. The reviewer independently
   checked outgoing precedence, rapid navigation/reversal, resize, reduced-motion

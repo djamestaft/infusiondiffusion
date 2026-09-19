@@ -18,18 +18,22 @@ physical-device and remaining INF-57 acceptance gates remain unchanged.
 - The first server-rendered campaign stays visible. Do not delay its image load,
   split its heading on initial render, or add an entrance that postpones LCP.
 - Eligible desktop slide changes use a single GSAP timeline. Outgoing letters
-  travel 24px left over 220ms with an 80ms total stagger and fade. Incoming letters
-  start 100ms later, overlapping the departure rather than waiting for a blank frame.
+  travel 24px left over 280ms with an 80ms total stagger and fade. Incoming letters
+  start 220ms later, overlapping the departure rather than waiting for a blank frame.
   Incoming letters
-  travel 36px horizontally from the right over 550ms, with a total stagger capped
-  at 200ms and power3.out easing. Previous as well as Next uses that approved
+  travel 36px horizontally from the right over 750ms, with a total stagger capped
+  at 280ms and power2.out easing. Previous as well as Next uses that approved
   right-side letter arrival; the legacy fallback keeps its directional slide.
+- Devon requested a longer stretch and more letter spacing. Add up to 2.5px of
+  visual tracking per character, capped at 48px extra spread per line. Use
+  individual transforms so original line breaks and settled typography remain
+  unchanged; restart spacing at each wrapped line.
 - The campaign image starts 120ms after the first letters: opacity 0 to 1 and
-  scale 0.98 to 1.01 over 300ms, then scale 1 over 280ms. The containing layout
+  scale 0.98 to 1.01 over 420ms, then scale 1 over 440ms. The containing layout
   stays stable and retains the full image in its existing 5:4 contain frame.
 - Description and CTA arrive as whole elements from a 12px offset, starting at
   200ms after the incoming letters; both finish before the final headline letters.
-  Total sequence: 850ms.
+  Total sequence: 1250ms.
 - The outgoing image and supporting content fade over 160ms, starting at 80ms.
   Only the selected campaign is available
   to assistive technology and keyboard navigation.
