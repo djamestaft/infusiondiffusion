@@ -132,11 +132,11 @@ it("waits for the complete title, then gently fades stationary supporting conten
   ).toBe(true);
   expect(Number(gsap.getProperty(description, "opacity"))).toBe(0);
   expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
-  timeline.seek(1.45);
+  timeline.seek(1.34);
   expect(Number(gsap.getProperty(description, "opacity"))).toBeGreaterThan(0);
   expect(Number(gsap.getProperty(description, "opacity"))).toBeLessThan(0.5);
   expect(Number(gsap.getProperty(cta, "opacity"))).toBe(0);
-  timeline.seek(1.65);
+  timeline.seek(1.55);
   expect(Number(gsap.getProperty(cta, "opacity"))).toBeGreaterThan(0);
   for (const element of [description, cta]) {
     expect(Number(gsap.getProperty(element, "x"))).toBe(0);
@@ -160,12 +160,12 @@ it("caps the full sequence for long headlines", () => {
     manyChars,
   );
   expect(timeline.duration()).toBeGreaterThan(1);
-  expect(timeline.duration()).toBeLessThanOrEqual(2.2);
+  expect(timeline.duration()).toBeLessThanOrEqual(1.8);
   timeline.pause().seek(0.05);
   expect(Number(gsap.getProperty(manyChars.at(-1)!, "x"))).toBeLessThanOrEqual(
     84,
   );
-  timeline.pause().seek(2.1);
+  timeline.pause().seek(1.8);
   expect(
     Number(gsap.getProperty(incoming.querySelector("a")!, "opacity")),
   ).toBe(1);

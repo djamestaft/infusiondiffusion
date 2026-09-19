@@ -8,10 +8,11 @@ Frame sampling confirmed outgoing letters moving left while incoming letters
 remain invisible; the incoming letters start at220ms and the image at340ms.
 The review refinement spreads letters by up to2.5px per character within each
 line, with48px maximum extra spread and no text reflow. The title settles at1.25s.
-Description and CTA then fade in place after a100ms pause, starting at1.35s and
-1.50s, each over600ms. The full sequence ends at2.1s. The recording shows the
-complete title with both supporting elements still invisible; the description
-begins appearing at1364ms and CTA at1514ms, with transform:none throughout.
+Devon’s final pacing adjustment brings description and CTA in after a50ms pause,
+starting at1.30s and1.38s, each fading in place over400ms. The full sequence ends
+at1.78s. The included recordings/frame JSON capture the preceding600ms support
+fade (2.1s total); composition, title motion and stationary support remain the
+same. Current timeline and desktop/mobile browser checks verify the faster pace.
 Image scale reaches1.01 and returns to1 before supporting content arrives.
 The final heading is unsplit, visible and accessible. Screenshots at
 1440/768/390/320 showed complete imagery and copy, preserved desktop alignment
