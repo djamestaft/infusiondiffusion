@@ -55,8 +55,12 @@ He explicitly owns **every new task**, including design preparation and
 coordination of independent verification. This scoped ownership overrides the
 default preparation owner; existing task assignments remain unchanged.
 
-Parent **INF-49** is Todo. **INF-50** (section map/storyboard) is Todo and is the
-first motion task to start. **INF-51–57** are Backlog:
+**19 September preview update:** Devon delegated G1–G3 self-approval and requested
+complete delivery on one preview branch. INF-50/51 design/studies and INF-52–56
+implementation are now in preview verification on `agent/storefront-motion-delivery`.
+INF-57 covers independent checks before the final review; production and physical
+iPhone acceptance remain open. See `docs/evidence/storefront-motion/README.md`.
+The original dependency order remains:
 
 | Task   | Scope                                                                        | Prerequisites           |
 | ------ | ---------------------------------------------------------------------------- | ----------------------- |
@@ -79,7 +83,8 @@ Design/studies may proceed before launch gates close. Live integration follows
 INF-36's shopping-release review, preserving the existing after-shopping
 refinement sequence; INF-47 physical-iPhone scroll acceptance blocks final motion
 release. Existing commercial/content/SEO tickets do not depend on this enhancement.
-No scope is marked delivered and no source publication or runtime change is made.
+The later user instruction authorizes preview integration before INF-36. No source
+publication or production deployment is included; production dependencies remain.
 
 Gates: responsive storyboard → animated-study selection and exact Figma/Storybook
 contract → component/template acceptance → independent review, green exact-head
@@ -88,8 +93,8 @@ reduced-motion and JS-failure alternatives are first-class deliverables.
 
 See the [motion brief](../features/storefront-motion-brief.md) and
 [delivery plan](../superpowers/plans/2026-09-19-storefront-motion.md).
-This planning addition is prepared on agent/storefront-motion-plan and requires
-human merge; it does not approve the eventual animation designs.
+The planning PR108 is merged at67de810. The selected motion design is self-approved
+for preview under Devon’s19September delegation; final user acceptance is pending.
 
 ## Completed cutover and remaining launch gates
 
@@ -110,7 +115,7 @@ renewal/restart/logout/isolation. INF-36 retains independent review. INF-41/42
 retain final SEO, domain journey and explicit live-payment/commercial approval.
 No paid transaction or new purchasable product format is authorized by this
 closeout. The later motion request authorizes its planning and execution ledger;
-start INF-50 for that workstream while retaining the launch gates above.
+complete motion preview verification while retaining the launch gates above.
 The completed imagery delivery is not active work.
 
 ## Historical planning snapshots

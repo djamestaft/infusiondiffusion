@@ -18,6 +18,11 @@
     ],
     "rules": [
       {
+        "name": "Home/About motion preview — 19 September 2026",
+        "section": "motion",
+        "body": "Devon delegated G1–G3 for preview. Intentional divergence from static Approved frames: measured desktop collection pin with all products,80px decorative-name band at8%semantic ink, height-aware300–440px cards; native scrolling. Shared motionTokens:700ms visible16px entrance, backdrop-only6x4px120ms damping64ms cap0.1px cutoff,32px name drift and12px chapter travel. About square photos locally sticky with centered complete copy. Touch/reduced/saveData/short and long-content layouts static. Final preview review and physical-iPhone/production gates remain open. See docs/evidence/storefront-motion/README.md."
+      },
+      {
         "name": "Soft-launch announcement — 17 September 2026",
         "body": "User-requested reuse of AnnouncementBar above shared navigation. Exact copy: Payments are in test mode. We’re launching shortly. Existing tokens, natural height, non-dismissible; visible on scroll and inside mobile dialog. Sanity announcement fields own enablement/copy. Hide the gold separator while the floating header is transparent; show it with the solid header and mobile menu, retaining border space. Preserve 78/86px navigation row. Intentional user-authorized divergence from no-notice Figma 2764:488.",
         "section": "components"

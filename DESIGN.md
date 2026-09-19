@@ -524,3 +524,26 @@ photo left and the statement aligns right to keep a complete product visible.
 Inspect actual text wrapping at 320px; asset-only inspection is insufficient.
 Desktop layout, typography, navigation, announcement and tokens remain unchanged.
 See [website imagery evidence](docs/features/website-imagery-refresh.md).
+
+## Home and About motion candidate — 19 September 2026
+
+Devon delegated G1–G3 decisions and requested one final Vercel preview review.
+The exact Approved Home/About frames remain static brand/layout authority; this
+motion candidate is an intentional divergence, not a Figma approval rewrite.
+See `docs/evidence/storefront-motion/README.md` and the dated preview spec.
+
+Use native scroll and complete visible content. On fine-pointer, hover-capable
+screens at least1024×800, with no reduced-motion/save-data request, the collection
+may pin only if measured cards and controls fit below the actual header. Retain
+all supplied products. Names use semantic secondary ink at8%opacity, displayed
+as decorative CSS text above and behind cards. Reserve80px above card media;
+card width is height-aware, capped440px, with static fallback for content extremes.
+Use `src/lib/motion/tokens.ts` for shared entrance, drift and damping values.
+
+Hero entrance remains visible,16px over700ms; decorative backdrop alone receives
+bounded pointer motion. Carousel controls and600ms transitions remain unchanged.
+About retains all four chapters, complete Born copy, square figures and viewer
+behavior. Copy is vertically centered beside local sticky photographs; motion
+never masks prose. Static controls revert owned effects and keyboard focus on
+clipped products restores natural flow. Mobile/touch, reduced motion and
+save-data use complete natural layouts. Do not replace native scrolling.

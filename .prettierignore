@@ -11,3 +11,6 @@ adws/**
 .agents/skills/sssf/**
 specs/9507c91e_account-entry.md
 specs/9507c91e_account-entry-implementation.md
+
+# Untracked operational exports and generated media evidence.
+output/

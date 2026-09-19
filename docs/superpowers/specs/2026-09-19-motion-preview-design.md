@@ -66,10 +66,10 @@ delegation; final user acceptance remains the preview review.
 ## Verification and evidence
 
 Selected exact timing: hero 16px to zero over 700ms power3.out, visible throughout;
-skip entrance on restored-scroll entry. Collection cards clamp(300px,36vw,440px),
+skip entrance on restored-scroll entry. Collection cards clamp(300px,min(36vw,100svh - 612px),440px),
 direct linear scrub, scroll distance measured travel capped at 2.5 viewport heights.
 Decorative names clamp(96px,11vw,180px), semantic secondary ink at 8% opacity,
-drift +32px to -32px. About desktop chapters min-height 72svh with natural text
+drift +32px to -32px with an80px visible name band. About desktop chapters min-height 72svh with natural text
 growth, local sticky square photographs and +12px to -12px travel. No masks.
 Pointer effect targets only a decorative background layer, settles at 0.1px,
 stops on leave/focus/offscreen/hidden/static; no permanent ambient loop.
@@ -99,3 +99,8 @@ do not claim physical-device or field CWV results from emulation.
 Final review gets preview URL, PR, exact commit, evidence index, selected decisions,
 sync matrix and residual physical-device/production release work. INF-57/49 cannot
 be labelled production-released just because the preview is ready.
+
+Independent critique amendment: About copy centers vertically next to the sticky
+photographs. The hero pointer targets the existing decorative backdrop; an added
+radial wash was rejected as visually ineffective. Height-aware card sizing and
+80px name space preserve readable lettering and measured stage fit.

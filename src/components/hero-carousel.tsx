@@ -507,6 +507,7 @@ function EditorialCarousel({
     >
       {backgroundSrc ? (
         <Image
+          data-motion-backdrop
           src={backgroundSrc}
           alt=""
           fill

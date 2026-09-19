@@ -2,7 +2,7 @@
 
 Date: 19 September 2026
 
-Status: planning authorized; visual concepts and runtime implementation remain gated
+Status: preview implementation underway; G1–G3 delegated to Codex on19September2026; final user preview review and production gates remain open
 
 Owner: Devon Taft for every task in this workstream
 
@@ -160,3 +160,11 @@ decisions, not implementation placeholders. The approved study handoff supplies
 exact runtime APIs and implementation-level tests before foundation work begins.
 
 See the [delivery plan](../superpowers/plans/2026-09-19-storefront-motion.md).
+
+## Preview implementation amendment — 19 September 2026
+
+Devon requested end-to-end delivery and delegated all intermediate self-approvals.
+The selected contract is `../superpowers/specs/2026-09-19-motion-preview-design.md`;
+implementation and evidence are indexed in `../evidence/storefront-motion/README.md`.
+This supersedes the G1–G3 human stops above for this preview only, and authorizes
+preview integration before INF-36. INF-47 and production merge/smoke remain open.

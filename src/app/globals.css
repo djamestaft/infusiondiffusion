@@ -763,3 +763,56 @@
   outline: 2px solid var(--action-focus);
   outline-offset: 2px;
 }
+
+/* Motion is an enhancement: these rules are only acquired after a successful
+   scoped runtime mount and a measured content-fit check. */
+:root {
+  --motion-fragrance-ink: var(--content-secondary);
+  --motion-fragrance-opacity: 0.08;
+}
+.motion-fragrance-names {
+  color: var(--motion-fragrance-ink);
+  opacity: var(--motion-fragrance-opacity);
+  font-size: clamp(96px, 11vw, 180px);
+  line-height: 1;
+}
+
+.motion-collection[data-motion-active] .motion-collection-viewport {
+  overflow: clip;
+  padding: 80px 4px 4px;
+}
+.motion-collection[data-motion-active] .motion-collection-track {
+  display: flex;
+  gap: 24px;
+}
+.motion-collection[data-motion-active] .motion-collection-track > * {
+  flex: 0 0 clamp(300px, min(36vw, calc(100svh - 612px)), 440px);
+}
+.motion-collection[data-motion-active] .motion-fragrance-names {
+  display: block;
+}
+[data-motion-chapter] {
+  min-height: 72svh;
+  align-items: start;
+}
+[data-motion-chapter] [data-motion-photograph] {
+  position: sticky;
+  top: var(--motion-chapter-top, 104px);
+  align-self: start;
+}
+#home-guidance-title {
+  scroll-margin-top: 110px;
+}
+
+.motion-collection[data-motion-active] .motion-collection-inner {
+  padding-block: 24px;
+}
+
+[data-motion-chapter] [data-motion-copy] {
+  align-self: center;
+}
+
+/* Repeated names are decorative CSS content; accessible names stay on cards. */
+.motion-fragrance-names::before {
+  content: attr(data-fragrance-names);
+}

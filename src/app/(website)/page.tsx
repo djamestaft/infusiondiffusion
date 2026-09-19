@@ -42,6 +42,7 @@ async function HomeContent() {
 
   return (
     <HomeTemplate
+      motionEnabled
       products={products}
       heroImage={heroImage}
       heroSlides={settings.homepage.heroSlides}

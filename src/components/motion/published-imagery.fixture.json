@@ -1,0 +1,56 @@
+{
+  "captured": "2026-09-19",
+  "chapterImages": [
+    {
+      "alt": "Blanc De Blanc diffuser with its carton and gift bag in a sunlit guest room.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/d9b4698ecccc80f0d32f8baa0980c89e63b683ee-1122x1402.png"
+    },
+    {
+      "alt": "Ambre Egyptian, Bois De Santal and Noir De La Nuit reed diffusers on wood and stone.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/7d351000f2d4c16877702a5663ff8812fb2598aa-1254x1254.png"
+    },
+    {
+      "alt": "Santuaire Serein diffuser with gift packaging beside a reading chair.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/57ea5090e6c43a0a146ad28c70d0c282ef823c65-1254x1254.png"
+    },
+    {
+      "alt": "The six Infusion Diffusion reed diffusers arranged on layered stone.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/e4ea53c97d2b5464be0f584db7a08e78c5b2e9aa-1254x1254.png"
+    }
+  ],
+  "slides": [
+    {
+      "id": "published-campaign-1",
+      "title": "Six fragrances.\nFind your favourite.",
+      "subtitle": "Six distinctive fragrances. Explore the scents that bring character to the spaces you love.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/e7a6cd29bca1655c8eb64524c90a3a8a84adce36-1600x1280.png",
+      "alt": "An asymmetrical collage of all six Infusion Diffusion fragrance families, each pairing a reed diffuser and room mist in its own setting.",
+      "cta": {
+        "href": "/shop",
+        "label": "Explore the collection"
+      }
+    },
+    {
+      "id": "published-campaign-2",
+      "title": "A gift with atmosphere.",
+      "subtitle": "For a thoughtful thank-you or a special occasion, choose a fragrance they will love coming home to.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/8141e8f4d6c9f20aed2e5b39535ef2009c5a6bea-1400x1120.png",
+      "alt": "Ambre Egyptian reed diffuser with its branded gift bag and carton on a sunlit travertine console.",
+      "cta": {
+        "href": "/shop",
+        "label": "Find a fragrance to give"
+      }
+    },
+    {
+      "id": "published-campaign-3",
+      "title": "Set the mood with\nNoir De La Nuit",
+      "subtitle": "Black glass, golden details and a fragrance for the spaces you love. Discover your next everyday ritual.",
+      "src": "https://cdn.sanity.io/images/j222nd1i/production/eb329b9d10a8ae68ffc3dd69d4473e1e2d62b1d7-1400x1120.png",
+      "alt": "Noir De La Nuit reed diffuser with black reeds and a long gold tassel on dark stone.",
+      "cta": {
+        "href": "/products/home-decor-example-product-2",
+        "label": "Discover Noir De La Nuit"
+      }
+    }
+  ]
+}
